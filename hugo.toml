@@ -16,3 +16,13 @@ weight = 20
 name = 'Tags'
 pageRef = '/tags'
 weight = 30
+
+[[menus.main]]
+name = 'Connect'
+url = '/#connect'
+weight = 130
+
+[[menus.main]]
+name = 'Roadmap'
+url = '/#roadmap'
+weight = 140

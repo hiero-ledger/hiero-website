@@ -1,11 +1,92 @@
 +++
-title = 'Home'
+title = "Home"
 date = 2023-01-01T08:00:00-07:00
 draft = false
-section_open_source_heading = 'Why is Hiero Open Source?'
-section_open_source_body = 'The main goal of Hiero is to create a diverse community of developers, dreamers, and builders working to make the world more fair, fast, and secure. To achieve that goal it is critical that everyone can access the source of Hiero and move the project forward. A decentralized network that is used by enterprises and critical infrastructure around the world must be vendor-neutral and fully auditable.'
-+++
 
-Laborum voluptate pariatur ex culpa magna nostrud est incididunt fugiat
-pariatur do dolor ipsum enim. Consequat tempor do dolor eu. Non id id anim anim
-excepteur excepteur pariatur nostrud qui irure ullamco.
+section_why_open_source_heading = "Why is Hiero Open Source?"
+section_why_open_source_text = "The main goal of Hiero is to create a diverse community of developers, dreamers, and builders working to make the world more fair, fast, and secure. To achieve that goal it is critical that everyone can access the source of Hiero and move the project forward. A decentralized network that is used by enterprises and critical infrastructure around the world must be vendor-neutral and fully auditable."
+
+section_what_parts_open_source_heading = "What parts of Hiero are Open Source?"
+section_what_parts_open_source_text = "Hiero is 100% open-source. While the transition of the project to Linux Foundation Decentralized Trust is still ongoing, a view into some additional contributions can be found in [Hedera’s Github organization](https://github.com/hashgraph). As a first step, the technical steering committee (TSC) of Hiero will provide oversight to include  projects that are needed to run an enterprise-ready decentralized network to the new  [Hiero GitHub organization](https://github.com/hiero). More information about the transition process can be found in the roadmap (link to roadmap section)."
+
+section_why_contribute_heading = "Why should I contribute?"
+section_why_contribute_text = "There are many benefits in contributing to Hiero for both individuals or companies:"
+
+section_getting_started_heading = "How to Contribute / Getting Started?"
+section_getting_started_text = '''
+<p>Since we are still working on the transition of the Hiero repositories from the Hedera’s GitHub organization (https://github.com/hashgraph) into the Hiero GitHub organization (https://github.com/hiero), many opportunities for contribution can be initiated at the Hedera’s GitHub organization today.</p>
+<p>While in this transition phase we already want to enable developers to join in developing Hiero and its related projects. As such we’re always willing to help you get started, and mentor you on your journey of learning the project and making useful contributions.</p>
+<p>
+There is good work to do for everyone with whatever skillset you have, and it doesn’t have to be code. We also welcome help with documentation, design, project organization, organizing meetups and promoting the project.</p>
+<p>
+We maintain a list of starter issues that are a great way to get up to speed as a new contributor. You can search for the “good first issue” label in our issue tracker to see what’s currently available HERE.</p>
+<p>
+If you have any questions, need help or additional mentoring you can reach out to the community and the technical steering committee (TSC) of Hiero in our GitHub discussions (LINK)</p>
+'''
+
+section_connect_heading = "Connect with the Hiero Open Source community"
+section_connect_text = '''
+<p>Since we do not create Hiero from scratch it already has a vibrant community from Hedera and other products and projects. With the creation of the Hiero project, we started GitHub discussions (LINK) that can be used as a central place to contact the community and the technical steering committee (TSC) of Hiero.</p>
+<p>
+For us, the community of the open-source project is a crucial part of its success. Based on that we will concentrate on the integration of the community. As defined in the roadmap, we will integrate the community into the development of Hiero from day 1. An essential part of that is to have community members be part of the TSC. Here the TSC is working on voting mechanisms that allow us to create a diverse community.</p>
+<p>
+Next to the TSC, we want to invest in a diverse and inclusive community. It is important to us that everyone, regardless of knowledge and background, can become an active contributor to Hiero. To enable that, we plan to hire at least one community manager in the near future and provide open documentation and teaching resources.</p>
+'''
+
+section_roadmap_heading = "Our Roadmap in the Linux Foundation Decentralized Trust"
+section_roadmap_text = '''
+<p>With the creation of the project in the Linux Foundation Decentralized Trust (LFDT) and the establishment of the initial technical steering committee (TSC) the cornerstones of Hiero have been laid. As a next essential step the TSC needs to provide a roadmap that covers the transition of the first repositories and projects to the Hiero GitHub organization (https://github.com/hiero) and the inclusion and enabling of the community. The members of the TSC have committed themselves to work on the creation of this roadmap with the highest priority. The TSC hopes and encourages input and feedback by the complete ecosystem from core developers to users. To do so we enabled GitHub discussions (LINK) as a first open way for communication. We hope that as many community members as possible contribute to the discussions regarding the initial roadmap and help us to create a real community driven project.</p>
+<p>
+While an official roadmap does not exist today, the TSC has already defined several points they believe are essential for Hiero’s success. The following provide insight into those areas.</p>
+
+'''
+
+[[section_why_contribute_points]]
+heading = "Help to create diverse and trustful networks"
+text = "Hiero is created as a vendor-neutral project designed to be owned by the community and garnering the advantage from a broad and diverse base. This approach is believed to make Hedera and other networks built on top of Hiero as trustful as possible."
+
+[[section_why_contribute_points]]
+heading = "Boost your engineering reputation"
+text = "TBD"
+
+[[section_why_contribute_points]]
+heading = "Attend hackathons and bug bounties"
+text = "TBD"
+
+[[section_why_contribute_points]]
+heading = "Become part of the technical steering committee"
+text = "TBD"
+
+[[section_why_contribute_points]]
+heading = "Get recognized by the community"
+text = "TBD"
+
+[[section_why_contribute_points]]
+heading = "Contribute to the future of web3"
+text = "TBD"
+
+[[section_roadmap_points]]
+heading = "Transparent voting mechanisms for the community"
+text = "Together with the Linux Foundation, the Hiero TSC seeks to establish voting mechanisms that can be used in electing new committee members. Such transparency is instrumental in developing trust by integrating the community in all aspects of the project's governance and operations."
+
+[[section_roadmap_points]]
+heading = "Transition of network repositories"
+text = "Hedera has existed since WHEN, which has allowed its developer ecosystem to grow as represented by the variety of projects within its repository (https://github.com/hashgraph). With the number of projects involved, the initial priorities are to transition the repositories needed to run a fully functioning base network (including Consensus Node, Mirror Node, JSON-RPC-Relay, and others) as soon as possible."
+
+[[section_roadmap_points]]
+heading = "Transition of SDKs"
+text = "The next phase of code contributions involve those that allow developed applications to take advantage of the myriad of a network’s services. Here the SDK clients are essential parts and should be migrated to Hiero directly after or parallel with the network repositories."
+
+[[section_roadmap_points]]
+heading = "Renaming and rebranding"
+text = "Repositories in the Hedera GitHub organization (https://github.com/hashgraph) use “Hedera” or “Hashgraph” as names of the project reflecting the initial motivations for its use, reflected in the repository and project names but also in the sources. With the transition of sources to Hiero we plan to refactor all those projects and use Hiero as core element in naming conventions."
+
+[[section_roadmap_points]]
+heading = "Enabling better communication with the community"
+text = "TBD"
+
+[[section_roadmap_points]]
+heading = "Better support regarding contributions especially for newcomers"
+text = "TBD"
++++
+Laborum voluptate pariatur ex culpa magna nostrud est incididunt fugiat pariatur do dolor ipsum enim. Consequat tempor do dolor eu. Non id id anim anim excepteur excepteur pariatur nostrud qui irure ullamco.

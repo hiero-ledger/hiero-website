@@ -1,7 +1,38 @@
 {{ define "main" }}
   {{ .Content }}
+  <h2 id="open-source" class="mt-6 text-3xl">{{ $.Param "section_why_open_source_heading" | safeHTML }}</h2>
+  <p>{{ $.Param "section_why_open_source_text" | safeHTML }}</p>
+
+  <h2 id="what-parts" class="mt-6 text-3xl">{{ $.Param "section_what_parts_open_source_heading" | safeHTML }}</h2>
+  <p>{{ $.Param "section_what_parts_open_source_text" | $.RenderString }}</p>
+  
+  <div class="pl-4">
+    {{ range .Param "section_why_contribute_points" }}
+      <h3 class="mt-4 text-2xl">{{ .heading }}</h3>    
+      <p>{{ .text | safeHTML }}<p>
+    {{ end }}
+  </div>
+
+  <h2 id="contribute" class="mt-6 text-3xl">{{ $.Param "section_getting_started_heading" | safeHTML }}</h2>
+  <div class="space-y-4">{{ $.Param "section_getting_started_text" | safeHTML }}</div>
+
+  <h2 id="connect" class="mt-6 text-3xl">{{ $.Param "section_connect_heading" | safeHTML }}</h2>
+  <div class="space-y-4">{{ $.Param "section_connect_text" | safeHTML }}</div>
+
+  <h2 id="roadmap" class="mt-6 text-3xl">{{ $.Param "section_roadmap_heading" | safeHTML }}</h2>
+  <div class="space-y-4">{{ $.Param "section_roadmap_text" | safeHTML }}</div>
+
+  <div class="pl-4">
+    {{ range .Param "section_roadmap_points" }}
+      <h3 class="mt-4 text-2xl">{{ .heading }}</h3>    
+      <p>{{ .text | safeHTML }}<p>
+    {{ end }}
+  </div>
+  
+  <hr class="my-8"/>
+
   {{ range site.RegularPages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>    
     {{ .Summary }}
   {{ end }}
 {{ end }}

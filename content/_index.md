@@ -3,6 +3,12 @@ title = "Home"
 date = 2023-01-01T08:00:00-07:00
 draft = false
 
+section_hero_heading = "Hiero Open Source"
+section_hero_text = "Do your next steps in the open-source community of Hiero"
+
+section_what_is_hiero_heading = "What is Hiero?"
+section_what_is_hiero_text = "Hiero, a Linux Foundation Decentralized Trust project, is an open-source, vendor-neutral distributed ledger technology. Hiero is used to build the Hedera public ledger."
+
 section_why_open_source_heading = "Why is Hiero Open Source?"
 section_why_open_source_text = "The main goal of Hiero is to create a diverse community of developers, dreamers, and builders working to make the world more fair, fast, and secure. To achieve that goal it is critical that everyone can access the source of Hiero and move the project forward. A decentralized network that is used by enterprises and critical infrastructure around the world must be vendor-neutral and fully auditable."
 
@@ -38,8 +44,27 @@ section_roadmap_text = '''
 <p>With the creation of the project in the Linux Foundation Decentralized Trust (LFDT) and the establishment of the initial technical steering committee (TSC) the cornerstones of Hiero have been laid. As a next essential step the TSC needs to provide a roadmap that covers the transition of the first repositories and projects to the Hiero GitHub organization (https://github.com/hiero) and the inclusion and enabling of the community. The members of the TSC have committed themselves to work on the creation of this roadmap with the highest priority. The TSC hopes and encourages input and feedback by the complete ecosystem from core developers to users. To do so we enabled GitHub discussions (LINK) as a first open way for communication. We hope that as many community members as possible contribute to the discussions regarding the initial roadmap and help us to create a real community driven project.</p>
 <p>
 While an official roadmap does not exist today, the TSC has already defined several points they believe are essential for Hiero’s success. The following provide insight into those areas.</p>
-
 '''
+
+[[section_what_is_hiero_points]]
+heading = "Hiero is <strong>Fair</strong>"
+text = "Everybody should have equal access to all public forums. No one should have the ability to re-prioritize your transactions, or drop them, or front-run, or sandwich trade, or otherwise disadvantage you. The hashgraph algorithm is leaderless. We all deserve a more fair world."
+
+[[section_what_is_hiero_points]]
+heading = "Hiero is <strong>Fast</strong>"
+text = "You shouldn't have to sacrifice performance for fairness or security. The world of interconnected businesses and networks continues to expand at an accelerating rate. Waiting minutes for transactions to finalize doesn't meet your requirements. The hashgraph algorithm isn't just fair, it is also fast."
+
+[[section_what_is_hiero_points]]
+heading = "Hiero is <strong>Secure</strong>"
+text = "The hashgraph algorithm is asynchronous Byzantine Fault Tolerant (ABFT). This is the gold standard in distributed network security. Your transactions are protected from bad actors with the highest security available."
+
+[[section_what_is_hiero_points]]
+heading = "Hiero is <strong>Decentralized</strong>"
+text = "No one entity should have complete control of your future. Spreading power and influence out among many participants, all with equal access, helps secure your access to the network and your data. You should be able to participate in the network, in its development, and in its use. This network belongs to the world. It belongs to the future."
+
+[[section_what_is_hiero_points]]
+heading = "Hiero is <strong>Leaderless</strong>"
+text = "A ledger with a leader-based consensus protocol is inherently unfair, and either slow or susceptible to denial of service attacks. We believe in a future where every node can participate on an equal basis with a completely leaderless consensus protocol, safe from denial-of- service, and safe from centralization."
 
 [[section_why_contribute_points]]
 heading = "Help to create diverse and trustful networks"
@@ -89,4 +114,3 @@ text = "TBD"
 heading = "Better support regarding contributions especially for newcomers"
 text = "TBD"
 +++
-Laborum voluptate pariatur ex culpa magna nostrud est incididunt fugiat pariatur do dolor ipsum enim. Consequat tempor do dolor eu. Non id id anim anim excepteur excepteur pariatur nostrud qui irure ullamco.

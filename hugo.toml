@@ -8,21 +8,21 @@ pageRef = '/'
 weight = 10
 
 [[menus.main]]
-name = 'Posts'
-pageRef = '/posts'
+name = 'Open Source'
+url = '/#open-source'
 weight = 20
 
 [[menus.main]]
-name = 'Tags'
-pageRef = '/tags'
+name = 'Contribute'
+url = '/#contribute'
 weight = 30
 
 [[menus.main]]
 name = 'Connect'
 url = '/#connect'
-weight = 130
+weight = 40
 
 [[menus.main]]
 name = 'Roadmap'
 url = '/#roadmap'
-weight = 140
+weight = 50

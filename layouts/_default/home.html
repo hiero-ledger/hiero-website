@@ -1,38 +1,68 @@
 {{ define "main" }}
-  {{ .Content }}
-  <h2 id="open-source" class="mt-6 text-3xl">{{ $.Param "section_why_open_source_heading" | safeHTML }}</h2>
-  <p>{{ $.Param "section_why_open_source_text" | safeHTML }}</p>
-
-  <h2 id="what-parts" class="mt-6 text-3xl">{{ $.Param "section_what_parts_open_source_heading" | safeHTML }}</h2>
-  <p>{{ $.Param "section_what_parts_open_source_text" | $.RenderString }}</p>
-  
-  <div class="pl-4">
-    {{ range .Param "section_why_contribute_points" }}
-      <h3 class="mt-4 text-2xl">{{ .heading }}</h3>    
-      <p>{{ .text | safeHTML }}<p>
-    {{ end }}
+<div id="hero" class="bg-gray-800">
+  <div class="container max-w-sm py-12 mx-auto lg:max-w-7xl md:max-w-2xl sm:max-w-xl sm:w-full sm:py-16 text-white">
+    <h1 class="mt-6 text-5xl">{{ $.Param "section_hero_heading" | safeHTML }}</h1>
+    <p>{{ $.Param "section_hero_text" | safeHTML }}</p>
   </div>
-
-  <h2 id="contribute" class="mt-6 text-3xl">{{ $.Param "section_getting_started_heading" | safeHTML }}</h2>
-  <div class="space-y-4">{{ $.Param "section_getting_started_text" | safeHTML }}</div>
-
-  <h2 id="connect" class="mt-6 text-3xl">{{ $.Param "section_connect_heading" | safeHTML }}</h2>
-  <div class="space-y-4">{{ $.Param "section_connect_text" | safeHTML }}</div>
-
-  <h2 id="roadmap" class="mt-6 text-3xl">{{ $.Param "section_roadmap_heading" | safeHTML }}</h2>
-  <div class="space-y-4">{{ $.Param "section_roadmap_text" | safeHTML }}</div>
-
-  <div class="pl-4">
-    {{ range .Param "section_roadmap_points" }}
-      <h3 class="mt-4 text-2xl">{{ .heading }}</h3>    
-      <p>{{ .text | safeHTML }}<p>
-    {{ end }}
+</div>
+<div id="what-is-hiero" class="bg-gray-200">
+  <div class="container max-w-sm py-12 mx-auto lg:max-w-7xl md:max-w-2xl sm:max-w-xl sm:w-full sm:py-16">
+    <h2 class="mt-6 text-3xl">{{ $.Param "section_what_is_hiero_heading" | safeHTML }}</h2>
+    <p>{{ $.Param "section_what_is_hiero_text" | $.RenderString }}</p>
+    <div class="pl-4">
+      {{ range .Param "section_what_is_hiero_points" }}
+        <h3 class="mt-4 text-2xl">{{ .heading | safeHTML }}</h3>    
+        <p>{{ .text | safeHTML }}<p>
+      {{ end }}
+    </div>
   </div>
-  
-  <hr class="my-8"/>
-
-  {{ range site.RegularPages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>    
-    {{ .Summary }}
-  {{ end }}
+</div>
+<div id="open-source" class="bg-slate-300">
+  <div class="container max-w-sm py-12 mx-auto lg:max-w-7xl md:max-w-2xl sm:max-w-xl sm:w-full sm:py-16">
+    <h2 class="mt-6 text-3xl">{{ $.Param "section_why_open_source_heading" | safeHTML }}</h2>
+    <p>{{ $.Param "section_why_open_source_text" | safeHTML }}</p>
+  </div>
+</div>
+<div id="what-parts" class="bg-gray-200">
+  <div class="container max-w-sm py-12 mx-auto lg:max-w-7xl md:max-w-2xl sm:max-w-xl sm:w-full sm:py-16">
+    <h2 class="mt-6 text-3xl">{{ $.Param "section_what_parts_open_source_heading" | safeHTML }}</h2>
+    <p>{{ $.Param "section_what_parts_open_source_text" | $.RenderString }}</p>
+  </div>
+</div>
+<div id="why-contribute" class="bg-slate-300">
+  <div class="container max-w-sm py-12 mx-auto lg:max-w-7xl md:max-w-2xl sm:max-w-xl sm:w-full sm:py-16">
+    <h2 class="mt-6 text-3xl">{{ $.Param "section_why_contribute_heading" | safeHTML }}</h2>
+    <p>{{ $.Param "section_why_contribute_text" | $.RenderString }}</p>
+    <div class="pl-4">
+      {{ range .Param "section_why_contribute_points" }}
+        <h3 class="mt-4 text-2xl">{{ .heading }}</h3>    
+        <p>{{ .text | safeHTML }}<p>
+      {{ end }}
+    </div>
+  </div>
+</div>
+<div id="contribute" class="bg-gray-200">
+  <div class="container max-w-sm py-12 mx-auto lg:max-w-7xl md:max-w-2xl sm:max-w-xl sm:w-full sm:py-16">
+    <h2 class="mt-6 text-3xl">{{ $.Param "section_getting_started_heading" | safeHTML }}</h2>
+    <div class="space-y-4">{{ $.Param "section_getting_started_text" | safeHTML }}</div>
+  </div>
+</div>
+<div id="connect" class="bg-slate-300">
+  <div class="container max-w-sm py-12 mx-auto lg:max-w-7xl md:max-w-2xl sm:max-w-xl sm:w-full sm:py-16">
+    <h2 class="mt-6 text-3xl">{{ $.Param "section_connect_heading" | safeHTML }}</h2>
+    <div class="space-y-4">{{ $.Param "section_connect_text" | safeHTML }}</div>
+  </div>
+</div>
+<div id="roadmap" class="bg-gray-200">
+  <div class="container max-w-sm py-12 mx-auto lg:max-w-7xl md:max-w-2xl sm:max-w-xl sm:w-full sm:py-16">
+    <h2 class="mt-6 text-3xl">{{ $.Param "section_roadmap_heading" | safeHTML }}</h2>
+    <div class="space-y-4">{{ $.Param "section_roadmap_text" | safeHTML }}</div>
+    <div class="pl-4">
+      {{ range .Param "section_roadmap_points" }}
+        <h3 class="mt-4 text-2xl">{{ .heading }}</h3>    
+        <p>{{ .text | safeHTML }}<p>
+      {{ end }}
+    </div>
+  </div>
+</div>   
 {{ end }}

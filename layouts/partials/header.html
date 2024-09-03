@@ -1,7 +1,11 @@
-<div class="container pt-16">
-    <div class="flex flex-row justify-between">
-        <div>*Hiero Logo*</div>
-    {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+{{ $image := resources.Get "/images/hiero-logo.svg" }}
+
+<div class="py-2 fixed inset-x-0 top-0 z-10 bg-white">
+    <div class="container">
+        <div class="flex flex-row justify-between items-center">
+            <a href="{{ .Site.Home.RelPermalink }}"><img src="{{ $image.RelPermalink }}" alt="logo" class="h-12"></a>
+            {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+        </div>
     </div>
 </div>
 

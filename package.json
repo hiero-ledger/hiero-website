@@ -6,7 +6,7 @@
     "prelim:twcss": "./node_modules/tailwindcss/lib/cli.js -i ./assets/css/main.css -o ./static/css/main.css --jit",
     "dev:twcssw": "./node_modules/tailwindcss/lib/cli.js -i ./assets/css/main.css -o ./static/css/main.css --jit -w",
     "dev:hugo": "hugo server",
-    "prod:twcss": "./node_modules/tailwindcss/lib/cli.js -i ./assets/css/main.css -o ./assets/css/main.css --jit --minify",
+    "prod:twcss": "./node_modules/tailwindcss/lib/cli.js -i ./assets/css/main.css -o ./static/css/main.css --jit --minify",
     "prod:hugo": "hugo --gc --minify"
   },
   "devDependencies": {

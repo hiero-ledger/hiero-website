@@ -1,0 +1,44 @@
+[
+    {
+        "firstName": "Richard",
+        "lastName":"Bair",
+        "gitHubAccount": "https://github.com/rbair23",
+        "photo": "fpo.png",
+        "bio": "Richard is Vice President of Engineering at Hashgraph. Before the Hedera ecosystem, he was a Chief Client Architect for the Java platform at Oracle, and an architect for Oracle’s IoT applications. With 20+ years of experience building mission-critical platforms and applications used by millions of people worldwide, his passion is building incredible, scalable, high performance systems. He loves backpacking, camping, and watching his kids grow."
+    },
+    {
+        "firstName": "Leemon",
+        "lastName":"Baird",
+        "gitHubAccount": "https://github.com/",
+        "photo": "fpo.png",
+        "bio": "Leemon is the Co-founder and Chief Scientist at Hashgraph. The inventor of the organization’s namesake, the distributed hashgraph consensus algorithm, Leemon co-founded the Hedera network with Mance Harmon. He has two decades of technology and start-up experience, and served as Professor of Computer Science at the US Air Force Academy, as well as holding senior scientist roles in several labs. Leemon received his PhD in Computer Science from Carnegie Mellon University and has multiple patents and publications in peer-reviewed journals. He has spoken at conferences in computer security, machine learning and mathematics."
+    },
+    {
+        "firstName": "Hendrik",
+        "lastName":"Ebbers",
+        "gitHubAccount": "https://github.com/hendrikebbers",
+        "photo": "hendrik.png",
+        "bio": "Hendrik Ebbers is a member of the Board of Directors of the Eclipse Foundation. He is leading several open-source projects as a member of working groups and committees like Eclipse Adoptium or JakartaEE and actively contributing to even more projects. Hendrik has been a core committer to the consensus node of Hedera for several years. <br><strong>Statement:</strong> As a board member of the Eclipse Foundation I know that meaningful standards can only be formed in a vendor neutral and professional environment. By joining the Linux Foundation the Hiero project does exactly the needed next step in that direction. Today Hiero is in an excellent state to define the future of trustful and decentralized ledgers in an open, sustainable and vendor neutral way together with the community."
+    },
+    {
+        "firstName": "Stoyan",
+        "lastName":"Panayotov",
+        "gitHubAccount": "https://github.com/stoqnkpL",
+        "photo": "stoyan.png",
+        "bio": "Stoyan Panayotov is a software architect at Limechain with several years of experience in the blockchain industry consulting various clients - decentralized networks, protocols and dApps. Stoyan has been a core committer to the consensus node of Hedera for several years."
+    },
+    {
+        "firstName": "Alex",
+        "lastName":"Popowycz",
+        "gitHubAccount": "https://github.com/",
+        "photo": "fpo.png",
+        "bio": "Alex is the Chief Information Officer of Hedera and is charged with the technical operations of the network in close partnership with Hedera's member operators, ensuring the sustainable evolution of capabilities to the network while maintaining its core attributes of speed, fairness, and security. Prior to joining Hedera, Alex was the CIO at Health First, a multi-hospital integrated health system. He previously held several technology leadership positions at Fidelity Investments, with primary responsibility for cybersecurity and standards."
+    },
+    {
+        "firstName": "George",
+        "lastName":"Spasov",
+        "gitHubAccount": "https://github.com/Perseverance",
+        "photo": "fpo.png",
+        "bio": "George Spasov is a blockchain architect and co-founder of LimeChain. As part of LimeChain, over the past 8 years he has overseen the ideation, architecture creation, development and release of tens of projects including blockchain networks, L2 rollups, decentralized applications, infrastructure and customer facing products. George brings a vast knowledge of both Hedera and the wider DLT space."
+    }
+]

@@ -61,12 +61,32 @@
   <div class="bg-slate-300">
     <div class="container py-12 sm:py-16">
       <h2 class="text-3xl">{{ $.Param "section_connect_heading" | safeHTML }}</h2>
-      <div class="space-y-4">{{ $.Param "section_connect_text" | safeHTML }}</div>
+      <div class="space-y-4">{{ $.Param "section_connect_text" | safeHTML }}</div>      
+    </div>
+  </div>
+</div>
+<div id="technical-steering-committee" class="pt-16 -mt-16">
+  <div class="bg-gray-200">
+    <div class="container py-12 sm:py-16">
+      <h2 class="text-3xl">{{ $.Param "section_technical_steering_committee_heading" | safeHTML }}</h2>
+      <div class="space-y-4">{{ $.Param "section_technical_steering_committee_text" | safeHTML }}</div>
+      <div class="mt-8 mb-4">{{ $.Param "section_technical_steering_committee_individuals_heading" | safeHTML }}</div>
+      <div class="team-members grid grid-cols-3 gap-6">
+        {{ $sortedCommittee := sort $.Site.Data.technical_steering_committee "lastName" }}
+        {{ range $sortedCommittee}}
+        <div class="team-member text-center">          
+          <img src="images/tsc/{{ .photo }}" alt="{{ .firstName }} {{ .lastName }}" class="w-48 h-48 rounded-full mx-auto">
+          <h3 class="text-xl font-semibold">{{ .firstName }} {{ .lastName }}</h3>
+          <p><a href="{{ .gitHubAccount }}" target="_blank" rel="noopener">{{ .gitHubAccount }}</a></p>
+          <p class="text-gray-500 mt-2 space-y-4">{{ .bio | safeHTML }}</p>
+        </div>
+        {{ end }}
+      </div>
     </div>
   </div>
 </div>
 <div id="roadmap" class="pt-16 -mt-16">
-  <div class="bg-gray-200">
+  <div class="bg-slate-300">
     <div class="container py-12 sm:py-16">
       <h2 class="text-3xl">{{ $.Param "section_roadmap_heading" | safeHTML }}</h2>
       <div class="space-y-4">{{ $.Param "section_roadmap_text" | safeHTML }}</div>

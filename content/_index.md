@@ -20,14 +20,14 @@ section_why_contribute_text = "There are many benefits in contributing to Hiero 
 
 section_getting_started_heading = "How to Contribute / Getting Started?"
 section_getting_started_text = '''
-<p>Since we are still working on the transition of the Hiero repositories from the Hedera’s GitHub organization (https://github.com/hashgraph) into the Hiero GitHub organization (https://github.com/hiero), many opportunities for contribution can be initiated at the Hedera’s GitHub organization today.</p>
+<p>Since we are still working on the transition of the Hiero repositories from the Hedera’s GitHub organization (<a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">https://github.com/hashgraph</a>) into the Hiero GitHub organization (<a href="https://github.com/hiero" target="_blank" rel="noreferrer noopener">https://github.com/hiero</a>), many opportunities for contribution can be initiated at the Hedera’s GitHub organization today.</p>
 <p>While in this transition phase we already want to enable developers to join in developing Hiero and its related projects. As such we’re always willing to help you get started, and mentor you on your journey of learning the project and making useful contributions.</p>
 <p>
 There is good work to do for everyone with whatever skillset you have, and it doesn’t have to be code. We also welcome help with documentation, design, project organization, organizing meetups and promoting the project.</p>
 <p>
-We maintain a list of starter issues that are a great way to get up to speed as a new contributor. You can search for the “good first issue” label in our issue tracker to see what’s currently available HERE.</p>
+We maintain a list of starter issues that are a great way to get up to speed as a new contributor. You can search for the “good first issue” label in our issue tracker to see what’s currently available <a href="#" target="_blank" rel="noreferrer noopener">HERE</a>.</p>
 <p>
-If you have any questions, need help or additional mentoring you can reach out to the community and the technical steering committee (TSC) of Hiero in our GitHub discussions (LINK)</p>
+If you have any questions, need help or additional mentoring you can reach out to the community and the technical steering committee (TSC) of Hiero in our GitHub <a href="#" target="_blank" rel="noreferrer noopener">discussions</a></p>
 '''
 
 section_connect_heading = "Connect with the Hiero Open Source community"
@@ -53,22 +53,27 @@ While an official roadmap does not exist today, the TSC has already defined seve
 [[section_what_is_hiero_points]]
 heading = "Hiero is <strong>Fair</strong>"
 text = "Everybody should have equal access to all public forums. No one should have the ability to re-prioritize your transactions, or drop them, or front-run, or sandwich trade, or otherwise disadvantage you. The hashgraph algorithm is leaderless. We all deserve a more fair world."
+icon = "images/fpo-icon-small.png"
 
 [[section_what_is_hiero_points]]
 heading = "Hiero is <strong>Fast</strong>"
 text = "You shouldn't have to sacrifice performance for fairness or security. The world of interconnected businesses and networks continues to expand at an accelerating rate. Waiting minutes for transactions to finalize doesn't meet your requirements. The hashgraph algorithm isn't just fair, it is also fast."
+icon = "images/fpo-icon-small.png"
 
 [[section_what_is_hiero_points]]
 heading = "Hiero is <strong>Secure</strong>"
 text = "The hashgraph algorithm is asynchronous Byzantine Fault Tolerant (ABFT). This is the gold standard in distributed network security. Your transactions are protected from bad actors with the highest security available."
+icon = "images/fpo-icon-small.png"
 
 [[section_what_is_hiero_points]]
 heading = "Hiero is <strong>Decentralized</strong>"
 text = "No one entity should have complete control of your future. Spreading power and influence out among many participants, all with equal access, helps secure your access to the network and your data. You should be able to participate in the network, in its development, and in its use. This network belongs to the world. It belongs to the future."
+icon = "images/fpo-icon-small.png"
 
 [[section_what_is_hiero_points]]
 heading = "Hiero is <strong>Leaderless</strong>"
 text = "A ledger with a leader-based consensus protocol is inherently unfair, and either slow or susceptible to denial of service attacks. We believe in a future where every node can participate on an equal basis with a completely leaderless consensus protocol, safe from denial-of- service, and safe from centralization."
+icon = "images/fpo-icon-small.png"
 
 [[section_why_contribute_points]]
 heading = "Help to create diverse and trustful networks"

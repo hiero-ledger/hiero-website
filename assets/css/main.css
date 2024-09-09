@@ -19,6 +19,11 @@ footer {
 }
 
 a {
+  color: #f87171;
+  text-decoration: underline;
+}
+
+nav a {
   color: gray;
   text-decoration: none;
 }
@@ -60,7 +65,7 @@ a {
 
 @media(min-width: 1280px) {
   .container {
-      max-width:1280px;
+      max-width:1540px;
       padding-right: 4rem;
       padding-left: 4rem
   }

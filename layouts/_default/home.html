@@ -67,7 +67,7 @@
   </div> 
 </div> 
 <!-- WHY CONTRIBUTE? -->
-<div id="why-contribute" class="pt-16 -mt-16">
+<div id="why-contribute" class="anchor">
   <div class="bg-white">
     <div class="container py-12 sm:pt-32 sm:pb-28 text-center">
       <div class="pb-16">
@@ -87,7 +87,7 @@
 </div>
 <hr class="h-1 bg-red-400"/>
 <!-- CONTRIBUTE -->
-<div id="contribute" class="pt-16 -mt-16">
+<div id="contribute" class="anchor">
   <div class="bg-white">
     <div class="container py-12 sm:pt-32 sm:pb-28 grid grid-cols-2 gap-10">
       <div>
@@ -112,47 +112,86 @@
   </div>
 </div>
 <hr class="h-1 bg-red-400"/>
-<!-- CONECT -->
-<div id="connect" class="pt-16 -mt-16">
-  <div class="bg-slate-300">
-    <div class="container py-12 sm:py-16">
-      <h2 class="text-3xl">{{ $.Param "section_connect_heading" | safeHTML }}</h2>
-      <div class="space-y-4">{{ $.Param "section_connect_text" | safeHTML }}</div>      
+<!-- CONNECT -->
+<div id="connect" class="anchor">
+  <div class="bg-white">
+    <div class="container py-12 sm:pt-32 sm:pb-28 grid grid-cols-2 gap-10">
+      <div class="order-1 sm:order-2">
+        <h2 class="text-6xl">{{ $.Param "section_connect_heading" | safeHTML }}</h2>
+        <div class="space-y-4">{{ $.Param "section_connect_text" | safeHTML }}</div>
+      </div>
+      <div class="order-2 sm:order-1 grid grid-cols-2 gap-10">
+        {{ with $fpoIconLarge }}
+        <img src="{{ $fpoIconLarge.RelPermalink }}" width="{{ $fpoIconLarge.Width }}" height="{{ $fpoIconLarge.Height }}">
+        {{ end }}
+        {{ with $fpoIconLarge }}
+        <img src="{{ $fpoIconLarge.RelPermalink }}" width="{{ $fpoIconLarge.Width }}" height="{{ $fpoIconLarge.Height }}">
+        {{ end }}
+        {{ with $fpoIconLarge }}
+        <img src="{{ $fpoIconLarge.RelPermalink }}" width="{{ $fpoIconLarge.Width }}" height="{{ $fpoIconLarge.Height }}">
+        {{ end }}
+        {{ with $fpoIconLarge }}
+        <img src="{{ $fpoIconLarge.RelPermalink }}" width="{{ $fpoIconLarge.Width }}" height="{{ $fpoIconLarge.Height }}">
+        {{ end }}
+      </div>      
     </div>
   </div>
 </div>
-<div id="technical-steering-committee" class="pt-16 -mt-16">
-  <div class="bg-gray-200">
-    <div class="container py-12 sm:py-16">
-      <h2 class="text-3xl">{{ $.Param "section_technical_steering_committee_heading" | safeHTML }}</h2>
+<hr class="h-1 bg-red-400"/>
+<!-- TECHNICAL STEERING COMMITTEE -->
+<div id="technical-steering-committee" class="anchor">
+  <div class="bg-white">
+    <div class="container py-12 sm:pt-32 sm:pb-28 grid grid-cols-2 gap-10">
+      <div>
+      <h2 class="text-6xl mb-4">{{ $.Param "section_technical_steering_committee_heading" | safeHTML }}</h2>
       <div class="space-y-4">{{ $.Param "section_technical_steering_committee_text" | safeHTML }}</div>
-      <div class="mt-8 mb-4">{{ $.Param "section_technical_steering_committee_individuals_heading" | safeHTML }}</div>
-      <div class="team-members grid grid-cols-3 gap-6">
+      </div>
+      <!--<div class="mt-8 mb-4">{{ $.Param "section_technical_steering_committee_individuals_heading" | safeHTML }}</div>-->
+      <div class="team-members grid grid-cols-2 gap-10">
         {{ $sortedCommittee := sort $.Site.Data.technical_steering_committee "lastName" }}
         {{ range $sortedCommittee}}
-        <div class="team-member text-center">          
-          <img src="images/tsc/{{ .photo }}" alt="{{ .firstName }} {{ .lastName }}" class="w-48 h-48 rounded-full mx-auto">
+        <div class="team-member">          
+          <img src="images/tsc/{{ .photo }}" alt="{{ .firstName }} {{ .lastName }}" class="w-full">
           <h3 class="text-xl font-semibold">{{ .firstName }} {{ .lastName }}</h3>
-          <p><a href="{{ .gitHubAccount }}" target="_blank" rel="noopener">{{ .gitHubAccount }}</a></p>
-          <p class="text-gray-500 mt-2 space-y-4">{{ .bio | safeHTML }}</p>
+          <div class="flex flex-row gap-2 items-center">
+            <button class="text-red-400 border-2 border-red-400 border-solid rounded-full py-1 px-4">Bio</button>
+            <a href="{{ .gitHubAccount }}" target="_blank" rel="noopener">icon</a>
+          </div>         
+          <!-- <p class="text-gray-500 mt-2 space-y-4">{{ .bio | safeHTML }}</p> -->
         </div>
         {{ end }}
       </div>
     </div>
   </div>
 </div>
-<div id="roadmap" class="pt-16 -mt-16">
-  <div class="bg-slate-300">
-    <div class="container py-12 sm:py-16">
-      <h2 class="text-3xl">{{ $.Param "section_roadmap_heading" | safeHTML }}</h2>
-      <div class="space-y-4">{{ $.Param "section_roadmap_text" | safeHTML }}</div>
-      <div class="pl-4">
-        {{ range .Param "section_roadmap_points" }}
-          <h3 class="mt-4 text-2xl">{{ .heading }}</h3>    
-          <p>{{ .text | safeHTML }}</p>
+<hr class="h-1 bg-red-400"/>
+<!-- ROADMAP -->
+<div id="roadmap" class="anchor">
+  <div class="bg-white">
+    <div class="container py-12 sm:pt-32 sm:pb-0 sm:py-16 grid grid-cols-2 gap-10">
+      <div>
+        <h2 class="text-6xl mb-4">{{ $.Param "section_roadmap_heading" | safeHTML }}</h2>
+        <div class="space-y-4">{{ $.Param "section_roadmap_text" | safeHTML }}</div>
+      </div>
+      <div>
+        {{ range .Param "section_roadmap_points" }} 
+        <div class="grid grid-cols-[55px_1fr] gap-10">
+          <div class="flex flex-col">
+            {{ $icon := resources.Get .icon }}
+            {{ with $icon }}
+            <img src="{{ $icon.RelPermalink }}" width="{{ $icon.Width }}" height="{{ $icon.Height }}" class="border-2 border-black">
+            {{ end }}
+            <div class="bg-black w-0.5 flex-1 mx-auto"></div>
+          </div>
+          <div class="pb-20">
+            <h3 class="text-2xl mb-2">{{ .heading }}</h3>    
+            <p>{{ .text | safeHTML }}</p>
+          </div>
+          
+        </div>
         {{ end }}
       </div>
-    </div>
+    </div> <!-- end container -->
   </div>
 </div> 
 {{ end }}

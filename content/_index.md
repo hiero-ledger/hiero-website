@@ -32,7 +32,7 @@ If you have any questions, need help or additional mentoring you can reach out t
 
 section_connect_heading = "Connect with the Hiero Open Source community"
 section_connect_text = '''
-<p>Since we do not create Hiero from scratch it already has a vibrant community from Hedera and other products and projects. With the creation of the Hiero project, we started GitHub discussions (LINK) that can be used as a central place to contact the community and the technical steering committee (TSC) of Hiero.</p>
+<p>Since we do not create Hiero from scratch it already has a vibrant community from Hedera and other products and projects. With the creation of the Hiero project, we started <a href="#" target="_blank" rel="noreferrer noopener">GitHub discussions</a> that can be used as a central place to contact the community and the technical steering committee (TSC) of Hiero.</p>
 <p>
 For us, the community of the open-source project is a crucial part of its success. Based on that we will concentrate on the integration of the community. As defined in the roadmap, we will integrate the community into the development of Hiero from day 1. An essential part of that is to have community members be part of the TSC. Here the TSC is working on voting mechanisms that allow us to create a diverse community.</p>
 <p>
@@ -40,7 +40,11 @@ Next to the TSC, we want to invest in a diverse and inclusive community. It is i
 '''
 
 section_technical_steering_committee_heading = "The Technical Steering Committee of Hiero"
-section_technical_steering_committee_text = "While one of our main goals is to have a diverse and inclusive community in which everybody has the rights and responsibilities to move the project forward, it is important that a committee oversees the project and moves the roadmap forward. To do so, we have defined a technical steering committee (TSC) that is defined by six individuals today. One of the important next steps on our roadmap is to enable voting mechanisms to add additional members from the community to the TSC. The duties, goals, and rights of the TSC are defined in the technical charter of the Hiero project, which can be found HERE."
+section_technical_steering_committee_text = '''
+<p>While one of our main goals is to have a diverse and inclusive community in which everybody has the rights and responsibilities to move the project forward, it is important that a committee oversees the project and moves the roadmap forward. To do so, we have defined a technical steering committee (TSC) that is defined by six individuals today. One of the important next steps on our roadmap is to enable voting mechanisms to add additional members from the community to the TSC. The duties, goals, and rights of the TSC are defined in the technical charter of the Hiero project, which can be found <a href="#" target="_blank" rel="noreferrer noopener">HERE</a>.
+</p>
+'''
+
 section_technical_steering_committee_individuals_heading = "Today the TSC is made up of the following individuals:"
 
 section_roadmap_heading = "Our Roadmap in the Linux Foundation Decentralized Trust"
@@ -102,24 +106,30 @@ text = "TBD"
 [[section_roadmap_points]]
 heading = "Transparent voting mechanisms for the community"
 text = "Together with the Linux Foundation, the Hiero TSC seeks to establish voting mechanisms that can be used in electing new committee members. Such transparency is instrumental in developing trust by integrating the community in all aspects of the project's governance and operations."
+icon = "images/fpo-icon-small.png"
 
 [[section_roadmap_points]]
 heading = "Transition of network repositories"
 text = "Hedera has existed since WHEN, which has allowed its developer ecosystem to grow as represented by the variety of projects within its repository (https://github.com/hashgraph). With the number of projects involved, the initial priorities are to transition the repositories needed to run a fully functioning base network (including Consensus Node, Mirror Node, JSON-RPC-Relay, and others) as soon as possible."
+icon = "images/fpo-icon-small.png"
 
 [[section_roadmap_points]]
 heading = "Transition of SDKs"
 text = "The next phase of code contributions involve those that allow developed applications to take advantage of the myriad of a network’s services. Here the SDK clients are essential parts and should be migrated to Hiero directly after or parallel with the network repositories."
+icon = "images/fpo-icon-small.png"
 
 [[section_roadmap_points]]
 heading = "Renaming and rebranding"
 text = "Repositories in the Hedera GitHub organization (https://github.com/hashgraph) use “Hedera” or “Hashgraph” as names of the project reflecting the initial motivations for its use, reflected in the repository and project names but also in the sources. With the transition of sources to Hiero we plan to refactor all those projects and use Hiero as core element in naming conventions."
+icon = "images/fpo-icon-small.png"
 
 [[section_roadmap_points]]
 heading = "Enabling better communication with the community"
 text = "TBD"
+icon = "images/fpo-icon-small.png"
 
 [[section_roadmap_points]]
 heading = "Better support regarding contributions especially for newcomers"
 text = "TBD"
+icon = "images/fpo-icon-small.png"
 +++

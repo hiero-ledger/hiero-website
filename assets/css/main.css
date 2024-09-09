@@ -42,7 +42,7 @@ nav a {
 
 @media(min-width: 640px) {
   .container {
-      max-width:640px;
+      max-width:768px;
       padding-right: 2rem;
       padding-left: 2rem
   }
@@ -50,19 +50,13 @@ nav a {
 
 @media(min-width: 768px) {
   .container {
-      max-width:768px;
+      max-width:1024px;
       padding-right: 3rem;
       padding-left: 3rem
   }
 }
 
 @media(min-width: 1024px) {
-  .container {
-      max-width:1024px
-  }
-}
-
-@media(min-width: 1280px) {
   .container {
       max-width:1540px;
       padding-right: 4rem;

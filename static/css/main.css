@@ -702,20 +702,20 @@ video {
   flex-grow: 1;
 }
 
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.grid-cols-\[35\%_1fr\] {
-  grid-template-columns: 35% 1fr;
-}
-
 .grid-cols-\[55px_1fr\] {
   grid-template-columns: 55px 1fr;
+}
+
+.grid-rows-\[max-content\] {
+  grid-template-rows: max-content;
 }
 
 .flex-row {
@@ -740,10 +740,6 @@ video {
 
 .gap-2 {
   gap: 0.5rem;
-}
-
-.gap-32 {
-  gap: 8rem;
 }
 
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
@@ -812,14 +808,14 @@ video {
   padding-bottom: 3rem;
 }
 
-.py-\[30px\] {
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.py-\[30px\] {
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .pb-16 {
@@ -832,6 +828,10 @@ video {
 
 .pb-52 {
   padding-bottom: 13rem;
+}
+
+.pt-12 {
+  padding-top: 3rem;
 }
 
 .pt-44 {
@@ -948,7 +948,7 @@ nav a {
 
 @media(min-width: 640px) {
   .container {
-    max-width:640px;
+    max-width:768px;
     padding-right: 2rem;
     padding-left: 2rem
   }
@@ -956,19 +956,13 @@ nav a {
 
 @media(min-width: 768px) {
   .container {
-    max-width:768px;
+    max-width:1024px;
     padding-right: 3rem;
     padding-left: 3rem
   }
 }
 
 @media(min-width: 1024px) {
-  .container {
-    max-width:1024px
-  }
-}
-
-@media(min-width: 1280px) {
   .container {
     max-width:1540px;
     padding-right: 4rem;
@@ -977,14 +971,6 @@ nav a {
 }
 
 @media (min-width: 640px) {
-  .sm\:order-1 {
-    order: 1;
-  }
-
-  .sm\:order-2 {
-    order: 2;
-  }
-
   .sm\:flex-row {
     flex-direction: row;
   }
@@ -1004,6 +990,38 @@ nav a {
 
   .sm\:pt-32 {
     padding-top: 8rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:order-1 {
+    order: 1;
+  }
+
+  .lg\:order-2 {
+    order: 2;
+  }
+
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-\[35\%_1fr\] {
+    grid-template-columns: 35% 1fr;
+  }
+
+  .lg\:gap-32 {
+    gap: 8rem;
   }
 }
 

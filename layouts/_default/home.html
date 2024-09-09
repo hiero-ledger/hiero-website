@@ -14,13 +14,13 @@
 <!-- WHAT IS HIERO -->
 <div id="what-is-hiero" class="anchor">
   <div class="bg-white">
-    <div class="container py-12 sm:pt-32 sm:pb-28 grid grid-cols-[35%_1fr] gap-32">
+    <div class="container py-12 sm:pt-32 sm:pb-28 grid grid-cols-1 lg:grid-cols-[35%_1fr] gap-10 lg:gap-32">
       <div>
         <h2 class="text-6xl">{{ $.Param "section_what_is_hiero_heading" | safeHTML }}</h2>
-        <p>{{ $.Param "section_what_is_hiero_text" | $.RenderString }}</p>
+        <p>{{ $.Param "section_what_is_hiero_text" | safeHTML }}</p>
       </div>
       <div class="flex flex-col gap-10">
-        {{ range .Param "section_what_is_hiero_points" }}
+        {{ range $.Param "section_what_is_hiero_points" }}
         <div class="grid grid-cols-[55px_1fr] gap-10">   
           {{ $icon := resources.Get .icon }}
           {{ with $icon }}
@@ -41,21 +41,21 @@
 <div id="open-source" class="anchor">
   <div class="bg-white">
     <div class="container py-12 sm:pt-32 sm:pb-28 flex flex-col gap-10">
-      <div class="grid grid-cols-2 gap-10">
-        <div class="order-1 sm:order-2">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div class="order-1 lg:order-2">
           <h2 class="text-3xl">{{ $.Param "section_why_open_source_heading" | safeHTML }}</h2>
           <p>{{ $.Param "section_why_open_source_text" | safeHTML }}</p>
         </div>
-        <div class="order-2 sm:order-1">
+        <div class="order-2 lg:order-1">
           {{ with $fpoIconLarge }}
           <img src="{{ $fpoIconLarge.RelPermalink }}" width="{{ $fpoIconLarge.Width }}" height="{{ $fpoIconLarge.Height }}">
           {{ end }}
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <div class="order-1">
           <h2 class="text-3xl">{{ $.Param "section_what_parts_open_source_heading" | safeHTML }}</h2>
-          <p>{{ $.Param "section_what_parts_open_source_text" | $.RenderString }}</p>
+          <p>{{ $.Param "section_what_parts_open_source_text" | safeHTML }}</p>
         </div>
         <div class="order-2">
           {{ with $fpoIconLarge }}
@@ -72,9 +72,9 @@
     <div class="container py-12 sm:pt-32 sm:pb-28 text-center">
       <div class="pb-16">
         <h2 class="text-6xl">{{ $.Param "section_why_contribute_heading" | safeHTML }}</h2>
-        <p>{{ $.Param "section_why_contribute_text" | $.RenderString }}</p>
+        <p>{{ $.Param "section_why_contribute_text" | safeHTML }}</p>
       </div>
-      <div class="grid grid-cols-3 gap-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {{ range .Param "section_why_contribute_points" }}
           <div class="bg-black text-white p-8 text-left">
             <h3 class="text-3xl mb-4">{{ .heading }}</h3>    
@@ -89,12 +89,12 @@
 <!-- CONTRIBUTE -->
 <div id="contribute" class="anchor">
   <div class="bg-white">
-    <div class="container py-12 sm:pt-32 sm:pb-28 grid grid-cols-2 gap-10">
+    <div class="container py-12 sm:pt-32 sm:pb-28 grid grid-cols-1 lg:grid-cols-2 gap-10">
       <div>
         <h2 class="text-6xl mb-8">{{ $.Param "section_getting_started_heading" | safeHTML }}</h2>
         <div class="space-y-4">{{ $.Param "section_getting_started_text" | safeHTML }}</div>
       </div>
-      <div class="grid grid-cols-2 gap-10">
+      <div class="grid grid-cols-2 gap-10 grid-rows-[max-content]">
         {{ with $fpoIconLarge }}
         <img src="{{ $fpoIconLarge.RelPermalink }}" width="{{ $fpoIconLarge.Width }}" height="{{ $fpoIconLarge.Height }}">
         {{ end }}
@@ -115,12 +115,12 @@
 <!-- CONNECT -->
 <div id="connect" class="anchor">
   <div class="bg-white">
-    <div class="container py-12 sm:pt-32 sm:pb-28 grid grid-cols-2 gap-10">
-      <div class="order-1 sm:order-2">
+    <div class="container py-12 sm:pt-32 sm:pb-28 grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <div class="order-1 lg:order-2">
         <h2 class="text-6xl">{{ $.Param "section_connect_heading" | safeHTML }}</h2>
         <div class="space-y-4">{{ $.Param "section_connect_text" | safeHTML }}</div>
       </div>
-      <div class="order-2 sm:order-1 grid grid-cols-2 gap-10">
+      <div class="order-2 lg:order-1 grid grid-cols-2 gap-10 grid-rows-[max-content]">
         {{ with $fpoIconLarge }}
         <img src="{{ $fpoIconLarge.RelPermalink }}" width="{{ $fpoIconLarge.Width }}" height="{{ $fpoIconLarge.Height }}">
         {{ end }}
@@ -141,7 +141,7 @@
 <!-- TECHNICAL STEERING COMMITTEE -->
 <div id="technical-steering-committee" class="anchor">
   <div class="bg-white">
-    <div class="container py-12 sm:pt-32 sm:pb-28 grid grid-cols-2 gap-10">
+    <div class="container py-12 sm:pt-32 sm:pb-28 grid grid-cols-1 lg:grid-cols-2 gap-10">
       <div>
       <h2 class="text-6xl mb-4">{{ $.Param "section_technical_steering_committee_heading" | safeHTML }}</h2>
       <div class="space-y-4">{{ $.Param "section_technical_steering_committee_text" | safeHTML }}</div>
@@ -168,7 +168,7 @@
 <!-- ROADMAP -->
 <div id="roadmap" class="anchor">
   <div class="bg-white">
-    <div class="container py-12 sm:pt-32 sm:pb-0 sm:py-16 grid grid-cols-2 gap-10">
+    <div class="container pt-12 sm:pt-32 sm:pb-0 sm:py-16 grid grid-cols-1 lg:grid-cols-2 gap-10">
       <div>
         <h2 class="text-6xl mb-4">{{ $.Param "section_roadmap_heading" | safeHTML }}</h2>
         <div class="space-y-4">{{ $.Param "section_roadmap_text" | safeHTML }}</div>

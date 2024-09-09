@@ -13,7 +13,9 @@ section_why_open_source_heading = "Why is Hiero Open Source?"
 section_why_open_source_text = "The main goal of Hiero is to create a diverse community of developers, dreamers, and builders working to make the world more fair, fast, and secure. To achieve that goal it is critical that everyone can access the source of Hiero and move the project forward. A decentralized network that is used by enterprises and critical infrastructure around the world must be vendor-neutral and fully auditable."
 
 section_what_parts_open_source_heading = "What parts of Hiero are Open Source?"
-section_what_parts_open_source_text = "Hiero is 100% open-source. While the transition of the project to Linux Foundation Decentralized Trust is still ongoing, a view into some additional contributions can be found in [Hedera’s Github organization](https://github.com/hashgraph). As a first step, the technical steering committee (TSC) of Hiero will provide oversight to include  projects that are needed to run an enterprise-ready decentralized network to the new  [Hiero GitHub organization](https://github.com/hiero). More information about the transition process can be found in the roadmap (link to roadmap section)."
+section_what_parts_open_source_text = '''
+Hiero is 100% open-source. While the transition of the project to Linux Foundation Decentralized Trust is still ongoing, a view into some additional contributions can be found in Hedera’s Github organization (<a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">https://github.com/hashgraph</a>). As a first step, the technical steering committee (TSC) of Hiero will provide oversight to include  projects that are needed to run an enterprise-ready decentralized network to the new Hiero GitHub organization (<a href="https://github.com/hiero" target="_blank" rel="noreferrer noopener">https://github.com/hiero</a>). More information about the transition process can be found in the  <a href="#roadmap" target="_self">roadmap</a>.
+'''
 
 section_why_contribute_heading = "Why should I contribute?"
 section_why_contribute_text = "There are many benefits in contributing to Hiero for both individuals or companies:"
@@ -27,7 +29,7 @@ There is good work to do for everyone with whatever skillset you have, and it do
 <p>
 We maintain a list of starter issues that are a great way to get up to speed as a new contributor. You can search for the “good first issue” label in our issue tracker to see what’s currently available <a href="#" target="_blank" rel="noreferrer noopener">HERE</a>.</p>
 <p>
-If you have any questions, need help or additional mentoring you can reach out to the community and the technical steering committee (TSC) of Hiero in our GitHub <a href="#" target="_blank" rel="noreferrer noopener">discussions</a></p>
+If you have any questions, need help or additional mentoring you can reach out to the community and the technical steering committee (TSC) of Hiero in our <a href="#" target="_blank" rel="noreferrer noopener">GitHub discussions</a></p>
 '''
 
 section_connect_heading = "Connect with the Hiero Open Source community"
@@ -105,31 +107,43 @@ text = "TBD"
 
 [[section_roadmap_points]]
 heading = "Transparent voting mechanisms for the community"
-text = "Together with the Linux Foundation, the Hiero TSC seeks to establish voting mechanisms that can be used in electing new committee members. Such transparency is instrumental in developing trust by integrating the community in all aspects of the project's governance and operations."
+text = '''
+Together with the Linux Foundation, the Hiero TSC seeks to establish voting mechanisms that can be used in electing new committee members. Such transparency is instrumental in developing trust by integrating the community in all aspects of the project's governance and operations.
+'''
 icon = "images/fpo-icon-small.png"
 
 [[section_roadmap_points]]
 heading = "Transition of network repositories"
-text = "Hedera has existed since WHEN, which has allowed its developer ecosystem to grow as represented by the variety of projects within its repository (https://github.com/hashgraph). With the number of projects involved, the initial priorities are to transition the repositories needed to run a fully functioning base network (including Consensus Node, Mirror Node, JSON-RPC-Relay, and others) as soon as possible."
+text = '''
+Hedera has existed since WHEN, which has allowed its developer ecosystem to grow as represented by the variety of projects within its repository (<a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">https://github.com/hashgraph</a>). With the number of projects involved, the initial priorities are to transition the repositories needed to run a fully functioning base network (including Consensus Node, Mirror Node, JSON-RPC-Relay, and others) as soon as possible.
+'''
 icon = "images/fpo-icon-small.png"
 
 [[section_roadmap_points]]
 heading = "Transition of SDKs"
-text = "The next phase of code contributions involve those that allow developed applications to take advantage of the myriad of a network’s services. Here the SDK clients are essential parts and should be migrated to Hiero directly after or parallel with the network repositories."
+text = '''
+The next phase of code contributions involve those that allow developed applications to take advantage of the myriad of a network’s services. Here the SDK clients are essential parts and should be migrated to Hiero directly after or parallel with the network repositories.
+'''
 icon = "images/fpo-icon-small.png"
 
 [[section_roadmap_points]]
 heading = "Renaming and rebranding"
-text = "Repositories in the Hedera GitHub organization (https://github.com/hashgraph) use “Hedera” or “Hashgraph” as names of the project reflecting the initial motivations for its use, reflected in the repository and project names but also in the sources. With the transition of sources to Hiero we plan to refactor all those projects and use Hiero as core element in naming conventions."
+text = '''
+Repositories in the Hedera GitHub organization (<a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">https://github.com/hashgraph</a>) use “Hedera” or “Hashgraph” as names of the project reflecting the initial motivations for its use, reflected in the repository and project names but also in the sources. With the transition of sources to Hiero we plan to refactor all those projects and use Hiero as core element in naming conventions.
+'''
 icon = "images/fpo-icon-small.png"
 
 [[section_roadmap_points]]
 heading = "Enabling better communication with the community"
-text = "TBD"
+text = '''
+TBD
+'''
 icon = "images/fpo-icon-small.png"
 
 [[section_roadmap_points]]
 heading = "Better support regarding contributions especially for newcomers"
-text = "TBD"
+text = '''
+TBD
+'''
 icon = "images/fpo-icon-small.png"
 +++

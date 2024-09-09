@@ -1,11 +1,15 @@
 {{ define "main" }}
-<div id="hero" class="bg-gray-800">
-  <div class="container py-12 sm:py-16 text-white">
-    <h1 class="text-5xl">{{ $.Param "section_hero_heading" | safeHTML }}</h1>
-    <p>{{ $.Param "section_hero_text" | safeHTML }}</p>
+{{ $heroGraphic := resources.Get "/images/hero-graphic.png" }}
+<div id="hero" class="bg-white relative">
+  <div class="container pt-44 pb-52 text-black bg-white">
+    {{ with $heroGraphic }}
+    <img src="{{ $heroGraphic.RelPermalink }}" width="{{ $heroGraphic.Width }}" height="{{ $heroGraphic.Height }}" class="absolute bottom-0 right-0">
+    {{ end }}
+    <h1 class="text-[90px] leading-none relative">{{ $.Param "section_hero_heading" | safeHTML }}</h1>
+    <p class="text-2xl relative">{{ $.Param "section_hero_text" | safeHTML }}</p>    
   </div>
 </div>
-<div id="what-is-hiero" class="pt-16 -mt-16">
+<div id="what-is-hiero" class="anchor">
   <div class="bg-gray-200">
     <div class="container py-12 sm:py-16">
       <h2 class="text-3xl">{{ $.Param "section_what_is_hiero_heading" | safeHTML }}</h2>
@@ -19,7 +23,7 @@
     </div>
   </div>
 </div>
-<div id="open-source" class="pt-16 -mt-16">
+<div id="open-source" class="anchor">
   <div class="bg-slate-300">
     <div class="container py-12 sm:py-16">
       <h2 class="text-3xl">{{ $.Param "section_why_open_source_heading" | safeHTML }}</h2>

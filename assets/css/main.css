@@ -19,8 +19,13 @@ footer {
 }
 
 a {
-  color: #00e;
+  color: gray;
   text-decoration: none;
+}
+
+.anchor {
+  margin-top: -6.813rem; /*-109px*/
+  padding-top: 6.813rem; /*109px*/
 }
 
 .container {

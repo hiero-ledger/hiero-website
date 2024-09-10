@@ -58,8 +58,8 @@ nav a {
 
 @media(min-width: 1024px) {
   .container {
-      max-width:1540px;
-      padding-right: 4rem;
-      padding-left: 4rem
+      max-width:1820px;
+      padding-right: 8.75rem;
+      padding-left: 8.75rem
   }
 }

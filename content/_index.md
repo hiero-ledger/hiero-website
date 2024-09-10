@@ -93,27 +93,27 @@ icon = "images/fpo-icon-small.png"
 
 [[section_why_contribute_points]]
 heading = "Help to create diverse and trustful networks"
-text = "Hiero is created as a vendor-neutral project designed to be owned by the community and garnering the advantage from a broad and diverse base. This approach is believed to make Hedera and other networks built on top of Hiero as trustful as possible."
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
 
 [[section_why_contribute_points]]
 heading = "Boost your engineering reputation"
-text = "TBD"
+text = "Maximus ultrices arcu egestas penatibus ridiculus; congue nullam. Aliquet sit imperdiet amet tristique massa ad nec morbi lectus. Luctus ac suspendisse ultricies; imperdiet pretium odio. Elementum risus facilisis amet in augue eget vulputate."
 
 [[section_why_contribute_points]]
 heading = "Attend hackathons and bug bounties"
-text = "TBD"
+text = "Nulla volutpat dolor cursus nibh scelerisque cursus habitant nec sed. Curabitur libero lorem cubilia penatibus dictumst habitant ac posuere venenatis. Elit dictum nisi convallis vel potenti maecenas blandit litora felis."
 
 [[section_why_contribute_points]]
 heading = "Become part of the technical steering committee"
-text = "TBD"
+text = "Mollis odio nam tristique libero vestibulum senectus volutpat. Rhoncus odio nostra aliquet gravida volutpat porttitor efficitur ipsum a. Maximus dictumst pellentesque donec et; nisl proin vitae. Nulla semper penatibus sit ad donec feugiat dolor sollicitudin urna."
 
 [[section_why_contribute_points]]
 heading = "Get recognized by the community"
-text = "TBD"
+text = "Varius donec sit per ipsum quis. Eu ornare metus dolor metus tellus interdum. Sed ridiculus mauris sociosqu venenatis tempor. Amet dis non ornare arcu montes curabitur dictumst. Dapibus ipsum felis porttitor est enim pellentesque maecenas finibus."
 
 [[section_why_contribute_points]]
 heading = "Contribute to the future of web3"
-text = "TBD"
+text = "Lobortis congue congue proin venenatis dui turpis nulla accumsan. Parturient mattis velit pulvinar orci vehicula pulvinar pharetra mattis. Sed feugiat magna viverra consectetur netus metus accumsan. Ad venenatis habitasse augue amet magna in aliquet."
 
 [[section_roadmap_points]]
 heading = "Transparent voting mechanisms for the community"

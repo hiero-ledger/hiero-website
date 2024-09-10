@@ -1,10 +1,10 @@
 +++
-title = "Home"
+title = "Hiero"
 date = 2023-01-01T08:00:00-07:00
 draft = false
 
-section_hero_heading = "Hiero Open Source"
-section_hero_text = "Do your next steps in the open-source community of Hiero"
+section_hero_heading = "Hiero"
+section_hero_text = "Open Source Distributed Ledger Technology"
 
 section_what_is_hiero_heading = "What is Hiero?"
 section_what_is_hiero_text = "Hiero, a Linux Foundation Decentralized Trust project, is an open-source, vendor-neutral distributed ledger technology. Hiero is used to build the Hedera public ledger."
@@ -57,27 +57,27 @@ While an official roadmap does not exist today, the TSC has already defined seve
 '''
 
 [[section_what_is_hiero_points]]
-heading = "Hiero is <strong>Fair</strong>"
+heading = "Hiero is <strong>fair</strong>"
 text = "Everybody should have equal access to all public forums. No one should have the ability to re-prioritize your transactions, or drop them, or front-run, or sandwich trade, or otherwise disadvantage you. The hashgraph algorithm is leaderless. We all deserve a more fair world."
 icon = "images/fpo-icon-small.png"
 
 [[section_what_is_hiero_points]]
-heading = "Hiero is <strong>Fast</strong>"
+heading = "Hiero is <strong>fast</strong>"
 text = "You shouldn't have to sacrifice performance for fairness or security. The world of interconnected businesses and networks continues to expand at an accelerating rate. Waiting minutes for transactions to finalize doesn't meet your requirements. The hashgraph algorithm isn't just fair, it is also fast."
 icon = "images/fpo-icon-small.png"
 
 [[section_what_is_hiero_points]]
-heading = "Hiero is <strong>Secure</strong>"
+heading = "Hiero is <strong>secure</strong>"
 text = "The hashgraph algorithm is asynchronous Byzantine Fault Tolerant (ABFT). This is the gold standard in distributed network security. Your transactions are protected from bad actors with the highest security available."
 icon = "images/fpo-icon-small.png"
 
 [[section_what_is_hiero_points]]
-heading = "Hiero is <strong>Decentralized</strong>"
+heading = "Hiero is <strong>decentralized</strong>"
 text = "No one entity should have complete control of your future. Spreading power and influence out among many participants, all with equal access, helps secure your access to the network and your data. You should be able to participate in the network, in its development, and in its use. This network belongs to the world. It belongs to the future."
 icon = "images/fpo-icon-small.png"
 
 [[section_what_is_hiero_points]]
-heading = "Hiero is <strong>Leaderless</strong>"
+heading = "Hiero is <strong>leaderless</strong>"
 text = "A ledger with a leader-based consensus protocol is inherently unfair, and either slow or susceptible to denial of service attacks. We believe in a future where every node can participate on an equal basis with a completely leaderless consensus protocol, safe from denial-of- service, and safe from centralization."
 icon = "images/fpo-icon-small.png"
 

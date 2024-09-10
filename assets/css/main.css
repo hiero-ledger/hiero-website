@@ -3,27 +3,27 @@
 @tailwind utilities;
 
 body {
-  color: #222;
-  font-family: sans-serif;
+  font-family: theme('fontFamily.serif');
   line-height: 1.5;
   margin: 0;
+  color: theme('colors.black');
 }
 
 header {
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid theme('colors.black');
 }
 
 footer {
-  border-top: 1px solid #222;
+  border-top: 1px solid theme('colors.black');
 }
 
 a {
-  color: #f87171;
+  color: theme('colors.red.DEFAULT');
   text-decoration: underline;
 }
 
 nav a {
-  color: gray;
+  color: theme('colors.black');
   text-decoration: none;
 }
 

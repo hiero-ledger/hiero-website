@@ -1,14 +1,10 @@
 {{ define "main" }}
-{{ $heroGraphic := resources.Get "/images/hero-graphic.png" }}
 {{ $fpoIconSmall := resources.Get "/images/fpo-icon-small.png" }}
 {{ $fpoIconLarge := resources.Get "/images/fpo-icon-large.png" }}
-<div id="hero" class="bg-white relative">
-  <div class="container pt-44 pb-52 text-black bg-white">
-    {{ with $heroGraphic }}
-    <img src="{{ $heroGraphic.RelPermalink }}" width="{{ $heroGraphic.Width }}" height="{{ $heroGraphic.Height }}" class="absolute bottom-0 right-0">
-    {{ end }}
-    <h1 class="text-[90px] leading-none relative">{{ $.Param "section_hero_heading" | safeHTML }}</h1>
-    <p class="text-2xl relative">{{ $.Param "section_hero_text" | safeHTML }}</p>    
+<div id="hero" class="bg-gradient-to-r from-red-dark to-red relative">
+  <div class="container pt-44 pb-52 text-white text-center">    
+    <h1 class="text-5xl leading-none relative mb-2.5">{{ $.Param "section_hero_heading" | safeHTML }}</h1>
+    <p class="text-xl relative">{{ $.Param "section_hero_text" | safeHTML }}</p>    
   </div>
 </div>
 <!-- WHAT IS HIERO -->
@@ -16,8 +12,8 @@
   <div class="bg-white">
     <div class="container py-12 sm:pt-32 sm:pb-28 grid grid-cols-1 lg:grid-cols-[35%_1fr] gap-10 lg:gap-32">
       <div>
-        <h2 class="text-6xl">{{ $.Param "section_what_is_hiero_heading" | safeHTML }}</h2>
-        <p>{{ $.Param "section_what_is_hiero_text" | safeHTML }}</p>
+        <h2 class="text-4xl">{{ $.Param "section_what_is_hiero_heading" | safeHTML }}</h2>
+        <p class="text-lg">{{ $.Param "section_what_is_hiero_text" | safeHTML }}</p>
       </div>
       <div class="flex flex-col gap-10">
         {{ range $.Param "section_what_is_hiero_points" }}
@@ -27,8 +23,8 @@
           <img src="{{ $icon.RelPermalink }}" width="{{ $icon.Width }}" height="{{ $icon.Height }}">
           {{ end }}
           <div>
-            <h3 class="text-2xl mb-2 [&>strong]:text-red-400">{{ .heading | safeHTML }}</h3>    
-            <p>{{ .text | safeHTML }}<p>
+            <h3 class="text-2xl mb-2 [&>strong]:text-red">{{ .heading | safeHTML }}</h3>    
+            <p class="text-base">{{ .text | safeHTML }}<p>
           </div>
         </div>
         {{ end }}
@@ -36,8 +32,35 @@
     </div>
   </div>
 </div>
-<hr class="h-1 bg-red-400"/>
+<hr class="h-1 bg-red"/>
 <!-- OPEN SOURCE -->
+<div id="open-source" class="anchor">
+  <div class="bg-white">
+    <div class="container py-12 sm:pt-32 sm:pb-28 grid grid-cols-2 gap-10">
+      <div>
+        <div class="h-14 w-14 mb-5">
+          {{ $icon := resources.Get "images/fpo-icon-small.png" }}
+          {{ with $icon }}
+          <img src="{{ $icon.RelPermalink }}" width="{{ $icon.Width }}" height="{{ $icon.Height }}">
+          {{ end }}
+        </div>
+        <h2 class="text-2xl font-medium mb-5">{{ $.Param "section_why_open_source_heading" | safeHTML }}</h2>
+        <p class="text-base">{{ $.Param "section_why_open_source_text" | safeHTML }}</p>
+      </div>
+      <div>
+        <div class="h-14 w-14 mb-5">
+          {{ $icon := resources.Get "images/fpo-icon-small.png" }}
+          {{ with $icon }}
+          <img src="{{ $icon.RelPermalink }}" width="{{ $icon.Width }}" height="{{ $icon.Height }}">
+          {{ end }}
+        </div>
+        <h2 class="text-2xl font-medium mb-5">{{ $.Param "section_what_parts_open_source_heading" | safeHTML }}</h2>
+        <p class="text-base">{{ $.Param "section_what_parts_open_source_text" | safeHTML }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
 <div id="open-source" class="anchor">
   <div class="bg-white">
     <div class="container py-12 sm:pt-32 sm:pb-28 flex flex-col gap-10">
@@ -63,30 +86,46 @@
           {{ end }}
         </div>
       </div>
-    </div><!-- end container -->    
+    </div> 
   </div> 
 </div> 
+-->
 <!-- WHY CONTRIBUTE? -->
 <div id="why-contribute" class="anchor">
   <div class="bg-white">
     <div class="container py-12 sm:pt-32 sm:pb-28 text-center">
       <div class="pb-16">
-        <h2 class="text-6xl">{{ $.Param "section_why_contribute_heading" | safeHTML }}</h2>
-        <p>{{ $.Param "section_why_contribute_text" | safeHTML }}</p>
+        <h2 class="text-4xl">{{ $.Param "section_why_contribute_heading" | safeHTML }}</h2>
+        <p class="text-lg">{{ $.Param "section_why_contribute_text" | safeHTML }}</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {{ range .Param "section_why_contribute_points" }}
-          <div class="bg-black text-white p-8 text-left">
-            <h3 class="text-3xl mb-4">{{ .heading }}</h3>    
-            <p>{{ .text | safeHTML }}</p>
+          <div class="bg-black text-white pt-8 px-[30px] pb-[43px] text-left">
+            <h3 class="text-2xl mb-5">{{ .heading }}</h3>    
+            <p class="text-base">{{ .text | safeHTML }}</p>
           </div>
         {{ end }}        
       </div>
     </div>
   </div>
 </div>
-<hr class="h-1 bg-red-400"/>
+<hr class="h-1 bg-red"/>
 <!-- CONTRIBUTE -->
+<div id="contribute" class="anchor">
+  <div class="bg-white">
+    <div class="container py-12 sm:pt-32 sm:pb-28 grid grid-cols-2 gap-10">
+      <div>        
+        <h2 class="text-4xl mb-5">{{ $.Param "section_getting_started_heading" | safeHTML }}</h2>
+        <div class="text-lg max-w-[565px] space-y-4">{{ $.Param "section_getting_started_text" | safeHTML }}</div>
+      </div>
+      <div>       
+        <h2 class="text-4xl mb-5">{{ $.Param "section_connect_heading" | safeHTML }}</h2>
+        <div class="text-lg max-w-[565px] space-y-4">{{ $.Param "section_connect_text" | safeHTML }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
 <div id="contribute" class="anchor">
   <div class="bg-white">
     <div class="container py-12 sm:pt-32 sm:pb-28 grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -111,8 +150,8 @@
     </div>
   </div>
 </div>
-<hr class="h-1 bg-red-400"/>
-<!-- CONNECT -->
+<hr class="h-1 bg-red"/>
+
 <div id="connect" class="anchor">
   <div class="bg-white">
     <div class="container py-12 sm:pt-32 sm:pb-28 grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -137,7 +176,8 @@
     </div>
   </div>
 </div>
-<hr class="h-1 bg-red-400"/>
+-->
+<hr class="h-1 bg-red"/>
 <!-- TECHNICAL STEERING COMMITTEE -->
 <div id="technical-steering-committee" class="anchor">
   <div class="bg-white">
@@ -164,7 +204,7 @@
     </div>
   </div>
 </div>
-<hr class="h-1 bg-red-400"/>
+<hr class="h-1 bg-red"/>
 <!-- ROADMAP -->
 <div id="roadmap" class="anchor">
   <div class="bg-white">

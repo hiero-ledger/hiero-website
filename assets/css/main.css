@@ -40,20 +40,26 @@ nav a {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  padding-right: 1.5rem;
-  padding-left: 1.5rem
+  padding-right: 2rem;
+  padding-left: 2rem
+}
+
+.container-mobile-full {
+  padding:0;
 }
 
 @media(min-width: 640px) {
   .container {
       max-width:768px;
-      padding-right: 2rem;
-      padding-left: 2rem
+  }
+  .container-mobile-full {
+    padding:0;
   }
 }
 
 @media(min-width: 768px) {
-  .container {
+  .container,
+  .container-mobile-full {
       max-width:1024px;
       padding-right: 3rem;
       padding-left: 3rem
@@ -61,7 +67,8 @@ nav a {
 }
 
 @media(min-width: 1024px) {
-  .container {
+  .container,
+  .container-mobile-full {
       max-width:1820px;
       padding-right: 8.75rem;
       padding-left: 8.75rem

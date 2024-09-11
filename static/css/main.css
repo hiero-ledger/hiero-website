@@ -605,16 +605,12 @@ video {
   right: 0px;
 }
 
-.left-0 {
-  left: 0px;
+.bottom-0 {
+  bottom: 0px;
 }
 
 .left-\[50\%\] {
   left: 50%;
-}
-
-.right-0 {
-  right: 0px;
 }
 
 .right-2 {
@@ -629,10 +625,6 @@ video {
   top: 0.25rem;
 }
 
-.top-\[50\%\] {
-  top: 50%;
-}
-
 .z-10 {
   z-index: 10;
 }
@@ -644,10 +636,6 @@ video {
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem;
 }
 
 .mb-2\.5 {
@@ -726,6 +714,10 @@ video {
   height: 100%;
 }
 
+.h-10 {
+  height: 2.5rem;
+}
+
 .w-0\.5 {
   width: 0.125rem;
 }
@@ -758,16 +750,24 @@ video {
   width: 100%;
 }
 
+.w-10 {
+  width: 2.5rem;
+}
+
 .max-w-3xl {
   max-width: 48rem;
+}
+
+.max-w-\[390px\] {
+  max-width: 390px;
 }
 
 .max-w-\[565px\] {
   max-width: 565px;
 }
 
-.max-w-\[390px\] {
-  max-width: 390px;
+.max-w-full {
+  max-width: 100%;
 }
 
 .flex-1 {
@@ -783,18 +783,13 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.-translate-x-\[91px\] {
-  --tw-translate-x: -91px;
+.-translate-y-\[80px\] {
+  --tw-translate-y: -80px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.-translate-y-\[50\%\] {
-  --tw-translate-y: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.translate-x-\[91px\] {
-  --tw-translate-x: 91px;
+.translate-y-\[80px\] {
+  --tw-translate-y: 80px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -806,12 +801,16 @@ video {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.grid-cols-\[55px_1fr\] {
-  grid-template-columns: 55px 1fr;
+.grid-cols-\[1fr\] {
+  grid-template-columns: 1fr;
 }
 
 .grid-cols-\[75px_1fr\] {
   grid-template-columns: 75px 1fr;
+}
+
+.grid-cols-\[40px_1fr\] {
+  grid-template-columns: 40px 1fr;
 }
 
 .flex-row {
@@ -838,8 +837,16 @@ video {
   gap: 2.5rem;
 }
 
+.gap-16 {
+  gap: 4rem;
+}
+
 .gap-2 {
   gap: 0.5rem;
+}
+
+.gap-5 {
+  gap: 1.25rem;
 }
 
 .gap-x-10 {
@@ -867,6 +874,10 @@ video {
 
 .border-2 {
   border-width: 2px;
+}
+
+.border {
+  border-width: 1px;
 }
 
 .border-b {
@@ -921,6 +932,10 @@ video {
   --tw-gradient-to: #B81A56 var(--tw-gradient-to-position);
 }
 
+.p-8 {
+  padding: 2rem;
+}
+
 .p-\[30px\] {
   padding: 30px;
 }
@@ -933,11 +948,6 @@ video {
 .px-\[30px\] {
   padding-left: 30px;
   padding-right: 30px;
-}
-
-.px-\[60px\] {
-  padding-left: 60px;
-  padding-right: 60px;
 }
 
 .py-1 {
@@ -970,6 +980,15 @@ video {
   padding-bottom: 60px;
 }
 
+.py-20 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.pb-12 {
+  padding-bottom: 3rem;
+}
+
 .pb-16 {
   padding-bottom: 4rem;
 }
@@ -978,12 +997,12 @@ video {
   padding-bottom: 5rem;
 }
 
-.pb-\[43px\] {
-  padding-bottom: 43px;
+.pb-\[100px\] {
+  padding-bottom: 100px;
 }
 
-.pb-\[70px\] {
-  padding-bottom: 70px;
+.pb-\[43px\] {
+  padding-bottom: 43px;
 }
 
 .pl-\[15\%\] {
@@ -998,8 +1017,12 @@ video {
   padding-top: 2rem;
 }
 
-.pt-\[60px\] {
-  padding-top: 60px;
+.pt-\[100px\] {
+  padding-top: 100px;
+}
+
+.pt-\[90px\] {
+  padding-top: 90px;
 }
 
 .text-left {
@@ -1132,20 +1155,27 @@ nav a {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  padding-right: 1.5rem;
-  padding-left: 1.5rem
+  padding-right: 2rem;
+  padding-left: 2rem
+}
+
+.container-mobile-full {
+  padding:0;
 }
 
 @media(min-width: 640px) {
   .container {
     max-width:768px;
-    padding-right: 2rem;
-    padding-left: 2rem
+  }
+
+  .container-mobile-full {
+    padding:0;
   }
 }
 
 @media(min-width: 768px) {
-  .container {
+  .container,
+  .container-mobile-full {
     max-width:1024px;
     padding-right: 3rem;
     padding-left: 3rem
@@ -1153,7 +1183,8 @@ nav a {
 }
 
 @media(min-width: 1024px) {
-  .container {
+  .container,
+  .container-mobile-full {
     max-width:1820px;
     padding-right: 8.75rem;
     padding-left: 8.75rem
@@ -1161,8 +1192,76 @@ nav a {
 }
 
 @media (min-width: 640px) {
+  .sm\:absolute {
+    position: absolute;
+  }
+
+  .sm\:left-\[50\%\] {
+    left: 50%;
+  }
+
+  .sm\:top-\[50\%\] {
+    top: 50%;
+  }
+
+  .sm\:mb-2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .sm\:block {
+    display: block;
+  }
+
+  .sm\:h-\[75px\] {
+    height: 75px;
+  }
+
+  .sm\:w-\[75px\] {
+    width: 75px;
+  }
+
+  .sm\:-translate-x-\[50\%\] {
+    --tw-translate-x: -50%;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
+  .sm\:-translate-y-\[50\%\] {
+    --tw-translate-y: -50%;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sm\:grid-cols-\[55px_1fr\] {
+    grid-template-columns: 55px 1fr;
+  }
+
+  .sm\:grid-cols-\[75px_1fr\] {
+    grid-template-columns: 75px 1fr;
+  }
+
   .sm\:flex-row {
     flex-direction: row;
+  }
+
+  .sm\:gap-10 {
+    gap: 2.5rem;
+  }
+
+  .sm\:border-none {
+    border-style: none;
+  }
+
+  .sm\:px-\[60px\] {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  .sm\:py-36 {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
   }
 
   .sm\:pb-0 {
@@ -1181,6 +1280,10 @@ nav a {
     padding-bottom: 60px;
   }
 
+  .sm\:pb-\[70px\] {
+    padding-bottom: 70px;
+  }
+
   .sm\:pt-\[120px\] {
     padding-top: 120px;
   }
@@ -1192,15 +1295,54 @@ nav a {
   .sm\:pt-\[92px\] {
     padding-top: 92px;
   }
+
+  .sm\:pl-\[15\%\] {
+    padding-left: 15%;
+  }
 }
 
 @media (min-width: 768px) {
+  .md\:max-w-\[565px\] {
+    max-width: 565px;
+  }
+
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:gap-10 {
+    gap: 2.5rem;
   }
 }
 
 @media (min-width: 1024px) {
+  .lg\:left-0 {
+    left: 0px;
+  }
+
+  .lg\:right-0 {
+    right: 0px;
+  }
+
+  .lg\:top-\[50\%\] {
+    top: 50%;
+  }
+
+  .lg\:-translate-x-\[91px\] {
+    --tw-translate-x: -91px;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
+  .lg\:-translate-y-\[50\%\] {
+    --tw-translate-y: -50%;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
+  .lg\:translate-x-\[91px\] {
+    --tw-translate-x: 91px;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
   .lg\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

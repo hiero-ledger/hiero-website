@@ -33,7 +33,7 @@
 <!-- OPEN SOURCE -->
 <div id="open-source" class="anchor">
   <div class="bg-white">
-    <div class="container pt-12 pb-[100px] sm:pt-[92px] sm:pb-[154px] grid grid-cols-1 sm:grid-cols-2 gap-16 sm:gap-10 relative">
+    <div class="container pt-12 pb-[60px] sm:pt-[92px] sm:pb-[154px] grid grid-cols-1 sm:grid-cols-2 gap-16 sm:gap-10 relative">
       {{ $graphic := resources.Get "images/Hiero-Logo-Outline.svg" }}
       {{ with $graphic }}      
       <img src="{{ $graphic.RelPermalink }}" class="sm:absolute w-full h-full sm:top-[50%] sm:left-[50%] sm:-translate-x-[50%] sm:-translate-y-[50%]">
@@ -65,20 +65,14 @@
 <div id="quotes" class="anchor">
   <div class="py-[60px] sm:pt-[120px] sm:pb-[60px]">
     <div class="container container-mobile-full">
-      <div class="relative w-full bg-gradient-to-br from-red-dark via-red to-red">          
-        <div class="absolute top-0 left-[50%] -translate-x-[50%] -translate-y-[80px] lg:top-[50%] lg:left-0 lg:-translate-x-[91px] lg:-translate-y-[50%] text-white-dark text-5xl h-[40px] w-[51px]">
+      <div class="relative w-full">          
+        <div class="mx-auto mb-10 lg:mb-0 lg:absolute lg:top-[50%] lg:left-0 lg:-translate-x-[91px] lg:-translate-y-[50%] text-white-dark text-5xl h-[40px] w-[51px]">
           {{ $graphic := resources.Get "images/Hiero-Icon-Quote-Left.svg" }}
           {{ with $graphic }}      
           <img src="{{ $graphic.RelPermalink }}">
           {{ end }} 
-        </div>
-        <div class="absolute bottom-0 left-[50%] -translate-x-[50%] translate-y-[80px] lg:top-[50%] lg:right-0 lg:translate-x-[91px] lg:-translate-y-[50%] text-white-dark text-5xl h-[40px] w-[51px]">
-          {{ $graphic := resources.Get "images/Hiero-Icon-Quote-Right.svg" }}
-          {{ with $graphic }}      
-          <img src="{{ $graphic.RelPermalink }}">
-          {{ end }}
-        </div>
-        <div class="p-8 sm:pt-[60px] sm:px-[60px] sm:pb-[70px] grid grid-cols-1 sm:grid-cols-2 gap-16 sm:gap-10 text-lg text-white">
+        </div>        
+        <div class="p-8 sm:pt-[60px] sm:px-[60px] sm:pb-[70px] grid grid-cols-1 sm:grid-cols-2 gap-16 sm:gap-10 text-lg text-white bg-gradient-to-br from-red-dark via-red to-red">
           <div>
             <div class="mb-5">{{ $.Param "section_quotes_first_quote" | safeHTML }}</div>
             <div class="font-bold">{{ $.Param "section_quotes_first_author" | safeHTML }}</div>
@@ -87,6 +81,12 @@
             <div class="mb-5">{{ $.Param "section_quotes_second_quote" | safeHTML }}</div>
             <div class="font-bold">{{ $.Param "section_quotes_second_author" | safeHTML }}</div>
           </div>
+        </div>
+        <div class="mx-auto mt-10 lg:mt-0 lg:absolute lg:top-[50%] lg:left-auto lg:right-0 lg:translate-x-[91px] lg:-translate-y-[50%] text-white-dark text-5xl h-[40px] w-[51px]">
+          {{ $graphic := resources.Get "images/Hiero-Icon-Quote-Right.svg" }}
+          {{ with $graphic }}      
+          <img src="{{ $graphic.RelPermalink }}">
+          {{ end }}
         </div>        
       </div>     
     </div>
@@ -118,7 +118,7 @@
 <div id="contribute" class="anchor"> <!-- support two anchors -->
   <div id="connect" class="anchor"> <!-- support two anchors -->
     <div class="bg-white">
-      <div class="container pt-[100px] pb-12 sm:pt-[60px] sm:pb-[60px] grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-10">
+      <div class="container pt-[60px] pb-12 sm:pt-[60px] sm:pb-[60px] grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-10">
         <div>        
           <h2 class="text-4xl max-w-full md:max-w-[565px] mb-5">{{ $.Param "section_getting_started_heading" | safeHTML }}</h2>
           <div class="text-lg max-w-full md:max-w-[565px] space-y-4">{{ $.Param "section_getting_started_text" | safeHTML }}</div>

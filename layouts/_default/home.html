@@ -11,7 +11,7 @@
     <div class="container py-12 sm:pt-[120px] sm:pb-[120px] grid grid-cols-1 lg:grid-cols-[35%_1fr] gap-10 lg:gap-32">
       <div>
         <h2 class="text-4xl">{{ $.Param "section_what_is_hiero_heading" | safeHTML }}</h2>
-        <p class="text-lg">{{ $.Param "section_what_is_hiero_text" | safeHTML }}</p>
+        <p class="text-lg max-w-[390px]">{{ $.Param "section_what_is_hiero_text" | safeHTML }}</p>
       </div>
       <div class="flex flex-col gap-10">
         {{ range $.Param "section_what_is_hiero_points" }}

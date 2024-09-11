@@ -152,22 +152,30 @@
       <!--<div class="mt-8 mb-4">{{ $.Param "section_technical_steering_committee_individuals_heading" | safeHTML }}</div>-->
       <div class="team-members grid grid-cols-2 gap-x-10 gap-y-[60px]">
         {{ $sortedCommittee := sort $.Site.Data.technical_steering_committee "lastName" }}
-        {{ range $sortedCommittee}}
-        <div class="team-member">
+        {{ range $index, $sortedCommittee := $sortedCommittee}}
+        {{ $bioId := printf "%s%s%d" .firstName .lastName $index }}
+        <div class="team-member relative">
           <div class="mb-3">    
             <img src="images/tsc/{{ .photo }}" alt="{{ .firstName }} {{ .lastName }}" class="w-full">
           </div> 
           <h3 class="text-2xl mb-4">{{ .firstName }} {{ .lastName }}</h3>
           <div class="flex flex-row gap-2 items-center">
-            <button class="text-red border-2 border-red border-solid rounded-full py-1 px-[26px] text-lg">Bio</button>
+            <button class="text-red border-2 border-red border-solid rounded-full py-1 px-[26px] text-lg" onclick="showBio('{{$bioId}}')">Bio</button>
             <a href="{{ .gitHubAccount }}" target="_blank" rel="noopener" class="border-2 border-red border-solid rounded-full h-[35px] w-[35px] flex justify-center items-center">
               {{ $icon := resources.Get "images/Hiero-Icon-Github.svg" }}
               {{ with $icon }}      
               <img src="{{ $icon.RelPermalink }}" />
               {{ end }}
             </a>
-          </div>         
-          <!-- <p class="text-gray-500 mt-2 space-y-4">{{ .bio | safeHTML }}</p> -->
+          </div>        
+          <div id="{{$bioId}}" class="absolute hidden top-0 bg-black text-white text-lg z-10 flex-col p-[30px]" aria-hidden="true"> <!-- bio modal -->
+            <button class="absolute text-white top-1 right-2" onclick="hideBio('{{$bioId}}')">X</button>
+            <div class="mb-5">    
+              <img src="images/tsc/{{ .photo }}" alt="{{ .firstName }} {{ .lastName }}" class="w-full">
+            </div>
+            <p class="text-gray-500 mt-2 space-y-4">{{ .bio | safeHTML }}</p>
+            <button class="text-black text-lg rounded-full py-1.5 px-[26px] bg-white-dark self-center mt-4" onclick="hideBio('{{$bioId}}')">Close</button>
+          </div>          
         </div>
         {{ end }}
       </div>

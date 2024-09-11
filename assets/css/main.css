@@ -32,6 +32,10 @@ nav a {
   padding-top: 6.813rem; /*109px*/
 }
 
+.active-bio {
+  display: flex;
+}
+
 .container {
   width: 100%;
   margin-right: auto;

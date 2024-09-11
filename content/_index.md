@@ -53,7 +53,7 @@ Next to the TSC, we want to invest in a diverse and inclusive community. It is i
 
 section_technical_steering_committee_heading = "The Technical Steering Committee of Hiero"
 section_technical_steering_committee_text = '''
-<p>While one of our main goals is to have a diverse and inclusive community in which everybody has the rights and responsibilities to move the project forward, it is important that a committee oversees the project and moves the roadmap forward. To do so, we have defined a technical steering committee (TSC) that is defined by six individuals today. One of the important next steps on our roadmap is to enable voting mechanisms to add additional members from the community to the TSC. The duties, goals, and rights of the TSC are defined in the technical charter of the Hiero project, which can be found <a href="#" target="_blank" rel="noreferrer noopener">HERE</a>.
+<p>While one of our main goals is to have a diverse and inclusive community in which everybody has the rights and responsibilities to move the project forward, it is important that a committee oversees the project and moves the roadmap forward. To do so, we have defined a technical steering committee (TSC) that is defined by six individuals today. One of the important next steps on our roadmap is to enable voting mechanisms to add additional members from the community to the TSC. The duties, goals, and rights of the TSC are defined in the technical charter of the Hiero project, which can be found <a href="#" target="_blank" rel="noreferrer noopener">here</a>.
 </p>
 '''
 

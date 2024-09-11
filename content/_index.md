@@ -61,7 +61,7 @@ section_technical_steering_committee_individuals_heading = "Today the TSC is mad
 
 section_roadmap_heading = "Our Roadmap in the Linux Foundation Decentralized Trust"
 section_roadmap_text = '''
-<p>With the creation of the project in the Linux Foundation Decentralized Trust (LFDT) and the establishment of the initial technical steering committee (TSC) the cornerstones of Hiero have been laid. As a next essential step the TSC needs to provide a roadmap that covers the transition of the first repositories and projects to the Hiero GitHub organization (https://github.com/hiero) and the inclusion and enabling of the community. The members of the TSC have committed themselves to work on the creation of this roadmap with the highest priority. The TSC hopes and encourages input and feedback by the complete ecosystem from core developers to users. To do so we enabled GitHub discussions (LINK) as a first open way for communication. We hope that as many community members as possible contribute to the discussions regarding the initial roadmap and help us to create a real community driven project.</p>
+<p>With the creation of the project in the Linux Foundation Decentralized Trust (LFDT) and the establishment of the initial technical steering committee (TSC) the cornerstones of Hiero have been laid. As a next essential step the TSC needs to provide a roadmap that covers the transition of the first repositories and projects to the Hiero GitHub organization (<a href="https://github.com/hiero" target="_blank" rel="noreferrer noopener">https://github.com/hiero</a>) and the inclusion and enabling of the community. The members of the TSC have committed themselves to work on the creation of this roadmap with the highest priority. The TSC hopes and encourages input and feedback by the complete ecosystem from core developers to users. To do so we enabled <a href="#" target="_blank" rel="noreferrer noopener">GitHub discussions</a> as a first open way for communication. We hope that as many community members as possible contribute to the discussions regarding the initial roadmap and help us to create a real community driven project.</p>
 <p>
 While an official roadmap does not exist today, the TSC has already defined several points they believe are essential for Hiero’s success. The following provide insight into those areas.</p>
 '''
@@ -69,27 +69,27 @@ While an official roadmap does not exist today, the TSC has already defined seve
 [[section_what_is_hiero_points]]
 heading = "Hiero is <strong>fair</strong>"
 text = "Everybody should have equal access to all public forums. No one should have the ability to re-prioritize your transactions, or drop them, or front-run, or sandwich trade, or otherwise disadvantage you. The hashgraph algorithm is leaderless. We all deserve a more fair world."
-icon = "images/fpo-icon-small.png"
+icon = "images/Hiero-Icon-Fair.svg"
 
 [[section_what_is_hiero_points]]
 heading = "Hiero is <strong>fast</strong>"
 text = "You shouldn't have to sacrifice performance for fairness or security. The world of interconnected businesses and networks continues to expand at an accelerating rate. Waiting minutes for transactions to finalize doesn't meet your requirements. The hashgraph algorithm isn't just fair, it is also fast."
-icon = "images/fpo-icon-small.png"
+icon = "images/Hiero-Icon-Fast.svg"
 
 [[section_what_is_hiero_points]]
 heading = "Hiero is <strong>secure</strong>"
 text = "The hashgraph algorithm is asynchronous Byzantine Fault Tolerant (ABFT). This is the gold standard in distributed network security. Your transactions are protected from bad actors with the highest security available."
-icon = "images/fpo-icon-small.png"
+icon = "images/Hiero-Icon-Secure.svg"
 
 [[section_what_is_hiero_points]]
 heading = "Hiero is <strong>decentralized</strong>"
 text = "No one entity should have complete control of your future. Spreading power and influence out among many participants, all with equal access, helps secure your access to the network and your data. You should be able to participate in the network, in its development, and in its use. This network belongs to the world. It belongs to the future."
-icon = "images/fpo-icon-small.png"
+icon = "images/Hiero-Icon-Decentralized.svg"
 
 [[section_what_is_hiero_points]]
 heading = "Hiero is <strong>leaderless</strong>"
 text = "A ledger with a leader-based consensus protocol is inherently unfair, and either slow or susceptible to denial of service attacks. We believe in a future where every node can participate on an equal basis with a completely leaderless consensus protocol, safe from denial-of- service, and safe from centralization."
-icon = "images/fpo-icon-small.png"
+icon = "images/Hiero-Icon-Leaderless.svg"
 
 [[section_why_contribute_points]]
 heading = "Help to create diverse and trustful networks"
@@ -120,40 +120,40 @@ heading = "Transparent voting mechanisms for the community"
 text = '''
 Together with the Linux Foundation, the Hiero TSC seeks to establish voting mechanisms that can be used in electing new committee members. Such transparency is instrumental in developing trust by integrating the community in all aspects of the project's governance and operations.
 '''
-icon = "images/fpo-icon-small.png"
+icon = "images/Hiero-Icon-Timeline-1.svg"
 
 [[section_roadmap_points]]
 heading = "Transition of network repositories"
 text = '''
 Hedera has existed since WHEN, which has allowed its developer ecosystem to grow as represented by the variety of projects within its repository (<a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">https://github.com/hashgraph</a>). With the number of projects involved, the initial priorities are to transition the repositories needed to run a fully functioning base network (including Consensus Node, Mirror Node, JSON-RPC-Relay, and others) as soon as possible.
 '''
-icon = "images/fpo-icon-small.png"
+icon = "images/Hiero-Icon-Timeline-2.svg"
 
 [[section_roadmap_points]]
 heading = "Transition of SDKs"
 text = '''
 The next phase of code contributions involve those that allow developed applications to take advantage of the myriad of a network’s services. Here the SDK clients are essential parts and should be migrated to Hiero directly after or parallel with the network repositories.
 '''
-icon = "images/fpo-icon-small.png"
+icon = "images/Hiero-Icon-Timeline-3.svg"
 
 [[section_roadmap_points]]
 heading = "Renaming and rebranding"
 text = '''
 Repositories in the Hedera GitHub organization (<a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">https://github.com/hashgraph</a>) use “Hedera” or “Hashgraph” as names of the project reflecting the initial motivations for its use, reflected in the repository and project names but also in the sources. With the transition of sources to Hiero we plan to refactor all those projects and use Hiero as core element in naming conventions.
 '''
-icon = "images/fpo-icon-small.png"
+icon = "images/Hiero-Icon-Timeline-4.svg"
 
 [[section_roadmap_points]]
 heading = "Enabling better communication with the community"
 text = '''
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 '''
-icon = "images/fpo-icon-small.png"
+icon = "images/Hiero-Icon-Timeline-5.svg"
 
 [[section_roadmap_points]]
 heading = "Better support regarding contributions especially for newcomers"
 text = '''
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 '''
-icon = "images/fpo-icon-small.png"
+icon = "images/Hiero-Icon-Timeline-6.svg"
 +++

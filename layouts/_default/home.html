@@ -1,19 +1,19 @@
 {{ define "main" }}
 <div id="hero" class="bg-gradient-to-br from-red-dark via-red to-red relative">
   <div class="container py-20 sm:py-36 text-white text-center">    
-    <h1 class="text-5xl leading-none relative mb-2.5">{{ $.Param "section_hero_heading" | safeHTML }}</h1>
-    <p class="text-xl relative">{{ $.Param "section_hero_text" | safeHTML }}</p>    
+    <h1 class="text-4xl sm:text-5xl leading-none relative mb-2.5">{{ $.Param "section_hero_heading" | safeHTML }}</h1>
+    <p class="text-[24px] tracking-[-0.081rem] sm:text-xl relative">{{ $.Param "section_hero_text" | safeHTML }}</p>    
   </div>
 </div>
 <!-- WHAT IS HIERO -->
 <div id="what-is-hiero" class="anchor">
   <div class="bg-white">
-    <div class="container pt-[90px] pb-12 sm:pt-[120px] sm:pb-[120px] grid grid-cols-1 lg:grid-cols-[35%_1fr] gap-10 lg:gap-32">
+    <div class="container pt-[80px] pb-[40px] sm:pt-[120px] sm:pb-[120px] grid grid-cols-1 lg:grid-cols-[35%_1fr] gap-[60px] lg:gap-32">
       <div>
-        <h2 class="text-4xl">{{ $.Param "section_what_is_hiero_heading" | safeHTML }}</h2>
-        <p class="text-lg max-w-[390px]">{{ $.Param "section_what_is_hiero_text" | safeHTML }}</p>
+        <h2 class="text-3xl mb-2.5 sm:text-4xl sm:mb-0">{{ $.Param "section_what_is_hiero_heading" | safeHTML }}</h2>
+        <p class="text-base sm:text-lg max-w-[390px]">{{ $.Param "section_what_is_hiero_text" | safeHTML }}</p>
       </div>
-      <div class="flex flex-col gap-16 sm:gap-10">
+      <div class="flex flex-col gap-[60px] sm:gap-10">
         {{ range $.Param "section_what_is_hiero_points" }}
         <div class="grid grid-cols-[1fr] sm:grid-cols-[55px_1fr] gap-5 sm:gap-10">   
           {{ $icon := resources.Get .icon }}
@@ -33,7 +33,7 @@
 <!-- OPEN SOURCE -->
 <div id="open-source" class="anchor">
   <div class="bg-white">
-    <div class="container pt-12 pb-[60px] sm:pt-[92px] sm:pb-[154px] grid grid-cols-1 sm:grid-cols-2 gap-16 sm:gap-10 relative">
+    <div class="container pt-[40px] pb-[40px] sm:pt-[92px] sm:pb-[154px] grid grid-cols-1 sm:grid-cols-2 gap-[80px] sm:gap-10 relative">
       {{ $graphic := resources.Get "images/Hiero-Logo-Outline.svg" }}
       {{ with $graphic }}      
       <img src="{{ $graphic.RelPermalink }}" class="sm:absolute w-full h-full sm:top-[50%] sm:left-[50%] sm:-translate-x-[50%] sm:-translate-y-[50%]">
@@ -63,7 +63,7 @@
 </div>
 <!-- QUOTES -->
 <div id="quotes" class="anchor">
-  <div class="py-[60px] sm:pt-[120px] sm:pb-[60px]">
+  <div class="pt-[40px] pb-[40px] sm:pt-[120px] sm:pb-[60px]">
     <div class="container container-mobile-full">
       <div class="relative w-full">          
         <div class="mx-auto mb-10 lg:mb-0 lg:absolute lg:top-[50%] lg:left-0 lg:-translate-x-[91px] lg:-translate-y-[50%] text-white-dark text-5xl h-[40px] w-[51px]">
@@ -71,8 +71,8 @@
           {{ with $graphic }}      
           <img src="{{ $graphic.RelPermalink }}">
           {{ end }} 
-        </div>        
-        <div class="p-8 sm:pt-[60px] sm:px-[60px] sm:pb-[70px] grid grid-cols-1 sm:grid-cols-2 gap-16 sm:gap-10 text-lg text-white bg-gradient-to-br from-red-dark via-red to-red">
+        </div>
+        <div class="p-[30px] sm:pt-[60px] sm:px-[60px] sm:pb-[70px] grid grid-cols-1 sm:grid-cols-2 gap-16 sm:gap-10 text-lg text-white bg-gradient-to-br from-red-dark via-red to-red">
           <div>
             <div class="mb-5">{{ $.Param "section_quotes_first_quote" | safeHTML }}</div>
             <div class="font-bold">{{ $.Param "section_quotes_first_author" | safeHTML }}</div>
@@ -118,13 +118,13 @@
 <div id="contribute" class="anchor"> <!-- support two anchors -->
   <div id="connect" class="anchor"> <!-- support two anchors -->
     <div class="bg-white">
-      <div class="container pt-[60px] pb-12 sm:pt-[60px] sm:pb-[60px] grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-10">
+      <div class="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[60px] grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-10">
         <div>        
-          <h2 class="text-4xl max-w-full md:max-w-[565px] mb-5">{{ $.Param "section_getting_started_heading" | safeHTML }}</h2>
+          <h2 class="text-2xl mb-2.5 sm:text-4xl max-w-full md:max-w-[565px] sm:mb-5">{{ $.Param "section_getting_started_heading" | safeHTML }}</h2>
           <div class="text-lg max-w-full md:max-w-[565px] space-y-4">{{ $.Param "section_getting_started_text" | safeHTML }}</div>
         </div>
         <div>       
-          <h2 class="text-4xl max-w-full md:max-w-[565px] mb-5">{{ $.Param "section_connect_heading" | safeHTML }}</h2>
+          <h2 class="text-2xl mb-2.5 sm:text-4xl max-w-full md:max-w-[565px] sm:mb-5">{{ $.Param "section_connect_heading" | safeHTML }}</h2>
           <div class="text-lg max-w-full md:max-w-[565px] space-y-4">{{ $.Param "section_connect_text" | safeHTML }}</div>
         </div>
       </div>
@@ -132,7 +132,7 @@
   </div>
 </div>
 <div> <!-- divider -->
-  <div class="container py-12 sm:pt-[60px] sm:pb-[60px] flex flex-row items-center gap-10">
+  <div class="container py-[40px] sm:pt-[60px] sm:pb-[60px] flex flex-row items-center gap-10">
     {{ $graphic := resources.Get "images/Hiero-Icon.svg" }}
     {{ with $graphic }}      
     <img src="{{ $graphic.RelPermalink }}">
@@ -143,13 +143,13 @@
 <!-- TECHNICAL STEERING COMMITTEE -->
 <div id="technical-steering-committee" class="anchor">
   <div class="bg-white">
-    <div class="container py-12 sm:pt-[60px] sm:pb-[60px] grid grid-cols-1 lg:grid-cols-2 gap-10">
+    <div class="container py-[40px] sm:pt-[60px] sm:pb-[60px] grid grid-cols-1 lg:grid-cols-2 gap-10">
       <div>
-      <h2 class="text-4xl mb-4">{{ $.Param "section_technical_steering_committee_heading" | safeHTML }}</h2>
-      <div class="space-y-4 text-lg">{{ $.Param "section_technical_steering_committee_text" | safeHTML }}</div>
+      <h2 class="text-3xl mb-2.5 sm:text-4xl sm:mb-4">{{ $.Param "section_technical_steering_committee_heading" | safeHTML }}</h2>
+      <div class="space-y-4 lext-base sm:text-lg">{{ $.Param "section_technical_steering_committee_text" | safeHTML }}</div>
       </div>
       <!--<div class="mt-8 mb-4">{{ $.Param "section_technical_steering_committee_individuals_heading" | safeHTML }}</div>-->
-      <div class="team-members grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-[60px]">
+      <div class="team-members grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-[40px] sm:gap-y-[60px]">
         {{ $sortedCommittee := sort $.Site.Data.technical_steering_committee "lastName" }}
         {{ range $index, $sortedCommittee := $sortedCommittee}}
         {{ $bioId := printf "%s%s%d" .firstName .lastName $index }}
@@ -184,9 +184,9 @@
 <!-- ROADMAP -->
 <div id="roadmap" class="anchor">
   <div class="bg-white">
-    <div class="container pt-12 sm:pt-[60px] sm:pb-0 grid grid-cols-1 lg:grid-cols-2 gap-10">
+    <div class="container pt-[40px] sm:pt-[60px] sm:pb-0 grid grid-cols-1 lg:grid-cols-2 gap-10">
       <div>
-        <h2 class="text-4xl mb-5">{{ $.Param "section_roadmap_heading" | safeHTML }}</h2>
+        <h2 class="text-2xl mb-2.5 sm:text-4xl sm:mb-5">{{ $.Param "section_roadmap_heading" | safeHTML }}</h2>
         <div class="space-y-4 text-lg">{{ $.Param "section_roadmap_text" | safeHTML }}</div>
       </div>
       <div>
@@ -201,8 +201,8 @@
             {{ end }}
             <div class="bg-black w-0.5 flex-1 mx-auto"></div>
           </div>
-          <div class="pb-20">
-            <h3 class="text-2xl font-medium mb-5">{{ .heading }}</h3>    
+          <div class="pb-[60px] sm:pb-20">
+            <h3 class="text-lg mb-2.5 sm:text-2xl font-medium sm:mb-5">{{ .heading }}</h3>    
             <p class="text-base">{{ .text | safeHTML }}</p>
           </div>
           

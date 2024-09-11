@@ -44,7 +44,11 @@ module.exports = {
         letterSpacing: '-0.167rem',
         fontWeight: '400',
       }], /* 32px */
-      '3xl': '3rem', /* 48px */
+      '3xl': ['2.25rem', {
+        lineHeight: '2.875rem',
+        letterSpacing: '-0.188rem',
+        fontWeight: '400',
+      }], /* 36px */
       '4xl': ['4rem', {
         lineHeight: '4.5rem',
         letterSpacing: '-0.333rem',

@@ -91,6 +91,11 @@ heading = "Hiero is <strong>leaderless</strong>"
 text = "A ledger with a leader-based consensus protocol is inherently unfair, and either slow or susceptible to denial of service attacks. We believe in a future where every node can participate on an equal basis with a completely leaderless consensus protocol, safe from denial-of- service, and safe from centralization."
 icon = "images/Hiero-Icon-Leaderless.svg"
 
+[[section_what_is_hiero_points]]
+heading = "Hiero is <strong>open</strong>"
+text = "Hiero is a vibrant community of developers, visionaries, and innovators dedicated to creating a more fair, efficient, and secure world. As part of the Linux Foundation Decentralized Trust initiative, we are pioneering a new era of open governance and collaboration for the project."
+icon = "images/Hiero-Icon-Fair.svg"
+
 [[section_why_contribute_points]]
 heading = "Help to create diverse and trustful networks"
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."

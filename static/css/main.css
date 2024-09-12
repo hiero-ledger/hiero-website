@@ -857,10 +857,6 @@ video {
   border-width: 2px;
 }
 
-.border-b {
-  border-bottom-width: 1px;
-}
-
 .border-solid {
   border-style: solid;
 }
@@ -957,10 +953,6 @@ video {
   padding-bottom: 4rem;
 }
 
-.pb-20 {
-  padding-bottom: 5rem;
-}
-
 .pb-\[40px\] {
   padding-bottom: 40px;
 }
@@ -969,8 +961,8 @@ video {
   padding-bottom: 43px;
 }
 
-.pt-12 {
-  padding-top: 3rem;
+.pb-\[60px\] {
+  padding-bottom: 60px;
 }
 
 .pt-8 {
@@ -983,14 +975,6 @@ video {
 
 .pt-\[80px\] {
   padding-top: 80px;
-}
-
-.pb-10 {
-  padding-bottom: 2.5rem;
-}
-
-.pb-\[60px\] {
-  padding-bottom: 60px;
 }
 
 .text-left {
@@ -1260,6 +1244,10 @@ nav a {
     padding-bottom: 0px;
   }
 
+  .sm\:pb-20 {
+    padding-bottom: 5rem;
+  }
+
   .sm\:pb-\[120px\] {
     padding-bottom: 120px;
   }
@@ -1292,8 +1280,11 @@ nav a {
     padding-top: 92px;
   }
 
-  .sm\:pb-20 {
-    padding-bottom: 5rem;
+  .sm\:text-2xl {
+    font-size: 2rem;
+    line-height: 2.25rem;
+    letter-spacing: -0.167rem;
+    font-weight: 400;
   }
 
   .sm\:text-4xl {
@@ -1321,13 +1312,6 @@ nav a {
     font-size: 1.75rem;
     line-height: 2.25rem;
     letter-spacing: -0.094rem;
-    font-weight: 400;
-  }
-
-  .sm\:text-2xl {
-    font-size: 2rem;
-    line-height: 2.25rem;
-    letter-spacing: -0.167rem;
     font-weight: 400;
   }
 }

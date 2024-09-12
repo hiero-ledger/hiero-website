@@ -605,16 +605,16 @@ video {
   right: 0px;
 }
 
-.right-2 {
-  right: 0.5rem;
+.right-1\.5 {
+  right: 0.375rem;
 }
 
 .top-0 {
   top: 0px;
 }
 
-.top-1 {
-  top: 0.25rem;
+.top-1\.5 {
+  top: 0.375rem;
 }
 
 .z-10 {

@@ -164,7 +164,11 @@
             </a>
           </div>        
           <div id="{{$bioId}}" class="absolute hidden top-0 bg-black text-white text-lg z-10 flex-col p-[30px]" aria-hidden="true"> <!-- bio modal -->
-            <button class="absolute text-white top-1 right-2" onclick="hideBio('{{$bioId}}')">X</button>
+            <button class="absolute text-white top-1.5 right-1.5" onclick="hideBio('{{$bioId}}')"> 
+              {{ $icon := resources.Get "images/Hiero-Icon-ModalClose.svg" }}
+              {{ with $icon }}      
+              <img src="{{ $icon.RelPermalink }}">
+              {{ end }}</button>
             <div class="mb-5">    
               <img src="images/tsc/{{ .photo }}" alt="{{ .firstName }} {{ .lastName }}" class="w-full">
             </div>

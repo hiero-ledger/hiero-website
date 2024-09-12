@@ -939,11 +939,6 @@ video {
   padding-right: 26px;
 }
 
-.px-\[30px\] {
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -952,11 +947,6 @@ video {
 .py-1\.5 {
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
-}
-
-.py-12 {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
 }
 
 .py-20 {
@@ -974,24 +964,12 @@ video {
   padding-bottom: 40px;
 }
 
-.pb-16 {
-  padding-bottom: 4rem;
-}
-
 .pb-\[40px\] {
   padding-bottom: 40px;
 }
 
-.pb-\[43px\] {
-  padding-bottom: 43px;
-}
-
 .pb-\[60px\] {
   padding-bottom: 60px;
-}
-
-.pt-8 {
-  padding-top: 2rem;
 }
 
 .pt-\[40px\] {
@@ -1000,10 +978,6 @@ video {
 
 .pt-\[80px\] {
   padding-top: 80px;
-}
-
-.text-left {
-  text-align: left;
 }
 
 .text-center {
@@ -1341,11 +1315,6 @@ nav a {
     background-color: transparent;
   }
 
-  .sm\:px-\[60px\] {
-    padding-left: 60px;
-    padding-right: 60px;
-  }
-
   .sm\:py-36 {
     padding-top: 9rem;
     padding-bottom: 9rem;
@@ -1369,10 +1338,6 @@ nav a {
 
   .sm\:pb-\[60px\] {
     padding-bottom: 60px;
-  }
-
-  .sm\:pb-\[70px\] {
-    padding-bottom: 70px;
   }
 
   .sm\:pl-\[15\%\] {
@@ -1491,10 +1456,6 @@ nav a {
 
   .lg\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .lg\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .lg\:grid-cols-\[35\%_1fr\] {

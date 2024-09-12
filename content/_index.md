@@ -151,14 +151,14 @@ icon = "images/Hiero-Icon-Timeline-4.svg"
 [[section_roadmap_points]]
 heading = "Enabling better communication with the community"
 text = '''
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+A critical focus will be enhancing communication channels with the community to ensure transparency and inclusivity. In addition to GitHub Discussions, we are exploring the establishment of additional forums, such as Discord channels, to foster real-time interaction. Regular community calls and office hours will be implemented to keep the project on track and keep everyone updated on key milestones and developments.
 '''
 icon = "images/Hiero-Icon-Timeline-5.svg"
 
 [[section_roadmap_points]]
 heading = "Better support regarding contributions especially for newcomers"
 text = '''
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+We recognize the importance of nurturing contributors at all levels, especially those who are new to the project. To this end, we will develop clear contributor guidelines, easy-to-follow documentation, and a mentorship program. These efforts aim to lower the barrier to entry, making it easier for newcomers to onboard and actively contribute to the growth of Hiero.
 '''
 icon = "images/Hiero-Icon-Timeline-6.svg"
 +++

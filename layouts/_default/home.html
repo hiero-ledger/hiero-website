@@ -225,7 +225,8 @@
               {{ $icon := resources.Get "images/Hiero-Icon-ModalClose.svg" }}
               {{ with $icon }}      
               <img src="{{ $icon.RelPermalink }}">
-              {{ end }}</button>
+              {{ end }}
+            </button>
             <div class="mb-5">    
               <img src="images/tsc/{{ .photo }}" alt="{{ .firstName }} {{ .lastName }}" class="w-full">
             </div>

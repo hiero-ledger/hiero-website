@@ -11,8 +11,21 @@ Renders a menu for the given menu ID.
 {{- $menuID := .menuID }}
 
 {{- with index site.Menus $menuID }}
-  <nav class="w-9/12 max-w-3xl hidden sm:block">
-    <ul class="flex flex-col sm:flex-row justify-between">
+  <button class="sm:hidden" onclick="showMobileNav()"> 
+    {{ $icon := resources.Get "images/Hiero-Icon-Nav-Menu.svg" }}
+    {{ with $icon }}      
+    <img src="{{ $icon.RelPermalink }}" class="w-5 h-5">
+    {{ end }}
+  </button>
+  <nav id="navigation" class="absolute hidden items-center justify-center w-full h-screen bg-black top-0 left-0 text-white sm:relative sm:h-auto sm:top-auto sm:bg-transparent sm:left-auto  sm:w-9/12 sm:max-w-3xl sm:block" aria-hidden="false">
+    <div class="absolute top-[35px] text-lg text-white sm:hidden">Navigation</div>
+    <button class="absolute text-white top-[35px] right-[25px] sm:hidden" onclick="hideMobileNav()"> 
+      {{ $icon := resources.Get "images/Hiero-Icon-ModalClose.svg" }}
+      {{ with $icon }}      
+      <img src="{{ $icon.RelPermalink }}" class="w-5 h-5">
+      {{ end }}
+    </button>
+    <ul id="menu" class="flex flex-col sm:flex-row justify-between">
       {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
     </ul>
   </nav>
@@ -33,13 +46,14 @@ Renders a menu for the given menu ID.
         {{- $name = . }}
       {{- end }}
     {{- end }}
-    <li>
+    <li class="text-center sm:text-left">
       <a
         {{- range $k, $v := $attrs }}
           {{- with $v }}
             {{- printf " %s=%q" $k $v | safeHTMLAttr }}
           {{- end }}
         {{- end -}}
+        onclick="hideMobileNav()"
       >{{ $name }}</a>
       {{- with .Children }}
         <ul>

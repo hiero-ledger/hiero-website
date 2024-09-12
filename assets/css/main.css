@@ -23,8 +23,20 @@ a {
 }
 
 nav a {
-  color: theme('colors.black');
+  color: theme('colors.white.DEFAULT');
   text-decoration: none;
+  font-size: 2.375rem;
+  line-height: 5.188rem;
+  letter-spacing: -0.128rem;
+}
+
+@media(min-width: 640px) {
+  nav a {
+    color: theme('colors.black');
+    font-size: theme('fontSize.base');
+    line-height: theme('fontSize.base.1.lineHeight');
+    letter-spacing: theme('fontSize.base.1.letterSpacing');
+  }
 }
 
 .anchor {
@@ -33,6 +45,10 @@ nav a {
 }
 
 .active-bio {
+  display: flex;
+}
+
+.active-navigation {
   display: flex;
 }
 

@@ -17,16 +17,6 @@ section_what_parts_open_source_text = '''
 Hiero is 100% open-source. While the transition of the project to Linux Foundation Decentralized Trust is still ongoing, a view into some additional contributions can be found in Hedera’s Github organization (<a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">https://github.com/hashgraph</a>). As a first step, the technical steering committee (TSC) of Hiero will provide oversight to include  projects that are needed to run an enterprise-ready decentralized network to the new Hiero GitHub organization (<a href="https://github.com/hiero" target="_blank" rel="noreferrer noopener">https://github.com/hiero</a>). More information about the transition process can be found in the  <a href="#roadmap" target="_self">roadmap</a>.
 '''
 
-section_quotes_first_quote = '''
-"As a long-time contributor to the Hyperledger project—now LF Decentralized Trust—and as a Hedera Council Member, we are thrilled to see Hedera's codebase integrated into the Linux Foundation Decentralized Trust. This milestone represents a powerful synergy: Hedera will benefit from the Linux Foundation's unparalleled experience in open, collaborative governance, while LFDT gains a significant DLT project backed by a vibrant developer ecosystem."
-'''
-section_quotes_first_author = "Shyam Nagarajan, Global Practice Leader, Executive Partner, Responsible AI, IBM Consulting"
-
-section_quotes_second_quote = '''
-"The HBaR Foundry community is excited to see the contribution of the Hedera software to the Linux Foundation Decentralized Trust project. We're delighted to see Hedera's commitment to growing an independently governed and transparent community with more resources and opportunities to engage and grow the ecosystem."
-'''
-section_quotes_second_author = "The HBAR Foundry - a community of expert Hedera builders"
-
 section_why_contribute_heading = "Why should I contribute?"
 section_why_contribute_text = "There are many benefits in contributing to Hiero for both individuals or companies:"
 
@@ -161,4 +151,18 @@ text = '''
 We recognize the importance of nurturing contributors at all levels, especially those who are new to the project. To this end, we will develop clear contributor guidelines, easy-to-follow documentation, and a mentorship program. These efforts aim to lower the barrier to entry, making it easier for newcomers to onboard and actively contribute to the growth of Hiero.
 '''
 icon = "images/Hiero-Icon-Timeline-6.svg"
+
+[[section_quotes]]
+quote = '''
+"As a long-time contributor to the Hyperledger project—now LF Decentralized Trust—and as a Hedera Council Member, we are thrilled to see Hedera's codebase integrated into the Linux Foundation Decentralized Trust. This milestone represents a powerful synergy: Hedera will benefit from the Linux Foundation's unparalleled experience in open, collaborative governance, while LFDT gains a significant DLT project backed by a vibrant developer ecosystem."
+'''
+author = "Shyam Nagarajan, Global Practice Leader, Executive Partner, Responsible AI, IBM Consulting"
+logo = "images/Hiero-Icon-Timeline-5.svg"
+
+[[section_quotes]]
+quote = '''
+"The HBaR Foundry community is excited to see the contribution of the Hedera software to the Linux Foundation Decentralized Trust project. We're delighted to see Hedera's commitment to growing an independently governed and transparent community with more resources and opportunities to engage and grow the ecosystem."
+'''
+author = "The HBAR Foundry - a community of expert Hedera builders"
+logo = "images/Hiero-Icon-Timeline-6.svg"
 +++

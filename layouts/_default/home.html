@@ -62,6 +62,7 @@
   </div>
 </div>
 <!-- QUOTES -->
+<!-- 
 <div id="quotes" class="anchor">
   <div class="pt-[40px] pb-[40px] sm:pt-[120px] sm:pb-[60px]">
     <div class="container container-mobile-full">
@@ -92,6 +93,62 @@
     </div>
   </div>
 </div>
+-->
+<div id="quotes" class="anchor">
+  <div class="pt-[40px] pb-[40px] sm:pt-[120px] sm:pb-[60px]">
+    <div class="container container-mobile-full">
+      <div class="relative w-full">          
+        <div class="mx-auto mb-10 lg:mb-0 lg:absolute lg:top-[50%] lg:left-0 lg:-translate-x-[91px] lg:-translate-y-[50%] text-white-dark text-5xl h-[40px] w-[51px]">
+          {{ $graphic := resources.Get "images/Hiero-Icon-Quote-Left.svg" }}
+          {{ with $graphic }}      
+          <img src="{{ $graphic.RelPermalink }}">
+          {{ end }} 
+        </div>
+        <div class="px-[25px] pt-[80px] lg:pt-[60px] lg:px-[60px] lg:pb-0 text-lg text-white bg-gradient-to-br from-red-dark via-red to-red">
+           <!-- Swiper -->
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                {{ range .Param "section_quotes" }}
+                <div class="swiper-slide">
+                  {{ $logo := resources.Get .logo }}
+                  {{ with $logo }}
+                  <div class="mb-5 flex justify-center">
+                    <img src="{{ $logo.RelPermalink }}">
+                  </div>
+                  {{ end }}
+                  <div class="mb-5">{{ .quote | safeHTML }}</div>
+                  <div class="font-bold mb-[155px]">{{ .author | safeHTML }}</div>
+                </div>
+                {{ end }}              
+            </div>
+            <div class="swiper-button swiper-button-next"></div>
+            <div class="swiper-button swiper-button-prev"></div>
+          </div>
+        </div>       
+        <div class="mx-auto mt-10 lg:mt-0 lg:absolute lg:top-[50%] lg:left-auto lg:right-0 lg:translate-x-[91px] lg:-translate-y-[50%] text-white-dark text-5xl h-[40px] w-[51px]">
+          {{ $graphic := resources.Get "images/Hiero-Icon-Quote-Right.svg" }}
+          {{ with $graphic }}      
+          <img src="{{ $graphic.RelPermalink }}">
+          {{ end }}
+        </div>        
+      </div>     
+    </div>
+  </div>
+</div>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+</script>
+
 
 <!-- WHY CONTRIBUTE? -->
 <!--

@@ -58,11 +58,13 @@ nav a {
 }
 
 @media(min-width: 768px) {
-  .container,
-  .container-mobile-full {
+  .container {
       max-width:1024px;
       padding-right: 3rem;
       padding-left: 3rem
+  }
+  .container-mobile-full {
+    padding:0;
   }
 }
 
@@ -73,4 +75,38 @@ nav a {
       padding-right: 8.75rem;
       padding-left: 8.75rem
   }
+}
+
+/* Swiper */
+.swiper {
+  width: 100%;
+  height: 100%;
+  max-width: 932px;
+}
+
+.swiper-slide  {
+  text-align: center;
+  font-family: theme('fontFamily.serif');
+  font-size: theme('fontSize.lg');
+}
+
+.swiper .swiper-button {
+  top: auto;
+  bottom: 80px;
+  color: theme('colors.black');
+  background-color: theme('colors.white.dark');
+  height: 35px;
+  width: 35px;
+}
+
+.swiper .swiper-button::after {
+  font-size: 14px;
+}
+
+.swiper .swiper-button-prev {
+  left: calc(50% - 40px);
+}
+
+.swiper .swiper-button-next {
+  right: calc(50% - 40px);
 }

@@ -18,7 +18,7 @@ Renders a menu for the given menu ID.
     {{ end }}
   </button>
   <nav id="navigation" class="absolute hidden items-center justify-center w-full h-screen bg-black top-0 left-0 text-white sm:relative sm:h-auto sm:top-auto sm:bg-transparent sm:left-auto  sm:w-9/12 sm:max-w-3xl sm:block" aria-hidden="false">
-    <div class="absolute top-[35px] text-lg text-white sm:hidden">Navigation</div>
+    <div class="absolute top-[35px] text-lg text-white font-bold sm:hidden">Navigation</div>
     <button class="absolute text-white top-[35px] right-[25px] sm:hidden" onclick="hideMobileNav()"> 
       {{ $icon := resources.Get "images/Hiero-Icon-ModalClose.svg" }}
       {{ with $icon }}      

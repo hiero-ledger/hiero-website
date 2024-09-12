@@ -13,7 +13,7 @@ section_why_open_source_text = "The main goal of Hiero is to create a diverse co
 
 section_what_parts_open_source_heading = "What parts of Hiero are Open Source?"
 section_what_parts_open_source_text = '''
-Hiero is 100% open-source. While the transition of the project to Linux Foundation Decentralized Trust is still ongoing, a view into some additional contributions can be found in <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera’s Github organization</a>. As a first step, the technical steering committee (TSC) of Hiero will provide oversight to include  projects that are needed to run an enterprise-ready decentralized network to a new Hiero GitHub organization. More information about the transition process can be found in the roadmap.
+Hiero is 100% open-source. While the transition of the project to Linux Foundation Decentralized Trust is still ongoing, a view into some additional contributions can be found in <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera’s GitHub organization</a>. As a first step, the technical steering committee (TSC) of Hiero will provide oversight to include  projects that are needed to run an enterprise-ready decentralized network to a new Hiero GitHub organization. More information about the transition process can be found in the roadmap.
 '''
 
 section_why_contribute_heading = "Why should I contribute?"
@@ -21,19 +21,17 @@ section_why_contribute_text = "There are many benefits in contributing to Hiero 
 
 section_getting_started_heading = "How to Contribute / Getting Started?"
 section_getting_started_text = '''
-<p>Since we are still working on the transition of the Hiero repositories from the Hedera’s GitHub organization (<a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">https://github.com/hashgraph</a>) into the Hiero GitHub organization (<a href="https://github.com/hiero" target="_blank" rel="noreferrer noopener">https://github.com/hiero</a>), many opportunities for contribution can be initiated at the Hedera’s GitHub organization today.</p>
+<p>Since we are still working on the transition of the Hiero repositories from the <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera GitHub organization</a> into the <a href="https://github.com/hiero" target="_blank" rel="noreferrer noopener">Hiero GitHub organization</a>, many opportunities for contribution can be initiated at the Hedera’s GitHub organization today.</p>
 <p>While in this transition phase we already want to enable developers to join in developing Hiero and its related projects. As such we’re always willing to help you get started, and mentor you on your journey of learning the project and making useful contributions.</p>
 <p>
-There is good work to do for everyone with whatever skillset you have, and it doesn’t have to be code. We also welcome help with documentation, design, project organization, organizing meetups and promoting the project.</p>
+There is good work to do for everyone with whatever skillset you have, and it doesn’t have to be code. We also welcome help with documentation, design, project organization and organizing meetups.</p>
 <p>
-We maintain a list of starter issues that are a great way to get up to speed as a new contributor. You can search for the “good first issue” label in our issue tracker to see what’s currently available <a href="#" target="_blank" rel="noreferrer noopener">HERE</a>.</p>
-<p>
-If you have any questions, need help or additional mentoring you can reach out to the community and the technical steering committee (TSC) of Hiero in our <a href="#" target="_blank" rel="noreferrer noopener">GitHub discussions</a></p>
+If you have any questions, need help or additional mentoring you can reach out to the community and the technical steering committee (TSC) of Hiero in our <a href="https://github.com/orgs/LFDT-Hiero/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a>.</p>
 '''
 
 section_connect_heading = "Connect with the Hiero Open Source community"
 section_connect_text = '''
-<p>Since we do not create Hiero from scratch it already has a vibrant community from Hedera and other products and projects. With the creation of the Hiero project, we started <a href="#" target="_blank" rel="noreferrer noopener">GitHub discussions</a> that can be used as a central place to contact the community and the technical steering committee (TSC) of Hiero.</p>
+<p>Since we do not create Hiero from scratch it already has a vibrant community from Hedera and other products and projects. With the creation of the Hiero project, we started <a href="https://github.com/orgs/LFDT-Hiero/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a> that can be used as a central place to contact the community and the technical steering committee (TSC) of Hiero.</p>
 <p>
 For us, the community of the open-source project is a crucial part of its success. Based on that we will concentrate on the integration of the community. As defined in the roadmap, we will integrate the community into the development of Hiero from day 1. An essential part of that is to have community members be part of the TSC. Here the TSC is working on voting mechanisms that allow us to create a diverse community.</p>
 <p>
@@ -42,7 +40,7 @@ Next to the TSC, we want to invest in a diverse and inclusive community. It is i
 
 section_technical_steering_committee_heading = "The Technical Steering Committee of Hiero"
 section_technical_steering_committee_text = '''
-<p>While one of our main goals is to have a diverse and inclusive community in which everybody has the rights and responsibilities to move the project forward, it is important that a committee oversees the project and moves the roadmap forward. To do so, we have defined a technical steering committee (TSC) that is defined by six individuals today. One of the important next steps on our roadmap is to enable voting mechanisms to add additional members from the community to the TSC. The duties, goals, and rights of the TSC are defined in the technical charter of the Hiero project, which can be found <a href="#" target="_blank" rel="noreferrer noopener">here</a>.
+<p>While one of our main goals is to have a diverse and inclusive community in which everybody has the rights and responsibilities to move the project forward, it is important that a committee oversees the project and moves the roadmap forward. To do so, we have defined a technical steering committee (TSC) that is defined by six individuals today. One of the important next steps on our roadmap is to enable voting mechanisms to add additional members from the community to the TSC. The duties, goals, and rights of the TSC are defined in the <a href="https://github.com/LFDT-Hiero/hiero/blob/main/technical-charter.md" target="_blank" rel="noreferrer noopener">technical charter</a> of the Hiero project.
 </p>
 '''
 
@@ -50,7 +48,7 @@ section_technical_steering_committee_individuals_heading = "Today the TSC is mad
 
 section_roadmap_heading = "Our Roadmap in the Linux Foundation Decentralized Trust"
 section_roadmap_text = '''
-<p>With the creation of the project in the Linux Foundation Decentralized Trust (LFDT) and the establishment of the initial technical steering committee (TSC) the cornerstones of Hiero have been laid. As a next essential step the TSC needs to provide a roadmap that covers the transition of the first repositories and projects to the Hiero GitHub organization (<a href="https://github.com/hiero" target="_blank" rel="noreferrer noopener">https://github.com/hiero</a>) and the inclusion and enabling of the community. The members of the TSC have committed themselves to work on the creation of this roadmap with the highest priority. The TSC hopes and encourages input and feedback by the complete ecosystem from core developers to users. To do so we enabled <a href="#" target="_blank" rel="noreferrer noopener">GitHub discussions</a> as a first open way for communication. We hope that as many community members as possible contribute to the discussions regarding the initial roadmap and help us to create a real community driven project.</p>
+<p>With the creation of the project in the Linux Foundation Decentralized Trust (LFDT) and the establishment of the initial technical steering committee (TSC) the cornerstones of Hiero have been laid. As a next essential step the TSC needs to provide a roadmap that covers the transition of the first repositories and projects to the <a href="https://github.com/hiero" target="_blank" rel="noreferrer noopener">Hiero GitHub organization</a> and the inclusion and enabling of the community. The members of the TSC have committed themselves to work on the creation of this roadmap with the highest priority. The TSC hopes and encourages input and feedback by the complete ecosystem from core developers to users. To do so we enabled <a href="https://github.com/orgs/LFDT-Hiero/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a> as a first open way for communication. We hope that as many community members as possible contribute to the discussions regarding the initial roadmap and help us to create a real community driven project.</p>
 <p>
 While an official roadmap does not exist today, the TSC has already defined several points they believe are essential for Hiero’s success. The following provide insight into those areas.</p>
 '''
@@ -119,7 +117,7 @@ icon = "images/Hiero-Icon-Timeline-1.svg"
 [[section_roadmap_points]]
 heading = "Transition of network repositories"
 text = '''
-Hedera has existed since WHEN, which has allowed its developer ecosystem to grow as represented by the variety of projects within its repository (<a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">https://github.com/hashgraph</a>). With the number of projects involved, the initial priorities are to transition the repositories needed to run a fully functioning base network (including Consensus Node, Mirror Node, JSON-RPC-Relay, and others) as soon as possible.
+Hedera has existed since 2017, which has allowed its developer ecosystem to grow as represented by the variety of projects within its <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">repository</a>. With the number of projects involved, the initial priorities are to transition the repositories needed to run a fully functioning base network (including Consensus Node, Mirror Node, JSON-RPC-Relay, and others) as soon as possible.
 '''
 icon = "images/Hiero-Icon-Timeline-2.svg"
 
@@ -133,7 +131,7 @@ icon = "images/Hiero-Icon-Timeline-3.svg"
 [[section_roadmap_points]]
 heading = "Renaming and rebranding"
 text = '''
-Repositories in the Hedera GitHub organization (<a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">https://github.com/hashgraph</a>) use “Hedera” or “Hashgraph” as names of the project reflecting the initial motivations for its use, reflected in the repository and project names but also in the sources. With the transition of sources to Hiero we plan to refactor all those projects and use Hiero as core element in naming conventions.
+Repositories in the <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera GitHub organization</a> use “Hedera” or “Hashgraph” as names of the project reflecting the initial motivations for its use, reflected in the repository and project names but also in the sources. With the transition of sources to Hiero we plan to refactor all those projects and use Hiero as core element in naming conventions.
 '''
 icon = "images/Hiero-Icon-Timeline-4.svg"
 
@@ -158,7 +156,7 @@ quote = '''
 author = '''
 Shyam Nagarajan Global Practice Leader, Executive Partner, Responsible AI, <a href="https://www.ibm.com/consulting" target="_blank" rel="noreferrer noopener">IBM Consulting</a>
 '''
-logo = "images/Hiero-Icon-Timeline-5.svg"
+logo = "images/Hiero-Logo-IBM.png"
 
 [[section_quotes]]
 quote = '''
@@ -167,7 +165,7 @@ quote = '''
 author = '''
 May Chan, CEO, <a href="https://www.hashpack.app/post/hashpack-on-hedera" target="_blank" rel="noreferrer noopener">HashPack</a>
 '''
-logo = "images/Hiero-Icon-Timeline-6.svg"
+logo = "images/Hiero-Logo-HashPack.png"
 
 [[section_quotes]]
 quote = '''
@@ -176,7 +174,7 @@ quote = '''
 author = '''
 <a href="https://hbarfoundry.com/" target="_blank" rel="noreferrer noopener">The HBAR Foundry</a>, A Community Of Expert Hedera Builders
 '''
-logo = "images/Hiero-Icon-Timeline-6.svg"
+logo = "images/Hiero-Logo-HbarFoundry.png"
 
 [[section_quotes]]
 quote = '''
@@ -185,7 +183,7 @@ quote = '''
 author = '''
 Sam Jimenez & Patrícia Carapinha, Founders, <a href="http://sentx.io/" target="_blank" rel="noreferrer noopener">SentX.io</a>
 '''
-logo = "images/Hiero-Icon-Timeline-6.svg"
+logo = "images/Hiero-Logo-Sentx.png"
 
 [[section_quotes]]
 quote = '''
@@ -194,7 +192,7 @@ quote = '''
 author = '''
 Ivan Saiz, CTO, <a href="https://io.builders/" target="_blank" rel="noreferrer noopener">ioBuilders</a>
 '''
-logo = "images/Hiero-Icon-Timeline-6.svg"
+logo = "images/Hiero-Logo-ioBuilders.png"
 
 [[section_quotes]]
 quote = '''
@@ -203,7 +201,7 @@ quote = '''
 author = '''
 Charles Adkins, President, <a href="https://hedera.com/" target="_blank" rel="noreferrer noopener">Hedera</a>
 '''
-logo = "images/Hiero-Icon-Timeline-6.svg"
+logo = "images/Hiero-Logo-Hedera.png"
 
 [[section_quotes]]
 quote = '''
@@ -212,5 +210,5 @@ quote = '''
 author = '''
 Dr. Leemon Baird, Inventor, Co-founder, & Chief Scientist, <a href="https://hashgraph.com/" target="_blank" rel="noreferrer noopener">Hashgraph</a>
 '''
-logo = "images/Hiero-Icon-Timeline-6.svg"
+logo = "images/Hiero-Logo-Hashgraph.png"
 +++

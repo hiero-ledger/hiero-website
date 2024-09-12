@@ -7,9 +7,9 @@
         "bio": "Richard is Vice President of Engineering at Hashgraph. Before the Hedera ecosystem, he was a Chief Client Architect for the Java platform at Oracle, and an architect for Oracle’s IoT applications. With 20+ years of experience building mission-critical platforms and applications used by millions of people worldwide, his passion is building incredible, scalable, high performance systems. He loves backpacking, camping, and watching his kids grow."
     },
     {
-        "firstName": "Leemon",
+        "firstName": "Dr. Leemon",
         "lastName":"Baird",
-        "gitHubAccount": "https://github.com/",
+        "gitHubAccount": "https://github.com/lbaird",
         "photo": "leemon.jpg",
         "bio": "Leemon is the Co-founder and Chief Scientist at Hashgraph. The inventor of the organization’s namesake, the distributed hashgraph consensus algorithm, Leemon co-founded the Hedera network with Mance Harmon. He has two decades of technology and start-up experience, and served as Professor of Computer Science at the US Air Force Academy, as well as holding senior scientist roles in several labs. Leemon received his PhD in Computer Science from Carnegie Mellon University and has multiple patents and publications in peer-reviewed journals. He has spoken at conferences in computer security, machine learning and mathematics."
     },
@@ -30,7 +30,7 @@
     {
         "firstName": "Alex",
         "lastName":"Popowycz",
-        "gitHubAccount": "https://github.com/",
+        "gitHubAccount": "https://github.com/popowycz",
         "photo": "alex.jpg",
         "bio": "Alex is the Chief Information Officer of Hedera and is charged with the technical operations of the network in close partnership with Hedera's member operators, ensuring the sustainable evolution of capabilities to the network while maintaining its core attributes of speed, fairness, and security. Prior to joining Hedera, Alex was the CIO at Health First, a multi-hospital integrated health system. He previously held several technology leadership positions at Fidelity Investments, with primary responsibility for cybersecurity and standards."
     },

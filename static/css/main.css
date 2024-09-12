@@ -1519,6 +1519,11 @@ nav a {
   }
 }
 
+.\[\&\>a\]\:text-white>a {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 .\[\&\>strong\]\:text-red>strong {
   --tw-text-opacity: 1;
   color: rgb(184 26 86 / var(--tw-text-opacity));

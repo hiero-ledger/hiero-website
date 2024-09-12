@@ -155,13 +155,62 @@ icon = "images/Hiero-Icon-Timeline-6.svg"
 quote = '''
 &#8220;As a long-time contributor to the Hyperledger project—now LF Decentralized Trust—and as a Hedera Council Member, we are thrilled to see Hedera's codebase integrated into the Linux Foundation Decentralized Trust. This milestone represents a powerful synergy: Hedera will benefit from the Linux Foundation's unparalleled experience in open, collaborative governance, while LFDT gains a significant DLT project backed by a vibrant developer ecosystem.&#8221;
 '''
-author = "Shyam Nagarajan, Global Practice Leader, Executive Partner, Responsible AI, IBM Consulting"
+author = '''
+Shyam Nagarajan Global Practice Leader, Executive Partner, Responsible AI, <a href="https://www.ibm.com/consulting" target="_blank" rel="noreferrer noopener">IBM Consulting</a>
+'''
 logo = "images/Hiero-Icon-Timeline-5.svg"
 
 [[section_quotes]]
 quote = '''
-&#8220;The HBaR Foundry community is excited to see the contribution of the Hedera software to the Linux Foundation Decentralized Trust project. We're delighted to see Hedera's commitment to growing an independently governed and transparent community with more resources and opportunities to engage and grow the ecosystem.&#8221;
+&#8220;Hedera’s participation in Linux Foundation’s Decentralized Trust will undoubtedly accelerate development, enhance security, and foster unprecedented collaboration within the Hedera ecosystem, positioning it at the forefront of blockchain innovation. As the leading wallet on the network, HashPack is committed to playing an active role in this new open source structure, and we look forward to <a href="https://www.hashpack.app/post/hashpack-on-hedera" target="_blank" rel="noreferrer noopener">contributing our expertise</a> to help shape the future of Hedera and the broader decentralized technology landscape.&#8221;
 '''
-author = "The HBAR Foundry - a community of expert Hedera builders"
+author = '''
+May Chan, CEO, <a href="https://www.hashpack.app/post/hashpack-on-hedera" target="_blank" rel="noreferrer noopener">HashPack</a>
+'''
+logo = "images/Hiero-Icon-Timeline-6.svg"
+
+[[section_quotes]]
+quote = '''
+&#8220;The HBAR Foundry community is excited to see the contribution of the Hedera software to the Linux Foundation Decentralized Trust project. We're delighted to see Hedera's commitment to growing an independently governed and transparent community with more resources and opportunities to engage and grow the ecosystem.&#8221;
+'''
+author = '''
+<a href="https://hbarfoundry.com/" target="_blank" rel="noreferrer noopener">The HBAR Foundry</a>, A Community Of Expert Hedera Builders
+'''
+logo = "images/Hiero-Icon-Timeline-6.svg"
+
+[[section_quotes]]
+quote = '''
+&#8220;Hedera’s contribution of its codebase to the Linux Foundation’s Decentralized Trust initiative is great news for SentX.io. By open-sourcing the Hashgraph technology, Hedera is reinforcing its commitment to innovation and decentralization. We expect this move to boost developer engagement, speed up the adoption of decentralized applications, and attract more retail users, driving growth across the ecosystem.&#8221;
+'''
+author = '''
+Sam Jimenez & Patrícia Carapinha, Founders, <a href="http://sentx.io/" target="_blank" rel="noreferrer noopener">SentX.io</a>
+'''
+logo = "images/Hiero-Icon-Timeline-6.svg"
+
+[[section_quotes]]
+quote = '''
+&#8220;Transferring ownership of Hedera's codebase to the Linux Foundation Decentralized Trust project is a testament to the power of open collaboration and meritocracy. This landmark initiative will empower developers, entrepreneurs, and enterprises to actively participate in shaping the future of Hedera. We are thrilled to be part of this vibrant ecosystem and look forward to contributing to its growth and success.&#8221;
+'''
+author = '''
+Ivan Saiz, CTO, <a href="https://io.builders/" target="_blank" rel="noreferrer noopener">ioBuilders</a>
+'''
+logo = "images/Hiero-Icon-Timeline-6.svg"
+
+[[section_quotes]]
+quote = '''
+&#8220;This contribution represents a historic moment in the evolution of decentralized networks and is setting a precedent for transparency and collaboration in the blockchain industry. By contributing our codebase to LF Decentralized Trust, as project Hiero, we are reaffirming our commitment to open governance and collaboration. LF Decentralized Trust's mission to advance decentralized systems aligns perfectly with our own goals. We look forward to providing developers with unmatched access to tools and resources, creating an environment where decentralized applications can truly thrive.&#8221;
+'''
+author = '''
+Charles Adkins, President, <a href="https://hedera.com/" target="_blank" rel="noreferrer noopener">Hedera</a>
+'''
+logo = "images/Hiero-Icon-Timeline-6.svg"
+
+[[section_quotes]]
+quote = '''
+&#8220;By contributing Hiero to the Linux Foundation, an organization with a long history of supporting open source and open innovation, Hedera demonstrates to Council Members, ecosystem partners, grantees, and the builder community that it is committed to growing the capabilities of its network through transparency and meritocracy.&#8221;
+'''
+author = '''
+Dr. Leemon Baird, Inventor, Co-founder, & Chief Scientist, <a href="https://hashgraph.com/" target="_blank" rel="noreferrer noopener">Hashgraph</a>
+'''
 logo = "images/Hiero-Icon-Timeline-6.svg"
 +++

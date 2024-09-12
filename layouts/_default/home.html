@@ -116,8 +116,8 @@
                     <img src="{{ $logo.RelPermalink }}">
                   </div>
                   {{ end }}
-                  <div class="mb-5">{{ .quote | safeHTML }}</div>
-                  <div class="font-bold mb-[155px]">{{ .author | safeHTML }}</div>
+                  <div class="mb-5 [&>a]:text-white">{{ .quote | safeHTML }}</div>
+                  <div class="font-bold mb-[155px] [&>a]:text-white">{{ .author | safeHTML }}</div>
                 </div>
                 {{ end }}              
             </div>

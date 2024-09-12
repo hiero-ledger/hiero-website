@@ -84,7 +84,7 @@ icon = "images/Hiero-Icon-Leaderless.svg"
 [[section_what_is_hiero_points]]
 heading = "Hiero is <strong>open</strong>"
 text = "Hiero is a vibrant community of developers, visionaries, and innovators dedicated to creating a more fair, efficient, and secure world. As part of the Linux Foundation Decentralized Trust initiative, we are pioneering a new era of open governance and collaboration for the project."
-icon = "images/Hiero-Icon-Fair.svg"
+icon = "images/Hiero-Icon-Open.svg"
 
 [[section_why_contribute_points]]
 heading = "Help to create diverse and trustful networks"

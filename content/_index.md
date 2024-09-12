@@ -16,9 +16,6 @@ section_what_parts_open_source_text = '''
 Hiero is 100% open-source. While the transition of the project to Linux Foundation Decentralized Trust is still ongoing, a view into some additional contributions can be found in <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera’s GitHub organization</a>. As a first step, the technical steering committee (TSC) of Hiero will provide oversight to include  projects that are needed to run an enterprise-ready decentralized network to a new Hiero GitHub organization. More information about the transition process can be found in the roadmap.
 '''
 
-section_why_contribute_heading = "Why should I contribute?"
-section_why_contribute_text = "There are many benefits in contributing to Hiero for both individuals or companies:"
-
 section_getting_started_heading = "How to Contribute / Getting Started?"
 section_getting_started_text = '''
 <p>Since we are still working on the transition of the Hiero repositories from the <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera GitHub organization</a> into the <a href="https://github.com/hiero" target="_blank" rel="noreferrer noopener">Hiero GitHub organization</a>, many opportunities for contribution can be initiated at the Hedera’s GitHub organization today.</p>
@@ -82,30 +79,6 @@ icon = "images/Hiero-Icon-Leaderless.svg"
 heading = "Hiero is <strong>open</strong>"
 text = "Hiero is a vibrant community of developers, visionaries, and innovators dedicated to creating a more fair, efficient, and secure world. As part of the Linux Foundation Decentralized Trust initiative, we are pioneering a new era of open governance and collaboration for the project."
 icon = "images/Hiero-Icon-Open.svg"
-
-[[section_why_contribute_points]]
-heading = "Help to create diverse and trustful networks"
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-
-[[section_why_contribute_points]]
-heading = "Boost your engineering reputation"
-text = "Maximus ultrices arcu egestas penatibus ridiculus; congue nullam. Aliquet sit imperdiet amet tristique massa ad nec morbi lectus. Luctus ac suspendisse ultricies; imperdiet pretium odio. Elementum risus facilisis amet in augue eget vulputate."
-
-[[section_why_contribute_points]]
-heading = "Attend hackathons and bug bounties"
-text = "Nulla volutpat dolor cursus nibh scelerisque cursus habitant nec sed. Curabitur libero lorem cubilia penatibus dictumst habitant ac posuere venenatis. Elit dictum nisi convallis vel potenti maecenas blandit litora felis."
-
-[[section_why_contribute_points]]
-heading = "Become part of the technical steering committee"
-text = "Mollis odio nam tristique libero vestibulum senectus volutpat. Rhoncus odio nostra aliquet gravida volutpat porttitor efficitur ipsum a. Maximus dictumst pellentesque donec et; nisl proin vitae. Nulla semper penatibus sit ad donec feugiat dolor sollicitudin urna."
-
-[[section_why_contribute_points]]
-heading = "Get recognized by the community"
-text = "Varius donec sit per ipsum quis. Eu ornare metus dolor metus tellus interdum. Sed ridiculus mauris sociosqu venenatis tempor. Amet dis non ornare arcu montes curabitur dictumst. Dapibus ipsum felis porttitor est enim pellentesque maecenas finibus."
-
-[[section_why_contribute_points]]
-heading = "Contribute to the future of web3"
-text = "Lobortis congue congue proin venenatis dui turpis nulla accumsan. Parturient mattis velit pulvinar orci vehicula pulvinar pharetra mattis. Sed feugiat magna viverra consectetur netus metus accumsan. Ad venenatis habitasse augue amet magna in aliquet."
 
 [[section_roadmap_points]]
 heading = "Transparent voting mechanisms for the community"

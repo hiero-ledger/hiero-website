@@ -790,6 +790,10 @@ video {
   flex-grow: 1;
 }
 
+.resize {
+  resize: both;
+}
+
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
@@ -964,6 +968,11 @@ video {
   padding-bottom: 40px;
 }
 
+.py-\[80px\] {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
 .pb-\[40px\] {
   padding-bottom: 40px;
 }
@@ -978,6 +987,10 @@ video {
 
 .pt-\[80px\] {
   padding-top: 80px;
+}
+
+.pb-\[80px\] {
+  padding-bottom: 80px;
 }
 
 .text-center {
@@ -1320,6 +1333,11 @@ nav a {
     padding-bottom: 9rem;
   }
 
+  .sm\:py-0 {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
   .sm\:pb-0 {
     padding-bottom: 0px;
   }
@@ -1483,6 +1501,11 @@ nav a {
 .\[\&\>a\]\:text-white>a {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.\[\&\>a\]\:text-white-dark>a {
+  --tw-text-opacity: 1;
+  color: rgb(229 228 215 / var(--tw-text-opacity));
 }
 
 .\[\&\>strong\]\:text-red>strong {

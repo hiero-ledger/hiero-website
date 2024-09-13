@@ -1,7 +1,7 @@
 /* Bio Modal */
-function initBioModal () {
+const initBioModal = () => {
 
-    function showBio(divId) {
+    const showBio = (divId) => {
         const div = document.getElementById(divId);
         if (div) {
             hideBioFromAll();
@@ -10,7 +10,7 @@ function initBioModal () {
         }
     }
 
-    function hideBio(divId) {
+    const hideBio = (divId) => {
         const div = document.getElementById(divId);
         if (div) {
             div.classList.remove('active-bio');
@@ -18,12 +18,12 @@ function initBioModal () {
         }
     }
 
-    function hideBioFromAll() {
+    const hideBioFromAll = () => {
         const elements = document.querySelectorAll('.active-bio');
         
         elements.forEach(element => {
-        element.classList.remove('active-bio');
-        element.ariaHidden = "true";
+            element.classList.remove('active-bio');
+            element.ariaHidden = "true";
         });
     }
 
@@ -33,24 +33,24 @@ function initBioModal () {
 }
 
 /* Mobile Navigation */
-function initMenu() {    
+const initMenu = () => {    
     const elNavigation = document.getElementById('navigation');
 
-    function hideMobileNav(ariaHidden = "true") {
+    const hideMobileNav = (ariaHidden = "true") => {
         if (elNavigation) {
             elNavigation.classList.remove('active-navigation');
             elNavigation.ariaHidden = ariaHidden;
         }
     }
 
-    function showMobileNav() {
+    const showMobileNav = () => {
         if (elNavigation) {
             elNavigation.classList.add('active-navigation');
             elNavigation.ariaHidden = "false";
         }
     }
 
-    function handleResize() {
+    const handleResize = () => {
         if (window.innerWidth > 640) {
             hideMobileNav("false");
         } else if (elNavigation) {

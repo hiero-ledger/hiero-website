@@ -678,10 +678,6 @@ video {
   margin-top: 1rem;
 }
 
-.mt-8 {
-  margin-top: 2rem;
-}
-
 .block {
   display: block;
 }
@@ -968,11 +964,6 @@ video {
   padding-bottom: 40px;
 }
 
-.py-\[80px\] {
-  padding-top: 80px;
-  padding-bottom: 80px;
-}
-
 .pb-\[40px\] {
   padding-bottom: 40px;
 }
@@ -987,10 +978,6 @@ video {
 
 .pt-\[80px\] {
   padding-top: 80px;
-}
-
-.pb-\[80px\] {
-  padding-bottom: 80px;
 }
 
 .text-center {
@@ -1328,14 +1315,14 @@ nav a {
     background-color: transparent;
   }
 
-  .sm\:py-36 {
-    padding-top: 9rem;
-    padding-bottom: 9rem;
-  }
-
   .sm\:py-0 {
     padding-top: 0px;
     padding-bottom: 0px;
+  }
+
+  .sm\:py-36 {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
   }
 
   .sm\:pb-0 {

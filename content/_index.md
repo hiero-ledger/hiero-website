@@ -42,8 +42,6 @@ section_technical_steering_committee_text = '''
 </p>
 '''
 
-section_technical_steering_committee_individuals_heading = "Today the TSC is made up of the following individuals:"
-
 section_roadmap_heading = "Our Roadmap in the Linux Foundation Decentralized Trust"
 section_roadmap_text = '''
 <p>With the creation of the project in the Linux Foundation Decentralized Trust (LFDT) and the establishment of the initial technical steering committee (TSC) the cornerstones of Hiero have been laid. As a next essential step the TSC needs to provide a roadmap that covers the transition of the first repositories and projects to the <a href="https://github.com/hiero" target="_blank" rel="noreferrer noopener">Hiero GitHub organization</a> and the inclusion and enabling of the community. The members of the TSC have committed themselves to work on the creation of this roadmap with the highest priority. The TSC hopes and encourages input and feedback by the complete ecosystem from core developers to users. To do so we enabled <a href="https://github.com/orgs/LFDT-Hiero/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a> as a first open way for communication. We hope that as many community members as possible contribute to the discussions regarding the initial roadmap and help us to create a real community driven project.</p>

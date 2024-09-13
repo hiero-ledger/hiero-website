@@ -37,7 +37,7 @@ const initMenu = () => {
     const elNavigation = document.getElementById('navigation');
 
     const hideMobileNav = (ariaHidden = "true") => {
-        if (elNavigation) {
+        if ((elNavigation && window.innerWidth < 640) || (elNavigation && ariaHidden === "false")) {
             elNavigation.classList.remove('active-navigation');
             elNavigation.ariaHidden = ariaHidden;
         }
@@ -51,8 +51,9 @@ const initMenu = () => {
     }
 
     const handleResize = () => {
-        if (window.innerWidth > 640) {
+        if (window.innerWidth >= 640) {
             hideMobileNav("false");
+
         } else if (elNavigation) {
             if(!elNavigation.classList.contains('active-navigation')) {
                 hideMobileNav("true");

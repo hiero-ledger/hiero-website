@@ -33,14 +33,14 @@
   </div>
 </div>
 <!-- OPEN SOURCE -->
-<div id="open-source" class="anchor">
+<div>
   <div class="bg-white">
     <div class="container pt-[40px] pb-[40px] sm:pt-[92px] sm:pb-[154px] grid grid-cols-1 sm:grid-cols-2 gap-[80px] sm:gap-10 relative">
       {{ $graphic := resources.Get "images/Hiero-Logo-Outline.svg" }}
       {{ with $graphic }}      
       <img src="{{ $graphic.RelPermalink }}" class="sm:absolute w-full h-full sm:top-[50%] sm:left-[50%] sm:-translate-x-[50%] sm:-translate-y-[50%]">
       {{ end }}    
-      <div class="relative">
+      <div id="open-source" class="anchor anchor--open-source relative" >
         <div class="h-14 w-14 mb-5">
           {{ $icon := resources.Get "images/Hiero-Icon-Heart.svg" }}
           {{ with $icon }}
@@ -189,7 +189,7 @@
   </div>
 </div>
 <!-- ROADMAP -->
-<div id="roadmap" class="anchor">
+<div id="roadmap" class="anchor anchor--roadmap">
   <div class="bg-white">
     <div id="roadmap-content" class="container pt-[40px] sm:pt-[120px] sm:pb-0 grid grid-cols-1 lg:grid-cols-2 gap-10">
       <div id="roadmap-intro-column">

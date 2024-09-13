@@ -44,6 +44,23 @@ nav a {
   padding-top: 6.813rem; /*109px*/
 }
 
+.anchor--roadmap {
+  margin-top: -5rem; /*-80px*/
+  padding-top: 5rem; /*80px*/
+}
+
+@media(min-width: 640px) {
+  .anchor--open-source {
+    margin-top: -12.5rem; /*-200px*/
+    padding-top: 12.5rem; /*200px*/
+  }
+  .anchor--roadmap {
+    margin-top: 0rem; /*0px*/
+    padding-top: 0rem; /*0px*/
+  }
+ 
+}
+
 .active-bio {
   display: flex;
 }

@@ -10,6 +10,8 @@ Renders a menu for the given menu ID.
 {{- $page := .page }}
 {{- $menuID := .menuID }}
 
+{{ $image := resources.Get "images/Hiero-Icon-wLogo-white-text.svg" }}
+
 {{- with index site.Menus $menuID }}
   <button class="sm:hidden" onclick="showMobileNav()"> 
     {{ $icon := resources.Get "images/Hiero-Icon-Nav-Menu.svg" }}
@@ -17,8 +19,8 @@ Renders a menu for the given menu ID.
     <img src="{{ $icon.RelPermalink }}" class="w-5 h-5">
     {{ end }}
   </button>
-  <nav id="navigation" class="absolute hidden items-center justify-center w-full h-screen bg-black top-0 left-0 text-white sm:relative sm:h-auto sm:top-auto sm:bg-transparent sm:left-auto  sm:w-9/12 sm:max-w-3xl sm:block" aria-hidden="false">
-    <div class="absolute top-[35px] text-lg text-white font-bold sm:hidden">Navigation</div>
+  <nav id="navigation" class="absolute hidden items-center justify-center w-full h-screen bg-black top-0 left-0 text-white sm:relative sm:h-auto sm:top-auto sm:bg-transparent sm:left-auto  sm:w-9/12 sm:max-w-xl sm:block" aria-hidden="false">
+    <div class="absolute top-[27px] sm:hidden"><img src="{{ $image.RelPermalink }}" alt="logo" class="h-[40px]  w-[128px]"></div>
     <button class="absolute text-white top-[35px] right-[25px] sm:hidden" onclick="hideMobileNav()"> 
       {{ $icon := resources.Get "images/Hiero-Icon-ModalClose.svg" }}
       {{ with $icon }}      
@@ -46,7 +48,8 @@ Renders a menu for the given menu ID.
         {{- $name = . }}
       {{- end }}
     {{- end }}
-    <li class="text-center sm:text-left">
+    {{- $connect := "Connect" }}
+    <li class="text-center sm:text-left {{- if eq $name $connect }} sm:hidden {{- end }}">
       <a
         {{- range $k, $v := $attrs }}
           {{- with $v }}

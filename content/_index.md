@@ -20,11 +20,11 @@ Hiero is 100% open-source. While the transition of the project to Linux Foundati
 section_getting_started_heading = "How to Contribute / Getting Started?"
 section_getting_started_text = '''
 <p>Since we are still working on the transition of the Hiero repositories from the <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera GitHub organization</a> into the <a href="https://github.com/LFDT-Hiero/" target="_blank" rel="noreferrer noopener">Hiero GitHub organization</a>, many opportunities for contribution can be initiated at the Hedera’s GitHub organization today.</p>
-<p>While in this transition phase we already want to enable developers to join in developing Hiero and its related projects. As such we’re always willing to help you get started, and mentor you on your journey of learning the project and making useful contributions.</p>
+<p>While in this transition phase we already want to enable developers to join in developing Hiero and its related projects. As such, we’re always willing to help you get started and mentor you on your journey of learning the project and making useful contributions.</p>
 <p>
-There is good work to do for everyone with whatever skillset you have, and it doesn’t have to be code. We also welcome help with documentation, design, project organization and organizing meetups.</p>
+There is good work to do for everyone with whatever skillset you have - and it doesn’t have to be code. We also welcome help with documentation, design, project organization, and organizing meetups. For instance, at Hacktoberfest we have a huge list of good first issues that let the community do the first contributions, several of which will help us remove Hedera naming and usage from the code and truly make it vendor neutral.</p>
 <p>
-If you have any questions, need help or additional mentoring you can reach out to the community and the technical steering committee (TSC) of Hiero in our <a href="https://github.com/orgs/LFDT-Hiero/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a>.</p>
+If you have any questions or need help or additional mentoring, then you can reach out to the community and the technical steering committee (TSC) of Hiero in our <a href="https://github.com/orgs/LFDT-Hiero/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a>.</p>
 '''
 
 section_connect_heading = "Connect with the Hiero Open Source community"
@@ -87,18 +87,18 @@ Together with the Linux Foundation, the Hiero TSC seeks to establish voting mech
 icon = "images/Hiero-Icon-Timeline-1.svg"
 
 [[section_roadmap_points]]
-heading = "Transition of network repositories"
-text = '''
-Hedera has existed since 2017, which has allowed its developer ecosystem to grow as represented by the variety of projects within its <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">repository</a>. With the number of projects involved, the initial priorities are to transition the repositories needed to run a fully functioning base network (including Consensus Node, Mirror Node, JSON-RPC-Relay, and others) as soon as possible.
-'''
-icon = "images/Hiero-Icon-Timeline-2.svg"
-
-[[section_roadmap_points]]
 heading = "Transition of SDKs"
 text = '''
 The next phase of code contributions involve those that allow developed applications to take advantage of the myriad of a network’s services. Here the SDK clients are essential parts and should be migrated to Hiero directly after or parallel with the network repositories.
 '''
 icon = "images/Hiero-Icon-Timeline-3.svg"
+
+[[section_roadmap_points]]
+heading = "Transition of network repositories"
+text = '''
+Hedera has existed since 2017, which has allowed its developer ecosystem to grow as represented by the variety of projects within its <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">repository</a>. With the number of projects involved, the initial priorities are to transition the repositories needed to run a fully functioning base network (including Consensus Node, Mirror Node, JSON-RPC-Relay, and others) as soon as possible.
+'''
+icon = "images/Hiero-Icon-Timeline-2.svg"
 
 [[section_roadmap_points]]
 heading = "Renaming and rebranding"

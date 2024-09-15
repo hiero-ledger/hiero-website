@@ -168,6 +168,24 @@ logo = "images/Hiero-Logo-ioBuilders.png"
 
 [[section_quotes]]
 quote = '''
+&#8220;Hedera’s contribution of its codebase to the Linux Foundation’s Decentralized Trust entirely reshapes decentralized governance. At Calaxy, we view this as more than an infrastructure change – it’s a move that drives real-world innovation. Developers now have greater autonomy and access to tools to build more inclusive, user-driven applications. We’re excited to see how this enables devs to push the boundaries of creator-focused economies and further integrate blockchain into our everyday social experiences and relationships.&#8221;
+'''
+author = '''
+Solo Ceesay, CEO & Co-founder, <a href="https://calaxy.com/" target="_blank" rel="noreferrer noopener">Calaxy</a>
+'''
+logo = "images/Hiero-Logo-Calaxy.png"
+
+[[section_quotes]]
+quote = '''
+&#8220;Hedera's decision to open-source its codebase under the Linux Foundation Decentralized Trust is a monumental leap forward for the entire blockchain industry. This bold move not only underscores Hedera's commitment to decentralization and transparency but also paves the way for unprecedented community-driven innovation. We are excited to collaborate with the growing ecosystem to build a future where the possibilities are limitless.&#8221;
+'''
+author = '''
+Rajiv Sohal, CTO, <a href="https://www.diamondstandard.co/" target="_blank" rel="noreferrer noopener">Diamond Standard</a>
+'''
+logo = "images/Hiero-Logo-DiamondStandard.svg"
+
+[[section_quotes]]
+quote = '''
 &#8220;This contribution represents a historic moment in the evolution of decentralized networks and is setting a precedent for transparency and collaboration in the blockchain industry. By contributing our codebase to LF Decentralized Trust, as project Hiero, we are reaffirming our commitment to open governance and collaboration. LF Decentralized Trust's mission to advance decentralized systems aligns perfectly with our own goals. We look forward to providing developers with unmatched access to tools and resources, creating an environment where decentralized applications can truly thrive.&#8221;
 '''
 author = '''

@@ -18,7 +18,7 @@
         "lastName":"Ebbers",
         "gitHubAccount": "https://github.com/hendrikebbers",
         "photo": "hendrik.jpg",
-        "bio": "Hendrik Ebbers is a member of the Board of Directors of the Eclipse Foundation. He is leading several open-source projects as a member of working groups and committees like Eclipse Adoptium or JakartaEE and actively contributing to even more projects. Hendrik has been a core committer to the consensus node of Hedera for several years. <br><strong>Statement:</strong> As a board member of the Eclipse Foundation I know that meaningful standards can only be formed in a vendor neutral and professional environment. By joining the Linux Foundation the Hiero project does exactly the needed next step in that direction. Today Hiero is in an excellent state to define the future of trustful and decentralized ledgers in an open, sustainable and vendor neutral way together with the community."
+        "bio": "Hendrik Ebbers is a member of the Board of Directors of the Eclipse Foundation. He is leading several open-source projects as a member of working groups and committees like Eclipse Adoptium or JakartaEE and actively contributing to even more projects. Hendrik has been a core committer to the consensus node of Hedera for several years."
     },
     {
         "firstName": "Stoyan",

@@ -7,7 +7,7 @@ section_hero_text = "Open Source Distributed Ledger Technology"
 
 section_what_is_hiero_heading = "What is Hiero?"
 section_what_is_hiero_text = '''
-Hiero, a <a href="http://www.lfdecentralizedtrust.org/" target="_blank" rel="noreferrer noopener">Linux Foundation Decentralized Trust</a> project, is an open-source, vendor-neutral distributed ledger technology. Hiero is used to build the Hedera public ledger.'''
+Hiero, a <a href="http://www.lfdecentralizedtrust.org/" target="_blank" rel="noreferrer noopener">Linux Foundation Decentralized Trust</a> project, is an open-source, vendor-neutral distributed ledger technology. Hiero is used to build the <a href="https://hedera.com/" target="_blank" rel="noreferrer noopener">Hedera</a> public ledger.'''
 
 section_why_open_source_heading = "Why is Hiero Open Source?"
 section_why_open_source_text = "The main goal of Hiero is to create a diverse community of developers, dreamers, and builders working to make the world more fair, fast, and secure. To achieve that goal it is critical that everyone can access the source of Hiero and move the project forward. A decentralized network that is used by enterprises and critical infrastructure around the world must be vendor-neutral and fully auditable."
@@ -19,7 +19,7 @@ Hiero is 100% open-source. While the transition of the project to Linux Foundati
 
 section_getting_started_heading = "How to Contribute / Getting Started?"
 section_getting_started_text = '''
-<p>Since we are still working on the transition of the Hiero repositories from the <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera GitHub organization</a> into the <a href="https://github.com/hiero" target="_blank" rel="noreferrer noopener">Hiero GitHub organization</a>, many opportunities for contribution can be initiated at the Hedera’s GitHub organization today.</p>
+<p>Since we are still working on the transition of the Hiero repositories from the <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera GitHub organization</a> into the <a href="https://github.com/LFDT-Hiero/" target="_blank" rel="noreferrer noopener">Hiero GitHub organization</a>, many opportunities for contribution can be initiated at the Hedera’s GitHub organization today.</p>
 <p>While in this transition phase we already want to enable developers to join in developing Hiero and its related projects. As such we’re always willing to help you get started, and mentor you on your journey of learning the project and making useful contributions.</p>
 <p>
 There is good work to do for everyone with whatever skillset you have, and it doesn’t have to be code. We also welcome help with documentation, design, project organization and organizing meetups.</p>
@@ -44,7 +44,7 @@ section_technical_steering_committee_text = '''
 
 section_roadmap_heading = "Our Roadmap in the Linux Foundation Decentralized Trust"
 section_roadmap_text = '''
-<p>With the creation of the project in the Linux Foundation Decentralized Trust (LFDT) and the establishment of the initial technical steering committee (TSC) the cornerstones of Hiero have been laid. As a next essential step the TSC needs to provide a roadmap that covers the transition of the first repositories and projects to the <a href="https://github.com/hiero" target="_blank" rel="noreferrer noopener">Hiero GitHub organization</a> and the inclusion and enabling of the community. The members of the TSC have committed themselves to work on the creation of this roadmap with the highest priority. The TSC hopes and encourages input and feedback by the complete ecosystem from core developers to users. To do so we enabled <a href="https://github.com/orgs/LFDT-Hiero/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a> as a first open way for communication. We hope that as many community members as possible contribute to the discussions regarding the initial roadmap and help us to create a real community driven project.</p>
+<p>With the creation of the project in the Linux Foundation Decentralized Trust (LFDT) and the establishment of the initial technical steering committee (TSC) the cornerstones of Hiero have been laid. As a next essential step the TSC needs to provide a roadmap that covers the transition of the first repositories and projects to the <a href="https://github.com/LFDT-Hiero/" target="_blank" rel="noreferrer noopener">Hiero GitHub organization</a> and the inclusion and enabling of the community. The members of the TSC have committed themselves to work on the creation of this roadmap with the highest priority. The TSC hopes and encourages input and feedback by the complete ecosystem from core developers to users. To do so we enabled <a href="https://github.com/orgs/LFDT-Hiero/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a> as a first open way for communication. We hope that as many community members as possible contribute to the discussions regarding the initial roadmap and help us to create a real community driven project.</p>
 <p>
 While an official roadmap does not exist today, the TSC has already defined several points they believe are essential for Hiero’s success. The following provide insight into those areas.</p>
 '''
@@ -135,7 +135,7 @@ quote = '''
 &#8220;Hedera’s participation in Linux Foundation’s Decentralized Trust will undoubtedly accelerate development, enhance security, and foster unprecedented collaboration within the Hedera ecosystem, positioning it at the forefront of blockchain innovation. As the leading wallet on the network, HashPack is committed to playing an active role in this new open source structure, and we look forward to <a href="https://www.hashpack.app/post/hashpack-on-hedera" target="_blank" rel="noreferrer noopener">contributing our expertise</a> to help shape the future of Hedera and the broader decentralized technology landscape.&#8221;
 '''
 author = '''
-May Chan, CEO, <a href="https://www.hashpack.app/post/hashpack-on-hedera" target="_blank" rel="noreferrer noopener">HashPack</a>
+May Chan, CEO, <a href="https://www.hashpack.app/" target="_blank" rel="noreferrer noopener">HashPack</a>
 '''
 logo = "images/Hiero-Logo-HashPack.png"
 

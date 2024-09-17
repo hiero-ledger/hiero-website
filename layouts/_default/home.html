@@ -229,19 +229,22 @@
   const initGSAP = () => {
     gsap.registerPlugin(ScrollTrigger)
     
-    const pin = (idToPin, idToPinColumnContainer, idTrigger, bottomOffset = 0) => {
+    const pin = (idToPin, idToPinColumnContainer, idTrigger, bottomOffset = 0, triggerStartCenter = false, minWidth = 1200, minHeight = 700 ) => {
       const elToPin = document.getElementById(idToPin);
       const elToPinColumnContainer = document.getElementById(idToPinColumnContainer);
       const elTrigger = document.getElementById(idTrigger);
-
-      gsap.matchMedia().add("(min-width: 1360px) and (min-height: 780px)", () => { 
+      const headerHeight = 90;
+      const pinCenter = window.innerHeight/2 - elToPin.offsetHeight/2 - headerHeight;
+      
+      gsap.matchMedia().add(`(min-width: ${minWidth}px) and (min-height: ${minHeight}px)`, () => { 
         ScrollTrigger.create({
           trigger: elTrigger,
-          start: "top top",
+          start: triggerStartCenter ? `top ${pinCenter}px` : 'top top',
           end: `+=${elToPinColumnContainer.offsetHeight - elToPin.offsetHeight - bottomOffset}`,
           pin: elToPin,
           pinSpacing: false,
           markers: false,
+          id: idToPin,
           invalidateOnRefresh: true
         });
       })
@@ -256,9 +259,9 @@
       }
 
       // Recreate triggers
-      pin('what-is-hiero-intro', 'what-is-hiero-intro-column', 'what-is-hiero-content')
-      pin('technical-steering-committee-intro', 'technical-steering-committee-intro-column', 'technical-steering-committee-content')
-      pin('roadmap-intro', 'roadmap-intro-column', 'roadmap-content', 80)
+      pin('what-is-hiero-intro', 'what-is-hiero-intro-column', 'what-is-hiero-content', 0, true)
+      pin('technical-steering-committee-intro', 'technical-steering-committee-intro-column', 'technical-steering-committee-content', 0, true)
+      pin('roadmap-intro', 'roadmap-intro-column', 'roadmap-content', 80, false, 1360, 780)
       ScrollTrigger.refresh(); //Recalculates the positioning of all of the ScrollTriggers on the page
     }
 

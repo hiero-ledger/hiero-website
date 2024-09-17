@@ -1,6 +1,6 @@
 # Hiero Website
 
-This repo contains the website of Hiero.
+This repo contains the website of Hiero (https://hiero.org).
 
 ## Building the website
 

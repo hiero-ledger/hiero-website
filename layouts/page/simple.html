@@ -1,6 +1,16 @@
 {{ define "main" }}
-<article class="container mx-auto my-auto px-4 py-4">
-    <h1 class="text-3xl py-2">{{ .Title }}</h1>
-    {{ .Content }}
-</article>
+<div id="hero" class="bg-gradient-to-br from-red-dark via-red to-red relative">
+  <div class="container py-20 sm:py-36 text-white text-center">    
+    <h1 class="text-4xl sm:text-5xl leading-none relative mb-2.5">{{ .Title }}</h1>
+    <p class="text-[24px] tracking-[-0.081rem] sm:text-xl relative">{{ .Description }}</p>    
+  </div>
+</div>
+
+<div id="content" class="bg-white">
+  <div class="container pt-[80px] pb-[40px] sm:pt-[120px] sm:pb-[120px]">
+    <div class="prose lg:prose-xl mx-auto space-y-6">
+        {{ .Content }}
+    </div>
+  </div>
+</div>
 {{ end }}

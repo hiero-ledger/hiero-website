@@ -2,9 +2,7 @@
 title: "Hacktoberfest 2024"
 description: "Contribute to Hiero by working on a good first issue"
 layout: "simple"
-------
-# 🚀 Contribute to Hiero
-
+---
 Welcome to the Hiero contributions page! We're thrilled to have you here.
 Hiero is the first open-source distributed ledger technology (DLT) that is developed in a full vendor-neutral way as a project of the Linux Foundation.
 Your contributions can help us improve and expand the project, making it better for everyone.

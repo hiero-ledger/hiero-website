@@ -718,10 +718,6 @@ video {
   height: 2.5rem;
 }
 
-.h-12 {
-  height: 3rem;
-}
-
 .h-14 {
   height: 3.5rem;
 }
@@ -770,10 +766,6 @@ video {
   width: 2.5rem;
 }
 
-.w-12 {
-  width: 3rem;
-}
-
 .w-14 {
   width: 3.5rem;
 }
@@ -802,10 +794,6 @@ video {
   width: 100%;
 }
 
-.min-w-0 {
-  min-width: 0px;
-}
-
 .max-w-\[390px\] {
   max-width: 390px;
 }
@@ -822,20 +810,8 @@ video {
   flex: 1 1 0%;
 }
 
-.flex-auto {
-  flex: 1 1 auto;
-}
-
-.flex-none {
-  flex: none;
-}
-
 .flex-initial {
   flex: 0 1 auto;
-}
-
-.shrink-0 {
-  flex-shrink: 0;
 }
 
 .grow {
@@ -913,11 +889,6 @@ video {
 .gap-x-10 {
   -moz-column-gap: 2.5rem;
        column-gap: 2.5rem;
-}
-
-.gap-x-4 {
-  -moz-column-gap: 1rem;
-       column-gap: 1rem;
 }
 
 .gap-x-6 {
@@ -1061,11 +1032,6 @@ video {
 .py-1\.5 {
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
-}
-
-.py-10 {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
 }
 
 .py-20 {
@@ -1400,10 +1366,6 @@ nav a {
   right: calc(50% - 40px);
 }
 
-.hover\:underline:hover {
-  text-decoration-line: underline;
-}
-
 .focus\:ring-2:focus {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
@@ -1455,10 +1417,6 @@ nav a {
     display: block;
   }
 
-  .sm\:flex {
-    display: flex;
-  }
-
   .sm\:hidden {
     display: none;
   }
@@ -1507,14 +1465,6 @@ nav a {
 
   .sm\:flex-row {
     flex-direction: row;
-  }
-
-  .sm\:flex-col {
-    flex-direction: column;
-  }
-
-  .sm\:items-end {
-    align-items: flex-end;
   }
 
   .sm\:gap-10 {

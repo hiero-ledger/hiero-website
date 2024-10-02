@@ -1,6 +1,6 @@
 ---
-title: "Contributions"
-description: "Contributions to Hiero"
+title: "Hacktoberfest 2024"
+description: "Contribute to Hiero by working on a good first issue"
 layout: "simple"
 ------
 

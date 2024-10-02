@@ -30,6 +30,8 @@ Let's code for a cause!
 3. **💻 Make Your Changes**: Tackle the issue and implement your solution.
 4. **📬 Submit a Pull Request**: Once you're done, submit a pull request for review.
 
+If you have any questions or need help, feel free to reach out to us on [GitHub discussion](https://github.com/orgs/LFDT-Hiero/discussions).
+
 We've got a range of issues, from beginner-friendly to advanced. There's something for everyone!
 
 {{< issueList endpoint="https://hedera-issues.koyeb.app/api/hacktoberfest-issues">}}

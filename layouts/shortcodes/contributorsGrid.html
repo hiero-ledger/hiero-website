@@ -1,0 +1,44 @@
+<!-- Uses the services / endpoints of this project: https://github.com/OpenElements/good-first-issue-provider -->
+<div id="loading" class="text-center text-xl text-gray-700">LOADING...</div>
+<ul id="contributors-list" role="list" class="grid grid-cols-4 gap-6"></ul>
+
+<script>
+  async function fetchContributors() {
+    const response = await fetch('{{ .Get "endpoint"}}');
+    const contributors = await response.json();
+    return contributors;
+  }
+
+  // Function to render issues into the table
+  function renderContributors(contributors) {
+    const listElement = document.getElementById('contributors-list');
+    listElement.innerHTML = ''; // Clear any existing rows
+
+    contributors.forEach(contributor => {
+      const listItem = document.createElement('li');
+      listItem.classList.add('flex', 'justify-center');
+      listItem.innerHTML = `<a target="_blank" href="https://github.com/${contributor.userName}">
+                                <div class="flex flex-col justify-center">
+                                    <img class="rounded-full h-32 w-32 bg-slate-600 p-0.5 grow" src="${contributor.avatarUrl}" alt="Avatar of ${contributor.userName}">
+                                    <span class="text-center">${contributor.userName}</span>
+                                </div>
+                            </a>`;
+      listElement.appendChild(listItem);
+    });
+  }
+
+  // Load issues on page load
+  document.addEventListener('DOMContentLoaded', async () => {
+    const loadingElement = document.getElementById('loading');
+    const listElement = document.getElementById('contributors-list');
+    let contributors = [];
+    try {
+      contributors = await fetchContributors();
+      renderContributors(contributors);
+      loadingElement.classList.add('hidden');
+      listElement.classList.remove('hidden');
+    } catch (error) {
+      loadingElement.textContent = 'Failed to load data. Please try again later.';
+    }
+  });
+</script>

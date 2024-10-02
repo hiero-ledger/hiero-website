@@ -1,13 +1,8 @@
 <!-- Uses the services / endpoints of this project: https://github.com/OpenElements/good-first-issue-provider -->
-<div class="container mx-auto py-10">
-    <div id="loading" class="text-center text-xl text-gray-700">LOADING...</div>
-
-    <ul id="contributors-list" role="list" class="grid grid-cols-4 gap-6">
-    </ul>
-</div>
+<div id="loading" class="text-center text-xl text-gray-700">LOADING...</div>
+<ul id="contributors-list" role="list" class="grid grid-cols-4 gap-6"></ul>
 
 <script>
-
   async function fetchContributors() {
     const response = await fetch('{{ .Get "endpoint"}}');
     const contributors = await response.json();
@@ -27,8 +22,7 @@
                                     <img class="rounded-full h-32 w-32 bg-slate-600 p-0.5 grow" src="${contributor.avatarUrl}" alt="Avatar of ${contributor.userName}">
                                     <span class="text-center">${contributor.userName}</span>
                                 </div>
-                            </a>
-`;
+                            </a>`;
       listElement.appendChild(listItem);
     });
   }

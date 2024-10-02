@@ -1,8 +1,10 @@
 ---
 title: "Hiero Heros"
-description: "All people that have contributed to Hiero"
+description: "Meet the amazing contributors who have helped build Hiero"
 layout: "simple"
 ---
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   
+We are proud to highlight all the contributors who have helped bring Hiero to life.
+Whether through code, documentation, testing, or community support, these individuals have played a vital role in the development of Hiero.
+Each contributor brings unique skills and ideas, helping us grow as a decentralized ecosystem.
 
 {{< contributorsGrid endpoint="https://hedera-issues.koyeb.app/api/contributors">}}

@@ -3,7 +3,6 @@ title: "Hacktoberfest 2024"
 description: "Contribute to Hiero by working on a good first issue"
 layout: "simple"
 ------
-
 # 🚀 Contribute to Hiero
 
 Welcome to the Hiero contributions page! We're thrilled to have you here.
@@ -14,6 +13,7 @@ Your contributions can help us improve and expand the project, making it better 
 
 - **🌱 Learn and Grow**: Dive into open source, pick up new skills, and level up your coding game.
 - **🤝 Join the Community**: Connect with fellow developers, share knowledge, and build lasting relationships.
+  You can find all heros that have already contributed to Hiero [here](/heros).
 - **🌍 Make an Impact**: Your code can make a difference, helping users around the globe.
 
 ## Hacktoberfest 2024

@@ -14,7 +14,7 @@ header {
 }
 
 footer {
-  border-top: 1px solid theme('colors.black');
+  /* border-top: 1px solid theme('colors.black'); */
 }
 
 a {

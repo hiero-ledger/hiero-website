@@ -605,6 +605,10 @@ video {
   right: 0px;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
 .left-0 {
   left: 0px;
 }
@@ -648,6 +652,10 @@ video {
 
 .mb-10 {
   margin-bottom: 2.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 
 .mb-2\.5 {
@@ -792,6 +800,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-screen {
+  width: 100vw;
 }
 
 .max-w-\[390px\] {
@@ -1225,7 +1237,7 @@ header {
 }
 
 footer {
-  border-top: 1px solid #1E1E1E;
+  /* border-top: 1px solid theme('colors.black'); */
 }
 
 a {

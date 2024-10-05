@@ -141,6 +141,15 @@ logo = "images/Hiero-Logo-HashPack.png"
 
 [[section_quotes]]
 quote = '''
+&#8220;By contributing its codebase to the Linux Foundation's Decentralized Trust, Hedera is demonstrating the ultimate commitment to open development. As a leading <a href="https://www.hgraph.com/blog/hedera-mirror-node" target="_blank" rel="noreferrer noopener">data infrastructure provider</a> in the ecosystem, Hgraph is actively dedicated to supporting the Hiero project as it transforms the open source DLT space and empowers the Hedera developer community.&#8221;
+'''
+author = '''
+Tyler McDonald, CEO, <a href="https://hgraph.com/" target="_blank" rel="noreferrer noopener">Hgraph</a>
+'''
+logo = "images/Hiero-Logo-Hgraph.png"
+
+[[section_quotes]]
+quote = '''
 &#8220;The HBAR Foundry community is excited to see the contribution of the Hedera software to the Linux Foundation Decentralized Trust project. We're delighted to see Hedera's commitment to growing an independently governed and transparent community with more resources and opportunities to engage and grow the ecosystem.&#8221;
 '''
 author = '''

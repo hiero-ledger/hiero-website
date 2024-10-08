@@ -14,7 +14,8 @@ HUGO_VERSION = "0.133.1"
     X-XSS-Protection = "1; mode=block"
 
 [[redirects]]
-  from = "/"
-  to = "/"
+  from = "/old-page"
+  to = "/new-page"
   status = 301
+  force = true
 

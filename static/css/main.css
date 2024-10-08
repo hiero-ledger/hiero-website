@@ -1227,6 +1227,7 @@ body {
   line-height: 1.5;
   margin: 0;
   color: #1E1E1E;
+  background-color: bisque;
 }
 
 header {
@@ -1234,7 +1235,7 @@ header {
 }
 
 footer {
-  /* border-top: 1px solid theme('colors.black'); */
+  border-top: 1px solid #1E1E1E;
 }
 
 a {
@@ -1268,7 +1269,7 @@ nav a {
 
 .anchor--roadmap {
   margin-top: -5rem;
-  /*-80px*/
+  /* -80px */
   padding-top: 5rem;
   /*80px*/
 }

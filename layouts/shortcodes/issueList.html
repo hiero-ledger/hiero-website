@@ -1,31 +1,31 @@
 <!-- Uses the services / endpoints of this project: https://github.com/OpenElements/good-first-issue-provider -->
 <div class="flex flex-col">
     <label for="language-filter" class="block prose lg:prose-xl">Filter issues by Language</label>
-    <select id="language-filter" name="language-filter" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+    
+    <select id="language-filter" name="language-filter" class="mt-2 block w-full rounded-md border-0 py-2 my-4 pl-3 pr-10 text-slate-900 ring-2 ring-inset ring-slate-800 focus:ring-gray-800 ">
         <option value="">All Languages</option>
     </select>
+    
     <!-- Loading Text -->
     <div id="loading" class="text-center text-xl text-gray-700">LOADING...</div>
-    <ul id="issues-list" class="divide-y divide-gray-100 hidden">
+    <ul id="issues-list" class="hidden">
     </ul>
 </div>
 <script>
-
   function populateLanguageFilter(issues) {
     var uniqueLanguages = new Set();
-    issues.forEach(issue => {
-      issue.languageTags.forEach(language => uniqueLanguages.add(language));
+    issues.forEach((issue) => {
+      issue.languageTags.forEach((language) => uniqueLanguages.add(language));
     });
-    const labelFilter = document.getElementById('language-filter');
+    const labelFilter = document.getElementById("language-filter");
     labelFilter.innerHTML = '<option value="">All Languages</option>'; // Reset options
-    uniqueLanguages.forEach(label => {
-      const option = document.createElement('option');
+    uniqueLanguages.forEach((label) => {
+      const option = document.createElement("option");
       option.value = label;
       option.textContent = label;
       labelFilter.appendChild(option);
     });
   }
-
 
   async function fetchIssues() {
     const response = await fetch('{{ .Get "endpoint"}}');
@@ -35,8 +35,8 @@
 
   // Function to render issues into the table
   function renderIssues(issues) {
-    const list = document.getElementById('issues-list');
-    list.innerHTML = ''; // Clear any existing rows
+    const list = document.getElementById("issues-list");
+    list.innerHTML = ""; // Clear any existing rows
 
     issues.sort((a, b) => {
       const orgA = a.org.toLowerCase();
@@ -62,54 +62,68 @@
       return 0;
     });
 
-
-    issues.forEach(issue => {
-      if(issue.isAssigned) {
+    issues.forEach((issue) => {
+      if (issue.isAssigned) {
         return;
       }
-      if(issue.isClosed) {
+      if (issue.isClosed) {
         return;
       }
-      const listItem = document.createElement('li');
-      listItem.className = 'flex flex-row justify-between gap-x-6 py-5';
+      const listItem = document.createElement("li");
+      listItem.className = "flex flex-row justify-between py-4";
 
-      listItem.innerHTML = `<div class="flex-initial">
-                                <a href="${issue.link}"  target="_blank"><p class="text-sm font-semibold leading-6 text-gray-900">${issue.title}</p></a>
-                                <a href="https://github.com/${issue.org}/${issue.repo}" target="_blank"><p class="mt-1 truncate text-xs leading-5 text-gray-500">${issue.repo}</p></a>
+      listItem.innerHTML = `<div class="w-full rounded-md border border-2 border-inherit py-1.5 my-4 pl-3 pr-10 bg-inherit text-white flex justify-between hover:bg-inherit-hovered">
+                              <div class="flex-1">
+                                  <a href="${issue.link}" class="hover:bg-inherit-hovered" target="_blank">
+                                      <p class="text-sm font-semibold leading-6">${issue.title}</p>
+                                  </a>
+                                  <a href="https://github.com/${issue.org}/${issue.repo}" target="_blank">
+                                      <p class="mt-1 truncate text-xs leading-5">${issue.repo}</p>
+                                  </a>
+                              </div>
+                              <div class="flex items-center ml-4">
+                                  ${issue.languageTags
+                                    .map(
+                                      (tag) => `
+                                      <span class="inline-flex items-center rounded-full px-2 py-1\.5 bg-white text-xs text-inherit text-white font-medium ">${tag}</span>`
+                                    )
+                                    .join("")}
+                              </div>
                             </div>
-                            <div>
-                                ${issue.languageTags.map(tag => `
-                                <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">${tag}</span>`).join('')}
-                            </div>`;
+                            `;
       list.appendChild(listItem);
     });
   }
 
   // Load issues on page load
-  document.addEventListener('DOMContentLoaded', async () => {
-    const loadingElement = document.getElementById('loading');
-    const tableContainer = document.getElementById('issues-list');
+  document.addEventListener("DOMContentLoaded", async () => {
+    const loadingElement = document.getElementById("loading");
+    const tableContainer = document.getElementById("issues-list");
     let issues = [];
     try {
       issues = await fetchIssues();
-      let useableIssues = issues.filter(issue => !issue.isAssigned && !issue.isClosed);
+      let useableIssues = issues.filter(
+        (issue) => !issue.isAssigned && !issue.isClosed
+      );
       renderIssues(useableIssues);
       populateLanguageFilter(useableIssues);
       // Hide the loading text and show the table
-      loadingElement.classList.add('hidden');
-      tableContainer.classList.remove('hidden');
+      loadingElement.classList.add("hidden");
+      tableContainer.classList.remove("hidden");
     } catch (error) {
-      loadingElement.textContent = 'Failed to load data. Please try again later.';
+      loadingElement.textContent =
+        "Failed to load data. Please try again later.";
     }
 
     // Event listener to filter issues by selected label
-    document.getElementById('language-filter').addEventListener('change', function() {
-      const selectedLabel = this.value;
-      const filteredIssues = selectedLabel
-          ? issues.filter(issue => issue.languageTags.includes(selectedLabel)) : issues;
-      renderIssues(filteredIssues);
-    });
-
-
+    document
+      .getElementById("language-filter")
+      .addEventListener("change", function () {
+        const selectedLabel = this.value;
+        const filteredIssues = selectedLabel
+          ? issues.filter((issue) => issue.languageTags.includes(selectedLabel))
+          : issues;
+        renderIssues(filteredIssues);
+      });
   });
 </script>

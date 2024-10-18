@@ -45,7 +45,7 @@ nav a {
 }
 
 .anchor--roadmap {
-  margin-top: -5rem; /*-80px*/
+  margin-top: -5rem; /* -80px */
   padding-top: 5rem; /*80px*/
 }
 
@@ -58,7 +58,6 @@ nav a {
     margin-top: 0rem; /*0px*/
     padding-top: 0rem; /*0px*/
   }
- 
 }
 
 .active-bio {

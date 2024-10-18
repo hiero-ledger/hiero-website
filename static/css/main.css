@@ -633,6 +633,10 @@ video {
   top: 35px;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -648,6 +652,10 @@ video {
 
 .mb-10 {
   margin-bottom: 2.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 
 .mb-2\.5 {
@@ -748,6 +756,11 @@ video {
 
 .h-\[90px\] {
   height: 90px;
+}
+
+.h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .h-full {
@@ -1259,7 +1272,7 @@ nav a {
 
 .anchor--roadmap {
   margin-top: -5rem;
-  /*-80px*/
+  /* -80px */
   padding-top: 5rem;
   /*80px*/
 }

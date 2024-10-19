@@ -9,4 +9,4 @@ Each contributor brings unique skills and ideas, helping us grow as a decentrali
 
 If you want to contribute to Hiero, please check out our current [Hacktoberfest initiative](/hacktoberfest) that provides a lot of good first issues to get started with.
 
-{{< contributorsGrid endpoint="https://hedera-issues.koyeb.app/api/contributors">}}
+{{< contributorsGrid endpoint="https://hedera-issues.koyeb.app/api/v2/contributors">}}

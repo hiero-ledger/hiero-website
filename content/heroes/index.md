@@ -1,5 +1,5 @@
 ---
-title: "Hiero Heros"
+title: "Hiero Heroes"
 description: "Meet the amazing contributors who have helped build Hiero"
 layout: "simple"
 ---

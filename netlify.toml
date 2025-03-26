@@ -4,3 +4,19 @@ publish = "public"
 
 [build.environment]
 HUGO_VERSION = "0.133.1"
+
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+
+
+[[redirects]]
+  from = "/old-page"
+  to = "/new-page"
+  status = 301
+  force = true
+

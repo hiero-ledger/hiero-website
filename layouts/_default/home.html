@@ -1,4 +1,5 @@
 {{ define "main" }}
+{{- $lazyLoading := site.Params.enableImageLazyLoading | default true -}}  
 <div id="hero" class="bg-gradient-to-br from-red-dark via-red to-red relative">
   <div class="container py-20 sm:py-36 text-white text-center">    
     <h1 class="text-4xl sm:text-5xl leading-none relative mb-2.5">{{ $.Param "section_hero_heading" | safeHTML }}</h1>
@@ -20,7 +21,7 @@
         <div class="grid grid-cols-[1fr] sm:grid-cols-[55px_1fr] gap-5 sm:gap-10">   
           {{ $icon := resources.Get .icon }}
           {{ with $icon }}
-          <img src="{{ $icon.RelPermalink }}">
+          <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
           {{ end }}
           <div>
             <h3 class="text-2xl mb-5 sm:mb-2 [&>strong]:text-red">{{ .heading | safeHTML }}</h3>    
@@ -38,13 +39,13 @@
     <div class="container pt-[40px] pb-[40px] sm:pt-[92px] sm:pb-[154px] grid grid-cols-1 sm:grid-cols-2 gap-[80px] sm:gap-10 relative">
       {{ $graphic := resources.Get "images/Hiero-Logo-Outline.svg" }}
       {{ with $graphic }}      
-      <img src="{{ $graphic.RelPermalink }}" class="sm:absolute w-full h-full sm:top-[50%] sm:left-[50%] sm:-translate-x-[50%] sm:-translate-y-[50%]">
+      <img src="{{ $graphic.RelPermalink }}" class="sm:absolute w-full h-full sm:top-[50%] sm:left-[50%] sm:-translate-x-[50%] sm:-translate-y-[50%]" {{ if $lazyLoading }}loading="lazy"{{ end }}>
       {{ end }}    
       <div id="open-source" class="anchor anchor--open-source relative" >
         <div class="h-14 w-14 mb-5">
           {{ $icon := resources.Get "images/Hiero-Icon-Heart.svg" }}
           {{ with $icon }}
-          <img src="{{ $icon.RelPermalink }}">
+          <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
           {{ end }}
         </div>
         <h2 class="text-2xl font-medium mb-5">{{ $.Param "section_why_open_source_heading" | safeHTML }}</h2>
@@ -54,7 +55,7 @@
         <div class="h-14 w-14 mb-5">
           {{ $icon := resources.Get "images/Hiero-Icon-OpenSource.svg" }}
           {{ with $icon }}
-          <img src="{{ $icon.RelPermalink }}">
+          <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
           {{ end }}
         </div>
         <h2 class="text-2xl font-medium mb-5">{{ $.Param "section_what_parts_open_source_heading" | safeHTML }}</h2>
@@ -71,7 +72,7 @@
         <div class="mx-auto mb-10 lg:mb-0 lg:absolute lg:top-[50%] lg:left-0 lg:-translate-x-[91px] lg:-translate-y-[50%] text-white-dark text-5xl h-[40px] w-[51px]">
           {{ $graphic := resources.Get "images/Hiero-Icon-Quote-Left.svg" }}
           {{ with $graphic }}      
-          <img src="{{ $graphic.RelPermalink }}">
+          <img src="{{ $graphic.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
           {{ end }} 
         </div>
         <div class="px-[25px] pt-[80px] lg:pt-[60px] lg:px-[60px] lg:pb-0 text-lg text-white bg-gradient-to-br from-red-dark via-red to-red">
@@ -83,7 +84,7 @@
                   {{ $logo := resources.Get .logo }}
                   {{ with $logo }}
                   <div class="mb-5 flex justify-center h-[38px]">
-                    <img src="{{ $logo.RelPermalink }}">
+                    <img src="{{ $logo.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
                   </div>
                   {{ end }}
                   <div class="mb-5 [&>a]:text-white">{{ .quote | safeHTML }}</div>
@@ -98,7 +99,7 @@
         <div class="mx-auto mt-10 lg:mt-0 lg:absolute lg:top-[50%] lg:left-auto lg:right-0 lg:translate-x-[91px] lg:-translate-y-[50%] text-white-dark text-5xl h-[40px] w-[51px]">
           {{ $graphic := resources.Get "images/Hiero-Icon-Quote-Right.svg" }}
           {{ with $graphic }}      
-          <img src="{{ $graphic.RelPermalink }}">
+          <img src="{{ $graphic.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
           {{ end }}
         </div>        
       </div>     
@@ -139,7 +140,7 @@
   <div class="container py-[40px] sm:py-0 flex flex-row items-center gap-10">
     {{ $graphic := resources.Get "images/Hiero-Icon.svg" }}
     {{ with $graphic }}      
-    <img src="{{ $graphic.RelPermalink }}">
+    <img src="{{ $graphic.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
     {{ end }}
     <div class="w-full bg-white-dark h-[1px]"></div>
   </div>
@@ -151,7 +152,7 @@
       <div id="technical-steering-committee-intro-column">
         <div id="technical-steering-committee-intro">
           <h2 class="text-3xl mb-2.5 sm:text-4xl sm:mb-4">{{ $.Param "section_technical_steering_committee_heading" | safeHTML }}</h2>
-          <div class="space-y-4 text-base text-lg">{{ $.Param "section_technical_steering_committee_text" | safeHTML }}</div>
+          <div class="space-y-4 lext-base sm:text-lg">{{ $.Param "section_technical_steering_committee_text" | safeHTML }}</div>
         </div>
       </div>
       <div class="team-members grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-[40px] sm:gap-y-[60px]">
@@ -160,7 +161,7 @@
         {{ $bioId := printf "%s%s%d" .firstName .lastName $index }}
         <div class="team-member relative">
           <div class="mb-3">    
-            <img src="images/tsc/{{ .photo }}" alt="{{ .firstName }} {{ .lastName }}" class="w-full aspect-square object-cover">
+            <img src="images/tsc/{{ .photo }}" alt="{{ .firstName }} {{ .lastName }}" class="w-full aspect-square object-cover" {{ if $lazyLoading }}loading="lazy"{{ end }}>
           </div> 
           <h3 class="text-2xl mb-4">{{ .firstName }} {{ .lastName }}</h3>
           <div class="flex flex-row gap-2 items-center">
@@ -168,7 +169,7 @@
             <a href="{{ .gitHubAccount }}" target="_blank" rel="noopener" class="border-2 border-red border-solid rounded-full h-[35px] w-[35px] flex justify-center items-center">
               {{ $icon := resources.Get "images/Hiero-Icon-Github.svg" }}
               {{ with $icon }}      
-              <img src="{{ $icon.RelPermalink }}">
+              <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
               {{ end }}
             </a>
           </div>        
@@ -176,11 +177,11 @@
             <button class="absolute text-white top-1.5 right-1.5" onclick="hideBio('{{$bioId}}')"> 
               {{ $icon := resources.Get "images/Hiero-Icon-ModalClose.svg" }}
               {{ with $icon }}      
-              <img src="{{ $icon.RelPermalink }}">
+              <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
               {{ end }}
             </button>
             <div class="mb-5">    
-              <img src="images/tsc/{{ .photo }}" alt="{{ .firstName }} {{ .lastName }}" class="w-full aspect-square object-cover">
+              <img src="images/tsc/{{ .photo }}" alt="{{ .firstName }} {{ .lastName }}" class="w-full aspect-square object-cover" {{ if $lazyLoading }}loading="lazy"{{ end }}>
             </div>
             <p class="text-gray-500 mt-2 space-y-4">{{ .bio | safeHTML }}</p>
             <button class="text-black text-lg rounded-full py-1.5 px-[26px] bg-white-dark self-center mt-4" onclick="hideBio('{{$bioId}}')">Close</button>
@@ -208,7 +209,7 @@
             {{ $icon := resources.Get .icon }}
             {{ with $icon }}
             <div class="w-10 h-10 sm:w-[75px] sm:h-[75px] flex justify-center border border-black sm:border-none">
-              <img src="{{ $icon.RelPermalink }}" class="self-center">
+              <img src="{{ $icon.RelPermalink }}" class="self-center" {{ if $lazyLoading }}loading="lazy"{{ end }}>
             </div>
             {{ end }}
             <div class="bg-black w-0.5 flex-1 mx-auto"></div>

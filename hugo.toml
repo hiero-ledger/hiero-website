@@ -2,6 +2,14 @@ baseURL = 'https://hiero.org/'
 languageCode = 'en-us'
 title = 'Hiero'
 
+[[module.mounts]]
+source = 'static'
+target = 'static'
+
+[[module.mounts]]
+source = 'images'
+target = 'static/images'
+
 [[menus.main]]
 name = 'Home'
 pageRef = '/'
@@ -54,7 +62,7 @@ unsafe = true
     style = 'monokai'
 
 [params]
-fallbackBlogFeaturedImage = '/images/tsc/Hiero_v3.png'
+fallbackBlogFeaturedImage = '/images/HI60000_GetInvolvedBanner_V1.jpg'
 enableImageLazyLoading = true
 
 [params.shareButtons]

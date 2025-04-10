@@ -12,7 +12,7 @@ name = "Hiero Team"
 title = ""
 organization = ""
 link = ""
-image = "/images/Hiero-Icon-wLogo.svg"
+image = "/images/profile-hiero.png"
 
 +++
 {{< show-date >}} We’re excited to share that elections are now open for end-user and community contributor seats on the [Hiero Technical Steering Committee (TSC)](https://www.lfdecentralizedtrust.org/blog/announcing-the-upcoming-elections-for-end-user-and-community-seats-on-the-hiero-technical-steering-committee-tsc). This is an important moment in Hiero’s evolution—bringing more diverse voices directly into the governance and technical direction of the project.

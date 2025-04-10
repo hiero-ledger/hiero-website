@@ -1,4 +1,4 @@
-baseURL = 'https://hierostaging.netlify.app/'
+baseURL = 'https://hiero.org/'
 languageCode = 'en-us'
 title = 'Hiero'
 

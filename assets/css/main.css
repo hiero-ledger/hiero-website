@@ -120,15 +120,15 @@ nav a {
   }
 
   h2 {
-    @apply font-medium text-[24px] mb-4;
+    @apply font-medium text-[24px] mt-8 mb-4;
   }
   
   h3 {
-    @apply font-medium text-lg mb-4;
+    @apply font-medium text-lg mt-8 mb-4;
   }
   
   h4 {
-    @apply font-medium text-base mb-4;
+    @apply font-medium text-base mt-8 mb-4;
   }
 
   cite {

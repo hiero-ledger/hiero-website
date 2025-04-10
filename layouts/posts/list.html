@@ -27,7 +27,7 @@
                                 {{- $image = print .RelPermalink $image -}}
                             {{ end -}}
                         {{ else }}
-                            {{- $image = absURL .Site.Params.fallbackBlogFeaturedImage }}
+                            {{- $image = .Site.Params.fallbackBlogFeaturedImage }}
                         {{ end -}}
                         <img src="{{ $image | safeURL }}" alt="{{ .Title }}" class="w-full h-[140px] object-cover" {{ if $lazyLoading }}loading="lazy"{{ end }} />
                         <div>

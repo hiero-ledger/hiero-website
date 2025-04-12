@@ -60,13 +60,18 @@
 }
 
 .resp-sharing-button {
+  display: flex;
+  flex-wrap: wrap;
+  height: 40px;
+  width: 40px;
+  align-content: center;
   border-radius: 5px;
   transition: 25ms ease-out;
   padding: 0.5em 0.75em;
   font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
   {{ if (isset .Site.Params.ShareButtons "fontsize" ) }}
   font-size: {{ .Site.Params.ShareButtons.FontSize }}
-  {{ end }}
+  {{ end }}  
 }
 
 .resp-sharing-button__icon svg {

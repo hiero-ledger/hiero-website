@@ -6,7 +6,7 @@ featured_image = ""
 categories = ["Blog"]
 tags = ["Sample","Example"]
 duration = ""
-abstract = "We’re excited to share that elections are now open for end-user and community contributor seats on the Hiero Technical Steering Committee (TSC). This is an important moment in Hiero’s evolution—bringing more diverse voices directly into the governance and technical direction of the project."
+abstract = "These new seats are specifically designed to ensure the real-world needs of end users and community contributors are directly represented."
 [[authors]]
 name = "Hiero Team"
 title = ""

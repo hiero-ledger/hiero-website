@@ -1349,11 +1349,6 @@ video {
   color: rgb(30 30 30 / var(--tw-text-opacity, 1));
 }
 
-.text-gray {
-  --tw-text-opacity: 1;
-  color: rgb(97 97 97 / var(--tw-text-opacity, 1));
-}
-
 .text-red {
   --tw-text-opacity: 1;
   color: rgb(184 26 86 / var(--tw-text-opacity, 1));

@@ -1,6 +1,6 @@
 +++
 title = '📢 Get Involved: Elections Open for End-User and Contributor Seats on the Hiero Technical Steering Committee'
-date = 2025-03-26T10:06:43-07:00
+date = 2025-04-15T09:17:00-07:00
 draft = false
 featured_image = ""
 categories = ["Blog"]

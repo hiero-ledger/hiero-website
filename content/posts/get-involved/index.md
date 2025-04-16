@@ -18,7 +18,7 @@ image = "/images/profile-hiero.png"
 {{< show-date >}} We’re excited to share that elections are now open for end-user and community contributor seats on the [Hiero Technical Steering Committee (TSC)](https://www.lfdecentralizedtrust.org/blog/announcing-the-upcoming-elections-for-end-user-and-community-seats-on-the-hiero-technical-steering-committee-tsc). This is an important moment in Hiero’s evolution—bringing more diverse voices directly into the governance and technical direction of the project.
 The TSC plays a crucial role in guiding Hiero’s roadmap, making key decisions about architecture, interoperability, and standards. These new seats are specifically designed to ensure the real-world needs of end users and community contributors are directly represented.
 
-## 🗳️  Who Should Run for These Seats?
+## 🗳️  Who Should Run for These awesome Seats?
 🧩 **End User Seat:** This position is designated for individuals or representatives from organizations that primarily utilize Hiero's software to build their products and services. If you or your organization are active consumers of Hiero's technology, your insights and experiences are invaluable to the TSC.
 
 

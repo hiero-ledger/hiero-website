@@ -12,14 +12,21 @@ module.exports = {
          DEFAULT: '#FFFFFF',
         'dark': '#E5E4D7'
       },      
-      'black': '#1E1E1E',
+      'black': '#000000',
+      'charcoal': '#1E1E1E',
       'red': {
         DEFAULT: '#B81A56',
         'dark': '#992350'
-      },      
+      },
+      'sand': '#E5E4D7',
+      'gray': {
+        DEFAULT: '#616161',
+        'light': '#EFEFEE',
+      },   
     }, 
     fontFamily: {
       'serif': ['"Space Grotesk"'],
+      'ibm': ['"IBM Plex Mono"'],
     },   
     fontSize: {
       xs: '0.75rem', /* 12px */

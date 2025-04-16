@@ -1,6 +1,7 @@
 +++
 title = "Hiero"
 draft = false
+featured_image = '/images/Hiero_v4.png'
 
 section_hero_heading = "Hiero"
 section_hero_text = "Open Source Distributed Ledger Technology"

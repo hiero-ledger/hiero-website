@@ -1,0 +1,50 @@
+{{ define "main" }}
+<div id="hero" class="bg-gradient-to-br from-red-dark via-red to-red relative">
+    <div class="container py-14 sm:py-[100px] xl:py-36 text-white text-center">    
+        <h1 class="text-[42px] sm:text-5xl leading-none relative mb-2.5">{{ .Title }}</h1>
+        <p class="text-[24px] tracking-[-0.081rem] sm:text-xl relative">{{ $.Param "subtitle" | safeHTML }}</p>    
+    </div>
+</div>
+<!-- POSTS -->
+<div id="posts" class="anchor">
+    <div class="bg-white">
+        <div class="container py-14 sm:py-[80px]">
+            <div class="max-w-[800px] mx-auto">
+                <h2 class="text-2xl mb-6 text-charcoal">{{ $.Param "list_title" | safeHTML }}</h2>
+                <div class="flex flex-col gap-[40px] sm:gap-y-12">
+                    {{- $lazyLoading := site.Params.enableImageLazyLoading | default true -}}  
+                    {{ $pages := where site.RegularPages "Type" "posts" }}
+                    {{ $paginator := .Paginate $pages 3 }}
+                    {{ range $paginator.Pages }}
+                    <a href="{{ .RelPermalink }}" class="grid grid-cols-[1fr] gap-0 sm:grid-cols-[280px_1fr] sm:gap-x-8 no-underline">                
+                        {{$image := .Params.featured_image}}
+                        {{- if $image }}
+                            {{- $isLocal := not (urls.Parse $image).Scheme -}}
+                            {{- $startsWithSlash := hasPrefix $image "/" -}}                       
+                            {{- if and $isLocal $startsWithSlash }}
+                                {{- $image = (relURL (strings.TrimPrefix "/" $image)) -}}
+                            {{ else if $isLocal }}
+                                {{- $image = print .RelPermalink $image -}}
+                            {{ end -}}
+                        {{ else }}
+                            {{- $image = .Site.Params.fallbackBlogFeaturedImage }}
+                        {{ end -}}
+                        <img src="{{ $image | safeURL }}" alt="{{ .Title }}" class="w-full h-[140px] object-cover" {{ if $lazyLoading }}loading="lazy"{{ end }} />
+                        <div>
+                            <h3 class="mt-3 sm:mt-0 text-[20px] font-medium text-black">{{ .Title }}</h3>
+                            {{ $t := .Params.date }}
+                            {{ $readDuration := .Params.duration }}
+                            <p class="text-charcoal text-sm font-normal mt-1 leading-none">{{ $readDuration }} {{- if and $readDuration $t }}<span class="mx-1">•</span> {{ end -}}{{ time.Format "January 2, 2006" $t}}</p>
+                            {{- if .Params.abstract }}
+                            <p class="text-charcoal text-sm sm:text-base font-normal line-clamp-2 sm:line-clamp-4 mt-2">{{ .Params.abstract | truncate 400 true }}<p>
+                            {{ end -}}  
+                        </div>
+                    </a>
+                    {{ end }}
+                </div>
+                {{ template "_internal/pagination.html" (dict "page" . "format" "default") }}
+            </div>
+        </div>
+    </div>
+</div>
+{{- end -}}

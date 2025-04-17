@@ -10,7 +10,7 @@ section_what_is_hiero_heading = "What is Hiero?"
 section_what_is_hiero_text = '''
 Hiero, a <a href="http://www.lfdecentralizedtrust.org/" target="_blank" rel="noreferrer noopener">Linux Foundation Decentralized Trust</a> project, is an open-source, vendor-neutral distributed ledger technology. Hiero is used to build the <a href="https://hedera.com/" target="_blank" rel="noreferrer noopener">Hedera</a> public ledger.'''
 
-section_why_open_source_heading = "Why is Hiero Open Source?"
+section_why_open_source_heading = "Why is Hiero the coolest Open Source project ever?"
 section_why_open_source_text = "The main goal of Hiero is to create a diverse community of developers, dreamers, and builders working to make the world more fair, fast, and secure. To achieve that goal it is critical that everyone can access the source of Hiero and move the project forward. A decentralized network that is used by enterprises and critical infrastructure around the world must be vendor-neutral and fully auditable."
 
 section_what_parts_open_source_heading = "What parts of Hiero are Open Source?"

@@ -13,7 +13,7 @@ To help ensure that tailwindcss and Hugo play nicely together, the tailwindcss i
 
 ## Install packages
 ```
-npm i 
+npm i
 ```
 
 ## Environments
@@ -68,7 +68,7 @@ This is **bold** text, and this is *emphasized* text.
 
 Visit the [Hugo](https://gohugo.io) website!
 ```
-Reference **content/posts/post-template-for-reference-only.md** for examples of markdown and shortcode features that the Hiero post template supports. 
+Reference **content/posts/post-template-for-reference-only.md** for examples of markdown and shortcode features that the Hiero post template supports.
 
 Save the file, then start Hugo’s development server to view the site. You can run the following commands to include draft content.
 ```
@@ -82,7 +82,7 @@ When satisfied with your new content, set the front matter **draft** parameter t
 The Hiero single post template supports additional metadata parameters that are optional as shown below:
 ```
 featured_image = "/images/Hiero_v4.png"
-categories = ["Blog"]
+categories = ["Maintainer's Corner"]
 tags = ["Sample","Example"]
 duration = "3 min read"
 abstract = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, seiusmod tempor incididunt ut labore et dolore magna aliqua."

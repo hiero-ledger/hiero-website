@@ -1,5 +1,5 @@
 +++
-title = 'Hiero Blog'
+title = "Maintainer's Corner"
 subtitle = 'Stay up to date with our latest news and announcements.'
 abstract = 'Stay up to date with our latest news and announcements.'
 list_title = 'Recent Articles'

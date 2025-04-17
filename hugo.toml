@@ -36,8 +36,8 @@ url = '/#roadmap'
 weight = 50
 
 [[menus.main]]
-name = 'Blog'
-url = '/blog/'
+name = "Maintainer's Corner"
+url = '/maintainers-corner/'
 weight = 60
 
 [permalinks]

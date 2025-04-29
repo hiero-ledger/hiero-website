@@ -49,6 +49,8 @@ Earlier, we announced that our nomination process starts by reviewing the [elect
 
 As of today, this process is still open, and we continue to welcome more nominations!
 
+Additional information on how to submit a nomination is provided in the following [video](https://www.youtube.com/watch?v=aqWDbzJbeig).
+
 ## 🛠️ What tools are used during the nomination process?
 
 While the nomination process is open, the LFDT Community Architects will work in parallel to build the election template using [Helios Voting](https://vote.heliosvoting.org/). This template contains general information including the name of the election, description, type (election or referendum), privacy options and voting details.
@@ -86,4 +88,3 @@ Once voting has concluded, the results for the End User and Contributor seats wi
 For a comprehensive overview of the voting process, we encourage community members to attend the upcoming [Hiero Community Call](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week), where additional details will be shared and participants will have the opportunity to ask questions.
 
 Additionally, members are encouraged to explore the [Helios Voting](https://vote.heliosvoting.org/) platform to become familiar with its features and functionality.
-

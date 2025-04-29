@@ -13,24 +13,24 @@ link = ""
 image = "/images/profile-hiero.png"
 +++
 
-## Hiero Upcoming TSC Elections - How Does Voting Work?
+## Upcoming Hiero TSC Elections - How Does Voting Work?
 
-In our previous [blog post](https://www.lfdecentralizedtrust.org/blog/announcing-the-upcoming-elections-for-end-user-and-community-seats-on-the-hiero-technical-steering-committee-tsc), we announced the upcoming elections for the End User and Contributor seats on the Hiero Technical Steering Committee (TSC), set to take place from May 7 to May 31, 2025. These elections are a pivotal moment for the Hiero community, offering a chance to directly influence the project's technical direction and governance.
+In the earlier LF/DT [blog post](https://www.lfdecentralizedtrust.org/blog/announcing-the-upcoming-elections-for-end-user-and-community-seats-on-the-hiero-technical-steering-committee-tsc), we announced the upcoming elections for the End User and Contributor seats on the Hiero Technical Steering Committee (TSC), set to take place from May 7 to May 31, 2025. These elections are a pivotal moment for the Hiero community, offering a chance to directly influence the project's technical direction and governance.
 
 Now, as the election period approaches, it's time to dive into how the voting process will unfold. In this follow-up post, we'll walk you through the steps to cast your vote, the criteria for eligibility, and the tools you'll use to participate. Whether you're an experienced contributor or a first-time voter, understanding this process (and our commitment to offer transparency) is key to making your voice heard.
 
 ## TSC Election Timeline for May 2025
 
-The following timeline borrows process from the sample in the [LF Decentralized Trust documentation](https://lf-decentralized-trust.github.io/governance/member-info/election-timeline.html).
+The following timeline borrows its process from the sample in the [LF Decentralized Trust documentation](https://lf-decentralized-trust.github.io/governance/member-info/election-timeline.html).
 
 ### Nomination Timeline
 
-- Mar 18 2025 - Nominations are open for TSC End User and Contribuitor Chair.
+- Mar 18 2025 - Nominations are open for TSC End User and Contributor Chair.
 - Apr 29 2025 - The community architects will gather the GitHub IDs of the active contributors to approve them as voters.
 - May 01 2025 - Update the eligibility check site.
 - May 06 2025 - Update the TSC on upcoming elections starting next day.
 - May 07 2025 - All nominees must have created their nomination statement as a GitHub Pull Request.
-- May 07 2025 - Nominations closed EOD Pacific.
+- May 07 2025 - Nominations close EOD Pacific.
 
 ### Voting Timeline
 
@@ -40,7 +40,7 @@ The following timeline borrows process from the sample in the [LF Decentralized 
 - May 20 2025 - TSC second reminder of voting for candidates.
 - May 27 2025 - TSC third and final reminder of voting for candidates.
 - May 31 2025 - Voting closes at 23:59 UTC.
-- Jun 01 2025 - The vote results will determine the 2 elected TSC members. Announcement will be made to the winning candidates.
+- Jun 01 2025 - The vote results will determine the two elected TSC members. An announcement will be made to the winning candidates.
 - Jun 03 2025 - The TSC will be formally updated with the results of the vote.
 
 ## How does the nomination process start?
@@ -51,13 +51,13 @@ As of today, this process is still open, and we continue to welcome more nominat
 
 ## What tools are used during the nomination process?
 
-While the nomination process is open, the LFDT Community Architects will work in parallel building the election template using [Helios Voting](https://vote.heliosvoting.org/). This template contains general information including the name of the election, description, type (election or referendum), privacy options and voting details.
+While the nomination process is open, the LFDT Community Architects will work in parallel to build the election template using [Helios Voting](https://vote.heliosvoting.org/). This template contains general information including the name of the election, description, type (election or referendum), privacy options and voting details.
 
 ![Helios Voting Home Page](/images/tsc-voting-process-post/helios-voting-home-page.png)
 
 The GitHub IDs of active voting members are collected and verified to confirm their eligibility. These members will be registered in the election form to invite them to cast their vote when the time comes.
 
-The Git Hub IDs of the voters is kept private. However the number of voters is kept visible and participants can check eligibility using a tool similar to the one used in the [LFDT TAC](https://lf-decentralized-trust.github.io/tac-eligibility-check/). Once this tool is available for Hiero, we will make it public to the team.
+The GitHub IDs of the voters is kept private. However the number of voters is kept visible and participants can check eligibility using a tool similar to the one used in the [LFDT TAC](https://lf-decentralized-trust.github.io/tac-eligibility-check/). Once this tool is available for Hiero, we will make it public to the team.
 
 New voters can always be added as the vote remains open.
 

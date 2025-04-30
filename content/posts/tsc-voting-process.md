@@ -1,7 +1,6 @@
 +++
 title = 'TSC Voting Process'
 date = 2025-04-29T10:12:50-07:00
-draft = true
 categories = ["Blog"]
 duration = ""
 abstract = "We’ll walk you through the steps to cast your vote, the criteria for eligibility, and the tools you’ll use to participate."

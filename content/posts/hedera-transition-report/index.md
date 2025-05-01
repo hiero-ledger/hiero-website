@@ -12,7 +12,7 @@ link = ""
 image = "/images/profile-hiero.png"
 +++
 
-# Hedera-to-Hiero Transition Report
+## Hedera-to-Hiero Transition Report
 This file is a report on the transition of the Hedera projects to Hiero.
 While we have the “transfer document” at https://github.com/hiero-ledger/hiero/blob/main/transition.md that contains a matrix of the transition state,
 the document can not contain all the details regarding every project that are needed to understand some of the blockers, problems, and general challenges.

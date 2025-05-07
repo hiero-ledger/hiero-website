@@ -24,12 +24,12 @@ The following timeline borrows its process from the sample in the [LF Decentrali
 
 ### 📝 Nomination Timeline
 
-- Mar 18 2025 - Nominations are open for TSC End User and Contributor Chair.
+- Mar 17 2025 - Nominations are open for TSC End User and Contributor Chair.
 - Apr 29 2025 - The community architects will gather the GitHub IDs of the active contributors to approve them as voters.
+- Apr 30 2025 - All nominees must have created their nomination statement as a GitHub Pull Request.
+- Apr 30 2025 - Nominations close EOD Pacific.
 - May 01 2025 - Update the eligibility check site.
 - May 06 2025 - Update the TSC on upcoming elections starting next day.
-- May 07 2025 - All nominees must have created their nomination statement as a GitHub Pull Request.
-- May 07 2025 - Nominations close EOD Pacific.
 
 ### 🗳️ Voting Timeline
 

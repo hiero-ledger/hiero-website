@@ -14,14 +14,20 @@ Maintainers are assigned the following scopes in this repository:
 
 <!-- Please keep this sorted alphabetically by github -->
 
-| Name          | GitHub ID     | Scope | LFID | Discord ID | Email | Company Affiliation |
-|-------------- | ------------- | ----- | ---- | ---------- | ----- | ------------------- |
-| Lenin Mehedy  | leninmehedy   |       |      |            |       | Hashgraph           |
-| Jeromy Cannon | jeromy-cannon |       |      |            |       | Hashgraph           |
-| Nathan Klick  | nathanklick   |       |      |            |       | Hashgraph           |
-| Pavel Borisov | PavelSBorisov |       |      |            |       | LimeChain           |
-| Roger Barker  | rbarker-dev   |       |      |            |       | Hashgraph           |
-| Andrew Brandt | andrewb1269hg |       |      |            |       | Hashgraph           |
+| Name             | GitHub ID     | Scope | LFID | Discord ID | Email | Company Affiliation |
+|----------------- | ------------- | ----- | ---- | ---------- | ----- | ------------------- |
+| Lenin Mehedy     | leninmehedy   |       |      |            |       | Hashgraph           |
+| Jeromy Cannon    | jeromy-cannon |       |      |            |       | Hashgraph           |
+| Nathan Klick     | nathanklick   |       |      |            |       | Hashgraph           |
+| Pavel Borisov    | PavelSBorisov |       |      |            |       | LimeChain           |
+| Roger Barker     | rbarker-dev   |       |      |            |       | Hashgraph           |
+| Andrew Brandt    | andrewb1269hg |       |      |            |       | Hashgraph           |
+| Richard Bair     | rbair23       |       |      |            |       | Hashgraph           |
+| Leemon Baird     | lbaird        |       |      |            |       | Hashgraph           |
+| George Spasov    | Perseverance  |       |      |            |       | Hashgraph           |
+| Hendrik Ebbers   | hendrikebbers |       |      |            |       | Hashgraph           |
+| Alex Popowycz    | popowycz      |       |      |            |       | Hashgraph           |
+| Stoyan Panayotov | stoqnkpL      |       |      |            |       | Hashgraph           |
 
 ## Emeritus Maintainers
 

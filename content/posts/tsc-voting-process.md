@@ -1,5 +1,6 @@
 +++
 title = 'TSC Voting Process'
+featured_image = "/images/tsc-voting-process-post/TSCVotingProcessBanner_V1.jpg"
 date = 2025-04-29T10:12:50-07:00
 categories = ["Blog"]
 duration = ""

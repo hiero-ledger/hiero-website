@@ -10,7 +10,8 @@ name = "Hiero Team"
 title = ""
 organization = ""
 link = ""
-image = "/images/TSC_results_V1.jpg"
+featured_image = "/images/TSC_results_V1.jpg"
+image = "/images/profile-hiero.png"
 +++
 
 ## 📣 The results for the Hiero Technical Steering Committee elections are here!

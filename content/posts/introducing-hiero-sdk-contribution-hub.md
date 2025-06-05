@@ -1,6 +1,7 @@
 +++
 title = 'Introducing the Hiero SDK Collaboration Hub: Streamlining Contributions for a Thriving Developer Community'
-featured_image = "/images/sdk-collaboration-hub.png"
+featured_image = "/images/SDK_hub_V1.jpg"
+preview_only = true
 date = 2025-06-04T10:12:50-07:00
 categories = ["Blog"]
 duration = ""

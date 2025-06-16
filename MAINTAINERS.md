@@ -6,28 +6,30 @@ The general handling of Maintainer rights and all groups in this GitHub org is d
 
 Maintainers are assigned the following scopes in this repository:
 
-| Scope      | Definition               | GitHub Role | GitHub Team                        |
-| ---------- | ------------------------ | ----------- | ---------------------------------- |
-| Maintainer | The GitHub Maintain role | Maintain    | `hiero-website-maintainers` |
+| Scope               | Definition                        | GitHub Role | GitHub Team                 |
+| ------------------- | --------------------------------- | ----------- | --------------------------- |
+| project-maintainers | The Maintainers of the project    | Maintain    | `hiero-website-maintainers` |
+| tsc                 | The Hiero TSC                     | Maintain    | `tsc`                       |
+| github-maintainers  | The Maintainers of the github org | Maintain    | `github-maintainers`        |
 
 ## Active Maintainers
 
-<!-- Please keep this sorted alphabetically by github -->
-
-| Name             | GitHub ID     | Scope | LFID | Discord ID | Email | Company Affiliation |
-|----------------- | ------------- | ----- | ---- | ---------- | ----- | ------------------- |
-| Lenin Mehedy     | leninmehedy   |       |      |            |       | Hashgraph           |
-| Jeromy Cannon    | jeromy-cannon |       |      |            |       | Hashgraph           |
-| Nathan Klick     | nathanklick   |       |      |            |       | Hashgraph           |
-| Pavel Borisov    | PavelSBorisov |       |      |            |       | LimeChain           |
-| Roger Barker     | rbarker-dev   |       |      |            |       | Hashgraph           |
-| Andrew Brandt    | andrewb1269hg |       |      |            |       | Hashgraph           |
-| Richard Bair     | rbair23       |       |      |            |       | Hashgraph           |
-| Leemon Baird     | lbaird        |       |      |            |       | Hashgraph           |
-| George Spasov    | Perseverance  |       |      |            |       | Hashgraph           |
-| Hendrik Ebbers   | hendrikebbers |       |      |            |       | Hashgraph           |
-| Alex Popowycz    | popowycz      |       |      |            |       | Hashgraph           |
-| Stoyan Panayotov | stoqnkpL      |       |      |            |       | Hashgraph           |
+| Name                   | GitHub ID     | Scope              | LFID | Discord ID | Email | Company Affiliation |
+|----------------------- | ------------- | ------------------ | ---- | ---------- | ----- | -------------------- |
+| Lenin Mehedy           | leninmehedy   | github-maintainers |      |            |       | Hashgraph            |
+| Jeromy Cannon          | jeromy-cannon | github-maintainers |      |            |       | Hashgraph            |
+| Nathan Klick           | nathanklick   | github-maintainers |      |            |       | Hashgraph            |
+| Pavel Borisov          | PavelSBorisov | github-maintainers |      |            |       | LimeChain            |
+| Roger Barker           | rbarker-dev   | github-maintainers |      |            |       | Hashgraph            |
+| Andrew Brandt          | andrewb1269hg | github-maintainers |      |            |       | Hashgraph            |
+| Richard Bair           | rbair23       | tsc                |      |            |       | Hashgraph            |
+| Leemon Baird           | lbaird        | tsc                |      |            |       | Hashgraph            |
+| George Spasov          | Perseverance  | tsc                |      |            |       | LimeChain            |
+| Hendrik Ebbers         | hendrikebbers | tsc                |      |            |       | Hashgraph            |
+| Alex Popowycz          | popowycz      | tsc                |      |            |       | Hedera               |
+| Stoyan Panayotov       | stoqnkpL      | tsc                |      |            |       | LimeChain            |
+| Milan Wiercx Van Rhijn | MilanWR       | tsc                |      |            |       | MilanWR.com (8BEES)  |
+| Michael Kantor         | kantorcodes   | tsc                |      |            |       | Hashgraph Online     |
 
 ## Emeritus Maintainers
 

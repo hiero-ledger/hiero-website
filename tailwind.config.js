@@ -3,7 +3,17 @@ module.exports = {
   content: ["content/**/*.md", "layouts/**/*.html"],
   theme: {
     extend: {
-      
+      transitionProperty: {
+        'colors': 'color, background-color, border-color',
+        'transform': 'transform',
+      },
+      colors: {
+        'red': {
+          DEFAULT: '#B81A56',
+          'dark': '#992350',
+          'light': '#D92D6A',
+        },
+      },
     },
     colors: {
       transparent: 'transparent',
@@ -16,7 +26,8 @@ module.exports = {
       'charcoal': '#1E1E1E',
       'red': {
         DEFAULT: '#B81A56',
-        'dark': '#992350'
+        'dark': '#992350',
+        'light': '#D92D6A'
       },
       'sand': '#E5E4D7',
       'gray': {
@@ -70,4 +81,3 @@ module.exports = {
   },
   plugins: [],
 }
-

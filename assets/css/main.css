@@ -18,16 +18,85 @@ a {
   @apply text-red underline;
 }
 
+/* Enhanced Navbar Styles */
 nav a {  
   @apply text-white no-underline text-[2.375rem] leading-[5.188rem] tracking-[-0.128rem];
+  @apply transition-colors duration-300 ease-in-out;
+  position: relative;
 }
 
+nav a:hover {
+  color: #D92D6A; 
+}
+
+nav a.active {
+  @apply font-bold;
+}
+
+nav a.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2rem;
+  left: 25%;
+  width: 50%;
+  height: 3px;
+  background-color: #D92D6A; 
+  transform: translateX(-50%);
+}
+
+/* Desktop styles */
 @media(min-width: 640px) {
-  nav a {    
-    @apply text-charcoal text-base;
+  nav a {
+    @apply text-charcoal text-base leading-normal;
+  }
+  
+  nav a:hover {
+    color: #B81A56; 
+  }
+  
+  nav a.active {
+    color: #B81A56; 
+  }
+  
+  nav a.active::after {
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    transform: none;
   }
 }
 
+/* Mobile menu fixes */
+@media (max-width: 640px) {
+  li.sm\:block.hidden {
+    display: none;
+  }
+  
+  nav a.active {
+    background-color: rgba(184, 26, 86, 0.1) !important;
+    border-bottom: 2px solid #B81A56 !important;
+    box-shadow: none !important;
+  }
+  
+  nav a.active::after {
+    display: none;
+  }
+  
+  nav a:focus, nav a.active:focus {
+    --tw-ring-opacity: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Accessibility focus states (desktop only) */
+@media (min-width: 640px) {
+  nav a:focus {
+    @apply outline-none ring-2 ring-red-light ring-offset-2;
+  }
+}
+
+/* Existing styles */
 .anchor {
   @apply mt-[-6.813rem] pt-[6.813rem];
 }
@@ -116,7 +185,8 @@ nav a {
     @apply relative mt-[86px] mb-6 sm:my-6 sm:ml-[92px] text-charcoal first:mt-0 border-red ltr:border-l-2 ltr:pl-6 rtl:border-r-2 rtl:pr-6 py-2 sm:py-4 pr-6;
   }
   :where(blockquote)::before {
-    @apply block absolute top-[-60px] sm:top-0 left-[-3px] sm:left-[-92px] content-[''] w-[50px] h-[40px] bg-[url(/images/Hiero-Icon-Quote-Left.svg)];
+    content: '';
+    @apply block absolute top-[-60px] sm:top-0 left-[-3px] sm:left-[-92px] w-[50px] h-[40px] bg-[url(/images/Hiero-Icon-Quote-Left.svg)];
   }
 
   h2 {
@@ -153,18 +223,15 @@ nav a {
   ul {
     @apply list-disc my-4 pl-6;
   }
-
 }
 
 /* Code block copy buttons */
-/* ------------------------------------------------------------------------- */
-
 .highlight {
   @apply relative mb-6;
 
   pre {
     @apply pt-8 pb-3 px-3 rounded-md;
-    background-color: theme('colors.charcoal') !important;    
+    background-color: #1E1E1E !important; /* charcoal */   
   }
 }
 
@@ -178,7 +245,7 @@ code {
 }
 
 .highlight:hover .copy-button {
-  @apply opacity-100
+  @apply opacity-100;
 }
 
 .copy-button > svg {
@@ -190,7 +257,6 @@ code {
 }
 
 /* Code block pagination */
-/* ------------------------------------------------------------------------- */
 .pagination {
   @apply flex gap-2 mx-auto mt-16 justify-center;
 
@@ -214,19 +280,21 @@ code {
     }
     &:has([aria-label="Previous"], [aria-label="Next"]) {
       .page-link::before {
-        @apply content-[''] w-2 h-3;
+        content: '';
+        @apply w-2 h-3;
         background-image: url("data:image/svg+xml,%3Csvg id='arrow-single' xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 8 12'%3E%3Cpath d='M6.1,12l1.4-1.4L2.9,6,7.5,1.4,6.1,0,0,6l6,6Z'/%3E%3C/svg%3E");
       }
     }
     &:has([aria-label="First"], [aria-label="Last"]) {
       .page-link::before {
-        @apply content-[''] w-[14px] h-3;   
+        content: '';
+        @apply w-[14px] h-3;   
         background-image: url("data:image/svg+xml,%3Csvg id='arrow-double' xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 14 12'%3E%3Cpath d='M6.1,12l1.4-1.4L2.9,6,7.5,1.4,6.1,0,0,6l6,6Z'/%3E%3Cpath d='M12.1,12l1.4-1.4-4.6-4.6L13.5,1.4,12.1,0l-6,6,6,6Z'/%3E%3C/svg%3E");
       }
     }
     &:has([aria-label="Next"], [aria-label="Last"]) {
       .page-link::before {
-          @apply rotate-180;
+          transform: rotate(180deg);
       }
     }   
     &.active {

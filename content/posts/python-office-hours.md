@@ -1,6 +1,6 @@
 +++
 title = 'Help Shape Hiero’s Python SDK Office Hours'
-featured_image = "/images/tsc-voting-process-post/TSCVotingProcessBanner_V1.jpg"
+featured_image = "/images/Python_office_hours.jpg"
 date = 2025-07-02T11:00:00-07:00
 categories = ["Blog"]
 duration = ""
@@ -15,13 +15,13 @@ image = "/images/profile-hiero.png"
 
 Got 2 minutes?
 
-We’re excited to announce a new Office hour initiative to help every newcomer—and seasoned Hiero contributor—to hit the ground running in contributing to the Hiero Python SDK. 
+We’re excited to announce a new Office hour initiative to help every newcomer—and seasoned Hiero contributor—to hit the ground running in contributing to the Hiero Python SDK.
 
 ## 📣 What’s the Hiero Python SDK?
 
-The Hiero Python SDK is one of Hiero’s newest community projects under the Linux Foundation Decentralized Trust (LFDT) umbrella. It lets Python devs hook into Hiero code services. The greater our development, the more able developers will be able to build decentralized applications on networks such as Hedera using Python. 
+The Hiero Python SDK is one of Hiero’s newest community projects under the Linux Foundation Decentralized Trust (LFDT) umbrella. It lets Python devs hook into Hiero code services. The greater our development, the more able developers will be able to build decentralized applications on networks such as Hedera using Python.
 
-We are still young, starting in November of 2024, but aspire to support all transaction types. We welcome new contributors to help us scale - both technical and non-technical and want to create a supportive environment. 
+We are still young, starting in November of 2024, but aspire to support all transaction types. We welcome new contributors to help us scale - both technical and non-technical and want to create a supportive environment.
 
 ## 📝 I’m Interested. How Can I Contribute?
 

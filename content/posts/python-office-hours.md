@@ -21,7 +21,7 @@ We’re excited to announce a new office hour initiative to help every newcomer 
 
 The Hiero Python SDK is one of Hiero’s newest community projects under the Linux Foundation Decentralized Trust (LFDT) umbrella. It lets Python devs hook into Hiero code services. The greater our development, the more developers will be able to build decentralized applications on networks such as Hedera using Python.
 
-We are still young, starting in November of 2024, but aspire to support all transaction types. We welcome new contributors to help us scale - both technical and non-technical and want to create a supportive environment.
+The SDK is relatively new (created in November 2024) and is under active development. We encourage participation from the community in this dynamic environment, in both technical and non-technical areas.
 
 ## 📝 I’m Interested. How Can I Contribute?
 

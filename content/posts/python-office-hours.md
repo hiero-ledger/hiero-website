@@ -15,11 +15,11 @@ image = "/images/profile-hiero.png"
 
 Got 2 minutes?
 
-We’re excited to announce a new Office hour initiative to help every newcomer—and seasoned Hiero contributor—to hit the ground running in contributing to the Hiero Python SDK.
+We’re excited to announce a new office hour initiative to help every newcomer - and seasoned Hiero contributor - hit the ground running in contributing to the Hiero Python SDK.
 
 ## 📣 What’s the Hiero Python SDK?
 
-The Hiero Python SDK is one of Hiero’s newest community projects under the Linux Foundation Decentralized Trust (LFDT) umbrella. It lets Python devs hook into Hiero code services. The greater our development, the more able developers will be able to build decentralized applications on networks such as Hedera using Python.
+The Hiero Python SDK is one of Hiero’s newest community projects under the Linux Foundation Decentralized Trust (LFDT) umbrella. It lets Python devs hook into Hiero code services. The greater our development, the more developers will be able to build decentralized applications on networks such as Hedera using Python.
 
 We are still young, starting in November of 2024, but aspire to support all transaction types. We welcome new contributors to help us scale - both technical and non-technical and want to create a supportive environment.
 
@@ -27,12 +27,12 @@ We are still young, starting in November of 2024, but aspire to support all tran
 
 Please take a moment to answer the [google survey](https://forms.gle/87upMwvzkWAto2AE8) to help make these office hour sessions as valuable and inclusive as possible.
 
-**Note**: We already run a public, fortnightly SDK community call (roadmap, blockers, next steps). The proposed **office hours** are an addition to provide a welcome space available to all -both newcomers and existing contributors- for hands-on help.
+**Note**: We already run a public, fortnightly SDK community call (roadmap, blockers, next steps). The proposed **office hours** are an addition to provide a welcome space available to all - both newcomers and existing contributors - for hands-on help.
 
 ## 📅 Why We’re Doing These Office Hours
 
 - **Helping Newcomers**
- Getting started with a new codebase in an emerging technology can feel overwhelming. Our goal is to chip away at those first-time barriers so you can focus on building and contributing with confidence.
+Getting started with a new codebase in an emerging technology can feel overwhelming. Our goal is to chip away at those first-time barriers so you can focus on building and contributing with confidence.
 
 
 - **Engage Contributors**

@@ -37,6 +37,12 @@ For us, the community of the open-source project is a crucial part of its succes
 Next to the TSC, we want to invest in a diverse and inclusive community. It is important to us that everyone, regardless of knowledge and background, can become an active contributor to Hiero. To enable that, we plan to hire at least one community manager in the near future and provide open documentation and teaching resources.</p>
 '''
 
+section_meet_heading = "Join our TSC and Community Calls"
+section_meet_text = '''
+<p>Join our open TSC, Community and Project meetings. We welcome your opinion and invite you to collaborate with the team!</p>
+<p>
+'''
+
 section_technical_steering_committee_heading = "The Technical Steering Committee of Hiero"
 section_technical_steering_committee_text = '''
 <p>While one of our main goals is to have a diverse and inclusive community in which everybody has the rights and responsibilities to move the project forward, it is important that a committee oversees the project and moves the roadmap forward. To do so, we have defined a technical steering committee (TSC) that is defined by six individuals today. One of the important next steps on our roadmap is to enable voting mechanisms to add additional members from the community to the TSC. The duties, goals, and rights of the TSC are defined in the <a href="https://github.com/hiero-ledger/hiero/blob/main/technical-charter.md" target="_blank" rel="noreferrer noopener">technical charter</a> of the Hiero project.

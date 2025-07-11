@@ -1,5 +1,9 @@
 # Hiero Website
 
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/hiero-ledger/hiero-website/badge)](https://scorecard.dev/viewer/?uri=github.com/hiero-ledger/hiero-website)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/10697/badge)](https://bestpractices.coreinfrastructure.org/projects/10697)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 This repo contains the website of Hiero (https://hiero.org).
 
 ## Building the website

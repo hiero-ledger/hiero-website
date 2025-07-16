@@ -41,12 +41,14 @@
         "photo": "george.jpg",
         "bio": "George Spasov is a blockchain architect and co-founder of LimeChain. As part of LimeChain, over the past 8 years he has overseen the ideation, architecture creation, development and release of tens of projects including blockchain networks, L2 rollups, decentralized applications, infrastructure and customer facing products. George brings a vast knowledge of both Hedera and the wider DLT space."
     },
+    {
         "firstName": "Milan",
         "lastName":"Wiercx van Rhijn",
         "gitHubAccount": "https://github.com/MilanWR",
         "photo": "milan.jpg",
         "bio": "TBD"
     },
+    {
         "firstName": "Michael",
         "lastName":"Kantor",
         "gitHubAccount": "https://github.com/kantorcodes",

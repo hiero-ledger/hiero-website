@@ -45,14 +45,14 @@
         "firstName": "Milan",
         "lastName":"Wiercx van Rhijn",
         "gitHubAccount": "https://github.com/MilanWR",
-        "photo": "milan.jpg",
+        "photo": "milan.jpeg",
         "bio": "TBD"
     },
     {
         "firstName": "Michael",
         "lastName":"Kantor",
         "gitHubAccount": "https://github.com/kantorcodes",
-        "photo": "michael.jpg",
+        "photo": "michael.jpeg",
         "bio": "TBD"
     }
 ]

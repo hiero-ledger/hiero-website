@@ -54,5 +54,12 @@
         "gitHubAccount": "https://github.com/kantorcodes",
         "photo": "michael.jpeg",
         "bio": "TBD"
+    },
+    {
+        "firstName": "Brandon",
+        "lastName":"Davenport",
+        "gitHubAccount": "https://github.com/itsbrandondev",
+        "photo": "brandon.jpeg",
+        "bio": "TBD"
     }
 ]

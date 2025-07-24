@@ -40,5 +40,26 @@
         "gitHubAccount": "https://github.com/Perseverance",
         "photo": "george.jpg",
         "bio": "George Spasov is a blockchain architect and co-founder of LimeChain. As part of LimeChain, over the past 8 years he has overseen the ideation, architecture creation, development and release of tens of projects including blockchain networks, L2 rollups, decentralized applications, infrastructure and customer facing products. George brings a vast knowledge of both Hedera and the wider DLT space."
+    },
+    {
+        "firstName": "Milan",
+        "lastName":"Wiercx van Rhijn",
+        "gitHubAccount": "https://github.com/MilanWR",
+        "photo": "milan.jpeg",
+        "bio": "Milan Wiercx van Rhijn is a longtime Hedera builder and leads The HBAR Foundry, a grassroots collective of developers. A multi-time Hedera Hackathon winner, he created projects like Teppo, Nomid, Honeytrail, and The Mouth, and has worked with teams such as Acoer, GoMint, and Earthlings.land. As the elected End User representative on the Hiero Technical Steering Committee, Milan champions transparency, unbiased representation, and user-driven technical direction - with a deep passion for open-source growth through Hiero."
+    },
+    {
+        "firstName": "Michael",
+        "lastName":"Kantor",
+        "gitHubAccount": "https://github.com/kantorcodes",
+        "photo": "michael.jpeg",
+        "bio": "Michael is the President of Hashgraph Online, a DAO-led and governed open-source organization with the mandate of creating a decentralized, agentic internet. Hashgraph Online has created standards like HCS-1 and HCS-20 which have generated over 28m transactions on Mainnet. Michael brings over a decade of software-development experience to Hedera and contributes regularly to Hedera through community-led HIPs, ideation and feedback within the ecosystem."
+    },
+    {
+        "firstName": "Brandon",
+        "lastName":"Davenport",
+        "gitHubAccount": "https://github.com/itsbrandondev",
+        "photo": "brandon.jpeg",
+        "bio": "Brandon Davenport is Director of Communications at Hgraph, a leading infrastructure provider and technical partner for enterprise, startups and developers. He pairs 15 years of content and brand leadership with hands-on open-source governance, product development, and community building. A major Hedera enthusiast since 2019, Brandon champions open-source and startup collaboration across the entire ecosystem. Based in Ottawa, he enjoys running, playing music, and spending time with his wife and their pets."
     }
 ]

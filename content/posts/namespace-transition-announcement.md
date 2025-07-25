@@ -5,7 +5,7 @@ preview_only = true
 date = 2025-07-25T11:02:50-07:00
 categories = ["Blog"]
 duration = ""
-abstract = "XYZ"
+abstract = "Hedera projects are transitioning to Hiero, a vendor-neutral platform under the Linux Foundation Decentralized Trust. This involves a namespace change from hashgraph to `hiero` or `hiero-ledger`, impacting project dependencies and SDK imports. Developers are encouraged to update their dependencies accordingly to stay aligned with this evolution."
 [[authors]]
 name = "Michiel Mulders"
 title = "Developer Relations Engineer"

@@ -1,9 +1,8 @@
 +++
 title = "July's Open Issues at the Python SDK"
 featured_image = "/images/python/blog_titles/blog_july_open_issues.jpg"
-date = 2025-07-26T11:00:00-07:00
+date = 2025-07-25T11:00:00-07:00
 categories = ["Blog"]
-duration = ""
 abstract = "July's Open Issues at the Python SDK"
 [[authors]]
 name = "exploreriii"

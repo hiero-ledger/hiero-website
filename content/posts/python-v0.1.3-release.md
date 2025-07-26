@@ -13,8 +13,6 @@ link = ""
 image = "/images/python/members/exploreriii.png"
 +++
 
-# Hiero Python SDK – Announcing Release v0.1.3
-
 This July, our Python SDK is racing ahead, and we’re excited to share the latest in new transaction support and version milestones. 
 
 ---

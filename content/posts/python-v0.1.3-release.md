@@ -1,6 +1,6 @@
 +++
 title = "Hiero Python SDK – Announcing Release v0.1.3"
-featured_image = "/images/Python_office_hours.jpg"
+featured_image = "/images/python/blog_titles/python_v0.1.3_release.jpg"
 date = 2025-07-18T11:00:00-07:00
 categories = ["Blog"]
 duration = ""
@@ -10,7 +10,7 @@ name = "exploreriii"
 title = ""
 organization = "Hiero Team"
 link = ""
-image = "/images/profile‑hiero.png"
+image = "/images/python/members/exploreriii.png"
 +++
 
 This July, our Python SDK is racing ahead, and we’re excited to share the latest in new transaction support and version milestones. 

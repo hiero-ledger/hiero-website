@@ -1,16 +1,17 @@
 +++
-title           = "July's Open Issues at the Hiero Python SDK"
-featured_image  = "/images/Python_office_hours.jpg"
-date            = 2025-07-22T11:00:00+01:00
-categories      = ["Blog"]
-abstract        = "Help us grow the Hiero Python SDK by tackling open issues and joining our community calls."
+title = "July's Open Issues at the Python SDK"
+featured_image = "/images/python/blog_titles/blog_july_open_issues.jpg"
+date = 2025-07-26T11:00:00-07:00
+categories = ["Blog"]
+duration = ""
+abstract = "July's Open Issues at the Python SDK"
 [[authors]]
-  name         = "exploreriii"
-  organization = "Hiero"
-  image        = "/images/profile-hiero.png"
+name = "exploreriii"
+title = ""
+organization = "Hiero Team"
+link = ""
+image = "/images/python/members/exploreriii.png"
 +++
-
-# July's Open Issues at the Hiero Python SDK
 
 The community team at the Hiero Python SDK have been working behind the scenes since November 2024 to help Python developers plug into Hedera’s decentralized network using Python code. 
 

@@ -1,6 +1,6 @@
 +++
 title = 'Namespace Transition Announcement: Hedera Projects Moving to Hiero'
-featured_image = "/images/transition.jpg"
+featured_image = "/images/transition.png"
 preview_only = true
 date = 2025-07-25T11:02:50-07:00
 categories = ["Blog"]

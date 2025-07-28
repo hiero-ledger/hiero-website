@@ -1,6 +1,6 @@
 +++
 title = 'Namespace Transition Announcement: Hedera Projects Moving to Hiero'
-featured_image = "/images/SDK_hub_V1.jpg"
+featured_image = "/images/transition.jpg"
 preview_only = true
 date = 2025-07-25T11:02:50-07:00
 categories = ["Blog"]
@@ -28,7 +28,7 @@ If your projects rely on Hedera SDKs, APIs, or services, you will be directly im
 
 Each SDK will follow one of two possible namespace migration strategies, based on technical and community considerations:
 
-- **Single-Step Cutover**: Also known as a hard cutover, this strategy involves switching entirely to the new namespace in a single release. After a specific version, all new releases will be published exclusively under the @hiero or @hiero-ledger namespace. Older versions will remain available under @hashgraph but will no longer receive updates. 
+- **Single-Step Cutover**: Also known as a hard cutover, this strategy involves switching entirely to the new namespace in a single release. After a specific version, all new releases will be published exclusively under the @hiero or @hiero-ledger namespace. Older versions will remain available under @hashgraph but will no longer receive updates.
 
 - **Dual Publishing**: In this strategy, releases are published under both the old `@hashgraph` and new `@hiero` or `@hiero-ledger` namespaces for a defined transition period—typically 6 months. Identical releases appear in both namespaces, accompanied by migration documentation, deprecation warnings, and outreach to ease the transition.
 

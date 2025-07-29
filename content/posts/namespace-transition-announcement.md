@@ -24,58 +24,52 @@ Hiero embraces an entirely open source and community-governed model, which makes
 
 ## What Does This Mean for Developers?
 
-If your projects rely on Hedera SDKs, APIs, or services, you will be directly impacted by this namespace transition. Specifically, the **key change involves updating the dependencies and namespaces in your projects from hashgraph to `hiero` or `hiero-ledger`.**
+Developers using Hedera SDKs in Java, JavaScript, or Rust projects must update their project configurations, including package identifiers and dependencies, from the previous hashgraph namespace to the new `hiero` or `hiero-ledger` namespaces.
 
-Each SDK will follow one of two possible namespace migration strategies, based on technical and community considerations:
+Two primary migration strategies are being used, depending on the SDK:
 
-- **Single-Step Cutover**: Also known as a hard cutover, this strategy involves switching entirely to the new namespace in a single release. After a specific version, all new releases will be published exclusively under the `@hiero` or `@hiero-ledger` namespace. Older versions will remain available under `@hashgraph` but will no longer receive updates.
+### Single-Step Cutover
 
-- **Dual Publishing**: In this strategy, releases are published under both the old `@hashgraph` and new `@hiero` or `@hiero-ledger` namespaces for a defined transition period—typically 6 months. Identical releases appear in both namespaces, accompanied by migration documentation, deprecation warnings, and outreach to ease the transition.
+This involves a complete switch from the old namespace to the new one in a single, clearly defined release. After this release, new SDK updates will only be available under the new namespace. Older versions will remain accessible under the original `hashgraph` namespace but will no longer receive updates or new features.
 
-## Migration Timeline and Action Items
+**Java SDK**
 
-**JavaScript SDK (**`@hiero-ledger`**)**
-
-- The dual publishing process will begin from `v2.70.0`
-
-- Dual publishing will continue for 6 months until `v2.82.0`
-
-- Starting from `v2.83.0` the packages will only be published under `hiero-ledger`
-
-→ [**Migration guidelines**](https://github.com/hiero-ledger/hiero-sdk-js/blob/main/manual/migration_hiero.md) for JavaScript SDK
-
-**Rust SDK (**`hiero`**)**
-
-- The dual publishing process will begin from `v0.38.0`
-
-- Dual publishing will continue for 6 months until `v0.50.0`. Starting from `v0.51.0` the packages will only be published under `hiero`
-
-→ [**Migration guidelines**](https://github.com/hiero-ledger/hiero-sdk-rust/blob/main/MIGRATION.md) for Rust SDK
-
-**Java SDK (**`org.hiero`**)**
-
-- Notice to the community for **9 months** will be provided before the hard cutover occurs.
-
-- The Java SDK will be published under a new groupId and artifactId starting with version `2.80.0`. The new groupId will be `org.hiero` and the new artifactId will be `hiero-sdk`.
+- The Java SDK will transition to the new namespace starting from version `2.80.0` (approximately in 9 months).
+- This change involves updating your build tools (e.g., Maven or Gradle configurations) to reflect the new groupId (`org.hiero`) and artifactId (`hiero-sdk`).
+- Documentation and warnings about this upcoming transition will be clearly communicated leading up to the cutover.
 
 → [**Migration guidelines**](https://github.com/hiero-ledger/hiero-sdk-java/blob/main/HIERO_MIGRATION.md) for Java SDK
 
-We strongly encourage developers to update their dependencies early, ensuring a seamless transition when the migration period concludes. 
+### Dual Publishing
 
+Dual publishing involves simultaneously releasing SDK updates under both the old (`hashgraph`) and new (`hiero` or `hiero-ledger`) namespaces for a specific transition period (6 months). After the dual publishing period, updates will only appear under the new namespace. This approach allows developers time to migrate their dependencies gradually.
 
-## **Resources and Support**
+**JavaScript SDK**
 
-- [**Post introducing Hiero**](https://www.lfdecentralizedtrust.org/blog/hiero-advancing-decentralized-trust-through-open-source-innovation): Learn more about Hiero’s vision and roadmap.
+- The dual publishing process will begin from `v2.70.0` to `v2.82.0` (6 months).
+- Starting from version `2.83.0`, updates will exclusively appear under `@hiero-ledger`.
 
-- [**Hiero at LF Decentralized Trust Discord**](https://discord.com/invite/BCSKp4MKJm): Join the community discussions and stay connected.
+→ [**Migration guidelines**](https://github.com/hiero-ledger/hiero-sdk-js/blob/main/manual/migration_hiero.md) for JavaScript SDK
 
-- [**Hiero at GitHub**](https://github.com/hiero-ledger): Explore and contribute to Hiero projects directly on GitHub.
+**Rust SDK**
 
-- [**SDK Collaboration Hub**](https://github.com/hiero-ledger/sdk-collaboration-hub): Join discussions, proposals, and best practices aimed at standardizing communication across all Hiero SDKs. This collaboration helps facilitate not only SDKs maintained by Hiero but also community-driven initiatives, such as the newly developed[ Python SDK](https://github.com/hiero-ledger/hiero-sdk-python).
+- The dual publishing process will begin from `v0.38.0` to `v0.50.0` (6 months).
+- Starting from version `v0.51.0`, updates will exclusively appear under `hiero`.
 
+→ [**Migration guidelines**](https://github.com/hiero-ledger/hiero-sdk-rust/blob/main/MIGRATION.md) for Rust SDK
 
-## **Conclusion**
+## Resources and Support
 
-This transition is a significant leap forward for the distributed ledger technology community, embracing openness, decentralization, and collaboration. We look forward to working together through this exciting migration and seeing the innovative developments that Hiero will enable.
+- [**Introduction to Hiero**](https://www.lfdecentralizedtrust.org/blog/hiero-advancing-decentralized-trust-through-open-source-innovation): Learn more about Hiero’s vision and roadmap.
 
-Stay tuned for further updates and reach out via [Discord](https://discord.lfdecentralizedtrust.org/) or [GitHub Discussions](https://github.com/orgs/hiero-ledger/discussions) with questions or feedback. Let's shape the future of decentralized trust together with Hiero!
+- [**Hiero at LF Decentralized Trust Discord**](https://discord.com/invite/BCSKp4MKJm): For direct community support and discussions.
+
+- [**Hiero GitHub**](https://github.com/hiero-ledger): Explore and contribute directly to Hiero projects.
+
+- [**SDK Collaboration Hub**](https://github.com/hiero-ledger/sdk-collaboration-hub): Join broader community discussions, standardization initiatives, and efforts such as the newly developed[ Python SDK](https://github.com/hiero-ledger/hiero-sdk-python).
+
+## Conclusion
+
+This namespace migration is essential for the long-term sustainability and community-centric governance of Hiero. We encourage all developers to begin **updating their projects as soon as possible** to ensure a seamless transition.
+
+For questions or additional support, please reach out via [Discord](https://discord.lfdecentralizedtrust.org/) or [GitHub Discussions](https://github.com/orgs/hiero-ledger/discussions). Let's work together to build the future of decentralized trust with Hiero.

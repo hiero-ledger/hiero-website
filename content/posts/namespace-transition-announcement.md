@@ -56,7 +56,7 @@ Each SDK will follow one of two possible namespace migration strategies, based o
 
 - Notice to the community for **9 months** will be provided before the hard cutover occurs.
 
-- The Hiero Java SDK will be published under the new namepsace starting from version `2.80.0`
+- The Hiero Java SDK will be published under the new namespace starting from version `2.80.0`
 
 → [**Migration guidelines**](https://github.com/hiero-ledger/hiero-sdk-java/blob/main/HIERO_MIGRATION.md) for Java SDK
 

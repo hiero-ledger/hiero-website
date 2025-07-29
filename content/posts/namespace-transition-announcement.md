@@ -52,11 +52,11 @@ Each SDK will follow one of two possible namespace migration strategies, based o
 
 → [**Migration guidelines**](https://github.com/hiero-ledger/hiero-sdk-rust/blob/main/MIGRATION.md) for Rust SDK
 
-**Java SDK (**`hiero`**)**
+**Java SDK (**`org.hiero`**)**
 
 - Notice to the community for **9 months** will be provided before the hard cutover occurs.
 
-- The Hiero Java SDK will be published under the new namespace starting from version `2.80.0`
+- The Java SDK will be published under a new groupId and artifactId starting with version `2.80.0`. The new groupId will be `org.hiero` and the new artifactId will be `hiero-sdk`.
 
 → [**Migration guidelines**](https://github.com/hiero-ledger/hiero-sdk-java/blob/main/HIERO_MIGRATION.md) for Java SDK
 

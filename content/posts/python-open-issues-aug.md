@@ -75,6 +75,8 @@ Whether you’re a seasoned dev or learning your first open-source workflow, we�
 - **🗓️ Fortnightly Community Call**  
   Every **Wednesday at 2 PM UTC**  
   Chat with contributors, propose features, and share progress.
+   👉 [Meeting Calendar](https://zoom-lfx.platform.linuxfoundation.org/meeting/92041330205?password=2f345bee-0c14-4dd5-9883-06fbc9c60581
+   )
 
 ---
 

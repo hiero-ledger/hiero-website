@@ -45,10 +45,6 @@
             </div>
         </div>
         <div class="container py-14 sm:py-[80px] lg:py-[90px]">
-            {{- $featuredImage := $.Param "featured_image" -}}    
-            {{ if $featuredImage }} 
-            <img src="{{ $featuredImage }}" alt="{{ .Title }}" class="mb-10 w-full h-auto max-h-[200px] sm:max-h-[500px] object-cover" {{ if $lazyLoading }}loading="lazy"{{ end }}>
-            {{ end }}
             <main class="w-full min-w-0 max-w-[800px] mx-auto">
                 <div class="content text-sm text-charcoal font-normal sm:text-base">                
                 {{ .Content | safeHTML }}

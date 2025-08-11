@@ -15,7 +15,7 @@ image = "/images/python/members/exploreriii.png"
 
 The **Hiero Python SDK** provides functionality to interact with the **Hedera Public DLT (Distributed Ledger Technology) Network**, using the Python programming language.
 
-Since its creation by **Nadine Leopfe** (Developer Advocate at Hashgraph) in late **September 2024**, and proposed to the **TSC** in late **November 2024**, the Python SDK has its origins as a **community project**. The Python SDK was **not** part of Hedera’s codebase that was donated to Hiero, a project in the **Linux Foundation Decentralized Trust (LFDT)** — Hedera did not yet support Python. 
+Since its creation in late **September 2024**, and proposed to the **TSC** in late **November 2024**, the Python SDK has its origins as a **community project**. The Python SDK was **not** part of Hedera’s codebase that was donated to Hiero, a project in the **Linux Foundation Decentralized Trust (LFDT)**. Until then, Hedera did not have a supported SDK in pure Python.
 
 Shortly after the first TSC call, several Hiero community members became interested, and have since made valuable contributions to the Python SDK functionality. Today, our Python SDK has **extensive functionality** which builds on initial work, including in **token services**, **file services**, and **smart contracts**. 
 
@@ -79,7 +79,7 @@ One of the most exciting developments is the **influx of new contributors**. We�
 **Special shout-outs go to:**
 - Our passionate community developers!
 - Nadine and Richard for planting the seed.  
-- Contributors like **Dosik13** and **Exploreriii** who’ve delivered improvements in performance and scope.  
+- Contributors like **Dosik13** who’ve delivered improvements in performance and scope.  
 - First-time contributors this week who are already shaping the SDK’s future with meaningful updates.  
 - The **Hiero-LFDT** team who’ve consistently supported the project.
 

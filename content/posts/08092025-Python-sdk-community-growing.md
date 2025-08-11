@@ -27,9 +27,9 @@ We have noticed a **recent strong uptick** in community interest over the last c
 **(Aug 2 – Aug 9, 2025)**
 
 **Changes:**
-- 4 new starters  
+- 5 new starters  
 - 11 new issues  
-- 10 new pull requests  
+- 11 new pull requests  
 - 5 merged pull requests  
 - 7,099 net code additions  
 
@@ -68,7 +68,7 @@ Interest has surged in our Python SDK and with it, we are learning more about wh
 
 - **A space to chat and discuss**  
   → There are lots of questions at this early stage that are important to resolve to build confidence.  
-  Having a warm space to hang out, such as our **Community Call** (Fortnightly on Wednesday, 2pm UTC [Join Here](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week)), active maintainers, and an existing **Discord server** ([Join Discord](https://discord.com/channels/905194001349627914/1336494517544681563)) is invaluable.
+  Having a warm space to hang out, such as our **Community Call** (Fortnightly on Wednesday, 2pm UTC [Join Here](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week)), active maintainers, and an existing **Discord server** ([Join Discord](https://discord.com/channels/905194001349627914/1336494517544681563)) is invaluable. We also have a new **Discussion Section** [Join The Conversation](https://github.com/hiero-ledger/hiero-sdk-python/discussions) to expand on new ideas.
 
 ---
 

@@ -1,6 +1,6 @@
 +++
 title = "Developer Community Interest in the Python SDK Flourishing"
-featured_image = "/images/python/blog_titles/2nd_9th_August_milestones.jpg"
+featured_image = "/images/python/blog_titles/blog_developer_interest_flourishing.png"
 date = 2025-08-09T11:00:00-07:00
 categories = ["Blog"]
 duration = ""

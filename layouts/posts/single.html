@@ -1,0 +1,61 @@
+{{ define "main" }}
+<div class="mx-auto flex">   
+    <article class="w-full break-words">
+        <div id="hero" class="bg-gradient-to-br from-red-dark via-red to-red relative">
+            <div class="container pt-14 pb-12 sm:py-[100px] text-white">    
+                <h1 class="font-medium text-xl sm:text-2xl leading-none relative mb-6 sm:mb-5">{{ .Title }}</h1>
+                {{- $lazyLoading := site.Params.enableImageLazyLoading | default true -}}
+                <div class="flex flex-wrap gap-6">   
+                {{- with $.Params.authors -}}
+                {{- range $i, $author := . -}}
+                {{- if reflect.IsMap $author -}}                   
+                    <a
+                    {{ with $author.link }}href="{{ . }}" target="_blank"{{ end }}
+                    class="inline-flex items-center text-sand text-sm gap-x-4 no-underline"
+                    {{ with $author.name }}title="{{ . }}"{{ end }}
+                    >
+                    {{- with $image := $author.image }}
+                        {{- $isLocal := not (urls.Parse $image).Scheme -}}
+                        {{- $startsWithSlash := hasPrefix $image "/" -}}
+                        {{- if and $isLocal $startsWithSlash }}
+                        {{- $image = (relURL (strings.TrimPrefix "/" $image)) -}}
+                        {{ end -}}
+                        <img src="{{ $image | safeURL }}" alt="{{ $author.name }}" class="inline-block h-[72px] w-[72px] rounded-full bg-white" {{ if $lazyLoading }}loading="lazy"{{ end }} />
+                    {{ end -}}
+                    <div class="font-normal">
+                        {{ $t := $.Param "date" }}
+                        {{ $readDuration := $.Param "duration" }}
+                        <p class="m-0">{{ $readDuration }} {{- if and $readDuration $t }}<span class="mx-1">•</span> {{ end -}}{{ time.Format "January 2, 2006" $t}}</p>
+                        <p class="m-0">by {{ $author.name }}</p>
+                        {{- $joinTitleAndOrganizationWith := " " -}}  
+                        {{- if and ($author.title) ($author.organization) }}
+                            {{ $joinTitleAndOrganizationWith = ", " }}  
+                        {{ end -}}
+                        {{- if or ($author.title) ($author.organization) }}
+                        <p class="m-0">{{- if $author.title }}{{ $author.title }}{{ end -}}{{$joinTitleAndOrganizationWith}}{{- if $author.organization }}{{ $author.organization }}{{ end -}}</p>
+                        {{- end -}}
+                    </div>
+                    </a>
+                {{- else -}}
+                    {{- if $i }}<span class="mr-1">,</span>{{ end -}}<span class="mx-1">{{ $author }}</span>
+                {{- end -}}
+                {{- end -}}
+                {{- end -}}  
+                </div>               
+            </div>
+        </div>
+        <div class="container py-14 sm:py-[80px] lg:py-[90px]">
+            <main class="w-full min-w-0 max-w-[800px] mx-auto">
+                <div class="content text-sm text-charcoal font-normal sm:text-base">                
+                {{ .Content | safeHTML }}
+                    <div class="mt-11 mx-auto w-fit">
+                    {{ partial "share-buttons.html" . }}
+                    </div>
+                </div>                
+            </main>            
+        </div>
+        {{ .Scratch.Set "postMode" "recent" }} <!-- postMode supports the value "recent" or "related" -->
+        {{ partial "related.html" . }}
+    </article>
+</div>
+{{ end }}

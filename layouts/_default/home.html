@@ -1,8 +1,9 @@
 {{ define "main" }}
+{{- $lazyLoading := site.Params.enableImageLazyLoading | default true -}}
 <div id="hero" class="bg-gradient-to-br from-red-dark via-red to-red relative">
-  <div class="container py-20 sm:py-36 text-white text-center">    
+  <div class="container py-20 sm:py-36 text-white text-center">
     <h1 class="text-4xl sm:text-5xl leading-none relative mb-2.5">{{ $.Param "section_hero_heading" | safeHTML }}</h1>
-    <p class="text-[24px] tracking-[-0.081rem] sm:text-xl relative">{{ $.Param "section_hero_text" | safeHTML }}</p>    
+    <p class="text-[24px] tracking-[-0.081rem] sm:text-xl relative">{{ $.Param "section_hero_text" | safeHTML }}</p>
   </div>
 </div>
 <!-- WHAT IS HIERO -->
@@ -17,13 +18,13 @@
       </div>
       <div class="flex flex-col gap-[60px] sm:gap-10">
         {{ range $.Param "section_what_is_hiero_points" }}
-        <div class="grid grid-cols-[1fr] sm:grid-cols-[55px_1fr] gap-5 sm:gap-10">   
+        <div class="grid grid-cols-[1fr] sm:grid-cols-[55px_1fr] gap-5 sm:gap-10">
           {{ $icon := resources.Get .icon }}
           {{ with $icon }}
-          <img src="{{ $icon.RelPermalink }}">
+          <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
           {{ end }}
           <div>
-            <h3 class="text-2xl mb-5 sm:mb-2 [&>strong]:text-red">{{ .heading | safeHTML }}</h3>    
+            <h3 class="text-2xl mb-5 sm:mb-2 [&>strong]:text-red">{{ .heading | safeHTML }}</h3>
             <p class="text-base">{{ .text | safeHTML }}<p>
           </div>
         </div>
@@ -37,14 +38,14 @@
   <div class="bg-white">
     <div class="container pt-[40px] pb-[40px] sm:pt-[92px] sm:pb-[154px] grid grid-cols-1 sm:grid-cols-2 gap-[80px] sm:gap-10 relative">
       {{ $graphic := resources.Get "images/Hiero-Logo-Outline.svg" }}
-      {{ with $graphic }}      
-      <img src="{{ $graphic.RelPermalink }}" class="sm:absolute w-full h-full sm:top-[50%] sm:left-[50%] sm:-translate-x-[50%] sm:-translate-y-[50%]">
-      {{ end }}    
+      {{ with $graphic }}
+      <img src="{{ $graphic.RelPermalink }}" class="sm:absolute w-full h-full sm:top-[50%] sm:left-[50%] sm:-translate-x-[50%] sm:-translate-y-[50%]" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+      {{ end }}
       <div id="open-source" class="anchor anchor--open-source relative" >
         <div class="h-14 w-14 mb-5">
           {{ $icon := resources.Get "images/Hiero-Icon-Heart.svg" }}
           {{ with $icon }}
-          <img src="{{ $icon.RelPermalink }}">
+          <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
           {{ end }}
         </div>
         <h2 class="text-2xl font-medium mb-5">{{ $.Param "section_why_open_source_heading" | safeHTML }}</h2>
@@ -54,7 +55,7 @@
         <div class="h-14 w-14 mb-5">
           {{ $icon := resources.Get "images/Hiero-Icon-OpenSource.svg" }}
           {{ with $icon }}
-          <img src="{{ $icon.RelPermalink }}">
+          <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
           {{ end }}
         </div>
         <h2 class="text-2xl font-medium mb-5">{{ $.Param "section_what_parts_open_source_heading" | safeHTML }}</h2>
@@ -67,12 +68,12 @@
 <div id="quotes" class="anchor">
   <div class="pt-[40px] pb-[40px] sm:pt-[120px] sm:pb-[60px]">
     <div class="container container-mobile-full">
-      <div class="relative w-full">          
+      <div class="relative w-full">
         <div class="mx-auto mb-10 lg:mb-0 lg:absolute lg:top-[50%] lg:left-0 lg:-translate-x-[91px] lg:-translate-y-[50%] text-white-dark text-5xl h-[40px] w-[51px]">
           {{ $graphic := resources.Get "images/Hiero-Icon-Quote-Left.svg" }}
-          {{ with $graphic }}      
-          <img src="{{ $graphic.RelPermalink }}">
-          {{ end }} 
+          {{ with $graphic }}
+          <img src="{{ $graphic.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+          {{ end }}
         </div>
         <div class="px-[25px] pt-[80px] lg:pt-[60px] lg:px-[60px] lg:pb-0 text-lg text-white bg-gradient-to-br from-red-dark via-red to-red">
            <!-- Swiper -->
@@ -83,25 +84,25 @@
                   {{ $logo := resources.Get .logo }}
                   {{ with $logo }}
                   <div class="mb-5 flex justify-center h-[38px]">
-                    <img src="{{ $logo.RelPermalink }}">
+                    <img src="{{ $logo.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
                   </div>
                   {{ end }}
                   <div class="mb-5 [&>a]:text-white">{{ .quote | safeHTML }}</div>
                   <div class="font-bold mb-[155px] [&>a]:text-white">{{ .author | safeHTML }}</div>
                 </div>
-                {{ end }}              
+                {{ end }}
             </div>
             <div class="swiper-button swiper-button-next"></div>
             <div class="swiper-button swiper-button-prev"></div>
           </div>
-        </div>       
+        </div>
         <div class="mx-auto mt-10 lg:mt-0 lg:absolute lg:top-[50%] lg:left-auto lg:right-0 lg:translate-x-[91px] lg:-translate-y-[50%] text-white-dark text-5xl h-[40px] w-[51px]">
           {{ $graphic := resources.Get "images/Hiero-Icon-Quote-Right.svg" }}
-          {{ with $graphic }}      
-          <img src="{{ $graphic.RelPermalink }}">
+          {{ with $graphic }}
+          <img src="{{ $graphic.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
           {{ end }}
-        </div>        
-      </div>     
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -125,21 +126,49 @@
 <!-- CONTRIBUTE & CONNECT -->
 <div class="bg-white">
   <div class="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px] grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-10">
-    <div id="contribute" class="anchor">        
+    <div id="contribute" class="anchor">
       <h2 class="text-2xl mb-2.5 sm:text-4xl max-w-full md:max-w-[565px] sm:mb-5">{{ $.Param "section_getting_started_heading" | safeHTML }}</h2>
       <div class="text-lg max-w-full md:max-w-[565px] space-y-4">{{ $.Param "section_getting_started_text" | safeHTML }}</div>
     </div>
-    <div id="connect" class="anchor">       
+    <div id="connect" class="anchor">
       <h2 class="text-2xl mb-2.5 sm:text-4xl max-w-full md:max-w-[565px] sm:mb-5">{{ $.Param "section_connect_heading" | safeHTML }}</h2>
       <div class="text-lg max-w-full md:max-w-[565px] space-y-4">{{ $.Param "section_connect_text" | safeHTML }}</div>
     </div>
   </div>
 </div>
+<div>
+<div class="bg-white">
+  <div class="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px] grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-10">
+    <div id="meet" class="anchor">
+      <h2 class="text-2xl mb-2.5 sm:text-4xl max-w-full md:max-w-[565px] sm:mb-5">{{ $.Param "section_meet_heading" | safeHTML }}</h2>
+      <div class="text-lg max-w-full md:max-w-[565px] space-y-4">{{ $.Param "section_meet_text" | safeHTML }}</div>
+    </div>
+      <div>
+        <table class="w-full table-auto border-collapse border border-gray-300 text-sm sm:text-base">
+          <thead>
+            <tr>
+              <th class="border border-gray-300 px-4 py-2 text-left bg-[#B81A56] text-white">Community Meeting</th>
+              <th class="border border-gray-300 px-4 py-2 text-left bg-[#B81A56] text-white">Meeting occurrance link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="border px-4 py-2">TSC meeting</td><td class="border px-4 py-2"><a href="https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1758031200" class="text-blue-600 underline" target="_blank" rel="noopener noreferrer">LFX Calendar Link</a></td></tr>
+            <tr><td class="border px-4 py-2">Community Call</td><td class="border px-4 py-2"><a href="https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1758207600" class="text-blue-600 underline" target="_blank" rel="noopener noreferrer">LFX Calendar Link</a></td></tr>
+            <tr><td class="border px-4 py-2">Python SDK</td><td class="border px-4 py-2"><a href="https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1758117600" class="text-blue-600 underline" target="_blank" rel="noopener noreferrer">LFX Calendar Link</a></td></tr>
+            <tr><td class="border px-4 py-2">Docs</td><td class="border px-4 py-2"><a href="https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1757516400" class="text-blue-600 underline" target="_blank" rel="noopener noreferrer">LFX Calendar Link</a></td></tr>
+            <tr><td class="border px-4 py-2">Solo</td><td class="border px-4 py-2"><a href="https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1757433600" class="text-blue-600 underline" target="_blank" rel="noopener noreferrer">LFX Calendar Link</a></td></tr>
+            <tr><td class="border px-4 py-2">Solo Action</td><td class="border px-4 py-2"><a href="https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1757944800" class="text-blue-600 underline" target="_blank" rel="noopener noreferrer">LFX Calendar Link</a></td></tr>
+            <tr><td class="border px-4 py-2">SDK</td><td class="border px-4 py-2"><a href="https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1757340000" class="text-blue-600 underline" target="_blank" rel="noopener noreferrer">LFX Calendar Link</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>
 <div> <!-- divider -->
   <div class="container py-[40px] sm:py-0 flex flex-row items-center gap-10">
     {{ $graphic := resources.Get "images/Hiero-Icon.svg" }}
-    {{ with $graphic }}      
-    <img src="{{ $graphic.RelPermalink }}">
+    {{ with $graphic }}
+    <img src="{{ $graphic.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
     {{ end }}
     <div class="w-full bg-white-dark h-[1px]"></div>
   </div>
@@ -151,7 +180,7 @@
       <div id="technical-steering-committee-intro-column">
         <div id="technical-steering-committee-intro">
           <h2 class="text-3xl mb-2.5 sm:text-4xl sm:mb-4">{{ $.Param "section_technical_steering_committee_heading" | safeHTML }}</h2>
-          <div class="space-y-4 text-base text-lg">{{ $.Param "section_technical_steering_committee_text" | safeHTML }}</div>
+          <div class="space-y-4 lext-base sm:text-lg">{{ $.Param "section_technical_steering_committee_text" | safeHTML }}</div>
         </div>
       </div>
       <div class="team-members grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-[40px] sm:gap-y-[60px]">
@@ -159,32 +188,32 @@
         {{ range $index, $sortedCommittee := $sortedCommittee}}
         {{ $bioId := printf "%s%s%d" .firstName .lastName $index }}
         <div class="team-member relative">
-          <div class="mb-3">    
-            <img src="images/tsc/{{ .photo }}" alt="{{ .firstName }} {{ .lastName }}" class="w-full aspect-square object-cover">
-          </div> 
+          <div class="mb-3">
+            <img src="images/tsc/{{ .photo }}" alt="{{ .firstName }} {{ .lastName }}" class="w-full aspect-square object-cover" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+          </div>
           <h3 class="text-2xl mb-4">{{ .firstName }} {{ .lastName }}</h3>
           <div class="flex flex-row gap-2 items-center">
             <button class="text-red border-2 border-red border-solid rounded-full py-1 px-[26px] text-lg" onclick="showBio('{{$bioId}}')">Bio</button>
             <a href="{{ .gitHubAccount }}" target="_blank" rel="noopener" class="border-2 border-red border-solid rounded-full h-[35px] w-[35px] flex justify-center items-center">
               {{ $icon := resources.Get "images/Hiero-Icon-Github.svg" }}
-              {{ with $icon }}      
-              <img src="{{ $icon.RelPermalink }}">
+              {{ with $icon }}
+              <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
               {{ end }}
             </a>
-          </div>        
+          </div>
           <div id="{{$bioId}}" class="absolute hidden top-0 bg-black text-white text-lg z-10 flex-col p-[30px]" aria-hidden="true"> <!-- bio modal -->
-            <button class="absolute text-white top-1.5 right-1.5" onclick="hideBio('{{$bioId}}')"> 
+            <button class="absolute text-white top-1.5 right-1.5" onclick="hideBio('{{$bioId}}')">
               {{ $icon := resources.Get "images/Hiero-Icon-ModalClose.svg" }}
-              {{ with $icon }}      
-              <img src="{{ $icon.RelPermalink }}">
+              {{ with $icon }}
+              <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
               {{ end }}
             </button>
-            <div class="mb-5">    
-              <img src="images/tsc/{{ .photo }}" alt="{{ .firstName }} {{ .lastName }}" class="w-full aspect-square object-cover">
+            <div class="mb-5">
+              <img src="images/tsc/{{ .photo }}" alt="{{ .firstName }} {{ .lastName }}" class="w-full aspect-square object-cover" {{ if $lazyLoading }}loading="lazy"{{ end }}>
             </div>
             <p class="text-gray-500 mt-2 space-y-4">{{ .bio | safeHTML }}</p>
             <button class="text-black text-lg rounded-full py-1.5 px-[26px] bg-white-dark self-center mt-4" onclick="hideBio('{{$bioId}}')">Close</button>
-          </div>          
+          </div>
         </div>
         {{ end }}
       </div>
@@ -202,28 +231,28 @@
         </div>
       </div>
       <div>
-        {{ range .Param "section_roadmap_points" }} 
+        {{ range .Param "section_roadmap_points" }}
         <div class="grid grid-cols-[40px_1fr] sm:grid-cols-[75px_1fr] gap-5 sm:gap-10 sm:pl-[15%]">
           <div class="flex flex-col">
             {{ $icon := resources.Get .icon }}
             {{ with $icon }}
             <div class="w-10 h-10 sm:w-[75px] sm:h-[75px] flex justify-center border border-black sm:border-none">
-              <img src="{{ $icon.RelPermalink }}" class="self-center">
+              <img src="{{ $icon.RelPermalink }}" class="self-center" {{ if $lazyLoading }}loading="lazy"{{ end }}>
             </div>
             {{ end }}
             <div class="bg-black w-0.5 flex-1 mx-auto"></div>
           </div>
           <div class="pb-[60px] sm:pb-20">
-            <h3 class="text-lg mb-2.5 sm:text-2xl font-medium sm:mb-5">{{ .heading }}</h3>    
+            <h3 class="text-lg mb-2.5 sm:text-2xl font-medium sm:mb-5">{{ .heading }}</h3>
             <p class="text-base">{{ .text | safeHTML }}</p>
           </div>
-          
+
         </div>
         {{ end }}
       </div>
     </div> <!-- end container -->
   </div>
-</div> 
+</div>
 
 <!-- GSAP -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -231,15 +260,15 @@
 <script>
   const initGSAP = () => {
     gsap.registerPlugin(ScrollTrigger)
-    
+
     const pin = (idToPin, idToPinColumnContainer, idTrigger, bottomOffset = 0, triggerStartCenter = false, minWidth = 1200, minHeight = 700 ) => {
       const elToPin = document.getElementById(idToPin);
       const elToPinColumnContainer = document.getElementById(idToPinColumnContainer);
       const elTrigger = document.getElementById(idTrigger);
       const headerHeight = 90;
       const pinCenter = window.innerHeight/2 - elToPin.offsetHeight/2 - headerHeight;
-      
-      gsap.matchMedia().add(`(min-width: ${minWidth}px) and (min-height: ${minHeight}px)`, () => { 
+
+      gsap.matchMedia().add(`(min-width: ${minWidth}px) and (min-height: ${minHeight}px)`, () => {
         ScrollTrigger.create({
           trigger: elTrigger,
           start: triggerStartCenter ? `top ${pinCenter}px` : 'top top',
@@ -251,8 +280,8 @@
           invalidateOnRefresh: true
         });
       })
-    }    
-    
+    }
+
     // Resize to recalculate element values
     const resize = function () {
       // Kill all triggers
@@ -275,9 +304,9 @@
     });
 
     resize();
-    
+
   }
-  
+
   window.addEventListener('load', function () {    initGSAP();
   });
 </script>

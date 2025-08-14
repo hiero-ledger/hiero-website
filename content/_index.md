@@ -1,6 +1,7 @@
 +++
 title = "Hiero"
 draft = false
+featured_image = '/images/Hiero_v4.png'
 
 section_hero_heading = "Hiero"
 section_hero_text = "Open Source Distributed Ledger Technology"
@@ -19,32 +20,38 @@ Hiero is 100% open-source. While the transition of the project to Linux Foundati
 
 section_getting_started_heading = "How to Contribute / Getting Started?"
 section_getting_started_text = '''
-<p>Since we are still working on the transition of the Hiero repositories from the <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera GitHub organization</a> into the <a href="https://github.com/LFDT-Hiero/" target="_blank" rel="noreferrer noopener">Hiero GitHub organization</a>, many opportunities for contribution can be initiated at the Hedera’s GitHub organization today.</p>
+<p>Since we are still working on the transition of the Hiero repositories from the <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera GitHub organization</a> into the <a href="https://github.com/hiero-ledger/" target="_blank" rel="noreferrer noopener">Hiero GitHub organization</a>, many opportunities for contribution can be initiated at the Hedera’s GitHub organization today.</p>
 <p>While in this transition phase we already want to enable developers to join in developing Hiero and its related projects. As such, we’re always willing to help you get started and mentor you on your journey of learning the project and making useful contributions.</p>
 <p>
-There is good work to do for everyone with whatever skillset you have - and it doesn’t have to be code. We also welcome help with documentation, design, project organization, and organizing meetups. For instance, at <a href="/hacktoberfest">Hacktoberfest</a> we have a huge list of good first issues that let the community do the first contributions, several of which will help us remove Hedera naming and usage from the code and truly make it vendor neutral.</p>
+There is good work to do for everyone with whatever skillset you have - and it doesn’t have to be code. We also welcome help with documentation, design, project organization, and organizing meetups. For example, during one of our previous <a href="/hacktoberfest">community contribution events</a>, we curated a large list of beginner-friendly issues to encourage first-time contributions. Several of these issues focused on removing "Hedera" specific naming and usage from the codebase to help identify the project as vendor neutral.</p>
 <p>
-If you have any questions or need help or additional mentoring, then you can reach out to the community and the technical steering committee (TSC) of Hiero in our <a href="https://github.com/orgs/LFDT-Hiero/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a>.</p>
+If you have any questions or need help or additional mentoring, then you can reach out to the community and the technical steering committee (TSC) of Hiero in our <a href="https://github.com/orgs/hiero-ledger/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a>.</p>
 '''
 
 section_connect_heading = "Connect with the Hiero Open Source community"
 section_connect_text = '''
-<p>Since we did not create Hiero from scratch, it already has <a href="/heros/">a vibrant community</a> from Hedera and other products and projects. With the creation of the Hiero project, we started <a href="https://github.com/orgs/LFDT-Hiero/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a> that can be used as a central place to contact the community and the technical steering committee (TSC) of Hiero.</p>
+<p>Since we did not create Hiero from scratch, it already has <a href="/heros/">a vibrant community</a> from Hedera and other products and projects. With the creation of the Hiero project, we started <a href="https://github.com/orgs/hiero-ledger/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a> that can be used as a central place to contact the community and the technical steering committee (TSC) of Hiero.</p>
 <p>
 For us, the community of the open-source project is a crucial part of its success. Based on that we will concentrate on the integration of the community. As defined in the roadmap, we will integrate the community into the development of Hiero from day 1. An essential part of that is to have community members be part of the TSC. Here the TSC is working on voting mechanisms that allow us to create a diverse community.</p>
 <p>
 Next to the TSC, we want to invest in a diverse and inclusive community. It is important to us that everyone, regardless of knowledge and background, can become an active contributor to Hiero. To enable that, we plan to hire at least one community manager in the near future and provide open documentation and teaching resources.</p>
 '''
 
+section_meet_heading = "Join our TSC and Community Calls"
+section_meet_text = '''
+<p>Join our open TSC, Community and Project meetings. We welcome your opinion and invite you to collaborate with the team!</p>
+<p>
+'''
+
 section_technical_steering_committee_heading = "The Technical Steering Committee of Hiero"
 section_technical_steering_committee_text = '''
-<p>While one of our main goals is to have a diverse and inclusive community in which everybody has the rights and responsibilities to move the project forward, it is important that a committee oversees the project and moves the roadmap forward. To do so, we have defined a technical steering committee (TSC) that is defined by six individuals today. One of the important next steps on our roadmap is to enable voting mechanisms to add additional members from the community to the TSC. The duties, goals, and rights of the TSC are defined in the <a href="https://github.com/LFDT-Hiero/hiero/blob/main/technical-charter.md" target="_blank" rel="noreferrer noopener">technical charter</a> of the Hiero project.
+<p>While one of our main goals is to have a diverse and inclusive community in which everybody has the rights and responsibilities to move the project forward, it is important that a committee oversees the project and moves the roadmap forward. To do so, we have defined a technical steering committee (TSC) that is defined by six individuals today. One of the important next steps on our roadmap is to enable voting mechanisms to add additional members from the community to the TSC. The duties, goals, and rights of the TSC are defined in the <a href="https://github.com/hiero-ledger/hiero/blob/main/technical-charter.md" target="_blank" rel="noreferrer noopener">technical charter</a> of the Hiero project.
 </p>
 '''
 
 section_roadmap_heading = "Our Roadmap in the Linux Foundation Decentralized Trust"
 section_roadmap_text = '''
-<p>With the creation of the project in the Linux Foundation Decentralized Trust (LFDT) and the establishment of the initial technical steering committee (TSC) the cornerstones of Hiero have been laid. As a next essential step the TSC needs to provide a roadmap that covers the transition of the first repositories and projects to the <a href="https://github.com/LFDT-Hiero/" target="_blank" rel="noreferrer noopener">Hiero GitHub organization</a> and the inclusion and enabling of the community. The members of the TSC have committed themselves to work on the creation of this roadmap with the highest priority. The TSC hopes and encourages input and feedback by the complete ecosystem from core developers to users. To do so we enabled <a href="https://github.com/orgs/LFDT-Hiero/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a> as a first open way for communication. We hope that as many community members as possible contribute to the discussions regarding the initial roadmap and help us to create a real community driven project.</p>
+<p>With the creation of the project in the Linux Foundation Decentralized Trust (LFDT) and the establishment of the initial technical steering committee (TSC) the cornerstones of Hiero have been laid. As a next essential step the TSC needs to provide a roadmap that covers the transition of the first repositories and projects to the <a href="https://github.com/hiero-ledger/" target="_blank" rel="noreferrer noopener">Hiero GitHub organization</a> and the inclusion and enabling of the community. The members of the TSC have committed themselves to work on the creation of this roadmap with the highest priority. The TSC hopes and encourages input and feedback by the complete ecosystem from core developers to users. To do so we enabled <a href="https://github.com/orgs/hiero-ledger/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a> as a first open way for communication. We hope that as many community members as possible contribute to the discussions regarding the initial roadmap and help us to create a real community driven project.</p>
 <p>
 While an official roadmap does not exist today, the TSC has already defined several points they believe are essential for Hiero’s success. The following provide insight into those areas.</p>
 '''

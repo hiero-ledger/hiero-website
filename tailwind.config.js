@@ -3,7 +3,17 @@ module.exports = {
   content: ["content/**/*.md", "layouts/**/*.html"],
   theme: {
     extend: {
-      
+      transitionProperty: {
+        'colors': 'color, background-color, border-color',
+        'transform': 'transform',
+      },
+      colors: {
+        'red': {
+          DEFAULT: '#B81A56',
+          'dark': '#992350',
+          'light': '#D92D6A',
+        },
+      },
     },
     colors: {
       transparent: 'transparent',
@@ -12,14 +22,22 @@ module.exports = {
          DEFAULT: '#FFFFFF',
         'dark': '#E5E4D7'
       },      
-      'black': '#1E1E1E',
+      'black': '#000000',
+      'charcoal': '#1E1E1E',
       'red': {
         DEFAULT: '#B81A56',
-        'dark': '#992350'
-      },      
+        'dark': '#992350',
+        'light': '#D92D6A'
+      },
+      'sand': '#E5E4D7',
+      'gray': {
+        DEFAULT: '#616161',
+        'light': '#EFEFEE',
+      },   
     }, 
     fontFamily: {
       'serif': ['"Space Grotesk"'],
+      'ibm': ['"IBM Plex Mono"'],
     },   
     fontSize: {
       xs: '0.75rem', /* 12px */
@@ -63,4 +81,3 @@ module.exports = {
   },
   plugins: [],
 }
-

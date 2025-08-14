@@ -1,8 +1,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <meta name="robots" content="noindex, nofollow">
-<title>Hiero | Open Source Distributed Ledger Technology</title>
-<meta name="description" content="Hiero, a Linux Foundation Decentralized Trust project, is an open-source, vendor-neutral distributed ledger technology used to build the Hedera public ledger.">
-<meta property="og:image" content="/images/tsc/Hiero_v4.png">
-{{ partialCached "head/css.html" . }}
+<title>Hiero | {{ .Title }}</title>
+<meta name="description" content="{{ .Params.abstract }}">
+{{- $image := .Params.featured_image }}
+{{- if $image }}
+    {{- $isLocal := not (urls.Parse $image).Scheme -}}
+    {{- $startsWithSlash := hasPrefix $image "/" -}}                       
+    {{- if and $isLocal $startsWithSlash }}
+        {{- $image = absURL (relURL (strings.TrimPrefix "/" $image)) -}}
+    {{ else if $isLocal }}
+        {{ $relativePath := printf "%s%s" .RelPermalink $image }}
+        {{- $image = absURL $relativePath -}}
+    {{ end -}}
+{{ else }}
+    {{- $image = absURL .Site.Params.fallbackBlogFeaturedImage }}
+{{ end -}}
+<meta property="og:image" content="{{ $image }}">
+{{ partial "head/css.html" . }}
 {{ partialCached "head/js.html" . }}

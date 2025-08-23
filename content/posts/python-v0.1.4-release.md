@@ -3,7 +3,7 @@ title           = "Hiero Python SDK – Announcing Release v0.1.4"
 featured_image  = "/images/python/blog_posts/v0.1.4.jpg"
 date            = 2025-08-23T11:00:00+01:00
 categories      = ["Blog"]
-abstract        = "Release 0.1.4 just announced!."
+abstract        = "Release 0.1.4 just announced!"
 [[authors]]
   name         = "exploreriii"
   organization = "Python SDK Team"
@@ -12,17 +12,13 @@ abstract        = "Release 0.1.4 just announced!."
 
 # 🚀 The Python SDK Has a New Release – Welcome v0.1.4
 
-As of the 20th August 2025, the Python SDK has a new **v0.1.4** release!
-
-This extensive update represents a big leap forward, especially for smart contract functionality, and comes with a range of improvements that make building on Hedera with Python easier, clearer, and more powerful. A huge thank you to our talented contributors for making this release possible.
+This extensive update represents a **big leap** forward, especially for smart contract functionality, and comes with a range of improvements that make building on Hedera with Python easier, clearer, and more powerful. A huge thank you to our **talented contributors** for making this release possible.
 
 ---
 
 ## ✨ What’s New in 0.1.4
 
 Using the Hiero Python SDK, you can now interact with the Hedera network in more ways than ever before.
-
-### 🔹 New Features
 
 #### 🚀 Work with Smart Contracts
 - Create and Update contracts with `ContractCreateTransaction` and `ContractUpdateTransaction`

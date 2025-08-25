@@ -15,6 +15,7 @@ image = "/images/profile-hiero.png"
 
 ## 📣 Announcing the Hiero DID SDK JS: A Modern JavaScript Toolkit for Decentralized Identity on Hedera
 
+
 ![Hiero DID SDK JS Component View Diagram](https://github.com/hiero-ledger/hiero-did-sdk-js/raw/main/docs/modules/ROOT/images/component-view-diagram.png "Hiero DID SDK JS — Component View Diagram")
 
 

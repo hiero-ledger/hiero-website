@@ -9,20 +9,6 @@ categories     = ["Announcements"]
 featured_image = "/images/hiero-graduation.png"
 images         = ["/images/hiero-graduation.png"]
 canonical_url  = "https://hiero.org/blog/hiero-graduation"
-
-# Open Graph metadata
-og_title       = "Hiero Achieves LFDT Graduation"
-og_description = "Hiero is the First Project under the Linux Foundation Decentralized Trust's Umbrella and Its New Project Lifecycle Framework"
-og_image       = "/images/hiero-graduation.png"
-og_type        = "article"
-og_url         = "https://hiero.org/blog/hiero-graduation"
-
-# Twitter Card metadata
-twitter_card        = "summary_large_image"
-twitter_title       = "Hiero Achieves LFDT Graduation"
-twitter_description = "Hiero becomes the first project to achieve graduation under the LFDT project lifecycle and the first since the foundation’s expansion."
-twitter_image       = "/images/hiero-graduation.png"
-twitter_site        = "@hieroledger"
 +++
 
 # Hiero Becomes the First Graduated Project under LFDT’s New Project Lifecycle Framework — and the First to Achieve Graduation since LFDT’s Expanded Umbrella"

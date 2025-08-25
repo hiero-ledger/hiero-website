@@ -1,19 +1,16 @@
 +++
-title          = "Announcing the Hiero DID SDK JS: A Modern JavaScript Toolkit for Decentralized Identity on Hedera"
+title = 'Announcing the Hiero DID SDK JS: A Modern JavaScript Toolkit for Decentralized Identity on Hedera'
 featured_image = "/images/hiero-did-sdk-js.png"
-date           = 2025-08-25T13:26:50-07:00
-categories     = ["Blog"]
-duration       = ""
-abstract       = "Introducing the Hiero DID SDK JS — an open-source JavaScript toolkit for building decentralized identity applications on Hedera, with support for Hedera DID Method and Hedera AnonCreds Method."
+date = 2025-08-25T13:26:50-07:00
+categories = ["Blog"]
+duration = ""
+abstract = "Introducing the Hiero DID SDK JS — an open-source JavaScript toolkit for building decentralized identity applications on Hedera, with support for Hedera DID Method and Hedera AnonCreds Method."
 [[authors]]
-name           = "Hiero Team"
-title          = ""
-organization   = ""
-link           = ""
-image          = "/images/profile-hiero.png"
-slug           = "hiero-did-sdk-js"
-tags           = ["Hedera", "Decentralized Identity", "DID", "SDK", "AnonCreds", "Open Source"]
-canonical_url  = "https://hiero.org/blog/hiero-did-sdk-js"
+name = "Hiero Team"
+title = ""
+organization = ""
+link = ""
+image = "/images/profile-hiero.png"
 +++
 
 ![Hiero DID SDK JS Component View Diagram](https://github.com/hiero-ledger/hiero-did-sdk-js/raw/main/docs/modules/ROOT/images/component-view-diagram.png "Hiero DID SDK JS — Component View Diagram")

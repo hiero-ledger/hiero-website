@@ -19,6 +19,16 @@ This dual milestone underscores Hiero’s technical, contributor diverisity and 
 
 ---
 
+## Background Information and Project Lifecycle
+
+The term "**project**" within LF Decentralized Trust (LFDT) refers to a collaborative endeavor to deliver a work item. 
+A project life cycle is a structured, phased framework that guides a project from its initial idea through completion, breaking it down into manageable stages for planning, execution, and control to achieve successful outcomes. 
+
+The Technical Advisory Council of the Linux Foundation Decentralized Trust has established a defined project lifecycle, including its stages, as outlined in the [official documentation](https://lf-decentralized-trust.github.io/governance/governing-documents/project-lifecycle/).
+
+In Hiero's case, the **Graduated** status signifies that a project has matured by surpassing rigorous evaluation across legal, technical, community, and documentation dimensions.
+While graduation marks a high standard of quality, ongoing TAC oversight means that projects must maintain those standards or risk reverting to earlier lifecycle stages.
+
 ## A Year of Milestones
 
 Since its launch in September 2024, Hiero has grown into a thriving, vendor-neutral project:

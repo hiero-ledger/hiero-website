@@ -11,11 +11,11 @@ images         = ["/images/hiero-graduation.png"]
 canonical_url  = "https://hiero.org/blog/hiero-graduation"
 +++
 
-# Hiero Becomes the First Graduated Project under LFDT’s New Project Lifecycle Framework — and the First to Achieve Graduation since LFDT’s Expanded Umbrella"
+# Hiero Becomes the First Graduated Project under LFDT’s New Project Lifecycle Framework — and the First to Achieve Graduation since LFDT’s Expanded Umbrella.
 
 We are proud to announce that **Hiero** has officially reached **graduated status** within the Linux Foundation Decentralized Trust (LFDT), becoming both the **first project to do so under LFDT’s new project lifecycle framework** — and the **first project to achieve graduation under the newly expanded LFDT umbrella organization**.
 
-This dual milestone underscores Hiero’s technical,contributor diverisity and governance maturity while also signaling the growing strength of LFDT as a foundation dedicated to advancing decentralized trust.
+This dual milestone underscores Hiero’s technical, contributor diverisity and governance maturity while also signaling the growing strength of LFDT as a foundation dedicated to advancing decentralized trust.
 
 ---
 
@@ -23,7 +23,7 @@ This dual milestone underscores Hiero’s technical,contributor diverisity and g
 
 Since its launch in September 2024, Hiero has grown into a thriving, vendor-neutral project:
 
-- **Community Governance:** In June 2025, open elections expanded the Technical Steering Committee (TSC), with Michael Kantor (Contributor seat) and Milan Wiercx Van Rhijn (End User seat) joining.
+- **Community Governance:** In June 2025, open elections expanded the Technical Steering Committee (TSC), with Michael Kantor (Contributor seat) and Milan Wiercx Van Rhijn (End User seat) joining. In July, we had Brandon Davenport (Contributor seat) joining as well.
 - **Expanding Participation:** Nearly 800 contributors from 80+ organizations and 50+ adopters are actively shaping Hiero.
 - **Engineering Excellence:** Hiero’s 28 repositories follow Apache 2.0/MIT licensing, CI/CD pipelines, OpenSSF Scorecard compliance, and transparent governance under LFDT.
 - **Cross-Foundation Collaboration:** Hiero has partnered with the OpenWallet Foundation and Hyperledger AnonCreds to advance privacy-preserving decentralized identity, delivering the Hedera ACA-Py plugin, the Hiero DID SDK for Python, and expanding support for interoperable, open identity tooling.
@@ -55,7 +55,7 @@ Graduation confirms that Hiero has achieved LFDT’s highest standards for:
 
 Hiero’s graduation is not just about maturity — it’s about momentum. In its first year under LFDT, Hiero has welcomed a wave of **community-contributed projects**, each expanding the ecosystem:
 
-- **Hiero SDK in Python** — Native Python SDK published to PyPI for managing tokens, consensus transactions, and DIDs.
+- **Hiero SDK in Python** — Native Python SDK published to PyPI for managing tokens, consensus transactions, smart contracts and DIDs. Office Hours are scheduled for the community to participate.
 - **Hiero Solo Action** — GitHub Action to spin up a Hiero Solo test network inside CI/CD pipelines.
 - **GoMint API** — Open source API layer for authentication, token management, custodial keys, and consensus services.
 - **Hashgraph Online Standards SDK** — Reference implementations for Hashgraph Consensus Standards (HCS-1, HCS-10, HCS-11, and more), including demos for AI agent communication and decentralized file storage.

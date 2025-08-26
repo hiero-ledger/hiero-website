@@ -13,7 +13,7 @@ canonical_url  = "https://hiero.org/blog/hiero-graduation"
 
 # Hiero Becomes the First Graduated Project under LFDT’s New Project Lifecycle Framework — and the First to Achieve Graduation since LFDT’s Expanded Umbrella.
 
-We are proud to announce that **Hiero** has officially reached **graduated status** within the Linux Foundation Decentralized Trust (LFDT), becoming both the **first project to do so under LFDT’s new project lifecycle framework** — and the **first project to achieve graduation under the newly expanded LFDT umbrella organization**.
+📣 We are proud to announce that **Hiero** has officially reached **graduated status** within the Linux Foundation Decentralized Trust (LFDT), becoming both the **first project to do so under LFDT’s new project lifecycle framework** — and the **first project to achieve graduation under the newly expanded LFDT umbrella organization**. 📣
 
 This dual milestone underscores Hiero’s technical, contributor diverisity and governance maturity while also signaling the growing strength of LFDT as a foundation dedicated to advancing decentralized trust.
 
@@ -44,9 +44,9 @@ Graduation confirms that Hiero has achieved LFDT’s highest standards for:
 
 ## Real-World Adoption
 
-- **Hedera:** Since February 2025, Hedera has been powered entirely by Hiero’s open codebase, making it the largest public network based on an LFDT project.
-- **HashSphere:** Enables enterprises and governments to run private Hiero-based networks with Hedera compatibility.
-- **Ecosystem Tools:** Wallets like HashPack, platforms like Hgraph, and developer tooling from Hashgraph Online extend Hiero’s reach.
+- **[Hedera](https://hedera.com/):** Since February 2025, Hedera has been powered entirely by Hiero’s open codebase, making it the largest public network based on an LFDT project.
+- **[HashSphere](https://www.hashgraph.com/hashsphere/):** Enables enterprises and governments to run private Hiero-based networks with Hedera compatibility.
+- **Ecosystem Tools:** Wallets like [HashPack](https://www.hashpack.app/), platforms like [Hgraph](https://hgraph.com/), and developer tooling from [Hashgraph Online](https://hashgraphonline.com/) extend Hiero’s reach.
 - **Use Cases:** Hiero is already enabling breakthroughs in cross-border payments (reducing costs from $40 to $0.10 and delays from a week to under a minute) and supply chain transparency (eliminating data mismatches and single points of control).
 
 ---
@@ -75,9 +75,9 @@ From identity to finance, supply chains to sustainability, and from SDKs to smar
 
 We invite developers, enterprises, and governments to join us in building with Hiero:
 
-- Explore the project: https://hiero.org
-- Get started: https://docs.hiero.org
-- Join the community: https://www.lfdecentralizedtrust.org
+- [Explore the project](https://hiero.org)
+- [Get started](https://docs.hiero.org)
+- [Join the LFDT community](https://www.lfdecentralizedtrust.org)
 
 **The future of decentralized trust is open — and with Hiero’s graduation, LFDT has proven its ability to grow and nurture open source projects while cultivating the communities that allow them to thrive.**
 

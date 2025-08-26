@@ -25,6 +25,9 @@ Since its launch in September 2024, Hiero has grown into a thriving, vendor-neut
 
 - **Community Governance:** In June 2025, open elections expanded the Technical Steering Committee (TSC), with Michael Kantor (Contributor seat) and Milan Wiercx Van Rhijn (End User seat) joining. In July, we had Brandon Davenport (Contributor seat) joining as well.
 - **Expanding Participation:** Nearly 800 contributors from 80+ organizations and 50+ adopters are actively shaping Hiero.
+
+![Organizations participating in Hiero]("/images/Hiero-orgs.png" "Hiero Organizations")
+
 - **Engineering Excellence:** Hiero’s 28 repositories follow Apache 2.0/MIT licensing, CI/CD pipelines, OpenSSF Scorecard compliance, and transparent governance under LFDT.
 - **Cross-Foundation Collaboration:** Hiero has partnered with the OpenWallet Foundation and Hyperledger AnonCreds to advance privacy-preserving decentralized identity, delivering the Hedera ACA-Py plugin, the Hiero DID SDK for Python, and expanding support for interoperable, open identity tooling.
 - **Global Presence:** From LFDT webinars to the Global Digital Collaboration Conference in Geneva, Hiero has showcased real-world use cases like cross-border payments and verifiable credentials anchored to Hedera.

@@ -16,7 +16,7 @@ canonical_url  = "https://hiero.org/blog/hiero-graduation"
 
 📣 We are proud to announce that **Hiero** has officially reached **graduated status** within the Linux Foundation Decentralized Trust (LFDT), becoming both the **first project to do so under LFDT’s new project lifecycle framework** — and the **first project to achieve graduation under the newly expanded LFDT umbrella organization**. 📣
 
-This dual milestone underscores Hiero’s technical, contributor diverisity and governance maturity while also signaling the growing strength of LFDT as a foundation dedicated to advancing decentralized trust.
+This dual milestone underscores Hiero’s technical, contributor diversity and governance maturity while also signaling the growing strength of LFDT as a foundation dedicated to advancing decentralized trust.
 
 ---
 

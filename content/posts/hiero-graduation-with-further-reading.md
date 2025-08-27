@@ -77,7 +77,7 @@ Hiero’s graduation is not just about maturity — it’s about momentum. In it
 - **Hederium** — A Go implementation of the Hashio protocol, developed by LimeChain, bringing reliability, performance, and scalability to distributed applications.
 - **hiero-cli** — The official command-line interface for Hedera and Hiero, automating accounts, tokens, topics, smart contracts, and CI/CD workflows.
 
-These projects reflect the **collaborative DNA of LFDT**: open participation, vendor neutrality, and ecosystem-wide innovation.
+These contributions reflect the **collaborative DNA of LFDT**: open participation, vendor neutrality, and ecosystem-wide innovation.
 
 ---
 

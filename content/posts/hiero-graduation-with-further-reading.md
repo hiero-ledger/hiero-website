@@ -65,9 +65,9 @@ Graduation confirms that Hiero has achieved LFDT’s highest standards for:
 
 ---
 
-## Community-Contributed Projects
+## Community Contributions
 
-Hiero’s graduation is not just about maturity — it’s about momentum. In its first year under LFDT, Hiero has welcomed a wave of **community-contributed projects**, each expanding the ecosystem:
+Hiero’s graduation is not just about maturity — it’s about momentum. In its first year under LFDT, Hiero has welcomed a wave of **community contributions**, each expanding the ecosystem:
 
 - **Hiero SDK in Python** — Native Python SDK published to PyPI for managing tokens, consensus transactions, smart contracts and DIDs. Office Hours are scheduled for the community to participate.
 - **Hiero Solo Action** — GitHub Action to spin up a Hiero Solo test network inside CI/CD pipelines.

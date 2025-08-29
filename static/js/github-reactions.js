@@ -90,7 +90,7 @@ class GitHubReactions {
   }
 
   // Provide mock reactions data for development
-  getMockReactions(prNumber) {
+  getMockReactions() {
     if (!this.isDevelopment) return null;
     
     // Generate some realistic mock data
@@ -131,6 +131,12 @@ class GitHubReactions {
     }
 
     const url = `${this.baseURL}/pulls/${prNumber}/reactions`;
+    
+    // Validate URL to prevent security issues
+    if (!this.validateUrl(url)) {
+      throw new Error('Invalid URL detected');
+    }
+    
     console.log(`Making API request to: ${url}`);
     
     try {
@@ -170,7 +176,7 @@ class GitHubReactions {
       // If it's a CORS error in development, use mock data
       if (this.isDevelopment && (error.name === 'TypeError' || error.message.includes('NetworkError'))) {
         console.log('🔄 Using mock reactions data for development (CORS limitation)');
-        const mockReactions = this.getMockReactions(prNumber);
+        const mockReactions = this.getMockReactions();
         if (mockReactions) {
           // Cache mock data with shorter timeout
           this.cache.set(cacheKey, {
@@ -227,15 +233,19 @@ class GitHubReactions {
       console.log(`🔍 Auto-discovering PR for blog post: ${slug}`);
       
       // Search through recent closed PRs
-      const searchResponse = await fetch(
-        `${this.baseURL}/pulls?state=closed&sort=updated&direction=desc&per_page=50`,
-        {
-          headers: {
-            'Accept': 'application/vnd.github.v3+json',
-            'User-Agent': 'Hiero-Website-Reactions/1.0'
-          }
+      const searchUrl = `${this.baseURL}/pulls?state=closed&sort=updated&direction=desc&per_page=50`;
+      
+      // Validate URL to prevent security issues
+      if (!this.validateUrl(searchUrl)) {
+        throw new Error('Invalid search URL detected');
+      }
+      
+      const searchResponse = await fetch(searchUrl, {
+        headers: {
+          'Accept': 'application/vnd.github.v3+json',
+          'User-Agent': 'Hiero-Website-Reactions/1.0'
         }
-      );
+      });
       
       if (!searchResponse.ok) {
         throw new Error(`Failed to search PRs: ${searchResponse.status}`);
@@ -247,7 +257,15 @@ class GitHubReactions {
       // Look for PR that added/modified this blog post
       for (const pr of pulls) {
         try {
-          const filesResponse = await fetch(`${this.baseURL}/pulls/${pr.number}/files`, {
+          const filesUrl = `${this.baseURL}/pulls/${pr.number}/files`;
+          
+          // Validate URL to prevent security issues
+          if (!this.validateUrl(filesUrl)) {
+            console.warn(`Invalid files URL detected for PR #${pr.number}`);
+            continue;
+          }
+          
+          const filesResponse = await fetch(filesUrl, {
             headers: {
               'Accept': 'application/vnd.github.v3+json',
               'User-Agent': 'Hiero-Website-Reactions/1.0'
@@ -311,9 +329,12 @@ class GitHubReactions {
     if (prInfo) {
       const githubLink = container.closest('.github-reactions').querySelector('.github-link');
       if (githubLink) {
-        githubLink.href = prInfo.html_url;
-        githubLink.style.display = 'flex';
-        githubLink.title = `React on PR #${prInfo.number}: ${prInfo.title}`;
+        // Validate URL before assignment
+        if (this.validateUrl(prInfo.html_url)) {
+          githubLink.href = prInfo.html_url;
+          githubLink.style.display = 'flex';
+          githubLink.title = `React on PR #${prInfo.number}: ${this.sanitizeHtml(prInfo.title)}`;
+        }
       }
     }
 
@@ -325,7 +346,11 @@ class GitHubReactions {
 
     // If no reactions, show appropriate message
     if (Object.keys(reactionCounts).length === 0) {
-      container.innerHTML = '<div class="no-reactions">No reactions yet - be the first to react!</div>';
+      container.innerHTML = ''; // Clear safely
+      const noReactionsDiv = document.createElement('div');
+      noReactionsDiv.className = 'no-reactions';
+      noReactionsDiv.textContent = 'No reactions yet - be the first to react!';
+      container.appendChild(noReactionsDiv);
       return;
     }
 
@@ -337,34 +362,56 @@ class GitHubReactions {
       if (!devNotice) {
         devNotice = document.createElement('div');
         devNotice.className = 'reactions-dev-notice';
-        devNotice.innerHTML = `
-          <div style="background: #f0f8ff; border: 1px solid #0066cc; border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; font-size: 0.875rem; color: #0066cc;">
-            🧪 <strong>Development Mode:</strong> Showing mock reactions data. In production, this will display real GitHub reactions.
-          </div>
-        `;
+        
+        const noticeDiv = document.createElement('div');
+        noticeDiv.style.cssText = 'background: #f0f8ff; border: 1px solid #0066cc; border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; font-size: 0.875rem; color: #0066cc;';
+        
+        const iconSpan = document.createElement('span');
+        iconSpan.textContent = '🧪 ';
+        
+        const strongElement = document.createElement('strong');
+        strongElement.textContent = 'Development Mode: ';
+        
+        const textSpan = document.createElement('span');
+        textSpan.textContent = 'Showing mock reactions data. In production, this will display real GitHub reactions.';
+        
+        noticeDiv.appendChild(iconSpan);
+        noticeDiv.appendChild(strongElement);
+        noticeDiv.appendChild(textSpan);
+        devNotice.appendChild(noticeDiv);
+        
         parent.insertBefore(devNotice, container);
       }
     }
 
-    // Create reaction elements
-    const reactionsHTML = Object.entries(reactionCounts)
+    // Create reaction elements safely
+    container.innerHTML = ''; // Clear container safely
+    
+    Object.entries(reactionCounts)
       .sort(([,a], [,b]) => b - a) // Sort by count (highest first)
-      .map(([type, count]) => {
+      .forEach(([type, count]) => {
         const emoji = this.emojiMap[type] || '👍';
         const label = this.reactionLabels[type] || type;
         
-        return `
-          <div class="reaction-item" 
-               title="${count} ${label} reaction${count !== 1 ? 's' : ''}"
-               data-reaction="${type}">
-            <span class="reaction-emoji" role="img" aria-label="${label}">${emoji}</span>
-            <span class="reaction-count">${count}</span>
-          </div>
-        `;
-      })
-      .join('');
-
-    container.innerHTML = reactionsHTML;
+        const reactionDiv = document.createElement('div');
+        reactionDiv.className = 'reaction-item';
+        reactionDiv.title = `${count} ${label} reaction${count !== 1 ? 's' : ''}`;
+        reactionDiv.dataset.reaction = type;
+        
+        const emojiSpan = document.createElement('span');
+        emojiSpan.className = 'reaction-emoji';
+        emojiSpan.setAttribute('role', 'img');
+        emojiSpan.setAttribute('aria-label', label);
+        emojiSpan.textContent = emoji;
+        
+        const countSpan = document.createElement('span');
+        countSpan.className = 'reaction-count';
+        countSpan.textContent = count;
+        
+        reactionDiv.appendChild(emojiSpan);
+        reactionDiv.appendChild(countSpan);
+        container.appendChild(reactionDiv);
+      });
     
     // Add analytics event
     this.trackReactionsLoaded(slug, Object.keys(reactionCounts).length, reactions.length);
@@ -392,7 +439,11 @@ class GitHubReactions {
     const container = document.getElementById(`reactions-${slug}`);
     if (!container) return;
     
-    container.innerHTML = '<div class="no-reactions">No reactions found for this post</div>';
+    container.innerHTML = ''; // Clear safely
+    const noReactionsDiv = document.createElement('div');
+    noReactionsDiv.className = 'no-reactions';
+    noReactionsDiv.textContent = 'No reactions found for this post';
+    container.appendChild(noReactionsDiv);
   }
 
   // Render error state
@@ -400,7 +451,11 @@ class GitHubReactions {
     const container = document.getElementById(`reactions-${slug}`);
     if (!container) return;
     
-    container.innerHTML = `<div class="reactions-error">${message}</div>`;
+    container.innerHTML = ''; // Clear safely
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'reactions-error';
+    errorDiv.textContent = message;
+    container.appendChild(errorDiv);
   }
 
   // Analytics/tracking (optional)
@@ -411,9 +466,9 @@ class GitHubReactions {
       totalReactions
     });
     
-    // Example: Google Analytics event
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'reactions_loaded', {
+    // Example: Google Analytics event (only if gtag is available)
+    if (typeof window.gtag !== 'undefined') {
+      window.gtag('event', 'reactions_loaded', {
         'custom_parameter_1': slug,
         'custom_parameter_2': uniqueReactions,
         'value': totalReactions
@@ -425,6 +480,39 @@ class GitHubReactions {
   clearCache() {
     this.cache.clear();
     console.log('🧹 Reactions cache cleared');
+  }
+
+  // Validate and sanitize URLs to prevent security issues
+  validateUrl(url) {
+    try {
+      const parsed = new URL(url);
+      // Only allow GitHub URLs
+      return parsed.hostname === 'github.com' && parsed.protocol === 'https:';
+    } catch {
+      return false;
+    }
+  }
+
+  // Sanitize HTML content to prevent XSS
+  sanitizeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // Safe DOM manipulation without innerHTML
+  setTextContent(element, text) {
+    if (element) {
+      element.textContent = text;
+    }
+  }
+
+  // Safe DOM manipulation for HTML content
+  setSafeHtml(element, html) {
+    if (element) {
+      // Use textContent for safety, or implement proper sanitization
+      element.textContent = html;
+    }
   }
 }
 

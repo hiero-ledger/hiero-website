@@ -1,9 +1,9 @@
 +++
 title           = "Hiero Python SDK – Announcing Release v0.1.4"
 featured_image  = "/images/python/blog_posts/v0.1.4.jpg"
-date            = 2025-08-23T11:00:00+01:00
+date            = 2025-08-29T11:00:00+01:00
 categories      = ["Blog"]
-abstract        = "Release 0.1.4 just announced!"
+abstract        = "Release 0.1.4 announced!"
 [[authors]]
   name         = "exploreriii"
   organization = "Python SDK Team"

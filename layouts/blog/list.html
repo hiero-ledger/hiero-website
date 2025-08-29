@@ -1,0 +1,170 @@
+{{ define "main" }}
+<div id="hero" class="bg-gradient-to-br from-red-dark via-red to-red relative">
+  <div class="container py-20 sm:py-36 text-white text-center">
+    <h1 class="text-4xl sm:text-5xl leading-none relative mb-2.5">{{ .Title }}</h1>
+    <p class="text-[24px] tracking-[-0.081rem] sm:text-xl relative">{{ .Description }}</p>
+  </div>
+</div>
+
+<div id="blog-content" class="bg-white">
+  <div class="container pt-[80px] pb-[40px] sm:pt-[120px] sm:pb-[120px]">
+    
+    <!-- Blog intro content -->
+    <div class="prose lg:prose-xl mx-auto mb-16 text-center max-w-4xl">
+      {{ .Content }}
+    </div>
+
+    <!-- Blog posts grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {{ range .Pages.ByDate.Reverse }}
+        {{ if not .Draft }}
+          <article class="blog-post-card bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+            <div class="p-6">
+              <!-- Post meta -->
+              <div class="flex items-center text-sm text-gray-500 mb-4">
+                <time datetime="{{ .Date.Format "2006-01-02" }}">
+                  {{ .Date.Format "Jan 2, 2006" }}
+                </time>
+                {{ if .Params.author }}
+                  <span class="mx-2">•</span>
+                  <span>{{ .Params.author }}</span>
+                {{ end }}
+              </div>
+
+              <!-- Post title and excerpt -->
+              <h2 class="text-xl font-medium mb-3 leading-tight">
+                <a href="{{ .RelPermalink }}" class="text-black hover:text-red no-underline">
+                  {{ .Title }}
+                </a>
+              </h2>
+              
+              <p class="text-base text-gray-700 mb-4 line-clamp-3">
+                {{ .Description | default (.Summary | truncate 150) }}
+              </p>
+
+              <!-- Tags -->
+              {{ if .Params.tags }}
+                <div class="flex flex-wrap gap-2 mb-4">
+                  {{ range .Params.tags }}
+                    <span class="inline-flex items-center rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700">
+                      {{ . }}
+                    </span>
+                  {{ end }}
+                </div>
+              {{ end }}
+
+              <!-- Reactions and read more -->
+              <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                  {{ if .Params.github_pr }}
+                    <div id="reactions-preview-{{ .Params.github_pr }}" class="flex items-center space-x-2 text-sm text-gray-500">
+                      <span class="loading-reactions">Loading reactions...</span>
+                    </div>
+                  {{ end }}
+                </div>
+                <a href="{{ .RelPermalink }}" class="text-red hover:text-red-dark font-medium text-sm">
+                  Read more →
+                </a>
+              </div>
+            </div>
+          </article>
+        {{ end }}
+      {{ end }}
+    </div>
+
+    <!-- Empty state if no posts -->
+    {{ if eq (len .Pages) 0 }}
+      <div class="text-center py-16">
+        <h3 class="text-2xl font-medium text-gray-900 mb-4">No blog posts yet</h3>
+        <p class="text-lg text-gray-600 mb-8">Check back soon for updates from the Hiero community!</p>
+        <a href="/contribute" class="inline-flex items-center px-6 py-3 border border-red text-red hover:bg-red hover:text-white rounded-full font-medium">
+          Learn how to contribute
+        </a>
+      </div>
+    {{ end }}
+
+  </div>
+</div>
+
+<!-- GitHub Reactions Script for Preview Cards -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Find all reaction preview containers
+  const reactionPreviews = document.querySelectorAll('[id^="reactions-preview-"]');
+  
+  reactionPreviews.forEach(async function(container) {
+    const prNumber = container.id.replace('reactions-preview-', '');
+    
+    try {
+      const response = await fetch(`https://api.github.com/repos/hiero-ledger/hiero-website/pulls/${prNumber}/reactions`, {
+        headers: {
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      
+      if (response.ok) {
+        const reactions = await response.json();
+        const totalReactions = reactions.length;
+        
+        if (totalReactions > 0) {
+          // Count reaction types
+          const reactionCounts = reactions.reduce((counts, reaction) => {
+            counts[reaction.content] = (counts[reaction.content] || 0) + 1;
+            return counts;
+          }, {});
+          
+          // Find most popular reaction
+          const topReaction = Object.entries(reactionCounts)
+            .sort(([,a], [,b]) => b - a)[0];
+          
+          const reactionEmojis = {
+            '+1': '👍',
+            '-1': '👎', 
+            'laugh': '😄',
+            'confused': '😕',
+            'heart': '❤️',
+            'hooray': '🎉',
+            'rocket': '🚀',
+            'eyes': '👀'
+          };
+          
+          container.innerHTML = `
+            <span class="flex items-center space-x-1">
+              <span>${reactionEmojis[topReaction[0]] || '👍'}</span>
+              <span>${totalReactions}</span>
+            </span>
+          `;
+        } else {
+          container.innerHTML = '<span class="text-gray-400">No reactions yet</span>';
+        }
+      } else {
+        container.innerHTML = '<span class="text-gray-400">–</span>';
+      }
+    } catch (error) {
+      container.innerHTML = '<span class="text-gray-400">–</span>';
+    }
+  });
+});
+</script>
+
+<style>
+/* Line clamp utility for post excerpts */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Loading state animation */
+.loading-reactions {
+  opacity: 0.6;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+</style>
+{{ end }}

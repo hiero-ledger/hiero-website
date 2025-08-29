@@ -1,0 +1,304 @@
+{{ define "main" }}
+<div id="hero" class="bg-gradient-to-br from-red-dark via-red to-red relative">
+  <div class="container py-20 sm:py-36 text-white">
+    <div class="max-w-4xl mx-auto">
+      <!-- Post meta -->
+      <div class="flex items-center text-white-dark mb-6">
+        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+          {{ .Date.Format "January 2, 2006" }}
+        </time>
+        {{ if .Params.author }}
+          <span class="mx-2">•</span>
+          <span>{{ .Params.author }}</span>
+        {{ end }}
+        {{ if .ReadingTime }}
+          <span class="mx-2">•</span>
+          <span>{{ .ReadingTime }} min read</span>
+        {{ end }}
+      </div>
+
+      <!-- Post title -->
+      <h1 class="text-4xl sm:text-5xl leading-none relative mb-6">{{ .Title }}</h1>
+      
+      <!-- Post description -->
+      {{ if .Description }}
+        <p class="text-xl sm:text-2xl leading-relaxed text-white-dark">{{ .Description }}</p>
+      {{ end }}
+
+      <!-- Tags -->
+      {{ if .Params.tags }}
+        <div class="flex flex-wrap gap-2 mt-8">
+          {{ range .Params.tags }}
+            <span class="inline-flex items-center rounded-full bg-white bg-opacity-20 px-3 py-1 text-sm font-medium text-white">
+              {{ . }}
+            </span>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+<div id="blog-content" class="bg-white">
+  <div class="container pt-[80px] pb-[40px] sm:pt-[120px] sm:pb-[120px]">
+    <div class="max-w-4xl mx-auto">
+      
+      <!-- Blog post content -->
+      <div class="prose prose-lg max-w-none mb-12">
+        {{ .Content }}
+      </div>
+
+      <!-- Reactions section -->
+      {{ if .Params.github_pr }}
+        <div class="border-t border-gray-200 pt-8">
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-xl font-medium mb-4">Community Reactions</h3>
+            
+            <!-- Reactions display -->
+            <div id="reactions-{{ .Params.github_pr }}" class="reactions-container">
+              <div class="loading-state flex items-center space-x-2 text-gray-500">
+                <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-red"></div>
+                <span>Loading reactions from GitHub...</span>
+              </div>
+            </div>
+
+            <!-- Call to action -->
+            <div class="mt-6 p-4 bg-white rounded-lg border border-gray-200">
+              <p class="text-gray-700 mb-3">
+                <strong>Like this post?</strong> React to it on GitHub to let us know what content resonates with the community!
+              </p>
+              <a 
+                href="https://github.com/hiero-ledger/hiero-website/pull/{{ .Params.github_pr }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center px-4 py-2 bg-red text-white rounded-full hover:bg-red-dark transition-colors"
+              >
+                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path>
+                </svg>
+                React on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      {{ end }}
+
+      <!-- Navigation -->
+      <div class="flex justify-between items-center mt-12 pt-8 border-t border-gray-200">
+        <a href="/blog/" class="inline-flex items-center text-red hover:text-red-dark">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Back to Blog
+        </a>
+
+        <!-- Social sharing -->
+        <div class="flex items-center space-x-4">
+          <span class="text-gray-500">Share:</span>
+          <a 
+            href="https://twitter.com/intent/tweet?url={{ .Permalink | absURL }}&text={{ .Title }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-400 hover:text-gray-600"
+            aria-label="Share on Twitter"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+            </svg>
+          </a>
+          <a 
+            href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink | absURL }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-400 hover:text-gray-600"
+            aria-label="Share on LinkedIn"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GitHub Reactions Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const prNumber = {{ .Params.github_pr }};
+  const reactionsContainer = document.getElementById(`reactions-${prNumber}`);
+  
+  if (!reactionsContainer) return;
+
+  async function loadReactions() {
+    try {
+      const response = await fetch(`https://api.github.com/repos/hiero-ledger/hiero-website/pulls/${prNumber}/reactions`, {
+        headers: {
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const reactions = await response.json();
+      displayReactions(reactions);
+    } catch (error) {
+      console.warn('Failed to load reactions:', error);
+      displayError();
+    }
+  }
+
+  function displayReactions(reactions) {
+    const totalReactions = reactions.length;
+    
+    if (totalReactions === 0) {
+      reactionsContainer.innerHTML = `
+        <div class="text-center py-4">
+          <p class="text-gray-500 mb-2">No reactions yet</p>
+          <p class="text-sm text-gray-400">Be the first to react to this post on GitHub!</p>
+        </div>
+      `;
+      return;
+    }
+
+    // Count reaction types
+    const reactionCounts = reactions.reduce((counts, reaction) => {
+      counts[reaction.content] = (counts[reaction.content] || 0) + 1;
+      return counts;
+    }, {});
+
+    // Reaction emoji mapping
+    const reactionEmojis = {
+      '+1': '👍',
+      '-1': '👎',
+      'laugh': '😄',
+      'confused': '😕',
+      'heart': '❤️',
+      'hooray': '🎉',
+      'rocket': '🚀',
+      'eyes': '👀'
+    };
+
+    // Generate reaction display
+    const reactionElements = Object.entries(reactionCounts)
+      .filter(([type, count]) => count > 0)
+      .sort(([,a], [,b]) => b - a)
+      .map(([type, count]) => {
+        const emoji = reactionEmojis[type] || '👍';
+        return `
+          <span class="inline-flex items-center space-x-1 bg-white px-3 py-2 rounded-full border border-gray-200">
+            <span class="text-lg">${emoji}</span>
+            <span class="font-medium">${count}</span>
+          </span>
+        `;
+      });
+
+    reactionsContainer.innerHTML = `
+      <div class="flex flex-wrap gap-2 mb-4">
+        ${reactionElements.join('')}
+      </div>
+      <p class="text-sm text-gray-600">
+        <strong>${totalReactions}</strong> ${totalReactions === 1 ? 'reaction' : 'reactions'} on GitHub
+      </p>
+    `;
+  }
+
+  function displayError() {
+    reactionsContainer.innerHTML = `
+      <div class="text-center py-4">
+        <p class="text-gray-500">Unable to load reactions</p>
+        <p class="text-sm text-gray-400">Check back later or view directly on GitHub</p>
+      </div>
+    `;
+  }
+
+  // Load reactions
+  loadReactions();
+  // End of DOMContentLoaded event listener
+  // (missing opening for DOMContentLoaded)
+</script>
+
+<style>
+/* Prose styling for blog content */
+.prose {
+  color: #1E1E1E;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  color: #1E1E1E;
+  font-weight: 500;
+}
+
+.prose h2 {
+  font-size: 2rem;
+  line-height: 2.25rem;
+  letter-spacing: -0.167rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose h3 {
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+  letter-spacing: -0.094rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose p {
+  font-size: 1.125rem;
+  line-height: 1.438rem;
+  letter-spacing: -0.06rem;
+  margin-bottom: 1.5rem;
+}
+
+.prose a {
+  color: #B81A56;
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  color: #992350;
+}
+
+.prose ul, .prose ol {
+  margin-bottom: 1.5rem;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+}
+
+.prose blockquote {
+  border-left: 4px solid #B81A56;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #4B5563;
+}
+
+.prose code {
+  background-color: #F3F4F6;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.prose pre {
+  background-color: #1E1E1E;
+  color: #FFFFFF;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+}
+</style>
+{{ end }}

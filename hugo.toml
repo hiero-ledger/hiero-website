@@ -26,3 +26,33 @@ weight = 40
 name = 'Roadmap'
 url = '/#roadmap'
 weight = 50
+
+[[menu.main]]
+  name = "What is Hiero?"
+  url = "/#what-is-hiero"
+  weight = 10
+
+[[menu.main]]
+  name = "Open Source"
+  url = "/#open-source"
+  weight = 20
+
+[[menu.main]]
+  name = "Blog"
+  url = "/blog/"
+  weight = 30
+
+[[menu.main]]
+  name = "Contribute"
+  url = "/#contribute"
+  weight = 40
+
+[[menu.main]]
+  name = "Roadmap"
+  url = "/#roadmap"
+  weight = 50
+
+[[menu.main]]
+  name = "Connect"
+  url = "/#connect"
+  weight = 60

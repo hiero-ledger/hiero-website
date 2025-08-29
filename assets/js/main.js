@@ -1,3 +1,5 @@
+import { addCopyToClipboardButtons } from './copy-to-clipboard';
+
 /* Bio Modal */
 const initBioModal = () => {
 
@@ -74,6 +76,7 @@ const initMenu = () => {
 document.addEventListener('DOMContentLoaded', function () {
     initBioModal();
     initMenu();
+    addCopyToClipboardButtons('highlight');
 });
 
 // Bio modal functions (existing functionality)

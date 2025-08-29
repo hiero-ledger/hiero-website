@@ -1,6 +1,7 @@
 +++
 title = "Hiero"
 draft = false
+featured_image = '/images/Hiero_v4.png'
 
 section_hero_heading = "Hiero"
 section_hero_text = "Open Source Distributed Ledger Technology"
@@ -22,7 +23,7 @@ section_getting_started_text = '''
 <p>Since we are still working on the transition of the Hiero repositories from the <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera GitHub organization</a> into the <a href="https://github.com/hiero-ledger/" target="_blank" rel="noreferrer noopener">Hiero GitHub organization</a>, many opportunities for contribution can be initiated at the Hedera’s GitHub organization today.</p>
 <p>While in this transition phase we already want to enable developers to join in developing Hiero and its related projects. As such, we’re always willing to help you get started and mentor you on your journey of learning the project and making useful contributions.</p>
 <p>
-There is good work to do for everyone with whatever skillset you have - and it doesn’t have to be code. We also welcome help with documentation, design, project organization, and organizing meetups. For instance, at <a href="/hacktoberfest">Hacktoberfest</a> we have a huge list of good first issues that let the community do the first contributions, several of which will help us remove Hedera naming and usage from the code and truly make it vendor neutral.</p>
+There is good work to do for everyone with whatever skillset you have - and it doesn’t have to be code. We also welcome help with documentation, design, project organization, and organizing meetups. For example, during one of our previous <a href="/hacktoberfest">community contribution events</a>, we curated a large list of beginner-friendly issues to encourage first-time contributions. Several of these issues focused on removing "Hedera" specific naming and usage from the codebase to help identify the project as vendor neutral.</p>
 <p>
 If you have any questions or need help or additional mentoring, then you can reach out to the community and the technical steering committee (TSC) of Hiero in our <a href="https://github.com/orgs/hiero-ledger/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a>.</p>
 '''
@@ -34,6 +35,12 @@ section_connect_text = '''
 For us, the community of the open-source project is a crucial part of its success. Based on that we will concentrate on the integration of the community. As defined in the roadmap, we will integrate the community into the development of Hiero from day 1. An essential part of that is to have community members be part of the TSC. Here the TSC is working on voting mechanisms that allow us to create a diverse community.</p>
 <p>
 Next to the TSC, we want to invest in a diverse and inclusive community. It is important to us that everyone, regardless of knowledge and background, can become an active contributor to Hiero. To enable that, we plan to hire at least one community manager in the near future and provide open documentation and teaching resources.</p>
+'''
+
+section_meet_heading = "Join our TSC and Community Calls"
+section_meet_text = '''
+<p>Join our open TSC, Community and Project meetings. We welcome your opinion and invite you to collaborate with the team!</p>
+<p>
 '''
 
 section_technical_steering_committee_heading = "The Technical Steering Committee of Hiero"

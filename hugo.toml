@@ -1,6 +1,14 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://hiero.org/'
 languageCode = 'en-us'
 title = 'Hiero'
+
+[[module.mounts]]
+source = 'static'
+target = 'static'
+
+[[module.mounts]]
+source = 'images'
+target = 'static/images'
 
 [[menus.main]]
 name = 'Home'
@@ -26,6 +34,56 @@ weight = 40
 name = 'Roadmap'
 url = '/#roadmap'
 weight = 50
+
+[[menus.main]]
+name = 'Blog'
+url = '/blog/'
+weight = 60
+
+[[menus.main]]
+name = 'Calendar'
+url = 'https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week'
+weight = 70
+
+[permalinks]
+  [permalinks.page]
+    posts = '/blog/:slug/'
+  [permalinks.section]
+    posts = '/blog/'
+
+[params.blog.list]
+displayTags = true
+sortBy = "date"
+sortOrder = "desc"
+
+[params.blog.article]
+displayPagination = false
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[markup]
+  [markup.highlight]
+    style = 'monokai'
+
+[params]
+fallbackBlogFeaturedImage = '/images/HI60000_GetInvolvedBanner_V1.jpg'
+enableImageLazyLoading = true
+
+[params.shareButtons]
+networks = [ "linkedin", "telegram", "twitter", "email" ]
+size = "small"
+icon = "solid"
+buttonMargin = "0.2em"
+
+[related]
+threshold = 80
+includeNewer = true
+toLower = true
+
+[[related.indices]]
+name = "tags"
+weight = 100
 
 [[menu.main]]
   name = "What is Hiero?"

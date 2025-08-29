@@ -30,7 +30,7 @@
                         {{- $joinTitleAndOrganizationWith := " " -}}  
                         {{- if and ($author.title) ($author.organization) }}
                             {{ $joinTitleAndOrganizationWith = ", " }}  
-                        {{ end -}}
+                        {{- end -}}
                         {{- if or ($author.title) ($author.organization) }}
                         <p class="m-0">{{- if $author.title }}{{ $author.title }}{{ end -}}{{$joinTitleAndOrganizationWith}}{{- if $author.organization }}{{ $author.organization }}{{ end -}}</p>
                         {{- end -}}
@@ -48,6 +48,12 @@
             <main class="w-full min-w-0 max-w-[800px] mx-auto">
                 <div class="content text-sm text-charcoal font-normal sm:text-base">                
                 {{ .Content | safeHTML }}
+                
+                <!-- GitHub Reactions -->
+                <div class="mt-8">
+                    {{ partial "github-reactions.html" . }}
+                </div>
+                
                     <div class="mt-11 mx-auto w-fit">
                     {{ partial "share-buttons.html" . }}
                     </div>

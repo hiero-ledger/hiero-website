@@ -1,10 +1,11 @@
 +++
 title = 'TSC Voting Process'
 featured_image = "/images/tsc-voting-process-post/TSCVotingProcessBanner_V1.jpg"
-date = 2025-04-29T10:12:50-07:00
+date = 2024-12-29T10:12:50-07:00
 categories = ["Blog"]
 duration = ""
-abstract = "We’ll walk you through the steps to cast your vote, the criteria for eligibility, and the tools you’ll use to participate."
+abstract = "We'll walk you through the steps to cast your vote, the criteria for eligibility, and the tools you'll use to participate."
+pr_number = "123"
 [[authors]]
 name = "Hiero Team"
 title = ""

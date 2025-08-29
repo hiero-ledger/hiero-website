@@ -116,5 +116,17 @@ Reference the assets with a relative path such as **images/my-firt-post-image.jp
 #### Sharing
 The Hiero website uses [Hugo Share Buttons](https://github.com/Stals/hugo-share-buttons) for post sharing functionality.
 
+#### GitHub Reactions
+The Hiero website includes a GitHub reactions system that displays community reactions from Pull Requests on blog posts. This feature helps measure community engagement without requiring a backend.
+
+To enable reactions on a blog post, add a `pr_number` field to the frontmatter:
+```
+pr_number = "123"  # GitHub PR number
+```
+
+If no PR number is specified, the system will automatically search for PRs that modified the blog post file.
+
+For detailed usage instructions, see [docs/github-reactions-usage.md](docs/github-reactions-usage.md).
+
 #### Settings
 Additional settings can be found in the **hugo.toml** configuration file.

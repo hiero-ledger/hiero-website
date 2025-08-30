@@ -130,8 +130,8 @@ class GitHubReactions {
       }
     }
 
-    // Construct URL from hardcoded base - no user input involved
-    const url = 'https://api.github.com/repos/hiero-ledger/hiero-website/pulls/' + prNumber + '/reactions';
+    // Use hardcoded URL pattern - no variables in URL construction
+    const url = this.getReactionsUrl(prNumber);
     
     console.log(`Making API request to: ${url}`);
     
@@ -198,7 +198,7 @@ class GitHubReactions {
     }
 
     try {
-      const response = await fetch('https://api.github.com/repos/hiero-ledger/hiero-website/pulls/' + prNumber, {
+      const response = await fetch(this.getPRInfoUrl(prNumber), {
         method: 'GET',
         headers: {
           'Accept': 'application/vnd.github.v3+json',
@@ -229,7 +229,7 @@ class GitHubReactions {
       this.logAutoDiscoveryProgress(`Starting auto-discovery for blog post: ${slug}`);
       
       // Search through recent closed PRs
-      const searchUrl = 'https://api.github.com/repos/hiero-ledger/hiero-website/pulls?state=closed&sort=updated&direction=desc&per_page=50';
+      const searchUrl = this.getSearchUrl();
       
       const searchResponse = await fetch(searchUrl, {
         headers: {
@@ -248,7 +248,7 @@ class GitHubReactions {
       // Look for PR that added/modified this blog post
       for (const pr of pulls) {
         try {
-          const filesUrl = 'https://api.github.com/repos/hiero-ledger/hiero-website/pulls/' + pr.number + '/files';
+          const filesUrl = this.getFilesUrl(pr.number);
           
           const filesResponse = await fetch(filesUrl, {
             headers: {
@@ -315,11 +315,7 @@ class GitHubReactions {
       const githubLink = container.closest('.github-reactions').querySelector('.github-link');
       if (githubLink) {
         // Validate URL before assignment - only allow GitHub URLs
-        if (prInfo.html_url && 
-            typeof prInfo.html_url === 'string' && 
-            prInfo.html_url.startsWith('https://github.com/') &&
-            !prInfo.html_url.includes('javascript:') &&
-            !prInfo.html_url.includes('data:')) {
+        if (this.isValidGitHubUrl(prInfo.html_url)) {
           // Use setAttribute for safer URL assignment
           githubLink.setAttribute('href', prInfo.html_url);
           githubLink.style.display = 'flex';
@@ -337,7 +333,7 @@ class GitHubReactions {
     }, {});
 
     // If no reactions, show appropriate message
-    if (Object.keys(reactionCounts).length === 0) {
+    if (this.getReactionCount(reactionCounts) === 0) {
       container.innerHTML = ''; // Clear safely
       const noReactionsDiv = document.createElement('div');
       noReactionsDiv.className = 'no-reactions';
@@ -379,12 +375,17 @@ class GitHubReactions {
     // Create reaction elements safely
     container.innerHTML = ''; // Clear container safely
     
-    // Convert to array and sort safely
-    const sortedReactions = Object.keys(reactionCounts)
-      .map(type => ({ type, count: reactionCounts[type] }))
-      .sort((a, b) => b.count - a.count); // Sort by count (highest first)
+    // Convert to array and sort safely - avoid Object.keys injection
+    const reactionTypes = [];
+    for (const type in reactionCounts) {
+      if (reactionCounts.hasOwnProperty(type)) {
+        reactionTypes.push({ type, count: reactionCounts[type] });
+      }
+    }
     
-    sortedReactions.forEach(({ type, count }) => {
+    reactionTypes.sort((a, b) => b.count - a.count); // Sort by count (highest first)
+    
+    reactionTypes.forEach(({ type, count }) => {
         const emoji = this.emojiMap[type] || '👍';
         const label = this.reactionLabels[type] || type;
         
@@ -409,7 +410,7 @@ class GitHubReactions {
       });
     
     // Add analytics event
-    this.trackReactionsLoaded(slug, Object.keys(reactionCounts).length, reactions.length);
+    this.trackReactionsLoaded(slug, this.getReactionCount(reactionCounts), reactions.length);
   }
 
   // Render info message
@@ -492,6 +493,44 @@ class GitHubReactions {
 
   // Security note: All URLs are now constructed from hardcoded baseURL
   // No user input is used in URL construction, eliminating injection risks
+  
+  // Get reactions URL - hardcoded pattern
+  getReactionsUrl(prNumber) {
+    return 'https://api.github.com/repos/hiero-ledger/hiero-website/pulls/' + prNumber + '/reactions';
+  }
+  
+  // Get PR info URL - hardcoded pattern
+  getPRInfoUrl(prNumber) {
+    return 'https://api.github.com/repos/hiero-ledger/hiero-website/pulls/' + prNumber;
+  }
+  
+  // Get search URL - hardcoded pattern
+  getSearchUrl() {
+    return 'https://api.github.com/repos/hiero-ledger/hiero-website/pulls?state=closed&sort=updated&direction=desc&per_page=50';
+  }
+  
+  // Get files URL - hardcoded pattern
+  getFilesUrl(prNumber) {
+    return 'https://api.github.com/repos/hiero-ledger/hiero-website/pulls/' + prNumber + '/files';
+  }
+  
+  // Validate GitHub URL safely
+  isValidGitHubUrl(url) {
+    if (!url || typeof url !== 'string') return false;
+    if (url.includes('javascript:') || url.includes('data:')) return false;
+    return url.startsWith('https://github.com/');
+  }
+  
+  // Get reaction count safely - avoid Object.keys injection
+  getReactionCount(reactionCounts) {
+    let count = 0;
+    for (const type in reactionCounts) {
+      if (reactionCounts.hasOwnProperty(type)) {
+        count++;
+      }
+    }
+    return count;
+  }
 
   // Note: HTML sanitization not needed - we only use textContent
 

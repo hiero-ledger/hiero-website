@@ -230,14 +230,14 @@ class GitHubReactions {
   // Find PR by searching through recent PRs (fallback method)
   async findAndLoadReactions(slug) {
     try {
-      console.log(`🔍 Auto-discovering PR for blog post: ${slug}`);
+      this.logAutoDiscoveryProgress(`Starting auto-discovery for blog post: ${slug}`);
       
       // Search through recent closed PRs
       const searchUrl = `${this.baseURL}/pulls?state=closed&sort=updated&direction=desc&per_page=50`;
       
       // Validate URL to prevent security issues
       if (!this.validateUrl(searchUrl)) {
-        throw new Error('Invalid search URL detected');
+        throw new Error('Auto-discovery failed: Invalid search URL');
       }
       
       const searchResponse = await fetch(searchUrl, {
@@ -252,7 +252,7 @@ class GitHubReactions {
       }
       
       const pulls = await searchResponse.json();
-      console.log(`Searching through ${pulls.length} recent PRs...`);
+      this.logAutoDiscoveryProgress(`Searching through ${pulls.length} recent PRs...`);
       
       // Look for PR that added/modified this blog post
       for (const pr of pulls) {
@@ -261,7 +261,7 @@ class GitHubReactions {
           
           // Validate URL to prevent security issues
           if (!this.validateUrl(filesUrl)) {
-            console.warn(`Invalid files URL detected for PR #${pr.number}`);
+            console.warn(`Auto-discovery: Invalid files URL for PR #${pr.number}`);
             continue;
           }
           
@@ -290,7 +290,7 @@ class GitHubReactions {
           });
           
           if (hasPostFile) {
-            console.log(`✅ Found matching PR #${pr.number}: "${pr.title}"`);
+            this.logAutoDiscoveryProgress(`Found matching PR #${pr.number}: "${pr.title}"`);
             
             // Show info message about auto-discovery
             this.renderInfo(slug, `Found reactions from PR #${pr.number}: "${pr.title}"`);
@@ -305,7 +305,7 @@ class GitHubReactions {
         }
       }
       
-      console.log(`❌ No matching PR found for blog post: ${slug}`);
+      this.logAutoDiscoveryProgress(`No matching PR found for blog post: ${slug}`);
       this.renderNoReactions(slug);
       
     } catch (error) {
@@ -439,17 +439,23 @@ class GitHubReactions {
     const container = document.getElementById(`reactions-${slug}`);
     if (!container) return;
     
-    container.innerHTML = ''; // Clear safely
-    const noReactionsDiv = document.createElement('div');
-    noReactionsDiv.className = 'no-reactions';
-    noReactionsDiv.textContent = 'No reactions found for this post';
-    container.appendChild(noReactionsDiv);
+    // Hide the entire reactions component when no PR is found
+    const reactionsWrapper = container.closest('.github-reactions');
+    if (reactionsWrapper) {
+      reactionsWrapper.style.display = 'none';
+    }
   }
 
   // Render error state
   renderError(slug, message = 'Unable to load reactions') {
     const container = document.getElementById(`reactions-${slug}`);
     if (!container) return;
+    
+    // For auto-discovery errors, hide the component instead of showing error
+    if (message.includes('Invalid search URL') || message.includes('auto-discovery')) {
+      this.renderNoReactions(slug);
+      return;
+    }
     
     container.innerHTML = ''; // Clear safely
     const errorDiv = document.createElement('div');
@@ -482,12 +488,20 @@ class GitHubReactions {
     console.log('🧹 Reactions cache cleared');
   }
 
+  // Log auto-discovery progress for debugging
+  logAutoDiscoveryProgress(message, data = null) {
+    if (this.isDevelopment) {
+      console.log(`🔍 Auto-Discovery: ${message}`, data || '');
+    }
+  }
+
   // Validate and sanitize URLs to prevent security issues
   validateUrl(url) {
     try {
       const parsed = new URL(url);
-      // Only allow GitHub URLs
-      return parsed.hostname === 'github.com' && parsed.protocol === 'https:';
+      // Allow both github.com and api.github.com URLs
+      const validHostnames = ['github.com', 'api.github.com'];
+      return validHostnames.includes(parsed.hostname) && parsed.protocol === 'https:';
     } catch {
       return false;
     }

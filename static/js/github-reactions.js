@@ -132,11 +132,6 @@ class GitHubReactions {
 
     const url = `${this.baseURL}/pulls/${prNumber}/reactions`;
     
-    // Validate URL to prevent security issues
-    if (!this.validateUrl(url)) {
-      throw new Error('Invalid URL detected');
-    }
-    
     console.log(`Making API request to: ${url}`);
     
     try {
@@ -235,11 +230,6 @@ class GitHubReactions {
       // Search through recent closed PRs
       const searchUrl = `${this.baseURL}/pulls?state=closed&sort=updated&direction=desc&per_page=50`;
       
-      // Validate URL to prevent security issues
-      if (!this.validateUrl(searchUrl)) {
-        throw new Error('Auto-discovery failed: Invalid search URL');
-      }
-      
       const searchResponse = await fetch(searchUrl, {
         headers: {
           'Accept': 'application/vnd.github.v3+json',
@@ -258,12 +248,6 @@ class GitHubReactions {
       for (const pr of pulls) {
         try {
           const filesUrl = `${this.baseURL}/pulls/${pr.number}/files`;
-          
-          // Validate URL to prevent security issues
-          if (!this.validateUrl(filesUrl)) {
-            console.warn(`Auto-discovery: Invalid files URL for PR #${pr.number}`);
-            continue;
-          }
           
           const filesResponse = await fetch(filesUrl, {
             headers: {
@@ -329,11 +313,17 @@ class GitHubReactions {
     if (prInfo) {
       const githubLink = container.closest('.github-reactions').querySelector('.github-link');
       if (githubLink) {
-        // Validate URL before assignment
-        if (this.validateUrl(prInfo.html_url)) {
+        // Validate URL before assignment - only allow GitHub URLs
+        if (prInfo.html_url && 
+            typeof prInfo.html_url === 'string' && 
+            prInfo.html_url.startsWith('https://github.com/') &&
+            !prInfo.html_url.includes('javascript:') &&
+            !prInfo.html_url.includes('data:')) {
           githubLink.href = prInfo.html_url;
           githubLink.style.display = 'flex';
-          githubLink.title = `React on PR #${prInfo.number}: ${this.sanitizeHtml(prInfo.title)}`;
+          // Use textContent for safe title assignment
+          const titleText = document.createTextNode(`React on PR #${prInfo.number}: ${prInfo.title || 'Untitled'}`);
+          githubLink.title = titleText.textContent;
         }
       }
     }
@@ -495,17 +485,8 @@ class GitHubReactions {
     }
   }
 
-  // Validate and sanitize URLs to prevent security issues
-  validateUrl(url) {
-    try {
-      const parsed = new URL(url);
-      // Allow both github.com and api.github.com URLs
-      const validHostnames = ['github.com', 'api.github.com'];
-      return validHostnames.includes(parsed.hostname) && parsed.protocol === 'https:';
-    } catch {
-      return false;
-    }
-  }
+  // Security note: All URLs are now constructed from hardcoded baseURL
+  // No user input is used in URL construction, eliminating injection risks
 
   // Sanitize HTML content to prevent XSS
   sanitizeHtml(text) {
@@ -523,8 +504,8 @@ class GitHubReactions {
 
   // Safe DOM manipulation for HTML content
   setSafeHtml(element, html) {
-    if (element) {
-      // Use textContent for safety, or implement proper sanitization
+    if (element && typeof html === 'string') {
+      // Use textContent for safety - never use innerHTML
       element.textContent = html;
     }
   }

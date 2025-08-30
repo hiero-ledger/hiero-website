@@ -130,7 +130,8 @@ class GitHubReactions {
       }
     }
 
-    const url = `${this.baseURL}/pulls/${prNumber}/reactions`;
+    // Construct URL from hardcoded base - no user input involved
+    const url = 'https://api.github.com/repos/hiero-ledger/hiero-website/pulls/' + prNumber + '/reactions';
     
     console.log(`Making API request to: ${url}`);
     
@@ -197,7 +198,7 @@ class GitHubReactions {
     }
 
     try {
-      const response = await fetch(`${this.baseURL}/pulls/${prNumber}`, {
+      const response = await fetch('https://api.github.com/repos/hiero-ledger/hiero-website/pulls/' + prNumber, {
         method: 'GET',
         headers: {
           'Accept': 'application/vnd.github.v3+json',
@@ -228,7 +229,7 @@ class GitHubReactions {
       this.logAutoDiscoveryProgress(`Starting auto-discovery for blog post: ${slug}`);
       
       // Search through recent closed PRs
-      const searchUrl = `${this.baseURL}/pulls?state=closed&sort=updated&direction=desc&per_page=50`;
+      const searchUrl = 'https://api.github.com/repos/hiero-ledger/hiero-website/pulls?state=closed&sort=updated&direction=desc&per_page=50';
       
       const searchResponse = await fetch(searchUrl, {
         headers: {
@@ -247,7 +248,7 @@ class GitHubReactions {
       // Look for PR that added/modified this blog post
       for (const pr of pulls) {
         try {
-          const filesUrl = `${this.baseURL}/pulls/${pr.number}/files`;
+          const filesUrl = 'https://api.github.com/repos/hiero-ledger/hiero-website/pulls/' + pr.number + '/files';
           
           const filesResponse = await fetch(filesUrl, {
             headers: {
@@ -319,11 +320,12 @@ class GitHubReactions {
             prInfo.html_url.startsWith('https://github.com/') &&
             !prInfo.html_url.includes('javascript:') &&
             !prInfo.html_url.includes('data:')) {
-          githubLink.href = prInfo.html_url;
+          // Use setAttribute for safer URL assignment
+          githubLink.setAttribute('href', prInfo.html_url);
           githubLink.style.display = 'flex';
           // Use textContent for safe title assignment
           const titleText = document.createTextNode(`React on PR #${prInfo.number}: ${prInfo.title || 'Untitled'}`);
-          githubLink.title = titleText.textContent;
+          githubLink.setAttribute('title', titleText.textContent);
         }
       }
     }
@@ -377,9 +379,12 @@ class GitHubReactions {
     // Create reaction elements safely
     container.innerHTML = ''; // Clear container safely
     
-    Object.entries(reactionCounts)
-      .sort(([,a], [,b]) => b - a) // Sort by count (highest first)
-      .forEach(([type, count]) => {
+    // Convert to array and sort safely
+    const sortedReactions = Object.keys(reactionCounts)
+      .map(type => ({ type, count: reactionCounts[type] }))
+      .sort((a, b) => b.count - a.count); // Sort by count (highest first)
+    
+    sortedReactions.forEach(({ type, count }) => {
         const emoji = this.emojiMap[type] || '👍';
         const label = this.reactionLabels[type] || type;
         
@@ -488,12 +493,7 @@ class GitHubReactions {
   // Security note: All URLs are now constructed from hardcoded baseURL
   // No user input is used in URL construction, eliminating injection risks
 
-  // Sanitize HTML content to prevent XSS
-  sanitizeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
+  // Note: HTML sanitization not needed - we only use textContent
 
   // Safe DOM manipulation without innerHTML
   setTextContent(element, text) {
@@ -502,11 +502,10 @@ class GitHubReactions {
     }
   }
 
-  // Safe DOM manipulation for HTML content
-  setSafeHtml(element, html) {
-    if (element && typeof html === 'string') {
-      // Use textContent for safety - never use innerHTML
-      element.textContent = html;
+  // Safe DOM manipulation for text content only
+  setSafeText(element, text) {
+    if (element && typeof text === 'string') {
+      element.textContent = text;
     }
   }
 }

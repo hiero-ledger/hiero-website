@@ -73,6 +73,6 @@ And join our community meetings:
 ---
 
 ## 🙌 Thanks to Our Contributors
-Big thanks to **Dosik13, nadineloepfe, ivaylonikolov7, manishdait, anirudhsengar, rbarker-dev, 0xJohnZW, Mounil2005, piyush588**, and many more for making this release happen.
+Big thanks to [**Dosik13**](https://github.com/Dosik13), [**nadineloepfe**](https://github.com/nadineloepfe), [**ivaylonikolov7**](https://github.com/ivaylonikolov7), [**manishdait**](https://github.com/manishdait), [**anirudhsengar**](https://github.com/anirudhsengar), [**rbarker-dev**](https://github.com/rbarker-dev), [**0xJohnZW**](https://github.com/0xJohnZW), [**Mounil2005**](https://github.com/Mounil2005), [**piyush588**](https://github.com/piyush588), and many more for making this release happen.
 
 We’re excited to see what the community builds next! 🚀

@@ -55,6 +55,10 @@
   opacity: 0.8;
 }
 
+.github-link:not(.loaded) {
+  display: none;
+}
+
 .github-link:hover {
   background: rgba(9, 105, 218, 0.1);
   opacity: 1;

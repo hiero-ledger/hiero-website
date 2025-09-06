@@ -130,9 +130,8 @@ class GitHubReactions {
       }
     }
 
-    // Use hardcoded URL pattern - no variables in URL construction
-    const url = this.getReactionsUrl(prNumber);
-    
+    // Use the secure URL builder method
+    const url = this.buildReactionsUrl(prNumber);
     console.log(`Making API request to: ${url}`);
     
     try {
@@ -198,7 +197,8 @@ class GitHubReactions {
     }
 
     try {
-      const response = await fetch(this.getPRInfoUrl(prNumber), {
+      // Use the secure URL builder method
+      const response = await fetch(this.buildPRInfoUrl(prNumber), {
         method: 'GET',
         headers: {
           'Accept': 'application/vnd.github.v3+json',
@@ -229,7 +229,7 @@ class GitHubReactions {
       this.logAutoDiscoveryProgress(`Starting auto-discovery for blog post: ${slug}`);
       
       // Search through recent closed PRs
-      const searchUrl = this.getSearchUrl();
+      const searchUrl = this.buildSearchUrl();
       
       const searchResponse = await fetch(searchUrl, {
         headers: {
@@ -248,7 +248,7 @@ class GitHubReactions {
       // Look for PR that added/modified this blog post
       for (const pr of pulls) {
         try {
-          const filesUrl = this.getFilesUrl(pr.number);
+          const filesUrl = this.buildFilesUrl(pr.number);
           
           const filesResponse = await fetch(filesUrl, {
             headers: {
@@ -320,21 +320,18 @@ class GitHubReactions {
           githubLink.setAttribute('href', prInfo.html_url);
           githubLink.style.display = 'flex';
           // Use textContent for safe title assignment
-          const titleText = document.createTextNode(`React on PR #${prInfo.number}: ${prInfo.title || 'Untitled'}`);
-          githubLink.setAttribute('title', titleText.textContent);
+          const titleText = `React on PR #${prInfo.number}: ${prInfo.title || 'Untitled'}`;
+          githubLink.setAttribute('title', titleText);
         }
       }
     }
 
     // Group reactions by type and count them
-    const reactionCounts = reactions.reduce((acc, reaction) => {
-      acc[reaction.content] = (acc[reaction.content] || 0) + 1;
-      return acc;
-    }, {});
+    const reactionCounts = this.groupReactionsByType(reactions);
 
     // If no reactions, show appropriate message
     if (this.getReactionCount(reactionCounts) === 0) {
-      container.innerHTML = ''; // Clear safely
+      this.clearContainer(container);
       const noReactionsDiv = document.createElement('div');
       noReactionsDiv.className = 'no-reactions';
       noReactionsDiv.textContent = 'No reactions yet - be the first to react!';
@@ -344,41 +341,37 @@ class GitHubReactions {
 
     // Show development notice if using mock data
     if (isMockData) {
-      const parent = container.parentElement;
-      let devNotice = parent.querySelector('.reactions-dev-notice');
-      
-      if (!devNotice) {
-        devNotice = document.createElement('div');
-        devNotice.className = 'reactions-dev-notice';
-        
-        const noticeDiv = document.createElement('div');
-        noticeDiv.style.cssText = 'background: #f0f8ff; border: 1px solid #0066cc; border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; font-size: 0.875rem; color: #0066cc;';
-        
-        const iconSpan = document.createElement('span');
-        iconSpan.textContent = '🧪 ';
-        
-        const strongElement = document.createElement('strong');
-        strongElement.textContent = 'Development Mode: ';
-        
-        const textSpan = document.createElement('span');
-        textSpan.textContent = 'Showing mock reactions data. In production, this will display real GitHub reactions.';
-        
-        noticeDiv.appendChild(iconSpan);
-        noticeDiv.appendChild(strongElement);
-        noticeDiv.appendChild(textSpan);
-        devNotice.appendChild(noticeDiv);
-        
-        parent.insertBefore(devNotice, container);
-      }
+      this.showDevelopmentNotice(container);
     }
 
     // Create reaction elements safely
-    container.innerHTML = ''; // Clear container safely
+    this.clearContainer(container);
+    this.renderReactionItems(container, reactionCounts);
     
-    // Convert to array and sort safely - avoid Object.keys injection
+    // Add analytics event
+    this.trackReactionsLoaded(slug, this.getReactionCount(reactionCounts), reactions.length);
+  }
+
+  // Group reactions by type safely
+  groupReactionsByType(reactions) {
+    const reactionCounts = {};
+    
+    reactions.forEach(reaction => {
+      const content = reaction.content;
+      if (typeof content === 'string' && content.length > 0) {
+        reactionCounts[content] = (reactionCounts[content] || 0) + 1;
+      }
+    });
+    
+    return reactionCounts;
+  }
+
+  // Render individual reaction items
+  renderReactionItems(container, reactionCounts) {
+    // Convert to array and sort safely
     const reactionTypes = [];
     for (const type in reactionCounts) {
-      if (reactionCounts.hasOwnProperty(type)) {
+      if (Object.prototype.hasOwnProperty.call(reactionCounts, type)) {
         reactionTypes.push({ type, count: reactionCounts[type] });
       }
     }
@@ -386,31 +379,65 @@ class GitHubReactions {
     reactionTypes.sort((a, b) => b.count - a.count); // Sort by count (highest first)
     
     reactionTypes.forEach(({ type, count }) => {
-        const emoji = this.emojiMap[type] || '👍';
-        const label = this.reactionLabels[type] || type;
-        
-        const reactionDiv = document.createElement('div');
-        reactionDiv.className = 'reaction-item';
-        reactionDiv.title = `${count} ${label} reaction${count !== 1 ? 's' : ''}`;
-        reactionDiv.dataset.reaction = type;
-        
-        const emojiSpan = document.createElement('span');
-        emojiSpan.className = 'reaction-emoji';
-        emojiSpan.setAttribute('role', 'img');
-        emojiSpan.setAttribute('aria-label', label);
-        emojiSpan.textContent = emoji;
-        
-        const countSpan = document.createElement('span');
-        countSpan.className = 'reaction-count';
-        countSpan.textContent = count;
-        
-        reactionDiv.appendChild(emojiSpan);
-        reactionDiv.appendChild(countSpan);
-        container.appendChild(reactionDiv);
-      });
+      const emoji = this.emojiMap[type] || '👍';
+      const label = this.reactionLabels[type] || type;
+      
+      const reactionDiv = document.createElement('div');
+      reactionDiv.className = 'reaction-item';
+      reactionDiv.title = `${count} ${label} reaction${count !== 1 ? 's' : ''}`;
+      reactionDiv.dataset.reaction = type;
+      
+      const emojiSpan = document.createElement('span');
+      emojiSpan.className = 'reaction-emoji';
+      emojiSpan.setAttribute('role', 'img');
+      emojiSpan.setAttribute('aria-label', label);
+      emojiSpan.textContent = emoji;
+      
+      const countSpan = document.createElement('span');
+      countSpan.className = 'reaction-count';
+      countSpan.textContent = count;
+      
+      reactionDiv.appendChild(emojiSpan);
+      reactionDiv.appendChild(countSpan);
+      container.appendChild(reactionDiv);
+    });
+  }
+
+  // Show development notice
+  showDevelopmentNotice(container) {
+    const parent = container.parentElement;
+    let devNotice = parent.querySelector('.reactions-dev-notice');
     
-    // Add analytics event
-    this.trackReactionsLoaded(slug, this.getReactionCount(reactionCounts), reactions.length);
+    if (!devNotice) {
+      devNotice = document.createElement('div');
+      devNotice.className = 'reactions-dev-notice';
+      
+      const noticeDiv = document.createElement('div');
+      noticeDiv.style.cssText = 'background: #f0f8ff; border: 1px solid #0066cc; border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; font-size: 0.875rem; color: #0066cc;';
+      
+      const iconSpan = document.createElement('span');
+      iconSpan.textContent = '🧪 ';
+      
+      const strongElement = document.createElement('strong');
+      strongElement.textContent = 'Development Mode: ';
+      
+      const textSpan = document.createElement('span');
+      textSpan.textContent = 'Showing mock reactions data. In production, this will display real GitHub reactions.';
+      
+      noticeDiv.appendChild(iconSpan);
+      noticeDiv.appendChild(strongElement);
+      noticeDiv.appendChild(textSpan);
+      devNotice.appendChild(noticeDiv);
+      
+      parent.insertBefore(devNotice, container);
+    }
+  }
+
+  // Clear container safely
+  clearContainer(container) {
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
   }
 
   // Render info message
@@ -453,7 +480,7 @@ class GitHubReactions {
       return;
     }
     
-    container.innerHTML = ''; // Clear safely
+    this.clearContainer(container);
     const errorDiv = document.createElement('div');
     errorDiv.className = 'reactions-error';
     errorDiv.textContent = message;
@@ -491,27 +518,34 @@ class GitHubReactions {
     }
   }
 
-  // Security note: All URLs are now constructed from hardcoded baseURL
-  // No user input is used in URL construction, eliminating injection risks
-  
-  // Get reactions URL - hardcoded pattern
-  getReactionsUrl(prNumber) {
-    return 'https://api.github.com/repos/hiero-ledger/hiero-website/pulls/' + prNumber + '/reactions';
+  // Secure URL builders - hardcoded patterns to prevent injection
+  buildReactionsUrl(prNumber) {
+    // Validate PR number is numeric
+    const numericPR = parseInt(prNumber, 10);
+    if (isNaN(numericPR) || numericPR < 1) {
+      throw new Error('Invalid PR number');
+    }
+    return `${this.baseURL}/issues/${numericPR}/reactions`;
   }
   
-  // Get PR info URL - hardcoded pattern
-  getPRInfoUrl(prNumber) {
-    return 'https://api.github.com/repos/hiero-ledger/hiero-website/pulls/' + prNumber;
+  buildPRInfoUrl(prNumber) {
+    const numericPR = parseInt(prNumber, 10);
+    if (isNaN(numericPR) || numericPR < 1) {
+      throw new Error('Invalid PR number');
+    }
+    return `${this.baseURL}/pulls/${numericPR}`;
   }
   
-  // Get search URL - hardcoded pattern
-  getSearchUrl() {
-    return 'https://api.github.com/repos/hiero-ledger/hiero-website/pulls?state=closed&sort=updated&direction=desc&per_page=50';
+  buildSearchUrl() {
+    return `${this.baseURL}/pulls?state=closed&sort=updated&direction=desc&per_page=50`;
   }
   
-  // Get files URL - hardcoded pattern
-  getFilesUrl(prNumber) {
-    return 'https://api.github.com/repos/hiero-ledger/hiero-website/pulls/' + prNumber + '/files';
+  buildFilesUrl(prNumber) {
+    const numericPR = parseInt(prNumber, 10);
+    if (isNaN(numericPR) || numericPR < 1) {
+      throw new Error('Invalid PR number');
+    }
+    return `${this.baseURL}/pulls/${numericPR}/files`;
   }
   
   // Validate GitHub URL safely
@@ -521,31 +555,15 @@ class GitHubReactions {
     return url.startsWith('https://github.com/');
   }
   
-  // Get reaction count safely - avoid Object.keys injection
+  // Get reaction count safely
   getReactionCount(reactionCounts) {
     let count = 0;
     for (const type in reactionCounts) {
-      if (reactionCounts.hasOwnProperty(type)) {
+      if (Object.prototype.hasOwnProperty.call(reactionCounts, type)) {
         count++;
       }
     }
     return count;
-  }
-
-  // Note: HTML sanitization not needed - we only use textContent
-
-  // Safe DOM manipulation without innerHTML
-  setTextContent(element, text) {
-    if (element) {
-      element.textContent = text;
-    }
-  }
-
-  // Safe DOM manipulation for text content only
-  setSafeText(element, text) {
-    if (element && typeof text === 'string') {
-      element.textContent = text;
-    }
   }
 }
 

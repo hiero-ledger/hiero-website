@@ -1,11 +1,10 @@
 +++
 title = 'TSC Voting Process'
 featured_image = "/images/tsc-voting-process-post/TSCVotingProcessBanner_V1.jpg"
-date = 2024-12-29T10:12:50-07:00
+date = 2025-04-29T10:12:50-07:00
 categories = ["Blog"]
 duration = ""
 abstract = "We'll walk you through the steps to cast your vote, the criteria for eligibility, and the tools you'll use to participate."
-pr_number = "123"
 [[authors]]
 name = "Hiero Team"
 title = ""
@@ -89,3 +88,9 @@ Once voting has concluded, the results for the End User and Contributor seats wi
 For a comprehensive overview of the voting process, we encourage community members to attend the upcoming [Hiero Community Call](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week), where additional details will be shared and participants will have the opportunity to ask questions.
 
 Additionally, members are encouraged to explore the [Helios Voting](https://vote.heliosvoting.org/) platform to become familiar with its features and functionality.
+
+---
+
+## 💬 Join the Discussion
+
+We value your feedback on this voting process! Visit the [GitHub Pull Request #73](https://github.com/hiero-ledger/hiero-website/pull/73) where this blog post was developed to share your thoughts, ask questions, or contribute to the discussion. Your input helps us improve our community processes and ensures transparency in our governance.

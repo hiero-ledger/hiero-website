@@ -22,11 +22,7 @@ Here’s how you can roll up your sleeves, gain Python skills, and help our SDK 
 
 ## 🚀 What’s Going On?
 
-<<<<<<< HEAD
 This September, the Hiero Python SDK community has plenty of opportunities to contribute—whether you’re a new developer or experienced one. From documentation and developer tools to queries, transactions, and tokens, your contributions can help push the SDK forward.
-=======
-The Hiero Python SDK community is moving fast—pushing forward on documentation, refining developer tools, and delivering ongoing improvements across queries, transactions, and tokens, all while opening new opportunities for contributors at every level.
->>>>>>> f3a1e7a517bc7ec79444c77257d48ee8d03b397d
 
 Several open issues are actively being addressed, while others are ready for new contributors.  
 
@@ -77,11 +73,10 @@ Whether you’re a seasoned dev or learning your first open-source workflow, we�
   Chat with contributors, propose features, and share progress.
    👉 [Meeting Calendar](https://zoom-lfx.platform.linuxfoundation.org/meeting/92041330205?password=2f345bee-0c14-4dd5-9883-06fbc9c60581
    )
-<<<<<<< HEAD
+
 - Alongside our community call, we hold an office hour every other Wednesday at 5 PM UTC, giving contributors a chance to connect directly with maintainers:
 👉 [Meeting Link](https://zoom-lfx.platform.linuxfoundation.org/meeting/99912667426?password=5b584a0e-1ed7-49d3-b2fc-dc5ddc888338)
 
->>>>>>> f3a1e7a517bc7ec79444c77257d48ee8d03b397d
 ---
 
 ## 🏁 Ready to Jump In?

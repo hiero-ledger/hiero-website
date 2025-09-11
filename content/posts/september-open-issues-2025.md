@@ -1,6 +1,6 @@
 +++
 title = "September's Open Issues at the Python SDK"
-featured_image = "/images/python/blog_titles/blog_august_open_issues.jpg"
+featured_image = "/images/python/blog_titles/september-issues.png"
 date = 2025-09-08T11:00:00-07:00
 categories = ["Blog"]
 abstract = "September's Open Issues at the Python SDK"

@@ -13,7 +13,7 @@ link = ""
 image = "/images/profile-hiero.png"
 +++
 
-## 🗳️ Calling all Maintainers!!! September TSC Elections for Contributor Seat end September 23
+## 🗳️ Calling all Maintainers!!! September TSC Elections for Contributor Seat end September 21
 
 All current maintainers for the [Hiero Project](https://github.com/hiero-ledger) are welcomed to cast their vote for our TSC's next Maintainer Seat representative.
 
@@ -36,7 +36,7 @@ Voters are able to select one of the following representatives who have been nom
 
 Helios sends notifications to all eligible voters via your configured GitHub Notifications.
 
-Additionally, all current maintaines of all projects in hiero are welcomed to cast their vote directly in [Helios using this ballot link](https://vote.heliosvoting.org/helios/e/hiero-tsc-election-september-2025/vote)
+Additionally, all current maintainers of all projects in hiero are welcomed to cast their vote directly in [Helios using this ballot link](https://vote.heliosvoting.org/helios/e/hiero-tsc-election-september-2025/vote)
 
 As a reminder, please locate the "Log In" button in the lower left side of the screen and use your GitHub ID to register.
 

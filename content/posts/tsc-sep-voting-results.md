@@ -5,7 +5,7 @@ preview_only = true
 date = 2025-09-23T00:00:00-07:00
 categories = ["Blog"]
 duration = ""
-abstract = "The result for the September Hiero Technical Steering Committee election is here!"
+abstract = "The results for the September Hiero Technical Steering Committee election are here!"
 [[authors]]
 name = "Hiero Team"
 title = ""

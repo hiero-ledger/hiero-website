@@ -1,11 +1,11 @@
 +++
-title = 'Result of the September Hiero Technical Steering Committee Elections'
+title = 'Result for September Hiero Technical Steering Committee Elections'
 featured_image = "/images/tsc_results_sep.jpg"
 preview_only = true
 date = 2025-06-02T00:00:00-07:00
 categories = ["Blog"]
 duration = ""
-abstract = "The result for the September Hiero Technical Steering Committee elections are here!"
+abstract = "The result for the September Hiero Technical Steering Committee election is here!"
 [[authors]]
 name = "Hiero Team"
 title = ""
@@ -24,4 +24,4 @@ The result of this election has been announced in the Hiero TSC meeting schedule
 
 For more information on the roles and responsibilities of TSC members, please refer to the [Hiero Technical Charter](https://github.com/hiero-ledger/hiero/blob/main/technical-charter.md).
 
-We extend our gratitude to all participants in the election process and to the candidates who stood for election. We are confident Georgi will make significant contributions to the continued growth and success of the [Hiero project](https://github.com/hiero-ledger)! 
+We extend our gratitude to all participants in the election process and to the candidates who stood for election. We are confident Georgi will make significant contributions to the continued growth and success of the [Hiero project](https://github.com/hiero-ledger)!

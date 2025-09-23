@@ -1,8 +1,8 @@
 +++
-title = 'Result for September Hiero Technical Steering Committee Elections'
+title = 'Results for September Hiero Technical Steering Committee Elections'
 featured_image = "/images/tsc_results_sep.jpg"
 preview_only = true
-date = 2025-06-02T00:00:00-07:00
+date = 2025-09-23T00:00:00-07:00
 categories = ["Blog"]
 duration = ""
 abstract = "The result for the September Hiero Technical Steering Committee election is here!"

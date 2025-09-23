@@ -16,7 +16,7 @@ image = "/images/profile-hiero.png"
 
 ## 📣 September’s Hiero Technical Steering Committee election results have been announced!
 
-We are pleased to announce the results of the recent elections for the Hiero Technical Steering Committee (TSC) End User and Contributor seat.
+We are pleased to announce the results of the recent election for the Hiero Technical Steering Committee (TSC) Contributor seat.
 
 Congratulations to [**Georgi Lazarov**](https://github.com/georgi-l95), who has been elected to the Contributor seat on the Hiero Technical Steering Committee.
 

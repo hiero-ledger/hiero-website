@@ -14,7 +14,7 @@ link = ""
 image = "/images/profile-hiero.png"
 +++
 
-## 📣 September’s Hiero Technical Steering Committee election results have been announced!
+## 📣 September Hiero Technical Steering Committee election results have been announced!
 
 We are pleased to announce the results of the recent election for the Hiero Technical Steering Committee (TSC) Contributor seat.
 

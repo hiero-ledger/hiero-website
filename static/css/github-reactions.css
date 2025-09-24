@@ -1,0 +1,284 @@
+.github-reactions {
+  @apply my-6 p-5 bg-white rounded-lg border border-gray-light;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.github-reactions::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #992350, #B81A56, #D92D6A);
+  border-radius: 1px 1px 0 0;
+}
+
+.github-reactions:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.reactions-container {
+  @apply flex flex-col gap-3;
+}
+
+.reactions-header {
+  @apply flex items-center justify-between flex-wrap gap-2;
+  margin-bottom: 0.5rem;
+}
+
+.reactions-label {
+  @apply flex items-center gap-2 text-base text-charcoal font-medium;
+  letter-spacing: -0.025em;
+}
+
+.reaction-icon {
+  @apply w-4 h-4 text-red;
+  opacity: 0.8;
+}
+
+.github-link {
+  @apply flex items-center gap-1.5 text-sm font-medium text-white no-underline px-3 py-1.5 rounded-md;
+  background: linear-gradient(135deg, #992350 0%, #B81A56 100%);
+  box-shadow: 0 1px 3px rgba(184, 26, 86, 0.15);
+  transition: all 0.3s ease;
+}
+
+.github-link:not(.loaded) {
+  @apply hidden;
+}
+
+.github-link:hover {
+  background: linear-gradient(135deg, #B81A56 0%, #D92D6A 100%);
+  box-shadow: 0 2px 6px rgba(184, 26, 86, 0.25);
+  transform: translateY(-1px);
+}
+
+.github-link svg {
+  @apply w-3.5 h-3.5;
+  opacity: 0.9;
+}
+
+.reactions-list {
+  @apply flex gap-2.5 flex-wrap items-center;
+  min-height: 36px;
+  padding: 0.25rem 0;
+  margin-top: 0.25rem;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+}
+
+.reaction-item {
+  @apply inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-white border rounded-md text-sm font-medium;
+  border-color: rgba(229, 228, 215, 0.8);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+  cursor: default;
+  user-select: none;
+  line-height: 1.2;
+  display: inline-flex !important;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.reaction-item:hover {
+  @apply bg-gray-light;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+  border-color: rgba(184, 26, 86, 0.15);
+}
+
+.reaction-emoji {
+  @apply text-lg leading-none;
+  transition: transform 0.2s ease;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.25rem;
+}
+
+.reaction-item:hover .reaction-emoji {
+  transform: scale(1.05);
+}
+
+.reaction-count {
+  @apply text-charcoal font-medium;
+  font-variant-numeric: tabular-nums;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.125rem;
+}
+
+.loading {
+  @apply flex items-center gap-2 text-sm text-gray font-medium;
+  padding: 0.75rem 0;
+  margin-top: 0.25rem;
+}
+
+.loading-spinner {
+  @apply w-4 h-4 border-2 border-gray-light border-t-red rounded-full;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.no-reactions {
+  @apply text-sm text-gray italic py-2.5 px-3 rounded-md;
+  @apply bg-gray-light border border-gray-light;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
+  margin-top: 0.25rem;
+}
+
+.reactions-error {
+  @apply text-sm text-red font-medium flex items-center gap-2 py-2.5 px-3 rounded-md;
+  @apply bg-gray-light border border-gray-light;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-top: 0.25rem;
+}
+
+.reactions-error::before {
+  content: "⚠️";
+  @apply text-base;
+}
+
+.reactions-info {
+  @apply text-sm text-red font-medium flex items-center gap-2 py-2.5 px-3 rounded-md;
+  @apply bg-gray-light border border-gray-light;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.reactions-info::before {
+  content: "ℹ️";
+  @apply text-base;
+}
+
+@media (max-width: 768px) {
+  .github-reactions {
+    @apply my-5 p-4;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .reactions-header {
+    @apply flex-col items-start gap-2;
+    margin-bottom: 0.75rem;
+  }
+  
+  .reactions-label {
+    @apply text-sm;
+  }
+  
+  .github-link {
+    @apply px-2.5 py-1 text-xs;
+  }
+  
+  .reactions-list {
+    @apply gap-2;
+    min-height: 32px;
+    margin-top: 0.5rem;
+  }
+  
+  .reaction-item {
+    @apply px-2 py-1 text-xs;
+    line-height: 1.1;
+  }
+  
+  .reaction-emoji {
+    @apply text-sm;
+  }
+  
+  .loading {
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+  }
+  
+  .no-reactions, .reactions-error, .reactions-info {
+    padding: 0.5rem 0.75rem;
+    margin-top: 0.5rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .github-reactions {
+    @apply bg-charcoal border-gray;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  
+  .github-reactions::before {
+    background: linear-gradient(90deg, #992350, #B81A56, #D92D6A);
+  }
+  
+  .reactions-label {
+    @apply text-white;
+  }
+  
+  .reaction-icon {
+    @apply text-red-light;
+  }
+  
+  .reaction-item {
+    @apply bg-charcoal border-gray text-white;
+  }
+  
+  .reaction-item:hover {
+    @apply bg-gray;
+    border-color: rgba(217, 45, 106, 0.3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .reaction-count {
+    @apply text-white;
+  }
+  
+  .loading, .no-reactions {
+    @apply text-gray;
+  }
+  
+  .loading-spinner {
+    @apply border-gray border-t-red-light;
+  }
+  
+  .github-link {
+    background: linear-gradient(135deg, #992350 0%, #B81A56 100%);
+  }
+  
+  .github-link:hover {
+    background: linear-gradient(135deg, #B81A56 0%, #D92D6A 100%);
+  }
+}
+
+.reaction-item {
+  animation: fadeInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+.reaction-item:nth-child(1) { animation-delay: 0ms; }
+.reaction-item:nth-child(2) { animation-delay: 50ms; }
+.reaction-item:nth-child(3) { animation-delay: 100ms; }
+.reaction-item:nth-child(4) { animation-delay: 150ms; }
+.reaction-item:nth-child(5) { animation-delay: 200ms; }
+.reaction-item:nth-child(6) { animation-delay: 250ms; }
+.reaction-item:nth-child(7) { animation-delay: 300ms; }
+.reaction-item:nth-child(8) { animation-delay: 350ms; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

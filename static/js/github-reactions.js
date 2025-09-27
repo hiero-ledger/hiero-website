@@ -251,7 +251,14 @@ class GitHubReactions {
         }
       }
 
-      const url = `${this.BASE_API_URL}/repos/${this.REPO_OWNER}/${this.REPO_NAME}/issues/${prNumber}/reactions`;
+      // Sanitize PR number to prevent URL injection
+      const sanitizedPR = this.sanitizePRNumber(prNumber);
+      if (!sanitizedPR) {
+        throw new Error('Invalid PR number provided');
+      }
+
+      // Construct URL safely with validated components
+      const url = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/issues/${sanitizedPR}/reactions`;
       console.log(`Making API request to: ${url}`);
       
       try {
@@ -311,7 +318,14 @@ class GitHubReactions {
     
     try {
       return await this.fetchWithCache(cacheKey, async () => {
-        const url = `${this.BASE_API_URL}/repos/${this.REPO_OWNER}/${this.REPO_NAME}/pulls/${prNumber}`;
+        // Sanitize PR number to prevent URL injection
+        const sanitizedPR = this.sanitizePRNumber(prNumber);
+        if (!sanitizedPR) {
+          throw new Error('Invalid PR number provided');
+        }
+
+        // Construct URL safely with validated components
+        const url = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/pulls/${sanitizedPR}`;
         
         const response = await fetch(url, {
           method: 'GET',
@@ -356,7 +370,8 @@ class GitHubReactions {
     try {
       this.logAutoDiscoveryProgress(`Starting auto-discovery for blog post: ${slug}`);
       
-      const searchUrl = `${this.BASE_API_URL}/repos/${this.REPO_OWNER}/${this.REPO_NAME}/pulls?state=closed&sort=updated&direction=desc&per_page=50`;
+      // Construct search URL safely with validated components
+      const searchUrl = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/pulls?state=closed&sort=updated&direction=desc&per_page=50`;
       
       const searchResponse = await fetch(searchUrl, {
         headers: {
@@ -374,7 +389,15 @@ class GitHubReactions {
       
       for (const pr of pulls) {
         try {
-          const filesUrl = `${this.BASE_API_URL}/repos/${this.REPO_OWNER}/${this.REPO_NAME}/pulls/${pr.number}/files`;
+          // Sanitize PR number to prevent URL injection
+          const sanitizedPR = this.sanitizePRNumber(pr.number);
+          if (!sanitizedPR) {
+            console.warn(`Invalid PR number: ${pr.number}`);
+            continue;
+          }
+
+          // Construct files URL safely with validated components
+          const filesUrl = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/pulls/${sanitizedPR}/files`;
           
           const filesResponse = await fetch(filesUrl, {
             headers: {
@@ -457,14 +480,29 @@ class GitHubReactions {
       const urlObj = new URL(url);
       const pathParts = urlObj.pathname.split('/').filter(part => part);
       
-      return (
-        urlObj.hostname === 'github.com' &&
-        pathParts.length === 4 &&
-        pathParts[0] === this.REPO_OWNER &&
-        pathParts[1] === this.REPO_NAME &&
-        pathParts[2] === 'pull' &&
-        /^\d+$/.test(pathParts[3])
-      );
+      // Validate hostname and path structure
+      if (urlObj.hostname !== 'github.com' || pathParts.length !== 4) {
+        return false;
+      }
+      
+      // Validate path components against expected values
+      const [owner, repo, type, prNumber] = pathParts;
+      if (type !== 'pull' || !/^\d+$/.test(prNumber)) {
+        return false;
+      }
+      
+      // Validate owner and repo match expected values
+      if (owner !== this.REPO_OWNER || repo !== this.REPO_NAME) {
+        return false;
+      }
+      
+      // Additional validation: ensure PR number is within reasonable range
+      const prNum = parseInt(prNumber, 10);
+      if (prNum < 1 || prNum > 999999) {
+        return false;
+      }
+      
+      return true;
     } catch (error) {
       return false;
     }
@@ -482,13 +520,16 @@ class GitHubReactions {
     if (prInfo && prInfo.html_url) {
       const githubLink = container.closest('.github-reactions').querySelector('.github-link');
       if (githubLink) {
+        // Validate URL before setting href to prevent HTML injection
         if (this.isValidGitHubUrl(prInfo.html_url)) {
-          githubLink.href = prInfo.html_url;
+          // Use setAttribute for safer URL assignment
+          githubLink.setAttribute('href', prInfo.html_url);
           githubLink.style.display = 'flex';
           
-          const prTitle = prInfo.title ? String(prInfo.title).substring(0, 100) : 'Untitled';
+          // Sanitize title to prevent HTML injection
+          const prTitle = prInfo.title ? String(prInfo.title).substring(0, 100).replace(/[<>]/g, '') : 'Untitled';
           const titleText = `React on PR #${prInfo.number}: ${prTitle}`;
-          githubLink.title = titleText;
+          githubLink.setAttribute('title', titleText);
         }
       }
     }
@@ -532,8 +573,9 @@ class GitHubReactions {
     reactionTypes.forEach(({ type, count }, index) => {
       if (!this.ALLOWED_REACTIONS.includes(type)) return;
       
-      const emoji = this.emojiMap[type];
-      const label = this.reactionLabels[type] || type;
+      // Safely access emoji and label with fallbacks to prevent object injection
+      const emoji = this.emojiMap.hasOwnProperty(type) ? this.emojiMap[type] : '❓';
+      const label = this.reactionLabels.hasOwnProperty(type) ? this.reactionLabels[type] : 'unknown';
       
       console.log(`🎯 Creating reaction item ${index + 1}:`, { type, count, emoji, label });
       

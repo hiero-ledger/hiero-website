@@ -259,6 +259,12 @@ class GitHubReactions {
 
       // Construct URL safely with validated components
       const url = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/issues/${sanitizedPR}/reactions`;
+      
+      // Validate the constructed URL to prevent any injection
+      if (!this.isValidApiUrl(url)) {
+        throw new Error('Invalid API URL constructed');
+      }
+      
       console.log(`Making API request to: ${url}`);
       
       try {
@@ -327,6 +333,11 @@ class GitHubReactions {
         // Construct URL safely with validated components
         const url = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/pulls/${sanitizedPR}`;
         
+        // Validate the constructed URL to prevent any injection
+        if (!this.isValidApiUrl(url)) {
+          throw new Error('Invalid API URL constructed');
+        }
+        
         const response = await fetch(url, {
           method: 'GET',
           headers: {
@@ -373,6 +384,11 @@ class GitHubReactions {
       // Construct search URL safely with validated components
       const searchUrl = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/pulls?state=closed&sort=updated&direction=desc&per_page=50`;
       
+      // Validate the constructed URL to prevent any injection
+      if (!this.isValidApiUrl(searchUrl)) {
+        throw new Error('Invalid search URL constructed');
+      }
+      
       const searchResponse = await fetch(searchUrl, {
         headers: {
           'Accept': 'application/vnd.github.v3+json',
@@ -398,6 +414,12 @@ class GitHubReactions {
 
           // Construct files URL safely with validated components
           const filesUrl = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/pulls/${sanitizedPR}/files`;
+          
+          // Validate the constructed URL to prevent any injection
+          if (!this.isValidApiUrl(filesUrl)) {
+            console.warn(`Invalid files URL constructed for PR ${sanitizedPR}`);
+            continue;
+          }
           
           const filesResponse = await fetch(filesUrl, {
             headers: {
@@ -473,6 +495,57 @@ class GitHubReactions {
     }
   }
 
+  isValidApiUrl(url) {
+    if (!url || typeof url !== 'string') return false;
+    
+    try {
+      const urlObj = new URL(url);
+      
+      // Validate hostname
+      if (urlObj.hostname !== 'api.github.com') {
+        return false;
+      }
+      
+      // Validate path structure for API endpoints
+      const pathParts = urlObj.pathname.split('/').filter(part => part);
+      if (pathParts.length < 6 || pathParts[0] !== 'repos') {
+        return false;
+      }
+      
+      // Validate owner and repo match expected values
+      if (pathParts[1] !== this.REPO_OWNER || pathParts[2] !== this.REPO_NAME) {
+        return false;
+      }
+      
+      // Validate endpoint types
+      const endpointType = pathParts[3];
+      if (!['issues', 'pulls'].includes(endpointType)) {
+        return false;
+      }
+      
+      // Validate PR/issue number
+      const number = pathParts[4];
+      if (!/^\d+$/.test(number)) {
+        return false;
+      }
+      
+      const num = parseInt(number, 10);
+      if (num < 1 || num > 999999) {
+        return false;
+      }
+      
+      // Validate sub-endpoints
+      const subEndpoint = pathParts[5];
+      if (subEndpoint && !['reactions', 'files'].includes(subEndpoint)) {
+        return false;
+      }
+      
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
   isValidGitHubUrl(url) {
     if (!url || typeof url !== 'string') return false;
     
@@ -520,10 +593,13 @@ class GitHubReactions {
     if (prInfo && prInfo.html_url) {
       const githubLink = container.closest('.github-reactions').querySelector('.github-link');
       if (githubLink) {
+        // Sanitize URL input before validation to prevent HTML injection
+        const sanitizedUrl = String(prInfo.html_url).replace(/[<>]/g, '');
+        
         // Validate URL before setting href to prevent HTML injection
-        if (this.isValidGitHubUrl(prInfo.html_url)) {
+        if (this.isValidGitHubUrl(sanitizedUrl)) {
           // Use setAttribute for safer URL assignment
-          githubLink.setAttribute('href', prInfo.html_url);
+          githubLink.setAttribute('href', sanitizedUrl);
           githubLink.style.display = 'flex';
           
           // Sanitize title to prevent HTML injection
@@ -574,8 +650,8 @@ class GitHubReactions {
       if (!this.ALLOWED_REACTIONS.includes(type)) return;
       
       // Safely access emoji and label with fallbacks to prevent object injection
-      const emoji = this.emojiMap.hasOwnProperty(type) ? this.emojiMap[type] : '❓';
-      const label = this.reactionLabels.hasOwnProperty(type) ? this.reactionLabels[type] : 'unknown';
+      const emoji = Object.prototype.hasOwnProperty.call(this.emojiMap, type) ? this.emojiMap[type] : '❓';
+      const label = Object.prototype.hasOwnProperty.call(this.reactionLabels, type) ? this.reactionLabels[type] : 'unknown';
       
       console.log(`🎯 Creating reaction item ${index + 1}:`, { type, count, emoji, label });
       

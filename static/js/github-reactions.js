@@ -35,20 +35,13 @@ class GitHubReactions {
   }
 
   async initializeReactions() {
-    console.log('🚀 Initializing GitHub reactions...');
-    console.log('🌍 Environment:', this.isDevelopment ? 'Development' : 'Production');
-    
     const reactionContainers = document.querySelectorAll('.github-reactions');
-    console.log(`Found ${reactionContainers.length} reaction containers`);
     
     if (reactionContainers.length === 0) {
-      console.log('No reaction containers found on this page');
       return;
     }
 
-    // In development, immediately show mock data for testing
     if (this.isDevelopment) {
-      console.log('🧪 Development mode: Showing mock data immediately');
       reactionContainers.forEach((container, index) => {
         const slug = container.dataset.slug;
         const prNumber = container.dataset.pr || 'mock';
@@ -62,31 +55,26 @@ class GitHubReactions {
             state: 'closed'
           };
           this.renderReactions(mockReactions, slug, mockPRInfo);
-        }, 1000 + (index * 200)); // Stagger the loading
+        }, 1000 + (index * 200));
       });
       return;
     }
 
-    const promises = Array.from(reactionContainers).map(async (container, index) => {
+    const promises = Array.from(reactionContainers).map(async (container) => {
       const prNumber = container.dataset.pr;
       const slug = container.dataset.slug;
       
-      console.log(`Processing container ${index + 1}:`, { prNumber, slug });
-      
       if (prNumber && prNumber !== 'undefined' && prNumber !== '') {
-        console.log(`Loading reactions for PR #${prNumber}`);
         return this.loadReactionsForPR(prNumber, slug);
       } else {
-        console.log(`No PR specified for ${slug}, attempting auto-discovery`);
         return this.findAndLoadReactions(slug);
       }
     });
 
     try {
       await Promise.allSettled(promises);
-      console.log('✅ All reaction containers processed');
     } catch (error) {
-      console.error('❌ Error processing reaction containers:', error);
+      console.error('Error processing reaction containers:', error);
     }
   }
 
@@ -155,14 +143,9 @@ class GitHubReactions {
         throw new Error('Invalid PR number provided');
       }
       
-      console.log(`Fetching reactions for PR #${sanitizedPR}...`);
-      
-      // First check if PR exists
       const prInfo = await this.fetchPRInfo(sanitizedPR);
       if (!prInfo) {
-        // In development, use mock data if PR not found
         if (this.isDevelopment) {
-          console.log('🔄 PR not found, using mock data for development');
           const mockReactions = this.getMockReactions();
           const mockPRInfo = {
             number: sanitizedPR,
@@ -177,20 +160,12 @@ class GitHubReactions {
         return { success: false, prNumber: sanitizedPR, error: 'PR not found' };
       }
       
-      console.log(`PR #${sanitizedPR} found: "${prInfo.title}"`);
-      
       const reactions = await this.fetchReactions(sanitizedPR);
-      
-      console.log(`Found ${reactions.length} reactions for PR #${sanitizedPR}`);
       this.renderReactions(reactions, slug, prInfo);
       
       return { success: true, prNumber: sanitizedPR, reactions: reactions.length };
     } catch (error) {
-      console.error(`❌ Error loading reactions for PR ${prNumber}:`, error);
-      
-      // In development, use mock data for any error
       if (this.isDevelopment) {
-        console.log('🔄 Error occurred, using mock data for development');
         const mockReactions = this.getMockReactions();
         const mockPRInfo = {
           number: prNumber,
@@ -202,7 +177,6 @@ class GitHubReactions {
         return { success: true, prNumber, reactions: mockReactions.length };
       }
       
-      // Provide more specific error messages for production
       if (error.message.includes('404')) {
         this.renderError(slug, `PR #${prNumber} not found`);
       } else if (error.message.includes('403')) {
@@ -220,8 +194,6 @@ class GitHubReactions {
   getMockReactions() {
     if (!this.isDevelopment) return null;
     
-    console.log('🎭 Generating mock reactions for development');
-    
     const mockReactions = [
       { content: '+1', user: { login: 'dev1' } },
       { content: '+1', user: { login: 'dev2' } },
@@ -232,10 +204,7 @@ class GitHubReactions {
     
     const shuffled = mockReactions.sort(() => 0.5 - Math.random());
     const count = Math.floor(Math.random() * 3) + 2;
-    const result = shuffled.slice(0, count);
-    
-    console.log(`🎭 Generated ${result.length} mock reactions:`, result);
-    return result;
+    return shuffled.slice(0, count);
   }
 
   async fetchReactions(prNumber) {
@@ -251,21 +220,16 @@ class GitHubReactions {
         }
       }
 
-      // Sanitize PR number to prevent URL injection
       const sanitizedPR = this.sanitizePRNumber(prNumber);
       if (!sanitizedPR) {
         throw new Error('Invalid PR number provided');
       }
 
-      // Construct URL safely with validated components
       const url = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/issues/${sanitizedPR}/reactions`;
       
-      // Validate the constructed URL to prevent any injection
       if (!this.isValidApiUrl(url)) {
         throw new Error('Invalid API URL constructed');
       }
-      
-      console.log(`Making API request to: ${url}`);
       
       try {
         const response = await fetch(url, {
@@ -277,15 +241,11 @@ class GitHubReactions {
 
         this.rateLimitRemaining = parseInt(response.headers.get('X-RateLimit-Remaining')) || null;
         this.rateLimitReset = parseInt(response.headers.get('X-RateLimit-Reset')) || null;
-        
-        console.log(`Rate limit remaining: ${this.rateLimitRemaining}`);
 
         if (!response.ok) {
           const errorText = await response.text();
           
-          // Handle rate limit specifically
           if (response.status === 403 && errorText.includes('rate limit')) {
-            console.warn('GitHub API rate limit exceeded. Using mock data for development.');
             if (this.isDevelopment) {
               return this.getMockReactions();
             }
@@ -296,18 +256,15 @@ class GitHubReactions {
         }
 
         const reactions = await response.json();
-        console.log(`Successfully fetched ${reactions.length} reactions for PR #${prNumber}`);
         return reactions;
       } catch (error) {
         console.error(`Network error fetching reactions for PR #${prNumber}:`, error);
         
-        // Use mock data in development for any network issues or rate limits
         if (this.isDevelopment && (
           error.name === 'TypeError' || 
           error.message.includes('NetworkError') ||
           error.message.includes('rate limit')
         )) {
-          console.log('🔄 Using mock reactions data for development');
           const mockReactions = this.getMockReactions();
           if (mockReactions) {
             return mockReactions;
@@ -324,16 +281,13 @@ class GitHubReactions {
     
     try {
       return await this.fetchWithCache(cacheKey, async () => {
-        // Sanitize PR number to prevent URL injection
         const sanitizedPR = this.sanitizePRNumber(prNumber);
         if (!sanitizedPR) {
           throw new Error('Invalid PR number provided');
         }
 
-        // Construct URL safely with validated components
         const url = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/pulls/${sanitizedPR}`;
         
-        // Validate the constructed URL to prevent any injection
         if (!this.isValidApiUrl(url)) {
           throw new Error('Invalid API URL constructed');
         }
@@ -352,13 +306,10 @@ class GitHubReactions {
           return await response.json();
         }
         
-        // Handle rate limit specifically
         if (response.status === 403) {
           const errorText = await response.text();
           if (errorText.includes('rate limit')) {
-            console.warn('GitHub API rate limit exceeded for PR info.');
             if (this.isDevelopment) {
-              // Return mock PR info for development
               return {
                 number: prNumber,
                 title: `Mock PR #${prNumber}`,
@@ -381,10 +332,8 @@ class GitHubReactions {
     try {
       this.logAutoDiscoveryProgress(`Starting auto-discovery for blog post: ${slug}`);
       
-      // Construct search URL safely with validated components
       const searchUrl = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/pulls?state=closed&sort=updated&direction=desc&per_page=50`;
       
-      // Validate the constructed URL to prevent any injection
       if (!this.isValidApiUrl(searchUrl)) {
         throw new Error('Invalid search URL constructed');
       }
@@ -405,17 +354,14 @@ class GitHubReactions {
       
       for (const pr of pulls) {
         try {
-          // Sanitize PR number to prevent URL injection
           const sanitizedPR = this.sanitizePRNumber(pr.number);
           if (!sanitizedPR) {
             console.warn(`Invalid PR number: ${pr.number}`);
             continue;
           }
 
-          // Construct files URL safely with validated components
           const filesUrl = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/pulls/${sanitizedPR}/files`;
           
-          // Validate the constructed URL to prevent any injection
           if (!this.isValidApiUrl(filesUrl)) {
             console.warn(`Invalid files URL constructed for PR ${sanitizedPR}`);
             continue;
@@ -458,9 +404,7 @@ class GitHubReactions {
       
       this.logAutoDiscoveryProgress(`No matching PR found for blog post: ${slug}`);
       
-      // In development, show mock data when no PR is found
       if (this.isDevelopment) {
-        console.log('🔄 No PR found, using mock data for development');
         const mockReactions = this.getMockReactions();
         const mockPRInfo = {
           number: 'auto-discovered',
@@ -475,11 +419,9 @@ class GitHubReactions {
       this.renderError(slug, `Unable to find related discussion for this blog post`);
       
     } catch (error) {
-      console.error(`❌ Error in auto-discovery for ${slug}:`, error);
+      console.error(`Error in auto-discovery for ${slug}:`, error);
       
-      // In development, use mock data for any auto-discovery error
       if (this.isDevelopment) {
-        console.log('🔄 Auto-discovery error, using mock data for development');
         const mockReactions = this.getMockReactions();
         const mockPRInfo = {
           number: 'auto-discovered',
@@ -501,29 +443,24 @@ class GitHubReactions {
     try {
       const urlObj = new URL(url);
       
-      // Validate hostname
       if (urlObj.hostname !== 'api.github.com') {
         return false;
       }
       
-      // Validate path structure for API endpoints
       const pathParts = urlObj.pathname.split('/').filter(part => part);
       if (pathParts.length < 6 || pathParts[0] !== 'repos') {
         return false;
       }
       
-      // Validate owner and repo match expected values
       if (pathParts[1] !== this.REPO_OWNER || pathParts[2] !== this.REPO_NAME) {
         return false;
       }
       
-      // Validate endpoint types
       const endpointType = pathParts[3];
       if (!['issues', 'pulls'].includes(endpointType)) {
         return false;
       }
       
-      // Validate PR/issue number
       const number = pathParts[4];
       if (!/^\d+$/.test(number)) {
         return false;
@@ -534,7 +471,6 @@ class GitHubReactions {
         return false;
       }
       
-      // Validate sub-endpoints
       const subEndpoint = pathParts[5];
       if (subEndpoint && !['reactions', 'files'].includes(subEndpoint)) {
         return false;
@@ -553,23 +489,19 @@ class GitHubReactions {
       const urlObj = new URL(url);
       const pathParts = urlObj.pathname.split('/').filter(part => part);
       
-      // Validate hostname and path structure
       if (urlObj.hostname !== 'github.com' || pathParts.length !== 4) {
         return false;
       }
       
-      // Validate path components against expected values
       const [owner, repo, type, prNumber] = pathParts;
       if (type !== 'pull' || !/^\d+$/.test(prNumber)) {
         return false;
       }
       
-      // Validate owner and repo match expected values
       if (owner !== this.REPO_OWNER || repo !== this.REPO_NAME) {
         return false;
       }
       
-      // Additional validation: ensure PR number is within reasonable range
       const prNum = parseInt(prNumber, 10);
       if (prNum < 1 || prNum > 999999) {
         return false;
@@ -593,16 +525,12 @@ class GitHubReactions {
     if (prInfo && prInfo.html_url) {
       const githubLink = container.closest('.github-reactions').querySelector('.github-link');
       if (githubLink) {
-        // Sanitize URL input before validation to prevent HTML injection
         const sanitizedUrl = String(prInfo.html_url).replace(/[<>]/g, '');
         
-        // Validate URL before setting href to prevent HTML injection
         if (this.isValidGitHubUrl(sanitizedUrl)) {
-          // Use setAttribute for safer URL assignment
           githubLink.setAttribute('href', sanitizedUrl);
           githubLink.style.display = 'flex';
           
-          // Sanitize title to prevent HTML injection
           const prTitle = prInfo.title ? String(prInfo.title).substring(0, 100).replace(/[<>]/g, '') : 'Untitled';
           const titleText = `React on PR #${prInfo.number}: ${prTitle}`;
           githubLink.setAttribute('title', titleText);
@@ -634,26 +562,18 @@ class GitHubReactions {
   renderReactionItems(container, reactionCounts) {
     if (!(reactionCounts instanceof Map)) return;
     
-    console.log('🎨 Rendering reaction items:', reactionCounts);
-    console.log('📦 Container:', container);
-    
     const reactionTypes = Array.from(reactionCounts.entries()).map(([type, count]) => ({
       type,
       count: Math.max(0, Math.floor(count))
     }));
     
-    console.log('📊 Reaction types:', reactionTypes);
-    
     reactionTypes.sort((a, b) => b.count - a.count);
     
-    reactionTypes.forEach(({ type, count }, index) => {
+    reactionTypes.forEach(({ type, count }) => {
       if (!this.ALLOWED_REACTIONS.includes(type)) return;
       
-      // Safely access emoji and label with fallbacks to prevent object injection
       const emoji = Object.prototype.hasOwnProperty.call(this.emojiMap, type) ? this.emojiMap[type] : '❓';
       const label = Object.prototype.hasOwnProperty.call(this.reactionLabels, type) ? this.reactionLabels[type] : 'unknown';
-      
-      console.log(`🎯 Creating reaction item ${index + 1}:`, { type, count, emoji, label });
       
       const reactionDiv = document.createElement('div');
       reactionDiv.className = 'reaction-item';
@@ -673,11 +593,7 @@ class GitHubReactions {
       reactionDiv.appendChild(emojiSpan);
       reactionDiv.appendChild(countSpan);
       container.appendChild(reactionDiv);
-      
-      console.log(`✅ Added reaction item ${index + 1} to container`);
     });
-    
-    console.log('🎨 Finished rendering reaction items. Container children:', container.children.length);
   }
 
   showDevelopmentNotice(container) {
@@ -756,11 +672,6 @@ class GitHubReactions {
   }
 
   trackReactionsLoaded(slug, uniqueReactions, totalReactions) {
-    console.log(`📊 Reactions loaded for ${slug}:`, {
-      uniqueReactions,
-      totalReactions
-    });
-    
     if (typeof window.gtag !== 'undefined') {
       window.gtag('event', 'reactions_loaded', {
         'custom_parameter_1': String(slug).substring(0, 50),
@@ -772,25 +683,22 @@ class GitHubReactions {
 
   clearCache() {
     this.cache.clear();
-    console.log('🧹 Reactions cache cleared');
   }
 
   logAutoDiscoveryProgress(message, data = null) {
     if (this.isDevelopment) {
-      console.log(`🔍 Auto-Discovery: ${String(message).substring(0, 100)}`, data || '');
+      console.log(`Auto-Discovery: ${String(message).substring(0, 100)}`, data || '');
     }
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('🌟 GitHub Reactions system starting...');
-  
   const reactionsManager = new GitHubReactions();
   
   window.GitHubReactions = reactionsManager;
   
   reactionsManager.initializeReactions().catch(error => {
-    console.error('❌ Failed to initialize GitHub reactions:', error);
+    console.error('Failed to initialize GitHub reactions:', error);
   });
 });
 

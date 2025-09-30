@@ -21,11 +21,11 @@ This year, the Hiero project is excited to take part and welcome contributors of
 
 ## How to Join Hacktoberfest
 
-1- Head over to hacktoberfest.com and click **Start Hacking**.
+1. Head over to [hacktoberfest.com](https://hacktoberfest.com/) and click **Start Hacking**.
 
-2- Register using your GitHub account.
+2. Register using your GitHub account.
 
-3- Once registered, you’re ready to start contributing to [hiero-ledger](https://github.com/hiero-ledger)!
+3. Once registered, you’re ready to start contributing to [hiero-ledger](https://github.com/hiero-ledger)!
 
 
 ## Get Started with Hiero

@@ -15,12 +15,13 @@ image = "/images/profile-hiero.png"
 ## 📣 Hacktoberfest 2025: Contribute to Hiero!
 
 It’s that time of year again and Hacktoberfest 2025 is here! 🎉
+
 Every October, thousands of open source contributors from around the world come together to improve projects, learn new skills, and give back to the community.
 This year, the Hiero project is excited to take part and welcome contributors of all levels.
 
 ## How to Join Hacktoberfest
 
-1- Head over to hacktoberfest.comvand click **Start Hacking**.
+1- Head over to hacktoberfest.com and click **Start Hacking**.
 
 2- Register using your GitHub account.
 

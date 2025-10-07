@@ -130,15 +130,6 @@ icon = "images/Hiero-Icon-Timeline-6.svg"
 
 [[section_quotes]]
 quote = '''
-&#8220;As a long-time contributor to the Hyperledger project—now LF Decentralized Trust—and as a Hedera Council Member, we are thrilled to see Hedera's codebase integrated into the Linux Foundation Decentralized Trust. This milestone represents a powerful synergy: Hedera will benefit from the Linux Foundation's unparalleled experience in open, collaborative governance, while LFDT gains a significant DLT project backed by a vibrant developer ecosystem.&#8221;
-'''
-author = '''
-Shyam Nagarajan Global Practice Leader, Executive Partner, Responsible AI, <a href="https://www.ibm.com/consulting" target="_blank" rel="noreferrer noopener">IBM Consulting</a>
-'''
-logo = "images/Hiero-Logo-IBM.png"
-
-[[section_quotes]]
-quote = '''
 &#8220;Hedera’s participation in Linux Foundation’s Decentralized Trust will undoubtedly accelerate development, enhance security, and foster unprecedented collaboration within the Hedera ecosystem, positioning it at the forefront of blockchain innovation. As the leading wallet on the network, HashPack is committed to playing an active role in this new open source structure, and we look forward to <a href="https://www.hashpack.app/post/hashpack-on-hedera" target="_blank" rel="noreferrer noopener">contributing our expertise</a> to help shape the future of Hedera and the broader decentralized technology landscape.&#8221;
 '''
 author = '''

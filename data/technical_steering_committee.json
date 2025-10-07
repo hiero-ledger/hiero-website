@@ -35,11 +35,11 @@
         "bio": "Alex is the Chief Information Officer of Hedera and is charged with the technical operations of the network in close partnership with Hedera's member operators, ensuring the sustainable evolution of capabilities to the network while maintaining its core attributes of speed, fairness, and security. Prior to joining Hedera, Alex was the CIO at Health First, a multi-hospital integrated health system. He previously held several technology leadership positions at Fidelity Investments, with primary responsibility for cybersecurity and standards."
     },
     {
-        "firstName": "George",
-        "lastName":"Spasov",
-        "gitHubAccount": "https://github.com/Perseverance",
-        "photo": "george.jpg",
-        "bio": "George Spasov is a blockchain architect and co-founder of LimeChain. As part of LimeChain, over the past 8 years he has overseen the ideation, architecture creation, development and release of tens of projects including blockchain networks, L2 rollups, decentralized applications, infrastructure and customer facing products. George brings a vast knowledge of both Hedera and the wider DLT space."
+        "firstName": "Georgi",
+        "lastName":"Lazarov",
+        "gitHubAccount": "https://github.com/georgi-l95",
+        "photo": "georgi.jpeg",
+        "bio": "Georgi Lazarov is a technical lead at LimeChain with more than 5 years of experience in the blockchain industry. He is a core committer to the tooling around Hiero, like Local Node and JSON-RPC Relay, as well as a contributor to the Block Node and other core components of the Hiero ecosystem."
     },
     {
         "firstName": "Milan",

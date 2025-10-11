@@ -30,7 +30,7 @@ If you have any questions or need help or additional mentoring, then you can rea
 
 section_connect_heading = "Connect with the Hiero Open Source community"
 section_connect_text = '''
-<p>Since we did not create Hiero from scratch, it already has <a href="/heros/">a vibrant community</a> from Hedera and other products and projects. With the creation of the Hiero project, we started <a href="https://github.com/orgs/hiero-ledger/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a> that can be used as a central place to contact the community and the technical steering committee (TSC) of Hiero.</p>
+<p>Since we did not create Hiero from scratch, it already has <a href="/heroes/">a vibrant community</a> from Hedera and other products and projects. With the creation of the Hiero project, we started <a href="https://github.com/orgs/hiero-ledger/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a> that can be used as a central place to contact the community and the technical steering committee (TSC) of Hiero.</p>
 <p>
 For us, the community of the open-source project is a crucial part of its success. Based on that we will concentrate on the integration of the community. As defined in the roadmap, we will integrate the community into the development of Hiero from day 1. An essential part of that is to have community members be part of the TSC. Here the TSC is working on voting mechanisms that allow us to create a diverse community.</p>
 <p>

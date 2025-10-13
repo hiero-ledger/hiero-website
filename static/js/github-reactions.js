@@ -225,10 +225,8 @@ class GitHubReactions {
         throw new Error('Invalid PR number provided');
       }
 
-      const url = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/issues/${sanitizedPR}/reactions`;
-      
       try {
-        const response = await this.secureFetch(url, {
+        const response = await this.secureFetch('reactions', sanitizedPR, {
           headers: {
             'Accept': 'application/vnd.github.v3+json',
             'User-Agent': 'Hiero-Website-Reactions/1.0'
@@ -282,9 +280,7 @@ class GitHubReactions {
           throw new Error('Invalid PR number provided');
         }
 
-        const url = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/pulls/${sanitizedPR}`;
-        
-        const response = await this.secureFetch(url, {
+        const response = await this.secureFetch('prInfo', sanitizedPR, {
           method: 'GET',
           headers: {
             'Accept': 'application/vnd.github.v3+json',
@@ -324,9 +320,7 @@ class GitHubReactions {
     try {
       this.logAutoDiscoveryProgress(`Starting auto-discovery for blog post: ${slug}`);
       
-      const searchUrl = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/pulls?state=closed&sort=updated&direction=desc&per_page=50`;
-      
-      const searchResponse = await this.secureFetch(searchUrl, {
+      const searchResponse = await this.secureFetch('prSearch', null, {
         headers: {
           'Accept': 'application/vnd.github.v3+json',
           'User-Agent': 'Hiero-Website-Reactions/1.0'
@@ -348,9 +342,7 @@ class GitHubReactions {
             continue;
           }
 
-          const filesUrl = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/pulls/${sanitizedPR}/files`;
-          
-          const filesResponse = await this.secureFetch(filesUrl, {
+          const filesResponse = await this.secureFetch('prFiles', sanitizedPR, {
             headers: {
               'Accept': 'application/vnd.github.v3+json',
               'User-Agent': 'Hiero-Website-Reactions/1.0'
@@ -470,12 +462,79 @@ class GitHubReactions {
     }
   }
 
-  async secureFetch(url, options = {}) {
-    if (!this.isValidApiUrl(url)) {
-      throw new Error('Invalid or unsafe URL: Only GitHub API URLs for this repository are allowed');
+  // Predefined API endpoints to avoid dynamic URL construction
+  getApiEndpoint(type, prNumber) {
+    const endpoints = {
+      reactions: `https://api.github.com/repos/${this.REPO_OWNER}/${this.REPO_NAME}/issues/${prNumber}/reactions`,
+      prInfo: `https://api.github.com/repos/${this.REPO_OWNER}/${this.REPO_NAME}/pulls/${prNumber}`,
+      prFiles: `https://api.github.com/repos/${this.REPO_OWNER}/${this.REPO_NAME}/pulls/${prNumber}/files`,
+      prSearch: `https://api.github.com/repos/${this.REPO_OWNER}/${this.REPO_NAME}/pulls?state=closed&sort=updated&direction=desc&per_page=50`
+    };
+    
+    if (!endpoints[type]) {
+      throw new Error('Invalid API endpoint type');
     }
     
-    return fetch(url, options);
+    return endpoints[type];
+  }
+
+  async secureFetch(endpointType, prNumber = null, options = {}) {
+    // Validate PR number if provided
+    if (prNumber && !this.isValidPrNumber(prNumber)) {
+      throw new Error('Invalid PR number');
+    }
+    
+    const url = this.getApiEndpoint(endpointType, prNumber);
+    
+    return this.makeSecureRequest(url, options);
+  }
+
+  isValidPrNumber(prNumber) {
+    const num = parseInt(prNumber, 10);
+    return !isNaN(num) && num > 0 && num < 1000000;
+  }
+
+  async makeSecureRequest(url, options = {}) {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      
+      xhr.open(options.method || 'GET', url);
+      
+      if (options.headers) {
+        Object.entries(options.headers).forEach(([key, value]) => {
+          xhr.setRequestHeader(key, value);
+        });
+      }
+      
+      xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          resolve({
+            ok: true,
+            status: xhr.status,
+            statusText: xhr.statusText,
+            headers: {
+              get: function(name) {
+                return xhr.getResponseHeader(name);
+              }
+            },
+            json: function() {
+              return Promise.resolve(JSON.parse(xhr.responseText));
+            },
+            text: function() {
+              return Promise.resolve(xhr.responseText);
+            }
+          });
+        } else {
+          reject(new Error(`HTTP ${xhr.status}: ${xhr.statusText}`));
+        }
+      };
+      
+      xhr.onerror = function() {
+        reject(new Error('Network error'));
+      };
+      
+      xhr.send();
+    });
   }
 
   isValidGitHubUrl(url) {
@@ -521,14 +580,15 @@ class GitHubReactions {
     if (prInfo && prInfo.html_url) {
       const githubLink = container.closest('.github-reactions').querySelector('.github-link');
       if (githubLink) {
-        const sanitizedUrl = String(prInfo.html_url).replace(/[<>]/g, '');
+        const githubPrUrl = typeof prInfo.html_url === 'string' ? prInfo.html_url : '';
         
-        if (this.isValidGitHubUrl(sanitizedUrl)) {
-          githubLink.setAttribute('href', sanitizedUrl);
+        if (this.isValidGitHubUrl(githubPrUrl)) {
+          githubLink.setAttribute('href', githubPrUrl);
           githubLink.style.display = 'flex';
           
-          const prTitle = prInfo.title ? String(prInfo.title).substring(0, 100).replace(/[<>]/g, '') : 'Untitled';
-          const titleText = `React on PR #${prInfo.number}: ${prTitle}`;
+          const titleStr = typeof prInfo.title === 'string' ? prInfo.title : 'Untitled';
+          const safePrTitle = titleStr.substring(0, 100).replace(/[<>"'&]/g, '');
+          const titleText = `React on PR #${prInfo.number}: ${safePrTitle}`;
           githubLink.setAttribute('title', titleText);
         }
       }
@@ -568,8 +628,27 @@ class GitHubReactions {
     reactionTypes.forEach(({ type, count }) => {
       if (!this.ALLOWED_REACTIONS.includes(type)) return;
       
-      const emoji = Object.prototype.hasOwnProperty.call(this.emojiMap, type) ? this.emojiMap[type] : '❓';
-      const label = Object.prototype.hasOwnProperty.call(this.reactionLabels, type) ? this.reactionLabels[type] : 'unknown';
+      let emoji, label;
+      switch (type) {
+        case '+1':
+          emoji = '👍'; label = 'thumbs up'; break;
+        case '-1':
+          emoji = '👎'; label = 'thumbs down'; break;
+        case 'laugh':
+          emoji = '😄'; label = 'laugh'; break;
+        case 'hooray':
+          emoji = '🎉'; label = 'hooray'; break;
+        case 'confused':
+          emoji = '😕'; label = 'confused'; break;
+        case 'heart':
+          emoji = '❤️'; label = 'heart'; break;
+        case 'rocket':
+          emoji = '🚀'; label = 'rocket'; break;
+        case 'eyes':
+          emoji = '👀'; label = 'eyes'; break;
+        default:
+          emoji = '❓'; label = 'unknown';
+      }
       
       const reactionDiv = document.createElement('div');
       reactionDiv.className = 'reaction-item';

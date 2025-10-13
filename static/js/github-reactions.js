@@ -227,12 +227,8 @@ class GitHubReactions {
 
       const url = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/issues/${sanitizedPR}/reactions`;
       
-      if (!this.isValidApiUrl(url)) {
-        throw new Error('Invalid API URL constructed');
-      }
-      
       try {
-        const response = await fetch(url, {
+        const response = await this.secureFetch(url, {
           headers: {
             'Accept': 'application/vnd.github.v3+json',
             'User-Agent': 'Hiero-Website-Reactions/1.0'
@@ -288,11 +284,7 @@ class GitHubReactions {
 
         const url = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/pulls/${sanitizedPR}`;
         
-        if (!this.isValidApiUrl(url)) {
-          throw new Error('Invalid API URL constructed');
-        }
-        
-        const response = await fetch(url, {
+        const response = await this.secureFetch(url, {
           method: 'GET',
           headers: {
             'Accept': 'application/vnd.github.v3+json',
@@ -334,11 +326,7 @@ class GitHubReactions {
       
       const searchUrl = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/pulls?state=closed&sort=updated&direction=desc&per_page=50`;
       
-      if (!this.isValidApiUrl(searchUrl)) {
-        throw new Error('Invalid search URL constructed');
-      }
-      
-      const searchResponse = await fetch(searchUrl, {
+      const searchResponse = await this.secureFetch(searchUrl, {
         headers: {
           'Accept': 'application/vnd.github.v3+json',
           'User-Agent': 'Hiero-Website-Reactions/1.0'
@@ -362,17 +350,17 @@ class GitHubReactions {
 
           const filesUrl = `${this.BASE_API_URL}/repos/${encodeURIComponent(this.REPO_OWNER)}/${encodeURIComponent(this.REPO_NAME)}/pulls/${sanitizedPR}/files`;
           
-          if (!this.isValidApiUrl(filesUrl)) {
-            console.warn(`Invalid files URL constructed for PR ${sanitizedPR}`);
-            continue;
-          }
-          
-          const filesResponse = await fetch(filesUrl, {
+          const filesResponse = await this.secureFetch(filesUrl, {
             headers: {
               'Accept': 'application/vnd.github.v3+json',
               'User-Agent': 'Hiero-Website-Reactions/1.0'
             }
+          }).catch(error => {
+            console.warn(`Failed to fetch files for PR ${sanitizedPR}:`, error);
+            return null;
           });
+          
+          if (!filesResponse) continue;
           
           if (!filesResponse.ok) continue;
           
@@ -480,6 +468,14 @@ class GitHubReactions {
     } catch (error) {
       return false;
     }
+  }
+
+  async secureFetch(url, options = {}) {
+    if (!this.isValidApiUrl(url)) {
+      throw new Error('Invalid or unsafe URL: Only GitHub API URLs for this repository are allowed');
+    }
+    
+    return fetch(url, options);
   }
 
   isValidGitHubUrl(url) {

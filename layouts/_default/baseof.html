@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="{{ or site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+
 <head>
   {{ partial "head.html" . }}
+  {{ if hugo.IsProduction }}
+  {{ template "_internal/google_analytics.html" . }}
+  {{ end }}
 </head>
+
 <body>
   <header class="relative h-[90px]">
     {{ partial "header.html" . }}
@@ -14,4 +19,5 @@
     {{ partial "footer.html" . }}
   </footer>
 </body>
+
 </html>

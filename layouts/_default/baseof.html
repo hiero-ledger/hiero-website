@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ or site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
 <head>
-  {{ if .Site.Params.GoogleAnalyticsID }}
+  {{ if and (hugo.IsProduction) (.Site.Params.GoogleAnalyticsID) }}
   {{ partial "analytics-gtag.html" . }}
   {{ end }}
   {{ partial "head.html" . }}

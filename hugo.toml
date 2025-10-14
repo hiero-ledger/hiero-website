@@ -73,9 +73,6 @@ unsafe = true
 fallbackBlogFeaturedImage = '/images/HI60000_GetInvolvedBanner_V1.jpg'
 enableImageLazyLoading = true
 
-# Google Analytics 4
-googleAnalyticsID = "G-CFHSWYZWW8"
-
 [params.shareButtons]
 networks = [ "linkedin", "telegram", "twitter", "email" ]
 size = "small"

@@ -9,7 +9,7 @@ title = 'Hiero'
 [privacy]
   [privacy.googleAnalytics]
     disable = false
-    respectDoNotTrack = false
+    respectDoNotTrack = true
 
 [[module.mounts]]
 source = 'static'

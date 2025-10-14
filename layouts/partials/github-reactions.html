@@ -1,0 +1,27 @@
+{{ $prNumber := .Params.pr_number | default "" }}
+{{ $postSlug := .File.BaseFileName }}
+
+<div class="github-reactions" data-pr="{{ $prNumber }}" data-slug="{{ $postSlug }}">
+  <div class="reactions-container">
+    <div class="reactions-header">
+      <span class="reactions-label">
+        <svg class="reaction-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2zm0-4H7V7h10v2z"/>
+        </svg>
+        Community Reactions
+      </span>
+      <a href="#" class="github-link" target="_blank" rel="noopener" style="display: none;">
+        <span>React on GitHub</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+        </svg>
+      </a>
+    </div>
+    <div class="reactions-list" id="reactions-{{ $postSlug }}">
+      <div class="loading">
+        <div class="loading-spinner"></div>
+        <span>Loading reactions...</span>
+      </div>
+    </div>
+  </div>
+</div>

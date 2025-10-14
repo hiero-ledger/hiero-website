@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ or site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
 <head>
-  {{ if and (hugo.IsProduction) (.Site.Params.GoogleAnalyticsID) }}
-  {{ partial "analytics-gtag.html" . }}
-  {{ end }}
   {{ partial "head.html" . }}
+  {{ if hugo.IsProduction }}
+  {{ template "_internal/google_analytics.html" . }}
+  {{ end }}
 </head>
 <body>
   <header class="relative h-[90px]">

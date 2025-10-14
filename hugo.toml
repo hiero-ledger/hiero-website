@@ -2,8 +2,14 @@ baseURL = 'https://hiero.org/'
 languageCode = 'en-us'
 title = 'Hiero'
 
-# Google Analytics 4
-googleAnalyticsID = "G-CFHSWYZWW8"
+[services]
+  [services.googleAnalytics]
+    id = "G-CFHSWYZWW8"
+
+[privacy]
+  [privacy.googleAnalytics]
+    disable = false
+    respectDoNotTrack = false
 
 [[module.mounts]]
 source = 'static'

@@ -40,6 +40,7 @@ Next to the TSC, we want to invest in a diverse and inclusive community. It is i
 section_meet_heading = "Join our TSC and Community Calls"
 section_meet_text = '''
 <p>Join our open TSC, Community and Project meetings. We welcome your opinion and invite you to collaborate with the team!</p>
+<p>Register to any of our current meeting series <a href="https://github.com/hiero-ledger#open-community-meetings-and-tsc-schedules" target="_blank" rel="noreferrer noopener">HERE</a></p>
 <p>
 '''
 

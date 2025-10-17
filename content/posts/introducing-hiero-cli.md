@@ -1,9 +1,9 @@
 +++
-title = "Hacktoberfest 2025: Contribute to Hiero!"
-featured_image = "/images/hacktoberfest-2025.png"
-date = 2025-09-30T14:00:00-07:00
+title = "Join the Next Chapter of the CLI! Explore Hiero CLI"
+featured_image = "/images/hiero-cli.png"
+date = 2025-10-17T14:00:00-07:00
 categories = ["Blog"]
-abstract = "Join the Hiero project this Hacktoberfest 2025"
+abstract = "We’re thrilled to share a major milestone: the Hedera CLI is transitioned into Hiero CLI"
 [[authors]]
 name = "Hiero Team"
 title = ""
@@ -14,7 +14,7 @@ image = "/images/profile-hiero.png"
 
 ## 📣 Join the Next Chapter of the CLI! Explore Hiero CLI
 
-We’re thrilled to share a major milestone: the Hedera CLI is transitioned into the Hiero CLI and is part of [hiero-ledger](https://github.com/hiero-ledger/hiero-cli)!. 
+We’re thrilled to share a major milestone: the Hedera CLI is transitioned into Hiero CLI and is part of [hiero-ledger](https://github.com/hiero-ledger/hiero-cli)!. 
 This shift reflects not just a rebranding, but a deeper philosophical transition toward openness, extensibility, and community-driven development.
 
 Read the full announcement in the LFDT blog site here: [“Transitioning Hedera CLI to Hiero CLI: Embracing Open Source and Extensibility”](https://www.lfdecentralizedtrust.org/blog/transitioning-hedera-cli-to-hiero-cli-embracing-open-source-and-extensibility?utm_source=chatgpt.com)

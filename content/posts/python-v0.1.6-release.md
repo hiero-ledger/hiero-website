@@ -1,3 +1,15 @@
++++
+title           = "Hiero Python SDK – Announcing Release v0.1.6"
+featured_image  = "/images/python/blog_posts/v0.1.4.jpg"
+date            = 2025-08-29T11:00:00+01:00
+categories      = ["Blog"]
+abstract        = "Release 0.1.6 announced!"
+[[authors]]
+  name         = "exploreriii"
+  organization = "Python SDK Team"
+  image        = "/images/python/members/exploreriii.png"
++++
+
 # 🚀 Hiero Python SDK – Announcing Release v0.1.6
 
 We’re thrilled to announce **version 0.1.6** of the Hiero Python SDK!  

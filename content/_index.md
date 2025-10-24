@@ -46,7 +46,8 @@ section_meet_text = '''
 
 section_technical_steering_committee_heading = "The Technical Steering Committee of Hiero"
 section_technical_steering_committee_text = '''
-<p>While one of our main goals is to have a diverse and inclusive community in which everybody has the rights and responsibilities to move the project forward, it is important that a committee oversees the project and moves the roadmap forward. To do so, we have defined a technical steering committee (TSC) that is defined by six individuals today. One of the important next steps on our roadmap is to enable voting mechanisms to add additional members from the community to the TSC. The duties, goals, and rights of the TSC are defined in the <a href="https://github.com/hiero-ledger/hiero/blob/main/technical-charter.md" target="_blank" rel="noreferrer noopener">technical charter</a> of the Hiero project
+<p>Hiero welcomes a diverse and inclusive community of contributors and leaders who help shape the future of our project. Guided by this belief, we have established our Technical Steering Committee (TSC), composed of experienced and diverse members from our community who work together to achieve the project’s goals and to drive the project's decisions in the right direction. The duties, goals, and rights of the TSC are defined in the <a href="https://github.com/hiero-ledger/hiero/blob/main/technical-charter.md" target="_blank" rel="noreferrer noopener">technical charter</a> of the Hiero project.
+</p>
 '''
 
 section_roadmap_heading = "Our Roadmap in the Linux Foundation Decentralized Trust"

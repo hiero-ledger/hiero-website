@@ -5,7 +5,7 @@ date            = 2025-10-24T11:00:00+01:00
 categories      = ["Blog"]
 abstract        = "Release 0.1.6 announced!"
 [[authors]]
-  name         = "exploreriii"
+  name         = "chithraka-kal"
   organization = "Python SDK Team"
   image        = "/images/python/members/exploreriii.png"
 +++

@@ -29,6 +29,14 @@ Renders a menu for the given menu ID.
     </button>
     <ul id="menu" class="flex flex-col sm:flex-row justify-between">
       {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+      <li class="self-center">
+        <a href="https://github.com/hiero-ledger/" target="_blank" rel="noopener" class="flex">
+          {{ $icon := resources.Get "images/Hiero-Icon-Github.svg" }}
+          {{ with $icon }}
+          <img src="{{ $icon.RelPermalink }}" class="h-[35px] w-[35px] sm:h-[17px] sm:w-[17px]">
+          {{ end }}
+        </a>
+      </li>
     </ul>
   </nav>
 {{- end }}

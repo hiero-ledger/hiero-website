@@ -89,58 +89,37 @@ pip install --upgrade hiero-sdk-python
 
 
 
- ## 🙌 Community growth — contributors spotlight
-We are incredibly excited to highlight the massive community growth for this release: 27 new contributors took part in v0.1.7! This is a fantastic sign of momentum for the project.
+## 🙌 Community growth — contributors spotlight
 
-New contributors (first-time contributors for v0.1.7)
-@Nayan4007 — first contribution in #503
+We are incredibly excited to highlight the massive community growth for this release: **27 new contributors** took part in v0.1.7! This is a fantastic sign of momentum for the project.
 
-@prajeeta15 — first contribution in #421
-
-@Shashank0701-byte — first contribution in #509
-
-@ambiguity — first contribution in #512
-
-@Raja-89 — first contribution in #493
-
-@amritamishra01 — first contribution in #529
-
-@Adityarya11 — first contribution in #515
-
-@joepaulvilsan — first contribution in #520
-
-@mollymont — first contribution in #542
-
-@bhaskargurram-ai — first contribution in #537
-
-@Ananya4444 — first contribution in #545
-
-@msaadsbr — first contribution in #513
-
-@riyadev27 — first contribution in #525
-
-@OnatadeTobi — first contribution in #557
-
-@sankhya007 — first contribution in #558
-
-@Pratyush2240 — first contribution in #573
-
-@RaghavGanesh7 — first contribution in #574
-
-@Zaki-Mohd — first contribution in #464
-
-@nadineeloepfe — first contribution in #607
-
-@r-barker-dev — first contribution in #524
-
-@Pranay22077 — first contribution in #522
-
-@gg21-prog — first contribution in #527
-
-@BhuvanaB404 — first contribution in #446
-
-@Zaki-Mohammed — first contribution in #459
-
-@Manishdait — first contribution in #422
+### New contributors (first-time contributors for v0.1.7)
+- [@Nayan4007](https://github.com/Nayan4007) — first contribution in [#503](https://github.com/hiero-ledger/hiero-sdk-python/pull/503)
+- [@prajeeta15](https://github.com/prajeeta15) — first contribution in [#421](https://github.com/hiero-ledger/hiero-sdk-python/pull/421)
+- [@Shashank0701-byte](https://github.com/Shashank0701-byte) — first contribution in [#509](https://github.com/hiero-ledger/hiero-sdk-python/pull/509)
+- [@ambiguity](https://github.com/ambiguity) — first contribution in [#512](https://github.com/hiero-ledger/hiero-sdk-python/pull/512)
+- [@Raja-89](https://github.com/Raja-89) — first contribution in [#493](https://github.com/hiero-ledger/hiero-sdk-python/pull/493)
+- [@amritamishra01](https://github.com/amritamishra01) — first contribution in [#529](https://github.com/hiero-ledger/hiero-sdk-python/pull/529)
+- [@Adityarya11](https://github.com/Adityarya11) — first contribution in [#515](https://github.com/hiero-ledger/hiero-sdk-python/pull/515)
+- [@joepaulvilsan](https://github.com/joepaulvilsan) — first contribution in [#520](https://github.com/hiero-ledger/hiero-sdk-python/pull/520)
+- [@mollymont](https://github.com/mollymont) — first contribution in [#542](https://github.com/hiero-ledger/hiero-sdk-python/pull/542)
+- [@bhaskargurram-ai](https://github.com/bhaskargurram-ai) — first contribution in [#537](https://github.com/hiero-ledger/hiero-sdk-python/pull/537)
+- [@Ananya4444](https://github.com/Ananya4444) — first contribution in [#545](https://github.com/hiero-ledger/hiero-sdk-python/pull/545)
+- [@msaadsbr](https://github.com/msaadsbr) — first contribution in [#513](https://github.com/hiero-ledger/hiero-sdk-python/pull/513)
+- [@riyadev27](https://github.com/riyadev27) — first contribution in [#525](https://github.com/hiero-ledger/hiero-sdk-python/pull/525)
+- [@OnatadeTobi](https://github.com/OnatadeTobi) — first contribution in [#557](https://github.com/hiero-ledger/hiero-sdk-python/pull/557)
+- [@sankhya007](https://github.com/sankhya007) — first contribution in [#558](https://github.com/hiero-ledger/hiero-sdk-python/pull/558)
+- [@Pratyush2240](https://github.com/Pratyush2240) — first contribution in [#573](https://github.com/hiero-ledger/hiero-sdk-python/pull/573)
+- [@RaghavGanesh7](https://github.com/RaghavGanesh7) — first contribution in [#574](https://github.com/hiero-ledger/hiero-sdk-python/pull/574)
+- [@Zaki-Mohd](https://github.com/Zaki-Mohd) — first contribution in [#464](https://github.com/hiero-ledger/hiero-sdk-python/pull/464)
+- [@nadineeloepfe](https://github.com/nadineeloepfe) — first contribution in [#607](https://github.com/hiero-ledger/hiero-sdk-python/pull/607)
+- [@r-barker-dev](https://github.com/r-barker-dev) — first contribution in [#524](https://github.com/hiero-ledger/hiero-sdk-python/pull/524)
+- [@Pranay22077](https://github.com/Pranay22077) — first contribution in [#522](https://github.com/hiero-ledger/hiero-sdk-python/pull/522)
+- [@gg21-prog](https://github.com/gg21-prog) — first contribution in [#527](https://github.com/hiero-ledger/hiero-sdk-python/pull/527)
+- [@BhuvanaB404](https://github.com/BhuvanaB404) — first contribution in [#446](https://github.com/hiero-ledger/hiero-sdk-python/pull/446)
+- [@Zaki-Mohammed](https://github.com/Zaki-Mohammed) — first contribution in [#459](https://github.com/hiero-ledger/hiero-sdk-python/pull/459)
+- [@Manishdait](https://github.com/Manishdait) — first contribution in [#422](https://github.com/hiero-ledger/hiero-sdk-python/pull/422)
 
 Thank you all — your work helps make Hiero stronger and more useful to developers.
+
+---

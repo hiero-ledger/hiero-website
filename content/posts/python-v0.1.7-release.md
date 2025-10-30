@@ -7,7 +7,7 @@ abstract       = "Announcing v0.1.7, a release packed with documentation, new fe
 [[authors]]
   name         = "cheese-cakee"
   organization = "Python SDK Team"
-# image        = "/images/python/members/cheese-cakee.png"
+# image        = "https://avatars.githubusercontent.com/u/222005964?v=4"
 +++
 
 # 🚀 Hiero Python SDK – Announcing Release v0.1.7
@@ -85,8 +85,11 @@ Update to the latest Hiero Python SDK release with:
 
 ```bash
 pip install --upgrade hiero-sdk-python
+```
 
-🙌 Community growth — contributors spotlight
+
+
+ ## 🙌 Community growth — contributors spotlight
 We are incredibly excited to highlight the massive community growth for this release: 27 new contributors took part in v0.1.7! This is a fantastic sign of momentum for the project.
 
 New contributors (first-time contributors for v0.1.7)

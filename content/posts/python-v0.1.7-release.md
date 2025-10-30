@@ -1,13 +1,23 @@
 +++
+
 title          = "Hiero Python SDK – Announcing Release v0.1.7"
+
 featured_image = "/images/python/blog_posts/v0.1.7.png"
+
 date           = "2025-10-30T14:00:00+05:30"
+
 categories     = ["Blog"]
+
 abstract       = "Announcing v0.1.7, a release packed with documentation, new features, and 27 new contributors!"
+
 [[authors]]
+
   name         = "cheese-cakee"
+  
   organization = "Python SDK Team"
+  
   image        = "https://avatars.githubusercontent.com/u/222005964?v=4"
+  
 +++
 
 # 🚀 Hiero Python SDK – Announcing Release v0.1.7

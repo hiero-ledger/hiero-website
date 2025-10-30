@@ -122,7 +122,6 @@ We are incredibly excited to highlight the massive community growth for this rel
 - [@Pratyush2240](https://github.com/Pratyush2240) — first contribution in [#573](https://github.com/hiero-ledger/hiero-sdk-python/pull/573)
 - [@RaghavGanesh7](https://github.com/RaghavGanesh7) — first contribution in [#574](https://github.com/hiero-ledger/hiero-sdk-python/pull/574)
 - [@Zaki-Mohd](https://github.com/Zaki-Mohd) — first contribution in [#464](https://github.com/hiero-ledger/hiero-sdk-python/pull/464)
-- [@nadineeloepfe](https://github.com/nadineeloepfe) — first contribution in [#607](https://github.com/hiero-ledger/hiero-sdk-python/pull/607)
 - [@r-barker-dev](https://github.com/r-barker-dev) — first contribution in [#524](https://github.com/hiero-ledger/hiero-sdk-python/pull/524)
 - [@Pranay22077](https://github.com/Pranay22077) — first contribution in [#522](https://github.com/hiero-ledger/hiero-sdk-python/pull/522)
 - [@gg21-prog](https://github.com/gg21-prog) — first contribution in [#527](https://github.com/hiero-ledger/hiero-sdk-python/pull/527)

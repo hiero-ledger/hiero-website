@@ -16,7 +16,7 @@ abstract       = "Announcing v0.1.7, a release packed with documentation, new fe
   
   organization = "Python SDK Team"
   
-  image        = "https://avatars.githubusercontent.com/u/222005964?v=4"
+  image        = "/images/python/members/cheese-cakee.jpg"
   
 +++
 

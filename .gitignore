@@ -5,3 +5,4 @@ resources/
 .idea
 .env
 *.code-workspace
+pnpm-lock.yaml

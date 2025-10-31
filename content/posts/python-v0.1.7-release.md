@@ -2,7 +2,7 @@
 
 title          = "Hiero Python SDK – Announcing Release v0.1.7"
 
-featured_image = "/images/python/blog_posts/v0.1.7.png"
+featured_image = "/images/python/blog_posts/v0.1.7.jpg"
 
 date           = "2025-10-30T14:00:00+05:30"
 

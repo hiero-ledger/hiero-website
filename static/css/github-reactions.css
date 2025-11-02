@@ -1,0 +1,559 @@
+.github-reactions {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+  border: 1px solid rgba(229, 228, 215, 0.8);
+  border-radius: 0.75rem;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03),
+    0 0 0 1px rgba(184, 26, 86, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.github-reactions::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #992350 0%, #B81A56 50%, #D92D6A 100%);
+  border-radius: 2px 2px 0 0;
+  box-shadow: 0 2px 4px rgba(184, 26, 86, 0.15);
+}
+
+.github-reactions:hover {
+  box-shadow: 
+    0 10px 25px -3px rgba(0, 0, 0, 0.08),
+    0 4px 6px -2px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(184, 26, 86, 0.1);
+  transform: translateY(-2px);
+  border-color: rgba(184, 26, 86, 0.15);
+}
+
+.reactions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.reactions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(229, 228, 215, 0.6);
+}
+
+.reactions-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1E1E1E;
+  letter-spacing: -0.02em;
+  position: relative;
+}
+
+.reactions-label::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #B81A56, #D92D6A);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(184, 26, 86, 0.3);
+  flex-shrink: 0;
+}
+
+.reaction-icon {
+  width: 20px;
+  height: 20px;
+  color: #B81A56;
+  opacity: 0.9;
+  filter: drop-shadow(0 1px 2px rgba(184, 26, 86, 0.2));
+}
+
+.github-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 0.625rem 1rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #992350 0%, #B81A56 100%);
+  box-shadow: 
+    0 4px 6px -1px rgba(184, 26, 86, 0.2),
+    0 2px 4px -1px rgba(184, 26, 86, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.github-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.github-link:hover::before {
+  left: 100%;
+}
+
+.github-link:not(.loaded) {
+  display: none;
+}
+
+.github-link:hover {
+  background: linear-gradient(135deg, #B81A56 0%, #D92D6A 100%);
+  box-shadow: 
+    0 6px 12px -2px rgba(184, 26, 86, 0.3),
+    0 4px 6px -1px rgba(184, 26, 86, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.github-link svg {
+  width: 16px;
+  height: 16px;
+  opacity: 0.95;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.reactions-list {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+  min-height: 48px;
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+}
+
+.reaction-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+  border: 1px solid rgba(229, 228, 215, 0.8);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1E1E1E;
+  box-shadow: 
+    0 2px 4px -1px rgba(0, 0, 0, 0.05),
+    0 1px 2px -1px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+  user-select: none;
+  line-height: 1.2;
+  flex-shrink: 0;
+  white-space: nowrap;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.reaction-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(184, 26, 86, 0.02), transparent);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.reaction-item:hover {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  box-shadow: 
+    0 4px 8px -2px rgba(0, 0, 0, 0.08),
+    0 2px 4px -1px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 0 0 1px rgba(184, 26, 86, 0.15);
+  transform: translateY(-1px) scale(1.02);
+  border-color: rgba(184, 26, 86, 0.2);
+}
+
+.reaction-item:hover::before {
+  opacity: 1;
+}
+
+.reaction-emoji {
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.25rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.reaction-item:hover .reaction-emoji {
+  transform: scale(1.1) rotate(2deg);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+.reaction-count {
+  font-weight: 700;
+  color: #1E1E1E;
+  font-variant-numeric: tabular-nums;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.25rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  background: linear-gradient(135deg, #1E1E1E, #2A2A2A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #616161;
+  padding: 1rem 0;
+  margin-top: 0.5rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(229, 228, 215, 0.6);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(229, 228, 215, 0.8);
+  border-top-color: #B81A56;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 2px 4px rgba(184, 26, 86, 0.1);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.no-reactions {
+  font-size: 1rem;
+  color: #616161;
+  font-style: italic;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border: 1px solid rgba(229, 228, 215, 0.8);
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.03),
+    0 1px 2px rgba(0, 0, 0, 0.02);
+  margin-top: 0.5rem;
+  position: relative;
+}
+
+.no-reactions::before {
+  content: '💭';
+  font-size: 1.125rem;
+  margin-right: 0.5rem;
+}
+
+.reactions-error {
+  font-size: 1rem;
+  color: #B81A56;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+  border: 1px solid rgba(184, 26, 86, 0.2);
+  box-shadow: 
+    0 2px 4px -1px rgba(184, 26, 86, 0.1),
+    0 1px 2px -1px rgba(184, 26, 86, 0.05);
+  margin-top: 0.5rem;
+}
+
+.reactions-error::before {
+  content: "⚠️";
+  font-size: 1.25rem;
+  filter: drop-shadow(0 1px 2px rgba(184, 26, 86, 0.2));
+}
+
+.reactions-info {
+  font-size: 1rem;
+  color: #B81A56;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #f0f8ff 0%, #ffffff 100%);
+  border: 1px solid rgba(184, 26, 86, 0.15);
+  box-shadow: 
+    0 2px 4px -1px rgba(0, 0, 0, 0.05),
+    0 1px 2px -1px rgba(0, 0, 0, 0.03);
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.reactions-info::before {
+  content: "ℹ️";
+  font-size: 1.25rem;
+  filter: drop-shadow(0 1px 2px rgba(184, 26, 86, 0.1));
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .github-reactions {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    border-radius: 0.75rem;
+  }
+  
+  .reactions-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  .reactions-label {
+    font-size: 1rem;
+  }
+  
+  .github-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    align-self: flex-start;
+  }
+  
+  .reactions-list {
+    gap: 0.625rem;
+    min-height: 44px;
+    margin-top: 0.75rem;
+  }
+  
+  .reaction-item {
+    padding: 0.5rem 0.625rem;
+    font-size: 0.875rem;
+    line-height: 1.1;
+  }
+  
+  .reaction-emoji {
+    font-size: 1.125rem;
+  }
+  
+  .loading {
+    padding: 0.75rem 0;
+    margin-top: 0.75rem;
+  }
+  
+  .no-reactions, .reactions-error, .reactions-info {
+    padding: 0.75rem 1rem;
+    margin-top: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .github-reactions {
+    margin: 1rem 0;
+    padding: 0.75rem;
+  }
+  
+  .reactions-list {
+    gap: 0.5rem;
+    min-height: 40px;
+  }
+  
+  .reaction-item {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+  
+  .reaction-emoji {
+    font-size: 1rem;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .github-reactions {
+    background: linear-gradient(135deg, #1E1E1E 0%, #2A2A2A 100%);
+    border-color: rgba(97, 97, 97, 0.6);
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.3),
+      0 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(184, 26, 86, 0.1);
+  }
+  
+  .github-reactions:hover {
+    box-shadow: 
+      0 10px 25px -3px rgba(0, 0, 0, 0.4),
+      0 4px 6px -2px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(184, 26, 86, 0.2);
+    border-color: rgba(184, 26, 86, 0.25);
+  }
+  
+  .reactions-label {
+    color: #ffffff;
+  }
+  
+  .reactions-label::before {
+    background: linear-gradient(135deg, #D92D6A, #B81A56);
+    box-shadow: 0 2px 4px rgba(217, 45, 106, 0.4);
+  }
+  
+  .reaction-icon {
+    color: #D92D6A;
+  }
+  
+  .reaction-item {
+    background: linear-gradient(135deg, #2A2A2A 0%, #1E1E1E 100%);
+    border-color: rgba(97, 97, 97, 0.6);
+    color: #ffffff;
+  }
+  
+  .reaction-item:hover {
+    background: linear-gradient(135deg, #3A3A3A 0%, #2A2A2A 100%);
+    border-color: rgba(217, 45, 106, 0.4);
+    box-shadow: 
+      0 4px 8px -2px rgba(0, 0, 0, 0.4),
+      0 2px 4px -1px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05),
+      0 0 0 1px rgba(217, 45, 106, 0.3);
+  }
+  
+  .reaction-count {
+    color: #ffffff;
+    background: linear-gradient(135deg, #ffffff, #e5e5e5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .loading, .no-reactions {
+    color: #616161;
+    background: linear-gradient(135deg, #2A2A2A 0%, #1E1E1E 100%);
+    border-color: rgba(97, 97, 97, 0.4);
+  }
+  
+  .loading-spinner {
+    border-color: rgba(97, 97, 97, 0.8);
+    border-top-color: #D92D6A;
+  }
+  
+  .github-link {
+    background: linear-gradient(135deg, #992350 0%, #B81A56 100%);
+  }
+  
+  .github-link:hover {
+    background: linear-gradient(135deg, #B81A56 0%, #D92D6A 100%);
+  }
+  
+  .reactions-error {
+    background: linear-gradient(135deg, #2A1A1A 0%, #1E1E1E 100%);
+    border-color: rgba(184, 26, 86, 0.3);
+  }
+  
+  .reactions-info {
+    background: linear-gradient(135deg, #1A1A2A 0%, #1E1E1E 100%);
+    border-color: rgba(184, 26, 86, 0.2);
+  }
+}
+
+/* Animation Enhancements */
+.reaction-item {
+  animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+.reaction-item:nth-child(1) { animation-delay: 0ms; }
+.reaction-item:nth-child(2) { animation-delay: 60ms; }
+.reaction-item:nth-child(3) { animation-delay: 120ms; }
+.reaction-item:nth-child(4) { animation-delay: 180ms; }
+.reaction-item:nth-child(5) { animation-delay: 240ms; }
+.reaction-item:nth-child(6) { animation-delay: 300ms; }
+.reaction-item:nth-child(7) { animation-delay: 360ms; }
+.reaction-item:nth-child(8) { animation-delay: 420ms; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Pulse animation for loading state */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.loading {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Focus states for accessibility */
+.github-link:focus {
+  outline: 2px solid rgba(184, 26, 86, 0.5);
+  outline-offset: 2px;
+}
+
+.reaction-item:focus {
+  outline: 2px solid rgba(184, 26, 86, 0.3);
+  outline-offset: 1px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .github-reactions {
+    border-width: 2px;
+    border-color: #B81A56;
+  }
+  
+  .reaction-item {
+    border-width: 2px;
+    border-color: #B81A56;
+  }
+  
+  .github-link {
+    border-width: 2px;
+    border-color: #ffffff;
+  }
+}

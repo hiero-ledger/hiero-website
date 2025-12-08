@@ -25,8 +25,8 @@ pageRef = '/'
 weight = 10
 
 [[menus.main]]
-name = 'Open Source'
-url = '/#open-source'
+name = 'Good First Issues'
+url = 'https://github.com/issues?q=is%3Aopen+is%3Aissue+org%3Ahiero-ledger+archived%3Afalse+label%3A%22good+first+issue%22+'
 weight = 20
 
 [[menus.main]]

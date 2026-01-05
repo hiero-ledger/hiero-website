@@ -3,12 +3,13 @@ title          = "Hiero Graduates as the First Project under the Linux Foundatio
 date           = 2025-08-22
 draft          = false
 slug           = "hiero-graduation"
-description    = "Hiero has become the first project to graduate under both LFDT’s umberlla and it's new project lifecycle framework — a milestone that highlights its technical maturity, thriving ecosystem, and cross-community collaboration."
+description    = "Hiero has become the first project to graduate under both LFDT's umberlla and it's new project lifecycle framework — a milestone that highlights its technical maturity, thriving ecosystem, and cross-community collaboration."
 tags           = ["Hiero", "LFDT", "Graduation", "Open Source", "DLT", "Decentralized Trust"]
 categories     = ["Announcements"]
 featured_image = "/images/hiero-graduation.png"
 images         = ["/images/hiero-graduation.png"]
 canonical_url  = "https://hiero.org/blog/hiero-graduation"
+pr_number      = "73"
 +++
 
 ## Hiero Becomes the First Graduated Project under LFDT’s New Project Lifecycle Framework — and the First to Achieve Graduation since LFDT’s Expanded Umbrella.

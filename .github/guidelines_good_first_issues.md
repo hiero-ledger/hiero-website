@@ -11,7 +11,7 @@
   - [1. Content Fixes](#1-content-fixes)
   - [2. Hugo Frontmatter & Configuration Changes](#2-hugo-frontmatter--configuration-changes)
   - [3. Markdown Formatting & Structural Corrections](#3-markdown-formatting--structural-corrections)
-  - [4. File Organisation](#4-file-organisation)
+  - [4. File Organization](#4-file-Organization)
   - [5. Links & References](#5-links--references)
   - [6. Explicit Removals](#6-explicit-removals)
 - [What Is NOT a Good First Issue](#what-is-not-a-good-first-issue)
@@ -163,7 +163,7 @@ These are **syntax-level fixes**, not content decisions.
 
 ---
 
-### 4. File Organisation
+### 4. File Organization
 
 These changes must be **file-specific and enumerated**.
 

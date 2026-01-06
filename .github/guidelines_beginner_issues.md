@@ -3,7 +3,7 @@
 This document defines what we **do** and **do not** consider a *Beginner Issue* for the **Hiero website repository**.
 
 Beginner Issues represent the **next step after Good First Issues**.  
-They are intended for contributors who have completed (or are comfortable with) a Good First Issue and are ready to take on **light coding or documentation and investigation** in a Hugo-based website.
+They are intended for contributors who have completed (or are comfortable with) a Good First Issue and are ready to take on **light coding, documentation, and investigation** in a Hugo-based website.
 
 This document **builds on** the  
 **[Good First Issue Guidelines](./guidelines_good_first_issues.md)**,  
@@ -20,7 +20,7 @@ which remain the baseline for scope, safety, and contributor experience.
   - [1. Content Improvements](#1-content-improvements)
   - [2. Hugo Frontmatter & Page Structure](#2-hugo-frontmatter--page-structure)
   - [3. Markdown & Documentation Structure](#3-markdown--documentation-structure)
-  - [4. File & Asset Organisation](#4-file--asset-organisation)
+  - [4. File & Asset organization](#4-file--asset-organization)
   - [5. Links & References](#5-links--references)
 - [What Is NOT a Beginner Issue](#what-is-not-a-beginner-issue)
 - [Maintainer Guidance](#maintainer-guidance)
@@ -63,13 +63,13 @@ Beginner Issues differ from Good First Issues in that they:
 Beginner Issues assume contributors are already familiar with:
 
 - The basic Hiero website repository structure
-- Basic Hugo Skills 
+- Basic Hugo skills 
 - Making pull requests
 - Following contribution guidelines
 
 Beginner Issues **do not** assume:
 - Deep Hugo expertise
-- Other CSS or frontend development experience
+- CSS or frontend development experience
 - Design or content strategy skills
 
 ---
@@ -138,7 +138,7 @@ These involve **organizational improvements**.
 
 ---
 
-### 4. File & Asset Organisation
+### 4. File & Asset organization
 
 These involve **light cleanup and consistency work**.
 

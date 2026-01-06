@@ -63,6 +63,7 @@ Beginner Issues differ from Good First Issues in that they:
 Beginner Issues assume contributors are already familiar with:
 
 - The basic Hiero website repository structure
+- Netlify previews and tests
 - Basic Hugo skills 
 - Making pull requests
 - Following contribution guidelines

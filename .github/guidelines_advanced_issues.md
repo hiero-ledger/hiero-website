@@ -70,6 +70,7 @@ Advanced Issues differ from Intermediate Issues in that they:
 
 Advanced Issues assume contributors are comfortable with:
 
+- Netlify previews and tests
 - Hugo content, layouts, templates, and shortcodes
 - The full Hiero website structure and build process
 - Reviewing changes holistically, not file-by-file

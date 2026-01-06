@@ -64,6 +64,7 @@ Intermediate Issues differ from Beginner Issues in that they:
 
 Intermediate Issues assume contributors are comfortable with:
 
+- Netlify previews and tests
 - The Hiero website repository structure
 - Hugo content organization and frontmatter patterns
 - Editing and organizing Markdown at scale

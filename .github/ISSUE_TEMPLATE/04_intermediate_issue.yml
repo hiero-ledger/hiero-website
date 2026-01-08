@@ -1,0 +1,148 @@
+name: Intermediate Website Issue Template
+description: Create a well-documented issue for contributors with some familiarity with the Hiero Website codebase
+title: "[Intermediate]: "
+labels: ["intermediate"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ## **Thanks for contributing to the Hiero Website!** 🌐✨
+
+        We truly appreciate your time and effort.  
+        This template is designed to help you create an **Intermediate issue** for the Hiero Website project.
+
+        The goal is to create an issue for contributors who have:
+        - basic familiarity with the Hiero Website codebase (HUGO, Tailwind, Markdown content, etc.)
+        - experience following our contribution workflow
+        - confidence navigating existing components, pages, and documentation
+        ---
+
+  - type: textarea
+    id: intro
+    attributes:
+      label: 🧩 Intermediate Contributors
+      description: Who is this issue for?
+      value: |
+        This issue is intended for contributors who are already very familiar with the
+        [Hiero Website](https://github.com/hiero-ledger/hiero-website) codebase and its architectural patterns.
+  
+        You should feel comfortable with:
+        - Netlify previews and tests
+        - The Hiero website repository structure
+        - understanding Hugo templating concepts without step-by-step guidance 
+        - Editing and organizing Markdown at scale
+        - Making pull requests with minimal guidance
+        - navigating `layouts/`, `content/`, `partials/`, and `static/` 
+        - following the standard PR workflow without additional onboarding
+
+        If this is your very first contribution to the project, we recommend starting with a few
+        **Good First Issues** before working on this one.
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: | 
+        > [!IMPORTANT] 
+        > ### 🧭 What we consider an *Intermediate Website Issue* 
+        > 
+        > This issue generally: 
+        > 
+        > - Requires **some knowledge of the Hugo codebase**, but not deep architectural knowledge 
+        > - Is **narrowly scoped** and well-contained 
+        > - Is **low to medium risk**, not touching highly sensitive or critical infrastructure 
+        > - May involve **refactors, content restructuring, or small feature additions** 
+        > - Provides **enough documentation or examples** to reason about a solution 
+        > - Often has **similar patterns elsewhere in the codebase** 
+        > 
+        > **What this issue is NOT:** 
+        > - A beginner-friendly onboarding task 
+        > - A large architectural redesign of the site 
+        > - A change requiring extensive cross-module refactors 
+        > - A breaking change to site infrastructure or deployment
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 🐞 Problem Description
+      description: |
+        Describe the problem clearly and precisely.
+
+        You may assume the reader:
+        - understands the website structure
+        - can navigate `layouts/`, `content/`, `partials/`, and `static/`
+        - is comfortable reading existing implementations
+
+        Still, explain:
+        - what is wrong or missing
+        - where it lives in the codebase
+        - why it matters
+      value: |
+        Describe the problem here.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 💡 Expected Solution
+      description: |
+        Describe the intended outcome.
+
+        This does NOT need to be a full implementation plan,
+        but should explain:
+        - what should change
+        - what should NOT change
+        - any constraints or boundaries
+      value: |
+        Describe the expected solution here.
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: 🧠 Implementation Notes
+      description: |
+        Provide technical guidance to help implementation.
+
+        Examples:
+        - files or modules likely involved
+        - patterns already used elsewhere
+        - things to be careful about
+        - known edge cases
+      value: |
+        Add implementation notes here.
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: ✅ Acceptance Criteria
+      description: Define what "done" means for this issue
+      value: |
+        To merge this issue, the pull request must:
+
+        - [ ] Fully address the problem described above
+        - [ ] Follow existing project conventions and patterns
+        - [ ] Include tests or example updates where appropriate
+        - [ ] Pass all CI checks
+        - [ ] Include a valid changelog entry
+        - [ ] Use DCO and GPG-signed commits
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: 📚 Additional Context or Resources
+      description: |
+        Add any links, references, or extra notes that may help.
+      value: |
+        - [Website Developer Docs](https://github.com/hiero-ledger/hiero-website/tree/main/docs)
+    validations:
+      required: false

@@ -2,6 +2,7 @@
 
 ## Table of Contents
 
+- [How To Use This Document](#how-to-use-this-document)
 - [Purpose](#purpose)
 - [Guidelines](#guidelines)
 - [Assumptions](#assumptions)
@@ -20,6 +21,27 @@
 - [Common Red Flags](#common-red-flags)
 
 ---
+## How to Use This Document
+
+This guide is here to support maintainers and issue creators who use the **Good First Issue** label.
+
+It offers shared language, examples, and guidance to help:
+
+**Issue creators:**
+- Feel confident when proposing a Good First Issue  
+- Get inspiration for what makes a task a good starting point  
+- Decide when another issue template might be a better fit  
+
+**Maintainers:**
+- Apply the Good First Issue label consistently  
+- Keep issue difficulty labels clear and helpful  
+
+This is not a rulebook, and it’s not meant to limit what kinds of contributions are welcome.
+
+All contributions — big or small, simple or complex — are valuable to the Hiero project.  
+This guide simply helps highlight which tasks are especially well-suited as a first step.
+
+---
 
 ## Purpose
 
@@ -28,6 +50,7 @@ Good First Issues (GFIs) are designed to provide a **welcoming, confidence-build
 For many people, contributing to a new repository means learning a new workflow, exploring an unfamiliar structure, and opening their first pull request. Good First Issues help make that journey smoother by focusing on **clear, approachable tasks**.
 
 They allow contributors to spend more time learning the process and less time navigating uncertainty.
+
 
 ---
 

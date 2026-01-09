@@ -1,133 +1,129 @@
-# Good First Issue — Candidate Guidelines (Hiero Website)
+# Good First Issue — Candidate  
 
-This document defines the purpose and usage of the **`good first issue: candidate`** label for the **Hiero website repository**.
+This label helps us shape issues into great entry points for new contributors.
 
-It intentionally **does not redefine what a Good First Issue is**.  
-Instead, it exists to **gate and protect** the standards defined in:
+Some issues are *almost* ready to be a “Good First Issue” — they just need a bit more clarity, context, or detail first.  
+That’s where the **Good First Issue — Candidate** label comes in.
 
-👉 **[Good First Issue Guidelines](./guidelines_good_first_issues.md)**  
-
----
-
-## Table of Contents
-
-- [Purpose](#purpose)
-- [Why the Candidate Label Exists](#why-the-candidate-label-exists)
-- [When to Use `good first issue: candidate`](#when-to-use-good-first-issue-candidate)
-- [What the Candidate Label Is NOT](#what-the-candidate-label-is-not)
-- [Promoting a Candidate to Good First Issue](#promoting-a-candidate-to-good-first-issue)
-- [Maintainer Checklist](#maintainer-checklist)
+For the definition of a fully ready Good First Issue, see:  
+👉 **[Good First Issue Guidelines](./guidelines_good_first_issues.md)**
 
 ---
 
-## Purpose
+## What “Candidate” Means
 
-The **`good first issue: candidate`** label represents a **temporary holding state**.
+A **Good First Issue — Candidate** is an issue that:
 
-It indicates that an issue:
-- Might qualify as a Good First Issue
-- Appears small and low risk
-- But **does not yet meet all requirements** defined in the  
-  **Good First Issue Guidelines**
+- ✅ Looks like it could be a good starting point for new contributors  
+- ✅ Appears small, contained, and low-risk  
+- ✅ There is some doubt if it is a GFI or lacks documentation
 
-The candidate label exists so maintainers can **refine an issue before exposing it** as a Good First Issue.
+Think of it as:
 
-> The candidate label is **not** a weaker GFI.  
-> It is a **quality-control step**.
+> “Almost there — just needs a bit of checking or polish.”
 
----
-
-## Why the Candidate Label Exists
-
-Applying the **Good First Issue** label signals that an issue is:
-
-- Fully specified
-- Mechanical
-- Low risk
-- Ready for self-assignment by first-time contributors
-
-If that signal is wrong, contributor trust is weakened.
-
-The **candidate** label exists to:
-
-- 🚫 Prevent premature Good First Issue labeling
-- 🧭 Enforce adherence to the Good First Issue Guidelines
-- 🛠 Give maintainers time to add missing details
-- 📋 Provide a clear promotion path to GFI
+The goal is to make sure that when an issue is labeled **Good First Issue**, contributors can confidently pick it up and succeed.
 
 ---
 
-## When to Use `good first issue: candidate`
+## Why This Label Exists
 
-Apply the **candidate** label when:
+We want Good First Issues to feel:
 
-- The issue appears to fit the **[Good First Issue Guidelines](./guidelines_good_first_issues.md)**
-- But one or more required elements are missing or unclear
+- ✅ Approachable  
+- ✅ Well-scoped  
+- ✅ Clear  
+- ✅ Low-friction  
 
-Typical reasons include:
-- Missing exact file paths
-- Missing explicit implementation steps
-- Missing acceptance criteria
-- Uncertainty about whether the issue is truly mechanical
+The **Candidate** label gives maintainers time to:
 
-If you are unsure whether an issue fully meets the GFI bar, **use the candidate label**.
+- ✅ Add missing context and help  
+- ✅ Confirm it is truly beginner-friendly  
 
----
-
-## What the Candidate Label Is NOT
-
-The candidate label must **not** be used for issues that clearly violate the  
-**Good First Issue Guidelines**.
-
-Do **not** use the candidate label if the issue:
-
-- Requires deciding *what* to change
-- Requires deciding *how* content should read or look
-- Involves Hugo layouts, themes, or templates
-- Involves CSS, styling, or UX
-- Is exploratory, investigative, or blocked
-- Would never qualify as a Good First Issue even after refinement
-
-> If an issue will **never** meet the **[Good First Issue Guidelines](./guidelines_good_first_issues.md)**,  
-> do **not** label it as a candidate.
+This is important because Github automatically advertises all issues labelled `Good First Issue`. In this way, all our `Good First Issue` are ready for anybody to come, get assigned and succeed.
 
 ---
 
-## Promoting a Candidate to Good First Issue
+## When to Use the Candidate Label
 
-A candidate may be promoted **only after it fully satisfies** the  
-**Good First Issue Guidelines — Hiero Website**.
+Use **Good First Issue — Candidate** when:
 
-Promotion requires that **all GFI requirements are met**, including:
-- Fully specified solution
-- Exact files, text, or values
-- Objective acceptance criteria
-- No interpretation or judgment required
+- ✅  An issue *seems* like a good fit for new contributors  
+- ✅  But something is still unclear or incomplete  
 
----
+Common examples:
 
-## Promotion Process
+- File paths or locations aren’t specified yet  
+- The exact change isn’t fully described  
+- Acceptance criteria could be clearer  
+- You want to double-check that the task is truly a GFI  
 
-1. Review the issue against the **Good First Issue Guidelines**
-2. Add any missing instructions, details, or acceptance criteria
-3. Confirm the issue clearly meets all GFI requirements
-4. Remove the `good first issue: candidate` label
-5. Apply the **Good First Issue** label
+If you’re unsure whether an issue is ready to be advertised as a Good First Issue, the **Candidate** label is a great middle step.
 
 ---
 
-## Maintainer Checklist
+## What the Candidate Label Is (and Isn’t)
 
-Use the **candidate** label if:
+### It is:
 
-- The issue seems like it *could* be a Good First Issue
-- But you are not yet comfortable advertising it as one
+- A staging area for promising beginner-friendly issues  
+- A signal that some refinement may still be needed  
+- A way to improve clarity and consistency  
 
-When in doubt, **use the candidate label first**.
+### It isn’t:
+
+- A restriction on who can view or discuss the issue  
+- A statement about contributor ability  
+- A permanent category  
+
+Some issues will naturally evolve into Good First Issues.  
+Others may turn out to be better suited for more experienced contributors — and that's okay too, helping to build confidence and momentum.
 
 ---
 
-## Final Rule
+## Promoting an Issue to “Good First Issue”
 
-> The **Good First Issue Guidelines** define the standard.  
-> The **candidate label** exists to protect it.
+An issue can be promoted once it:
+
+- Has clear, concrete instructions  
+- Describes *what* to change and *where*  
+- Includes objective acceptance criteria  
+
+### Simple promotion flow:
+
+1. Review the issue against the GFI guidelines  
+2. Add or refine instructions as needed  
+3. Confirm the scope is beginner-friendly  
+4. Replace **Candidate** with **Good First Issue**
+
+---
+
+## For Issue Creators
+
+If an issue feels like:
+
+> “This could be a great first contribution, but needs a little more clarity.”
+
+Use the **Good First Issue — Candidate** label.
+
+# For Maintainers
+
+If a good first issue candidate is truly a `Good First Issue` and is well-documented
+
+Swap the **Good First Issue — Candidate** label for **Good First Issue** label.
+
+If it is more advanced:
+- Close the `Good First Issue Candidate`
+- Re-open the issue at `beginner`, `intermediate` or `advanced`
+
+---
+
+## The Big Picture
+
+It's important for `Good First Issues` to feel welcoming and be ready-to-assign and succeed.
+
+The Candidate label exists to help us:
+
+- Make it easier to create `Good First Issues`
+- Give maintainers time to improve the contribution experience
+- Maintain a positive first-contribution experience  

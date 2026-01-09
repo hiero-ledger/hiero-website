@@ -1,44 +1,45 @@
 # Hiero Website — Issue Difficulty Overview (Maintainers Cheatsheet)
 
-**Audience:** Maintainers only  
-**Purpose:** Quick, practical reference to label issues correctly  
-**Not contributor-facing documentation**
+**Audience:** Maintainers  
+**Purpose:** Quick, practical reference for labeling issues  
 
-This document summarizes **how to choose the correct difficulty label** for issues in the Hiero website repository.
+This guide summarizes how to choose the most helpful **difficulty label** for issues in the Hiero website repository.
 
-> Core question:  
-> **How much judgment, investigation, and ownership does this issue require?**
+**Core question:**  
+> How much guidance, exploration, and ownership does this issue involve?
 
 ---
 
 ## Difficulty Levels at a Glance
 
-| Label | Who It’s For | Judgment Required | Scope | Risk |
+| Label | Who It’s For | Guidance Level | Scope | Risk |
 |---|---|---|---|---|
-| **Good First Issue** | First-time contributors | None | Single, explicit task | Very low |
-| **Good First Issue: Candidate** | Maintainers | None (yet) | Single task, incomplete spec | Very low |
-| **Beginner Issue** | Post-GFI contributors | Low | Localized | Low |
-| **Intermediate Issue** | Regular contributors | Medium | Multi-file / section | Medium |
-| **Advanced Issue** | Experienced contributors | High | Site-wide / systemic | High |
+| **Good First Issue** | First-time contributors | Fully guided | Single, explicit task | Very low |
+| **Good First Issue: Candidate** | Maintainers | Nearly guided | Single task, incomplete spec | Very low |
+| **Beginner Issue** | Post-GFI contributors | Light guidance | Localized | Low |
+| **Intermediate Issue** | Regular contributors | Flexible guidance | Multi-file / section | Medium |
+| **Advanced Issue** | Experienced contributors | Open-ended | Site-wide / systemic | High |
 
 ---
 
 ## Decision Flow (Fast Triage)
 
-Ask these questions **in order**:
+Ask these questions in order:
 
-1. **Is the solution fully specified and mechanical?**
-   - Yes → **Good First Issue**
-   - Almost, but missing details → **Good First Issue: Candidate**
+1. **Is the solution fully specified and purely mechanical?**  
+   → Use **Good First Issue**
 
-2. **Does the contributor need to read existing content and make small decisions?**
-   - Yes → **Beginner Issue**
+2. **Is it almost mechanical, but missing a few details?**  
+   → Use **Good First Issue: Candidate**
 
-3. **Does the contributor need to investigate, weigh options, and choose an approach?**
-   - Yes → **Intermediate Issue**
+3. **It is quite mechanical, but has a broader scope or and light research?**  
+   → Use **Beginner Issue**
 
-4. **Does this require system-level, architectural, UX, or long-term decisions?**
-   - Yes → **Advanced Issue**
+4. **Does the contributor need to explore options and choose an approach?**  
+   → Use **Intermediate Issue**
+
+5. **Does this involve system-level, architectural, UX, or long-term decisions?**  
+   → Use **Advanced Issue**
 
 ---
 
@@ -46,131 +47,124 @@ Ask these questions **in order**:
 
 ### Good First Issue (GFI)
 
-**Use when:**
-- Task is fully scripted
-- Exact files, values, or text are specified
-- No interpretation required
-- Outcome is objectively verifiable
+Best for:
+- Fully guided tasks  
+- Exact files, values, or text provided  
+- No interpretation required  
+- Clear, objective outcome  
 
-**Examples:**
-- Fix a typo in a specific file
-- Replace a broken link with a given URL
-- Update a value to a specified value
+**Typical examples:**
+- Fixing a typo in a specific file  
+- Replacing a broken link with a given URL  
+- Updating a value to a specified value  
 
-**If any uncertainty exists → do NOT use GFI**
+If the task needs extra explanation in comments, it’s usually better suited for another label.
 
 ---
 
 ### Good First Issue: Candidate
 
-**Use when:**
-- The issue *might* be a GFI
-- But is missing:
-  - Exact file paths
-  - Explicit steps
-  - Acceptance criteria
-- Or you are unsure it is truly mechanical
+Best for:
+- Issues that *could* become GFIs  
+- Tasks missing small but important details  
+- Cases where the scope looks right, but clarity is still needed  
 
-**Purpose:**
-- Quality gate
-- Temporary holding state
-- Maintainer refinement space
+This label gives maintainers space to refine instructions before promoting the issue to a full GFI.
 
-> If it will *never* qualify as GFI, **do not use candidate**
+If the task wouldn’t make sense as a GFI even with refinement, another label is likely a better fit.
 
 ---
 
 ### Beginner Issue
 
-**Use when:**
-- Builds on GFI experience
-- Requires reading existing files
-- Requires **small, safe decisions**
-- Still low risk and localized
+Best for:
+- Tasks that build on GFI experience  
+- Work that involves reading existing files  
+- Small, safe choices  
+- Localized, low-risk changes  
 
-**Allowed judgment:**
-- Clarifying wording
-- Choosing between obvious patterns
-- Minor reorganization with stated intent
+**Typical activities:**
+- Clarifying wording  
+- Choosing between obvious patterns  
+- Light reorganization with stated intent  
 
-**Not allowed:**
-- Designing new systems
-- UX, visual, or layout changes
-- Open-ended content creation
-
-**Rule of thumb:**
-> “Read → understand → make a small decision”
+**Helpful framing:**  
+> “Read → understand → make a small choice”
 
 ---
 
 ### Intermediate Issue
 
-**Use when:**
-- Contributor must investigate independently
-- Multiple valid solutions exist
-- Contributor chooses *how* to implement intent
-- Spans multiple related files or sections
+Best for:
+- Independent exploration  
+- Multiple valid solution paths  
+- Contributor chooses *how* to implement the goal  
+- Spans multiple related files or sections  
 
-**Typical characteristics:**
-- Clear problem statement
-- Solution not prescribed
-- Requires reasoning and trade-offs
-- Still feasible in one PR
+**Common characteristics:**
+- Clear problem statement  
+- Solution not fully prescribed  
+- Requires reasoning and trade-offs  
+- Still feasible in one PR  
 
 **Examples:**
-- Reorganizing documentation sections
-- Writing or significantly revising content
-- Designing frontmatter usage for a section
+- Reorganizing documentation sections  
+- Writing or significantly revising content  
+- Designing frontmatter usage for a section  
 
 ---
 
 ### Advanced Issue
 
-**Use when:**
-- Requires architectural or design ownership
-- Affects multiple areas or site-wide behavior
-- Introduces or changes conventions
-- Has long-term maintenance impact
+Best for:
+- Architectural or design ownership  
+- Site-wide or cross-section changes  
+- Introducing or evolving conventions  
+- Long-term maintenance impact  
 
-**High-risk areas:**
-- Navigation or information architecture
-- Hugo templates, layouts, shortcodes
-- UX, accessibility, or visual redesign
-- Governance or strategic content
+**Common areas:**
+- Navigation or information architecture  
+- Hugo templates, layouts, or shortcodes  
+- UX, accessibility, or visual redesign  
+- Governance or strategic content  
 
-**Rule of thumb:**
+**Helpful framing:**  
 > “Designing or evolving the system”
 
 ---
 
-## Common Mislabeling Pitfalls
+## Common Labeling Pitfalls
 
-- ❌ Labeling exploratory work as GFI
-- ❌ Using Beginner for purely mechanical tasks
-- ❌ Using Intermediate for UX or template changes
-- ❌ Using Advanced for large but mechanical refactors
-- ❌ Over-promoting issues to appear more “important”
+Some situations that often benefit from a second look:
+
+- Labeling exploratory work as a GFI  
+- Using Beginner for fully mechanical tasks  
+- Using Intermediate for UX or template changes  
+- Using Advanced for large but mechanical refactors  
+- Over-promoting issues to make them seem more “important”  
 
 ---
 
 ## Final Guidance for Maintainers
 
-- **When in doubt, label lower**
-- Prefer **Candidate** over premature GFI
-- Prefer **Beginner** over Intermediate if judgment is limited
-- Use **Advanced** sparingly and intentionally
+- When unsure, start with a **lower difficulty label**  
+- Use **Candidate** rather than a premature GFI  
+- Prefer **Beginner** over Intermediate when choices are limited  
+- Use **Advanced** intentionally for system-level work  
 
 ---
 
-## Final Rule
+## Final Note
 
-> Difficulty labels describe **decision complexity**,  
-> not **time, size, or importance**.
+Difficulty labels describe **how much guidance and ownership a task involves**,  
+not **time, size, or importance**.
+
+---
 
 ## Helpful Links
-[Advanced Guidelines](guidelines_advanced_issues.md)
-[Intermediate Guidelines](guidelines_intermediate_issues.md)
-[Beginner Guidelines](guidelines_beginner_issues.md)
-[Good First Issue Guidelines](guidelines_good_first_issues.md)
-[Good First Issue Candidate Guidelines](guidelines_good_first_issue_candidates.md.md)
 
+- [Advanced Guidelines](guidelines_advanced_issues.md)  
+- [Intermediate Guidelines](guidelines_intermediate_issues.md)  
+- [Beginner Guidelines](guidelines_beginner_issues.md)  
+- [Good First Issue Guidelines](guidelines_good_first_issues.md)  
+- [Good First Issue Candidate Guidelines](guidelines_good_first_issue_candidates.md)  

@@ -1,19 +1,22 @@
 # Advanced Issue Guidelines — Hiero Website
 
-This document defines what we **do** and **do not** consider an *Advanced Issue* for the **Hiero website repository**.
+Advanced Issues represent the **highest tier of contribution** for the Hiero website.
 
-Advanced Issues represent the **highest tier of contribution** for the Hiero website.  
-They are intended for contributors with **deep familiarity** with the repository, strong Hugo knowledge, and the ability to **own high-impact changes end-to-end**.
+They’re designed for contributors who are comfortable working across the full repository, understand Hugo’s structure and behavior, and are ready to take ownership of **high-impact changes from design through delivery**.
 
-This document **builds on**:
+This guide builds on:
+
 - **[Good First Issue Guidelines](./guidelines_good_first_issues.md)**
 - **[Beginner Issue Guidelines](./guidelines_beginner_issues.md)**
 - **[Intermediate Issue Guidelines](./guidelines_intermediate_issues.md)**
+
+and exists to support consistent, clear use of the **Advanced Issue** label.
 
 ---
 
 ## Table of Contents
 
+- [How to Use This Document](#how-to-use-this-document)
 - [Purpose](#purpose)
 - [How Advanced Issues Differ from Intermediate Issues](#how-advanced-issues-differ-from-intermediate-issues)
 - [Assumptions](#assumptions)
@@ -23,78 +26,98 @@ This document **builds on**:
   - [3. Site-Wide Content & Structural Refactors](#3-site-wide-content--structural-refactors)
   - [4. UX, Accessibility & Visual Changes](#4-ux-accessibility--visual-changes)
   - [5. Strategic Editorial & Governance Content](#5-strategic-editorial--governance-content)
-- [What Is NOT an Advanced Issue](#what-is-not-an-advanced-issue)
+- [What’s Typically Not an Advanced Issue](#whats-typically-not-an-advanced-issue)
 - [Maintainer Guidance](#maintainer-guidance)
+
+---
+
+## How to Use This Document
+
+This guide supports maintainers and issue creators who use the **Advanced Issue** label.
+
+It offers shared language and examples to help:
+
+**Issue creators:**
+- Propose well-scoped, high-impact Advanced Issues  
+- Describe problems clearly, even when solutions are open-ended  
+- Decide when a task is better suited for a different issue category  
+
+**Maintainers:**
+- Apply the Advanced label consistently  
+- Set clear expectations for scope and responsibility  
+
+This isn’t a rulebook, and it’s not meant to limit what kinds of contributions are welcome.
+
+All contributions — from small fixes to major improvements — are valuable to the Hiero project.  
+This guide simply highlights the kinds of tasks that benefit from deeper ownership and broader system-level thinking.
 
 ---
 
 ## Purpose
 
-The goal of an **Advanced Issue** is to:
+Advanced Issues are designed to:
 
-- ✅ Enable **high-impact, high-responsibility changes**
-- ✅ Improve long-term usability, maintainability, or clarity of the site
-- ✅ Introduce or evolve **structural or architectural patterns**
-- ✅ Prepare contributors for **ongoing ownership or stewardship**
+- Enable high-impact, high-responsibility contributions  
+- Improve long-term usability, clarity, and maintainability  
+- Support thoughtful evolution of site structure and patterns  
+- Prepare contributors for ongoing ownership or stewardship  
 
-Advanced Issues may affect:
-- Multiple sections of the site
-- Site-wide behavior or structure
-- Public-facing UX or navigation
-- Long-term content strategy or governance materials
+These issues often affect:
 
-These issues carry **higher risk** and require careful review.
+- Multiple sections of the site  
+- Site-wide behavior or structure  
+- Public-facing UX or navigation  
+- Long-term content strategy or governance materials  
+
+Because of their scope, they benefit from careful review, discussion, and iteration.
 
 ---
 
 ## How Advanced Issues Differ from Intermediate Issues
 
-Advanced Issues differ from Intermediate Issues in that they:
+Advanced Issues introduce more system-level responsibility than Intermediate Issues.
 
-- ❗ Require **design and architectural ownership**
-- ❗ Involve **system-level thinking**
-- ❗ Often affect **multiple areas of the site**
-- ❗ May introduce new conventions or patterns
-- ❗ Have **long-term impact** if done incorrectly
+They often:
 
-### Rule of Thumb
+- Involve architectural or design decisions  
+- Require evaluating trade-offs  
+- Affect multiple areas of the site  
+- Introduce or refine conventions and patterns  
+- Have long-term impact  
 
-> If a contributor must **design or redesign systems,  
-> evaluate trade-offs, and own long-term consequences**,  
-> it is an **Advanced Issue**.
+**Helpful way to think about it:**
 
+- If the task involves choosing *how* to solve a well-scoped problem → *Intermediate Issue*  
+- If the task involves shaping or evolving the system itself → *Advanced Issue*  
 
 ---
 
 ## Assumptions
 
-Advanced Issues assume contributors are comfortable with:
+Advanced Issues are designed for contributors who are comfortable working independently and holistically.
 
-- Netlify previews and tests
-- Hugo content, layouts, templates, and shortcodes
-- The full Hiero website structure and build process
-- Reviewing changes holistically, not file-by-file
-- Anticipating downstream and maintenance impact
-- Communicating design decisions clearly in PRs
+They aim to:
 
-Advanced Issues **do not** assume:
-- Marketing authority without alignment
-- Product ownership
-- Unilateral decision-making without review
+- Build on strong familiarity with the repository and workflow  
+- Encourage system-level thinking  
+- Support thoughtful, well-communicated design decisions  
+- Keep changes intentional, reviewable, and maintainable  
+
+They don’t require marketing authority or unilateral decision-making — collaboration and alignment are still key.
 
 ---
 
 ## What We Consider Advanced Issues
 
-Advanced Issues are:
+Advanced Issues are typically:
 
-- ✅ Clearly motivated but **not fully specified**
-- ✅ Multi-file or site-wide in scope
-- ✅ Design- and decision-heavy
-- ✅ High impact, with medium to high risk
-- ✅ Expected to require discussion and iteration
+- Clearly motivated but not fully scripted  
+- Multi-file or site-wide in scope  
+- Design- and decision-heavy  
+- High impact, with medium to high risk  
+- Expected to involve discussion and iteration  
 
-They often start with a **problem statement**, not a solution.
+They often start with a **problem statement**, not a complete solution.
 
 ---
 
@@ -102,15 +125,15 @@ They often start with a **problem statement**, not a solution.
 
 These involve **how users find and understand content**.
 
-#### ✅ Allowed
-- Redesigning navigation or menus
-- Restructuring documentation hierarchies
-- Introducing new content groupings or sections
-- Improving discoverability across the site
+#### Good fits
+- Redesigning navigation or menus  
+- Restructuring documentation hierarchies  
+- Introducing new content groupings or sections  
+- Improving discoverability across the site  
 
-#### ❌ Not Allowed
-- Small ordering tweaks (Intermediate)
-- Mechanical link changes (Beginner / GFI)
+#### Less ideal
+- Small ordering tweaks  
+- Mechanical link changes  
 
 ---
 
@@ -118,15 +141,15 @@ These involve **how users find and understand content**.
 
 These involve **site behavior and rendering**.
 
-#### ✅ Allowed
-- Creating or modifying Hugo layouts or partials
-- Introducing new shortcodes
-- Refactoring templates for maintainability
-- Improving performance or flexibility of layouts
+#### Good fits
+- Creating or modifying Hugo layouts or partials  
+- Introducing new shortcodes  
+- Refactoring templates for maintainability  
+- Improving performance or flexibility of layouts  
 
-#### ❌ Not Allowed
-- Minor frontmatter-only changes
-- Content-only updates without layout impact
+#### Less ideal
+- Minor frontmatter-only changes  
+- Content-only updates without layout impact  
 
 ---
 
@@ -134,15 +157,15 @@ These involve **site behavior and rendering**.
 
 These involve **broad consistency and maintainability work**.
 
-#### ✅ Allowed
-- Large-scale documentation reorganizations
-- Migrating content to new structures
-- Removing or consolidating deprecated sections
-- Enforcing new conventions across the site
+#### Good fits
+- Large-scale documentation reorganizations  
+- Migrating content to new structures  
+- Removing or consolidating deprecated sections  
+- Enforcing new conventions across the site  
 
-#### ❌ Not Allowed
-- Single-page edits (Beginner / Intermediate)
-- Refactors without a clear migration plan
+#### Less ideal
+- Single-page edits  
+- Refactors without a clear migration plan  
 
 ---
 
@@ -150,15 +173,15 @@ These involve **broad consistency and maintainability work**.
 
 These involve **how the site looks and feels**.
 
-#### ✅ Allowed
-- Accessibility improvements (ARIA, contrast, semantics)
-- Visual or layout redesigns
-- Responsive behavior improvements
-- Interaction or usability enhancements
+#### Good fits
+- Accessibility improvements (ARIA, contrast, semantics)  
+- Visual or layout redesigns  
+- Responsive behavior improvements  
+- Interaction or usability enhancements  
 
-#### ❌ Not Allowed
-- Minor cosmetic tweaks
-- One-off styling fixes
+#### Less ideal
+- Minor cosmetic tweaks  
+- One-off styling fixes  
 
 ---
 
@@ -166,52 +189,52 @@ These involve **how the site looks and feels**.
 
 These involve **high-importance content**.
 
-#### ✅ Allowed
-- Governance, roadmap, or policy documentation
-- Major announcements or structural blog series
-- Defining editorial standards or conventions
-- Content requiring cross-team alignment
+#### Good fits
+- Governance, roadmap, or policy documentation  
+- Major announcements or structured blog series  
+- Defining editorial standards or conventions  
+- Content requiring cross-team alignment  
 
-#### ❌ Not Allowed
-- Casual blog posts (Intermediate)
-- Minor doc updates (Beginner / Intermediate)
+#### Less ideal
+- Casual blog posts  
+- Minor documentation updates  
 
 ---
 
-## What Is NOT an Advanced Issue
+## What’s Typically Not an Advanced Issue
 
-The following are **not** Advanced Issues:
+Some kinds of work are usually better suited for other issue categories, such as:
 
-- Purely mechanical tasks
-- Small, localized changes
-- Fully scripted work
-- Low-risk formatting or content fixes
-- Issues that do not require design or system thinking
-
-These should use **Good First**, **Beginner**, or **Intermediate** labels instead.
+- Purely mechanical tasks  
+- Small, localized changes  
+- Fully scripted work  
+- Low-risk formatting or content fixes  
+- Tasks that don’t involve design or system-level thinking  
 
 ---
 
 ## Maintainer Guidance
 
-### Label as an Advanced Issue if the issue:
+### An Advanced Issue is usually a good fit when:
 
-- ✅ Requires architectural or design decisions
-- ✅ Has multiple valid solution paths
-- ✅ Affects multiple parts of the site
-- ✅ Has long-term maintenance implications
-- ✅ Requires experienced review and iteration
+- It requires architectural or design decisions  
+- It has multiple valid solution paths  
+- It affects multiple parts of the site  
+- It has long-term maintenance implications  
+- It benefits from experienced review and iteration  
 
-### Do NOT label as an Advanced Issue if the issue:
+### A different issue category may be better when:
 
-- ❌ Is primarily mechanical or procedural
-- ❌ Is well-bounded and low risk
-- ❌ Can be completed without system-level reasoning
-- ❌ Would overwhelm or block contributors unnecessarily
+- The task is primarily mechanical  
+- The scope is small and low risk  
+- It can be completed without system-level reasoning  
+- It would overwhelm or block contributors unnecessarily  
 
 ---
 
-## Final Rule
+## Final Note
 
-> Advanced Issues are for **designing and evolving the system**,  
-> not for **learning the workflow**.
+Advanced Issues are about **designing and evolving the system**,  
+not about learning the workflow.
+
+They help contributors make meaningful, lasting improvements — with care, collaboration, and clarity.

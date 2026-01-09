@@ -7,137 +7,136 @@
 - [Assumptions](#assumptions)
 - [Expected Scope & Time Guidance](#expected-scope--time-guidance)
 - [What Qualifies as a Good First Issue](#what-qualifies-as-a-good-first-issue)
-- [Allowed Categories](#allowed-categories)
+- [Good First Issue Categories](#good-first-issue-categories)
   - [1. Content Fixes](#1-content-fixes)
   - [2. Hugo Frontmatter & Configuration Changes](#2-hugo-frontmatter--configuration-changes)
   - [3. Markdown Formatting & Structural Corrections](#3-markdown-formatting--structural-corrections)
-  - [4. File Organization](#4-file-Organization)
+  - [4. File Organization](#4-file-organization)
   - [5. Links & References](#5-links--references)
   - [6. Explicit Removals](#6-explicit-removals)
-- [What Is NOT a Good First Issue](#what-is-not-a-good-first-issue)
+- [What’s Typically Not a Good First Issue](#whats-typically-not-a-good-first-issue)
 - [Asking Questions](#asking-questions)
-- [Maintainer Enforcement Checklist](#maintainer-enforcement-checklist)
-- [Maintainer Red Flags](#maintainer-red-flags)
+- [Maintainer Guidance Checklist](#maintainer-guidance-checklist)
+- [Common Red Flags](#common-red-flags)
 
 ---
 
-
 ## Purpose
 
-Good First Issues (GFIs) exist to provide a **safe, confidence-building first pull request**.
+Good First Issues (GFIs) are designed to provide a **welcoming, confidence-building first contribution experience**.
 
-We recognize that the hardest part of contributing to a new repository is often:
-- Setting up the environment
-- Understanding the repository structure
-- Learning the contribution workflow
-- Successfully opening a first pull request
+For many people, contributing to a new repository means learning a new workflow, exploring an unfamiliar structure, and opening their first pull request. Good First Issues help make that journey smoother by focusing on **clear, approachable tasks**.
 
-Good First Issues are intentionally narrow so contributors can focus on **learning the workflow**, not solving open-ended problems.
+They allow contributors to spend more time learning the process and less time navigating uncertainty.
 
 ---
 
 ## Guidelines
 
-A Good First Issue **must** be:
+A Good First Issue works best when it:
 
-- ✅ **Narrow in scope** — usually a single file or clearly defined location
-- ✅ **Fully guided** — exact instructions and expected changes are provided
-- ✅ **Mechanical** — no interpretation or decision-making required
+- Focuses on a small, clearly defined change  
+- Includes helpful, step-by-step instructions  
+- Keeps the task simple and approachable  
 
-> **Rule of thumb:**  
-> If a contributor must decide *what* to change, *how it should read*, or *how it should look*, it is **not** a Good First Issue.
+These qualities help contributors move forward with confidence and enjoy a smooth first experience.
+
+**Helpful rule of thumb:**  
+If an issue invites open-ended discussion about *what* should change or *how* it should look or read, it may be better suited for a different issue category.
 
 ---
 
 ## Assumptions
 
-Good First Issues must assume:
+Good First Issues are designed to be welcoming and accessible to a wide range of contributors.
 
-- ✅ No prior experience with Hiero or this repository
-- ✅ No or very basic Hugo knowledge
-- ✅ No content, design, or UX judgment
-- ✅ No need to preview or run the site locally
+They aim to:
 
-They are an opportunity to get started, learn the workflow, and build confidence.
+- Be easy to approach, even if you’re completely new to the project  
+- Focus on straightforward, easy-to-follow changes  
+- Make it simple to navigate the relevant parts of the site  
+- Avoid the need for complex setup or tooling  
+
+The focus is on helping contributors get comfortable with the workflow, make a meaningful change, and build confidence through a smooth first contribution experience.
 
 ---
 
 ## Expected Scope & Time Guidance
 
-Good First Issues for the Hiero website are intentionally small and tightly scoped.
+Good First Issues for the Hiero website are intentionally small and focused.
 
-As a general guideline:
+As a general reference:
 
-- ⏱ **Estimated time:** ~1–4 hours 
-  (often dominated by setup and learning the workflow)
-- 📄 **Scope:** A single file or clearly defined location
-- 🧠 **Cognitive load:** Mechanical changes only
+- ⏱ **Estimated time:** ~1–4 hours  
+- 📄 **Scope:** One file or a clearly defined area  
+- 🧠 **Type:** Simple, approachable changes  
 
-If an issue is expected to take significantly longer than a few hours,  or requires multiple rounds of interpretation or review, it is **not** a Good First Issue.
+If an issue looks like it might take longer or involve multiple rounds of discussion, it may be better suited for another issue category.
 
 ---
 
 ## What Qualifies as a Good First Issue
 
-Good First Issues are almost always:
+Good First Issues tend to share a few common qualities:
 
-- ✅ Mechanical edits
-- ✅ Fully specified
-- ✅ Single-file or single-location
-- ✅ Low risk and easy to review
+- ✅ The task is clear
+- ✅ The step-by-step solution is provided 
+- ✅ The work is focused on a specific file or area  
+- ✅ The result is straightforward to review  
+
+The goal is to offer a **clear, low-stress first contribution experience** that helps people learn the workflow and feel confident getting involved.
 
 ---
 
-## Allowed Categories
+## Good First Issue Categories
 
-Good First Issues must fall **entirely** within one or more of the categories below.  
-If an issue does not clearly fit within these boundaries, it is usually **not** a Good First Issue.
+Most Good First Issues fall into one or more of the categories below.
+
+These categories aren’t strict rules — they’re simply a helpful way to describe the kinds of changes that usually work well for first-time contributors.
 
 ---
 
 ### 1. Content Fixes
 
-These are **purely corrective changes** where the correct outcome is already known.
+These are **small, corrective changes** where the right outcome is already known.
 
-#### ✅ Allowed
-- Spelling mistakes
-- Grammar mistakes
-- Punctuation or capitalization errors
-- Verbatim duplicate text removal
-- Replacing text with **explicitly provided replacement text**
-- Removing content explicitly identified as incorrect or obsolete
+#### Good fits
+- Spelling or grammar fixes  
+- Punctuation or capitalization corrections  
+- Removing duplicate text  
+- Replacing text with wording that’s already provided  
+- Removing content that’s clearly marked as outdated  
 
 **Examples**
-- Fix `Open-soruce` → `Open-source` in `content/_index.md`
-- Replace a sentence with an explicitly provided corrected sentence
+- Fix `Open-soruce` → `Open-source` in `content/_index.md`  
+- Replace a sentence with a provided corrected version  
 
-#### ❌ Not Allowed
-- Writing new prose
-- Rewriting sentences for clarity or tone
-- Improving wording, voice, or style
-- Editorial judgment of any kind
+#### Less ideal
+- Writing a new blog post  
+- Rewording paragraphs for style 
+- Making editorial changes  
 
 ---
 
 ### 2. Hugo Frontmatter & Configuration Changes
 
-These are **value-level edits** that do not affect structure or behavior.
+These are **simple value updates** that don’t affect layout or behavior.
 
-#### ✅ Allowed
-- Adding frontmatter fields **when the exact key and value are provided**
-- Changing existing frontmatter values **when the new value is specified**
-- Renaming a frontmatter key in a single file when instructed
-- Setting `draft = true/false` when instructed
+#### Good fits
+- Adding frontmatter fields when the key and value are provided  
+- Updating existing values when the new value is specified  
+- Renaming a frontmatter key in a single file  
+- Toggling `draft = true/false`  
 
 **Examples**
-- Add `featured_image = "/images/Hiero_v4.png"` to `content/_index.md`
-- Change `draft = true` to `draft = false` in a specified file
+- Add `featured_image = "/images/Hiero_v4.png"` to `content/_index.md`  
+- Change `draft = true` to `draft = false` in a specified file  
 
-#### ❌ Not Allowed
-- Introducing new frontmatter concepts
-- Choosing images or assets
-- Refactoring frontmatter across multiple files
-- Editing layouts, templates, or shortcodes
+#### Less ideal
+- Investigation to identify the correct frontmatter  
+- Creating images or assets  
+- Refactoring multiple files  
+- Editing layouts or shortcodes  
 
 ---
 
@@ -145,136 +144,132 @@ These are **value-level edits** that do not affect structure or behavior.
 
 These are **syntax-level fixes**, not content decisions.
 
-#### ✅ Allowed
-- Fixing broken Markdown syntax
-- Correcting heading levels **when the final structure is specified**
-- Fixing list indentation or numbering
-- Correcting code block formatting
-- Reordering sections **when the exact order is provided**
+#### Good fits
+- Fixing broken Markdown  
+- Adjusting heading levels when the final structure is specified  
+- Fixing list indentation or numbering  
+- Correcting code block formatting  
+- Reordering sections when the order is provided  
 
 **Examples**
-- Change `## Purpose` to `### Purpose` in a specified file
-- Fix a broken Markdown list using a provided corrected list
+- Change `## Purpose` to `### Purpose` in a specified file  
+- Fix a broken list using a provided corrected version  
 
-#### ❌ Not Allowed
-- Deciding document structure
-- Improving flow or readability
-- Reorganizing content by judgment
+#### Less ideal
+- Redesigning the document structure  
+- Improving flow or readability  
+- Reorganizing content based on personal judgment  
 
 ---
 
 ### 4. File Organization
 
-These changes must be **file-specific and enumerated**.
+These changes should be **clear and specific**.
 
-#### ✅ Allowed
-- Deleting assets when exact filenames are listed
-- Renaming assets when old and new names are provided
-- Updating references **only** for explicitly listed files
+#### Good fits
+- Deleting assets when filenames are listed  
+- Renaming files when old and new names are provided  
+- Updating references for named files  
 
 **Examples**
-- Delete `static/images/old-logo.png`
-- Rename `static/images/Hiero-logo-final.png` → `Hiero-logo.png`
+- Delete `static/images/old-logo.png`  
+- Rename `static/images/Hiero-logo-final.png` → `Hiero-logo.png`  
 
-#### ❌ Not Allowed
-- Determining which assets are unused
-- Optimizing or compressing images
-- Changing image formats or branding
+#### Less ideal
+- Deciding which assets are unused  
+- Optimizing or compressing images  
+- Changing branding or formats  
 
 ---
 
 ### 5. Links & References
 
-These are **direct substitutions**, not audits.
+These are **direct updates**, not site-wide reviews.
 
-#### ✅ Allowed
-- Updating URLs when the correct destination is provided
-- Fixing anchor links when the correct anchor is specified
-- Replacing outdated links with explicitly provided replacements
+#### Good fits
+- Updating URLs when the new destination is provided  
+- Fixing anchor links when the correct anchor is specified  
+- Replacing outdated links with given alternatives  
 
 **Examples**
-- Replace `https://github.com/hashgraph` with `https://github.com/hiero-ledger`
-- Fix `#gettingstarted` → `#getting-started`
+- Replace `https://github.com/hashgraph` with `https://github.com/hiero-ledger`  
+- Fix `#gettingstarted` → `#getting-started`  
 
-#### ❌ Not Allowed
-- Finding broken links
-- Auditing links across the site
-- Adding new references
+#### Less ideal
+- Searching for broken links  
+- Asking to fix broken links, without a specified link
 
 ---
 
 ### 6. Explicit Removals
 
-Removals must be **clearly bounded and intentional**.
+These are **clearly scoped cleanups**.
 
-#### ✅ Allowed
-- Removing commented-out blocks that are explicitly identified
-- Deleting unused examples when exact line ranges are provided
-- Removing deprecated sections when explicitly instructed
+#### Good fits
+- Removing commented-out blocks that are identified  
+- Deleting examples with exact line ranges  
+- Removing deprecated sections when instructed  
 
 **Examples**
-- Remove a block marked `<!-- OLD HERO SECTION -->`
-- Delete lines 42–55 of a specified file
+- Remove a block marked `<!-- OLD HERO SECTION -->`  
+- Delete lines 42–55 of a specified file  
 
-#### ❌ Not Allowed
-- General cleanup
-- Removing “anything that looks unused”
-- Deciding what is obsolete
+#### Less ideal
+- General cleanup  
+- Removing “anything that looks unused”  
+- Deciding what’s obsolete  
 
 ---
 
-## What Is NOT a Good First Issue
+## What’s Typically Not a Good First Issue
 
-The following are **never** Good First Issues for the Hiero website:
+Some kinds of work are usually better suited for more experienced contributors, such as:
 
-- New pages or sections
-- Content creation or expansion
-- UX, design, or visual changes
-- Hugo themes, layouts, or templates
-- CSS or styling changes
-- Navigation or information architecture changes
-- Accessibility improvements
-- Site-wide refactors or audits
+- Creating new pages or sections  
+- Writing or expanding content  
+- UX, design, or visual changes  
+- Hugo themes, layouts, or templates  
+- CSS or styling updates  
+- Navigation or information architecture changes  
+- Accessibility improvements  
+- Site-wide refactors or audits  
 
-These belong in **Beginner**, **Intermediate**, or **Advanced** issues.
+These contributions are still valuable, but are better suited with a beginner, intermediate or advanced label applied.
 
 ---
 
 ## Asking Questions
 
-Asking questions is encouraged.
+Questions are always welcome — especially for:
 
-However, questions should be limited to:
-- Clarifying provided instructions
-- Confirming file paths or locations
-- Verifying that changes match the stated acceptance criteria
+- Clarifying instructions  
+- Confirming file paths  
+- Verifying acceptance criteria  
 
-If answering a question requires deciding *what* should be changed,  
-the issue is **not** a Good First Issue.
+If answering a question requires deciding *what* should be changed, the issue may be better suited for a different category.
 
 ---
 
-## Maintainer Enforcement Checklist
+## Maintainer Guidance Checklist
 
-Apply the **Good First Issue** label only if **all** are true:
+An issue is usually a good fit for the **Good First Issue** label when:
 
-- [ ] Exact text, values, or filenames are provided
-- [ ] Exact implementation steps are provided
-- [ ] No interpretation or judgment is required
-- [ ] Scope is minimal and localized
-- [ ] Acceptance criteria are objective
+- [ ] The expected change is clearly described  
+- [ ] Files, text, or values are provided  
+- [ ] The task is localized and straightforward  
+- [ ] The outcome is easy to review  
 
-If any item is unclear, use **`good first issue: candidate`** instead.
-
----
-
-## Maintainer Red Flags
-
-Do **not** label an issue as a Good First Issue if:
-
-- You would need to explain the solution in comments
-- Multiple reviewers could reasonably disagree on the result
-- You expect back-and-forth on wording or structure
-- The issue feels “simple” but not strictly mechanical
+If anything feels unclear, **Good First Issue — Candidate** is a helpful middle step.
 
 ---
+
+## Common Red Flags
+
+An issue may be better suited for a different category if:
+
+- The solution needs to be explained in comments  
+- Reviewers might disagree on the outcome  
+- Back-and-forth on wording or structure is expected  
+- The task feels “simple” but no step-by-step solution is provided
+
+In those cases, choosing a different issue label can lead to a smoother experience for everyone.

@@ -1,6 +1,17 @@
 # Writing Blog Posts 
 
-## Detailed Steps
+## Content Guidelines
+
+Blog posts on hiero.org/blog should focus exclusively on technical content for a maintainer-focused audience.
+
+For:
+- Marketing
+- Business-related content
+- Major project announcements
+
+Please use [LF Blog](https://www.linuxfoundation.org/blog)
+
+## Step by Step Guide to Writing Blog Posts 
 
 ### 1. Search Existing Blog Posts
 

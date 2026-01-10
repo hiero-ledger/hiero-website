@@ -1,0 +1,143 @@
+name: Good First Issue Candidate Template
+description: Propose a potential Good First Issue (candidate) for the Hiero Website
+title: "[Good First Issue]:"
+labels: ["Good First Issue Candidate"]
+assignees: []
+body:
+  - type: textarea
+    id: intro-gfi-candidate
+    attributes:
+      label: Good First Issue — Candidate
+      value: |
+        > This issue is being reviewed to ensure it's a good fit for new contributors.
+        > Maintainers may add clarifications or refinements before it's ready to pick up.
+        >
+        > Maintainers and reviewers can read more about Good First Issues:
+        > .github/guidelines_good_first_issues.md
+
+    validations:
+      required: false
+
+  - type: textarea
+    id: intro
+    attributes:
+      label: 🆕🐥 Designed for New Contributors
+      description: Who is this issue for?
+      value: |
+        This issue is designed to be approachable for people who are new to contributing to the [Hiero Website](https://github.com/hiero-ledger/hiero-website) or have limited prior experience.
+        We know that creating a pull request (PR) can feel like a big step for new contributors.
+        The goal of this issue and all other issues in [**find a good first issue**](https://github.com/issues?q=is%3Aopen+is%3Aissue+org%3Ahiero-ledger+archived%3Afalse+label%3A%22good+first+issue%22+) is to help you make your first contribution to the Hiero Website.
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        > [!IMPORTANT]
+        > ### 📋 Good First Issue (GFI) Guidelines
+        > Good First Issues work best when they have a narrow scope, clear instructions, and example solutions when possible.
+        >        
+        > Examples of work that fits well as a Good First Issue:
+        >
+        > - **Mechanical website changes that don't require deep architectural knowledge:**
+        >   - Updating deprecated HTML tags or attributes
+        >   - Replacing old CSS classes with new ones
+        >   - Updating version numbers in configuration files
+        >
+        > - **Simple bug fixes with clear reproduction steps and expected behavior:**
+        >   - Fixing a broken link or image
+        >   - Correcting layout issues with clear CSS adjustments
+        >   - Accessibility fixes (e.g., adding alt text) when explicitly instructed
+        >
+        > - **Documentation improvements** that are instruction-driven:
+        >   - Fixing known typos or grammar issues
+        >   - Updating README sections when new wording is provided
+        >   - Making explicitly requested changes to comments or inline docs
+        >
+        > **Issues that are usually better suited for more experienced contributors:**
+        >
+        > - Writing new documentation or content without clear guidance
+        > - Changes that require deciding *what* to do or *how* something should behave
+        > - Work involving CSS, styling, or UX decisions without explicit instructions
+        > - Bug fixes that require investigation to understand root cause
+        > - Work spanning multiple subsystems or frameworks
+        > - Tasks requiring domain, protocol, or architectural knowledge
+        >
+        > 📖 *For a more detailed explanation, refer to:  
+        > [`.github/guidelines_good_first_issue_candidates.md`](.github/guidelines_good_first_issue_candidates.md).*
+
+  - type: textarea
+    id: issue
+    attributes:
+      label: 👾 Description of the issue
+      description: |
+        DESCRIBE THE ISSUE IN A WAY THAT IS UNDERSTANDABLE TO NEW CONTRIBUTORS.
+        YOU MUST NOT ASSUME THAT SUCH CONTRIBUTORS HAVE ANY KNOWLEDGE ABOUT THE LANGUAGE, CODEBASE OR HIERO WEBSITE.
+        IT IS HELPFUL TO ADD LINKS TO THE RELEVANT DOCUMENTATION AND/OR CODE SECTIONS.
+      value: |
+        Describe the issue here.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 💡 Proposed Solution
+      description: |
+        DESCRIBE THE STEPS NEEDED TO SOLVE THE ISSUE.
+        BREAK DOWN THE STEPS AS MUCH AS POSSIBLE AND MAKE SURE THEY ARE EASY TO FOLLOW.
+        ADD LINKS TO RELEVANT DOCUMENTATION OR CODE SECTIONS IF POSSIBLE.
+      value: |
+        Edit here.
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: 👩‍💻 Implementation Steps
+      description: |
+        DESCRIBE THE TECHNICAL STEPS NEEDED TO SOLVE THE ISSUE.
+        BREAK DOWN THE STEPS AS MUCH AS POSSIBLE AND MAKE SURE THEY ARE EASY TO FOLLOW.
+      value: |
+        Edit here.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: ✅ Acceptance Criteria
+      description: Checklist of requirements for merging a PR
+      value: |
+        To be able to merge a pull request for this issue, we need:
+
+        - [ ] **Issue is Solved:** The implementation fully addresses the issue requirements
+        - [ ] **Netlify website previews as expected:** Netlify preview build is successful and shows expected changes
+        - [ ] **No Further Changes are Made:** Code review feedback has been addressed
+    validations:
+      required: true
+
+  - type: textarea
+    id: contribution_steps
+    attributes:
+      label: 📋 Step-by-Step Contribution Guide
+      description: Provide a contribution workflow suitable for new contributors
+      value: |
+        If you have never contributed to an open source project at GitHub, the following step-by-step guide will introduce you to the workflow.
+
+        - [ ] **Fork, Branch and Work on the issue:** Create a fork, branch, and solve the problem. See [Contribution Guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/workflow.md)
+        - [ ] **DCO and GPG key sign each commit:** each commit must be -s and -S signed. See [Signing Guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/signing.md)
+        - [ ] **Push and Create a Pull Request:** Once your issue is resolved, push your changes and open a PR.
+        - [ ] **You did it 🎉:** A maintainer will review and merge if approved.
+    validations:
+      required: true
+
+  - type: textarea
+    id: information
+    attributes:
+      label: 🤔 Additional Information
+      description: Provide extra resources or context for contributors
+      value: |
+        For more help:
+        - Join our [Discord](https://github.com/hiero-ledger/hiero-website/blob/main/docs/discord.md)

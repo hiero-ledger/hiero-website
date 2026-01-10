@@ -102,9 +102,9 @@ body:
       description: Checklist of requirements for merging a PR
       value: |
         To be able to merge a pull request for this issue, we need:
-        - [ ] **Signed commits:** commits must be DCO and GPG key signed
-        - [ ] **All Tests Pass:** workflow checks like linting and integration tests must pass
+
         - [ ] **Issue is Solved:** The implementation fully addresses the issue requirements
+        - [ ] **Netlify website previews as expected:** Netlify preview build is successful and shows expected changes
         - [ ] **No Further Changes are Made:** Code review feedback has been addressed
     validations:
       required: true
@@ -115,8 +115,10 @@ body:
       label: 📋 Step-by-Step Contribution Guide
       description: Provide a contribution workflow suitable for new contributors
       value: |
-        - [ ] **Fork, Branch and Work on the issue:** Create a copy of the repository, create a branch for the issue and solve the problem.
-        - [ ] **DCO and GPG key sign each commit:** each commit must be -s and -S signed. See [Signing Guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/signing.md).
+        If you have never contributed to an open source project at GitHub, the following step-by-step guide will introduce you to the workflow.
+
+        - [ ] **Fork, Branch and Work on the issue:** Create a fork, branch, and solve the problem. See [Contribution Guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/workflow.md)
+        - [ ] **DCO and GPG key sign each commit:** each commit must be -s and -S signed. See [Signing Guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/signing.md)
         - [ ] **Push and Create a Pull Request:** Once your issue is resolved, push your changes and open a PR.
         - [ ] **You did it 🎉:** A maintainer will review and merge if approved.
     validations:

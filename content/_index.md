@@ -37,16 +37,9 @@ For us, the community of the open-source project is a crucial part of its succes
 Next to the TSC, we want to invest in a diverse and inclusive community. It is important to us that everyone, regardless of knowledge and background, can become an active contributor to Hiero. To enable that, we plan to hire at least one community manager in the near future and provide open documentation and teaching resources.</p>
 '''
 
-section_meet_heading = "Join our TSC and Community Calls"
-section_meet_text = '''
-<p>Join our open TSC, Community and Project meetings. We welcome your opinion and invite you to collaborate with the team!</p>
-<p>Register to any of our current meeting series <a href="https://github.com/hiero-ledger#open-community-meetings-and-tsc-schedules" target="_blank" rel="noreferrer noopener">HERE</a></p>
-<p>
-'''
-
 section_technical_steering_committee_heading = "The Technical Steering Committee of Hiero"
 section_technical_steering_committee_text = '''
-<p>Hiero welcomes a diverse and inclusive community of contributors and leaders who help shape the future of our project. Guided by this belief, we have established our Technical Steering Committee (TSC), composed of experienced and diverse members from our community who work together to achieve the project’s goals and to drive the project's decisions in the right direction. The duties, goals, and rights of the TSC are defined in the <a href="https://github.com/hiero-ledger/hiero/blob/main/technical-charter.md" target="_blank" rel="noreferrer noopener">technical charter</a> of the Hiero project.
+<p>Hiero welcomes a diverse and inclusive community of contributors and leaders who help shape the future of our project. Guided by this belief, we have established our Technical Steering Committee (TSC), composed of experienced and diverse members from our community who work together to achieve the project's goals and to drive the project's decisions in the right direction. The duties, goals, and rights of the TSC are defined in the <a href="https://github.com/hiero-ledger/hiero/blob/main/technical-charter.md" target="_blank" rel="noreferrer noopener">technical charter</a> of the Hiero project.
 </p>
 '''
 
@@ -54,8 +47,100 @@ section_roadmap_heading = "Our Roadmap in the Linux Foundation Decentralized Tru
 section_roadmap_text = '''
 <p>With the creation of the project in the Linux Foundation Decentralized Trust (LFDT) and the establishment of the initial technical steering committee (TSC) the cornerstones of Hiero have been laid. As a next essential step the TSC needs to provide a roadmap that covers the transition of the first repositories and projects to the <a href="https://github.com/hiero-ledger/" target="_blank" rel="noreferrer noopener">Hiero GitHub organization</a> and the inclusion and enabling of the community. The members of the TSC have committed themselves to work on the creation of this roadmap with the highest priority. The TSC hopes and encourages input and feedback by the complete ecosystem from core developers to users. To do so we enabled <a href="https://github.com/orgs/hiero-ledger/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a> as a first open way for communication. We hope that as many community members as possible contribute to the discussions regarding the initial roadmap and help us to create a real community driven project.</p>
 <p>
-While an official roadmap does not exist today, the TSC has already defined several points they believe are essential for Hiero’s success. The following provide insight into those areas.</p>
+While an official roadmap does not exist today, the TSC has already defined several points they believe are essential for Hiero's success. The following provide insight into those areas.</p>
 '''
+
+section_meet_heading = "Join our TSC and Community Calls"
+section_meet_text = '''
+<p>Join our open TSC, Community and Project meetings. We welcome your opinion and invite you to collaborate with the team!</p>
+<p>Register to any of our current meeting series <a href="https://github.com/hiero-ledger#open-community-meetings-and-tsc-schedules" target="_blank" rel="noreferrer noopener">HERE</a></p>
+<p>View all meeting schedules and access recordings via our <a href="https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week" target="_blank" rel="noreferrer noopener">LFX Calendar</a>.</p>
+<p>
+'''
+
+[[section_meet_calls]]
+name = "TSC"
+description = "The Technical Steering Committee (TSC) meeting for project governance, roadmap planning, and key technical decisions."
+schedule = "Bi-weekly"
+calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1758031200"
+register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/95775743341?password=c07443bf-b0e6-4a68-93f1-5c7ce9bb49ab&invite=true"
+
+[[section_meet_calls]]
+name = "Community Call"
+description = "Open community meeting for general discussions, updates, and Q&A sessions with the Hiero community and TSC members."
+schedule = "Monthly"
+calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1758207600"
+register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/97122675754?password=7eaa865a-2f17-4a7c-97b0-aff51933991c&invite=true"
+
+[[section_meet_calls]]
+name = "Python SDK"
+description = "Focused discussions on the Hiero Python SDK development, including new features, issues, and contributions."
+schedule = "Monthly"
+calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1758117600"
+register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/92041330205?password=2f345bee-0c14-4dd5-9883-06fbc9c60581&invite=true"
+
+[[section_meet_calls]]
+name = "Docs"
+description = "Documentation working group meetings to improve and maintain Hiero project documentation."
+schedule = "Monthly"
+calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1757516400"
+register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/96247351493?password=54a04164-8618-458d-8176-4ca21b346291&invite=true"
+
+[[section_meet_calls]]
+name = "Solo"
+description = "Discussions and updates about Solo, an opinionated CLI tool to deploy and manage standalone test networks."
+schedule = "Bi-weekly"
+calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1757433600"
+register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/94695703550?password=e8819002-3f6e-4905-9916-b049f501e866&invite=true"
+
+[[section_meet_calls]]
+name = "Solo Action"
+description = "Working sessions focused on Solo Action project development, issues, and contributions."
+schedule = "Bi-weekly"
+calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1757944800"
+register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/92576669768?password=8dab94bb-7315-4d37-a944-b1fa0e924741&invite=true"
+
+[[section_meet_calls]]
+name = "SDK"
+description = "General SDK working group for cross-SDK discussions, standards, and coordination across all Hiero SDK implementations."
+schedule = "Monthly"
+calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1757340000"
+register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/94709702244?password=bcba4892-928c-47e0-9a21-e1abca95f7d3&invite=true"
+
+[[section_meet_calls]]
+name = "Hiero Website"
+description = "Planning and development meetings for the Hiero website, content strategy, and user experience improvements."
+schedule = "Monthly"
+calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1755529200"
+register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/94831465670?password=50e11cd2-6450-4a97-b9ae-7a7585c4409b&invite=true"
+
+[[section_meet_calls]]
+name = "Hiero Marketing"
+description = "Marketing and community outreach discussions, including events, communications, and ecosystem growth strategies."
+schedule = "Monthly"
+calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1761663600"
+register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/91725705912?password=57115f71-9576-46dc-90f7-98be38aade2d&invite=true"
+
+[[section_meet_calls]]
+name = "Monthly Maintainers"
+description = "Regular meeting for maintainers across all Hiero projects to coordinate, share updates, and discuss best practices."
+schedule = "Monthly"
+calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1761750000"
+register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/99574473075?password=deff3fc9-0e80-4877-80de-91499b5480e9&invite=true"
+
+[[section_meet_calls]]
+name = "Hiero/Hedera Identity"
+description = "Working group focused on identity-related projects, DID SDK development, and identity standards implementation."
+schedule = "Monthly"
+calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1763049600"
+register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/99097542854?password=3ee2d9c9-32de-4758-8a23-417c751bd7ab&invite=true"
+
+[[section_meet_calls]]
+name = "Hiero Mirror Node"
+description = "Development and maintenance discussions for the Hiero Mirror Node, which archives data from consensus nodes and serves it via an API."
+schedule = "Monthly"
+calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1763053200"
+register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/94618152832?password=3b037576-2aab-4f7e-ab24-acf9ca2c3734&invite=true"
 
 [[section_what_is_hiero_points]]
 heading = "Hiero is <strong>fair</strong>"

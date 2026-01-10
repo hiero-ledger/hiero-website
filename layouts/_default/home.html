@@ -136,12 +136,41 @@
     </div>
   </div>
 </div>
-<div>
-<div class="bg-white">
-  <div class="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px] grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-10">
-    <div id="meet" class="anchor">
-      <h2 class="text-2xl mb-2.5 sm:text-4xl max-w-full md:max-w-[565px] sm:mb-5">{{ $.Param "section_meet_heading" | safeHTML }}</h2>
-      <div class="text-lg max-w-full md:max-w-[565px] space-y-4">{{ $.Param "section_meet_text" | safeHTML }}</div>
+<!-- MEET / COMMUNITY CALLS -->
+<div id="meet" class="anchor">
+  <div class="bg-white">
+    <div class="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px]">
+      <div class="mb-10 sm:mb-16">
+        <h2 class="text-2xl mb-2.5 sm:text-4xl sm:mb-5">{{ $.Param "section_meet_heading" | safeHTML }}</h2>
+        <div class="text-lg max-w-full md:max-w-[800px] space-y-4">{{ $.Param "section_meet_text" | safeHTML }}</div>
+      </div>
+      {{ if $.Param "section_meet_calls" }}
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {{ range $.Param "section_meet_calls" }}
+        <div class="border-2 border-white-dark rounded-2xl p-8 hover:border-red transition-colors duration-200 bg-white">
+          <h3 class="text-xl sm:text-2xl font-medium mb-3 [&>strong]:text-red">{{ .name | safeHTML }}</h3>
+          {{ if .description }}
+          <p class="text-base mb-4 text-gray-600">{{ .description | safeHTML }}</p>
+          {{ end }}
+          {{ if .schedule }}
+          <p class="text-sm mb-4 text-gray-600"><strong>Schedule:</strong> {{ .schedule | safeHTML }}</p>
+          {{ end }}
+          <div class="flex flex-col gap-2 mt-4">
+            {{ if .calendar_link }}
+            <a href="{{ .calendar_link }}" target="_blank" rel="noreferrer noopener" class="text-red hover:text-red-dark text-base font-medium underline">
+              View Calendar →
+            </a>
+            {{ end }}
+            {{ if .register_link }}
+            <a href="{{ .register_link }}" target="_blank" rel="noreferrer noopener" class="text-red hover:text-red-dark text-base font-medium underline">
+              Register →
+            </a>
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+      </div>
+      {{ end }}
     </div>
   </div>
 </div>
@@ -161,7 +190,7 @@
       <div id="technical-steering-committee-intro-column">
         <div id="technical-steering-committee-intro">
           <h2 class="text-3xl mb-2.5 sm:text-4xl sm:mb-4">{{ $.Param "section_technical_steering_committee_heading" | safeHTML }}</h2>
-          <div class="space-y-4 lext-base sm:text-lg">{{ $.Param "section_technical_steering_committee_text" | safeHTML }}</div>
+          <div class="space-y-4 text-base sm:text-lg">{{ $.Param "section_technical_steering_committee_text" | safeHTML }}</div>
         </div>
       </div>
       <div class="team-members grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-[40px] sm:gap-y-[60px]">

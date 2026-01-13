@@ -1,6 +1,6 @@
 # Maintainers
 
-The general handling of Maintainer rights and all groups in this GitHub org is done in the https://github.com/hiero-ledger/governance repository.
+The general handling of Maintainer rights and all groups in this GitHub org is done in the [Governance](https://github.com/hiero-ledger/governance) repository.
 
 ## Maintainer Scopes, GitHub Roles and GitHub Teams
 
@@ -12,13 +12,14 @@ Maintainers are assigned the following scopes in this repository:
 | tsc                 | The Hiero TSC                     | Maintain    | `tsc`                       |
 | github-maintainers  | The Maintainers of the github org | Maintain    | `github-maintainers`        |
 
-## Active Maintainers
+## Active Hiero Website Maintainers
 
-| Name                   | GitHub ID     | Scope              | LFID | Discord ID | Email | Company Affiliation  |
-|----------------------- | ------------- | ------------------ | ---- | ---------- | ----- | -------------------- |
-|                        |               |                    |      |            |       |                      |
+| Name             | GitHub ID     | Company Affiliation |
+|------------------|--------------|---------------------|
+| Hendrik Ebbers   | hendrikebbers|   Hashgraph         |
+| Sophie Bulloch   | exploreriii  |   None              |
 
-## Emeritus Maintainers
+## Emeritus Hiero Website Maintainers
 
 | Name             | GitHub ID     | Scope               | LFID | Discord ID | Email | Company Affiliation  |
 |----------------- | ------------- | ------------------- | ---- | ---------- | ----- | -------------------- |

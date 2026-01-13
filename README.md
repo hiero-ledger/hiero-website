@@ -4,15 +4,15 @@
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/10697/badge)](https://bestpractices.coreinfrastructure.org/projects/10697)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-This repo contains the website of Hiero (https://hiero.org).
+This repo contains the website of [Hiero](https://hiero.org).
 
 ## Building the website
 
 The project is based on [Hugo](https://gohugo.io/) and you need to [install Hugo](https://gohugo.io/installation/) to build the website along with [Node.js](https://nodejs.org/), [npm](https://www.npmjs.com/), [Tailwind CSS](https://tailwindcss.com/), and [PostCSS](https://postcss.org/)
 
 To help ensure that tailwindcss and Hugo play nicely together, the tailwindcss integration was stitched together based on the following articles:
-[Making Tailwind JIT work with Hugo](https://www.brycewray.com/posts/2021/11/making-tailwind-jit-work-hugo/)
-[Making Tailwind JIT work with Hugo, the Version 3 edition](https://www.brycewray.com/posts/2022/03/making-tailwind-jit-work-hugo-version-3-edition/)
+- [Making Tailwind JIT work with Hugo](https://www.brycewray.com/posts/2021/11/making-tailwind-jit-work-hugo/)
+- [Making Tailwind JIT work with Hugo, the Version 3 edition](https://www.brycewray.com/posts/2022/03/making-tailwind-jit-work-hugo-version-3-edition/)
 
 
 ## Install packages
@@ -36,85 +36,44 @@ For production ready css, run the following command in terminal.
 npm run build
 ```
 
+## Contributing
 
-## Content
+We welcome contributions such as:
+- Code additions or changes
+- Blog posts
 
-### Posts
 
-To create a new post, run the following command:
+### Code Changes and Additions
+We have several [Open Issues](https://github.com/hiero-ledger/hiero-website/issues?q=is%3Aissue%20state%3Aopen%20no%3Aassignee) at the Hiero website that need help.
+
+Read [Workflow Guide](./docs/workflow.md) to get started.
+
+### Blog Posts
+
+See [Detailed Guide on Creating a Blog Post](./docs/blogs.md)
+
+Quickly create new blog post with basic [front matter](https://gohugo.io/content-management/front-matter/):
 
     hugo new posts/my-first-post.md
 
-Then, edit the `my-first-post.md` file to suit your needs.
-
-Hugo created the file in the content/posts directory. Open the file with your editor.
-
+This will create `content/posts/my-first-post.md` and it will look like this:
 ```
 +++
-title = 'My First Post'
-date = 2025-04-15T09:40:56-07:00
-draft = true
+title = 'My First Post' #Edit title
+date = 2025-04-15T09:40:56-07:00 #Edit date
+draft = true #Do not edit 
 +++
+## Start Writing here
 ```
 
-Notice the **draft** value in the [front matter](https://gohugo.io/content-management/front-matter/) is true. By default, Hugo does not publish draft content when you build the site. Learn more about [draft, future, and expired content](https://gohugo.io/getting-started/usage/#draft-future-and-expired-content).
-
-Add some [Markdown](https://daringfireball.net/projects/markdown) to the body of the post, but do not change the **draft** value.
-```
-+++
-title = 'My First Post'
-date = 2025-04-15T09:40:56-07:00
-draft = true
-+++
-## Introduction
-
-This is **bold** text, and this is *emphasized* text.
-
-Visit the [Hugo](https://gohugo.io) website!
-```
-Reference **content/posts/post-template-for-reference-only.md** for examples of markdown and shortcode features that the Hiero post template supports. 
-
-Save the file, then start Hugo’s development server to view the site. You can run the following commands to include draft content.
+Once written, save and preview, then turn draft to false once finished:
 ```
 hugo server --buildDrafts
 ```
 
-View your site at the URL displayed in your terminal. Keep the development server running as you continue to add and change content.
+Learn about [draft](https://gohugo.io/getting-started/usage/#draft-future-and-expired-content)
 
-When satisfied with your new content, set the front matter **draft** parameter to false.
+See an example [Blog Post](https://github.com/hiero-ledger/hiero-website/edit/main/content/posts/python-v0.1.7-release.md)
 
-The Hiero single post template supports additional metadata parameters that are optional as shown below:
-```
-featured_image = "/images/Hiero_v4.png"
-categories = ["Blog"]
-tags = ["Sample","Example"]
-duration = "3 min read"
-abstract = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, seiusmod tempor incididunt ut labore et dolore magna aliqua."
-[[authors]]
-name = "John Doe"
-title = "Title Here"
-organization = "Hiero"
-link = ""
-image = ""
-```
-| Parameter  | Description |
-| ------------- | ------------- |
-| featured_image     | Path to image that is shown above the post content and when the post is displayed within a list. The field supports absolute and relative paths.    |
-| categories      | Categories are a type of taxonomy - typically represent major groupings or sections of your site. The Hiero website is currently not using this parameter.   |
-| tags      | Tags are a type of taxonomy — a way to group and organize your content. The Hiero website can use these to show related blog posts when enabled in the single post partial **related.html**.    |
-| duration | The average reading time of the article. |
-| abstract | A short summary or preview of a post’s content. This is shown when the post is displayed in a list and in the single post description meta tag. |
-| [[authors]] | Supports one or many authors with the parameters **name**, **title**, **organization**, **link**, and **image**. The **image** parameter supports absolute and relative paths.|
+See [Detailed Guide on Creating a Blog Post](./docs/blogs.md)
 
-#### Assets
-If the post includes self hosted assets then it is recommended to create a subdirectory within **posts** that contains the post and associated assets. Run the following command to create a post in a subdirectory:
-
-    hugo new posts/my-first-post/index.md
-
-Reference the assets with a relative path such as **images/my-firt-post-image.jpg**
-
-#### Sharing
-The Hiero website uses [Hugo Share Buttons](https://github.com/Stals/hugo-share-buttons) for post sharing functionality.
-
-#### Settings
-Additional settings can be found in the **hugo.toml** configuration file.

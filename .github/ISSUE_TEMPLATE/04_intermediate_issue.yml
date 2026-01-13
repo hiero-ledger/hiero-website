@@ -132,22 +132,22 @@ body:
       value:  |
         **💡 Example of a helpful Proposed Solution:**
 
-        Approach
+        Approach:
         Migrate from client-side search to a pre-built search index using Hugo's built-in search capabilities 
         with Fuse.js or Pagefind. 
 
-        Key Changes
+        Key Changes:
         1. **Build-time indexing**: Generate a JSON search index during Hugo build
         2. **Lazy loading**: Only load search scripts when the user opens the search UI
         3. **Improved relevance**: Use Fuse.js fuzzy search with weighted fields (title > headings > body)
 
-        Constraints
+        Constraints:
         - **Must maintain current search UI/UX** - users are familiar with the existing interface
         - **Backwards compatible URLs** - search query parameters should continue to work
         - **Accessibility** - maintain ARIA labels and keyboard navigation
         - **Performance target**: Search index should load in < 500ms on 3G connection
 
-        Alternatives Considered
+        Alternatives Considered:
         - **Algolia/External Service**: Rejected due to cost and privacy concerns
         - **Full Server-Side Search**: Rejected because we're a static site (no backend)
         - **Keep Current Approach**: Would require significant optimization with diminishing returns
@@ -204,24 +204,24 @@ body:
            - Maintain existing search API/interface
            - Run A/B comparison of search results quality
 
-        Migration Concerns
+        Migration Concerns:
         - Existing bookmarks with search queries must continue to work
         - Search index should be cached by CDN (set appropriate headers)
         - Consider index size - may need to exclude certain content types
 
-        Testing Strategy
+        Testing Strategy:
         - Unit tests for search index generation
         - E2E tests for search UI interaction (Playwright)
         - Performance tests:  measure index load time and search speed
         - Accessibility audit with screen reader
         - Test on mobile devices (iOS Safari, Android Chrome)
 
-        Performance Considerations
+        Performance Considerations:
         - Search index size should be < 500KB gzipped
         - Consider splitting index by section if it grows too large
         - Use CDN caching headers (1 week cache, revalidate on deploy)
 
-        Security Considerations
+        Security Considerations:
         - Ensure search index doesn't include draft/private content
         - Validate search queries to prevent XSS (though Fuse.js handles this)
 

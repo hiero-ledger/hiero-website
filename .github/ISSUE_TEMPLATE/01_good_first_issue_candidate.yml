@@ -12,8 +12,8 @@ body:
         > This issue is being reviewed to ensure it's a good fit for new contributors.
         > Maintainers may add clarifications or refinements before it's ready to pick up.
         >
-        > Maintainers and reviewers can read more about Good First Issues:
-        > .github/guidelines_good_first_issues.md
+        > Maintainers and reviewers can read more about Good First Issues Candidate:
+        > .github/maintainers/guidelines_good_first_issue_candidates.md
 
     validations:
       required: false
@@ -64,8 +64,7 @@ body:
         > - Tasks requiring domain, protocol, or architectural knowledge
         >
         > 📖 *For a more detailed explanation, refer to:  
-        > [`.github/guidelines_good_first_issue_candidates.md`](.github/guidelines_good_first_issue_candidates.md).*
-
+        > [`github/maintainers/guidelines_good_first_issue_candidates.md`](.github/maintainers/guidelines_good_first_issue_candidates.md).*
   - type: textarea
     id: issue
     attributes:

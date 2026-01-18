@@ -50,7 +50,7 @@ section_roadmap_text = '''
 While an official roadmap does not exist today, the TSC has already defined several points they believe are essential for Hiero's success. The following provide insight into those areas.</p>
 '''
 
-section_meet_heading = "Join our TSC and Community Calls"
+section_meet_heading = "Join our Hiero Community Calls"
 section_meet_text = '''
 <p>Join our open TSC, Community and Project meetings. We welcome your opinion and invite you to collaborate with the team!</p>
 <p>Register to any of our current meeting series <a href="https://github.com/hiero-ledger#open-community-meetings-and-tsc-schedules" target="_blank" rel="noreferrer noopener">HERE</a></p>

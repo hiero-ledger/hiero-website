@@ -7,12 +7,7 @@
 This repo contains the website of [Hiero](https://hiero.org).
 
 ## Building the website
-
-The project is based on [Hugo](https://gohugo.io/) and you need to [install Hugo](https://gohugo.io/installation/) to build the website along with [Node.js](https://nodejs.org/), [npm](https://www.npmjs.com/), [Tailwind CSS](https://tailwindcss.com/), and [PostCSS](https://postcss.org/)
-
-To help ensure that tailwindcss and Hugo play nicely together, the tailwindcss integration was stitched together based on the following articles:
-- [Making Tailwind JIT work with Hugo](https://www.brycewray.com/posts/2021/11/making-tailwind-jit-work-hugo/)
-- [Making Tailwind JIT work with Hugo, the Version 3 edition](https://www.brycewray.com/posts/2022/03/making-tailwind-jit-work-hugo-version-3-edition/)
+See [docs/hugo-setup.md](docs/hugo-setup.md) for installing prerequisites (Hugo, Node.js/npm, Tailwind CSS, PostCSS) and running the site locally.
 
 
 ## Install packages

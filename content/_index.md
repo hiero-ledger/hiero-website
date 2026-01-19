@@ -61,7 +61,7 @@ section_meet_text = '''
 [[section_meet_calls]]
 name = "TSC"
 description = "The Technical Steering Committee (TSC) meeting for project governance, roadmap planning, and key technical decisions."
-schedule = "Bi-weekly"
+schedule = "Fortnightly"
 calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1758031200"
 register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/95775743341?password=c07443bf-b0e6-4a68-93f1-5c7ce9bb49ab&invite=true"
 
@@ -89,14 +89,14 @@ register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/962473514
 [[section_meet_calls]]
 name = "Solo"
 description = "Discussions and updates about Solo, an opinionated CLI tool to deploy and manage standalone test networks."
-schedule = "Bi-weekly"
+schedule = "Fortnightly"
 calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1757433600"
 register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/94695703550?password=e8819002-3f6e-4905-9916-b049f501e866&invite=true"
 
 [[section_meet_calls]]
 name = "Solo Action"
 description = "Working sessions focused on Solo Action project development, issues, and contributions."
-schedule = "Bi-weekly"
+schedule = "Fortnightly"
 calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1757944800"
 register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/92576669768?password=8dab94bb-7315-4d37-a944-b1fa0e924741&invite=true"
 

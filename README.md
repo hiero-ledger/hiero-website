@@ -73,7 +73,7 @@ hugo server --buildDrafts
 
 Learn about [draft](https://gohugo.io/getting-started/usage/#draft-future-and-expired-content)
 
-See an example [Blog Post](https://github.com/hiero-ledger/hiero-website/edit/main/content/posts/python-v0.1.7-release.md)
+See an example [Blog Post](https://github.com/hiero-ledger/hiero-website/blob/main/content/posts/python-v0.1.7-release.md)
 
 See [Detailed Guide on Creating a Blog Post](./docs/blogs.md)
 

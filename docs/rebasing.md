@@ -54,11 +54,11 @@ git log -n --pretty=format:'%h %an %G? %s'
 You should see `G` (valid signature). If you experience signing issues, read [Signing Guide](signing.md)
 
 ## Handling Conflicts:
-If conflicts occur during rebase, See [Merge Conflict Guide](signing.md) for detailed guidance.
+If conflicts occur during rebase, See [Merge Conflict Guide](merge_conflicts.md) for detailed guidance.
 
 > ⚠️ **Regularly** rebase your branch to avoid merge conflicts
 
 ### Helpful Resources
 - [Signing Guide](signing.md)
-- [Rebasing Guide](rebasing.md)
+- [Workflow Guide](workflow.md)
 - [Discord](discord.md)

@@ -60,7 +60,8 @@ body:
         > - Work spanning multiple subsystems or requiring deep design knowledge
         >
         > 📖 *For a more detailed explanation, refer to:  
-        > [`.github/guidelines_good_first_issues.md`](.github/guidelines_good_first_issues.md).*
+        > [`.github/maintainers/guidelines_good_first_issues.md`](.github/maintainers/guidelines_good_first_issues.md).*
+
 
   - type: textarea
     id: issue

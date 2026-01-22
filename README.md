@@ -10,28 +10,20 @@ This repo contains the website of [Hiero](https://hiero.org).
 See [docs/hugo-setup.md](docs/hugo-setup.md) for installing prerequisites (Hugo, Node.js/npm, Tailwind CSS, PostCSS) and running the site locally.
 
 
-## Install packages
-```
-npm i 
-```
+## Windows Setup
 
-## Environments
+For Windows Setup Instructions [Windows_Setup.md](docs/setup/windows_setup.md)
 
-### Dev
-For development run the following command in terminal.
-```
-npm run start
-```
+## Mac 
 
-While the process is running the website can be reached at http://localhost:1313/.
+For Mac Setup Instructions [Mac_Setup.md](docs/setup/mac_setup.md)
 
-### Production
-For production ready css, run the following command in terminal.
-```
-npm run build
-```
+## Linux 
 
-## Contributing
+For Linux Setup Instructions [linux_Setup.md](docs/setup/linux_setup.md)
+
+
+### Contributing
 
 We welcome contributions such as:
 - Code additions or changes

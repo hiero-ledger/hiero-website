@@ -72,3 +72,4 @@ See an example [Blog Post](https://github.com/hiero-ledger/hiero-website/blob/ma
 
 See [Detailed Guide on Creating a Blog Post](./docs/blogs.md)
 
+./docs/setup/windows_setup.md

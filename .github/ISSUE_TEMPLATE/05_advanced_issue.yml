@@ -65,7 +65,7 @@ body:
         > - A task solvable by following existing patterns alone
         >
         > 📖 Helpful references:
-        > - `.github/guidelines_advanced_issues.md`
+        > - `.github/maintainers/guidelines_advanced_issues.md`
 
   - type: textarea
     id: problem
@@ -91,7 +91,7 @@ body:
 
   - type: markdown
     attributes:
-      value:  |
+      value: |
         **🐞 Example of a helpful Problem Description:**
 
         Current Behavior
@@ -106,14 +106,13 @@ body:
         when search takes longer than 2 seconds to initialize.
 
         Components Involved
-        - `/layouts/partials/search.html` - Main search UI component
-        - `/static/js/search.js` - Client-side search logic
-        - `/layouts/_default/baseof.html` - Where search scripts are loaded
-        - Content files across `/content/` directory (all indexed)
+        - `/layouts/partials/search.html`
+        - `/static/js/search.js`
+        - `/layouts/_default/baseof.html`
+        - Content files across `/content/` directory
 
         Historical Context
         The current implementation was added in PR #42 when the site had only 30 pages.
-
 
   - type: textarea
     id: solution
@@ -121,44 +120,10 @@ body:
       label: 💡 Proposed / Expected Solution
       description: |
         Describe the intended direction or design.
-
-        This should include:
-        - the high-level approach
-        - any new abstractions or changes to existing ones
-        - constraints (e.g. backwards compatibility, performance, accessibility)
-        - known alternatives and why they were rejected (if applicable)
-
-        A full design document is not required, but reasoning and intent should be clear.
       value: |
         Describe the proposed solution here.
     validations:
       required: true
-
-  - type:  markdown
-    attributes:
-      value:  |
-        **💡 Example of a helpful Proposed Solution:**
-
-        Approach:
-        Migrate from client-side search to a pre-built search index using Hugo's built-in search capabilities 
-        with Fuse.js or Pagefind. 
-
-        Key Changes:
-        1. **Build-time indexing**: Generate a JSON search index during Hugo build
-        2. **Lazy loading**: Only load search scripts when the user opens the search UI
-        3. **Improved relevance**: Use Fuse.js fuzzy search with weighted fields (title > headings > body)
-
-        Constraints:
-        - **Must maintain current search UI/UX** - users are familiar with the existing interface
-        - **Backwards compatible URLs** - search query parameters should continue to work
-        - **Accessibility** - maintain ARIA labels and keyboard navigation
-        - **Performance target**: Search index should load in < 500ms on 3G connection
-
-        Alternatives Considered:
-        - **Algolia/External Service**: Rejected due to cost and privacy concerns
-        - **Full Server-Side Search**: Rejected because we're a static site (no backend)
-        - **Keep Current Approach**: Would require significant optimization with diminishing returns
-
 
   - type: textarea
     id: implementation
@@ -166,75 +131,10 @@ body:
       label: 🧠 Implementation & Design Notes
       description: |
         Provide detailed technical guidance.
-
-        This section is especially important for Advanced issues.
-
-        Consider including:
-        - specific modules or components involved
-        - suggested refactoring strategy
-        - migration or deprecation concerns
-        - testing strategy
-        - performance or security considerations
       value: |
         Add detailed implementation notes here.
     validations:
       required: false
-
-  - type: markdown
-    attributes:
-      value:  |
-        **🧠 Example of helpful Implementation Notes:**
-
-        Modules and Components
-        
-        Files to Modify
-        - `/layouts/partials/search.html` - Update to load search index
-        - `/static/js/search.js` - Replace with Fuse.js implementation
-        - `/layouts/index.json` - Create new search index template
-        - `/config.toml` - Add output format for JSON index
-
-        Files to Add
-        - `/static/js/fuse.min.js` - Fuse.js library (version 6.6.2)
-        - `/layouts/_default/search-index.json` - Template for search entries
-
-        Suggested Refactoring Strategy
-        
-        1. **Phase 1**: Create JSON index without breaking existing search
-           - Add new `index.json` output format
-           - Generate search index at build time
-           - Test index generation locally
-        
-        2. **Phase 2**:  Implement lazy loading
-           - Wrap search script loading in intersection observer
-           - Add loading state to search UI
-           - Test on slow connections
-        
-        3. **Phase 3**: Replace search logic
-           - Swap out old search.js with Fuse.js implementation
-           - Maintain existing search API/interface
-           - Run A/B comparison of search results quality
-
-        Migration Concerns:
-        - Existing bookmarks with search queries must continue to work
-        - Search index should be cached by CDN (set appropriate headers)
-        - Consider index size - may need to exclude certain content types
-
-        Testing Strategy:
-        - Unit tests for search index generation
-        - E2E tests for search UI interaction (Playwright)
-        - Performance tests:  measure index load time and search speed
-        - Accessibility audit with screen reader
-        - Test on mobile devices (iOS Safari, Android Chrome)
-
-        Performance Considerations:
-        - Search index size should be < 500KB gzipped
-        - Consider splitting index by section if it grows too large
-        - Use CDN caching headers (1 week cache, revalidate on deploy)
-
-        Security Considerations:
-        - Ensure search index doesn't include draft/private content
-        - Validate search queries to prevent XSS (though Fuse.js handles this)
-
 
   - type: textarea
     id: acceptance-criteria
@@ -250,7 +150,6 @@ body:
         - [ ] Include comprehensive tests covering new and existing behavior
         - [ ] Update relevant examples and documentation
         - [ ] Pass all CI checks
-        - [ ] Include a valid changelog entry
         - [ ] Use DCO and GPG-signed commits
     validations:
       required: true
@@ -261,10 +160,6 @@ body:
       label: 📚 Additional Context, Links, or Prior Art
       description: |
         Add any references that may help:
-        - design docs
-        - prior discussions
-        - related issues or PRs
-        - external references
       value: |
         Optional.
     validations:

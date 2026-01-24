@@ -28,15 +28,15 @@ body:
       value: |
         This issue is intended for contributors who are already very familiar with the
         [Hiero Website](https://github.com/hiero-ledger/hiero-website) codebase and its architectural patterns.
-  
+
         You should feel comfortable with:
         - Netlify previews and tests
         - The Hiero website repository structure
-        - understanding Hugo templating concepts without step-by-step guidance 
+        - Understanding Hugo templating concepts without step-by-step guidance
         - Editing and organizing Markdown at scale
         - Making pull requests with minimal guidance
-        - navigating `layouts/`, `content/`, `partials/`, and `static/` 
-        - following the standard PR workflow without additional onboarding
+        - Navigating `layouts/`, `content/`, `partials/`, and `static/`
+        - Following the standard PR workflow without additional onboarding
 
         If this is your very first contribution to the project, we recommend starting with a few
         **Good First Issues** before working on this one.
@@ -85,31 +85,6 @@ body:
     validations:
       required: true
 
-  - type: markdown
-    attributes:
-      value:  |
-        **🐞 Example of a helpful Problem Description:**
-
-        Current Behavior
-        The search functionality on the Hiero website currently uses client-side JavaScript to search through page content. 
-        This works well for small sites, but our website has grown to 200+ pages, causing: 
-        - Search indexing to take 3-5 seconds on initial page load
-        - High memory usage on mobile devices (often causing crashes on older phones)
-        - Poor search relevance for technical terms (no stemming or fuzzy matching)
-
-        Why This Matters
-        User analytics show that 40% of visitors use the search feature, and bounce rate increases by 25% 
-        when search takes longer than 2 seconds to initialize.
-
-        Components Involved
-        - `/layouts/partials/search.html` - Main search UI component
-        - `/static/js/search.js` - Client-side search logic
-        - `/layouts/_default/baseof.html` - Where search scripts are loaded
-        - Content files across `/content/` directory (all indexed)
-
-        Historical Context
-        The current implementation was added in PR #42 when the site had only 30 pages.
-
   - type: textarea
     id: solution
     attributes:
@@ -126,32 +101,6 @@ body:
         Describe the expected solution here.
     validations:
       required: true
-    
-  - type:  markdown
-    attributes:
-      value:  |
-        **💡 Example of a helpful Proposed Solution:**
-
-        Approach:
-        Migrate from client-side search to a pre-built search index using Hugo's built-in search capabilities 
-        with Fuse.js or Pagefind. 
-
-        Key Changes:
-        1. **Build-time indexing**: Generate a JSON search index during Hugo build
-        2. **Lazy loading**: Only load search scripts when the user opens the search UI
-        3. **Improved relevance**: Use Fuse.js fuzzy search with weighted fields (title > headings > body)
-
-        Constraints:
-        - **Must maintain current search UI/UX** - users are familiar with the existing interface
-        - **Backwards compatible URLs** - search query parameters should continue to work
-        - **Accessibility** - maintain ARIA labels and keyboard navigation
-        - **Performance target**: Search index should load in < 500ms on 3G connection
-
-        Alternatives Considered:
-        - **Algolia/External Service**: Rejected due to cost and privacy concerns
-        - **Full Server-Side Search**: Rejected because we're a static site (no backend)
-        - **Keep Current Approach**: Would require significant optimization with diminishing returns
-
 
   - type: textarea
     id: implementation
@@ -169,61 +118,6 @@ body:
         Add implementation notes here.
     validations:
       required: false
-
-  - type: markdown
-    attributes:
-      value:  |
-        **🧠 Example of helpful Implementation Notes:**
-
-        Modules and Components
-        
-        Files to Modify
-        - `/layouts/partials/search.html` - Update to load search index
-        - `/static/js/search.js` - Replace with Fuse.js implementation
-        - `/layouts/index.json` - Create new search index template
-        - `/config.toml` - Add output format for JSON index
-
-        Files to Add
-        - `/static/js/fuse.min.js` - Fuse.js library (version 6.6.2)
-        - `/layouts/_default/search-index.json` - Template for search entries
-
-        Suggested Refactoring Strategy
-        
-        1. **Phase 1**: Create JSON index without breaking existing search
-           - Add new `index.json` output format
-           - Generate search index at build time
-           - Test index generation locally
-        
-        2. **Phase 2**:  Implement lazy loading
-           - Wrap search script loading in intersection observer
-           - Add loading state to search UI
-           - Test on slow connections
-        
-        3. **Phase 3**: Replace search logic
-           - Swap out old search.js with Fuse.js implementation
-           - Maintain existing search API/interface
-           - Run A/B comparison of search results quality
-
-        Migration Concerns:
-        - Existing bookmarks with search queries must continue to work
-        - Search index should be cached by CDN (set appropriate headers)
-        - Consider index size - may need to exclude certain content types
-
-        Testing Strategy:
-        - Unit tests for search index generation
-        - E2E tests for search UI interaction (Playwright)
-        - Performance tests:  measure index load time and search speed
-        - Accessibility audit with screen reader
-        - Test on mobile devices (iOS Safari, Android Chrome)
-
-        Performance Considerations:
-        - Search index size should be < 500KB gzipped
-        - Consider splitting index by section if it grows too large
-        - Use CDN caching headers (1 week cache, revalidate on deploy)
-
-        Security Considerations:
-        - Ensure search index doesn't include draft/private content
-        - Validate search queries to prevent XSS (though Fuse.js handles this)
 
   - type: textarea
     id: acceptance-criteria
@@ -243,12 +137,12 @@ body:
       required: true
 
   - type: textarea
-    id: additional-info
+    id: information
     attributes:
-      label: 📚 Additional Context or Resources
-      description: |
-        Add any links, references, or extra notes that may help.
+      label: 🤔 Additional Information
+      description: Provide extra resources or context for contributors
       value: |
-        - [Website Developer Docs](https://github.com/hiero-ledger/hiero-website/tree/main/docs)
-    validations:
-      required: false
+        For more help:
+        - Join our [Discord](https://github.com/hiero-ledger/hiero-website/blob/main/docs/discord.md)
+        - [Hiero Website Community Calls](https://zoom-lfx.platform.linuxfoundation.org/meeting/94831465670?password=50e11cd2-6450-4a97-b9ae-7a7585c4409b)
+        - [Hiero Community Calls](https://zoom-lfx.platform.linuxfoundation.org/meeting/97122675754?password=7eaa865a-2f17-4a7c-97b0-aff51933991c)

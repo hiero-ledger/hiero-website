@@ -14,7 +14,6 @@ body:
         >
         > Maintainers and reviewers can read more about Good First Issues Candidate:
         > .github/maintainers/guidelines_good_first_issue_candidates.md
-
     validations:
       required: false
 
@@ -36,7 +35,7 @@ body:
         > [!IMPORTANT]
         > ### 📋 Good First Issue (GFI) Guidelines
         > Good First Issues work best when they have a narrow scope, clear instructions, and example solutions when possible.
-        >        
+        >
         > Examples of work that fits well as a Good First Issue:
         >
         > - **Mechanical website changes that don't require deep architectural knowledge:**
@@ -63,8 +62,9 @@ body:
         > - Work spanning multiple subsystems or frameworks
         > - Tasks requiring domain, protocol, or architectural knowledge
         >
-        > 📖 *For a more detailed explanation, refer to:  
-        > [`github/maintainers/guidelines_good_first_issue_candidates.md`](.github/maintainers/guidelines_good_first_issue_candidates.md).*
+        > 📖 *For a more detailed explanation, refer to:*  
+        > [`github/maintainers/guidelines_good_first_issue_candidates.md`](.github/maintainers/guidelines_good_first_issue_candidates.md).
+
   - type: textarea
     id: issue
     attributes:
@@ -77,27 +77,6 @@ body:
         Describe the issue here.
     validations:
       required: true
-  
-  - type: markdown
-    attributes:
-      value:  |
-        **💡 Example of a helpful Problem Description for GFI:**
-
-        ### The Problem
-        The Heroes page has a broken link to the Hacktoberfest initiative. When users click 
-        on "check out our current Hacktoberfest initiative", they should be taken to the 
-        Hacktoberfest page, but the link is not working correctly. 
-
-        Where to Find It
-        - **File**:  `content/heroes/index.md`
-        - **Line**: 10
-        - **Link text**: "check out our current Hacktoberfest initiative"
-        - **Current broken URL**: `/hacktoberfest` (missing the correct path)
-        - **View the file**: [content/heroes/index.md](https://github.com/hiero-ledger/hiero-website/blob/main/content/heroes/index.md#L10)
-
-        Why This Matters
-        New contributors visiting the Heroes page can't navigate to the Hacktoberfest initiative,
-        which is one of our main ways to welcome first-time contributors.
 
   - type: textarea
     id: solution
@@ -112,30 +91,6 @@ body:
     validations:
       required: true
 
-  - type: markdown
-    attributes:
-      value:  |
-        **💡 Example of a helpful Proposed Solution for GFI:**
-
-        What Needs to Change
-        Update the broken link in the Heroes page to point to the correct Hacktoberfest page.
-
-        Steps to Fix
-        1. Navigate to [`content/heroes/index.md`](https://github.com/hiero-ledger/hiero-website/blob/main/content/heroes/index.md)
-        2. Find line 10 and locate the broken link
-        3. Replace the current text:
-           ```markdown
-           [Hacktoberfest initiative](hacktoberfestt)
-           ```
-           with the correct link:
-           ```markdown
-           [Hacktoberfest initiative](/hacktoberfest)
-           ```
-        4. Save the file
-
-        
-        
-
   - type: textarea
     id: implementation
     attributes:
@@ -147,24 +102,6 @@ body:
         Edit here.
     validations:
       required: true
-
-  - type: markdown
-    attributes:
-      value:  |
-        **💡 Example of helpful Implementation Steps for GFI:**
-
-        Step-by-Step Solution
-        1. Open the file `content/heroes/index.md`
-        2. Find line 10, which currently says:
-        ```markdown
-        If you want to contribute to Hiero, please check out our current [Hacktoberfest initiative](hacktoberfestt) that provides a lot of good first issues to get started with.
-        ```
-        3. Verify the correct link path by checking that the Hacktoberfest content exists at `content/hacktoberfest/`
-        4. Confirm the link is correct (it should already be `/hacktoberfest`)
-        5. Save the file
-
-        **Note**:  In this example, we'd discover the link might already be correct, so the issue would need investigation first! 
-
 
   - type: textarea
     id: acceptance-criteria
@@ -203,3 +140,5 @@ body:
       value: |
         For more help:
         - Join our [Discord](https://github.com/hiero-ledger/hiero-website/blob/main/docs/discord.md)
+        - [Hiero Website Community Calls](https://zoom-lfx.platform.linuxfoundation.org/meeting/94831465670?password=50e11cd2-6450-4a97-b9ae-7a7585c4409b)
+        - [Hiero Community Calls](https://zoom-lfx.platform.linuxfoundation.org/meeting/97122675754?password=7eaa865a-2f17-4a7c-97b0-aff51933991c)

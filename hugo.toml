@@ -78,6 +78,8 @@ unsafe = true
 [params]
 fallbackBlogFeaturedImage = '/images/HI60000_GetInvolvedBanner_V1.jpg'
 enableImageLazyLoading = true
+postcss = false
+
 
 [params.shareButtons]
 networks = [ "linkedin", "telegram", "twitter", "email" ]

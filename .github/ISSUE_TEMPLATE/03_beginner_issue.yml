@@ -38,23 +38,17 @@ body:
         > **What we generally consider beginner issues:**
         >
         > - **Small, well-scoped updates to existing tests or lint rules**
-        > - **Narrow changes or additions to website functionality** using common HTML/CSS/JS skills, such as:
-        >   - Fixing a broken link or image
-        >   - Updating alt text for accessibility
-        >   - Correcting layout issues with simple CSS adjustments
+        > - **Narrow changes or additions to website functionality** using common HTML/CSS/JS skills
         > - **Documentation improvements** in examples such as clarifying steps or adding missing details
-        > - **Functional improvements to existing examples or snippets**:
-        >   - Adding steps or variations to better demonstrate functionality
+        > - **Functional improvements to existing examples or snippets**
         >
         > **What we generally do NOT consider beginner issues:**
-        > - Deep Hugo expertise or knowledge of advanced web development concepts
-        > - Other CSS or frontend development experience
-        > - Tasks better suited for Good First Issues (purely mechanical or fully guided changes)
+        > - Deep Hugo expertise or advanced frontend architecture work
+        > - Tasks better suited for Good First Issues
         > - Changes to core website architecture or frameworks
-        > - Work that requires deep knowledge across multiple areas of the codebase
         >
-        > 📖 *For a more detailed explanation, refer to:  
-        > [`.github/guidelines_beginner_issues.md`](.github/guidelines_beginner_issues.md).*
+        > 📖 *For a more detailed explanation, refer to:*  
+        > [`.github/guidelines_beginner_issues.md`](.github/guidelines_beginner_issues.md).
 
   - type: textarea
     id: issue
@@ -62,119 +56,23 @@ body:
       label: 👾 Description of the issue
       description: |
         DESCRIBE THE ISSUE IN A WAY THAT IS UNDERSTANDABLE AND APPROACHABLE TO BEGINNER CONTRIBUTORS.
-        ASSUME SUCH CONTRIBUTORS HAVE AT MOST BEGINNER-LEVEL KNOWLEDGE ABOUT WEB DEVELOPMENT AND THE HIERO WEBSITE.
-        IT IS HELPFUL TO ADD LINKS TO THE RELEVANT DOCUMENTATION AND/OR CODE SECTIONS.
-        SLIGHTLY CHALLENGE THEM TO ENCOURAGE LEARNING AND RESEARCH BUT MAKE SURE THE ISSUE IS STILL SIMPLE.
+        ADD LINKS TO THE RELEVANT DOCUMENTATION AND/OR CODE SECTIONS.
       value: |
         Describe the issue here.
     validations:
       required: true
 
-  - type: markdown
-    attributes:
-      value: |
-        <!-- Example for problem (hidden in submission) -->
-         ## 👾 Description of the issue - Example
-
-        The Problem:
-        The blog post list layout in `layouts/posts/list.html` hardcodes the number of posts per page
-        to 3, but this should be configurable through the site's configuration file (`hugo. toml`) to
-        make it easier to adjust without touching layout code.
-
-        Current State:
-        In `layouts/posts/list.html` at line 17, you'll find:
-        ```html
-        {{ $paginator := .Paginate $pages 3 }}
-        ```
-
-        This hardcoded `3` means we always show 3 blog posts per page.  If we want to change this,
-        we have to edit the layout file directly. 
-
-        Where to Find It:
-        - **Layout file**: [`layouts/posts/list.html` (line 17)](https://github.com/hiero-ledger/hiero-website/blob/main/layouts/posts/list.html#L17)
-        - **Config file**: [`hugo.toml`](https://github.com/hiero-ledger/hiero-website/blob/main/hugo.toml)
-
-        Expected Behavior:
-        The number of posts per page should be: 
-        1. Defined in `hugo.toml` as a parameter (e.g., `postsPerPage = 3`)
-        2. Read from that parameter in the layout file
-        3. Fall back to 3 if the parameter isn't set
-
-        Why This Matters:
-        - **Maintainability**: Configuration belongs in config files, not layout code
-        - **Flexibility**: Makes it easy to experiment with different page sizes
-        - **Best practices**: Follows Hugo's convention of keeping configuration separate
-
-  
   - type: textarea
     id: solution
     attributes:
       label: 💡 Proposed Solution
       description: |
         DESCRIBE THE STEPS NEEDED TO SOLVE THE ISSUE.
-        BREAK DOWN THE STEPS AS MUCH AS POSSIBLE AND MAKE SURE THEY ARE EASY TO FOLLOW.
-        ADD LINKS TO RELEVANT DOCUMENTATION OR CODE SECTIONS IF POSSIBLE.
+        BREAK DOWN THE STEPS AS MUCH AS POSSIBLE.
       value: |
         Edit here.
     validations:
       required: true
-
-  - type: markdown
-    attributes:
-      value: |
-        <!-- Example for the solution (hidden in submission) -->
-        ### 💡 Solution - Example
-        
-        1. Update the Configuration File
-
-          **File**:  `hugo.toml`
-
-          1. Open `hugo.toml` in your text editor
-          2. Find the `[params]` section (or create it if it doesn't exist)
-          3. Add this line:
-          ```toml
-          postsPerPage = 3
-          ```
-          4. Save the file
-
-          **Example of what it should look like**:
-          ```toml
-          [params]
-            enableImageLazyLoading = true
-            postsPerPage = 3
-            # ... other parameters
-          ```
-
-        2. Update the Layout Template
-
-          **File**: `layouts/posts/list.html`
-
-          1. Open `layouts/posts/list.html`
-          2. Find line 17: `{{ $paginator := .Paginate $pages 3 }}`
-          3. Replace it with:
-          ```html
-          {{ $postsPerPage := site.Params.postsPerPage | default 3 }}
-          {{ $paginator := .Paginate $pages $postsPerPage }}
-          ```
-          4. Save the file
-
-          3. Test Your Changes
-
-          Start the Hugo Server
-          ```bash
-          hugo server
-          ```
-
-        Test Case 1: Default Behavior
-          - Open http://localhost:1313/posts
-          - Verify you see 3 posts per page
-          - Check that pagination works correctly
-
-        Test Case 2: Different Value
-          - Change `postsPerPage = 3` to `postsPerPage = 5` in `hugo.toml`
-          - Refresh the browser (Hugo should auto-reload)
-          - Verify you now see 5 posts per page
-        
 
   - type: textarea
     id: implementation
@@ -182,57 +80,10 @@ body:
       label: 👩‍💻 Implementation Steps
       description: |
         DESCRIBE THE TECHNICAL STEPS NEEDED TO SOLVE THE ISSUE.
-        BREAK DOWN THE STEPS AS MUCH AS POSSIBLE AND MAKE SURE THEY ARE EASY TO FOLLOW.
       value: |
         Edit here.
     validations:
       required: true
-
-  - type: markdown
-    attributes:
-      value:  |
-        <!-- Example for the implementation (hidden in submission) -->
-        ## 👩‍💻 Implementation Steps - Example
-
-
-        What Needs to Change:
-          Move the hardcoded pagination number from the layout template to the Hugo configuration file.
-
-        Changes Needed:
-          1. Add Configuration Parameter in `hugo.toml`
-            Add a new parameter to define posts per page:
-
-            ```toml
-            [params]
-              postsPerPage = 3
-            ```
-
-            **Where to add it**:  Look at the existing `[params]` section in `hugo.toml` and add this
-            parameter there.  If there's no `[params]` section, create one.
-
-          2. Update the Layout Template in `layouts/posts/list.html`
-
-            **Change line 17 from:**
-            ```html
-            {{ $paginator := .Paginate $pages 3 }}
-            ```
-
-            **Change to:**
-            ```html
-            {{ $postsPerPage := site.Params.postsPerPage | default 3 }}
-            {{ $paginator := .Paginate $pages $postsPerPage }}
-            ```
-
-        Explanation of the Code:
-          - `site.Params.postsPerPage` - Reads the `postsPerPage` value from `hugo.toml`
-          - `| default 3` - If the parameter isn't set, use 3 as a fallback
-          - `$postsPerPage` - Stores this value in a variable
-          - `$paginator := .Paginate $pages $postsPerPage` - Uses the variable instead of hardcoded 3
-
-        Things to Keep in Mind:
-          - Make sure the parameter name matches exactly (case-sensitive)
-          - Test with different values to make sure it works
-          - The `default` filter is important for backwards compatibility
 
   - type: textarea
     id: acceptance-criteria
@@ -256,11 +107,11 @@ body:
       value: |
         If you have never contributed to an open source project at GitHub, the following step-by-step guide will introduce you to the workflow.
 
-        - [ ] **Read the README:** Familiarize yourself with the project by reading the [README](https://github.com/hiero-ledger/hiero-website/blob/main/README.md)
-        - [ ] **Fork, Branch and Work on the issue:** Create a fork, branch, and solve the problem. See [Contribution Guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/workflow.md)
-        - [ ] **DCO and GPG key sign each commit:** each commit must be -s and -S signed. See [Signing Guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/signing.md)
-        - [ ] **Push and Create a Pull Request:** Once your issue is resolved, push your changes and open a PR.
-        - [ ] **You did it 🎉:** A maintainer will review and merge if approved.
+        - [ ] **Read the README:** https://github.com/hiero-ledger/hiero-website/blob/main/README.md
+        - [ ] **Fork, Branch and Work on the issue**
+        - [ ] **DCO and GPG sign each commit:** https://github.com/hiero-ledger/hiero-website/blob/main/docs/signing.md
+        - [ ] **Push and Create a Pull Request**
+        - [ ] **You did it 🎉**
     validations:
       required: true
 
@@ -268,7 +119,9 @@ body:
     id: information
     attributes:
       label: 🤔 Additional Information
-      description: Provide extra resources or context for contributors to solve this beginner issue
+      description: Provide extra resources or context for contributors
       value: |
         For more help:
         - Join our [Discord](https://github.com/hiero-ledger/hiero-website/blob/main/docs/discord.md)
+        - [Hiero Website Community Calls](https://zoom-lfx.platform.linuxfoundation.org/meeting/94831465670?password=50e11cd2-6450-4a97-b9ae-7a7585c4409b)
+        - [Hiero Community Calls](https://zoom-lfx.platform.linuxfoundation.org/meeting/97122675754?password=7eaa865a-2f17-4a7c-97b0-aff51933991c)

@@ -64,6 +64,10 @@ Explore some of our most active and widely used Hiero repositories.
 These projects form the core of the Hiero ecosystem.
 '''
 
+# Note: Star counts below are manually maintained and should be periodically updated
+# from https://github.com/orgs/hiero-ledger/repositories
+# Last updated: January 2026
+
 [[section_meet_calls]]
 name = "TSC"
 description = "The Technical Steering Committee (TSC) meeting for project governance, roadmap planning, and key technical decisions."

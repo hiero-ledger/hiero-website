@@ -64,10 +64,6 @@ Explore some of our most active and widely used Hiero repositories.
 These projects form the core of the Hiero ecosystem.
 '''
 
-# Note: Star counts below are manually maintained and should be periodically updated
-# from https://github.com/orgs/hiero-ledger/repositories
-# Last updated: January 2026
-
 [[section_meet_calls]]
 name = "TSC"
 description = "The Technical Steering Committee (TSC) meeting for project governance, roadmap planning, and key technical decisions."
@@ -156,121 +152,101 @@ register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/946181528
 name = "hiero-consensus-node"
 description = "Crypto, token, consensus, file, and smart contract services for a Hiero based network"
 link = "https://github.com/hiero-ledger/hiero-consensus-node"
-stars = "376"
 
 [[section_repos]]
 name = "hiero-local-node"
 description = "Run your own local Hiero based network for development purposes"
 link = "https://github.com/hiero-ledger/hiero-local-node"
-stars = "272"
 
 [[section_repos]]
 name = "hiero-mirror-node"
 description = "Archives data from consensus nodes and serves it via an API"
 link = "https://github.com/hiero-ledger/hiero-mirror-node"
-stars = "175"
 
 [[section_repos]]
 name = "hiero-improvement-proposals"
 description = "Hiero Improvement Proposal repository for community-driven enhancements"
 link = "https://github.com/hiero-ledger/hiero-improvement-proposals"
-stars = "175"
 
 [[section_repos]]
 name = "hiero-sdk-js"
 description = "JavaScript/TypeScript SDK for interacting with a Hiero network"
 link = "https://github.com/hiero-ledger/hiero-sdk-js"
-stars = "145"
 
 [[section_repos]]
 name = "hiero-sdk-java"
 description = "Java SDK for Hiero distributed ledger technology"
 link = "https://github.com/hiero-ledger/hiero-sdk-java"
-stars = "134"
 
 [[section_repos]]
 name = "hiero-json-rpc-relay"
 description = "Implementation of Ethereum JSON-RPC APIs for Hedera"
 link = "https://github.com/hiero-ledger/hiero-json-rpc-relay"
-stars = "96"
 
 [[section_repos]]
 name = "hiero-sdk-go"
 description = "Go SDK for Hiero distributed ledger technology"
 link = "https://github.com/hiero-ledger/hiero-sdk-go"
-stars = "77"
 
 [[section_repos]]
 name = "hiero-sdk-rust"
 description = "The Hiero™ Rust SDK for building on Hiero networks"
 link = "https://github.com/hiero-ledger/hiero-sdk-rust"
-stars = "56"
 
 [[section_repos]]
 name = "hiero-mirror-node-explorer"
 description = "Hedera Mirror Node Explorer for the Hedera Hashgraph DLT"
 link = "https://github.com/hiero-ledger/hiero-mirror-node-explorer"
-stars = "46"
 
 [[section_repos]]
 name = "hiero-cli"
 description = "Hiero command line tools for developers"
 link = "https://github.com/hiero-ledger/hiero-cli"
-stars = "36"
 
 [[section_repos]]
 name = "solo"
 description = "An opinionated CLI tool to deploy and manage standalone test networks"
 link = "https://github.com/hiero-ledger/solo"
-stars = "35"
 
 [[section_repos]]
 name = "hiero-block-node"
 description = "New Block Node services for Hiero networks"
 link = "https://github.com/hiero-ledger/hiero-block-node"
-stars = "33"
 
 [[section_repos]]
 name = "hiero-sdk-tck"
 description = "Technology Compatibility Kit used to verify compliant implementations of a Hiero SDK"
 link = "https://github.com/hiero-ledger/hiero-sdk-tck"
-stars = "22"
 
 [[section_repos]]
 name = "hiero-sdk-cpp"
 description = "A C++ SDK for Hiero: A C++ toolkit for creating and interacting with on-ledger assets"
 link = "https://github.com/hiero-ledger/hiero-sdk-cpp"
-stars = "16"
 
 [[section_repos]]
 name = "governance"
 description = "Configuration repository for managing all Hiero GitHub repositories"
 link = "https://github.com/hiero-ledger/governance"
-stars = "13"
 
 [[section_repos]]
 name = "hiero-sdk-python"
 description = "A Python SDK for Hiero: A Python toolkit for interacting with on-ledger assets"
 link = "https://github.com/hiero-ledger/hiero-sdk-python"
-stars = "12"
 
 [[section_repos]]
 name = "hiero-sdk-swift"
 description = "A Swift SDK for Hiero: A Swift toolkit for creating and interacting with on-ledger assets"
 link = "https://github.com/hiero-ledger/hiero-sdk-swift"
-stars = "8"
 
 [[section_repos]]
 name = "sdk-collaboration-hub"
 description = "Collaboration hub for SDK-related discussions and coordination"
 link = "https://github.com/hiero-ledger/sdk-collaboration-hub"
-stars = "5"
 
 [[section_repos]]
 name = "tsc"
 description = "Technical Steering Committee activity, discussions and decisions repository"
 link = "https://github.com/hiero-ledger/tsc"
-stars = "5"
 
 [[section_what_is_hiero_points]]
 heading = "Hiero is <strong>fair</strong>"

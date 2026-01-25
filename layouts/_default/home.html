@@ -141,6 +141,37 @@
       },
     },
   });
+
+  // Fetch star counts from GitHub API
+  async function fetchStarCounts() {
+    const repoCards = document.querySelectorAll('[data-repo]');
+    
+    // Batch fetch all repos at once
+    const repoNames = Array.from(repoCards).map(card => card.dataset.repo);
+    
+    for (const repoName of repoNames) {
+      try {
+        const response = await fetch(`https://api.github.com/repos/hiero-ledger/${repoName}`);
+        if (response.ok) {
+          const data = await response.json();
+          const card = document.querySelector(`[data-repo="${repoName}"]`);
+          if (card) {
+            const starCountEl = card.querySelector('.star-count');
+            if (starCountEl) {
+              starCountEl.textContent = data.stargazers_count.toLocaleString();
+            }
+          }
+        }
+      } catch (error) {
+        console.error(`Error fetching stars for ${repoName}:`, error);
+      }
+    }
+  }
+
+  // Fetch star counts when page loads
+  if (document.querySelector('[data-repo]')) {
+    fetchStarCounts();
+  }
 </script>
 
 <!-- CONTRIBUTE & CONNECT -->
@@ -212,7 +243,7 @@
           <div class="swiper-wrapper">
             {{ range $.Param "section_repos" }}
             <div class="swiper-slide">
-              <div class="border-2 border-white-dark rounded-2xl p-8 hover:border-red transition-colors duration-200 bg-white h-full flex flex-col">
+              <div class="border-2 border-white-dark rounded-2xl p-8 hover:border-red transition-colors duration-200 bg-white h-full flex flex-col" data-repo="{{ .name }}">
                 <h3 class="text-xl sm:text-2xl font-medium mb-3 text-red">{{ .name | safeHTML }}</h3>
                 {{ if .description }}
                 <p class="text-base mb-4 text-gray-600 flex-grow">{{ .description | safeHTML }}</p>
@@ -223,9 +254,7 @@
                     View Repository →
                   </a>
                   {{ end }}
-                  {{ if .stars }}
-                  <span class="text-sm text-gray-600">⭐ {{ .stars }}</span>
-                  {{ end }}
+                  <span class="repo-stars text-sm text-gray-600">⭐ <span class="star-count">...</span></span>
                 </div>
               </div>
             </div>

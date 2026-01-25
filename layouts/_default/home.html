@@ -121,6 +121,26 @@
       prevEl: ".swiper-button-prev",
     },
   });
+
+  var reposSwiper = new Swiper(".reposSwiper", {
+    loop: true,
+    slidesPerView: 1,
+    spaceBetween: 20,
+    navigation: {
+      nextEl: ".swiper-button-next-repos",
+      prevEl: ".swiper-button-prev-repos",
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 24,
+      },
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 32,
+      },
+    },
+  });
 </script>
 
 <!-- CONTRIBUTE & CONNECT -->
@@ -164,6 +184,56 @@
           </div>
         </div>
         {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+<div> <!-- divider -->
+  <div class="container py-[40px] sm:py-0 flex flex-row items-center gap-10">
+    {{ $graphic := resources.Get "images/Hiero-Icon.svg" }}
+    {{ with $graphic }}
+    <img src="{{ $graphic.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+    {{ end }}
+    <div class="w-full bg-white-dark h-[1px]"></div>
+  </div>
+</div>
+<!-- REPOSITORIES -->
+<div id="repos" class="anchor">
+  <div class="bg-white">
+    <div class="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px]">
+      <div class="mb-10 sm:mb-16">
+        <h2 class="text-2xl mb-2.5 sm:text-4xl sm:mb-5">{{ $.Param "section_repos_heading" | safeHTML }}</h2>
+        <div class="text-lg max-w-full md:max-w-[800px]">{{ $.Param "section_repos_text" | safeHTML }}</div>
+      </div>
+      {{ if $.Param "section_repos" }}
+      <div class="relative">
+        <div class="swiper reposSwiper">
+          <div class="swiper-wrapper">
+            {{ range $.Param "section_repos" }}
+            <div class="swiper-slide">
+              <div class="border-2 border-white-dark rounded-2xl p-8 hover:border-red transition-colors duration-200 bg-white h-full flex flex-col">
+                <h3 class="text-xl sm:text-2xl font-medium mb-3 text-red">{{ .name | safeHTML }}</h3>
+                {{ if .description }}
+                <p class="text-base mb-4 text-gray-600 flex-grow">{{ .description | safeHTML }}</p>
+                {{ end }}
+                <div class="flex flex-row justify-between items-center mt-4">
+                  {{ if .link }}
+                  <a href="{{ .link }}" target="_blank" rel="noreferrer noopener" class="text-red hover:text-red-dark text-base font-medium underline">
+                    View Repository →
+                  </a>
+                  {{ end }}
+                  {{ if .stars }}
+                  <span class="text-sm text-gray-600">⭐ {{ .stars }}</span>
+                  {{ end }}
+                </div>
+              </div>
+            </div>
+            {{ end }}
+          </div>
+          <div class="swiper-button swiper-button-next-repos"></div>
+          <div class="swiper-button swiper-button-prev-repos"></div>
+        </div>
       </div>
       {{ end }}
     </div>

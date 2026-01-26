@@ -8,7 +8,7 @@ This repo contains the website of [Hiero](https://hiero.org).
 
 ## Building the website
 See [docs/hugo-setup.md](docs/hugo-setup.md) for installing prerequisites (Hugo, Node.js/npm, Tailwind CSS, PostCSS) and running the site locally.
-
+See [Setup/mac_setup.md](Setup/mac_setup.md) for mac steup and running this project.
 
 ## Install packages
 ```

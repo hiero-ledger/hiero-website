@@ -1,8 +1,9 @@
 {
   "scripts": {
     "clean": "rm -rf public",
+    "fetch-stats": "node scripts/fetch-repo-stats.js",
     "start": "TAILWIND_MODE=watch NODE_ENV=development npm-run-all clean prelim:twcss --parallel dev:*",
-    "build": "NODE_ENV=production npm-run-all clean prelim:twcss prod:*",
+    "build": "NODE_ENV=production npm-run-all clean fetch-stats prelim:twcss prod:*",
     "prelim:twcss": "./node_modules/tailwindcss/lib/cli.js -i ./assets/css/main.css -o ./static/css/main.css --jit",
     "dev:twcssw": "./node_modules/tailwindcss/lib/cli.js -i ./assets/css/main.css -o ./static/css/main.css --jit -w",
     "dev:hugo": "hugo server",

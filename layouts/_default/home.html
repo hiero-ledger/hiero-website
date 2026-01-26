@@ -142,36 +142,7 @@
     },
   });
 
-  // Fetch star counts from GitHub API
-  async function fetchStarCounts() {
-    const repoCards = document.querySelectorAll('[data-repo]');
-    
-    // Batch fetch all repos at once
-    const repoNames = Array.from(repoCards).map(card => card.dataset.repo);
-    
-    for (const repoName of repoNames) {
-      try {
-        const response = await fetch(`https://api.github.com/repos/hiero-ledger/${repoName}`);
-        if (response.ok) {
-          const data = await response.json();
-          const card = document.querySelector(`[data-repo="${repoName}"]`);
-          if (card) {
-            const starCountEl = card.querySelector('.star-count');
-            if (starCountEl) {
-              starCountEl.textContent = data.stargazers_count.toLocaleString();
-            }
-          }
-        }
-      } catch (error) {
-        console.error(`Error fetching stars for ${repoName}:`, error);
-      }
-    }
-  }
-
-  // Fetch star counts when page loads
-  if (document.querySelector('[data-repo]')) {
-    fetchStarCounts();
-  }
+  // Repository data is fetched at build time - no runtime API calls needed
 </script>
 
 <!-- CONTRIBUTE & CONNECT -->
@@ -254,7 +225,8 @@
                     View Repository →
                   </a>
                   {{ end }}
-                  <span class="repo-stars text-sm text-gray-600">⭐ <span class="star-count">...</span></span>
+                  {{ $repoStats := index $.Site.Data.repository_stats .name }}
+                  <span class="text-sm text-gray-600">⭐ {{ if $repoStats }}{{ $repoStats.stars }}{{ else }}0{{ end }}</span>
                 </div>
               </div>
             </div>

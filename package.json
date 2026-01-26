@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "scripts": {
     "clean": "rm -rf public",
     "fetch-stats": "node scripts/fetch-repo-stats.js",

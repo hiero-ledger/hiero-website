@@ -123,17 +123,9 @@
   });
 
   var reposSwiper = new Swiper(".reposSwiper", {
-    loop: true,
     slidesPerView: 1,
     spaceBetween: 20,
     grabCursor: true,
-    touchEventsTarget: 'container',
-    simulateTouch: true,
-    allowTouchMove: true,
-    navigation: {
-      nextEl: ".swiper-button-next-repos",
-      prevEl: ".swiper-button-prev-repos",
-    },
     pagination: {
       el: ".swiper-pagination",
       clickable: true,
@@ -217,8 +209,8 @@
         <div class="text-lg max-w-full md:max-w-[800px]">{{ $.Param "section_repos_text" | safeHTML }}</div>
       </div>
       {{ if $.Param "section_repos" }}
-      <div class="relative w-full">
-        <div class="swiper reposSwiper w-full">
+      <div class="relative w-full overflow-hidden">
+        <div class="swiper reposSwiper">
           <div class="swiper-wrapper">
             {{ range $.Param "section_repos" }}
             <div class="swiper-slide">
@@ -240,9 +232,7 @@
             </div>
             {{ end }}
           </div>
-          <div class="swiper-button-next swiper-button-next-repos"></div>
-          <div class="swiper-button-prev swiper-button-prev-repos"></div>
-          <div class="swiper-pagination"></div>
+          <div class="swiper-pagination mt-8"></div>
         </div>
       </div>
       {{ end }}

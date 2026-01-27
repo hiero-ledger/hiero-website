@@ -12,7 +12,7 @@ Step 2: Clone the Repository
 
 Clone your fork of the project to your local machine:
 
-git clone https://github.com/mukundkumarjha/hiero-website.git
+git clone https://github.com/hiero-ledger/hiero-website
 cd hiero-website
 
 Step 3: Install Node Packages

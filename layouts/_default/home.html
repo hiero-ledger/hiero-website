@@ -121,28 +121,6 @@
       prevEl: ".swiper-button-prev",
     },
   });
-
-  var reposSwiper = new Swiper(".reposSwiper", {
-    slidesPerView: 1,
-    spaceBetween: 20,
-    grabCursor: true,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-    breakpoints: {
-      640: {
-        slidesPerView: 2,
-        spaceBetween: 24,
-      },
-      1024: {
-        slidesPerView: 3,
-        spaceBetween: 32,
-      },
-    },
-  });
-
-  // Repository data is fetched at build time - no runtime API calls needed
 </script>
 
 <!-- CONTRIBUTE & CONNECT -->
@@ -209,11 +187,11 @@
         <div class="text-lg max-w-full md:max-w-[800px]">{{ $.Param "section_repos_text" | safeHTML }}</div>
       </div>
       {{ if $.Param "section_repos" }}
-      <div class="relative w-full overflow-hidden">
+      <div class="relative w-full px-16">
         <div class="swiper reposSwiper">
           <div class="swiper-wrapper">
             {{ range $.Param "section_repos" }}
-            <div class="swiper-slide">
+            <div class="swiper-slide" style="height: auto;">
               <div class="border-2 border-white-dark rounded-2xl p-8 hover:border-red transition-colors duration-200 bg-white h-full flex flex-col" data-repo="{{ .name }}">
                 <h3 class="text-xl sm:text-2xl font-medium mb-3 text-red">{{ .name | safeHTML }}</h3>
                 {{ if .description }}
@@ -232,13 +210,60 @@
             </div>
             {{ end }}
           </div>
-          <div class="swiper-pagination mt-8"></div>
+          <!-- Pagination inside swiper -->
+          <div class="repos-pagination swiper-pagination !relative !bottom-0 mt-8"></div>
         </div>
+        
+        <!-- Navigation buttons positioned outside swiper but inside relative container -->
+        <button class="repos-nav-prev absolute top-1/2 left-0 transform -translate-y-1/2 z-10 w-12 h-12 bg-red rounded-full flex items-center justify-center text-white shadow-lg hover:bg-red-dark transition-all duration-200 cursor-pointer">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <button class="repos-nav-next absolute top-1/2 right-0 transform -translate-y-1/2 z-10 w-12 h-12 bg-red rounded-full flex items-center justify-center text-white shadow-lg hover:bg-red-dark transition-all duration-200 cursor-pointer">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
       </div>
       {{ end }}
     </div>
   </div>
 </div>
+
+<!-- Initialize Repos Swiper after HTML is rendered -->
+<script>
+  var reposSwiper = new Swiper(".reposSwiper", {
+    loop: true,
+    slidesPerView: 1,
+    spaceBetween: 24,
+    grabCursor: true,
+    pagination: {
+      el: ".repos-pagination",
+      clickable: true,
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 24,
+      },
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 32,
+      },
+    },
+  });
+
+  // Custom navigation buttons
+  document.querySelector('.repos-nav-next').addEventListener('click', function() {
+    reposSwiper.slideNext();
+  });
+  
+  document.querySelector('.repos-nav-prev').addEventListener('click', function() {
+    reposSwiper.slidePrev();
+  });
+</script>
+
 <div> <!-- divider -->
   <div class="container py-[40px] sm:py-0 flex flex-row items-center gap-10">
     {{ $graphic := resources.Get "images/Hiero-Icon.svg" }}

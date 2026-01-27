@@ -212,8 +212,8 @@
         <div class="text-lg max-w-full md:max-w-[800px]">{{ $.Param "section_repos_text" | safeHTML }}</div>
       </div>
       {{ if $.Param "section_repos" }}
-      <div class="relative">
-        <div class="swiper reposSwiper">
+      <div class="relative w-full">
+        <div class="swiper reposSwiper w-full">
           <div class="swiper-wrapper">
             {{ range $.Param "section_repos" }}
             <div class="swiper-slide">

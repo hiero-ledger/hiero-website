@@ -1,62 +1,62 @@
 {
   "hiero-consensus-node": {
-    "stars": 0
+    "stars": 376
   },
   "hiero-local-node": {
-    "stars": 0
+    "stars": 272
   },
   "hiero-mirror-node": {
-    "stars": 0
+    "stars": 175
   },
   "hiero-improvement-proposals": {
-    "stars": 0
+    "stars": 175
   },
   "hiero-sdk-js": {
-    "stars": 0
+    "stars": 306
   },
   "hiero-sdk-java": {
-    "stars": 0
+    "stars": 249
   },
   "hiero-json-rpc-relay": {
-    "stars": 0
+    "stars": 87
   },
   "hiero-sdk-go": {
-    "stars": 0
+    "stars": 123
   },
   "hiero-sdk-rust": {
-    "stars": 0
+    "stars": 56
   },
   "hiero-mirror-node-explorer": {
-    "stars": 0
+    "stars": 46
   },
   "hiero-cli": {
-    "stars": 0
+    "stars": 36
   },
   "solo": {
-    "stars": 0
+    "stars": 35
   },
   "hiero-block-node": {
-    "stars": 0
+    "stars": 33
   },
   "hiero-sdk-tck": {
-    "stars": 0
+    "stars": 22
   },
   "hiero-sdk-cpp": {
-    "stars": 0
+    "stars": 36
   },
   "governance": {
-    "stars": 0
+    "stars": 13
   },
   "hiero-sdk-python": {
-    "stars": 0
+    "stars": 47
   },
   "hiero-sdk-swift": {
-    "stars": 0
+    "stars": 33
   },
   "sdk-collaboration-hub": {
-    "stars": 0
+    "stars": 5
   },
   "tsc": {
-    "stars": 0
+    "stars": 5
   }
 }

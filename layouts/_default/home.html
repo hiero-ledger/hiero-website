@@ -129,9 +129,14 @@
     grabCursor: true,
     touchEventsTarget: 'container',
     simulateTouch: true,
+    allowTouchMove: true,
     navigation: {
       nextEl: ".swiper-button-next-repos",
       prevEl: ".swiper-button-prev-repos",
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
     },
     breakpoints: {
       640: {
@@ -235,8 +240,9 @@
             </div>
             {{ end }}
           </div>
-          <div class="swiper-button swiper-button-next-repos"></div>
-          <div class="swiper-button swiper-button-prev-repos"></div>
+          <div class="swiper-button-next swiper-button-next-repos"></div>
+          <div class="swiper-button-prev swiper-button-prev-repos"></div>
+          <div class="swiper-pagination"></div>
         </div>
       </div>
       {{ end }}

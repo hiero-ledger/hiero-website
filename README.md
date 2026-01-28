@@ -15,6 +15,8 @@ See [Setup/mac_setup.md](Setup/mac_setup.md) for mac steup and running this proj
 npm i 
 ```
 
+For Windows Setup Instructions [Windows_Setup.md](docs/setup/windows_setup.md)
+
 ## Environments
 
 ### Dev

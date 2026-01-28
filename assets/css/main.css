@@ -160,6 +160,16 @@ nav a.active::after {
   @apply max-w-[932px] w-full h-full;
 }
 
+/* Repos Swiper - override default swiper styles */
+.reposSwiper {
+  @apply max-w-full;
+}
+
+.reposSwiper .swiper-slide {
+  @apply text-left text-base;
+  font-family: inherit;
+}
+
 .swiper-slide  {
   @apply font-serif text-center text-lg;
 }

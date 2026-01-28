@@ -178,6 +178,101 @@
     <div class="w-full bg-white-dark h-[1px]"></div>
   </div>
 </div>
+<!-- REPOSITORIES -->
+<div id="repos" class="anchor">
+  <div class="bg-white">
+    <div class="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px]">
+      <div class="mb-10 sm:mb-16">
+        <h2 class="text-2xl mb-2.5 sm:text-4xl sm:mb-5">{{ $.Param "section_repos_heading" | safeHTML }}</h2>
+        <div class="text-lg max-w-full md:max-w-[800px]">{{ $.Param "section_repos_text" | safeHTML }}</div>
+      </div>
+      {{ if $.Param "section_repos" }}
+      <div class="relative w-full px-16">
+        <div class="swiper reposSwiper">
+          <div class="swiper-wrapper">
+            {{ range $.Param "section_repos" }}
+            <div class="swiper-slide" style="height: auto;">
+              <div class="border-2 border-white-dark rounded-2xl p-8 hover:border-red transition-colors duration-200 bg-white h-full flex flex-col" data-repo="{{ .name }}">
+                <h3 class="text-xl sm:text-2xl font-medium mb-3 text-red">{{ .name | safeHTML }}</h3>
+                {{ if .description }}
+                <p class="text-base mb-4 text-gray-600 flex-grow">{{ .description | safeHTML }}</p>
+                {{ end }}
+                <div class="flex flex-row justify-between items-center mt-4">
+                  {{ if .link }}
+                  <a href="{{ .link }}" target="_blank" rel="noreferrer noopener" class="text-red hover:text-red-dark text-base font-medium underline">
+                    View Repository →
+                  </a>
+                  {{ end }}
+                  {{ $repoStats := index $.Site.Data.repository_stats .name }}
+                  <span class="text-sm text-gray-600">⭐ {{ if $repoStats }}{{ $repoStats.stars }}{{ else }}0{{ end }}</span>
+                </div>
+              </div>
+            </div>
+            {{ end }}
+          </div>
+          <!-- Pagination inside swiper -->
+          <div class="repos-pagination swiper-pagination !relative !bottom-0 mt-8"></div>
+        </div>
+        
+        <!-- Navigation buttons positioned outside swiper but inside relative container -->
+        <button class="repos-nav-prev absolute top-1/2 left-0 transform -translate-y-1/2 z-10 w-12 h-12 bg-red rounded-full flex items-center justify-center text-white shadow-lg hover:bg-red-dark transition-all duration-200 cursor-pointer">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <button class="repos-nav-next absolute top-1/2 right-0 transform -translate-y-1/2 z-10 w-12 h-12 bg-red rounded-full flex items-center justify-center text-white shadow-lg hover:bg-red-dark transition-all duration-200 cursor-pointer">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+<!-- Initialize Repos Swiper after HTML is rendered -->
+<script>
+  var reposSwiper = new Swiper(".reposSwiper", {
+    loop: true,
+    slidesPerView: 1,
+    spaceBetween: 24,
+    grabCursor: true,
+    pagination: {
+      el: ".repos-pagination",
+      clickable: true,
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 24,
+      },
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 32,
+      },
+    },
+  });
+
+  // Custom navigation buttons
+  document.querySelector('.repos-nav-next').addEventListener('click', function() {
+    reposSwiper.slideNext();
+  });
+  
+  document.querySelector('.repos-nav-prev').addEventListener('click', function() {
+    reposSwiper.slidePrev();
+  });
+</script>
+
+<div> <!-- divider -->
+  <div class="container py-[40px] sm:py-0 flex flex-row items-center gap-10">
+    {{ $graphic := resources.Get "images/Hiero-Icon.svg" }}
+    {{ with $graphic }}
+    <img src="{{ $graphic.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+    {{ end }}
+    <div class="w-full bg-white-dark h-[1px]"></div>
+  </div>
+</div>
 <!-- TECHNICAL STEERING COMMITTEE -->
 <div id="technical-steering-committee" class="anchor">
   <div class="bg-white">

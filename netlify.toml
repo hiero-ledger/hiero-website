@@ -1,5 +1,5 @@
 [build]
-command = "hugo"
+command = "npm run fetch-stats && hugo"
 publish = "public"
 
 [build.environment]

@@ -233,6 +233,26 @@ nav a.active::after {
   ul {
     @apply list-disc my-4 pl-6;
   }
+
+  table {
+    @apply w-full my-6 border-collapse;
+  }
+
+  th, td {
+    @apply border border-gray px-4 py-3 text-left;
+  }
+
+  th {
+    @apply bg-red text-white font-semibold;
+  }
+
+  tr:nth-child(even) {
+    @apply bg-gray-light;
+  }
+
+  tr:hover {
+    @apply bg-sand;
+  }
 }
 
 /* Code block copy buttons */

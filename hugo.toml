@@ -19,10 +19,7 @@ target = 'static'
 source = 'images'
 target = 'static/images'
 
-[[menus.main]]
-name = 'Home'
-pageRef = '/'
-weight = 10
+
 
 [[menus.main]]
 name = 'Good First Issues'

@@ -39,9 +39,12 @@ Next to the TSC, we want to invest in a diverse and inclusive community. It is i
 
 section_technical_steering_committee_heading = "The Technical Steering Committee of Hiero"
 section_technical_steering_committee_text = '''
-<p>Hiero welcomes a diverse and inclusive community of contributors and leaders who help shape the future of our project. Guided by this belief, we have established our Technical Steering Committee (TSC), composed of experienced and diverse members from our community who work together to achieve the project's goals and to drive the project's decisions in the right direction. The duties, goals, and rights of the TSC are defined in the <a href="https://github.com/hiero-ledger/hiero/blob/main/technical-charter.md" target="_blank" rel="noreferrer noopener">technical charter</a> of the Hiero project.
-</p>
+Hiero is governed by a Technical Steering Committee (TSC) composed of experienced and diverse members of the community. The duties, goals, and rights of the TSC are defined in the [technical charter](https://github.com/hiero-ledger/hiero/blob/main/technical-charter.md) of the Hiero project.
+
+* [TSC Community Call Summaries](https://zoom-lfx.platform.linuxfoundation.org/meeting/95775743341-1769526000000/summaries?password=52c5e319-ffcd-4ace-9851-69b63f296b99)
+* [Meeting Agenda Archive](https://github.com/hiero-ledger/governance/wiki)
 '''
+
 
 section_roadmap_heading = "Our Roadmap in the Linux Foundation Decentralized Trust"
 section_roadmap_text = '''

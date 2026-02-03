@@ -43,12 +43,7 @@ section_technical_steering_committee_text = '''
 </p>
 '''
 
-section_roadmap_heading = "Our Roadmap in the Linux Foundation Decentralized Trust"
-section_roadmap_text = '''
-<p>With the creation of the project in the Linux Foundation Decentralized Trust (LFDT) and the establishment of the initial technical steering committee (TSC) the cornerstones of Hiero have been laid. As a next essential step the TSC needs to provide a roadmap that covers the transition of the first repositories and projects to the <a href="https://github.com/hiero-ledger/" target="_blank" rel="noreferrer noopener">Hiero GitHub organization</a> and the inclusion and enabling of the community. The members of the TSC have committed themselves to work on the creation of this roadmap with the highest priority. The TSC hopes and encourages input and feedback by the complete ecosystem from core developers to users. To do so we enabled <a href="https://github.com/orgs/hiero-ledger/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a> as a first open way for communication. We hope that as many community members as possible contribute to the discussions regarding the initial roadmap and help us to create a real community driven project.</p>
-<p>
-While an official roadmap does not exist today, the TSC has already defined several points they believe are essential for Hiero's success. The following provide insight into those areas.</p>
-'''
+
 
 section_meet_heading = "Join our Hiero Community Calls"
 section_meet_text = '''
@@ -277,49 +272,7 @@ icon = "images/Hiero-Icon-Leaderless.svg"
 heading = "Hiero is <strong>open</strong>"
 text = "Hiero is a vibrant community of developers, visionaries, and innovators dedicated to creating a more fair, efficient, and secure world. As part of the Linux Foundation Decentralized Trust initiative, we are pioneering a new era of open governance and collaboration for the project."
 icon = "images/Hiero-Icon-Open.svg"
-
-[[section_roadmap_points]]
-heading = "Transparent voting mechanisms for the community"
-text = '''
-Together with the Linux Foundation, the Hiero TSC seeks to establish voting mechanisms that can be used in electing new committee members. Such transparency is instrumental in developing trust by integrating the community in all aspects of the project's governance and operations.
-'''
-icon = "images/Hiero-Icon-Timeline-1.svg"
-
-[[section_roadmap_points]]
-heading = "Transition of SDKs"
-text = '''
-The next phase of code contributions involve those that allow developed applications to take advantage of the myriad of a network’s services. Here the SDK clients are essential parts and should be migrated to Hiero directly after or parallel with the network repositories.
-'''
-icon = "images/Hiero-Icon-Timeline-3.svg"
-
-[[section_roadmap_points]]
-heading = "Transition of network repositories"
-text = '''
-Hedera has existed since 2017, which has allowed its developer ecosystem to grow as represented by the variety of projects within its <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">repository</a>. With the number of projects involved, the initial priorities are to transition the repositories needed to run a fully functioning base network (including Consensus Node, Mirror Node, JSON-RPC-Relay, and others) as soon as possible.
-'''
-icon = "images/Hiero-Icon-Timeline-2.svg"
-
-[[section_roadmap_points]]
-heading = "Renaming and rebranding"
-text = '''
-Repositories in the <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera GitHub organization</a> use “Hedera” or “Hashgraph” as names of the project reflecting the initial motivations for its use, reflected in the repository and project names but also in the sources. With the transition of sources to Hiero we plan to refactor all those projects and use Hiero as core element in naming conventions.
-'''
-icon = "images/Hiero-Icon-Timeline-4.svg"
-
-[[section_roadmap_points]]
-heading = "Enabling better communication with the community"
-text = '''
-A critical focus will be enhancing communication channels with the community to ensure transparency and inclusivity. In addition to GitHub Discussions, we are exploring the establishment of additional forums, such as Discord channels, to foster real-time interaction. Regular community calls and office hours will be implemented to keep the project on track and keep everyone updated on key milestones and developments.
-'''
-icon = "images/Hiero-Icon-Timeline-5.svg"
-
-[[section_roadmap_points]]
-heading = "Better support regarding contributions especially for newcomers"
-text = '''
-We recognize the importance of nurturing contributors at all levels, especially those who are new to the project. To this end, we will develop clear contributor guidelines, easy-to-follow documentation, and a mentorship program. These efforts aim to lower the barrier to entry, making it easier for newcomers to onboard and actively contribute to the growth of Hiero.
-'''
-icon = "images/Hiero-Icon-Timeline-6.svg"
-
+ 
 [[section_quotes]]
 quote = '''
 &#8220;Hedera’s participation in Linux Foundation’s Decentralized Trust will undoubtedly accelerate development, enhance security, and foster unprecedented collaboration within the Hedera ecosystem, positioning it at the forefront of blockchain innovation. As the leading wallet on the network, HashPack is committed to playing an active role in this new open source structure, and we look forward to <a href="https://www.hashpack.app/post/hashpack-on-hedera" target="_blank" rel="noreferrer noopener">contributing our expertise</a> to help shape the future of Hedera and the broader decentralized technology landscape.&#8221;

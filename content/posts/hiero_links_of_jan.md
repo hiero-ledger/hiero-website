@@ -7,7 +7,6 @@ abstract = """An overview of the updates that happened in Hiero during
 the month of January."""
 [[authors]]
   name = "Angelina Ceppaluni"
-  organization = "Hashgraph"
 +++
 
 ## Hiero Links Of January
@@ -27,13 +26,13 @@ and C++ SDK on a users local machine
 [HIP-1261: Simple Fees](https://github.com/hiero-ledger/hiero-sdk-java/pull/2559) 
 into the Java-SDK
 
-**Sophie Bulloch** Increased Good-First-Issue Initiavte efforts by
+**Sophie Bulloch** Increased Good-First-Issue initiative efforts by
 creating a new 
 [assignment workflow](https://github.com/hiero-ledger/hiero-sdk-python/pull/1315) 
 to assign contributors once they make a comment
 
-**Venilinvasilev** Fixed a [race condition](https://github.com/hiero-ledger/hiero-sdk-js/pull/3647) in node health handling that could cause excessive backoff under concurrent failures by ensuring backoff only increases when a node is healthy
+**Venilin Vasilev** Fixed a [race condition](https://github.com/hiero-ledger/hiero-sdk-js/pull/3647) in node health handling that could cause excessive backoff under concurrent failures by ensuring backoff only increases when a node is healthy
 
 **Want to be featured on the Hiero-Website?**
 --
-Reach out to [Hiero-Website-Channel](https://discord.com/channels/905194001349627914/1458790070986215567)!
+Follow this link to be featured on the Hiero-Website: [Discord Guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/discord.md)!

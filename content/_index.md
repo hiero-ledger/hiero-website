@@ -7,13 +7,13 @@ section_hero_heading = "Hiero"
 section_hero_text = "Open Source Distributed Ledger Technology"
 
 section_what_is_hiero_heading = "What is Hiero?"
-section_what_is_hiero_text = "Hiero is an open-source, vendor-neutral distributed ledger technology project under the Linux Foundation Decentralized Trust."
+section_what_is_hiero_text = "Hiero is an open-source, vendor-neutral distributed ledger technology project under the Linux Foundation Decentralized Trust. Hiero is used to build the Hedera public ledger."
 section_why_open_source_heading = "Why is Hiero Open Source?"
 section_why_open_source_text = "Hiero provides transparent and auditable infrastructure, fostering a global community to build a fair, fast, and secure decentralized future."
 
 section_what_parts_open_source_heading = "What parts of Hiero are Open Source?"
 section_what_parts_open_source_text = '''
- "Hiero is 100% open-source, with all core components transitioning to Linux Foundation governance for community-driven development."
+Hiero is 100% open-source, with all core components transitioning to Linux Foundation Decentralized Trust governance for community-driven development.
 '''
 
 section_getting_started_heading = "How to Contribute / Getting Started?"

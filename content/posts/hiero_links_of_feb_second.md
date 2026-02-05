@@ -23,6 +23,8 @@ a ready-to-use decentralized identity (SSI) solution for the Hiero ecosystem, pr
 
 **Sophie Bulloch** updated the committers list for the [Hiero Website](https://github.com/hiero-ledger/governance/pull/513) and added new [maintainers](https://github.com/hiero-ledger/governance/pull/489) and [committers](https://github.com/hiero-ledger/governance/pull/488) to the Python SDK
 
+**Robert Walworth** increased automation in the C++ SDK by implementing a [GitHub Actions](https://github.com/hiero-ledger/hiero-sdk-cpp/pull/1120) bot that automatically assigns issues to contributors when they comment ```/assign```
+
 **Angelina Ceppaluni** added a [protobuf training](https://github.com/hiero-ledger/hiero-sdk-python/pull/1645) guide to the Python SDK to enhance protobuf understanding of serialization and deserialization
 
 **Angelina Ceppaluni** added the first blog post highlighting the events in January. [Click here](https://hiero.org/blog/hiero-links-of-january/) to see whats new!

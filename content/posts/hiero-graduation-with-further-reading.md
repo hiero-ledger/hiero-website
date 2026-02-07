@@ -6,7 +6,7 @@ categories = ["Announcements"]
 tags = ["Hiero", "LFDT", "Graduation", "Open Source", "DLT", "Decentralized Trust"]
 draft = false
 slug = "hiero-graduation"
-description = "Hiero has become the first project to graduate under both LFDT’s umberlla and it's new project lifecycle framework — a milestone that highlights its technical maturity, thriving ecosystem, and cross-community collaboration."
+description = "Hiero has become the first project to graduate under both LFDT’s umbrella and its new project lifecycle framework — a milestone that highlights its technical maturity, thriving ecosystem, and cross-community collaboration."
 images = ["/images/hiero-graduation.png"]
 canonical_url = "https://hiero.org/blog/hiero-graduation"
 +++

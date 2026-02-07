@@ -12,13 +12,10 @@ section_what_is_hiero_text = "Hiero is an open-source, vendor-neutral distribute
 section_why_open_source_text = "Hiero provides transparent and auditable infrastructure, fostering a global community to build a fair, fast, and secure decentralized future."
 
 section_what_parts_open_source_heading = "What parts of Hiero are Open Source?"
-section_what_parts_open_source_text = '''
-Hiero is 100% open-source, with its transition to the Linux Foundation Decentralized Trust mostly complete and overseen by the project’s technical steering committee (TSC).
+section_what_parts_open_source_text = "Hiero is 100% open-source, with its transition to the Linux Foundation Decentralized Trust mostly complete and overseen by the project's technical steering committee."
 
 section_getting_started_heading = "How to Contribute / Getting Started?"
-section_getting_started_text = '''
-<p>Since we are still working on the transition of the Hiero repositories from the <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera GitHub organization</a> into the <a href="https://github.com/hiero-ledger/" target="_blank" rel="noreferrer noopener">Hiero GitHub organization</a>, many opportunities for contribution can be initiated at the Hedera’s GitHub organization today.</p>
-<p>While in this transition phase we already want to enable developers to join in developing Hiero and its related projects. As such, we’re always willing to help you get started and mentor you on your journey of learning the project and making useful contributions.</p>
+section_getting_started_text = "Since we are still working on the transition of the Hiero repositories from the [Hedera GitHub organization](https://github.com/hashgraph) into the [Hiero GitHub organization](https://github.com/hiero-ledger), many opportunities for contribution can be initiated at the Hedera's GitHub organization today. While in this transition phase we already want to enable developers to join in developing Hiero and its related projects. As such, we're always willing to help the project and making useful contributions."
 <p>
 There is good work to do for everyone with whatever skillset you have - and it doesn’t have to be code. We also welcome help with documentation, design, project organization, and organizing meetups. For example, during one of our previous <a href="/hacktoberfest">community contribution events</a>, we curated a large list of beginner-friendly issues to encourage first-time contributions. Several of these issues focused on removing "Hedera" specific naming and usage from the codebase to help identify the project as vendor neutral.</p>
 <p>

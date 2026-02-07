@@ -11,7 +11,6 @@ images = ["/images/hiero-graduation.png"]
 canonical_url = "https://hiero.org/blog/hiero-graduation"
 +++
 
-
 ## Hiero Becomes the First Graduated Project under LFDT’s New Project Lifecycle Framework — and the First to Achieve Graduation since LFDT’s Expanded Umbrella.
 
 

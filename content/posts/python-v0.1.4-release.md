@@ -10,7 +10,6 @@ organization = "Python SDK Team"
 image = "/images/python/members/exploreriii.png"
 +++
 
-
 # 🚀 The Python SDK Has a New Release – Welcome v0.1.4
 
 This extensive update represents a **big leap** forward, especially for smart contract functionality, and comes with a range of improvements that make building on Hedera with Python easier, clearer, and more powerful. A huge thank you to our **talented contributors** for making this release possible.

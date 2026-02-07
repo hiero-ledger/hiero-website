@@ -10,7 +10,6 @@ name = "Hiero Team"
 image = "/images/profile-hiero.png"
 +++
 
-
 ## 📣 The results for the Hiero Technical Steering Committee elections are here!
 
 We are pleased to announce the results of the recent elections for the Hiero Technical Steering Committee (TSC) End User and Contributor seats.

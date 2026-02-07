@@ -13,7 +13,6 @@ link = "https://www.linkedin.com/in/michielmulders/"
 image = "/images/profile-hiero.png"
 +++
 
-
 As previously announced in September 2024, Hedera projects have migrated to Hiero under Linux Foundation Decentralized Trust. This significant evolution involves a critical namespace transition from hashgraph to `hiero` or `hiero-ledger`, affecting project dependencies and SDK imports. This shift emphasizes greater transparency, collaboration, and open-source innovation, and developers are encouraged to update their dependencies accordingly to stay aligned.
 
 ## Why the Migration from Hedera to Hiero?

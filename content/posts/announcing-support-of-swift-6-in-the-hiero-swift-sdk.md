@@ -9,7 +9,6 @@ name = "Luke Forrest"
 organization = "Hashgraph"
 +++
 
-
 ## Official Swift 6 Support is Here
 
 The Hiero Swift SDK will be officially supporting **Swift 6.0, 6.1, and 6.2** as of version v0.47.0 released February 2nd. This change is an investment in **safety, performance, and long-term alignment** with modern Swift tooling on Hiero. 

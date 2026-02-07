@@ -9,7 +9,6 @@ name = "Rachitb0611"
 organization = "Python Team"
 +++
 
-
 We just lived through our first real Hacktoberfest with the new Hiero Python SDK. To say it was "a bit busy" would be an understatement.
 
 It was a chaotic, fantastic, and eye-opening month of merges, new faces, and a whole lot of learning. For the Hiero Python SDK, this October wasn't just another month on the calendar; it was the month our community truly came to life.

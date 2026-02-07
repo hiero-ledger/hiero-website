@@ -9,7 +9,6 @@ name = "Hiero Team"
 image = "/images/profile-hiero.png"
 +++
 
-
 ## 📣 Announcing the Hiero DID SDK JS: A Modern JavaScript Toolkit for Decentralized Identity on Hedera
 
 

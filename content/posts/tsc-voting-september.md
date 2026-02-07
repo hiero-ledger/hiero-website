@@ -9,7 +9,6 @@ name = "Hiero Team"
 image = "/images/profile-hiero.png"
 +++
 
-
 ## 🗳️ Calling all Maintainers!!! September TSC Elections for Contributor Seat end September 21
 
 All current maintainers for the [Hiero Project](https://github.com/hiero-ledger) are welcomed to cast their vote for our TSC's next Maintainer Seat representative.

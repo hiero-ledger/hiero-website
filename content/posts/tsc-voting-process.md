@@ -9,7 +9,6 @@ name = "Hiero Team"
 image = "/images/profile-hiero.png"
 +++
 
-
 ## 🗳️ Upcoming Hiero TSC Elections - How Does Voting Work?
 
 In the earlier LF/DT [blog post](https://www.lfdecentralizedtrust.org/blog/announcing-the-upcoming-elections-for-end-user-and-community-seats-on-the-hiero-technical-steering-committee-tsc), we announced the upcoming elections for the End User and Contributor seats on the Hiero Technical Steering Committee (TSC), set to take place from May 7 to May 31, 2025. These elections are a pivotal moment for the Hiero community, offering a chance to directly influence the project's technical direction and governance.

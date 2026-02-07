@@ -9,7 +9,6 @@ name = "Hiero Team"
 image = "/images/profile-hiero.png"
 +++
 
-
 Got 2 minutes?
 
 We’re excited to announce a new office hour initiative to help every newcomer - and seasoned Hiero contributor - hit the ground running in contributing to the Hiero Python SDK.

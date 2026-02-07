@@ -10,8 +10,6 @@ organization = "Python SDK Team"
 image = "/images/python/members/chithraka-kal.jpeg"
 +++
 
-
-
 # 🚀 Hiero Python SDK – Announcing Release v0.1.6
 
 We’re thrilled to announce **version 0.1.6** of the Hiero Python SDK!  

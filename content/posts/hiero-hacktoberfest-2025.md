@@ -9,7 +9,6 @@ name = "Hiero Team"
 image = "/images/profile-hiero.png"
 +++
 
-
 ## 📣 Hacktoberfest 2025: Contribute to Hiero!
 
 It’s that time of year again and Hacktoberfest 2025 is here! 🎉

@@ -10,7 +10,6 @@ organization = "Hiero"
 image = "/images/python/members/exploreriii.png"
 +++
 
-
 We heard you loud and clear: you want more live, direct support time, and we’re excited to kick off a fortnightly Office Hour for the Python SDK. Grab your calendar and a cup of ☕—here’s what you need to know.
 
 ---

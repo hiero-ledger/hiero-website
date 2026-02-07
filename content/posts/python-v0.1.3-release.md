@@ -10,7 +10,6 @@ organization = "Hiero Team"
 image = "/images/python/members/exploreriii.png"
 +++
 
-
 This July, our Python SDK is racing ahead, and we’re excited to share the latest in new transaction support and version milestones. 
 
 ---

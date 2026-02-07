@@ -13,7 +13,6 @@ link = "https://www.linkedin.com/in/michielmulders/"
 image = "/images/profile-hiero.png"
 +++
 
-
 Open-source contributions are the lifeblood of any vibrant software ecosystem, and Hiero recognizes this. That's why the Hiero SDK Collaboration Hub was created—a centralized platform designed to enhance collaboration, streamline contributions, and provide transparent guidance for developers and maintainers involved with Hiero SDKs.
 
 ## What is the Hiero SDK Collaboration Hub?

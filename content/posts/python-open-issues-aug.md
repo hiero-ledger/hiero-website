@@ -10,7 +10,6 @@ organization = "Hiero Team"
 image = "/images/python/members/exploreriii.png"
 +++
 
-
 The community team at the Hiero Python SDK has been working behind the scenes since November 2024 to help Python developers plug into Hedera’s decentralized network using Python code.
 
 If you’re interested in helping us grow our SDK codebase and documentation this August—whether you’re a smart‑contract wizard or just dipping your toes into technical contributions—we’re striving to create a welcoming space for you. 

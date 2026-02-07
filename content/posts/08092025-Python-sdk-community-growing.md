@@ -10,7 +10,6 @@ organization = "Python SDK Team"
 image = "/images/python/members/exploreriii.png"
 +++
 
-
 The **Hiero Python SDK** provides functionality to interact with the **Hedera Public DLT**(Distributed Ledger Technology), using the Python programming language.
 
 Since its creation in late **September 2024**, and proposed to the **TSC** in late **November 2024**, the Python SDK has its origins as a **community project**. The Python SDK was **not** part of Hedera’s codebase that was donated to Hiero, a project in the **Linux Foundation Decentralized Trust (LFDT)**. Until then, Hedera did not have a supported SDK in pure Python.

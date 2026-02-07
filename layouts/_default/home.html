@@ -33,79 +33,6 @@
     </div>
   </div>
 </div>
-<!-- OPEN SOURCE -->
-<div>
-  <div class="bg-white">
-    <div class="container pt-[40px] pb-[40px] sm:pt-[92px] sm:pb-[154px] grid grid-cols-1 sm:grid-cols-2 gap-[80px] sm:gap-10 relative">
-      {{ $graphic := resources.Get "images/Hiero-Logo-Outline.svg" }}
-      {{ with $graphic }}
-      <img src="{{ $graphic.RelPermalink }}" class="sm:absolute w-full h-full sm:top-[50%] sm:left-[50%] sm:-translate-x-[50%] sm:-translate-y-[50%]" {{ if $lazyLoading }}loading="lazy"{{ end }}>
-      {{ end }}
-      <div id="open-source" class="anchor anchor--open-source relative" >
-        <div class="h-14 w-14 mb-5">
-          {{ $icon := resources.Get "images/Hiero-Icon-Heart.svg" }}
-          {{ with $icon }}
-          <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
-          {{ end }}
-        </div>
-        <h2 class="text-2xl font-medium mb-5">{{ $.Param "section_why_open_source_heading" | safeHTML }}</h2>
-        <p class="text-base max-w-[565px]">{{ $.Param "section_why_open_source_text" | safeHTML }}</p>
-      </div>
-      <div class="relative">
-        <div class="h-14 w-14 mb-5">
-          {{ $icon := resources.Get "images/Hiero-Icon-OpenSource.svg" }}
-          {{ with $icon }}
-          <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
-          {{ end }}
-        </div>
-        <h2 class="text-2xl font-medium mb-5">{{ $.Param "section_what_parts_open_source_heading" | safeHTML }}</h2>
-        <p class="text-base max-w-[565px]">{{ $.Param "section_what_parts_open_source_text" | safeHTML }}</p>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- QUOTES -->
-<div id="quotes" class="anchor">
-  <div class="pt-[40px] pb-[40px] sm:pt-[120px] sm:pb-[60px]">
-    <div class="container container-mobile-full">
-      <div class="relative w-full">
-        <div class="mx-auto mb-10 lg:mb-0 lg:absolute lg:top-[50%] lg:left-0 lg:-translate-x-[91px] lg:-translate-y-[50%] text-white-dark text-5xl h-[40px] w-[51px]">
-          {{ $graphic := resources.Get "images/Hiero-Icon-Quote-Left.svg" }}
-          {{ with $graphic }}
-          <img src="{{ $graphic.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
-          {{ end }}
-        </div>
-        <div class="px-[25px] pt-[80px] lg:pt-[60px] lg:px-[60px] lg:pb-0 text-lg text-white bg-gradient-to-br from-red-dark via-red to-red">
-           <!-- Swiper -->
-          <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                {{ range .Param "section_quotes" }}
-                <div class="swiper-slide">
-                  {{ $logo := resources.Get .logo }}
-                  {{ with $logo }}
-                  <div class="mb-5 flex justify-center h-[38px]">
-                    <img src="{{ $logo.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
-                  </div>
-                  {{ end }}
-                  <div class="mb-5 [&>a]:text-white">{{ .quote | safeHTML }}</div>
-                  <div class="font-bold mb-[155px] [&>a]:text-white">{{ .author | safeHTML }}</div>
-                </div>
-                {{ end }}
-            </div>
-            <div class="swiper-button swiper-button-next"></div>
-            <div class="swiper-button swiper-button-prev"></div>
-          </div>
-        </div>
-        <div class="mx-auto mt-10 lg:mt-0 lg:absolute lg:top-[50%] lg:left-auto lg:right-0 lg:translate-x-[91px] lg:-translate-y-[50%] text-white-dark text-5xl h-[40px] w-[51px]">
-          {{ $graphic := resources.Get "images/Hiero-Icon-Quote-Right.svg" }}
-          {{ with $graphic }}
-          <img src="{{ $graphic.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
-          {{ end }}
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -122,7 +49,6 @@
     },
   });
 </script>
-
 <!-- CONTRIBUTE & CONNECT -->
 <div class="bg-white">
   <div class="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px] grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-10">
@@ -231,6 +157,48 @@
   </div>
 </div>
 
+<div> <!-- divider -->
+  <div class="container py-[40px] sm:py-0 flex flex-row items-center gap-10">
+    {{ $graphic := resources.Get "images/Hiero-Icon.svg" }}
+    {{ with $graphic }}
+    <img src="{{ $graphic.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+    {{ end }}
+    <div class="w-full bg-white-dark h-[1px]"></div>
+  </div>
+</div>
+
+<!-- OPEN SOURCE -->
+<div>
+  <div class="bg-white">
+    <div class="container pt-[40px] pb-[40px] sm:pt-[92px] sm:pb-[154px] grid grid-cols-1 sm:grid-cols-2 gap-[80px] sm:gap-10 relative">
+      {{ $graphic := resources.Get "images/Hiero-Logo-Outline.svg" }}
+      {{ with $graphic }}
+      <img src="{{ $graphic.RelPermalink }}" class="sm:absolute w-full h-full sm:top-[50%] sm:left-[50%] sm:-translate-x-[50%] sm:-translate-y-[50%]" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+      {{ end }}
+      <div id="open-source" class="anchor anchor--open-source relative" >
+        <div class="h-14 w-14 mb-5">
+          {{ $icon := resources.Get "images/Hiero-Icon-Heart.svg" }}
+          {{ with $icon }}
+          <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+          {{ end }}
+        </div>
+        <h2 class="text-2xl font-medium mb-5">{{ $.Param "section_why_open_source_heading" | safeHTML }}</h2>
+        <p class="text-base max-w-[565px]">{{ $.Param "section_why_open_source_text" | safeHTML }}</p>
+      </div>
+      <div class="relative">
+        <div class="h-14 w-14 mb-5">
+          {{ $icon := resources.Get "images/Hiero-Icon-OpenSource.svg" }}
+          {{ with $icon }}
+          <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+          {{ end }}
+        </div>
+        <h2 class="text-2xl font-medium mb-5">{{ $.Param "section_what_parts_open_source_heading" | safeHTML }}</h2>
+        <p class="text-base max-w-[565px]">{{ $.Param "section_what_parts_open_source_text" | safeHTML }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Initialize Repos Swiper after HTML is rendered -->
 <script>
   var reposSwiper = new Swiper(".reposSwiper", {
@@ -273,6 +241,66 @@
     <div class="w-full bg-white-dark h-[1px]"></div>
   </div>
 </div>
+
+<!-- QUOTES -->
+<div id="quotes" class="anchor">
+  <div class="pt-[40px] pb-[40px] sm:pt-[120px] sm:pb-[60px]">
+    <div class="container container-mobile-full">
+      <div class="relative w-full">
+        <div class="mx-auto mb-10 lg:mb-0 lg:absolute lg:top-[50%] lg:left-0 lg:-translate-x-[91px] lg:-translate-y-[50%] text-white-dark text-5xl h-[40px] w-[51px]">
+          {{ $graphic := resources.Get "images/Hiero-Icon-Quote-Left.svg" }}
+          {{ with $graphic }}
+          <img src="{{ $graphic.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+          {{ end }}
+        </div>
+        <div class="px-[25px] pt-[80px] lg:pt-[60px] lg:px-[60px] lg:pb-0 text-lg text-white bg-gradient-to-br from-red-dark via-red to-red">
+           <!-- Swiper -->
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                {{ range .Param "section_quotes" }}
+                <div class="swiper-slide">
+                  {{ $logo := resources.Get .logo }}
+                  {{ with $logo }}
+                  <div class="mb-5 flex justify-center h-[38px]">
+                    <img src="{{ $logo.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+                  </div>
+                  {{ end }}
+                  <div class="mb-5 [&>a]:text-white">{{ .quote | safeHTML }}</div>
+                  <div class="font-bold mb-[155px] [&>a]:text-white">{{ .author | safeHTML }}</div>
+                </div>
+                {{ end }}
+            </div>
+            <div class="swiper-button swiper-button-next"></div>
+            <div class="swiper-button swiper-button-prev"></div>
+          </div>
+        </div>
+        <div class="mx-auto mt-10 lg:mt-0 lg:absolute lg:top-[50%] lg:left-auto lg:right-0 lg:translate-x-[91px] lg:-translate-y-[50%] text-white-dark text-5xl h-[40px] w-[51px]">
+          {{ $graphic := resources.Get "images/Hiero-Icon-Quote-Right.svg" }}
+          {{ with $graphic }}
+          <img src="{{ $graphic.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    loop: true,
+    autoplay: {
+      delay: 30000,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+</script>
+
 <!-- TECHNICAL STEERING COMMITTEE -->
 <div id="technical-steering-committee" class="anchor">
   <div class="bg-white">

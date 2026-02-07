@@ -33,37 +33,6 @@
     </div>
   </div>
 </div>
-<!-- OPEN SOURCE -->
-<div>
-  <div class="bg-white">
-    <div class="container pt-[40px] pb-[40px] sm:pt-[92px] sm:pb-[154px] grid grid-cols-1 sm:grid-cols-2 gap-[80px] sm:gap-10 relative">
-      {{ $graphic := resources.Get "images/Hiero-Logo-Outline.svg" }}
-      {{ with $graphic }}
-      <img src="{{ $graphic.RelPermalink }}" class="sm:absolute w-full h-full sm:top-[50%] sm:left-[50%] sm:-translate-x-[50%] sm:-translate-y-[50%]" {{ if $lazyLoading }}loading="lazy"{{ end }}>
-      {{ end }}
-      <div id="open-source" class="anchor anchor--open-source relative" >
-        <div class="h-14 w-14 mb-5">
-          {{ $icon := resources.Get "images/Hiero-Icon-Heart.svg" }}
-          {{ with $icon }}
-          <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
-          {{ end }}
-        </div>
-        <h2 class="text-2xl font-medium mb-5">{{ $.Param "section_why_open_source_heading" | safeHTML }}</h2>
-        <p class="text-base max-w-[565px]">{{ $.Param "section_why_open_source_text" | safeHTML }}</p>
-      </div>
-      <div class="relative">
-        <div class="h-14 w-14 mb-5">
-          {{ $icon := resources.Get "images/Hiero-Icon-OpenSource.svg" }}
-          {{ with $icon }}
-          <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
-          {{ end }}
-        </div>
-        <h2 class="text-2xl font-medium mb-5">{{ $.Param "section_what_parts_open_source_heading" | safeHTML }}</h2>
-        <p class="text-base max-w-[565px]">{{ $.Param "section_what_parts_open_source_text" | safeHTML }}</p>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -184,6 +153,48 @@
         </button>
       </div>
       {{ end }}
+    </div>
+  </div>
+</div>
+
+<div> <!-- divider -->
+  <div class="container py-[40px] sm:py-0 flex flex-row items-center gap-10">
+    {{ $graphic := resources.Get "images/Hiero-Icon.svg" }}
+    {{ with $graphic }}
+    <img src="{{ $graphic.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+    {{ end }}
+    <div class="w-full bg-white-dark h-[1px]"></div>
+  </div>
+</div>
+
+<!-- OPEN SOURCE -->
+<div>
+  <div class="bg-white">
+    <div class="container pt-[40px] pb-[40px] sm:pt-[92px] sm:pb-[154px] grid grid-cols-1 sm:grid-cols-2 gap-[80px] sm:gap-10 relative">
+      {{ $graphic := resources.Get "images/Hiero-Logo-Outline.svg" }}
+      {{ with $graphic }}
+      <img src="{{ $graphic.RelPermalink }}" class="sm:absolute w-full h-full sm:top-[50%] sm:left-[50%] sm:-translate-x-[50%] sm:-translate-y-[50%]" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+      {{ end }}
+      <div id="open-source" class="anchor anchor--open-source relative" >
+        <div class="h-14 w-14 mb-5">
+          {{ $icon := resources.Get "images/Hiero-Icon-Heart.svg" }}
+          {{ with $icon }}
+          <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+          {{ end }}
+        </div>
+        <h2 class="text-2xl font-medium mb-5">{{ $.Param "section_why_open_source_heading" | safeHTML }}</h2>
+        <p class="text-base max-w-[565px]">{{ $.Param "section_why_open_source_text" | safeHTML }}</p>
+      </div>
+      <div class="relative">
+        <div class="h-14 w-14 mb-5">
+          {{ $icon := resources.Get "images/Hiero-Icon-OpenSource.svg" }}
+          {{ with $icon }}
+          <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+          {{ end }}
+        </div>
+        <h2 class="text-2xl font-medium mb-5">{{ $.Param "section_what_parts_open_source_heading" | safeHTML }}</h2>
+        <p class="text-base max-w-[565px]">{{ $.Param "section_what_parts_open_source_text" | safeHTML }}</p>
+      </div>
     </div>
   </div>
 </div>

@@ -6,9 +6,7 @@ categories = ["Blog"]
 abstract = "August's Open Issues at the Python SDK"
 [[authors]]
 name = "exploreriii"
-title = ""
 organization = "Hiero Team"
-link = ""
 image = "/images/python/members/exploreriii.png"
 +++
 

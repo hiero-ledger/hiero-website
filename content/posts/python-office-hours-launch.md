@@ -1,13 +1,13 @@
 +++
-title           = "Introducing the Hiero Python SDK Office Hour"
-featured_image  = "/images/python/blog_posts/python_office_hour.jpg"
-date            = 2025-08-18T11:00:00+01:00
-categories      = ["Blog"]
-abstract        = "Join our new fortnightly Office Hour to get real‑time help on the Hiero Python SDK."
+title = "Introducing the Hiero Python SDK Office Hour"
+featured_image = "/images/python/blog_posts/python_office_hour.jpg"
+date = 2025-08-18T11:00:00+01:00
+categories = ["Blog"]
+abstract = "Join our new fortnightly Office Hour to get real-time help on the Hiero Python SDK."
 [[authors]]
-  name         = "exploreriii"
-  organization = "Hiero"
-  image        = "/images/python/members/exploreriii.png"
+name = "exploreriii"
+organization = "Hiero"
+image = "/images/python/members/exploreriii.png"
 +++
 
 We heard you loud and clear: you want more live, direct support time, and we’re excited to kick off a fortnightly Office Hour for the Python SDK. Grab your calendar and a cup of ☕—here’s what you need to know.

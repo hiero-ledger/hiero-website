@@ -1,10 +1,9 @@
 +++
-title = 'Introducing the Hiero SDK Collaboration Hub: Streamlining Contributions for a Thriving Developer Community'
+title = "Introducing the Hiero SDK Collaboration Hub: Streamlining Contributions for a Thriving Developer Community"
 featured_image = "/images/SDK_hub_V1.jpg"
-preview_only = true
 date = 2025-06-04T10:12:50-07:00
 categories = ["Blog"]
-duration = ""
+preview_only = true
 abstract = "The Hiero SDK Collaboration Hub is your entry point to contributing with clarity, providing structured proposals, templates, guides, and transparent decision-making. Whether you're a new contributor or seasoned maintainer, the Hub simplifies collaboration and helps shape the future of Hiero SDKs."
 [[authors]]
 name = "Michiel Mulders"

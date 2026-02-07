@@ -4,13 +4,9 @@ featured_image = "/images/tsc_results_sep.jpg"
 preview_only = true
 date = 2025-09-23T00:00:00-07:00
 categories = ["Blog"]
-duration = ""
 abstract = "The results for the September Hiero Technical Steering Committee election are here!"
 [[authors]]
 name = "Hiero Team"
-title = ""
-organization = ""
-link = ""
 image = "/images/profile-hiero.png"
 +++
 

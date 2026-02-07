@@ -6,11 +6,10 @@ categories = ["Blog"]
 abstract = "August's Open Issues at the Python SDK"
 [[authors]]
 name = "exploreriii"
-title = ""
 organization = "Hiero Team"
-link = ""
 image = "/images/python/members/exploreriii.png"
 +++
+
 
 The community team at the Hiero Python SDK has been working behind the scenes since November 2024 to help Python developers plug into Hedera’s decentralized network using Python code.
 

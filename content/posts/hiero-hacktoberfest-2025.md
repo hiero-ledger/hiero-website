@@ -6,11 +6,9 @@ categories = ["Blog"]
 abstract = "Join the Hiero project this Hacktoberfest 2025"
 [[authors]]
 name = "Hiero Team"
-title = ""
-organization = ""
-link = ""
 image = "/images/profile-hiero.png"
 +++
+
 
 ## 📣 Hacktoberfest 2025: Contribute to Hiero!
 

@@ -1,10 +1,9 @@
 +++
-title = 'Namespace Transition Announcement: Hedera Projects Moving to Hiero'
+title = "Namespace Transition Announcement: Hedera Projects Moving to Hiero"
 featured_image = "/images/transition.png"
-preview_only = true
 date = 2025-07-25T11:02:50-07:00
 categories = ["Blog"]
-duration = ""
+preview_only = true
 abstract = "Hedera projects are transitioning to Hiero, a vendor-neutral platform under the Linux Foundation Decentralized Trust. This involves a namespace change from hashgraph to `hiero` or `hiero-ledger`, impacting project dependencies and SDK imports. Developers are encouraged to update their dependencies accordingly to stay aligned with this evolution."
 [[authors]]
 name = "Michiel Mulders"
@@ -13,6 +12,7 @@ organization = "Hashgraph"
 link = "https://www.linkedin.com/in/michielmulders/"
 image = "/images/profile-hiero.png"
 +++
+
 
 As previously announced in September 2024, Hedera projects have migrated to Hiero under Linux Foundation Decentralized Trust. This significant evolution involves a critical namespace transition from hashgraph to `hiero` or `hiero-ledger`, affecting project dependencies and SDK imports. This shift emphasizes greater transparency, collaboration, and open-source innovation, and developers are encouraged to update their dependencies accordingly to stay aligned.
 

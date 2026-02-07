@@ -3,15 +3,12 @@ title = 'TSC Voting Process'
 featured_image = "/images/tsc-voting-process-post/TSCVotingProcessBanner_V1.jpg"
 date = 2025-04-29T10:12:50-07:00
 categories = ["Blog"]
-duration = ""
 abstract = "We’ll walk you through the steps to cast your vote, the criteria for eligibility, and the tools you’ll use to participate."
 [[authors]]
 name = "Hiero Team"
-title = ""
-organization = ""
-link = ""
 image = "/images/profile-hiero.png"
 +++
+
 
 ## 🗳️ Upcoming Hiero TSC Elections - How Does Voting Work?
 

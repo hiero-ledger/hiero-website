@@ -1,14 +1,14 @@
 +++
-title          = "Hiero Graduates as the First Project under the Linux Foundation Decentralized Trust Umbrella and Its New Project Lifecycle Framework"
-date           = 2025-08-22
-draft          = false
-slug           = "hiero-graduation"
-description    = "Hiero has become the first project to graduate under both LFDT’s umberlla and it's new project lifecycle framework — a milestone that highlights its technical maturity, thriving ecosystem, and cross-community collaboration."
-tags           = ["Hiero", "LFDT", "Graduation", "Open Source", "DLT", "Decentralized Trust"]
-categories     = ["Announcements"]
+title = "Hiero Graduates as the First Project under the Linux Foundation Decentralized Trust Umbrella and Its New Project Lifecycle Framework"
 featured_image = "/images/hiero-graduation.png"
-images         = ["/images/hiero-graduation.png"]
-canonical_url  = "https://hiero.org/blog/hiero-graduation"
+date = 2025-08-22
+categories = ["Announcements"]
+tags = ["Hiero", "LFDT", "Graduation", "Open Source", "DLT", "Decentralized Trust"]
+draft = false
+slug = "hiero-graduation"
+description = "Hiero has become the first project to graduate under both LFDT’s umbrella and its new project lifecycle framework — a milestone that highlights its technical maturity, thriving ecosystem, and cross-community collaboration."
+images = ["/images/hiero-graduation.png"]
+canonical_url = "https://hiero.org/blog/hiero-graduation"
 +++
 
 ## Hiero Becomes the First Graduated Project under LFDT’s New Project Lifecycle Framework — and the First to Achieve Graduation since LFDT’s Expanded Umbrella.

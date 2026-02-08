@@ -1,15 +1,12 @@
 +++
-title = "Hiero Python SDK – Announcing Release v0.1.3"
+title = "Hiero Python SDK – Announcing Release v0.1.3"
 featured_image = "/images/python/blog_titles/blog_release_v0.1.3.jpg"
 date = 2025-07-18T11:00:00-07:00
 categories = ["Blog"]
-duration = ""
 abstract = "The Hiero Python SDK has a new v0.1.3 release!"
 [[authors]]
 name = "exploreriii"
-title = ""
 organization = "Hiero Team"
-link = ""
 image = "/images/python/members/exploreriii.png"
 +++
 

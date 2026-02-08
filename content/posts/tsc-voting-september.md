@@ -3,13 +3,9 @@ title = 'September TSC Contributor Seat Voting'
 featured_image = "/images/tsc-vote-september.jpg"
 date = 2025-09-17T15:31:00-07:00
 categories = ["Blog"]
-duration = ""
 abstract = "September 2025 elections for TSC Maintainer seat are here!"
 [[authors]]
 name = "Hiero Team"
-title = ""
-organization = ""
-link = ""
 image = "/images/profile-hiero.png"
 +++
 

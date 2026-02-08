@@ -26,7 +26,7 @@ body:
       value: |
         This issue is designed to be approachable for people who are new to contributing to the [Hiero Website](https://github.com/hiero-ledger/hiero-website) or have limited prior experience.
         We know that creating a pull request (PR) can feel like a big step for new contributors.
-        The goal of this issue and all other issues in [**find a good first issue**](https://github.com/issues?q=is%3Aopen+is%3Aissue+org%3Ahiero-ledger+archived%3Afalse+label%3A%22good+first+issue%22+) is to help you make your first contribution to the Hiero Website.
+        The goal of this issue and all other issues in [**find a good first issue**](https://github.com/issues?q=is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%20archived%3Afalse%20no%3Aassignee%20(label%3A%22good%20first%20issue%22%20OR%20label%3A%22skill%3A%20good%20first%20issue%22)%20(repo%3Ahiero-ledger%2Fhiero-sdk-cpp%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-swift%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-python%20OR%20repo%3Ahiero-ledger%2Fhiero-website)) is to help you make your first contribution to the Hiero Website.
     validations:
       required: false
 

@@ -4,10 +4,9 @@ featured_image = "/images/python/blog_titles/hiero-hacktoberfest-banner.jpg"
 date = 2025-10-30T10:00:00-07:00
 categories = ["Blog"]
 abstract = "A look back at how Hacktoberfest 2025 transformed the Hiero Python SDK, bringing in 39 new authors and a 660% increase in commits."
-
 [[authors]]
-  name = "Rachitb0611"
-  organization = "Python Team"
+name = "Rachitb0611"
+organization = "Python Team"
 +++
 
 We just lived through our first real Hacktoberfest with the new Hiero Python SDK. To say it was "a bit busy" would be an understatement.

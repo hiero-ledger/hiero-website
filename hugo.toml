@@ -42,11 +42,6 @@ url = '/#connect'
 weight = 40
 
 [[menus.main]]
-name = 'Roadmap'
-url = '/#roadmap'
-weight = 50
-
-[[menus.main]]
 name = 'Blog'
 url = '/blog/'
 weight = 60

@@ -7,26 +7,16 @@ section_hero_heading = "Hiero"
 section_hero_text = "Open Source Distributed Ledger Technology"
 
 section_what_is_hiero_heading = "What is Hiero?"
-section_what_is_hiero_text = '''
-Hiero, a <a href="http://www.lfdecentralizedtrust.org/" target="_blank" rel="noreferrer noopener">Linux Foundation Decentralized Trust</a> project, is an open-source, vendor-neutral distributed ledger technology. Hiero is used to build the <a href="https://hedera.com/" target="_blank" rel="noreferrer noopener">Hedera</a> public ledger.'''
+section_what_is_hiero_text = "Hiero is an open-source, vendor-neutral distributed ledger technology project under the <a href=\"https://www.lfdecentralizedtrust.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Linux Foundation Decentralized Trust</a>. Hiero is used to build the <a href=\"https://hedera.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Hedera</a> public ledger."
 
-section_why_open_source_heading = "Why is Hiero Open Source?"
-section_why_open_source_text = "The main goal of Hiero is to create a diverse community of developers, dreamers, and builders working to make the world more fair, fast, and secure. To achieve that goal it is critical that everyone can access the source of Hiero and move the project forward. A decentralized network that is used by enterprises and critical infrastructure around the world must be vendor-neutral and fully auditable."
+section_why_open_source_text = "Hiero provides transparent and auditable infrastructure, fostering a global community to build a fair, fast, and secure decentralized future."
 
 section_what_parts_open_source_heading = "What parts of Hiero are Open Source?"
-section_what_parts_open_source_text = '''
-Hiero is 100% open-source. While the transition of the project to Linux Foundation Decentralized Trust is still ongoing, a view into some additional contributions can be found in <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera’s GitHub organization</a>. As a first step, the technical steering committee (TSC) of Hiero will provide oversight to include  projects that are needed to run an enterprise-ready decentralized network to a new Hiero GitHub organization. More information about the transition process can be found in the roadmap.
-'''
-
+section_what_parts_open_source_text = "Hiero is 100% open-source, with its transition to the Linux Foundation Decentralized Trust mostly complete and overseen by the project's technical steering committee."
 section_getting_started_heading = "How to Contribute / Getting Started?"
-section_getting_started_text = '''
-<p>Since we are still working on the transition of the Hiero repositories from the <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera GitHub organization</a> into the <a href="https://github.com/hiero-ledger/" target="_blank" rel="noreferrer noopener">Hiero GitHub organization</a>, many opportunities for contribution can be initiated at the Hedera’s GitHub organization today.</p>
-<p>While in this transition phase we already want to enable developers to join in developing Hiero and its related projects. As such, we’re always willing to help you get started and mentor you on your journey of learning the project and making useful contributions.</p>
-<p>
-There is good work to do for everyone with whatever skillset you have - and it doesn’t have to be code. We also welcome help with documentation, design, project organization, and organizing meetups. For example, during one of our previous <a href="/hacktoberfest">community contribution events</a>, we curated a large list of beginner-friendly issues to encourage first-time contributions. Several of these issues focused on removing "Hedera" specific naming and usage from the codebase to help identify the project as vendor neutral.</p>
-<p>
-If you have any questions or need help or additional mentoring, then you can reach out to the community and the technical steering committee (TSC) of Hiero in our <a href="https://github.com/orgs/hiero-ledger/discussions" target="_blank" rel="noreferrer noopener">GitHub discussions</a>.</p>
-'''
+
+section_getting_started_text = "Since we are still working on the transition of the Hiero repositories from the [Hedera GitHub organization](https://github.com/hashgraph) into the [Hiero GitHub organization](https://github.com/hiero-ledger), many opportunities for contribution can be initiated at the Hedera's GitHub organization today. While in this transition phase we already want to enable developers to join in developing Hiero and its related projects. As such, we're always willing to help the project and making useful contributions."
+
 
 section_connect_heading = "Connect with the Hiero Open Source community"
 section_connect_text = '''

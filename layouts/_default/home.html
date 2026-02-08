@@ -33,6 +33,140 @@
     </div>
   </div>
 </div>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    loop: true,
+    autoplay: {
+      delay: 30000,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+</script>
+<!-- CONTRIBUTE & CONNECT -->
+<div class="bg-white">
+  <div class="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px] grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-10">
+    <div id="contribute" class="anchor">
+      <h2 class="text-2xl mb-2.5 sm:text-4xl max-w-full md:max-w-[565px] sm:mb-5">{{ $.Param "section_getting_started_heading" | safeHTML }}</h2>
+      <div class="text-lg max-w-full md:max-w-[565px] space-y-4">{{ $.Param "section_getting_started_text" | safeHTML }}</div>
+    </div>
+    <div id="connect" class="anchor">
+      <h2 class="text-2xl mb-2.5 sm:text-4xl max-w-full md:max-w-[565px] sm:mb-5">{{ $.Param "section_connect_heading" | safeHTML }}</h2>
+      <div class="text-lg max-w-full md:max-w-[565px] space-y-4">{{ $.Param "section_connect_text" | safeHTML }}</div>
+    </div>
+  </div>
+</div>
+<!-- MEET / COMMUNITY CALLS -->
+<div id="meet" class="anchor">
+  <div class="bg-white">
+    <div class="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px]">
+      <div class="mb-10 sm:mb-16">
+        <h2 class="text-2xl mb-2.5 sm:text-4xl sm:mb-5">{{ $.Param "section_meet_heading" | safeHTML }}</h2>
+        <div class="text-lg max-w-full md:max-w-[800px] space-y-4">{{ $.Param "section_meet_text" | safeHTML }}</div>
+      </div>
+      {{ if $.Param "section_meet_calls" }}
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {{ range $.Param "section_meet_calls" }}
+        <div class="border-2 border-white-dark rounded-2xl p-8 hover:border-red transition-colors duration-200 bg-white">
+          <h3 class="text-xl sm:text-2xl font-medium mb-3 [&>strong]:text-red">{{ .name | safeHTML }}</h3>
+          {{ if .description }}
+          <p class="text-base mb-4 text-gray-600">{{ .description | safeHTML }}</p>
+          {{ end }}
+          {{ if .schedule }}
+          <p class="text-sm mb-4 text-gray-600"><strong>Schedule:</strong> {{ .schedule | safeHTML }}</p>
+          {{ end }}
+          <div class="flex flex-col gap-2 mt-4">
+            {{ if .register_link }}
+            <a href="{{ .register_link }}" target="_blank" rel="noreferrer noopener" class="text-red hover:text-red-dark text-base font-medium underline">
+              Register →
+            </a>
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+<div> <!-- divider -->
+  <div class="container py-[40px] sm:py-0 flex flex-row items-center gap-10">
+    {{ $graphic := resources.Get "images/Hiero-Icon.svg" }}
+    {{ with $graphic }}
+    <img src="{{ $graphic.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+    {{ end }}
+    <div class="w-full bg-white-dark h-[1px]"></div>
+  </div>
+</div>
+<!-- REPOSITORIES -->
+<div id="repos" class="anchor">
+  <div class="bg-white">
+    <div class="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px]">
+      <div class="mb-10 sm:mb-16">
+        <h2 class="text-2xl mb-2.5 sm:text-4xl sm:mb-5">{{ $.Param "section_repos_heading" | safeHTML }}</h2>
+        <div class="text-lg max-w-full md:max-w-[800px]">{{ $.Param "section_repos_text" | safeHTML }}</div>
+      </div>
+      {{ if $.Param "section_repos" }}
+      <div class="relative w-full px-16">
+        <div class="swiper reposSwiper">
+          <div class="swiper-wrapper">
+            {{ range $.Param "section_repos" }}
+            <div class="swiper-slide" style="height: auto;">
+              <div class="border-2 border-white-dark rounded-2xl p-8 hover:border-red transition-colors duration-200 bg-white h-full flex flex-col" data-repo="{{ .name }}">
+                <h3 class="text-xl sm:text-2xl font-medium mb-3 text-red">{{ .name | safeHTML }}</h3>
+                {{ if .description }}
+                <p class="text-base mb-4 text-gray-600 flex-grow">{{ .description | safeHTML }}</p>
+                {{ end }}
+                <div class="flex flex-row justify-between items-center mt-4">
+                  {{ if .link }}
+                  <a href="{{ .link }}" target="_blank" rel="noreferrer noopener" class="text-red hover:text-red-dark text-base font-medium underline">
+                    View Repository →
+                  </a>
+                  {{ end }}
+                  {{ $repoStats := index $.Site.Data.repository_stats .name }}
+                  <span class="text-sm text-gray-600">⭐ {{ if $repoStats }}{{ $repoStats.stars }}{{ else }}0{{ end }}</span>
+                </div>
+              </div>
+            </div>
+            {{ end }}
+          </div>
+          <!-- Pagination inside swiper -->
+          <div class="repos-pagination swiper-pagination !relative !bottom-0 mt-8"></div>
+        </div>
+        
+        <!-- Navigation buttons positioned outside swiper but inside relative container -->
+        <button class="repos-nav-prev absolute top-1/2 left-0 transform -translate-y-1/2 z-10 w-12 h-12 bg-red rounded-full flex items-center justify-center text-white shadow-lg hover:bg-red-dark transition-all duration-200 cursor-pointer">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <button class="repos-nav-next absolute top-1/2 right-0 transform -translate-y-1/2 z-10 w-12 h-12 bg-red rounded-full flex items-center justify-center text-white shadow-lg hover:bg-red-dark transition-all duration-200 cursor-pointer">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+<div> <!-- divider -->
+  <div class="container py-[40px] sm:py-0 flex flex-row items-center gap-10">
+    {{ $graphic := resources.Get "images/Hiero-Icon.svg" }}
+    {{ with $graphic }}
+    <img src="{{ $graphic.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+    {{ end }}
+    <div class="w-full bg-white-dark h-[1px]"></div>
+  </div>
+</div>
+
 <!-- OPEN SOURCE -->
 <div>
   <div class="bg-white">
@@ -64,6 +198,50 @@
     </div>
   </div>
 </div>
+
+<!-- Initialize Repos Swiper after HTML is rendered -->
+<script>
+  var reposSwiper = new Swiper(".reposSwiper", {
+    loop: true,
+    slidesPerView: 1,
+    spaceBetween: 24,
+    grabCursor: true,
+    pagination: {
+      el: ".repos-pagination",
+      clickable: true,
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 24,
+      },
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 32,
+      },
+    },
+  });
+
+  // Custom navigation buttons
+  document.querySelector('.repos-nav-next').addEventListener('click', function() {
+    reposSwiper.slideNext();
+  });
+  
+  document.querySelector('.repos-nav-prev').addEventListener('click', function() {
+    reposSwiper.slidePrev();
+  });
+</script>
+
+<div> <!-- divider -->
+  <div class="container py-[40px] sm:py-0 flex flex-row items-center gap-10">
+    {{ $graphic := resources.Get "images/Hiero-Icon.svg" }}
+    {{ with $graphic }}
+    <img src="{{ $graphic.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
+    {{ end }}
+    <div class="w-full bg-white-dark h-[1px]"></div>
+  </div>
+</div>
+
 <!-- QUOTES -->
 <div id="quotes" class="anchor">
   <div class="pt-[40px] pb-[40px] sm:pt-[120px] sm:pb-[60px]">
@@ -123,61 +301,6 @@
   });
 </script>
 
-<!-- CONTRIBUTE & CONNECT -->
-<div class="bg-white">
-  <div class="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px] grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-10">
-    <div id="contribute" class="anchor">
-      <h2 class="text-2xl mb-2.5 sm:text-4xl max-w-full md:max-w-[565px] sm:mb-5">{{ $.Param "section_getting_started_heading" | safeHTML }}</h2>
-      <div class="text-lg max-w-full md:max-w-[565px] space-y-4">{{ $.Param "section_getting_started_text" | safeHTML }}</div>
-    </div>
-    <div id="connect" class="anchor">
-      <h2 class="text-2xl mb-2.5 sm:text-4xl max-w-full md:max-w-[565px] sm:mb-5">{{ $.Param "section_connect_heading" | safeHTML }}</h2>
-      <div class="text-lg max-w-full md:max-w-[565px] space-y-4">{{ $.Param "section_connect_text" | safeHTML }}</div>
-    </div>
-  </div>
-</div>
-<!-- MEET / COMMUNITY CALLS -->
-<div id="meet" class="anchor">
-  <div class="bg-white">
-    <div class="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px]">
-      <div class="mb-10 sm:mb-16">
-        <h2 class="text-2xl mb-2.5 sm:text-4xl sm:mb-5">{{ $.Param "section_meet_heading" | safeHTML }}</h2>
-        <div class="text-lg max-w-full md:max-w-[800px] space-y-4">{{ $.Param "section_meet_text" | safeHTML }}</div>
-      </div>
-      {{ if $.Param "section_meet_calls" }}
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        {{ range $.Param "section_meet_calls" }}
-        <div class="border-2 border-white-dark rounded-2xl p-8 hover:border-red transition-colors duration-200 bg-white">
-          <h3 class="text-xl sm:text-2xl font-medium mb-3 [&>strong]:text-red">{{ .name | safeHTML }}</h3>
-          {{ if .description }}
-          <p class="text-base mb-4 text-gray-600">{{ .description | safeHTML }}</p>
-          {{ end }}
-          {{ if .schedule }}
-          <p class="text-sm mb-4 text-gray-600"><strong>Schedule:</strong> {{ .schedule | safeHTML }}</p>
-          {{ end }}
-          <div class="flex flex-col gap-2 mt-4">
-            {{ if .register_link }}
-            <a href="{{ .register_link }}" target="_blank" rel="noreferrer noopener" class="text-red hover:text-red-dark text-base font-medium underline">
-              Register →
-            </a>
-            {{ end }}
-          </div>
-        </div>
-        {{ end }}
-      </div>
-      {{ end }}
-    </div>
-  </div>
-</div>
-<div> <!-- divider -->
-  <div class="container py-[40px] sm:py-0 flex flex-row items-center gap-10">
-    {{ $graphic := resources.Get "images/Hiero-Icon.svg" }}
-    {{ with $graphic }}
-    <img src="{{ $graphic.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
-    {{ end }}
-    <div class="w-full bg-white-dark h-[1px]"></div>
-  </div>
-</div>
 <!-- TECHNICAL STEERING COMMITTEE -->
 <div id="technical-steering-committee" class="anchor">
   <div class="bg-white">

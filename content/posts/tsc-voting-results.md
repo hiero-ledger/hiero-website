@@ -1,17 +1,12 @@
-
 +++
 title = 'Results of the Hiero Technical Steering Committee Elections'
 featured_image = "/images/TSC_results_V1.jpg"
 preview_only = true
 date = 2025-06-02T00:00:00-07:00
 categories = ["Blog"]
-duration = ""
 abstract = "The results for the Hiero Technical Steering Committee elections are here!"
 [[authors]]
 name = "Hiero Team"
-title = ""
-organization = ""
-link = ""
 image = "/images/profile-hiero.png"
 +++
 

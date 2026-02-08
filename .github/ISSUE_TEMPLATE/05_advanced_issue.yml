@@ -65,7 +65,7 @@ body:
         > - A task solvable by following existing patterns alone
         >
         > 📖 Helpful references:
-        > - `.github/guidelines_advanced_issues.md`
+        > - `.github/maintainers/guidelines_advanced_issues.md`
 
   - type: textarea
     id: problem

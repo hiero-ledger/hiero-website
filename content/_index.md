@@ -20,6 +20,13 @@ Hiero is 100% open-source. While the transition of the project to Linux Foundati
 
 
 
+section_technical_steering_committee_heading = "The Technical Steering Committee of Hiero"
+section_technical_steering_committee_text = '''
+<p>Hiero welcomes a diverse and inclusive community of contributors and leaders who help shape the future of our project. Guided by this belief, we have established our Technical Steering Committee (TSC), composed of experienced and diverse members from our community who work together to achieve the project's goals and to drive the project's decisions in the right direction. The duties, goals, and rights of the TSC are defined in the <a href="https://github.com/hiero-ledger/hiero/blob/main/technical-charter.md" target="_blank" rel="noreferrer noopener">technical charter</a> of the Hiero project.
+</p>
+'''
+
+
 
 section_meet_heading = "Join our Hiero Community Calls"
 section_meet_text = '''
@@ -27,6 +34,12 @@ section_meet_text = '''
 <p>Register to any of our current meeting series <a href="https://github.com/hiero-ledger#open-community-meetings-and-tsc-schedules" target="_blank" rel="noreferrer noopener">HERE</a></p>
 <p>View all meeting schedules and access recordings via our <a href="https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week" target="_blank" rel="noreferrer noopener">LFX Calendar</a>.</p>
 <p>
+'''
+
+section_repos_heading = "Jump to our Hiero Repositories"
+section_repos_text = '''
+Explore some of our most active and widely used Hiero repositories.
+These projects form the core of the Hiero ecosystem.
 '''
 
 [[section_meet_calls]]
@@ -113,6 +126,106 @@ schedule = "Monthly"
 calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1763053200"
 register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/94618152832?password=3b037576-2aab-4f7e-ab24-acf9ca2c3734&invite=true"
 
+[[section_repos]]
+name = "hiero-consensus-node"
+description = "Crypto, token, consensus, file, and smart contract services for a Hiero based network"
+link = "https://github.com/hiero-ledger/hiero-consensus-node"
+
+[[section_repos]]
+name = "hiero-local-node"
+description = "Run your own local Hiero based network for development purposes"
+link = "https://github.com/hiero-ledger/hiero-local-node"
+
+[[section_repos]]
+name = "hiero-mirror-node"
+description = "Archives data from consensus nodes and serves it via an API"
+link = "https://github.com/hiero-ledger/hiero-mirror-node"
+
+[[section_repos]]
+name = "hiero-improvement-proposals"
+description = "Hiero Improvement Proposal repository for community-driven enhancements"
+link = "https://github.com/hiero-ledger/hiero-improvement-proposals"
+
+[[section_repos]]
+name = "hiero-sdk-js"
+description = "JavaScript/TypeScript SDK for interacting with a Hiero network"
+link = "https://github.com/hiero-ledger/hiero-sdk-js"
+
+[[section_repos]]
+name = "hiero-sdk-java"
+description = "Java SDK for Hiero distributed ledger technology"
+link = "https://github.com/hiero-ledger/hiero-sdk-java"
+
+[[section_repos]]
+name = "hiero-json-rpc-relay"
+description = "Implementation of Ethereum JSON-RPC APIs for Hedera"
+link = "https://github.com/hiero-ledger/hiero-json-rpc-relay"
+
+[[section_repos]]
+name = "hiero-sdk-go"
+description = "Go SDK for Hiero distributed ledger technology"
+link = "https://github.com/hiero-ledger/hiero-sdk-go"
+
+[[section_repos]]
+name = "hiero-sdk-rust"
+description = "The Hiero™ Rust SDK for building on Hiero networks"
+link = "https://github.com/hiero-ledger/hiero-sdk-rust"
+
+[[section_repos]]
+name = "hiero-mirror-node-explorer"
+description = "Hedera Mirror Node Explorer for the Hedera Hashgraph DLT"
+link = "https://github.com/hiero-ledger/hiero-mirror-node-explorer"
+
+[[section_repos]]
+name = "hiero-cli"
+description = "Hiero command line tools for developers"
+link = "https://github.com/hiero-ledger/hiero-cli"
+
+[[section_repos]]
+name = "solo"
+description = "An opinionated CLI tool to deploy and manage standalone test networks"
+link = "https://github.com/hiero-ledger/solo"
+
+[[section_repos]]
+name = "hiero-block-node"
+description = "New Block Node services for Hiero networks"
+link = "https://github.com/hiero-ledger/hiero-block-node"
+
+[[section_repos]]
+name = "hiero-sdk-tck"
+description = "Technology Compatibility Kit used to verify compliant implementations of a Hiero SDK"
+link = "https://github.com/hiero-ledger/hiero-sdk-tck"
+
+[[section_repos]]
+name = "hiero-sdk-cpp"
+description = "A C++ SDK for Hiero: A C++ toolkit for creating and interacting with on-ledger assets"
+link = "https://github.com/hiero-ledger/hiero-sdk-cpp"
+
+[[section_repos]]
+name = "governance"
+description = "Configuration repository for managing all Hiero GitHub repositories"
+link = "https://github.com/hiero-ledger/governance"
+
+[[section_repos]]
+name = "hiero-sdk-python"
+description = "A Python SDK for Hiero: A Python toolkit for interacting with on-ledger assets"
+link = "https://github.com/hiero-ledger/hiero-sdk-python"
+
+[[section_repos]]
+name = "hiero-sdk-swift"
+description = "A Swift SDK for Hiero: A Swift toolkit for creating and interacting with on-ledger assets"
+link = "https://github.com/hiero-ledger/hiero-sdk-swift"
+
+[[section_repos]]
+name = "sdk-collaboration-hub"
+description = "Collaboration hub for SDK-related discussions and coordination"
+link = "https://github.com/hiero-ledger/sdk-collaboration-hub"
+
+[[section_repos]]
+name = "tsc"
+description = "Technical Steering Committee activity, discussions and decisions repository"
+link = "https://github.com/hiero-ledger/tsc"
+
 [[section_what_is_hiero_points]]
 heading = "Hiero is <strong>fair</strong>"
 text = "Everybody should have equal access to all public forums. No one should have the ability to re-prioritize your transactions, or drop them, or front-run, or sandwich trade, or otherwise disadvantage you. The hashgraph algorithm is leaderless. We all deserve a more fair world."
@@ -142,49 +255,7 @@ icon = "images/Hiero-Icon-Leaderless.svg"
 heading = "Hiero is <strong>open</strong>"
 text = "Hiero is a vibrant community of developers, visionaries, and innovators dedicated to creating a more fair, efficient, and secure world. As part of the Linux Foundation Decentralized Trust initiative, we are pioneering a new era of open governance and collaboration for the project."
 icon = "images/Hiero-Icon-Open.svg"
-
-[[section_roadmap_points]]
-heading = "Transparent voting mechanisms for the community"
-text = '''
-Together with the Linux Foundation, the Hiero TSC seeks to establish voting mechanisms that can be used in electing new committee members. Such transparency is instrumental in developing trust by integrating the community in all aspects of the project's governance and operations.
-'''
-icon = "images/Hiero-Icon-Timeline-1.svg"
-
-[[section_roadmap_points]]
-heading = "Transition of SDKs"
-text = '''
-The next phase of code contributions involve those that allow developed applications to take advantage of the myriad of a network’s services. Here the SDK clients are essential parts and should be migrated to Hiero directly after or parallel with the network repositories.
-'''
-icon = "images/Hiero-Icon-Timeline-3.svg"
-
-[[section_roadmap_points]]
-heading = "Transition of network repositories"
-text = '''
-Hedera has existed since 2017, which has allowed its developer ecosystem to grow as represented by the variety of projects within its <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">repository</a>. With the number of projects involved, the initial priorities are to transition the repositories needed to run a fully functioning base network (including Consensus Node, Mirror Node, JSON-RPC-Relay, and others) as soon as possible.
-'''
-icon = "images/Hiero-Icon-Timeline-2.svg"
-
-[[section_roadmap_points]]
-heading = "Renaming and rebranding"
-text = '''
-Repositories in the <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera GitHub organization</a> use “Hedera” or “Hashgraph” as names of the project reflecting the initial motivations for its use, reflected in the repository and project names but also in the sources. With the transition of sources to Hiero we plan to refactor all those projects and use Hiero as core element in naming conventions.
-'''
-icon = "images/Hiero-Icon-Timeline-4.svg"
-
-[[section_roadmap_points]]
-heading = "Enabling better communication with the community"
-text = '''
-A critical focus will be enhancing communication channels with the community to ensure transparency and inclusivity. In addition to GitHub Discussions, we are exploring the establishment of additional forums, such as Discord channels, to foster real-time interaction. Regular community calls and office hours will be implemented to keep the project on track and keep everyone updated on key milestones and developments.
-'''
-icon = "images/Hiero-Icon-Timeline-5.svg"
-
-[[section_roadmap_points]]
-heading = "Better support regarding contributions especially for newcomers"
-text = '''
-We recognize the importance of nurturing contributors at all levels, especially those who are new to the project. To this end, we will develop clear contributor guidelines, easy-to-follow documentation, and a mentorship program. These efforts aim to lower the barrier to entry, making it easier for newcomers to onboard and actively contribute to the growth of Hiero.
-'''
-icon = "images/Hiero-Icon-Timeline-6.svg"
-
+ 
 [[section_quotes]]
 quote = '''
 &#8220;Hedera’s participation in Linux Foundation’s Decentralized Trust will undoubtedly accelerate development, enhance security, and foster unprecedented collaboration within the Hedera ecosystem, positioning it at the forefront of blockchain innovation. As the leading wallet on the network, HashPack is committed to playing an active role in this new open source structure, and we look forward to <a href="https://www.hashpack.app/post/hashpack-on-hedera" target="_blank" rel="noreferrer noopener">contributing our expertise</a> to help shape the future of Hedera and the broader decentralized technology landscape.&#8221;

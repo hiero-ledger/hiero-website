@@ -54,7 +54,7 @@ body:
         > - Work that requires deep knowledge across multiple areas of the codebase
         >
         > 📖 *For a more detailed explanation, refer to:  
-        > [`.github/guidelines_beginner_issues.md`](.github/guidelines_beginner_issues.md).*
+        > [`.github/maintainers/guidelines_beginner_issues.md`](.github/maintainers/guidelines_beginner_issues.md).*
 
   - type: textarea
     id: issue

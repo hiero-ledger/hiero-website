@@ -1,13 +1,13 @@
 +++
-title           = "Hiero Python SDK – Announcing Release v0.1.6"
-featured_image  = "/images/python/blog_posts/v0.1.6.png"
-date            = 2025-10-24T11:00:00+01:00
-categories      = ["Blog"]
-abstract        = "Release 0.1.6 announced!"
+title = "Hiero Python SDK – Announcing Release v0.1.6"
+featured_image = "/images/python/blog_posts/v0.1.6.png"
+date = 2025-10-24T11:00:00+01:00
+categories = ["Blog"]
+abstract = "Release 0.1.6 announced!"
 [[authors]]
-  name         = "chithraka-kal"
-  organization = "Python SDK Team"
-  image        = "/images/python/members/chithraka-kal.jpeg"
+name = "chithraka-kal"
+organization = "Python SDK Team"
+image = "/images/python/members/chithraka-kal.jpeg"
 +++
 
 # 🚀 Hiero Python SDK – Announcing Release v0.1.6

@@ -1,7 +1,7 @@
 +++
 title = "Understanding Fairness in Distributed Ledger Technology"
-featured_image = "/images/blog/fairness-in-dlt.jpg"
-date = 2025-08-01T11:00:00-07:00
+featured_image = "/images/Fairness.png"
+date = 2026-02-10T22:34:00+05:30
 categories = ["Blog"]
 duration = "4 min read"
 abstract = "An explanation of fairness in distributed ledger technology, why it matters for certain use cases, and how Hiero enables fairness through its underlying consensus design."

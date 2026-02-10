@@ -23,7 +23,7 @@ target = 'static/images'
 
 [[menus.main]]
 name = 'Good First Issues'
-url = 'https://github.com/issues?q=is%3Aopen+is%3Aissue+org%3Ahiero-ledger+archived%3Afalse+label%3A%22good+first+issue%22+'
+url = 'https://github.com/issues?q=is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%20archived%3Afalse%20no%3Aassignee%20(label%3A%22good%20first%20issue%22%20OR%20label%3A%22skill%3A%20good%20first%20issue%22)%20(repo%3Ahiero-ledger%2Fhiero-sdk-cpp%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-swift%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-python%20OR%20repo%3Ahiero-ledger%2Fhiero-website)'
 weight = 20
 
 [[menus.main]]
@@ -40,11 +40,6 @@ weight = 35
 name = 'Connect'
 url = '/#connect'
 weight = 40
-
-[[menus.main]]
-name = 'Roadmap'
-url = '/#roadmap'
-weight = 50
 
 [[menus.main]]
 name = 'Blog'

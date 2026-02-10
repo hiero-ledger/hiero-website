@@ -3,13 +3,10 @@ title = "Developer Community Interest in the Python SDK is Flourishing"
 featured_image = "/images/python/blog_titles/blog_developer_interest_flourishing.png"
 date = 2025-08-09T11:00:00-07:00
 categories = ["Blog"]
-duration = ""
 abstract = "The Python SDK Developer Community is Growing!"
 [[authors]]
 name = "exploreriii"
-title = ""
 organization = "Python SDK Team"
-link = ""
 image = "/images/python/members/exploreriii.png"
 +++
 

@@ -6,9 +6,6 @@ categories = ["Blog"]
 abstract = "We’re thrilled to share a major milestone: the Hedera CLI is transitioned into Hiero CLI"
 [[authors]]
 name = "Hiero Team"
-title = ""
-organization = ""
-link = ""
 image = "/images/profile-hiero.png"
 +++
 

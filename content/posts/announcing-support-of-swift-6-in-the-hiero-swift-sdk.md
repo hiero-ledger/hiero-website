@@ -1,13 +1,12 @@
 +++
 title = "Announcing Support of Swift 6 in The Hiero Swift SDK"
-date = 2026-02-02T12:00:00-05:00
 featured_image = "/images/swift-6-support-banner.png"
+date = 2026-02-02T12:00:00-05:00
 categories = ["Blog"]
 abstract = "The Hiero Swift SDK now officially supports Swift 6.0, 6.1, and 6.2 with full CI testing and compatibility guarantees."
-
 [[authors]]
-  name = "Luke Forrest"
-  organization = "Hashgraph"
+name = "Luke Forrest"
+organization = "Hashgraph"
 +++
 
 ## Official Swift 6 Support is Here

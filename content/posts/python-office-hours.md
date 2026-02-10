@@ -1,15 +1,11 @@
 +++
-title = 'Help Shape Hiero’s Python SDK Office Hours'
+title = "Help Shape Hiero’s Python SDK Office Hours"
 featured_image = "/images/Python_office_hours.jpg"
 date = 2025-07-02T11:00:00-07:00
 categories = ["Blog"]
-duration = ""
 abstract = "Join us and be part of our Hiero’s Python SDK Office Hours!"
 [[authors]]
 name = "Hiero Team"
-title = ""
-organization = ""
-link = ""
 image = "/images/profile-hiero.png"
 +++
 

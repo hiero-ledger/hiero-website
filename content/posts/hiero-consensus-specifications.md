@@ -3,7 +3,7 @@ title = "HCS Specifications Join Hiero: A Durable, Neutral Home for Production-G
 featured_image = "/images/hiero-hcs.png"
 date = 2026-02-10
 categories = ["Blog"]
-tags = ["HCS", "Specifications", "Open Source", "Hashgraph Online", "HOL", "Standards"]
+tags = ["HCS", "Specifications", "Open Source", "Hashgraph Online", "HOL"]
 slug = "hiero-consensus-specifications"
 description = "Hashgraph Online has contributed the Hiero Consensus Specifications into the Hiero project under Linux Foundation Decentralized Trust, providing a vendor-neutral home for production-grade application-layer standards."
 [[authors]]

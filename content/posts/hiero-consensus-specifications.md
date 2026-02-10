@@ -1,4 +1,15 @@
-# HCS Specifications Join Hiero: A Durable, Neutral Home for Production-Grade Standards
++++
+title = "HCS Specifications Join Hiero: A Durable, Neutral Home for Production-Grade Standards"
+featured_image = "/images/Hiero_v4.png"
+date = 2026-02-10
+categories = ["Blog"]
+tags = ["HCS", "Specifications", "Open Source", "Hashgraph Online", "Standards"]
+slug = "hiero-consensus-specifications"
+description = "Hashgraph Online has contributed the Hiero Consensus Specifications into the Hiero project under Linux Foundation Decentralized Trust, providing a vendor-neutral home for production-grade application-layer standards."
+[[authors]]
+name = "Michael Kantor"
+organization = "Hashgraph Online"
++++
 
 Hashgraph Online has contributed the Hiero Consensus Specifications (HCS) into the Hiero project under Linux Foundation Decentralized Trust. The canonical repository is now maintained under the Hiero GitHub organization:
 

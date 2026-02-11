@@ -9,7 +9,7 @@ description = "Hashgraph Online has contributed the Hiero Consensus Specificatio
 abstract = "Hashgraph Online has contributed over 20 Hiero Consensus Specifications (HCS) into the Hiero project under Linux Foundation Decentralized Trust. These open, versioned specifications define interoperable message formats for file management, registries, AI agent coordination, identity metadata, and auditable engagement systems — already powering more than 33 million consensus transactions in production."
 [[authors]]
 name = "Michael Kantor"
-organization = "Hashgraph Online"
+organization = "Hiero TSC member / President, Hashgraph Online"
 +++
 
 [Hashgraph Online](https://hol.org) has contributed the [Hiero Consensus Specifications](https://github.com/hiero-ledger/hiero-consensus-specifications) (HCS) into the Hiero project under Linux Foundation Decentralized Trust. The canonical repository is now maintained under the Hiero GitHub organization:
@@ -160,9 +160,3 @@ Builders, enterprises, and researchers can participate by:
 - Opening issues to propose additions, identify gaps, or share implementation feedback
 
 One of the most impactful ways to contribute is to take a single specification and help make it easier to implement through clearer definitions, stronger examples, and real-world validation.
-
----
-
-## About Hashgraph Online
-
-[Hashgraph Online](https://hol.org) is a consortium focused on building open standards and interoperable tooling for the new autonomous internet. The organization emphasizes practical adoption, developer enablement, and public specification development to support ecosystem-wide interoperability.

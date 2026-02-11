@@ -12,7 +12,7 @@ name = "Michael Kantor"
 organization = "Hashgraph Online"
 +++
 
-[Hashgraph Online](https://hol.org) has contributed the Hiero Consensus Specifications (HCS) into the Hiero project under Linux Foundation Decentralized Trust. The canonical repository is now maintained under the Hiero GitHub organization:
+[Hashgraph Online](https://hol.org) has contributed the [Hiero Consensus Specifications](https://github.com/hiero-ledger/hiero-consensus-specifications) (HCS) into the Hiero project under Linux Foundation Decentralized Trust. The canonical repository is now maintained under the Hiero GitHub organization:
 
 https://github.com/hiero-ledger/hiero-consensus-specifications
 

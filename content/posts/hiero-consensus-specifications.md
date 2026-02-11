@@ -1,7 +1,7 @@
 +++
 title = "HCS Specifications Join Hiero: A Durable, Neutral Home for Production-Grade Standards"
 featured_image = "/images/hiero-hcs.png"
-date = 2026-02-10
+date = 2026-02-11
 categories = ["Blog"]
 tags = ["HCS", "Specifications", "Open Source", "Hashgraph Online", "HOL"]
 slug = "hiero-consensus-specifications"

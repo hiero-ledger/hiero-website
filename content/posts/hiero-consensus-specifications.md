@@ -12,7 +12,7 @@ name = "Michael Kantor"
 organization = "Hashgraph Online"
 +++
 
-Hashgraph Online has contributed the Hiero Consensus Specifications (HCS) into the Hiero project under Linux Foundation Decentralized Trust. The canonical repository is now maintained under the Hiero GitHub organization:
+[Hashgraph Online](https://hol.org) has contributed the Hiero Consensus Specifications (HCS) into the Hiero project under Linux Foundation Decentralized Trust. The canonical repository is now maintained under the Hiero GitHub organization:
 
 https://github.com/hiero-ledger/hiero-consensus-specifications
 
@@ -42,7 +42,7 @@ Key examples include:
 
 A standard approach for encoding, chunking, publishing, retrieving, and reassembling files through consensus topics.
 
-HCS-1 is widely used when teams need content-addressed data availability with verifiable ordering. Common use cases include identity schemas, credential definitions, metadata artifacts, and registry payloads that must be independently retrievable and auditable.
+[HCS-1](https://github.com/hiero-ledger/hiero-consensus-specifications/blob/main/docs/standards/hcs-1.md) is widely used when teams need content-addressed data availability with verifiable ordering. Common use cases include identity schemas, credential definitions, metadata artifacts, and registry payloads that must be independently retrievable and auditable.
 
 ---
 
@@ -50,7 +50,7 @@ HCS-1 is widely used when teams need content-addressed data availability with ve
 
 A standard for publishing, updating, and discovering registries over consensus messaging.
 
-HCS-2 defines how structured registries can be represented and maintained in a consistent, append-only manner. This enables independent applications to discover shared resources such as agents, services, datasets, identity artifacts, or protocol endpoints without relying on centralized databases or proprietary indexing layers.
+[HCS-2](https://github.com/hiero-ledger/hiero-consensus-specifications/blob/main/docs/standards/hcs-2.md) defines how structured registries can be represented and maintained in a consistent, append-only manner. This enables independent applications to discover shared resources such as agents, services, datasets, identity artifacts, or protocol endpoints without relying on centralized databases or proprietary indexing layers.
 
 Registries built using HCS-2 form a foundational layer for discovery across the ecosystem. They are commonly paired with other specifications such as HCS-1 for file-backed entries and HCS-10 for agent-related registries.
 
@@ -60,7 +60,7 @@ Registries built using HCS-2 form a foundational layer for discovery across the 
 
 A framework for AI agents to register, discover, and communicate using standardized operations over consensus-based messaging.
 
-HCS-10 defines shared expectations around how agents announce capabilities, exchange messages, and coordinate actions in a way that other systems can observe and interpret without bespoke integrations.
+[HCS-10](https://github.com/hiero-ledger/hiero-consensus-specifications/blob/main/docs/standards/hcs-10.md) defines shared expectations around how agents announce capabilities, exchange messages, and coordinate actions in a way that other systems can observe and interpret without bespoke integrations.
 
 ---
 
@@ -68,7 +68,7 @@ HCS-10 defines shared expectations around how agents announce capabilities, exch
 
 A method for managing identity and profile metadata for individuals and AI agents.
 
-HCS-11 provides a consistent representation of identity attributes that can be referenced across registries, communication protocols, and execution environments.
+[HCS-11](https://github.com/hiero-ledger/hiero-consensus-specifications/blob/main/docs/standards/hcs-11.md) provides a consistent representation of identity attributes that can be referenced across registries, communication protocols, and execution environments.
 
 ---
 
@@ -76,7 +76,7 @@ HCS-11 provides a consistent representation of identity attributes that can be r
 
 A standard for managing and auditing points using consensus topics, with applications in engagement systems and traceable incentive design.
 
-HCS-20 enables transparent issuance and verification of points across independent applications, reducing reliance on opaque or siloed accounting systems.
+[HCS-20](https://github.com/hiero-ledger/hiero-consensus-specifications/blob/main/docs/standards/hcs-20.md) enables transparent issuance and verification of points across independent applications, reducing reliance on opaque or siloed accounting systems.
 
 ---
 
@@ -106,7 +106,7 @@ By including HCS-2 alongside file management, identity metadata, and agent commu
 
 An important aspect of the HCS roadmap is its applicability beyond Web3-native environments.
 
-HCS-14 introduces a Universal Agent ID designed to give AI agents a single, portable identifier that works across Web2 APIs, Web3 networks, and hybrid environments. The specification is designed to keep identity stable even as endpoints, transports, and execution environments change.
+[HCS-14](https://github.com/hiero-ledger/hiero-consensus-specifications/blob/main/docs/standards/hcs-14.md) introduces a Universal Agent ID designed to give AI agents a single, portable identifier that works across Web2 APIs, Web3 networks, and hybrid environments. The specification is designed to keep identity stable even as endpoints, transports, and execution environments change.
 
 HCS-14 can incorporate existing decentralized identifiers where they already exist, or generate deterministic identifiers where they do not. Importantly for enterprise and Web2 integrations, Universal Agent IDs do not require on-chain transactions. They can be generated entirely offline from canonical agent data or existing identifiers.
 
@@ -165,4 +165,4 @@ One of the most impactful ways to contribute is to take a single specification a
 
 ## About Hashgraph Online
 
-Hashgraph Online is a consortium focused on building open standards and interoperable tooling for the new autonomous internet. The organization emphasizes practical adoption, developer enablement, and public specification development to support ecosystem-wide interoperability.
+[Hashgraph Online](https://hol.org) is a consortium focused on building open standards and interoperable tooling for the new autonomous internet. The organization emphasizes practical adoption, developer enablement, and public specification development to support ecosystem-wide interoperability.

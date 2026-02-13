@@ -7,7 +7,7 @@ abstract = """An overview of the updates that happened in Hiero during
 the week of February 9th."""
 [[authors]]
   name = "Angelina Ceppaluni"
-  organization = Hiero
+  organization = "Hiero"
 +++
 
 ## Hiero Links For The Week Of February 9th

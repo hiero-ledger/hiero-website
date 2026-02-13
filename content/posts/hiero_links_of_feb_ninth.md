@@ -1,7 +1,7 @@
 +++
 title = "Hiero Links For The Week of February 9th"
 featured_image = "/images/feb_ninth.png"
-date = 2026-02-012
+date = 2026-02-12
 categories = ["Blog"]
 abstract = """An overview of the updates that happened in Hiero during
 the week of February 9th."""

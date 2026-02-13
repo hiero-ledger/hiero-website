@@ -125,7 +125,7 @@ body:
         2. Find line 10 and locate the broken link
         3. Replace the current text:
            ```markdown
-           [Hacktoberfest initiative](hacktoberfestt)
+           [Hacktoberfest initiative](hacktoberfest)
            ```
            with the correct link:
            ```markdown
@@ -157,7 +157,7 @@ body:
         1. Open the file `content/heroes/index.md`
         2. Find line 10, which currently says:
         ```markdown
-        If you want to contribute to Hiero, please check out our current [Hacktoberfest initiative](hacktoberfestt) that provides a lot of good first issues to get started with.
+        If you want to contribute to Hiero, please check out our current [Hacktoberfest initiative](hacktoberfest) that provides a lot of good first issues to get started with.
         ```
         3. Verify the correct link path by checking that the Hacktoberfest content exists at `content/hacktoberfest/`
         4. Confirm the link is correct (it should already be `/hacktoberfest`)

@@ -24,8 +24,6 @@ section_technical_steering_committee_text = '''
 </p>
 '''
 
-
-
 section_meet_heading = "Join our Hiero Community Calls"
 section_meet_text = '''
 <p>Join our open TSC, Community and Project meetings. We welcome your opinion and invite you to collaborate with the team!</p>

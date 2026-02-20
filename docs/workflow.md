@@ -294,7 +294,7 @@ Set it to draft or 'ready to review' status and submit!
 4. Wait for Checks
 We have several security and quality checks.
 
-Pleae review them, view any previews, and check they all pass.
+Please review them, view any previews, and check they all pass.
 
 If they are failing and you require help, you can:
 - Contact us on [discord](discord.md)

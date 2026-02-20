@@ -175,7 +175,7 @@ This is incorrect:
 git commit -S -s -m "looks like its mostly working now"
 ```
 
-Read about conventional commit messages here: [Conventional Commmits](https://www.conventionalcommits.org/en/v1.0.0/#summary)
+Read about conventional commit messages here: [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)
 
 ## DCO and GPG Signing Commits
 **Each** commit in a pull request needs to be:

@@ -16,7 +16,7 @@ npm i
 ```
 For Linux Setup Instructions [linux_setup.md](docs/setup/linux_setup.md)
 For Windows Setup Instructions [Windows_setup.md](docs/setup/windows_setup.md)
-For Windows Setup Instructions [Macbook_setup.md](docs/setup/Macbook_setup.md)
+For MacOS Setup Instructions [Macbook_setup.md](docs/setup/Macbook_setup.md)
 ## Environments
 
 ### Dev

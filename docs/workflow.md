@@ -35,7 +35,7 @@ Overall, GitHub Desktop makes Git simpler, safer, and more visual, which is idea
 
 #### Visual Studio Code
 
-Visual Studio Code (VS Code) a visual code editor.
+Visual Studio Code (VS Code) is a visual code editor.
 
 It provides:
 - Easy project navigation
@@ -175,7 +175,7 @@ This is incorrect:
 git commit -S -s -m "looks like its mostly working now"
 ```
 
-Read about conventional commit messages here: [Conventional Commmits](https://www.conventionalcommits.org/en/v1.0.0/#summary)
+Read about conventional commit messages here: [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)
 
 ## DCO and GPG Signing Commits
 **Each** commit in a pull request needs to be:
@@ -294,7 +294,7 @@ Set it to draft or 'ready to review' status and submit!
 4. Wait for Checks
 We have several security and quality checks.
 
-Pleae review them, view any previews, and check they all pass.
+Please review them, view any previews, and check they all pass.
 
 If they are failing and you require help, you can:
 - Contact us on [discord](discord.md)

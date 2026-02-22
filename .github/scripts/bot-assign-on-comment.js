@@ -1,4 +1,4 @@
-// .github/scripts/bot-gfi_assign_on_comment.js
+// .github/scripts/bot-assign-on-comment.js
 //
 // Assigns human user to Good First Issue when they comment "/assign".
 // Posts a comment if the issue is already assigned.
@@ -8,7 +8,7 @@ const fs = require('fs'); // For spam list
 
 const GOOD_FIRST_ISSUE_LABEL = 'Good First Issue';
 const UNASSIGNED_GFI_SEARCH_URL =
-    'https://github.com/hiero-ledger/hiero-sdk-python/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22Good%20First%20Issue%22%20no%3Aassignee';
+    'https://github.com/hiero-ledger/hiero-website/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22Good%20First%20Issue%22%20no%3Aassignee';
 
 const SPAM_LIST_PATH = '.github/spam-list.txt';
 
@@ -38,7 +38,7 @@ async function getOpenAssignments({ github, owner, repo, username }) {
             per_page: 100,
         }
     );
-    return issues.length;
+    return issues.filter(item => !item.pull_request).length;
 }
 
 /// HELPERS FOR ASSIGNING ///
@@ -158,6 +158,7 @@ async function isRepoCollaborator({ github, owner, repo, username }) {
             permission === 'admin' ||
             permission === 'write' ||
             permission === 'maintain' ||
+            permission === 'triage' ||
             permission === 'read';
 
         console.log('[gfi-assign] isRepoCollaborator:', {

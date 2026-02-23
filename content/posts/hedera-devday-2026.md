@@ -62,7 +62,7 @@ A moonshot program to remove artificial throttles entirely, enabling full throug
 
 An ABFT Cross Ledger Protocol with: No bridge nodes, no liquidity pools and 100% decentralization. CLPR envisions seamless cross-ledger interoperability without the typical architectural compromises.
 
-The Hiero community can already be part of this exciting work by contributing to the [hiero-ledger](https://github.com/hiero-ledger) related Issues and work branches.
+The Hiero community can already be part of this exciting work by contributing to the [hiero-ledger](https://github.com/hiero-ledger) related Issues and work branches that can be found in repos such as the [consensus-node](https://github.com/hiero-ledger/hiero-consensus-node) or the [hiero-improvement-proposals](https://github.com/hiero-ledger/hiero-improvement-proposals).
 
 ## 👉 Stay In Touch Through Hiero
 

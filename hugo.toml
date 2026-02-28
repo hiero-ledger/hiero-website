@@ -27,11 +27,6 @@ url = 'https://github.com/issues?q=is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%2
 weight = 20
 
 [[menus.main]]
-name = 'Contribute'
-url = '/#contribute'
-weight = 30
-
-[[menus.main]]
 name = 'Repositories'
 url = '/#repos'
 weight = 35

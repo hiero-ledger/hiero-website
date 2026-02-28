@@ -32,11 +32,6 @@ url = '/#contribute'
 weight = 30
 
 [[menus.main]]
-name = 'Repositories'
-url = '/#repos'
-weight = 35
-
-[[menus.main]]
 name = 'Connect'
 url = '/#connect'
 weight = 40

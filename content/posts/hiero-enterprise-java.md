@@ -25,7 +25,7 @@ Spring Boot is [currently used](https://www.jetbrains.com/lp/devecosystem-2021/j
 
 ## 📝 Project Architecture
 
-The architecture of the project is highly modular, with a minimal dependency footprint designed to support seamless integration into a wide variety of enterprise environments. Each module depends only on the specific framework it supports (such as Eclipse MicroProfile 7.1) along with the Hiero Java SDK. In the future, the project may also explore integration with the [Web3j project](https://github.com/LFDT-web3j) under Linux Foundation Decentralized Trust (LFDT), pending further collaboration and discussion with the Web3j team.
+The architecture of the project is highly modular, with a minimal dependency footprint designed to support seamless integration into a wide variety of enterprise environments. Each module depends only on the specific framework it supports (such as Eclipse MicroProfile 7.0) along with the Hiero Java SDK. In the future, the project may also explore integration with the [Web3j project](https://github.com/LFDT-web3j) under Linux Foundation Decentralized Trust (LFDT), pending further collaboration and discussion with the Web3j team.
 
 The project provides samples for each framework and the public API is fully covered by Javadoc. In general, the same quality marks as for the [hiero-consensus-node](https://github.com/hiero-ledger/hiero-consensus-node) (final, nonNull, …) are used in the project.
 

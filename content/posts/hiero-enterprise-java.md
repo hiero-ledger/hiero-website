@@ -13,7 +13,7 @@ name = "Hiero community"
 
 ## 📢 Announcing the Migration of hiero-enterprise-java to the Hiero Ledger GitHub Organization
 
-The Hiero team is excited to announce that the [Hiero Enterprise Java project](https://github.com/hiero-ledger/hiero-enterprise-java) has officially been migrated into the Hiero project. The codebase previously was hosted at the OpenElements organization and is now available under the [Hiero Ledger GitHub](https://github.com/hiero-ledger) organization.
+The Hiero community is excited to announce that the [Hiero Enterprise Java project](https://github.com/hiero-ledger/hiero-enterprise-java) has officially been migrated into the Hiero project. The codebase previously was hosted at the OpenElements organization and is now available under the [Hiero Ledger GitHub](https://github.com/hiero-ledger) organization.
 
 This migration represents an important step toward strengthening the Hiero developer ecosystem by bringing enterprise-centered tooling directly under the vendor-neutral Hiero umbrella and making it available for other Hiero projects to collaborate to. 
 
@@ -59,7 +59,7 @@ The project looks forward to providing a perfect integration in the mostly used 
 
 ## Call for Contributors
 
-We invite developers and enterprise Java enthusiasts to join us in developing future releases for our Hiero enterprise tooling. The team welcomes code contributions, documentation improvements, feature suggestions, new issue reports, CI improvements and testing. 
+We invite developers and enterprise Java enthusiasts to join us in developing future releases for our Hiero enterprise tooling. The community welcomes code contributions, documentation improvements, feature suggestions, new issue reports, CI improvements and testing. 
 
 👉 Explore the code:
 https://github.com/hiero-ledger/hiero-enterprise-java

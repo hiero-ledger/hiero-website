@@ -3,13 +3,11 @@ title = "The Issue Progression Initiative at Hiero"
 featured_image = "/images/IPI.png"
 date = 2026-03-10
 categories = ["Blog"]
-abstract = """Introducing the Issue Progression Initiative Unlocking Developer Opportunities in Hiero."""
+abstract = """Introducing the Issue Progression Initiative - A Practical Path to Growing Open Source Developer Opportunities."""
 [[authors]]
   name = "Sophie Bulloch"
   organization = "Hiero Community"
 +++
-
-# The Issue Progression Initiative: A Practical Path to Growing Open Source Contributors
 
 Open source projects consistently face the same challenge: how to attract new developers, help them grow their skills, and ultimately develop trusted maintainers.
 
@@ -18,13 +16,14 @@ Many projects rely on **“good first issues”** as the primary entry point. Wh
 To address this, we introduced a broader approach called the **Issue Progression Initiative**.
 
 The goal is simple:  
-**create a structured pathway for developers to enter a project, build skills safely, and gradually take on deeper responsibility.**
+**Create a structured pathway for developers to enter a project, build skills safely, and gradually take on deeper responsibility.**
 
 This initiative began in the **Python SDK**, and is now expanding into the **C++ SDK**, **Swift SDK**, and **JavaScript SDK**.
 
 ---
 
-# Results So Far
+
+## Results So Far:
 
 The initiative has already produced measurable outcomes in the Python SDK:
 
@@ -38,7 +37,8 @@ While there have been challenges along the way, the approach has clearly demonst
 
 ---
 
-# How It Works
+
+## How It Works
 
 Each repository organizes issues into **four difficulty levels**:
 
@@ -51,7 +51,6 @@ Every issue is documented according to the expected experience level of the deve
 
 Importantly, this system does **not require artificial issue creation**. Maintainers simply label issues as they naturally arise within the project, at the appropriate level.
 
-For example:
 
 ### Good First Issues
 
@@ -65,6 +64,7 @@ Correct the spelling mistake in line 107:
 Current: Good First Isue
 Should be: Good First Issue
 ```
+
 
 Good First Issues are supported with documentation such as:
 
@@ -115,9 +115,11 @@ For example:
 Implement HIP1011. Architect the design to the Python SDK and create the relevant classes and tests.
 ```
 
+
 ---
 
-# A Consistent Contributor Experience
+
+## A Consistent Contributor Experience
 
 One of the key design principles is **predictability**.
 
@@ -132,7 +134,8 @@ Developers know:
 
 ---
 
-# Why This Attracts Developers
+
+## Why This Attracts Developers
 
 Developers often look for signals that a project welcomes contributors.
 
@@ -154,9 +157,11 @@ Developers trust the process. Even though they are beginners today, there is a p
 
 Contributors see their work used in real software, which is a strong motivator to continue participating.
 
+
 ---
 
-# Why Progression Matters
+
+## Why Progression Matters
 
 Many projects succeed at attracting contributors but struggle to **retain them**.
 
@@ -171,7 +176,8 @@ With progression:
 
 ---
 
-# How This Builds Committers and Maintainers
+
+## How This Builds Committers and Maintainers
 
 Granting write permissions requires trust.
 
@@ -206,7 +212,8 @@ This allows contributors to experience a **variety of challenges**, creating a r
 
 ---
 
-# The Junior Committer Role
+
+## The Junior Committer Role
 
 An additional piece of the initiative is the **Junior Committer role**.
 
@@ -230,7 +237,8 @@ This step has proven valuable for preparing contributors for full committer resp
 
 ---
 
-# A Simple System That Scales
+
+## A Simple System That Scales
 
 The Issue Progression Initiative is intentionally simple.
 
@@ -253,7 +261,8 @@ From there, the system largely grows itself as the project evolves.
 
 ---
 
-# The Bigger Picture
+
+## The Bigger Picture
 
 Open source sustainability depends on more than attracting contributors.
 

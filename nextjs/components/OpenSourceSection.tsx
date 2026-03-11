@@ -5,11 +5,11 @@ export default function OpenSourceSection() {
   return (
     <div className="bg-white">
       <div className="container pt-[40px] pb-[40px] sm:pt-[92px] sm:pb-[154px] grid grid-cols-1 sm:grid-cols-2 gap-[80px] sm:gap-10 relative">
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src="/images/Hiero-Logo-Outline.svg"
           alt=""
-          fill
-          className="sm:absolute w-full h-full sm:top-[50%] sm:left-[50%] sm:-translate-x-[50%] sm:-translate-y-[50%] object-contain pointer-events-none"
+          className="sm:absolute w-full h-full sm:top-[50%] sm:left-[50%] sm:-translate-x-[50%] sm:-translate-y-[50%] pointer-events-none"
           loading="lazy"
         />
         <div id="open-source" className="anchor anchor--open-source relative">

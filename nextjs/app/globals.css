@@ -73,7 +73,7 @@ footer {
   @apply border-t border-charcoal border-solid;
 }
 
-a {
+main a:not([class]) {
   @apply text-red underline;
 }
 

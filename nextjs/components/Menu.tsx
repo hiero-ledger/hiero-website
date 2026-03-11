@@ -75,7 +75,7 @@ export default function Menu() {
 
       <nav
         id="navigation"
-        className={`absolute hidden items-center justify-center w-full h-screen bg-black top-0 left-0 text-white sm:relative sm:h-auto sm:top-auto sm:bg-transparent sm:left-auto sm:w-9/12 sm:max-w-xl sm:block${isOpen ? " active-navigation" : ""}`}
+        className={`absolute hidden items-center justify-center w-full h-screen bg-black top-0 left-0 text-white sm:relative sm:h-auto sm:top-auto sm:bg-transparent sm:left-auto sm:w-9/12 sm:max-w-xl sm:block ${isOpen ? "active-navigation" : ""}`}
         aria-hidden={isDesktop ? false : !isOpen}
       >
         <div className="absolute top-[27px] sm:hidden">

@@ -3,15 +3,13 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import type { SwiperRef } from "swiper/react";
 import "swiper/css";
-import "swiper/css/navigation";
 import { quotesData } from "@/data/homepage";
 
 export default function QuotesCarousel() {
-  const prevRef = useRef<HTMLDivElement>(null);
-  const nextRef = useRef<HTMLDivElement>(null);
+  const swiperRef = useRef<SwiperRef>(null);
 
   return (
     <div id="quotes" className="anchor">
@@ -19,7 +17,7 @@ export default function QuotesCarousel() {
         <div className="container container-mobile-full">
           <div className="relative w-full">
             {/* Left quote icon */}
-            <div className="mx-auto mb-10 lg:mb-0 lg:absolute lg:top-[50%] lg:left-0 lg:-translate-x-[91px] lg:-translate-y-[50%] text-white-dark text-5xl h-[40px] w-[51px]">
+            <div className="mx-auto mb-10 lg:mb-0 lg:absolute lg:top-[50%] lg:left-0 lg:-translate-x-[91px] lg:-translate-y-[50%] h-[40px] w-[51px]">
               <Image
                 src="/images/Hiero-Icon-Quote-Left.svg"
                 alt=""
@@ -28,21 +26,12 @@ export default function QuotesCarousel() {
                 loading="lazy"
               />
             </div>
-            <div className="px-[25px] pt-[80px] lg:pt-[60px] lg:px-[60px] lg:pb-0 text-lg text-white bg-linear-to-br from-red-dark via-red to-red">
+            <div className="relative px-[25px] pt-[80px] lg:pt-[60px] lg:px-[60px] lg:pb-0 text-lg text-white bg-linear-to-br from-red-dark via-red to-red">
               <Swiper
-                modules={[Navigation, Autoplay]}
+                ref={swiperRef}
+                modules={[Autoplay]}
                 loop={true}
                 autoplay={{ delay: 30000 }}
-                navigation={{
-                  prevEl: prevRef.current,
-                  nextEl: nextRef.current,
-                }}
-                onBeforeInit={(swiper) => {
-                  if (swiper.params.navigation && typeof swiper.params.navigation !== "boolean") {
-                    swiper.params.navigation.prevEl = prevRef.current;
-                    swiper.params.navigation.nextEl = nextRef.current;
-                  }
-                }}
                 className="mySwiper"
               >
                 {quotesData.map((quote, i) => (
@@ -67,12 +56,29 @@ export default function QuotesCarousel() {
                     />
                   </SwiperSlide>
                 ))}
-                <div ref={prevRef} className="swiper-button swiper-button-prev" />
-                <div ref={nextRef} className="swiper-button swiper-button-next" />
               </Swiper>
+              {/* Custom nav buttons — absolute inside the red container, matching Hugo's bottom:5rem centered style */}
+              <button
+                onClick={() => swiperRef.current?.swiper.slidePrev()}
+                aria-label="Previous quote"
+                className="absolute bottom-20 left-[calc(50%-40px)] z-10 w-[35px] h-[35px] bg-white-dark text-charcoal flex items-center justify-center cursor-pointer hover:bg-sand transition-colors"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </button>
+              <button
+                onClick={() => swiperRef.current?.swiper.slideNext()}
+                aria-label="Next quote"
+                className="absolute bottom-20 right-[calc(50%-40px)] z-10 w-[35px] h-[35px] bg-white-dark text-charcoal flex items-center justify-center cursor-pointer hover:bg-sand transition-colors"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </button>
             </div>
             {/* Right quote icon */}
-            <div className="mx-auto mt-10 lg:mt-0 lg:absolute lg:top-[50%] lg:left-auto lg:right-0 lg:translate-x-[91px] lg:-translate-y-[50%] text-white-dark text-5xl h-[40px] w-[51px]">
+            <div className="mx-auto mt-10 lg:mt-0 lg:absolute lg:top-[50%] lg:left-auto lg:right-0 lg:translate-x-[91px] lg:-translate-y-[50%] h-[40px] w-[51px]">
               <Image
                 src="/images/Hiero-Icon-Quote-Right.svg"
                 alt=""

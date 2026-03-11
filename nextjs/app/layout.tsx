@@ -26,9 +26,9 @@ export const metadata: Metadata = {
   description:
     "Hiero is the first open-source distributed ledger technology (DLT) developed in a fully vendor-neutral way as a project of the Linux Foundation.",
   icons: {
-    icon: "/images/Hiero-Icon.svg",
-    shortcut: "/images/Hiero-Icon.svg",
-    apple: "/images/Hiero-Icon.svg",
+    icon: "/images/Hiero-Favicon.svg",
+    shortcut: "/images/Hiero-Favicon.svg",
+    apple: "/images/Hiero-Favicon.svg",
   },
 };
 
@@ -40,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${spaceGrotesk.className} ${spaceGrotesk.variable} ${ibmPlexMono.variable}`}>
-        <header className="relative h-[90px]">
+        <header className="relative h-22.5">
           <Header />
         </header>
         <main>{children}</main>

@@ -151,6 +151,10 @@ nav a.active::after {
   }
 }
 
+.active-navigation {
+  @apply flex;
+}
+
 /* ============================================
    Anchors & section offsets
    ============================================ */

@@ -1,13 +1,18 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
+import type { SwiperRef } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { quotesData } from "@/data/homepage";
 
 export default function QuotesCarousel() {
+  const prevRef = useRef<HTMLDivElement>(null);
+  const nextRef = useRef<HTMLDivElement>(null);
+
   return (
     <div id="quotes" className="anchor">
       <div className="pt-[40px] pb-[40px] sm:pt-[120px] sm:pb-[60px]">
@@ -29,8 +34,14 @@ export default function QuotesCarousel() {
                 loop={true}
                 autoplay={{ delay: 30000 }}
                 navigation={{
-                  nextEl: ".swiper-button-next",
-                  prevEl: ".swiper-button-prev",
+                  prevEl: prevRef.current,
+                  nextEl: nextRef.current,
+                }}
+                onBeforeInit={(swiper) => {
+                  if (swiper.params.navigation && typeof swiper.params.navigation !== "boolean") {
+                    swiper.params.navigation.prevEl = prevRef.current;
+                    swiper.params.navigation.nextEl = nextRef.current;
+                  }
                 }}
                 className="mySwiper"
               >
@@ -56,8 +67,8 @@ export default function QuotesCarousel() {
                     />
                   </SwiperSlide>
                 ))}
-                <div className="swiper-button swiper-button-next" />
-                <div className="swiper-button swiper-button-prev" />
+                <div ref={prevRef} className="swiper-button swiper-button-prev" />
+                <div ref={nextRef} className="swiper-button swiper-button-next" />
               </Swiper>
             </div>
             {/* Right quote icon */}

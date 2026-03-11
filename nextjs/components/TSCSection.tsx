@@ -25,7 +25,7 @@ export default function TSCSection() {
       <div className="bg-white">
         <div
           id="technical-steering-committee-content"
-          className="container py-[40px] sm:pt-[120px] sm:pb-0 grid grid-cols-1 lg:grid-cols-2 gap-10"
+          className="container py-[40px] sm:pt-[120px] sm:pb-[120px] grid grid-cols-1 lg:grid-cols-2 gap-10"
         >
           <div id="technical-steering-committee-intro-column">
             <div id="technical-steering-committee-intro">

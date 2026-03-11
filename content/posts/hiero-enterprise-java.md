@@ -8,12 +8,12 @@ slug = "hiero-enterprise-java"
 description = "Announcing the Migration of hiero-enterprise-java to the Hiero Ledger Organization."
 abstract = "The Hiero Enterprise Java project has officially moved to the Hiero Ledger organization, bringing APIs for integrating Hiero networks into Java frameworks like Spring Boot and MicroProfile while inviting the community to contribute to its development."
 [[authors]]
-name = "Hiero team"
+name = "Hiero community"
 +++
 
 ## 📢 Announcing the Migration of hiero-enterprise-java to the Hiero Ledger GitHub Organization
 
-The Hiero team is excited to announce that the [Hiero Enterprise Java project](https://github.com/hiero-ledger/hiero-enterprise-java) has officially been migrated into the Hiero project. The codebase previously was hosted at the OpenElements organization and is now available under the [Hiero Ledger GitHub](https://github.com/hiero-ledger) organization.
+The Hiero community is excited to announce that the [Hiero Enterprise Java project](https://github.com/hiero-ledger/hiero-enterprise-java) has officially been migrated into the Hiero project. The codebase previously was hosted at the OpenElements organization and is now available under the [Hiero Ledger GitHub](https://github.com/hiero-ledger) organization.
 
 This migration represents an important step toward strengthening the Hiero developer ecosystem by bringing enterprise-centered tooling directly under the vendor-neutral Hiero umbrella and making it available for other Hiero projects to collaborate to. 
 
@@ -25,7 +25,7 @@ Spring Boot is [currently used](https://www.jetbrains.com/lp/devecosystem-2021/j
 
 ## 📝 Project Architecture
 
-The architecture of the project is highly modular, with a minimal dependency footprint designed to support seamless integration into a wide variety of enterprise environments. Each module depends only on the specific framework it supports (such as Eclipse MicroProfile 7.0) along with the Hiero Java SDK. In the future, the project may also explore integration with the [Web3j project](https://github.com/LFDT-web3j) under Linux Foundation Decentralized Trust (LFDT), pending further collaboration and discussion with the Web3j team.
+The architecture of the project is highly modular, with a minimal dependency footprint designed to support seamless integration into a wide variety of enterprise environments. Each module depends only on the specific framework it supports (such as Eclipse MicroProfile 7.0) along with the Hiero Java SDK. In the future, the project may also explore integration with the [Web3j project](https://github.com/LFDT-web3j) under Linux Foundation Decentralized Trust (LFDT), pending further collaboration and discussion with the Web3j community.
 
 The project provides samples for each framework and the public API is fully covered by Javadoc. In general, the same quality marks as for the [hiero-consensus-node](https://github.com/hiero-ledger/hiero-consensus-node) (final, nonNull, …) are used in the project.
 
@@ -59,7 +59,7 @@ The project looks forward to providing a perfect integration in the mostly used 
 
 ## Call for Contributors
 
-We invite developers and enterprise Java enthusiasts to join us in developing future releases for our Hiero enterprise tooling. The team welcomes code contributions, documentation improvements, feature suggestions, new issue reports, CI improvements and testing. 
+We invite developers and enterprise Java enthusiasts to join us in developing future releases for our Hiero enterprise tooling. The community welcomes code contributions, documentation improvements, feature suggestions, new issue reports, CI improvements and testing. 
 
 👉 Explore the code:
 https://github.com/hiero-ledger/hiero-enterprise-java

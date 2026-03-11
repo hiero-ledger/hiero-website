@@ -1,6 +1,7 @@
 node_modules/
-public/
 resources/
+/public/
+!/nextjs/public/
 .DS_Store
 .idea
 .env

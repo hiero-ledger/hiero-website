@@ -58,11 +58,17 @@ export default function Menu() {
 
       <nav
         id="navigation"
-        className={`${isOpen ? "active-navigation" : "hidden"} absolute items-center justify-center w-full h-screen bg-black top-0 left-0 text-white sm:relative sm:h-auto sm:top-auto sm:bg-transparent sm:left-auto sm:w-9/12 sm:max-w-xl sm:block`}
+        className={`${isOpen ? "active-navigation" : "hidden"} fixed inset-0 z-50 flex-col items-center justify-start overflow-y-auto bg-black px-6 pt-24 pb-10 text-white sm:relative sm:inset-auto sm:z-auto sm:h-auto sm:w-9/12 sm:max-w-xl sm:flex sm:flex-row sm:items-center sm:justify-end sm:overflow-visible sm:bg-transparent sm:px-0 sm:pt-0 sm:pb-0 sm:text-inherit`}
         aria-hidden={!isOpen && pathname !== undefined}
       >
-        <div className="absolute top-[27px] sm:hidden">
-          <Image src="/images/Hiero-Icon-wLogo-white-text.svg" alt="Hiero logo" className="h-[40px] w-[128px]" width={128} height={40} />
+        <div className="absolute top-[27px] left-6 sm:hidden">
+          <Image
+            src="/images/Hiero-Icon-wLogo-white-text.svg"
+            alt="Hiero logo"
+            className="h-[40px] w-[128px]"
+            width={128}
+            height={40}
+          />
         </div>
 
         <button
@@ -74,7 +80,7 @@ export default function Menu() {
           <Image src="/images/Hiero-Icon-ModalClose.svg" alt="Close menu" className="w-5 h-5" width={20} height={20} />
         </button>
 
-        <ul id="menu" className="flex flex-col sm:flex-row justify-between">
+        <ul id="menu" className="flex w-full flex-col items-stretch gap-2 pt-10 sm:w-auto sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:pt-0">
           {menuItems.map((item) => (
             <li
               key={item.name}
@@ -86,20 +92,36 @@ export default function Menu() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsOpen(false)}
+                  className="block rounded-md px-3 py-2 sm:inline sm:rounded-none sm:px-0 sm:py-0"
                 >
                   {item.name}
                 </a>
               ) : (
-                <Link href={item.href} className={isActive(item.href) ? "active" : ""} onClick={() => setIsOpen(false)}>
+                <Link
+                  href={item.href}
+                  className={`${isActive(item.href) ? "active" : ""} block rounded-md px-3 py-2 sm:inline sm:rounded-none sm:px-0 sm:py-0`.trim()}
+                  onClick={() => setIsOpen(false)}
+                >
                   {item.name}
                 </Link>
               )}
             </li>
           ))}
 
-          <li className="self-center">
-            <a href="https://github.com/hiero-ledger/" target="_blank" rel="noopener noreferrer" className="flex">
-              <Image src="/images/Hiero-Icon-Github.svg" alt="GitHub" className="h-[35px] w-[35px] sm:h-[17px] sm:w-[17px]" width={35} height={35} />
+          <li className="mt-4 self-center sm:mt-0">
+            <a
+              href="https://github.com/hiero-ledger/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex justify-center rounded-md px-3 py-2 sm:px-0 sm:py-0"
+            >
+              <Image
+                src="/images/Hiero-Icon-Github.svg"
+                alt="GitHub"
+                className="h-[35px] w-[35px] sm:h-[17px] sm:w-[17px]"
+                width={35}
+                height={35}
+              />
             </a>
           </li>
         </ul>

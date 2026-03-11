@@ -1,26 +1,439 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================
+   Tailwind v4 Theme — ported from Hugo tailwind.config.js
+   ============================================ */
+@theme {
+  /* Colors */
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-white: #FFFFFF;
+  --color-white-dark: #E5E4D7;
+  --color-black: #000000;
+  --color-charcoal: #1E1E1E;
+  --color-red: #B81A56;
+  --color-red-dark: #992350;
+  --color-red-light: #D92D6A;
+  --color-sand: #E5E4D7;
+  --color-gray: #616161;
+  --color-gray-light: #EFEFEE;
+
+  /* Fonts — variables set by next/font in layout.tsx */
+  --font-serif: var(--font-space-grotesk), ui-serif, serif;
+  --font-ibm: var(--font-ibm-plex-mono), ui-monospace, monospace;
+
+  /* Font sizes (name: size | line-height letter-spacing) */
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+
+  --text-base: 1rem;
+  --text-base--line-height: 1.313rem;
+  --text-base--letter-spacing: -0.054rem;
+
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.438rem;
+  --text-lg--letter-spacing: -0.06rem;
+
+  --text-xl: 1.75rem;
+  --text-xl--line-height: 2.25rem;
+  --text-xl--letter-spacing: -0.094rem;
+
+  --text-2xl: 2rem;
+  --text-2xl--line-height: 2.25rem;
+  --text-2xl--letter-spacing: -0.167rem;
+
+  --text-3xl: 2.25rem;
+  --text-3xl--line-height: 2.875rem;
+  --text-3xl--letter-spacing: -0.188rem;
+
+  --text-4xl: 4rem;
+  --text-4xl--line-height: 4.5rem;
+  --text-4xl--letter-spacing: -0.333rem;
+
+  --text-5xl: 7.5rem;
+  --text-5xl--line-height: 6.875rem;
+  --text-5xl--letter-spacing: -0.625rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ============================================
+   Base Styles
+   ============================================ */
+body {
+  @apply m-0 text-charcoal leading-normal font-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+header {
+  @apply border-b border-charcoal border-solid;
+}
+
+footer {
+  @apply border-t border-charcoal border-solid;
+}
+
+a {
+  @apply text-red underline;
+}
+
+/* ============================================
+   Navbar Styles
+   ============================================ */
+nav a {
+  @apply text-white no-underline;
+  font-size: 2.375rem;
+  line-height: 5.188rem;
+  letter-spacing: -0.128rem;
+  @apply transition-colors duration-300 ease-in-out;
+  position: relative;
+}
+
+nav a:hover {
+  color: #D92D6A;
+}
+
+nav a.active {
+  @apply font-bold;
+}
+
+nav a.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2rem;
+  left: 25%;
+  width: 50%;
+  height: 3px;
+  background-color: #D92D6A;
+  transform: translateX(-50%);
+}
+
+/* Desktop nav */
+@media (min-width: 640px) {
+  nav a {
+    @apply text-charcoal text-base leading-normal;
+  }
+  nav a:hover {
+    color: #B81A56;
+  }
+  nav a.active {
+    color: #B81A56;
+  }
+  nav a.active::after {
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    transform: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Mobile menu */
+@media (max-width: 640px) {
+  nav a.active {
+    background-color: rgba(184, 26, 86, 0.1) !important;
+    border-bottom: 2px solid #B81A56 !important;
+    box-shadow: none !important;
+  }
+  nav a.active::after {
+    display: none;
+  }
+  nav a:focus,
+  nav a.active:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Desktop focus */
+@media (min-width: 640px) {
+  nav a:focus {
+    @apply outline-none ring-2 ring-red-light ring-offset-2;
+  }
+}
+
+/* ============================================
+   Anchors & section offsets
+   ============================================ */
+.anchor {
+  margin-top: -6.813rem;
+  padding-top: 6.813rem;
+}
+
+.anchor--roadmap {
+  margin-top: -5rem;
+  padding-top: 5rem;
+}
+
+@media (min-width: 640px) {
+  .anchor--open-source {
+    margin-top: -12.5rem;
+    padding-top: 12.5rem;
+  }
+  .anchor--roadmap {
+    margin-top: 0;
+    padding-top: 0;
+  }
+}
+
+/* ============================================
+   Container
+   ============================================ */
+.container {
+  @apply w-full mx-auto;
+  padding-left: 1.563rem;
+  padding-right: 1.563rem;
+}
+
+.container-mobile-full {
+  @apply p-0;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 1024px;
+    @apply px-12;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container,
+  .container-mobile-full {
+    max-width: 1820px;
+    padding-left: 8.75rem;
+    padding-right: 8.75rem;
+  }
+}
+
+/* ============================================
+   Swiper overrides
+   ============================================ */
+.swiper {
+  @apply w-full h-full;
+  max-width: 932px;
+}
+
+.reposSwiper {
+  @apply max-w-full;
+}
+
+.reposSwiper .swiper-slide {
+  @apply text-left text-base;
+  font-family: inherit;
+}
+
+.swiper-slide {
+  @apply font-serif text-center text-lg;
+}
+
+.swiper .swiper-button {
+  @apply top-auto text-charcoal bg-white-dark;
+  bottom: 5rem;
+  width: 35px;
+  height: 35px;
+}
+
+.swiper .swiper-button::after {
+  @apply text-sm;
+}
+
+.swiper .swiper-button-prev {
+  left: calc(50% - 40px);
+}
+
+.swiper .swiper-button-next {
+  right: calc(50% - 40px);
+}
+
+/* ============================================
+   Blog / Article content prose styles
+   ============================================ */
+.content {
+  :where(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    @apply relative text-charcoal border-red py-2 pr-6;
+    margin-top: 86px;
+    @apply mb-6 first:mt-0;
+    border-left-width: 2px;
+    @apply pl-6;
+  }
+
+  @media (min-width: 640px) {
+    :where(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+      @apply my-6 py-4;
+      margin-left: 92px;
+    }
+  }
+
+  :where(blockquote)::before {
+    content: '';
+    @apply block absolute;
+    top: -60px;
+    left: -3px;
+    width: 50px;
+    height: 40px;
+    background-image: url("/images/Hiero-Icon-Quote-Left.svg");
+  }
+
+  @media (min-width: 640px) {
+    :where(blockquote)::before {
+      top: 0;
+      left: -92px;
+    }
+  }
+
+  h2 {
+    @apply font-medium mt-8 mb-4;
+    font-size: 24px;
+  }
+
+  h3 {
+    @apply font-medium text-lg mt-8 mb-4;
+  }
+
+  h4 {
+    @apply font-medium text-base mt-8 mb-4;
+  }
+
+  cite {
+    @apply block text-red font-medium not-italic mt-4;
+  }
+
+  p:has(cite) {
+    @apply mb-0;
+  }
+
+  p {
+    @apply mb-4;
+  }
+
+  p img {
+    @apply my-7;
+  }
+
+  ol {
+    @apply list-decimal my-4 pl-6;
+  }
+
+  ul {
+    @apply list-disc my-4 pl-6;
+  }
+
+  table {
+    @apply w-full my-6 border-collapse;
+  }
+
+  th,
+  td {
+    @apply border border-gray px-4 py-3 text-left;
+  }
+
+  th {
+    @apply bg-red text-white font-semibold;
+  }
+
+  tr:nth-child(even) {
+    @apply bg-gray-light;
+  }
+
+  tr:hover {
+    @apply bg-sand;
+  }
+}
+
+/* ============================================
+   Code blocks
+   ============================================ */
+.highlight {
+  @apply relative mb-6;
+}
+
+.highlight pre {
+  @apply pt-8 pb-3 px-3 rounded-md;
+  background-color: #1E1E1E !important;
+}
+
+code {
+  @apply whitespace-pre-wrap text-xs font-ibm;
+  word-break: break-word;
+}
+
+.copy-button {
+  @apply bg-transparent border-none cursor-pointer p-0 absolute right-2 top-2 opacity-100;
+}
+
+.highlight:hover .copy-button {
+  @apply opacity-100;
+}
+
+.copy-button > svg {
+  width: 18px;
+}
+
+.copy-button > svg > path {
+  @apply fill-white;
+}
+
+/* ============================================
+   Pagination
+   ============================================ */
+.pagination {
+  @apply flex gap-2 mx-auto mt-16 justify-center;
+}
+
+.pagination .page-item.disabled {
+  opacity: 0.3;
+}
+
+.pagination .page-item.disabled .page-link {
+  @apply cursor-default;
+}
+
+.pagination .page-item .page-link {
+  @apply bg-sand flex justify-center items-center rounded-full leading-none no-underline text-base font-bold text-charcoal;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.pagination .page-item:has([aria-label="Previous"]) .page-link,
+.pagination .page-item:has([aria-label="First"]) .page-link,
+.pagination .page-item:has([aria-label="Next"]) .page-link,
+.pagination .page-item:has([aria-label="Last"]) .page-link {
+  @apply bg-transparent;
+}
+
+.pagination .page-item:has([aria-label="Previous"]) .page-link span,
+.pagination .page-item:has([aria-label="First"]) .page-link span,
+.pagination .page-item:has([aria-label="Next"]) .page-link span,
+.pagination .page-item:has([aria-label="Last"]) .page-link span {
+  @apply hidden;
+}
+
+.pagination .page-item:has([aria-label="Previous"]) .page-link::before,
+.pagination .page-item:has([aria-label="Next"]) .page-link::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.75rem;
+  background-image: url("data:image/svg+xml,%3Csvg id='arrow-single' xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 8 12'%3E%3Cpath d='M6.1,12l1.4-1.4L2.9,6,7.5,1.4,6.1,0,0,6l6,6Z'/%3E%3C/svg%3E");
+}
+
+.pagination .page-item:has([aria-label="First"]) .page-link::before,
+.pagination .page-item:has([aria-label="Last"]) .page-link::before {
+  content: '';
+  width: 14px;
+  height: 0.75rem;
+  background-image: url("data:image/svg+xml,%3Csvg id='arrow-double' xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 14 12'%3E%3Cpath d='M6.1,12l1.4-1.4L2.9,6,7.5,1.4,6.1,0,0,6l6,6Z'/%3E%3Cpath d='M12.1,12l1.4-1.4-4.6-4.6L13.5,1.4,12.1,0l-6,6,6,6Z'/%3E%3C/svg%3E");
+}
+
+.pagination .page-item:has([aria-label="Next"]) .page-link::before,
+.pagination .page-item:has([aria-label="Last"]) .page-link::before {
+  transform: rotate(180deg);
+}
+
+.pagination .page-item.active .page-link {
+  @apply bg-red text-white;
 }

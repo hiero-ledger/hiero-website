@@ -1,5 +1,13 @@
 import Image from "next/image";
-import { openSourceData } from "@/data/homepage";
+
+const openSourceData = {
+  whyHeading: "Why is Hiero Open Source?",
+  whyText:
+    "The main goal of Hiero is to create a diverse community of developers, dreamers, and builders working to make the world more fair, fast, and secure. To achieve that goal it is critical that everyone can access the source of Hiero and move the project forward. A decentralized network that is used by enterprises and critical infrastructure around the world must be vendor-neutral and fully auditable.",
+  whatHeading: "What parts of Hiero are Open Source?",
+  whatText:
+    'Hiero is 100% open-source. While the transition of the project to Linux Foundation Decentralized Trust is still ongoing, a view into some additional contributions can be found in <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera\'s GitHub organization</a>. As a first step, the technical steering committee (TSC) of Hiero will provide oversight to include  projects that are needed to run an enterprise-ready decentralized network to a new Hiero GitHub organization. More information about the transition process can be found in the roadmap.',
+};
 
 export default function OpenSourceSection() {
   return (

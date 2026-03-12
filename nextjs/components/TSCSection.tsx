@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import tscMembers from "@/data/technical_steering_committee.json";
-import { tscData } from "@/data/homepage";
 
 type Member = {
   firstName: string;
@@ -12,6 +11,10 @@ type Member = {
   photo: string;
   bio: string;
 };
+
+const tscHeading = "The Technical Steering Committee of Hiero";
+const tscText =
+  '<p>Hiero is governed by a Technical Steering Committee (TSC) composed of experienced and diverse members of the community. The duties, goals, and rights of the TSC are defined in the <a href="https://github.com/hiero-ledger/governance/blob/main/hiero-technical-charter.md" target="_blank" rel="noreferrer noopener">technical charter</a> of the Hiero project.</p>';
 
 export default function TSCSection() {
   const [openBio, setOpenBio] = useState<string | null>(null);
@@ -29,10 +32,10 @@ export default function TSCSection() {
         >
           <div id="technical-steering-committee-intro-column">
             <div id="technical-steering-committee-intro">
-              <h2 className="text-3xl mb-2.5 sm:text-4xl sm:mb-4">{tscData.heading}</h2>
+              <h2 className="text-3xl mb-2.5 sm:text-4xl sm:mb-4">{tscHeading}</h2>
               <div
                 className="space-y-4 text-base sm:text-lg"
-                dangerouslySetInnerHTML={{ __html: tscData.text }}
+                dangerouslySetInnerHTML={{ __html: tscText }}
               />
             </div>
           </div>

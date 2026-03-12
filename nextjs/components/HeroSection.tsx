@@ -1,4 +1,7 @@
-import { heroData } from "@/data/homepage";
+const heroData = {
+  heading: "Hiero",
+  text: "Open Source Distributed Ledger Technology",
+};
 
 export default function HeroSection() {
   return (

@@ -103,7 +103,10 @@ export default function TSCSection() {
                           loading="lazy"
                         />
                       </div>
-                      <p className="text-gray-500 mt-2 space-y-4">{member.bio}</p>
+                      <div
+                        className="text-white mt-2 [&>p]:mb-4 [&>p:last-child]:mb-0"
+                        dangerouslySetInnerHTML={{ __html: member.bio }}
+                      />
                       <button
                         className="text-black text-lg rounded-full py-1.5 px-[26px] bg-white-dark self-center mt-4 cursor-pointer"
                         onClick={() => setOpenBio(null)}

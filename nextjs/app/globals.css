@@ -1,8 +1,5 @@
 @import "tailwindcss";
 
-/* ============================================
-   Tailwind v4 Theme — ported from Hugo tailwind.config.js
-   ============================================ */
 @theme {
   /* Colors */
   --color-transparent: transparent;
@@ -398,7 +395,7 @@ code {
 }
 
 .pagination .page-item .page-link {
-  @apply bg-sand flex justify-center items-center rounded-full leading-none no-underline text-base font-bold text-charcoal;
+  @apply bg-sand flex justify-center items-center rounded-full leading-none no-underline text-base font-bold text-charcoal cursor-pointer;
   width: 2.5rem;
   height: 2.5rem;
 }

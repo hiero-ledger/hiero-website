@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getSimplePage } from "@/src/lib/posts";
+import { getSimplePage } from "@/lib/posts";
 import IssueList from "@/components/IssueList";
 
 export const metadata: Metadata = {

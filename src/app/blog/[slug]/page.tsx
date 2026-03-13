@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getAllPosts, getPostBySlug, FALLBACK_IMAGE } from "@/src/lib/posts";
+import { getAllPosts, getPostBySlug } from "@/lib/posts";
 import { format } from "date-fns";
 import Link from "next/link";
 import ShareButtons from "@/components/ShareButtons";

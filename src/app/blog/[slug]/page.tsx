@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import Link from "next/link";
 import ShareButtons from "@/components/ShareButtons";
 import { notFound } from "next/navigation";
+import parse from "html-react-parser";
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -60,10 +61,9 @@ export default async function BlogPostPage({
         {/* Content */}
         <div className="container py-14 sm:py-[80px] lg:py-[90px]">
           <main className="w-full min-w-0 max-w-[800px] mx-auto">
-            <div
-              className="content text-sm text-charcoal font-normal sm:text-base"
-              dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-            />
+            <div className="content text-sm text-charcoal font-normal sm:text-base">
+              {parse(post.contentHtml)}
+            </div>
             <div className="mt-11 mx-auto w-fit">
               <ShareButtons />
             </div>

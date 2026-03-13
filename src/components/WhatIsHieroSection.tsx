@@ -1,4 +1,5 @@
 import Image from "next/image";
+import parse from "html-react-parser";
 
 type WhatIsHieroPoint = {
   heading: string;
@@ -28,10 +29,9 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
               <h2 className="text-3xl mb-2.5 sm:text-4xl sm:mb-0">
                 {data.heading}
               </h2>
-              <p
-                className="text-base sm:text-lg max-w-[390px]"
-                dangerouslySetInnerHTML={{ __html: data.text }}
-              />
+              <div className="text-base sm:text-lg max-w-[390px]">
+                {parse(data.text)}
+              </div>
             </div>
           </div>
           <div className="flex flex-col gap-[60px] sm:gap-10">
@@ -47,10 +47,9 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
                   loading="lazy"
                 />
                 <div>
-                  <h3
-                    className="text-2xl mb-5 sm:mb-2 [&>strong]:text-red"
-                    dangerouslySetInnerHTML={{ __html: point.heading }}
-                  />
+                  <h3 className="text-2xl mb-5 sm:mb-2 [&>strong]:text-red">
+                    {parse(point.heading)}
+                  </h3>
                   <p className="text-base">{point.text}</p>
                 </div>
               </div>

@@ -1,3 +1,5 @@
+import parse from "html-react-parser";
+
 type MeetCall = {
   name: string;
   description: string;
@@ -24,10 +26,9 @@ export default function MeetSection({ data }: MeetSectionProps) {
             <h2 className="text-2xl mb-2.5 sm:text-4xl sm:mb-5">
               {data.heading}
             </h2>
-            <div
-              className="text-lg max-w-full md:max-w-[800px] space-y-4"
-              dangerouslySetInnerHTML={{ __html: data.text }}
-            />
+            <div className="text-lg max-w-full md:max-w-[800px] space-y-4">
+              {parse(data.text)}
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {data.calls.map((call, i) => (

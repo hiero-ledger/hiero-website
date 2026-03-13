@@ -1,4 +1,5 @@
 import Image from "next/image";
+import parse from "html-react-parser";
 
 type OpenSourceData = {
   whyHeading: string;
@@ -46,10 +47,7 @@ export default function OpenSourceSection({ data }: OpenSourceSectionProps) {
             />
           </div>
           <h2 className="text-2xl font-medium mb-5">{data.whatHeading}</h2>
-          <p
-            className="text-base max-w-[565px]"
-            dangerouslySetInnerHTML={{ __html: data.whatText }}
-          />
+          <div className="text-base max-w-[565px]">{parse(data.whatText)}</div>
         </div>
       </div>
     </div>

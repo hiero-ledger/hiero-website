@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import type { SwiperRef } from "swiper/react";
 import "swiper/css";
+import parse from "html-react-parser";
 
 type QuoteItem = {
   quote: string;
@@ -54,14 +55,12 @@ export default function QuotesCarousel({ data }: QuotesCarouselProps) {
                         loading="lazy"
                       />
                     </div>
-                    <div
-                      className="mb-5 [&>a]:text-white"
-                      dangerouslySetInnerHTML={{ __html: quote.quote }}
-                    />
-                    <div
-                      className="font-bold mb-[155px] [&>a]:text-white"
-                      dangerouslySetInnerHTML={{ __html: quote.author }}
-                    />
+                    <div className="mb-5 [&>a]:text-white">
+                      {parse(quote.quote)}
+                    </div>
+                    <div className="font-bold mb-[155px] [&>a]:text-white">
+                      {parse(quote.author)}
+                    </div>
                   </SwiperSlide>
                 ))}
               </Swiper>

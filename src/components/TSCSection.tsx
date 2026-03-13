@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import tscMembers from "@/data/technical_steering_committee.json";
+import parse from "html-react-parser";
 
 type Member = {
   firstName: string;
@@ -34,10 +35,9 @@ export default function TSCSection() {
               <h2 className="text-3xl mb-2.5 sm:text-4xl sm:mb-4">
                 {tscHeading}
               </h2>
-              <div
-                className="space-y-4 text-base sm:text-lg"
-                dangerouslySetInnerHTML={{ __html: tscText }}
-              />
+              <div className="space-y-4 text-base sm:text-lg">
+                {parse(tscText)}
+              </div>
             </div>
           </div>
           <div className="team-members grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-[40px] sm:gap-y-[60px]">
@@ -103,10 +103,9 @@ export default function TSCSection() {
                           loading="lazy"
                         />
                       </div>
-                      <div
-                        className="text-white mt-2 [&>p]:mb-4 [&>p:last-child]:mb-0"
-                        dangerouslySetInnerHTML={{ __html: member.bio }}
-                      />
+                      <div className="text-white mt-2 [&>p]:mb-4 [&>p:last-child]:mb-0">
+                        {parse(member.bio)}
+                      </div>
                       <button
                         className="text-black text-lg rounded-full py-1.5 px-[26px] bg-white-dark self-center mt-4 cursor-pointer"
                         onClick={() => setOpenBio(null)}>

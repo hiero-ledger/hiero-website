@@ -244,7 +244,7 @@ icon = "images/Hiero-Icon-Decentralized.svg"
 
 [[section_what_is_hiero_points]]
 heading = "Hiero is <strong>leaderless</strong>"
-text = "Leader-based consensus is unfair and either slow or vulnerable to attacks. We believe in a fully leaderless protocol where every node participates equally. Our protocol is secure from denial-of-service and centralization."
+text = "Leader-based consensus is unfair and either slow or vulnerable to attacks. We believe in a fully leaderless protocol where every node participates equally. Our protocol is resistant to denial-of-service and prevents centralization."
 icon = "images/Hiero-Icon-Leaderless.svg"
 
 [[section_what_is_hiero_points]]

@@ -7,70 +7,76 @@
 This repo contains the website of [Hiero](https://hiero.org).
 
 ## Building the website
-See [docs/hugo-setup.md](docs/hugo-setup.md) for installing prerequisites (Hugo, Node.js/npm, Tailwind CSS, PostCSS) and running the site locally.
 
+This website is built with [Next.js](https://nextjs.org/) and uses `pnpm` as the package manager. You'll need Node.js and `pnpm` installed.
 
 ## Install packages
+
+```bash
+pnpm install
 ```
-npm i 
-```
-For Linux Setup Instructions [linux_setup.md](docs/setup/linux_setup.md)
-For Windows Setup Instructions [Windows_setup.md](docs/setup/windows_setup.md)
-For MacOS Setup Instructions [Macbook_setup.md](docs/setup/Macbook_setup.md)
+
+For Linux Setup Instructions [linux_setup.md](../docs/setup/linux_setup.md)
+For Windows Setup Instructions [Windows_setup.md](../docs/setup/windows_setup.md)
+For MacOS Setup Instructions [Macbook_setup.md](../docs/setup/Macbook_setup.md)
+
 ## Environments
 
 ### Dev
+
 For development run the following command in terminal.
-```
-npm run start
+
+```bash
+pnpm run dev
 ```
 
-While the process is running the website can be reached at http://localhost:1313/.
+While the process is running the website can be reached at http://localhost:3000/.
 
 ### Production
-For production ready css, run the following command in terminal.
+
+For production build, run the following command in terminal.
+
+```bash
+pnpm run build
 ```
-npm run build
+
+Then you can start the production build with:
+
+```bash
+pnpm run start
 ```
 
 ## Contributing
 
 We welcome contributions such as:
+
 - Code additions or changes
 - Blog posts
 
-
 ### Code Changes and Additions
+
 We have several [Open Issues](https://github.com/hiero-ledger/hiero-website/issues?q=is%3Aissue%20state%3Aopen%20no%3Aassignee) at the Hiero website that need help.
 
-Read [Workflow Guide](./docs/workflow.md) to get started.
+Read [Workflow Guide](../docs/workflow.md) to get started.
 
 ### Blog Posts
 
-See [Detailed Guide on Creating a Blog Post](./docs/blogs.md)
+See [Detailed Guide on Creating a Blog Post](../docs/blogs.md)
 
-Quickly create new blog post with basic [front matter](https://gohugo.io/content-management/front-matter/):
+Quickly create new blog post with basic front matter by creating a new markdown file.
+For example, create a new file like `my-first-post.md` and it will look like this:
 
-    hugo new posts/my-first-post.md
-
-This will create `content/posts/my-first-post.md` and it will look like this:
-```
-+++
-title = 'My First Post' #Edit title
-date = 2025-04-15T09:40:56-07:00 #Edit date
-draft = true #Do not edit 
-+++
+```yaml
+---
+title: "My First Post" #Edit title
+date: "2025-04-15T09:40:56-07:00" #Edit date
+draft: true #Do not edit
+---
 ## Start Writing here
 ```
 
-Once written, save and preview, then turn draft to false once finished:
-```
-hugo server --buildDrafts
-```
-
-Learn about [draft](https://gohugo.io/getting-started/usage/#draft-future-and-expired-content)
+Once written, save your file to preview it locally using `pnpm dev`.
 
 See an example [Blog Post](https://github.com/hiero-ledger/hiero-website/blob/main/content/posts/python-v0.1.7-release.md)
 
-See [Detailed Guide on Creating a Blog Post](./docs/blogs.md)
-
+See [Detailed Guide on Creating a Blog Post](../docs/blogs.md)

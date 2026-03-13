@@ -1,6 +1,6 @@
 [build]
-command = "npm run fetch-stats && hugo"
-publish = "public"
+command = "npm run fetch-stats && pnpm build"
+publish = "dist"
 
 [build.environment]
 HUGO_VERSION = "0.133.1"

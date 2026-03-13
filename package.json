@@ -1,23 +1,34 @@
 {
+  "name": "nextjs",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
   "scripts": {
-    "clean": "rm -rf public",
-    "fetch-stats": "node scripts/fetch-repo-stats.mjs",
-    "start": "TAILWIND_MODE=watch NODE_ENV=development npm-run-all clean prelim:twcss --parallel dev:*",
-    "build": "NODE_ENV=production npm-run-all clean fetch-stats prelim:twcss prod:*",
-    "prelim:twcss": "./node_modules/tailwindcss/lib/cli.js -i ./assets/css/main.css -o ./static/css/main.css --jit",
-    "dev:twcssw": "./node_modules/tailwindcss/lib/cli.js -i ./assets/css/main.css -o ./static/css/main.css --jit -w",
-    "dev:hugo": "hugo server",
-    "prod:twcss": "./node_modules/tailwindcss/lib/cli.js -i ./assets/css/main.css -o ./static/css/main.css --jit --minify",
-    "prod:hugo": "hugo --gc --minify"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.23",
-    "clipboard": "^2.0.11",
-    "postcss": "^8.5.6",
-    "postcss-cli": "^11.0.0",
-    "tailwindcss": "^3.4.19"
+    "sync:repo-stats": "node scripts/sync-repo-stats.mjs",
+    "dev": "pnpm sync:repo-stats && next dev",
+    "build": "pnpm sync:repo-stats && next build",
+    "start": "next start",
+    "lint": "eslint"
   },
   "dependencies": {
-    "npm-run-all": "^4.1.5"
+    "date-fns": "^4.1.0",
+    "gray-matter": "^4.0.3",
+    "next": "16.1.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
+    "swiper": "^12.1.2",
+    "toml": "^3.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }

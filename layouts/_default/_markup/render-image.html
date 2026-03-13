@@ -1,7 +1,0 @@
-{{- $lazyLoading := site.Params.enableImageLazyLoading | default true -}}  
-<img src="{{ .Destination | safeURL }}"
-  {{- with .PlainText }} alt="{{ . }}"{{ end -}}
-  {{- with .Title }} title="{{ . }}"{{ end -}}
-  {{ if $lazyLoading }}loading="lazy"{{ end }}
->
-{{- /* chomp trailing newline */ -}}

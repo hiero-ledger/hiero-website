@@ -1,17 +1,18 @@
-# Writing Blog Posts 
+# Writing Blog Posts
 
 ## Content Guidelines
 
 Blog posts on hiero.org/blog should focus exclusively on technical content for a maintainer-focused audience.
 
 For:
+
 - Marketing
 - Business-related content
 - Major project announcements
 
 Please use [LF Blog](https://www.linuxfoundation.org/blog)
 
-## Step by Step Guide to Writing Blog Posts 
+## Step by Step Guide to Writing Blog Posts
 
 ### 1. Search Existing Blog Posts
 
@@ -28,6 +29,7 @@ Comment /assign on the new issue to request to get assigned.
 Then follow the [step-by-step instructions to creating your pull request](workflow.md)
 
 You'll need to:
+
 - Fork the repository
 - Create a working branch
 - GPG and DCO sign commits
@@ -35,101 +37,85 @@ You'll need to:
 
 #### How to Create the Blog Post:
 
-1. Find `/hiero-website/content/posts`. 
-2. Create `{blog_post_title}.md` 
+1. Find `/content/posts`.
+2. Create `{blog_post_title}.md`
 
-or skip steps 1 and 2 using a command line interface to quickly create at content/posts with:
-```bash
-hugo new posts/blog_post_title.md
-```
 3. Write the text of your blog post.
 
 4. Apply correct markdown syntax
-The blog needs to be written in markdown for it to render correctly. Most AI tools will be able to convert your blog post text into blog post markdown for you.
+   The blog needs to be written in markdown for it to render correctly. Most AI tools will be able to convert your blog post text into blog post markdown for you.
 
 Markdown is simple, you can learn more about Markdown here [Introductory Markdown Guide](https://www.markdownguide.org/basic-syntax/).
 
 5. Check the Preview
-In Visual Studio, preview the blog post by clicking `command+shift+V` or `control+shift+V`. You can also click "Open Preview to the Side" which is a small split screen icon with a magnifying glass on the top right. 
-
-If you find any errors, correct them in the raw file, not the preview file. Make sure to save as you go `command+S` to apply changes.
+   Once you start your local development server with `pnpm dev`, open `http://localhost:3000/blog` to see your new post in the list, and click on it to see the preview.
+   You can correct errors directly in the markdown file and save the file `command+S` to apply changes. Fast Refresh will auto-update your browser preview.
 
 6. Add Images
-Ask for help to attach images for your blog post.
+   We recommend images for:
 
-We recommend images for:
 - The blog post title
 - The author
 
-If you have images already, follow these steps:
-    - 1. Locate `/hiero-website/static/images`
-    - 2. Add high quality JPG image(s) and save them.
+If you have images already, follow these steps: - 1. Locate `/public/images` (or `/static/images` if legacy paths apply) - 2. Add high quality JPG or PNG image(s) and save them.
 
-7. Add Hugo Requirements
+7. Add Blog Requirements
 
-The hiero blog is built using Hugo [Introduction to Hugo](https://gohugo.io/documentation/). We need to add instructions at the top of the markdown file for it to render correctly.
+The hiero blog is built using Next.js. We need to add instructions at the top of the markdown file for it to render correctly.
 
 Copy paste and edit:
 
-```markdown
-+++
-title = "The Blog Post Title I Want the Community to See on the Hiero Blog"
-featured_image = "/images/the_icon_image_for_my_blog.jpg"
-date = 2025-08-01T11:00:00-07:00
-categories = ["Blog"]
-tags = ["Announcement"]
-duration = "3 min read"
-abstract = "A brief summary of the blog post that appears in lists and meta descriptions."
-[[authors]]
-name = "Your name or GitHub alias"
-title = "Your role or title"
-organization = "Hiero"
-link = "https://github.com/your-username"
-image = "/images/your_profile_image.png"
-+++
+```yaml
+---
+title: "The Blog Post Title I Want the Community to See on the Hiero Blog"
+featured_image: "/images/the_icon_image_for_my_blog.jpg"
+date: "2025-08-01T11:00:00-07:00"
+categories: ["Blog"]
+tags: ["Announcement"]
+duration: "3 min read"
+draft: false
+abstract: "A brief summary of the blog post that appears in lists and meta descriptions."
+authors:
+  - name: "Your name or GitHub alias"
+    title: "Your role or title"
+    organization: "Hiero"
+    link: "https://github.com/your-username"
+    image: "/images/your_profile_image.png"
+---
 ```
 
 ### Front Matter Parameters
 
-| Parameter | Required | Description |
-|---------|----------|-------------|
-| `title` | Yes | The main title of the blog post. Displayed at the top of the post and used in page metadata, previews, and search results. |
-| `featured_image` | No | Path to the image shown above the post content and when the post appears in a list. Supports absolute and relative paths. |
-| `date` | Yes | The publication date and time of the post. Used by Hugo for ordering content and determining publish time. Must be in ISO 8601 format. |
-| `categories` | No | A taxonomy used to represent major groupings or sections of the site. The Hiero website currently does not actively use this parameter. |
-| `tags` | No | A taxonomy used to group and organize content. When enabled in the single post partial `related.html`, tags can be used to display related blog posts. |
-| `duration` | No | The estimated average reading time of the article (for example, `3 min read`). |
-| `abstract` | No | A short summary or preview of the post’s content. Displayed in post lists and used for the single post meta description for SEO. |
-| `[[authors]]` | Yes | Defines one or more authors for the post. Supports the fields listed in the Author Fields table below. |
+| Parameter        | Required | Description                                                                                                                                        |
+| ---------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`          | Yes      | The main title of the blog post. Displayed at the top of the post and used in page metadata, previews, and search results.                         |
+| `featured_image` | No       | Path to the image shown above the post content and when the post appears in a list. Supports absolute and relative paths from the `public` folder. |
+| `date`           | Yes      | The publication date and time of the post. Used by Next.js for ordering content and determining publish time. Must be in ISO 8601 format.          |
+| `categories`     | No       | A taxonomy used to represent major groupings or sections of the site.                                                                              |
+| `tags`           | No       | A taxonomy used to group and organize content.                                                                                                     |
+| `duration`       | No       | The estimated average reading time of the article (for example, `3 min read`).                                                                     |
+| `draft`          | No       | Set to `true` if your blog post is a work in progress and shouldn't appear publicly yet.                                                           |
+| `abstract`       | No       | A short summary or preview of the post’s content. Displayed in post lists and used for the single post meta description for SEO.                   |
+| `authors`        | Yes      | Defines one or more authors for the post. Supports the fields listed in the Author Fields table below.                                             |
 
-### Author Fields (`[[authors]]`)
+### Author Fields (`authors`)
 
-| Field | Required | Description |
-|------|----------|-------------|
-| `name` | Yes | The author’s display name or GitHub username. |
-| `title` | No | The author’s role or title (for example, Engineer, Maintainer). |
-| `organization` | No | The organization or team the author represents. |
-| `link` | No | A URL to the author’s profile (GitHub, LinkedIn, personal website, etc.). |
-| `image` | No | Path to the author’s profile image. Supports absolute and relative paths. |
-
-
-
-
-#### Assets
-
-
-#### Sharing
-The Hiero website uses [Hugo Share Buttons](https://github.com/Stals/hugo-share-buttons) for post sharing functionality.
-
-#### Settings
-Additional settings can be found in the **hugo.toml** configuration file.
+| Field          | Required | Description                                                               |
+| -------------- | -------- | ------------------------------------------------------------------------- |
+| `name`         | Yes      | The author’s display name or GitHub username.                             |
+| `title`        | No       | The author’s role or title (for example, Engineer, Maintainer).           |
+| `organization` | No       | The organization or team the author represents.                           |
+| `link`         | No       | A URL to the author’s profile (GitHub, LinkedIn, personal website, etc.). |
+| `image`        | No       | Path to the author’s profile image. Supports absolute and relative paths. |
 
 ## 4. Create Pull Request and View Preview
+
 Commit and create the pull request following [Guide](workflow.md). Well done!
 
-Once you create your pull request, several checks will run and a preview will be generated.
-- Click the netlify preview
-- Check the blog post renders as expected
+Once you create your pull request, several checks will run (formatting, linting, building) and a Vercel/Netlify preview will likely be generated depending on infrastructure setup.
+
+- Click the preview link generated in the PR.
+- Check the blog post renders as expected.
 
 ## 5. Wait for Reviews
 

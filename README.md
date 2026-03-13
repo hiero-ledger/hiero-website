@@ -16,9 +16,9 @@ This website is built with [Next.js](https://nextjs.org/) and uses `pnpm` as the
 pnpm install
 ```
 
-For Linux Setup Instructions [linux_setup.md](../docs/setup/linux_setup.md)
-For Windows Setup Instructions [Windows_setup.md](../docs/setup/windows_setup.md)
-For MacOS Setup Instructions [Macbook_setup.md](../docs/setup/Macbook_setup.md)
+For Linux Setup Instructions [linux_setup.md](docs/setup/linux_setup.md)
+For Windows Setup Instructions [Windows_setup.md](docs/setup/windows_setup.md)
+For MacOS Setup Instructions [Macbook_setup.md](docs/setup/Macbook_setup.md)
 
 ## Environments
 
@@ -57,11 +57,11 @@ We welcome contributions such as:
 
 We have several [Open Issues](https://github.com/hiero-ledger/hiero-website/issues?q=is%3Aissue%20state%3Aopen%20no%3Aassignee) at the Hiero website that need help.
 
-Read [Workflow Guide](../docs/workflow.md) to get started.
+Read [Workflow Guide](docs/workflow.md) to get started.
 
 ### Blog Posts
 
-See [Detailed Guide on Creating a Blog Post](../docs/blogs.md)
+See [Detailed Guide on Creating a Blog Post](docs/blogs.md)
 
 Quickly create new blog post with basic front matter by creating a new markdown file.
 For example, create a new file like `my-first-post.md` and it will look like this:
@@ -79,4 +79,4 @@ Once written, save your file to preview it locally using `pnpm dev`.
 
 See an example [Blog Post](https://github.com/hiero-ledger/hiero-website/blob/main/content/posts/python-v0.1.7-release.md)
 
-See [Detailed Guide on Creating a Blog Post](../docs/blogs.md)
+See [Detailed Guide on Creating a Blog Post](docs/blogs.md)

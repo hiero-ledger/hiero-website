@@ -9,7 +9,11 @@ export default function Header() {
         <div className="flex flex-row justify-between items-center">
           <Link href="/" aria-label="Go to homepage">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/Hiero-Icon-wLogo.svg" alt="Hiero logo" className="h-[40px] w-[128px]" />
+            <img
+              src="/images/Hiero-Icon-wLogo.svg"
+              alt="Hiero logo"
+              className="h-[40px] w-[128px]"
+            />
           </Link>
           <Menu />
         </div>

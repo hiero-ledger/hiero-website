@@ -39,7 +39,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${spaceGrotesk.className} ${spaceGrotesk.variable} ${ibmPlexMono.variable}`}>
+      <body
+        className={`${spaceGrotesk.className} ${spaceGrotesk.variable} ${ibmPlexMono.variable}`}>
         <header className="relative h-22.5">
           <Header />
         </header>

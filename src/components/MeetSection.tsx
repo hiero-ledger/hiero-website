@@ -33,10 +33,13 @@ export default function MeetSection({ data }: MeetSectionProps) {
             {data.calls.map((call, i) => (
               <div
                 key={i}
-                className="border-2 border-white-dark rounded-2xl p-8 hover:border-red transition-colors duration-200 bg-white"
-              >
-                <h3 className="text-xl sm:text-2xl font-medium mb-3">{call.name}</h3>
-                <p className="text-base mb-4 text-gray-600">{call.description}</p>
+                className="border-2 border-white-dark rounded-2xl p-8 hover:border-red transition-colors duration-200 bg-white">
+                <h3 className="text-xl sm:text-2xl font-medium mb-3">
+                  {call.name}
+                </h3>
+                <p className="text-base mb-4 text-gray-600">
+                  {call.description}
+                </p>
                 <p className="text-sm mb-4 text-gray-600">
                   <strong>Schedule:</strong> {call.schedule}
                 </p>
@@ -45,8 +48,7 @@ export default function MeetSection({ data }: MeetSectionProps) {
                     href={call.registerLink}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="text-red hover:text-red-dark text-base font-medium underline"
-                  >
+                    className="text-red hover:text-red-dark text-base font-medium underline">
                     Register →
                   </a>
                 </div>
@@ -58,4 +60,3 @@ export default function MeetSection({ data }: MeetSectionProps) {
     </div>
   );
 }
-

@@ -5,14 +5,13 @@ export default function Footer() {
     <div className="bg-black text-base text-white-dark text-center py-8">
       <Container>
         <p>
-          Copyright © Hiero a Series of LF Projects, LLC | For web site terms of use, trademark policy and other
-          project policies please see{" "}
+          Copyright © Hiero a Series of LF Projects, LLC | For web site terms of
+          use, trademark policy and other project policies please see{" "}
           <a
             href="https://lfprojects.org"
             target="_blank"
             rel="noreferrer noopener"
-            className="text-white underline hover:text-white"
-          >
+            className="text-white underline hover:text-white">
             https://lfprojects.org
           </a>
           .

@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
-  return posts.map((p) => ({ slug: p.slug }));
+  return posts.map(p => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -31,7 +31,7 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   const allPosts = getAllPosts();
-  const recentPosts = allPosts.filter((p) => p.slug !== slug).slice(0, 4);
+  const recentPosts = allPosts.filter(p => p.slug !== slug).slice(0, 4);
 
   return (
     <div className="mx-auto flex">
@@ -39,8 +39,7 @@ export default async function BlogPostPage({
         {/* Hero */}
         <div
           id="hero"
-          className="bg-gradient-to-br from-red-dark via-red to-red relative"
-        >
+          className="bg-gradient-to-br from-red-dark via-red to-red relative">
           <div className="container pt-14 pb-12 sm:py-[100px] text-white">
             <h1 className="font-medium text-xl sm:text-2xl leading-none relative mb-6 sm:mb-5">
               {post.title}
@@ -79,12 +78,11 @@ export default async function BlogPostPage({
                 Recent Hiero Posts
               </h2>
               <ul className="mt-6 grid grid-cols-1 xl:grid-cols-4 gap-[38px] list-none p-0">
-                {recentPosts.map((rp) => (
+                {recentPosts.map(rp => (
                   <li key={rp.slug}>
                     <Link
                       href={`/blog/${rp.slug}`}
-                      className="no-underline grid grid-cols-1 sm:grid-cols-2 sm:gap-9 xl:gap-0 xl:grid-cols-1"
-                    >
+                      className="no-underline grid grid-cols-1 sm:grid-cols-2 sm:gap-9 xl:gap-0 xl:grid-cols-1">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={rp.featuredImage}
@@ -172,8 +170,7 @@ function AuthorBlock({
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center text-sand text-sm gap-x-4 no-underline"
-        title={author.name}
-      >
+        title={author.name}>
         {inner}
       </a>
     );

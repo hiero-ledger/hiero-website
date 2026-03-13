@@ -41,8 +41,7 @@ export default function QuotesCarousel({ data }: QuotesCarouselProps) {
                 modules={[Autoplay]}
                 loop={true}
                 autoplay={{ delay: 30000 }}
-                className="mySwiper"
-              >
+                className="mySwiper">
                 {data.map((quote, i) => (
                   <SwiperSlide key={i}>
                     <div className="mb-5 flex justify-center h-[38px]">
@@ -70,18 +69,32 @@ export default function QuotesCarousel({ data }: QuotesCarouselProps) {
               <button
                 onClick={() => swiperRef.current?.swiper.slidePrev()}
                 aria-label="Previous quote"
-                className="absolute bottom-20 left-[calc(50%-40px)] z-10 w-[35px] h-[35px] bg-white-dark text-charcoal flex items-center justify-center cursor-pointer hover:bg-sand transition-colors"
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                className="absolute bottom-20 left-[calc(50%-40px)] z-10 w-[35px] h-[35px] bg-white-dark text-charcoal flex items-center justify-center cursor-pointer hover:bg-sand transition-colors">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round">
                   <path d="M15 18l-6-6 6-6" />
                 </svg>
               </button>
               <button
                 onClick={() => swiperRef.current?.swiper.slideNext()}
                 aria-label="Next quote"
-                className="absolute bottom-20 right-[calc(50%-40px)] z-10 w-[35px] h-[35px] bg-white-dark text-charcoal flex items-center justify-center cursor-pointer hover:bg-sand transition-colors"
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                className="absolute bottom-20 right-[calc(50%-40px)] z-10 w-[35px] h-[35px] bg-white-dark text-charcoal flex items-center justify-center cursor-pointer hover:bg-sand transition-colors">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round">
                   <path d="M9 18l6-6-6-6" />
                 </svg>
               </button>
@@ -102,4 +115,3 @@ export default function QuotesCarousel({ data }: QuotesCarouselProps) {
     </div>
   );
 }
-

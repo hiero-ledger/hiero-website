@@ -22,8 +22,7 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
       <div className="bg-white">
         <div
           id="what-is-hiero-content"
-          className="container pt-[80px] pb-[40px] sm:pt-[120px] sm:pb-[120px] grid grid-cols-1 lg:grid-cols-[35%_1fr] gap-[60px] lg:gap-32"
-        >
+          className="container pt-[80px] pb-[40px] sm:pt-[120px] sm:pb-[120px] grid grid-cols-1 lg:grid-cols-[35%_1fr] gap-[60px] lg:gap-32">
           <div id="what-is-hiero-intro-column">
             <div id="what-is-hiero-intro">
               <h2 className="text-3xl mb-2.5 sm:text-4xl sm:mb-0">
@@ -39,8 +38,7 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
             {data.points.map((point, i) => (
               <div
                 key={i}
-                className="grid grid-cols-[1fr] sm:grid-cols-[55px_1fr] gap-5 sm:gap-10"
-              >
+                className="grid grid-cols-[1fr] sm:grid-cols-[55px_1fr] gap-5 sm:gap-10">
                 <Image
                   src={point.icon}
                   alt=""
@@ -63,4 +61,3 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
     </div>
   );
 }
-

@@ -35,8 +35,12 @@ export default function ReposCarousel({ data }: ReposCarouselProps) {
       <div className="bg-white">
         <div className="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px]">
           <div className="mb-10 sm:mb-16">
-            <h2 className="text-2xl mb-2.5 sm:text-4xl sm:mb-5">{data.heading}</h2>
-            <div className="text-lg max-w-full md:max-w-[800px]">{data.text}</div>
+            <h2 className="text-2xl mb-2.5 sm:text-4xl sm:mb-5">
+              {data.heading}
+            </h2>
+            <div className="text-lg max-w-full md:max-w-[800px]">
+              {data.text}
+            </div>
           </div>
           <div className="relative w-full px-16">
             <Swiper
@@ -51,9 +55,8 @@ export default function ReposCarousel({ data }: ReposCarouselProps) {
                 640: { slidesPerView: 2, spaceBetween: 24 },
                 1024: { slidesPerView: 3, spaceBetween: 32 },
               }}
-              className="reposSwiper"
-            >
-              {data.repos.map((repo) => (
+              className="reposSwiper">
+              {data.repos.map(repo => (
                 <SwiperSlide key={repo.name} style={{ height: "auto" }}>
                   <div className="border-2 border-white-dark rounded-2xl p-8 hover:border-red transition-colors duration-200 bg-white h-full flex flex-col">
                     <h3 className="text-xl sm:text-2xl font-medium mb-3 text-red">
@@ -67,8 +70,7 @@ export default function ReposCarousel({ data }: ReposCarouselProps) {
                         href={repo.link}
                         target="_blank"
                         rel="noreferrer noopener"
-                        className="text-red hover:text-red-dark text-base font-medium underline"
-                      >
+                        className="text-red hover:text-red-dark text-base font-medium underline">
                         View Repository →
                       </a>
                       <span className="text-sm text-gray-600">
@@ -83,9 +85,12 @@ export default function ReposCarousel({ data }: ReposCarouselProps) {
             <button
               onClick={() => swiperRef.current?.swiper.slidePrev()}
               className="repos-nav-prev absolute top-1/2 left-0 transform -translate-y-1/2 z-10 w-12 h-12 bg-red rounded-full flex items-center justify-center text-white shadow-lg hover:bg-red-dark transition-all duration-200 cursor-pointer"
-              aria-label="Previous slide"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              aria-label="Previous slide">
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -97,9 +102,12 @@ export default function ReposCarousel({ data }: ReposCarouselProps) {
             <button
               onClick={() => swiperRef.current?.swiper.slideNext()}
               className="repos-nav-next absolute top-1/2 right-0 transform -translate-y-1/2 z-10 w-12 h-12 bg-red rounded-full flex items-center justify-center text-white shadow-lg hover:bg-red-dark transition-all duration-200 cursor-pointer"
-              aria-label="Next slide"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              aria-label="Next slide">
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -114,4 +122,3 @@ export default function ReposCarousel({ data }: ReposCarouselProps) {
     </div>
   );
 }
-

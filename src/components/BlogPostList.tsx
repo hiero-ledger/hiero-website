@@ -45,12 +45,11 @@ export default function BlogPostList({
             <h2 className="text-2xl mb-6 text-charcoal">{listTitle}</h2>
 
             <div className="flex flex-col gap-[40px] sm:gap-y-12">
-              {pagePosts.map((post) => (
+              {pagePosts.map(post => (
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
-                  className="grid grid-cols-[1fr] gap-0 sm:grid-cols-[280px_1fr] sm:gap-x-8 no-underline"
-                >
+                  className="grid grid-cols-[1fr] gap-0 sm:grid-cols-[280px_1fr] sm:gap-x-8 no-underline">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={post.featuredImage}
@@ -88,11 +87,10 @@ export default function BlogPostList({
                     className="page-link"
                     role="button"
                     tabIndex={page === 1 ? -1 : 0}
-                    onClick={(e) => {
+                    onClick={e => {
                       e.preventDefault();
                       if (page !== 1) goTo(1);
-                    }}
-                  >
+                    }}>
                     <span aria-hidden="true">&laquo;&laquo;</span>
                   </a>
                 </li>
@@ -103,64 +101,57 @@ export default function BlogPostList({
                     className="page-link"
                     role="button"
                     tabIndex={page === 1 ? -1 : 0}
-                    onClick={(e) => {
+                    onClick={e => {
                       e.preventDefault();
                       if (page > 1) goTo(page - 1);
-                    }}
-                  >
+                    }}>
                     <span aria-hidden="true">&laquo;</span>
                   </a>
                 </li>
-                {visiblePages.map((p) => (
+                {visiblePages.map(p => (
                   <li
                     key={p}
-                    className={`page-item ${p === page ? "active" : ""}`}
-                  >
+                    className={`page-item ${p === page ? "active" : ""}`}>
                     <a
                       aria-current={p === page ? "page" : undefined}
                       aria-label={`Page ${p}`}
                       className="page-link"
                       role="button"
-                      onClick={(e) => {
+                      onClick={e => {
                         e.preventDefault();
                         goTo(p);
-                      }}
-                    >
+                      }}>
                       {p}
                     </a>
                   </li>
                 ))}
                 <li
-                  className={`page-item ${page === totalPages ? "disabled" : ""}`}
-                >
+                  className={`page-item ${page === totalPages ? "disabled" : ""}`}>
                   <a
                     aria-disabled={page === totalPages ? "true" : undefined}
                     aria-label="Next"
                     className="page-link"
                     role="button"
                     tabIndex={page === totalPages ? -1 : 0}
-                    onClick={(e) => {
+                    onClick={e => {
                       e.preventDefault();
                       if (page < totalPages) goTo(page + 1);
-                    }}
-                  >
+                    }}>
                     <span aria-hidden="true">&raquo;</span>
                   </a>
                 </li>
                 <li
-                  className={`page-item ${page === totalPages ? "disabled" : ""}`}
-                >
+                  className={`page-item ${page === totalPages ? "disabled" : ""}`}>
                   <a
                     aria-disabled={page === totalPages ? "true" : undefined}
                     aria-label="Last"
                     className="page-link"
                     role="button"
                     tabIndex={page === totalPages ? -1 : 0}
-                    onClick={(e) => {
+                    onClick={e => {
                       e.preventDefault();
                       if (page < totalPages) goTo(totalPages);
-                    }}
-                  >
+                    }}>
                     <span aria-hidden="true">&raquo;&raquo;</span>
                   </a>
                 </li>

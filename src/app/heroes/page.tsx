@@ -19,8 +19,7 @@ export default async function HeroesPage() {
     <>
       <div
         id="hero"
-        className="bg-gradient-to-br from-red-dark via-red to-red relative"
-      >
+        className="bg-gradient-to-br from-red-dark via-red to-red relative">
         <div className="container py-14 sm:py-[100px] xl:py-36 text-white text-center">
           <h1 className="text-[42px] sm:text-5xl leading-none relative mb-2.5">
             {title}

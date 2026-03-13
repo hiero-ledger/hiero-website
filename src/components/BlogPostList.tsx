@@ -54,7 +54,7 @@ export default function BlogPostList({
                   <img
                     src={post.featuredImage}
                     alt={post.title}
-                    className="w-full h-[140px] object-cover"
+                    className="w-full md:h-[140px] object-cover"
                     loading="lazy"
                   />
                   <div>

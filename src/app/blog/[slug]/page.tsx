@@ -87,7 +87,7 @@ export default async function BlogPostPage({
                       <img
                         src={rp.featuredImage}
                         alt={rp.title}
-                        className="w-full h-[140px] object-cover"
+                        className="w-full md:h-[140px] object-cover"
                         loading="lazy"
                       />
                       <div>

@@ -24,8 +24,8 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
         <div
           id="what-is-hiero-content"
           className="container pt-[80px] pb-[40px] sm:pt-[120px] sm:pb-[120px] grid grid-cols-1 lg:grid-cols-[35%_1fr] gap-[60px] lg:gap-32">
-          <div id="what-is-hiero-intro-column">
-            <div id="what-is-hiero-intro">
+          <div id="what-is-hiero-intro-column" className="relative">
+            <div id="what-is-hiero-intro" className="sticky top-1/2 -translate-y-1/2">
               <h2 className="text-3xl mb-2.5 sm:text-4xl sm:mb-0">
                 {data.heading}
               </h2>

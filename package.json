@@ -9,7 +9,8 @@
     "build": "pnpm sync:repo-stats && next build",
     "start": "next start",
     "lint": "eslint .",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json}\""
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json}\"",
+    "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json}\""
   },
   "dependencies": {
     "date-fns": "^4.1.0",

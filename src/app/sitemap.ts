@@ -3,6 +3,8 @@ import { getAllPosts } from "@/lib/posts";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://hiero.org";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   // Static routes
   const staticRoutes = [

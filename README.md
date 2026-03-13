@@ -27,7 +27,7 @@ For MacOS Setup Instructions [Macbook_setup.md](../docs/setup/Macbook_setup.md)
 For development run the following command in terminal.
 
 ```bash
-pnpm run dev
+pnpm dev
 ```
 
 While the process is running the website can be reached at http://localhost:3000/.
@@ -37,13 +37,13 @@ While the process is running the website can be reached at http://localhost:3000
 For production build, run the following command in terminal.
 
 ```bash
-pnpm run build
+pnpm build
 ```
 
 Then you can start the production build with:
 
 ```bash
-pnpm run start
+pnpm start
 ```
 
 ## Contributing

@@ -1,6 +1,6 @@
 [build]
-command = "npm run fetch-stats && pnpm build"
-publish = "dist"
+command = "pnpm build"
+publish = ".next"
 
 [build.environment]
-HUGO_VERSION = "0.133.1"
+NODE_VERSION = "20"

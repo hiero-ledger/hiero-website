@@ -19,7 +19,7 @@ Below are links to some of the things that happened this past week. **Check it o
 
 **Jessica G** added a [Hedera DevDay post](https://hiero.org/blog/hedera-devday-2026-was-a-success/) detailing the success of Hedera DevDay 2026
 
-**Venilin Vasilev** updated the [Good First Issue](https://github.com/hiero-ledger/hiero-sdk-js/pull/3768) guidelines to expand on Good First Issue opportunites
+**Venilin Vasilev** updated the [Good First Issue](https://github.com/hiero-ledger/hiero-sdk-js/pull/3768) guidelines to expand on Good First Issue opportunities
 
 **Abhijeet** created a new blog post on [HIP 1261: Simple Fees](https://github.com/hiero-ledger/hiero-website/pull/249)
 

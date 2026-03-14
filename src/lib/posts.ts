@@ -1,8 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import { remark } from "remark";
-import remarkHtml from "remark-html";
 import { parse as parseToml } from "toml";
 
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
@@ -30,7 +28,7 @@ export interface PostMeta {
 }
 
 export interface PostFull extends PostMeta {
-  contentHtml: string;
+  contentMarkdown: string;
 }
 
 export interface BlogIndexMeta {
@@ -42,7 +40,12 @@ export interface BlogIndexMeta {
 export interface SimplePageContent {
   title: string;
   description: string;
-  contentHtml: string;
+  contentMarkdown: string;
+}
+
+interface SimplePageDefaults {
+  title: string;
+  description: string;
 }
 
 function safeParseToml(input: string): object {
@@ -60,6 +63,13 @@ const MATTER_OPTIONS = {
     toml: safeParseToml,
   },
 };
+
+function cleanContent(content: string): string {
+  return content
+    .replace(/\{\{<[^>]*>\}\}/g, "")
+    .replace(/\{\{%[^%]*%\}\}/g, "")
+    .trim();
+}
 
 function parseDate(raw: unknown): string {
   if (!raw) return new Date(0).toISOString();
@@ -125,7 +135,7 @@ export function getAllPosts(): PostMeta[] {
   return posts;
 }
 
-export async function getPostBySlug(slug: string): Promise<PostFull | null> {
+export function getPostBySlug(slug: string): PostFull | null {
   if (!fs.existsSync(POSTS_DIR)) return null;
   const files = fs
     .readdirSync(POSTS_DIR)
@@ -139,14 +149,10 @@ export async function getPostBySlug(slug: string): Promise<PostFull | null> {
       };
       if (data.draft === true) continue;
       if (deriveSlug(data, file) !== slug) continue;
-      const cleaned = content
-        .replace(/\{\{<[^>]*>\}\}/g, "")
-        .replace(/\{\{%[^%]*%\}\}/g, "")
-        .trim();
-      const processed = await remark()
-        .use(remarkHtml, { sanitize: false })
-        .process(cleaned);
-      return { ...buildMeta(data, file), contentHtml: processed.toString() };
+      return {
+        ...buildMeta(data, file),
+        contentMarkdown: cleanContent(content),
+      };
     } catch {
       /* skip */
     }
@@ -177,27 +183,31 @@ export function getBlogIndexMeta(): BlogIndexMeta {
 }
 
 /** Parse a simple content markdown file (e.g. hacktoberfest, heroes). */
-export async function getSimplePage(
-  contentPath: string,
-): Promise<SimplePageContent | null> {
+export function getSimplePage(contentPath: string): SimplePageContent | null {
   const filePath = path.join(process.cwd(), contentPath);
   if (!fs.existsSync(filePath)) return null;
   try {
     const raw = fs.readFileSync(filePath, "utf8");
     const { data, content } = matter(raw);
-    const cleaned = content
-      .replace(/\{\{<[^>]*>\}\}/g, "")
-      .replace(/\{\{%[^%]*%\}\}/g, "")
-      .trim();
-    const processed = await remark()
-      .use(remarkHtml, { sanitize: false })
-      .process(cleaned);
     return {
       title: String(data.title ?? ""),
       description: String(data.description ?? ""),
-      contentHtml: processed.toString(),
+      contentMarkdown: cleanContent(content),
     };
   } catch {
     return null;
   }
+}
+
+export function getSimplePageWithDefaults(
+  contentPath: string,
+  fallback: SimplePageDefaults,
+): SimplePageContent {
+  const page = getSimplePage(contentPath);
+
+  return {
+    title: page?.title ?? fallback.title,
+    description: page?.description ?? fallback.description,
+    contentMarkdown: page?.contentMarkdown ?? "",
+  };
 }

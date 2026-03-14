@@ -27,7 +27,7 @@ export default function MeetSection({ data }: MeetSectionProps) {
               {data.heading}
             </h2>
             <RichText
-              html={data.text}
+              markdown={data.text}
               className="text-lg max-w-full md:max-w-[800px] space-y-4"
             />
           </div>

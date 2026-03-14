@@ -47,7 +47,11 @@ export default function OpenSourceSection({ data }: OpenSourceSectionProps) {
             />
           </div>
           <h2 className="text-2xl font-medium mb-5">{data.whatHeading}</h2>
-          <RichText html={data.whatText} className="text-base max-w-[565px]" />
+          <RichText
+            inline
+            markdown={data.whatText}
+            className="text-base max-w-[565px]"
+          />
         </div>
       </div>
     </div>

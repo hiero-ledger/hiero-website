@@ -15,7 +15,7 @@ interface Member {
 
 const tscHeading = "The Technical Steering Committee of Hiero";
 const tscText =
-  '<p>Hiero is governed by a Technical Steering Committee (TSC) composed of experienced and diverse members of the community. The duties, goals, and rights of the TSC are defined in the <a href="https://github.com/hiero-ledger/governance/blob/main/hiero-technical-charter.md" target="_blank" rel="noreferrer noopener">technical charter</a> of the Hiero project.</p>';
+  "Hiero is governed by a Technical Steering Committee (TSC) composed of experienced and diverse members of the community. The duties, goals, and rights of the TSC are defined in the [technical charter](https://github.com/hiero-ledger/governance/blob/main/hiero-technical-charter.md) of the Hiero project.";
 
 export default function TSCSection() {
   const [openBio, setOpenBio] = useState<string | null>(null);
@@ -36,7 +36,8 @@ export default function TSCSection() {
                 {tscHeading}
               </h2>
               <RichText
-                html={tscText}
+                inline
+                markdown={tscText}
                 className="space-y-4 text-base sm:text-lg"
               />
             </div>
@@ -104,10 +105,7 @@ export default function TSCSection() {
                           loading="lazy"
                         />
                       </div>
-                      <RichText
-                        html={member.bio}
-                        className="text-white mt-2 [&>p]:mb-4 [&>p:last-child]:mb-0"
-                      />
+                      <p className="text-white mt-2">{member.bio}</p>
                       <button
                         className="text-black text-lg rounded-full py-1.5 px-[26px] bg-white-dark self-center mt-4 cursor-pointer"
                         onClick={() => setOpenBio(null)}>

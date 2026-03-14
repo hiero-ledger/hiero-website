@@ -4,14 +4,14 @@ import RichText from "@/components/RichText";
 interface SimpleContentPageProps {
   title: string;
   description: string;
-  contentHtml: string;
+  contentMarkdown: string;
   children?: ReactNode;
 }
 
 export default function SimpleContentPage({
   title,
   description,
-  contentHtml,
+  contentMarkdown,
   children,
 }: SimpleContentPageProps) {
   return (
@@ -31,7 +31,7 @@ export default function SimpleContentPage({
       <div className="container py-14 sm:py-[80px] lg:py-[90px]">
         <main className="w-full min-w-0 max-w-[800px] mx-auto">
           <RichText
-            html={contentHtml}
+            markdown={contentMarkdown}
             className="content text-sm text-charcoal font-normal sm:text-base"
           />
           {children}

@@ -32,7 +32,8 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
                 {data.heading}
               </h2>
               <RichText
-                html={data.text}
+                inline
+                markdown={data.text}
                 className="text-base sm:text-lg max-w-[390px]"
               />
             </div>
@@ -52,7 +53,8 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
                 <div>
                   <RichText
                     as="h3"
-                    html={point.heading}
+                    inline
+                    markdown={point.heading}
                     className="text-2xl mb-5 sm:mb-2 [&>strong]:text-red"
                   />
                   <p className="text-base">{point.text}</p>

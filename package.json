@@ -15,12 +15,10 @@
   "dependencies": {
     "date-fns": "^4.1.0",
     "gray-matter": "^4.0.3",
-    "html-react-parser": "^5.2.17",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "remark": "^15.0.1",
-    "remark-html": "^16.0.1",
+    "react-markdown": "^10.1.0",
     "swiper": "^12.1.2",
     "toml": "^3.0.0"
   },

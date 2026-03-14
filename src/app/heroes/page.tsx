@@ -1,28 +1,32 @@
 import type { Metadata } from "next";
 import ContributorsGrid from "@/components/ContributorsGrid";
 import SimpleContentPage from "@/components/SimpleContentPage";
-import { getSimplePage, type SimplePageContent } from "../../lib/posts";
+import {
+  getSimplePageWithDefaults,
+  type SimplePageContent,
+} from "../../lib/posts";
 
 export const metadata: Metadata = {
   title: "Hiero Heroes",
   description: "Meet the amazing contributors who have helped build Hiero",
 };
 
-export default async function HeroesPage() {
-  const page: SimplePageContent | null = await getSimplePage(
+const HEROES_PAGE_DEFAULTS = {
+  title: "Hiero Heroes",
+  description: "Meet the amazing contributors who have helped build Hiero",
+};
+
+export default function HeroesPage() {
+  const page: SimplePageContent = getSimplePageWithDefaults(
     "content/heroes/index.md",
+    HEROES_PAGE_DEFAULTS,
   );
-  const title = page?.title ?? "Hiero Heroes";
-  const description =
-    page?.description ??
-    "Meet the amazing contributors who have helped build Hiero";
-  const contentHtml = page?.contentHtml ?? "";
 
   return (
     <SimpleContentPage
-      title={title}
-      description={description}
-      contentHtml={contentHtml}>
+      title={page.title}
+      description={page.description}
+      contentMarkdown={page.contentMarkdown}>
       <ContributorsGrid endpoint="https://hedera-issues.koyeb.app/api/v2/contributors" />
     </SimpleContentPage>
   );

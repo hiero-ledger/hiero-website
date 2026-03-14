@@ -3,8 +3,8 @@
 import fs from "node:fs";
 import fallbackRepositoryStats from "../data/repository_stats.json" with { type: "json" };
 
-const dataDirectory = new URL("../data/", import.meta.url);
-const targetFile = new URL("../data/repository_stats.json", import.meta.url);
+const dataDirectory = "src/data";
+const targetFile = "src/data/repository_stats.json";
 
 const repos = [
   "hiero-consensus-node",
@@ -34,20 +34,23 @@ function createZeroStatsMap() {
   return new Map(repos.map(repo => [repo, { stars: 0 }]));
 }
 
+function isRecord(value) {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function getStars(repoStats) {
+  if (!isRecord(repoStats)) return null;
+  const { stars } = repoStats;
+  return typeof stars === "number" && Number.isFinite(stars) ? stars : null;
+}
+
 function toStatsMap(rawStats) {
   const stats = new Map();
-  if (!rawStats || typeof rawStats !== "object" || Array.isArray(rawStats)) {
-    return stats;
-  }
+  if (!isRecord(rawStats)) return stats;
 
   for (const [repo, repoStats] of Object.entries(rawStats)) {
-    if (!repoSet.has(repo)) continue;
-    if (!repoStats || typeof repoStats !== "object") continue;
-
-    const stars = repoStats.stars;
-    if (typeof stars === "number" && Number.isFinite(stars)) {
-      stats.set(repo, { stars });
-    }
+    const stars = repoSet.has(repo) ? getStars(repoStats) : null;
+    if (stars !== null) stats.set(repo, { stars });
   }
 
   return stats;

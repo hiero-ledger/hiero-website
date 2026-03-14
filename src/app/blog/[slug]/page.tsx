@@ -23,7 +23,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post: PostFull | null = await getPostBySlug(slug);
+  const post: PostFull | null = getPostBySlug(slug);
   if (!post) return { title: "Post Not Found" };
   return { title: post.title, description: post.abstract };
 }
@@ -34,7 +34,7 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post: PostFull | null = await getPostBySlug(slug);
+  const post: PostFull | null = getPostBySlug(slug);
   if (!post) notFound();
 
   const allPosts: PostMeta[] = getAllPosts();
@@ -70,7 +70,7 @@ export default async function BlogPostPage({
         <div className="container py-14 sm:py-[80px] lg:py-[90px]">
           <main className="w-full min-w-0 max-w-[800px] mx-auto">
             <RichText
-              html={post.contentHtml}
+              markdown={post.contentMarkdown}
               className="content text-sm text-charcoal font-normal sm:text-base"
             />
             <div className="mt-11 mx-auto w-fit">

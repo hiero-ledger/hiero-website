@@ -1,15 +1,53 @@
-import parse from "html-react-parser";
+import Link from "next/link";
+import type { ReactNode } from "react";
+import ReactMarkdown from "react-markdown";
 
 interface RichTextProps {
   as?: "div" | "h3" | "p" | "span";
   className?: string;
-  html: string;
+  inline?: boolean;
+  markdown: string;
+}
+
+function isExternalHref(href: string): boolean {
+  return /^(https?:)?\/\//.test(href) || href.startsWith("mailto:");
+}
+
+function InlineParagraph({ children }: { children?: ReactNode }) {
+  return <>{children}</>;
 }
 
 export default function RichText({
   as: Tag = "div",
   className,
-  html,
+  inline = false,
+  markdown,
 }: RichTextProps) {
-  return <Tag className={className}>{parse(html)}</Tag>;
+  if (!markdown.trim()) {
+    return <Tag className={className} />;
+  }
+
+  const components = {
+    a({ href = "", children }: { href?: string; children?: ReactNode }) {
+      if (!href) return <>{children}</>;
+      if (isExternalHref(href)) {
+        return (
+          <a href={href} target="_blank" rel="noreferrer noopener">
+            {children}
+          </a>
+        );
+      }
+
+      return <Link href={href}>{children}</Link>;
+    },
+    ...(inline ? { p: InlineParagraph } : {}),
+  };
+
+  return (
+    <Tag className={className}>
+      <ReactMarkdown skipHtml components={components}>
+        {markdown}
+      </ReactMarkdown>
+    </Tag>
+  );
 }

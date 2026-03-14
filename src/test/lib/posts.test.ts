@@ -27,6 +27,63 @@ async function loadPostsModule() {
   return import("@/lib/posts");
 }
 
+function writePublishedPostsFixture() {
+  writeFile(
+    "content/posts/_index.md",
+    `+++
+title = "Engineering Blog"
+subtitle = "Latest engineering updates"
+list_title = "Recent Posts"
++++
+`,
+  );
+
+  writeFile(
+    "content/posts/older-post.md",
+    `+++
+title = "Older Post"
+date = 2026-03-01
+draft = false
+featured_image = "/images/older.png"
+abstract = "Older abstract"
+[[authors]]
+name = "Older Author"
++++
+
+Older content.
+`,
+  );
+
+  writeFile(
+    "content/posts/new-post.md",
+    `+++
+title = "New Post"
+date = 2026-03-15
+draft = false
+slug = "custom-new-post"
+description = "Summary from description"
+[[authors]]
+name = "New Author"
++++
+
+Hello from the post.
+{{< contributorsGrid endpoint="https://example.com" >}}
+`,
+  );
+
+  writeFile(
+    "content/posts/draft-post.md",
+    `+++
+title = "Draft Post"
+date = 2026-03-20
+draft = true
++++
+
+This should not appear.
+`,
+  );
+}
+
 afterEach(() => {
   if (tempDir) {
     rmSync(tempDir, { recursive: true, force: true });
@@ -42,61 +99,7 @@ afterEach(() => {
 describe("posts helpers", () => {
   it("loads published blog posts, derives slugs, and strips shortcodes", async () => {
     createTempSite();
-
-    writeFile(
-      "content/posts/_index.md",
-      `+++
-title = "Engineering Blog"
-subtitle = "Latest engineering updates"
-list_title = "Recent Posts"
-+++
-`,
-    );
-
-    writeFile(
-      "content/posts/older-post.md",
-      `+++
-title = "Older Post"
-date = 2026-03-01
-draft = false
-featured_image = "/images/older.png"
-abstract = "Older abstract"
-[[authors]]
-name = "Older Author"
-+++
-
-Older content.
-`,
-    );
-
-    writeFile(
-      "content/posts/new-post.md",
-      `+++
-title = "New Post"
-date = 2026-03-15
-draft = false
-slug = "custom-new-post"
-description = "Summary from description"
-[[authors]]
-name = "New Author"
-+++
-
-Hello from the post.
-{{< contributorsGrid endpoint="https://example.com" >}}
-`,
-    );
-
-    writeFile(
-      "content/posts/draft-post.md",
-      `+++
-title = "Draft Post"
-date = 2026-03-20
-draft = true
-+++
-
-This should not appear.
-`,
-    );
+    writePublishedPostsFixture();
 
     const { FALLBACK_IMAGE, getAllPosts, getBlogIndexMeta, getPostBySlug } =
       await loadPostsModule();

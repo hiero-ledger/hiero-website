@@ -20,7 +20,7 @@ Below are links to some of the things that happened this past week. **Check it o
 
 **Daniel Marvin** updated the [Windows Setup Instructions](https://github.com/hiero-ledger/hiero-sdk-python/pull/1958) in the Python SDK to help Windows users set up the SDK on their local Windows machine.
 
-+**Freya-Docs** created a PR to correct documentation errors in [FileCreateTransaction](https://github.com/hiero-ledger/hiero-sdk-cpp/pull/1217) within the C++ SDK.
+**Freya-Docs** created a PR to correct documentation errors in [FileCreateTransaction](https://github.com/hiero-ledger/hiero-sdk-cpp/pull/1217) within the C++ SDK.
 
 **Venilin Vasilev** created a PR to [fix common linting issues](https://github.com/hiero-ledger/hiero-sdk-js/pull/3847) and unblock the creation of new Good-First-Issues.
 

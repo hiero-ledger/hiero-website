@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
-import { getAllPosts, getPostBySlug } from "@/lib/posts";
+import {
+  getAllPosts,
+  getPostBySlug,
+  type PostAuthor,
+  type PostFull,
+  type PostMeta,
+} from "../../../lib/posts";
 import { format } from "date-fns";
 import Link from "next/link";
 import ShareButtons from "@/components/ShareButtons";
 import { notFound } from "next/navigation";
-import parse from "html-react-parser";
 
-export async function generateStaticParams() {
-  const posts = getAllPosts();
-  return posts.map(p => ({ slug: p.slug }));
+export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
+  const posts: PostMeta[] = getAllPosts();
+  return posts.map((post: PostMeta) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({
@@ -17,7 +22,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const post: PostFull | null = await getPostBySlug(slug);
   if (!post) return { title: "Post Not Found" };
   return { title: post.title, description: post.abstract };
 }
@@ -28,11 +33,13 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const post: PostFull | null = await getPostBySlug(slug);
   if (!post) notFound();
 
-  const allPosts = getAllPosts();
-  const recentPosts = allPosts.filter(p => p.slug !== slug).slice(0, 4);
+  const allPosts: PostMeta[] = getAllPosts();
+  const recentPosts: PostMeta[] = allPosts
+    .filter((candidate: PostMeta) => candidate.slug !== slug)
+    .slice(0, 4);
 
   return (
     <div className="mx-auto flex">
@@ -46,7 +53,7 @@ export default async function BlogPostPage({
               {post.title}
             </h1>
             <div className="flex flex-wrap gap-6">
-              {post.authors.map((author, i) => (
+              {post.authors.map((author: PostAuthor, i: number) => (
                 <AuthorBlock
                   key={i}
                   author={author}
@@ -61,9 +68,10 @@ export default async function BlogPostPage({
         {/* Content */}
         <div className="container py-14 sm:py-[80px] lg:py-[90px]">
           <main className="w-full min-w-0 max-w-[800px] mx-auto">
-            <div className="content text-sm text-charcoal font-normal sm:text-base">
-              {parse(post.contentHtml)}
-            </div>
+            <div
+              className="content text-sm text-charcoal font-normal sm:text-base"
+              dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+            />
             <div className="mt-11 mx-auto w-fit">
               <ShareButtons />
             </div>
@@ -124,13 +132,7 @@ function AuthorBlock({
   date,
   duration,
 }: {
-  author: {
-    name?: string;
-    title?: string;
-    organization?: string;
-    link?: string;
-    image?: string;
-  };
+  author: PostAuthor;
   date: string;
   duration?: string;
 }) {

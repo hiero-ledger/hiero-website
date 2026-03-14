@@ -10,7 +10,14 @@ interface RichTextProps {
 }
 
 function isExternalHref(href: string): boolean {
-  return /^(https?:)?\/\//.test(href) || href.startsWith("mailto:");
+  const normalizedHref = href.toLowerCase();
+
+  return (
+    normalizedHref.startsWith("http://") ||
+    normalizedHref.startsWith("https://") ||
+    normalizedHref.startsWith("//") ||
+    normalizedHref.startsWith("mailto:")
+  );
 }
 
 function InlineParagraph({ children }: { children?: ReactNode }) {

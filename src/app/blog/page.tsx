@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
-import { getAllPosts, getBlogIndexMeta } from "@/lib/posts";
 import BlogPostList from "@/components/BlogPostList";
+import {
+  getAllPosts,
+  getBlogIndexMeta,
+  type BlogIndexMeta,
+  type PostMeta,
+} from "../../lib/posts";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -8,8 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const posts = getAllPosts();
-  const blogMeta = getBlogIndexMeta();
+  const posts: PostMeta[] = getAllPosts();
+  const blogMeta: BlogIndexMeta = getBlogIndexMeta();
 
   return (
     <>

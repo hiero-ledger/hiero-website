@@ -1,21 +1,21 @@
 import Image from "next/image";
-import parse from "html-react-parser";
+import RichText from "./RichText";
 
-type WhatIsHieroPoint = {
+interface WhatIsHieroPoint {
   heading: string;
   text: string;
   icon: string;
-};
+}
 
-type WhatIsHieroData = {
+interface WhatIsHieroData {
   heading: string;
   text: string;
   points: WhatIsHieroPoint[];
-};
+}
 
-type WhatIsHieroSectionProps = {
+interface WhatIsHieroSectionProps {
   data: WhatIsHieroData;
-};
+}
 
 export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
   return (
@@ -25,13 +25,16 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
           id="what-is-hiero-content"
           className="container pt-[80px] pb-[40px] sm:pt-[120px] sm:pb-[120px] grid grid-cols-1 lg:grid-cols-[35%_1fr] gap-[60px] lg:gap-32">
           <div id="what-is-hiero-intro-column" className="relative">
-            <div id="what-is-hiero-intro" className="sticky top-1/2 -translate-y-1/2">
+            <div
+              id="what-is-hiero-intro"
+              className="sticky top-1/2 -translate-y-1/2">
               <h2 className="text-3xl mb-2.5 sm:text-4xl sm:mb-0">
                 {data.heading}
               </h2>
-              <div className="text-base sm:text-lg max-w-[390px]">
-                {parse(data.text)}
-              </div>
+              <RichText
+                html={data.text}
+                className="text-base sm:text-lg max-w-[390px]"
+              />
             </div>
           </div>
           <div className="flex flex-col gap-[60px] sm:gap-10">
@@ -47,9 +50,11 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
                   loading="lazy"
                 />
                 <div>
-                  <h3 className="text-2xl mb-5 sm:mb-2 [&>strong]:text-red">
-                    {parse(point.heading)}
-                  </h3>
+                  <RichText
+                    as="h3"
+                    html={point.heading}
+                    className="text-2xl mb-5 sm:mb-2 [&>strong]:text-red"
+                  />
                   <p className="text-base">{point.text}</p>
                 </div>
               </div>

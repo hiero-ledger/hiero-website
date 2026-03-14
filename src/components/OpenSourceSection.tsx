@@ -1,16 +1,16 @@
 import Image from "next/image";
-import parse from "html-react-parser";
+import RichText from "./RichText";
 
-type OpenSourceData = {
+interface OpenSourceData {
   whyHeading: string;
   whyText: string;
   whatHeading: string;
   whatText: string;
-};
+}
 
-type OpenSourceSectionProps = {
+interface OpenSourceSectionProps {
   data: OpenSourceData;
-};
+}
 
 export default function OpenSourceSection({ data }: OpenSourceSectionProps) {
   return (
@@ -47,7 +47,7 @@ export default function OpenSourceSection({ data }: OpenSourceSectionProps) {
             />
           </div>
           <h2 className="text-2xl font-medium mb-5">{data.whatHeading}</h2>
-          <div className="text-base max-w-[565px]">{parse(data.whatText)}</div>
+          <RichText html={data.whatText} className="text-base max-w-[565px]" />
         </div>
       </div>
     </div>

@@ -39,6 +39,12 @@ export interface BlogIndexMeta {
   listTitle: string;
 }
 
+export interface SimplePageContent {
+  title: string;
+  description: string;
+  contentHtml: string;
+}
+
 function safeParseToml(input: string): object {
   let s = input.replace(/\r/g, "");
   // Convert bare dates (TOML 1.0 local dates) to datetime for TOML 0.4 compat
@@ -173,7 +179,7 @@ export function getBlogIndexMeta(): BlogIndexMeta {
 /** Parse a simple content markdown file (e.g. hacktoberfest, heroes). */
 export async function getSimplePage(
   contentPath: string,
-): Promise<{ title: string; description: string; contentHtml: string } | null> {
+): Promise<SimplePageContent | null> {
   const filePath = path.join(process.cwd(), contentPath);
   if (!fs.existsSync(filePath)) return null;
   try {

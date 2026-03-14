@@ -3,18 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import { format } from "date-fns";
-import type { PostMeta } from "@/lib/posts";
+import type { PostMeta } from "../lib/posts";
 
 const POSTS_PER_PAGE = 3;
 const PAGER_SIZE = 5;
 
-export default function BlogPostList({
-  posts,
-  listTitle,
-}: {
+interface BlogPostListProps {
   posts: PostMeta[];
   listTitle: string;
-}) {
+}
+
+export default function BlogPostList({ posts, listTitle }: BlogPostListProps) {
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
   const pagePosts = posts.slice(
@@ -22,7 +21,6 @@ export default function BlogPostList({
     page * POSTS_PER_PAGE,
   );
 
-  // Hugo v0.133+ windowed pagination: show at most PAGER_SIZE page numbers
   const half = Math.floor(PAGER_SIZE / 2);
   const rawStart = Math.max(1, page - half);
   const windowEnd = Math.min(totalPages, rawStart + PAGER_SIZE - 1);
@@ -45,37 +43,41 @@ export default function BlogPostList({
             <h2 className="text-2xl mb-6 text-charcoal">{listTitle}</h2>
 
             <div className="flex flex-col gap-[40px] sm:gap-y-12">
-              {pagePosts.map(post => (
-                <Link
-                  key={post.slug}
-                  href={`/blog/${post.slug}`}
-                  className="grid grid-cols-[1fr] gap-0 sm:grid-cols-[280px_1fr] sm:gap-x-8 no-underline">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={post.featuredImage}
-                    alt={post.title}
-                    className="w-full md:h-[140px] object-cover"
-                    loading="lazy"
-                  />
-                  <div>
-                    <h3 className="mt-3 sm:mt-0 text-[20px] font-medium text-black">
-                      {post.title}
-                    </h3>
-                    <p className="text-charcoal text-sm font-normal mt-1 leading-none">
-                      {post.duration}
-                      {post.duration && <span className="mx-1">•</span>}
-                      {format(new Date(post.date), "MMMM d, yyyy")}
-                    </p>
-                    {post.abstract && (
-                      <p className="text-charcoal text-sm sm:text-base font-normal line-clamp-2 sm:line-clamp-4 mt-2">
-                        {post.abstract.length > 400
-                          ? post.abstract.slice(0, 400) + "…"
-                          : post.abstract}
+              {pagePosts.map((post: PostMeta) => {
+                const abstract = post.abstract ?? "";
+
+                return (
+                  <Link
+                    key={post.slug}
+                    href={`/blog/${post.slug}`}
+                    className="grid grid-cols-[1fr] gap-0 sm:grid-cols-[280px_1fr] sm:gap-x-8 no-underline">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={post.featuredImage}
+                      alt={post.title}
+                      className="w-full md:h-[140px] object-cover"
+                      loading="lazy"
+                    />
+                    <div>
+                      <h3 className="mt-3 sm:mt-0 text-[20px] font-medium text-black">
+                        {post.title}
+                      </h3>
+                      <p className="text-charcoal text-sm font-normal mt-1 leading-none">
+                        {post.duration}
+                        {post.duration && <span className="mx-1">•</span>}
+                        {format(new Date(post.date), "MMMM d, yyyy")}
                       </p>
-                    )}
-                  </div>
-                </Link>
-              ))}
+                      {abstract && (
+                        <p className="text-charcoal text-sm sm:text-base font-normal line-clamp-2 sm:line-clamp-4 mt-2">
+                          {abstract.length > 400
+                            ? abstract.slice(0, 400) + "…"
+                            : abstract}
+                        </p>
+                      )}
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
 
             {totalPages > 1 && (

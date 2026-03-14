@@ -6,17 +6,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import type { SwiperRef } from "swiper/react";
 import "swiper/css";
-import parse from "html-react-parser";
+import RichText from "./RichText";
 
-type QuoteItem = {
+interface QuoteItem {
   quote: string;
   author: string;
   logo: string;
-};
+}
 
-type QuotesCarouselProps = {
+interface QuotesCarouselProps {
   data: QuoteItem[];
-};
+}
 
 export default function QuotesCarousel({ data }: QuotesCarouselProps) {
   const swiperRef = useRef<SwiperRef>(null);
@@ -55,12 +55,14 @@ export default function QuotesCarousel({ data }: QuotesCarouselProps) {
                         loading="lazy"
                       />
                     </div>
-                    <div className="mb-5 [&>a]:text-white">
-                      {parse(quote.quote)}
-                    </div>
-                    <div className="font-bold mb-[155px] [&>a]:text-white">
-                      {parse(quote.author)}
-                    </div>
+                    <RichText
+                      html={quote.quote}
+                      className="mb-5 [&>a]:text-white"
+                    />
+                    <RichText
+                      html={quote.author}
+                      className="font-bold mb-[155px] [&>a]:text-white"
+                    />
                   </SwiperSlide>
                 ))}
               </Swiper>

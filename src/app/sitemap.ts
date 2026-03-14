@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
-import { getAllPosts } from "@/lib/posts";
+import { getAllPosts, type PostMeta } from "../lib/posts";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://hiero.org";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hiero.org";
 
 export const dynamic = "force-static";
 
@@ -35,8 +35,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   // Dynamic blog post routes
-  const posts = getAllPosts();
-  const blogRoutes = posts.map(post => ({
+  const posts: PostMeta[] = getAllPosts();
+  const blogRoutes = posts.map((post: PostMeta) => ({
     url: `${BASE_URL}/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: "monthly" as const,

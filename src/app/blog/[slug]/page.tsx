@@ -8,10 +8,11 @@ import {
 } from "../../../lib/posts";
 import { format } from "date-fns";
 import Link from "next/link";
+import RichText from "@/components/RichText";
 import ShareButtons from "@/components/ShareButtons";
 import { notFound } from "next/navigation";
 
-export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
+export function generateStaticParams(): { slug: string }[] {
   const posts: PostMeta[] = getAllPosts();
   return posts.map((post: PostMeta) => ({ slug: post.slug }));
 }
@@ -68,9 +69,9 @@ export default async function BlogPostPage({
         {/* Content */}
         <div className="container py-14 sm:py-[80px] lg:py-[90px]">
           <main className="w-full min-w-0 max-w-[800px] mx-auto">
-            <div
+            <RichText
+              html={post.contentHtml}
               className="content text-sm text-charcoal font-normal sm:text-base"
-              dangerouslySetInnerHTML={{ __html: post.contentHtml }}
             />
             <div className="mt-11 mx-auto w-fit">
               <ShareButtons />
@@ -86,7 +87,7 @@ export default async function BlogPostPage({
                 Recent Hiero Posts
               </h2>
               <ul className="mt-6 grid grid-cols-1 xl:grid-cols-4 gap-[38px] list-none p-0">
-                {recentPosts.map(rp => (
+                {recentPosts.map((rp: PostMeta) => (
                   <li key={rp.slug}>
                     <Link
                       href={`/blog/${rp.slug}`}
@@ -136,6 +137,8 @@ function AuthorBlock({
   date: string;
   duration?: string;
 }) {
+  const hasAuthorMeta = [author.title, author.organization].some(Boolean);
+
   const inner = (
     <>
       {author.image && (
@@ -154,7 +157,7 @@ function AuthorBlock({
           {format(new Date(date), "MMMM d, yyyy")}
         </p>
         <p className="m-0">by {author.name}</p>
-        {(author.title || author.organization) && (
+        {hasAuthorMeta && (
           <p className="m-0">
             {author.title}
             {author.title && author.organization ? ", " : " "}

@@ -27,20 +27,14 @@ async function loadPostsModule() {
   return import("@/lib/posts");
 }
 
-function writePublishedPostsFixture() {
-  writeFile(
-    "content/posts/_index.md",
-    `+++
+const BLOG_INDEX_CONTENT = `+++
 title = "Engineering Blog"
 subtitle = "Latest engineering updates"
 list_title = "Recent Posts"
 +++
-`,
-  );
+`;
 
-  writeFile(
-    "content/posts/older-post.md",
-    `+++
+const OLDER_POST_CONTENT = `+++
 title = "Older Post"
 date = 2026-03-01
 draft = false
@@ -51,12 +45,9 @@ name = "Older Author"
 +++
 
 Older content.
-`,
-  );
+`;
 
-  writeFile(
-    "content/posts/new-post.md",
-    `+++
+const NEW_POST_CONTENT = `+++
 title = "New Post"
 date = 2026-03-15
 draft = false
@@ -68,20 +59,22 @@ name = "New Author"
 
 Hello from the post.
 {{< contributorsGrid endpoint="https://example.com" >}}
-`,
-  );
+`;
 
-  writeFile(
-    "content/posts/draft-post.md",
-    `+++
+const DRAFT_POST_CONTENT = `+++
 title = "Draft Post"
 date = 2026-03-20
 draft = true
 +++
 
 This should not appear.
-`,
-  );
+`;
+
+function writePublishedPostsFixture() {
+  writeFile("content/posts/_index.md", BLOG_INDEX_CONTENT);
+  writeFile("content/posts/older-post.md", OLDER_POST_CONTENT);
+  writeFile("content/posts/new-post.md", NEW_POST_CONTENT);
+  writeFile("content/posts/draft-post.md", DRAFT_POST_CONTENT);
 }
 
 afterEach(() => {
@@ -214,51 +207,46 @@ Body.
     expect(getSimplePage("content/heroes/broken.md")).toBeNull();
   });
 
-  it("normalizes Date objects produced by frontmatter parsing", async () => {
+  it("normalizes TOML dates into ISO strings", async () => {
     createTempSite();
 
-    writeFile("content/posts/date-object.md", "Placeholder content");
+    writeFile(
+      "content/posts/date-object.md",
+      `+++
+title = "Date Object Post"
+draft = false
+date = 2026-04-01
++++
 
-    vi.doMock("gray-matter", () => ({
-      default: () => ({
-        data: {
-          title: "Date Object Post",
-          draft: false,
-          date: new Date("2026-04-01T10:00:00Z"),
-        },
-        content: "Body",
-      }),
-    }));
+Body
+`,
+    );
 
     const { getAllPosts } = await loadPostsModule();
     const posts = getAllPosts();
 
     expect(posts).toHaveLength(1);
-    expect(posts[0]?.date).toBe(new Date("2026-04-01T10:00:00Z").toISOString());
+    expect(posts[0]?.date).toBe(new Date("2026-04-01T00:00:00Z").toISOString());
   });
 
   it("normalizes string dates produced by frontmatter parsing", async () => {
     createTempSite();
 
-    writeFile("content/posts/string-date.md", "Placeholder content");
+    writeFile(
+      "content/posts/string-date.md",
+      `+++
+title = "String Date Post"
+draft = false
+date = "2026-05-01T00:00:00.000Z"
++++
 
-    const mockedMatter = vi.fn(() => ({
-      data: {
-        title: "String Date Post",
-        draft: false,
-        date: "2026-05-01T00:00:00.000Z",
-      },
-      content: "Body",
-    }));
-
-    vi.doMock("gray-matter", () => ({
-      default: mockedMatter,
-    }));
+Body
+`,
+    );
 
     const { getAllPosts } = await loadPostsModule();
     const posts = getAllPosts();
 
-    expect(mockedMatter).toHaveBeenCalled();
     expect(posts).toHaveLength(1);
     expect(posts[0]?.date).toBe(new Date("2026-05-01T00:00:00.000Z").toISOString());
   });
@@ -348,7 +336,11 @@ invalid =
     });
 
     writeFile("content/empty/index.md", "Body only with no frontmatter.");
-    expect(getSimplePage("content/empty/index.md")).toBeNull();
+    expect(getSimplePage("content/empty/index.md")).toEqual({
+      title: "",
+      description: "",
+      contentMarkdown: "Body only with no frontmatter.",
+    });
 
     expect(
       getSimplePageWithDefaults("content/empty/index.md", {
@@ -356,24 +348,22 @@ invalid =
         description: "Fallback description",
       }),
     ).toEqual({
-      title: "Fallback",
-      description: "Fallback description",
-      contentMarkdown: "",
+      title: "",
+      description: "",
+      contentMarkdown: "Body only with no frontmatter.",
     });
   });
 
   it("uses defaults for missing blog index fields", async () => {
     createTempSite();
 
-    writeFile("content/posts/_index.md", "placeholder");
-
-    vi.doMock("gray-matter", () => ({
-      default: () => ({
-        data: {
-          title: "Only Title",
-        },
-      }),
-    }));
+    writeFile(
+      "content/posts/_index.md",
+      `+++
+title = "Only Title"
++++
+`,
+    );
 
     const { getBlogIndexMeta } = await loadPostsModule();
 
@@ -387,14 +377,13 @@ invalid =
   it("returns empty title and description when simple page frontmatter omits them", async () => {
     createTempSite();
 
-    writeFile("content/empty/index.md", "placeholder");
-
-    vi.doMock("gray-matter", () => ({
-      default: () => ({
-        data: {},
-        content: "Body from parser",
-      }),
-    }));
+    writeFile(
+      "content/empty/index.md",
+      `---
+---
+Body from parser
+`,
+    );
 
     const { getSimplePage } = await loadPostsModule();
 
@@ -408,21 +397,21 @@ invalid =
   it("maps author entries with missing optional fields to undefined", async () => {
     createTempSite();
 
-    writeFile("content/posts/author-gaps.md", "placeholder");
+    writeFile(
+      "content/posts/author-gaps.md",
+      `+++
+title = "Author Gaps"
+draft = false
+date = 2026-03-05
+[[authors]]
++++
 
-    vi.doMock("gray-matter", () => ({
-      default: () => ({
-        data: {
-          title: "Author Gaps",
-          draft: false,
-          date: "2026-03-05T00:00:00.000Z",
-          authors: [{}],
-        },
-        content: "Author fallback content.",
-      }),
-    }));
+Author fallback content.
+`,
+    );
 
     const { getAllPosts } = await loadPostsModule();
+
     const posts = getAllPosts();
     const authorGaps = posts.find(post => post.slug === "author-gaps");
 

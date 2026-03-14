@@ -1,0 +1,17 @@
+# Ignore build artifacts and dependencies
+node_modules
+.next
+out
+build
+dist
+
+# Ignore lock and environment files
+pnpm-lock.yaml
+
+.env
+.env.local
+
+# Optional: Ignore specific image file types in the public folder
+public/**/*.svg
+public/**/*.png
+public/**/*.jpg

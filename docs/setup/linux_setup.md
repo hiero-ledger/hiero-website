@@ -4,11 +4,11 @@ This guide explains how to set up the Hiero website locally on a Linux system.
 
 ## Step 1: Install Dependencies
 
-Install Git, Node.js, npm, and Hugo (extended).
+Install Git, Node.js, and pnpm.
 
     sudo apt update
     sudo apt install git nodejs npm -y
-    sudo snap install hugo --channel=extended
+    sudo npm install -g pnpm
 
 ## Step 2: Clone the Repository
 
@@ -19,29 +19,28 @@ Clone the repository and navigate into it:
 
 ## Step 3: Install Node Packages
 
-Install required npm dependencies:
+Install required dependencies:
 
-    npm install
+    pnpm install
 
 ## Step 4: Local Development
 
-Start the Hugo development server with live reloading:
+Start the Next.js development server with live reloading:
 
-    npm run start
+    pnpm dev
 
 Open your browser and visit:
 
-    http://localhost:1313/
+    http://localhost:3000/
 
 ## Step 5: Preview Draft Content
 
-To preview draft blog posts:
+To preview draft blog posts, just ensure the `draft` flag in your markdown front matter is respected by your application logic, and run:
 
-    hugo server --buildDrafts
+    pnpm dev
 
 ## Step 6: Build for Production
 
 To generate a production-ready build:
 
-    npm run build
-
+    pnpm build

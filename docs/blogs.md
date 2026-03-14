@@ -1,124 +1,224 @@
 # Writing Blog Posts
 
-## Content Guidelines
+This guide reflects how the current site reads and renders blog content.
 
-Blog posts on hiero.org/blog should focus exclusively on technical content for a maintainer-focused audience.
+## What Belongs On The Hiero Blog
 
-For:
+Posts on `hiero.org/blog` should stay focused on technical, contributor, maintainer, or ecosystem-builder content.
 
-- Marketing
-- Business-related content
-- Major project announcements
+For broader marketing, business messaging, or Linux Foundation-level announcements, use the appropriate external channel instead.
 
-Please use [LF Blog](https://www.linuxfoundation.org/blog)
+## How Blog Posts Work In This Repo
 
-## Step by Step Guide to Writing Blog Posts
+The current parser in `src/lib/posts.ts` expects:
 
-### 1. Search Existing Blog Posts
+- A Markdown file directly inside `content/posts`
+- TOML front matter with `+++` delimiters
+- Markdown body content
 
-If a very similar blog post already exists, consider how to distinguish it slightly or create a follow-up blog.
+Important limitations:
 
-### 2. Create a Blog Post New Feature Suggestion
+- Only top-level `content/posts/*.md` files are loaded
+- `content/posts/_index.md` is reserved for the blog landing page metadata
+- Raw HTML in markdown is skipped by the current renderer
+- Hugo shortcodes like `{{< ... >}}` and `{{% ... %}}` are stripped out
 
-Visit [Hiero Website Issues](https://github.com/hiero-ledger/hiero-website/issues). Click on the green button "New Issue" at the top right, select Feature and create a brief proposal for your blog post.
+If you need a post-specific subfolder or custom shortcode behavior, that requires a code change first.
 
-### 3. Get Assigned and Get Working
+## Step By Step
 
-Comment /assign on the new issue to request to get assigned.
+### 1. Choose A File Name
 
-Then follow the [step-by-step instructions to creating your pull request](workflow.md)
+Create a new file in `content/posts` using kebab-case:
 
-You'll need to:
-
-- Fork the repository
-- Create a working branch
-- GPG and DCO sign commits
-- Submit the pull request
-
-#### How to Create the Blog Post:
-
-1. Find `/content/posts`.
-2. Create `{blog_post_title}.md`
-
-3. Write the text of your blog post.
-
-4. Apply correct markdown syntax
-   The blog needs to be written in markdown for it to render correctly. Most AI tools will be able to convert your blog post text into blog post markdown for you.
-
-Markdown is simple, you can learn more about Markdown here [Introductory Markdown Guide](https://www.markdownguide.org/basic-syntax/).
-
-5. Check the Preview
-   Once you start your local development server with `pnpm dev`, open `http://localhost:3000/blog` to see your new post in the list, and click on it to see the preview.
-   You can correct errors directly in the markdown file and save the file `command+S` to apply changes. Fast Refresh will auto-update your browser preview.
-
-6. Add Images
-   We recommend images for:
-
-- The blog post title
-- The author
-
-If you have images already, follow these steps: - 1. Locate `/public/images` (or `/static/images` if legacy paths apply) - 2. Add high quality JPG or PNG image(s) and save them.
-
-7. Add Blog Requirements
-
-The hiero blog is built using Next.js. We need to add instructions at the top of the markdown file for it to render correctly.
-
-Copy paste and edit:
-
-```yaml
----
-title: "The Blog Post Title I Want the Community to See on the Hiero Blog"
-featured_image: "/images/the_icon_image_for_my_blog.jpg"
-date: "2025-08-01T11:00:00-07:00"
-categories: ["Blog"]
-tags: ["Announcement"]
-duration: "3 min read"
-draft: false
-abstract: "A brief summary of the blog post that appears in lists and meta descriptions."
-authors:
-  - name: "Your name or GitHub alias"
-    title: "Your role or title"
-    organization: "Hiero"
-    link: "https://github.com/your-username"
-    image: "/images/your_profile_image.png"
----
+```text
+content/posts/my-first-post.md
 ```
 
-### Front Matter Parameters
+If you do not set a `slug`, the file name becomes the blog URL:
 
-| Parameter        | Required | Description                                                                                                                                        |
-| ---------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `title`          | Yes      | The main title of the blog post. Displayed at the top of the post and used in page metadata, previews, and search results.                         |
-| `featured_image` | No       | Path to the image shown above the post content and when the post appears in a list. Supports absolute and relative paths from the `public` folder. |
-| `date`           | Yes      | The publication date and time of the post. Used by Next.js for ordering content and determining publish time. Must be in ISO 8601 format.          |
-| `categories`     | No       | A taxonomy used to represent major groupings or sections of the site.                                                                              |
-| `tags`           | No       | A taxonomy used to group and organize content.                                                                                                     |
-| `duration`       | No       | The estimated average reading time of the article (for example, `3 min read`).                                                                     |
-| `draft`          | No       | Set to `true` if your blog post is a work in progress and shouldn't appear publicly yet.                                                           |
-| `abstract`       | No       | A short summary or preview of the post’s content. Displayed in post lists and used for the single post meta description for SEO.                   |
-| `authors`        | Yes      | Defines one or more authors for the post. Supports the fields listed in the Author Fields table below.                                             |
+```text
+/blog/my-first-post
+```
 
-### Author Fields (`authors`)
+### 2. Add TOML Front Matter
 
-| Field          | Required | Description                                                               |
-| -------------- | -------- | ------------------------------------------------------------------------- |
-| `name`         | Yes      | The author’s display name or GitHub username.                             |
-| `title`        | No       | The author’s role or title (for example, Engineer, Maintainer).           |
-| `organization` | No       | The organization or team the author represents.                           |
-| `link`         | No       | A URL to the author’s profile (GitHub, LinkedIn, personal website, etc.). |
-| `image`        | No       | Path to the author’s profile image. Supports absolute and relative paths. |
+Use this template:
 
-## 4. Create Pull Request and View Preview
+```toml
++++
+title = "My First Post"
+date = 2026-03-15
+draft = false
+featured_image = "/images/my-first-post/hero.png"
+categories = ["Blog"]
+tags = ["Example", "Community"]
+duration = "4 min read"
+abstract = "A short summary used in blog cards and metadata."
+slug = "my-first-post"
 
-Commit and create the pull request following [Guide](workflow.md). Well done!
+[[authors]]
+name = "Your Name"
+title = "Maintainer"
+organization = "Hiero"
+link = "https://github.com/your-handle"
+image = "/images/authors/your-name.png"
++++
+```
 
-Once you create your pull request, several checks will run (formatting, linting, building) and a Vercel/Netlify preview will likely be generated depending on infrastructure setup.
+You can add more authors by repeating the `[[authors]]` block.
 
-- Click the preview link generated in the PR.
-- Check the blog post renders as expected.
+### 3. Write The Body In Markdown
 
-## 5. Wait for Reviews
+Use standard Markdown for headings, lists, links, images, quotes, and code blocks.
 
-The Hiero website community will review your new blog post and publish it once approved.
+Good examples:
 
-Thank you!
+```md
+## Heading
+
+Use **bold** text instead of raw HTML tags.
+
+[External link](https://example.com)
+
+![Diagram](/images/my-first-post/diagram.png)
+```
+
+Avoid:
+
+- Raw HTML like `<div>` or `<strong>`
+- Hugo shortcodes like `{{< youtube ... >}}`
+
+Those will not render in the current setup.
+
+### 4. Add Images
+
+Put images in `public/images/...`.
+
+Examples:
+
+- Hero image: `public/images/my-first-post/hero.png`
+- Inline diagram: `public/images/my-first-post/diagram.png`
+- Author photo: `public/images/authors/your-name.png`
+
+Then reference them with site-rooted paths:
+
+```toml
+featured_image = "/images/my-first-post/hero.png"
+```
+
+```md
+![Diagram](/images/my-first-post/diagram.png)
+```
+
+### 5. Preview Locally
+
+Start the site:
+
+```bash
+pnpm dev
+```
+
+Preview at:
+
+- `http://localhost:3000/blog`
+- `http://localhost:3000/blog/<slug>`
+
+Draft behavior:
+
+- `draft = true` means the post is skipped entirely
+- It will not appear in the blog list
+- Its single-post page will not render either
+
+If you want to preview the post locally, set `draft = false` while testing.
+
+### 6. Open Your Pull Request
+
+Follow the normal contributor workflow in [workflow.md](./workflow.md).
+
+Before opening a PR, run:
+
+```bash
+pnpm lint
+pnpm build
+```
+
+## Required vs Recommended Fields
+
+The parser is permissive, but these are the current practical requirements.
+
+| Field | Status | Notes |
+| --- | --- | --- |
+| `title` | Required | Displayed on the page and in metadata. |
+| `date` | Required | Used for ordering. A TOML date like `2026-03-15` works. |
+| `[[authors]]` with `name` | Strongly recommended | The page hero is designed to show at least one author. |
+| `abstract` | Strongly recommended | Used in blog cards and metadata. |
+| `featured_image` | Strongly recommended | Used in the blog list and recent-post cards. If omitted, the site falls back to a default image. |
+| `draft` | Optional | Defaults to published behavior if omitted. |
+| `slug` | Optional | Defaults to the file name without `.md`. |
+| `categories` | Optional | Use an array such as `["Blog"]`. |
+| `tags` | Optional | Use an array such as `["Release", "SDK"]`. |
+| `duration` | Optional | Example: `"4 min read"`. |
+| `description` | Optional | Acts as a fallback summary if `abstract` is omitted. |
+
+## Author Fields
+
+Each author block supports these fields:
+
+| Field | Status | Notes |
+| --- | --- | --- |
+| `name` | Recommended | The main displayed author value. |
+| `title` | Optional | Shown in the hero metadata. |
+| `organization` | Optional | Shown with the title if present. |
+| `link` | Optional | Makes the author block clickable. |
+| `image` | Optional | Profile image shown in the hero area. |
+
+Example with two authors:
+
+```toml
+[[authors]]
+name = "First Author"
+title = "Maintainer"
+organization = "Hiero"
+link = "https://github.com/first-author"
+image = "/images/authors/first-author.png"
+
+[[authors]]
+name = "Second Author"
+organization = "Hiero"
+link = "https://github.com/second-author"
+```
+
+## Current Date Format Notes
+
+These both work with the current parser:
+
+```toml
+date = 2026-03-15
+```
+
+```toml
+date = 2026-03-15T09:30:00Z
+```
+
+## Pre-Publish Checklist
+
+Before your PR is ready:
+
+- The file is in `content/posts`
+- The file extension is `.md`
+- The front matter uses `+++`
+- The title and date are filled in
+- The post has at least one author
+- The post has an abstract
+- The hero image path is valid
+- Inline image paths are valid
+- The post renders correctly at `/blog/<slug>`
+- `draft = false` if the post is intended to publish after merge
+
+## Helpful References
+
+- Current example post: `content/posts/hiero-enterprise-java.md`
+- Blog index metadata: `content/posts/_index.md`
+- Local setup guide: [nextjs-setup.md](./nextjs-setup.md)
+- Workflow guide: [workflow.md](./workflow.md)

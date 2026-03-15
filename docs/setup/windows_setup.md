@@ -4,38 +4,44 @@
 
 ### Install packages
 
-Run these commands: 
+Ensure you have Node.js installed, then run these commands to install `pnpm`:
 
-```npm i ```
-```npm install  --save-dev cross-env npm install```
-```npm install --save-dev rimraf ```
-
-### Update Package.Json
-
-Navigate to your package.json file
-
-Remove the current script section and replace it with the code below:
-
+```bash
+npm install -g pnpm
 ```
-"scripts": {
-    "clean": "rimraf public",
-    "start": "cross-env TAILWIND_MODE=watch NODE_ENV=development npm-run-all clean prelim:twcss --parallel dev:*",
-    "build": "NODE_ENV=production npm-run-all clean prelim:twcss prod:*",
-    "prelim:twcss": "npx tailwindcss -i ./assets/css/main.css -o ./static/css/main.css --jit",
-    "dev:twcssw": "npx tailwindcss -i ./assets/css/main.css -o ./static/css/main.css --jit -w",
-    "dev:hugo": "hugo server",
-    "prod:twcss": "./node_modules/tailwindcss/lib/cli.js -i ./assets/css/main.css -o ./static/css/main.css --jit --minify",
-    "prod:hugo": "hugo --gc --minify"
-  },
+
+### Clone repository and install dependencies
+
+Navigate to your workspace and clone the repository, then install packages:
+
+```bash
+git clone https://github.com/hiero-ledger/hiero-website
+cd hiero-website
+pnpm install
 ```
-Save the file.
 
 ### Run Start Command
 
-Run ```npm run start``` to spin up the local server.
+Run the following to start the local development server:
 
-You should see ```Web Server is available at http://localhost:1313/```
+```bash
+pnpm dev
+```
 
-Open this link to see the project 
+You should see output similar to this in your console:
 
-You have just setup Hiero-Website locally!!
+```
+ready - started server on 0.0.0.0:3000, url: http://localhost:3000
+```
+
+Open `http://localhost:3000` to see the project.
+
+You have just set up the Hiero-Website locally!
+
+### Run Build Command
+
+To verify the production build works correctly on your machine:
+
+```bash
+pnpm build
+```

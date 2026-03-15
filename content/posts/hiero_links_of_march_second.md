@@ -18,7 +18,7 @@ Below are links to some of the things that happened this past week. **Check it o
 ---
 **Daniel Marvin** enhanced repository automation in the Python SDK to [enforce linked issue assignment check](https://github.com/hiero-ledger/hiero-sdk-python/pull/1889) for PR authors, updating the bot and workflow to ensure pull requests are linked to issues and that PR authors are assigned to at least one of those issues.
 
-**om12prakash** added [unit tests and implemented a `repr method](https://github.com/hiero-ledger/hiero-sdk-python/pull/1881) for the NftId class to improve test coverage and debugging readability in the Pyhton SDK.
+**om12prakash** added [unit tests and implemented a `repr` method](https://github.com/hiero-ledger/hiero-sdk-python/pull/1881) for the NftId class to improve test coverage and debugging readability in the Python SDK.
 
 **JavaScript Team** added new [Good First Issues](https://github.com/hiero-ledger/hiero-sdk-js/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22Good%20First%20Issue%22) to the Hiero JavaScript SDK repository. 
 

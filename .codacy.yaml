@@ -1,0 +1,3 @@
+exclude_paths:
+  - "pnpm-lock.yaml"
+  - "vitest.config.ts"

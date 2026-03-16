@@ -8,8 +8,6 @@
     "dev": "pnpm sync:repo-stats && next dev",
     "build": "pnpm sync:repo-stats && next build",
     "start": "next start",
-    "test": "vitest run",
-    "test:watch": "vitest",
     "lint": "eslint .",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json}\"",
     "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json}\""

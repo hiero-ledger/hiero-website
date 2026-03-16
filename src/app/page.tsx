@@ -14,36 +14,36 @@ const heroData = {
 
 const whatIsHieroData = {
   heading: "What is Hiero?",
-  text: "Hiero, a [Linux Foundation Decentralized Trust](http://www.lfdecentralizedtrust.org/) project, is an open-source, vendor-neutral distributed ledger technology. Hiero is used to build the [Hedera](https://hedera.com/) public ledger.",
+  text: "Public forums should be equally accessible. No one should manipulate your transactions to their advantage. Hashgraph is leaderless - toward a fairer world.Public forums should be equally accessible. No one should manipulate your transactions to their advantage. Hashgraph is leaderless - toward a fairer world.",
   points: [
     {
       heading: "Hiero is **fair**",
-      text: "Everybody should have equal access to all public forums. No one should have the ability to re-prioritize your transactions, or drop them, or front-run, or sandwich trade, or otherwise disadvantage you. The hashgraph algorithm is leaderless. We all deserve a more fair world.",
+      text: "Public forums should be equally accessible. No one should manipulate your transactions to their advantage. Hashgraph is leaderless - toward a fairer world.",
       icon: "/images/Hiero-Icon-Fair.svg",
     },
     {
       heading: "Hiero is **fast**",
-      text: "You shouldn't have to sacrifice performance for fairness or security. The world of interconnected businesses and networks continues to expand at an accelerating rate. Waiting minutes for transactions to finalize doesn't meet your requirements. The hashgraph algorithm isn't just fair, it is also fast.",
+      text: "Do not sacrifice performance for fairness or security. As businesses and networks expand rapidly, waiting for transactions to finalize no longer meets your needs. The hashgraph algorithm is fast.Do not sacrifice performance for fairness or security. As businesses and networks expand rapidly, waiting for transactions to finalize no longer meets your needs. The hashgraph algorithm is fast.",
       icon: "/images/Hiero-Icon-Fast.svg",
     },
     {
       heading: "Hiero is **secure**",
-      text: "The hashgraph algorithm is asynchronous Byzantine Fault Tolerant (ABFT). This is the gold standard in distributed network security. Your transactions are protected from bad actors with the highest security available.",
+      text: "The hashgraph algorithm is the gold standard - asynchronous Byzantine Fault Tolerant (ABFT). Your transactions are protected with the highest security.",
       icon: "/images/Hiero-Icon-Secure.svg",
     },
     {
       heading: "Hiero is **decentralized**",
-      text: "No one entity should have complete control of your future. Spreading power and influence out among many participants, all with equal access, helps secure your access to the network and your data. You should be able to participate in the network, in its development, and in its use. This network belongs to the world. It belongs to the future.",
+      text: "No single entity should control your future. Power is shared among participants with equal access, securing the network and your data. You can participate in its development and use. This network belongs to the world and the future.",
       icon: "/images/Hiero-Icon-Decentralized.svg",
     },
     {
       heading: "Hiero is **leaderless**",
-      text: "A ledger with a leader-based consensus protocol is inherently unfair, and either slow or susceptible to denial of service attacks. We believe in a future where every node can participate on an equal basis with a completely leaderless consensus protocol, safe from denial-of- service, and safe from centralization.",
+      text: "Leader-based consensus is unfair and either slow or vulnerable to attacks. We believe in a fully leaderless protocol where every node participates equally. Our protocol is resistant to denial-of-service and prevents centralization.",
       icon: "/images/Hiero-Icon-Leaderless.svg",
     },
     {
       heading: "Hiero is **open**",
-      text: "Hiero is a vibrant community of developers, visionaries, and innovators dedicated to creating a more fair, efficient, and secure world. As part of the Linux Foundation Decentralized Trust initiative, we are pioneering a new era of open governance and collaboration for the project.",
+      text: "Hiero's vibrant community builds a fairer, more efficient, and secure world. As part of the Linux Foundation Decentralized Trust initiative, it pioneers open governance and collaboration.",
       icon: "/images/Hiero-Icon-Open.svg",
     },
   ],

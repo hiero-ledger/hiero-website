@@ -23,7 +23,7 @@ const whatIsHieroData = {
     },
     {
       heading: "Hiero is **fast**",
-      text: "Do not sacrifice performance for fairness or security. As businesses and networks expand rapidly, waiting for transactions to finalize no longer meets your needs. The hashgraph algorithm is fast.Do not sacrifice performance for fairness or security. As businesses and networks expand rapidly, waiting for transactions to finalize no longer meets your needs. The hashgraph algorithm is fast.",
+      text: "Do not sacrifice performance for fairness or security. As businesses and networks expand rapidly, waiting for transactions to finalize no longer meets your needs. The hashgraph algorithm is fast.",
       icon: "/images/Hiero-Icon-Fast.svg",
     },
     {

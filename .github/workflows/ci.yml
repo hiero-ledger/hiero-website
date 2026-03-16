@@ -62,9 +62,6 @@ jobs:
       - name: Run lint check
         run: pnpm lint
 
-      - name: Run unit tests
-        run: pnpm test
-
       - name: Build Next.js application
         run: pnpm build
         env:

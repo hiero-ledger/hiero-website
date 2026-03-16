@@ -27,7 +27,7 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
           <div id="what-is-hiero-intro-column" className="relative">
             <div
               id="what-is-hiero-intro"
-              className="sticky top-1/2 -translate-y-1/2 mt-20">
+              className="sticky top-1/2 -translate-y-1/2 md:mt-20">
               <h2 className="text-3xl mb-2.5 sm:text-4xl sm:mb-0">
                 {data.heading}
               </h2>

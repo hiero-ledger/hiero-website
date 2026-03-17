@@ -14,7 +14,7 @@ const heroData = {
 
 const whatIsHieroData = {
   heading: "What is Hiero?",
-  text: "Public forums should be equally accessible. No one should manipulate your transactions to their advantage. Hashgraph is leaderless - toward a fairer world.Public forums should be equally accessible. No one should manipulate your transactions to their advantage. Hashgraph is leaderless - toward a fairer world.",
+  text: "Hiero, a [Linux Foundation Decentralized Trust](http://www.lfdecentralizedtrust.org/) project, is an open-source, vendor-neutral distributed ledger technology. Hiero is used to build the [Hedera](https://hedera.com/) public ledger.",
   points: [
     {
       heading: "Hiero is **fair**",

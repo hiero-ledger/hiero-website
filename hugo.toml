@@ -37,6 +37,11 @@ url = '/blog/'
 weight = 60
 
 [[menus.main]]
+name = 'TSC'
+url = '/tsc/'
+weight = 80
+
+[[menus.main]]
 name = 'Calendar'
 url = 'https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week'
 weight = 70

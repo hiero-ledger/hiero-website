@@ -18,12 +18,6 @@ section_what_parts_open_source_text = '''
 Hiero is 100% open-source. While the transition of the project to Linux Foundation Decentralized Trust is still ongoing, a view into some additional contributions can be found in <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera’s GitHub organization</a>. As a first step, the technical steering committee (TSC) of Hiero will provide oversight to include  projects that are needed to run an enterprise-ready decentralized network to a new Hiero GitHub organization. More information about the transition process can be found in the roadmap.
 '''
 
-section_technical_steering_committee_heading = "The Technical Steering Committee of Hiero"
-section_technical_steering_committee_text = '''
-<p>Hiero is governed by a Technical Steering Committee (TSC) composed of experienced and diverse members of the community. The duties, goals, and rights of the TSC are defined in the <a href="https://github.com/hiero-ledger/governance/blob/main/hiero-technical-charter.md" target="_blank" rel="noreferrer noopener">technical charter</a> of the Hiero project.
-</p>
-'''
-
 section_meet_heading = "Join our Hiero Community Calls"
 section_meet_text = '''
 <p>Join our open TSC, Community and Project meetings. We welcome your opinion and invite you to collaborate with the team!</p>

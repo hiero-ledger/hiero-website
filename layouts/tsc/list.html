@@ -1,0 +1,78 @@
+{{ define "main" }}
+
+<section id="technical-steering-committee" class="container py-10 ">
+
+  <div class="relative left-1/2 right-1/2 -mx-[50vw] w-screen bg-gradient-to-br from-red-dark via-red to-red">
+    <div class="max-w-7xl mx-auto px-6 py-20 text-center space-y-4">
+      
+      <h1 class="text-white text-4xl font-semibold">
+        {{ .Params.section_technical_steering_committee_heading }}
+      </h1>
+
+      <p class="text-white text-lg max-w-2xl mx-auto">
+        {{ .Params.section_technical_steering_committee_text }}
+        <a href="https://github.com/hiero-ledger/governance/blob/main/hiero-technical-charter.md"
+          class="underline font-medium"
+          target="_blank">
+          Technical Charter
+        </a>
+      </p>
+
+    </div>
+  </div>
+
+  <!-- Meetings -->
+  <div class="mt-10">
+    <h2 class="font-bold">Meetings</h2>
+
+    {{ range .Params.section_meet_calls }}
+      <div class="mb-6">
+        <p class="m-4">{{ .description }}</p>
+        <p><strong>Schedule:</strong> {{ .schedule }}</p>
+
+        <a href="{{ .calendar_link }}" target="_blank" class="m-4">View Calendar</a> |
+        <a href="{{ .register_link }}" target="_blank" class="m-4">Register</a>
+      </div>
+    {{ end }}
+  </div>
+
+  <!-- Committee Members -->
+  <div class="mt-12">
+    <h2 class="font-bold text-4xl">Committee Members</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      {{ $members := sort .Site.Data.technical_steering_committee "lastName" }}
+
+      {{ range $index, $member := $members }}
+        {{ $bioId := printf "%s%s%d" $member.firstName $member.lastName $index }}
+
+        <div class="border p-4 text-white bg-gradient-to-br from-red-dark via-red to-red">
+          
+          <img src="/images/tsc/{{ $member.photo }}" 
+               alt="{{ $member.firstName }} {{ $member.lastName }}">
+
+          <h3 class="text-center mt-4">{{ $member.firstName }} {{ $member.lastName }}</h3>
+
+          <!--<button onclick="document.getElementById('{{ $bioId }}').classList.toggle('hidden')" class="bg-red p-2 text-white">
+            Bio
+          </button>-->
+          <p class="mt-4">{{$member.bio}}</p>
+
+          {{ if $member.gitHubAccount }}
+            <p class="text-lg text-center mt-4"><a href="{{ $member.gitHubAccount }}" target="_blank" class="text-white">GitHub</a></p>
+          {{ end }}
+
+          <div id="{{ $bioId }}" class="hidden mt-2">
+            <p>{{ $member.bio | safeHTML }}</p>
+          </div>
+
+        </div>
+      {{ end }}
+
+    </div>
+  </div>
+
+</section>
+
+{{ end }}

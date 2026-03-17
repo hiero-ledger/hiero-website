@@ -288,53 +288,6 @@
   });
 </script>
 
-<!-- TECHNICAL STEERING COMMITTEE -->
-<div id="technical-steering-committee" class="anchor">
-  <div class="bg-white">
-    <div id="technical-steering-committee-content" class="container py-[40px] sm:pt-[120px] sm:pb-0 grid grid-cols-1 lg:grid-cols-2 gap-10">
-      <div id="technical-steering-committee-intro-column">
-        <div id="technical-steering-committee-intro">
-          <h2 class="text-3xl mb-2.5 sm:text-4xl sm:mb-4">{{ $.Param "section_technical_steering_committee_heading" | safeHTML }}</h2>
-          <div class="space-y-4 text-base sm:text-lg">{{ $.Param "section_technical_steering_committee_text" | safeHTML }}</div>
-        </div>
-      </div>
-      <div class="team-members grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-[40px] sm:gap-y-[60px]">
-        {{ $sortedCommittee := sort $.Site.Data.technical_steering_committee "lastName" }}
-        {{ range $index, $sortedCommittee := $sortedCommittee}}
-        {{ $bioId := printf "%s%s%d" .firstName .lastName $index }}
-        <div class="team-member relative">
-          <div class="mb-3">
-            <img src="images/tsc/{{ .photo }}" alt="{{ .firstName }} {{ .lastName }}" class="w-full aspect-square object-cover" {{ if $lazyLoading }}loading="lazy"{{ end }}>
-          </div>
-          <h3 class="text-2xl mb-4">{{ .firstName }} {{ .lastName }}</h3>
-          <div class="flex flex-row gap-2 items-center">
-            <button class="text-red border-2 border-red border-solid rounded-full py-1 px-[26px] text-lg" onclick="showBio('{{$bioId}}')">Bio</button>
-            <a href="{{ .gitHubAccount }}" target="_blank" rel="noopener" class="border-2 border-red border-solid rounded-full h-[35px] w-[35px] flex justify-center items-center">
-              {{ $icon := resources.Get "images/Hiero-Icon-Github.svg" }}
-              {{ with $icon }}
-              <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
-              {{ end }}
-            </a>
-          </div>
-          <div id="{{$bioId}}" class="absolute hidden top-0 bg-black text-white text-lg z-10 flex-col p-[30px]" aria-hidden="true"> <!-- bio modal -->
-            <button class="absolute text-white top-1.5 right-1.5" onclick="hideBio('{{$bioId}}')">
-              {{ $icon := resources.Get "images/Hiero-Icon-ModalClose.svg" }}
-              {{ with $icon }}
-              <img src="{{ $icon.RelPermalink }}" {{ if $lazyLoading }}loading="lazy"{{ end }}>
-              {{ end }}
-            </button>
-            <div class="mb-5">
-              <img src="images/tsc/{{ .photo }}" alt="{{ .firstName }} {{ .lastName }}" class="w-full aspect-square object-cover" {{ if $lazyLoading }}loading="lazy"{{ end }}>
-            </div>
-            <p class="text-gray-500 mt-2 space-y-4">{{ .bio | safeHTML }}</p>
-            <button class="text-black text-lg rounded-full py-1.5 px-[26px] bg-white-dark self-center mt-4" onclick="hideBio('{{$bioId}}')">Close</button>
-          </div>
-        </div>
-        {{ end }}
-      </div>
-    </div>
-  </div>
-</div>
 <!-- ROADMAP -->
 <div id="roadmap" class="anchor anchor--roadmap">
   <div class="bg-white">

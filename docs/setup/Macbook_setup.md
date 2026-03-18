@@ -1,12 +1,13 @@
+# Macbook Setup
+
 Step 1: Install Dependencies
 
 Open your Terminal and run the following commands:
 
-# Install Node.js and npm (if not already installed)
-brew install node
+# Install Node.js and pnpm (if not already installed)
 
-# Install the Hugo 'extended' version (required for Tailwind/Sass)
-brew install hugo
+brew install node
+npm install -g pnpm
 
 Step 2: Clone the Repository
 
@@ -17,20 +18,20 @@ cd hiero-website
 
 Step 3: Install Node Packages
 
-The project uses npm to manage CSS processing tools.
+The project uses pnpm to manage dependencies.
 
-npm i
+pnpm install
 
 Step 4: Local Development
 
-To start the Hugo development server with live reloading:
+To start the Next.js development server with hot module reloading:
 
-npm run start
+pnpm dev
 
-Access the site: Once the command is running, open your browser to http://localhost:1313/
+Access the site: Once the command is running, open your browser to http://localhost:3000/
 
 Step 5: Building for Production
 
-To generate the static site with optimized and minified CSS:
+To generate the production-ready application build:
 
-npm run build
+pnpm build

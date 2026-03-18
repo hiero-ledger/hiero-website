@@ -15,7 +15,7 @@
   "dependencies": {
     "date-fns": "^4.1.0",
     "gray-matter": "^4.0.3",
-    "next": "16.1.6",
+    "next": "16.1.7",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-markdown": "^10.1.0",
@@ -33,7 +33,7 @@
     "@vitejs/plugin-react": "6.0.0",
     "@vitest/coverage-v8": "4.1.0",
     "eslint": "^9",
-    "eslint-config-next": "16.1.6",
+    "eslint-config-next": "16.1.7",
     "jsdom": "^28.1.0",
     "prettier": "^3.8.1",
     "tailwindcss": "^4",

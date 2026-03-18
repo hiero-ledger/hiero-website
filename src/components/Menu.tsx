@@ -117,7 +117,9 @@ export default function Menu() {
                   href={item.href}
                   className={isActive(item.href) ? "active" : ""}
                   aria-current={isActive(item.href) ? "page" : undefined}
-                  onClick={() => { setIsOpen(false); }}>
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}>
                   {item.name}
                 </a>
               </li>

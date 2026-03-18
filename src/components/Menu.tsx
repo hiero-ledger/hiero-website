@@ -3,11 +3,11 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-type MenuItem = {
+interface MenuItem {
   name: string;
   href: string;
   external?: boolean;
-};
+}
 
 const menuItems: MenuItem[] = [
   {
@@ -104,19 +104,21 @@ export default function Menu() {
         </button>
 
         <ul id="menu" className="flex flex-col sm:flex-row justify-between">
-          {menuItems.map(item => (
-            <li
-              key={item.name}
-              className={`text-center sm:text-left ${item.name === "Connect" ? "sm:hidden" : ""}`.trim()}>
-              <a
-                href={item.href}
-                className={isActive(item.href) ? "active" : ""}
-                aria-current={isActive(item.href) ? "page" : undefined}
-                onClick={() => setIsOpen(false)}>
-                {item.name}
-              </a>
-            </li>
-          ))}
+          {menuItems.map(item => {
+            return (
+              <li
+                key={item.name}
+                className={`text-center sm:text-left ${item.name === "Connect" ? "sm:hidden" : ""}`.trim()}>
+                <a
+                  href={item.href}
+                  className={isActive(item.href) ? "active" : ""}
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  onClick={() => { setIsOpen(false); }}>
+                  {item.name}
+                </a>
+              </li>
+            );
+          })}
 
           <li className="self-center">
             <a

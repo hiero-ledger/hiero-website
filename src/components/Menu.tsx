@@ -66,7 +66,9 @@ export default function Menu() {
       <button
         type="button"
         className="sm:hidden"
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          setIsOpen(true);
+        }}
         aria-label="Open menu"
         aria-expanded={isOpen}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -93,7 +95,9 @@ export default function Menu() {
         <button
           type="button"
           className="absolute text-white top-[35px] right-[25px] sm:hidden"
-          onClick={() => setIsOpen(false)}
+          onClick={() => {
+            setIsOpen(false);
+          }}
           aria-label="Close menu">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img

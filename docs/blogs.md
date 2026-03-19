@@ -8,6 +8,9 @@ Posts on `hiero.org/blog` should stay focused on technical, contributor, maintai
 
 For broader marketing, business messaging, or Linux Foundation-level announcements, use the appropriate external channel instead.
 
+Hiero does not currently support translated blog variants. Publish a single
+English source post unless a dedicated i18n feature is added later.
+
 ## How Blog Posts Work In This Repo
 
 The current parser in `src/lib/posts.ts` expects:
@@ -220,5 +223,7 @@ Before your PR is ready:
 
 - Current example post: `content/posts/hiero-enterprise-java.md`
 - Blog index metadata: `content/posts/_index.md`
+- Contributor docs index: [README.md](./README.md)
 - Local setup guide: [nextjs-setup.md](./nextjs-setup.md)
+- Repo overview: [01-repo-overview.md](./01-repo-overview.md)
 - Workflow guide: [workflow.md](./workflow.md)

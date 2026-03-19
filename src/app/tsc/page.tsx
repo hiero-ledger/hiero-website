@@ -29,17 +29,17 @@ export default function TSCSection() {
       <div id="technical-steering-committee" className="anchor">
         <div className="bg-white text-[20px]">
           <div className="bg-gradient-to-br from-red-dark via-red to-red relative">
-          <div
-            id="technical-steering-committee-intro"
-            className="container py-14 sm:py-[100px] xl:py-36 text-white text-center">
-            <h2 className="text-[55px] text-center text-white font-bold">
-              {tscHeading}
-            </h2>
-            <RichText
-              inline
-              markdown={tscText}
-              className="space-y-4 text-center mt-6 text-white [&_a]:text-white font-bold"
-            />
+            <div
+              id="technical-steering-committee-intro"
+              className="container py-14 sm:py-[100px] xl:py-36 text-white text-center">
+              <h2 className="text-[55px] text-center text-white font-bold">
+                {tscHeading}
+              </h2>
+              <RichText
+                inline
+                markdown={tscText}
+                className="space-y-4 text-center mt-6 text-white [&_a]:text-white font-bold"
+              />
             </div>
           </div>
           <div

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import tscMembers from "@/data/technical_steering_committee.json";
-import RichText from "./RichText";
+import RichText from "../../components/RichText";
 
 interface Member {
   firstName: string;
@@ -25,22 +25,23 @@ export default function TSCSection() {
   );
 
   return (
+    <>
     <div id="technical-steering-committee" className="anchor">
-      <div className="bg-white">
+      <div className="bg-white text-[20px]">
+        <div id="technical-steering-committee-intro" className="bg-red py-22 px-6">
+          <h2 className="text-[55px] text-center text-white font-bold">
+            {tscHeading}
+          </h2>
+          <RichText
+            inline
+            markdown={tscText}
+            className="space-y-4 text-center mt-6 text-white [&_a]:text-white font-bold"
+          />
+        </div>
         <div
           id="technical-steering-committee-content"
-          className="container py-[40px] sm:pt-[120px] sm:pb-[120px] grid grid-cols-1 lg:grid-cols-2 gap-10">
-          <div id="technical-steering-committee-intro-column">
-            <div id="technical-steering-committee-intro">
-              <h2 className="text-3xl mb-2.5 sm:text-4xl sm:mb-4">
-                {tscHeading}
-              </h2>
-              <RichText
-                inline
-                markdown={tscText}
-                className="space-y-4 text-base sm:text-lg"
-              />
-            </div>
+          className="container py-[40px] sm:pt-[120px] sm:pb-[120px] gap-10">
+          <div id="technical-steering-committee-intro-column" className="">
           </div>
           <div className="team-members grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-[40px] sm:gap-y-[60px]">
             {sorted.map((member, index) => {
@@ -53,14 +54,14 @@ export default function TSCSection() {
                       alt={`${member.firstName} ${member.lastName}`}
                       width={400}
                       height={400}
-                      className="w-full aspect-square object-cover"
+                      className="w-full max-w-[250px] mx-auto aspect-square object-cover"
                       loading="lazy"
                     />
                   </div>
-                  <h3 className="text-2xl mb-4">
+                  <h3 className="text-2xl max-w-[250px] mx-auto">
                     {member.firstName} {member.lastName}
                   </h3>
-                  <div className="flex flex-row gap-2 items-center">
+                  <div className="flex flex-row gap-2 items-center max-w-[250px] mx-auto">
                     <button
                       className="text-red border-2 border-red border-solid rounded-full py-1 px-[26px] text-lg cursor-pointer"
                       onClick={() => setOpenBio(bioId)}>
@@ -120,5 +121,6 @@ export default function TSCSection() {
         </div>
       </div>
     </div>
+    </>
   );
 }

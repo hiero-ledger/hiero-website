@@ -5,7 +5,6 @@ import MeetSection from "@/components/MeetSection";
 import ReposCarousel from "@/components/ReposCarousel";
 import OpenSourceSection from "@/components/OpenSourceSection";
 import QuotesCarousel from "@/components/QuotesCarousel";
-import TSCSection from "@/components/TSCSection";
 
 const heroData = {
   heading: "Hiero",
@@ -355,7 +354,7 @@ export default function Home() {
       <OpenSourceSection data={openSourceData} />
       <Divider />
       <QuotesCarousel data={quotesData} />
-      <TSCSection />
+      
     </>
   );
 }

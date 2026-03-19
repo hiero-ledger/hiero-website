@@ -16,6 +16,7 @@ const menuItems: MenuItem[] = [
   },
   { name: "Connect", href: "/#connect" },
   { name: "Blog", href: "/blog/" },
+  { name: "TSC", href: "/tsc/" },
   {
     name: "Calendar",
     href: "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week",

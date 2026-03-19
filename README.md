@@ -8,7 +8,7 @@ This repo contains the source for [hiero.org](https://hiero.org).
 
 ## Current Stack
 
-- Next.js `16.1.6`
+- Next.js `16.1.7`
 - React `19.2.3`
 - TypeScript `5`
 - Tailwind CSS `4`
@@ -80,13 +80,23 @@ pnpm start
 
 ## Project Docs
 
+- Contributor docs index: [docs/README.md](docs/README.md)
 - Local Next.js setup: [docs/nextjs-setup.md](docs/nextjs-setup.md)
+- Repo overview: [docs/01-repo-overview.md](docs/01-repo-overview.md)
+- Content folder guide: [docs/02-content-folder.md](docs/02-content-folder.md)
+- Adding pages: [docs/03-adding-pages.md](docs/03-adding-pages.md)
 - Contributor workflow: [docs/workflow.md](docs/workflow.md)
 - Blog writing guide: [docs/blogs.md](docs/blogs.md)
+- First contribution checklist: [docs/05-first-contribution-checklist.md](docs/05-first-contribution-checklist.md)
+- Testing and quality checks: [docs/06-testing-and-quality-checks.md](docs/06-testing-and-quality-checks.md)
+- GitHub automation guide: [docs/07-github-automation.md](docs/07-github-automation.md)
 
 ## Creating a New Blog Post
 
 Blog posts are loaded from top-level Markdown files in `content/posts`.
+
+Hiero does not currently support translations or localized content variants, so
+new posts should be authored as a single English source file.
 
 1. Create a new file such as `content/posts/my-first-post.md`.
 2. Use TOML front matter with `+++` delimiters.

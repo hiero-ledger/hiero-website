@@ -4,7 +4,7 @@ This guide matches the current Hiero website codebase.
 
 ## Current Stack
 
-- Next.js `16.1.6`
+- Next.js `16.1.7`
 - React `19.2.3`
 - TypeScript `5`
 - Tailwind CSS `4`
@@ -60,6 +60,7 @@ Fast Refresh is enabled, so saving most files updates the browser automatically.
 - `src/app` - Next.js routes and page files
 - `src/components` - reusable UI components
 - `content/posts` - blog posts
+- `content/hacktoberfest` and `content/heroes` - markdown-backed simple pages
 - `public/images` - static images used by pages and posts
 - `docs` - contributor documentation
 
@@ -72,6 +73,9 @@ That means:
 - Standard Markdown works
 - Raw HTML inside markdown is skipped
 - Hugo shortcodes like `{{< ... >}}` and `{{% ... %}}` are stripped from blog and simple content pages
+
+Hiero does not currently support translations or locale-specific content. Keep
+content in a single English source file.
 
 When writing content, prefer Markdown syntax such as:
 
@@ -159,6 +163,12 @@ Check that:
 
 ## Next Steps
 
+- Contributor docs index: [README.md](./README.md)
+- Repo overview: [01-repo-overview.md](./01-repo-overview.md)
+- Content folder guide: [02-content-folder.md](./02-content-folder.md)
+- Adding pages guide: [03-adding-pages.md](./03-adding-pages.md)
 - Blog authoring guide: [blogs.md](./blogs.md)
+- First contribution checklist: [05-first-contribution-checklist.md](./05-first-contribution-checklist.md)
+- Testing and quality checks: [06-testing-and-quality-checks.md](./06-testing-and-quality-checks.md)
 - Contributor workflow: [workflow.md](./workflow.md)
 - General repo overview: [README.md](../README.md)

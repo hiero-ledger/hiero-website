@@ -28,9 +28,10 @@ export default function TSCSection() {
     <>
       <div id="technical-steering-committee" className="anchor">
         <div className="bg-white text-[20px]">
+          <div className="bg-gradient-to-br from-red-dark via-red to-red relative">
           <div
             id="technical-steering-committee-intro"
-            className="bg-red py-22 px-6">
+            className="container py-14 sm:py-[100px] xl:py-36 text-white text-center">
             <h2 className="text-[55px] text-center text-white font-bold">
               {tscHeading}
             </h2>
@@ -39,6 +40,7 @@ export default function TSCSection() {
               markdown={tscText}
               className="space-y-4 text-center mt-6 text-white [&_a]:text-white font-bold"
             />
+            </div>
           </div>
           <div
             id="technical-steering-committee-content"
@@ -86,10 +88,10 @@ export default function TSCSection() {
                     {/* Bio modal */}
                     {openBio === bioId && (
                       <div
-                        className="absolute top-0 bg-black text-white text-lg z-10 flex flex-col p-[30px]"
+                        className="absolute top-0 bg-white text-black text-lg z-10 flex flex-col p-[30px]"
                         aria-modal="true">
                         <button
-                          className="absolute text-white top-1.5 right-1.5 cursor-pointer"
+                          className="absolute text-black top-1.5 right-1.5 cursor-pointer"
                           onClick={() => setOpenBio(null)}
                           aria-label="Close bio">
                           <Image
@@ -109,7 +111,7 @@ export default function TSCSection() {
                             loading="lazy"
                           />
                         </div>
-                        <p className="text-white mt-2">{member.bio}</p>
+                        <p className="text-black mt-2">{member.bio}</p>
                         <button
                           className="text-black text-lg rounded-full py-1.5 px-[26px] bg-white-dark self-center mt-4 cursor-pointer"
                           onClick={() => setOpenBio(null)}>

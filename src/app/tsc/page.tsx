@@ -14,6 +14,7 @@ interface Member {
 }
 
 const tscHeading = "The Technical Steering Committee of Hiero";
+const tscSubheading = "An overview about the members of the TSC committee.";
 const tscText =
   "Hiero is governed by a Technical Steering Committee (TSC) composed of experienced and diverse members of the community. The duties, goals, and rights of the TSC are defined in the [technical charter](https://github.com/hiero-ledger/governance/blob/main/hiero-technical-charter.md) of the Hiero project.";
 
@@ -32,16 +33,17 @@ export default function TSCSection() {
             <div
               id="technical-steering-committee-intro"
               className="container py-14 sm:py-[100px] xl:py-36 text-white text-center">
-              <h2 className="text-[55px] text-center text-white font-bold">
+              <h2 className="text-[53px] text-center text-white">
                 {tscHeading}
               </h2>
               <RichText
                 inline
-                markdown={tscText}
-                className="space-y-4 text-center mt-6 text-white [&_a]:text-white font-bold"
+                markdown={tscSubheading}
+                className="space-y-4 text-center mt-6 text-white [&_a]:text-white"
               />
             </div>
           </div>
+          <p className="m-4 mt-10 text-center">{tscText}</p>
           <div
             id="technical-steering-committee-content"
             className="container py-[40px] sm:pt-[120px] sm:pb-[120px] gap-10">

@@ -42,7 +42,11 @@ export default function RichText({
 
       if (isExternalHref(href)) {
         return (
-          <a href={href} target="_blank" rel="noreferrer noopener" className={linkClass}>
+          <a
+            href={href}
+            target="_blank"
+            rel="noreferrer noopener"
+            className={linkClass}>
             {children}
           </a>
         );

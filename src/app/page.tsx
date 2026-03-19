@@ -354,7 +354,6 @@ export default function Home() {
       <OpenSourceSection data={openSourceData} />
       <Divider />
       <QuotesCarousel data={quotesData} />
-      
     </>
   );
 }

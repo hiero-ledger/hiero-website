@@ -43,7 +43,10 @@ export default function TSCSection() {
               />
             </div>
           </div>
-          <p className="m-4 mt-10 text-center">{tscText}</p>
+          <RichText 
+          markdown={tscText}
+          className="m-4 mt-10 text-center [&_a]:underline"
+          />
           <div
             id="technical-steering-committee-content"
             className="container py-[40px] sm:pt-[120px] sm:pb-[120px] gap-10">

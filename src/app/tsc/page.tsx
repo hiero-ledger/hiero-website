@@ -43,9 +43,9 @@ export default function TSCSection() {
               />
             </div>
           </div>
-          <RichText 
-          markdown={tscText}
-          className="m-4 mt-10 text-center [&_a]:underline"
+          <RichText
+            markdown={tscText}
+            className="m-4 mt-10 text-center [&_a]:underline"
           />
           <div
             id="technical-steering-committee-content"

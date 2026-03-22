@@ -63,12 +63,9 @@ export default function Menu() {
 
     const current = normalize(pathname);
     const target = normalize(href);
-    if (target === "/blog") return current === "/blog" || current.startsWith("/blog/");
+    if (target === "/blog")
+      return current === "/blog" || current.startsWith("/blog/");
     return current === target;
-    
-    /*if (href === "/blog/")
-      return pathname === "/blog" || pathname.startsWith("/blog/");
-    return pathname === href;*/
   };
 
   return (

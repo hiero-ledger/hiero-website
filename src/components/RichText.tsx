@@ -37,9 +37,16 @@ export default function RichText({
   const components = {
     a({ href = "", children }: { href?: string; children?: ReactNode }) {
       if (!href) return <>{children}</>;
+
+      const linkClass = "underline hover:text-gray-200";
+
       if (isExternalHref(href)) {
         return (
-          <a href={href} target="_blank" rel="noreferrer noopener">
+          <a
+            href={href}
+            target="_blank"
+            rel="noreferrer noopener"
+            className={linkClass}>
             {children}
           </a>
         );

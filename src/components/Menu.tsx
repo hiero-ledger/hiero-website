@@ -16,6 +16,7 @@ const menuItems: MenuItem[] = [
   },
   { name: "Connect", href: "/#connect" },
   { name: "Blog", href: "/blog/" },
+  { name: "TSC", href: "/tsc/" },
   {
     name: "Calendar",
     href: "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week",
@@ -54,11 +55,17 @@ export default function Menu() {
   }, [isDesktop, isOpen]);
 
   const isActive = (href: string): boolean => {
+    const normalize = (value: string) =>
+      value !== "/" && value.endsWith("/") ? value.slice(0, -1) : value;
+
     if (href.startsWith("http")) return false;
     if (href.startsWith("/#")) return false;
-    if (href === "/blog/")
-      return pathname === "/blog" || pathname.startsWith("/blog/");
-    return pathname === href;
+
+    const current = normalize(pathname);
+    const target = normalize(href);
+    if (target === "/blog")
+      return current === "/blog" || current.startsWith("/blog/");
+    return current === target;
   };
 
   return (

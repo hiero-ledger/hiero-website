@@ -55,11 +55,20 @@ export default function Menu() {
   }, [isDesktop, isOpen]);
 
   const isActive = (href: string): boolean => {
+    const normalize = (value: string) =>
+      value !== "/" && value.endsWith("/") ? value.slice(0, -1) : value;
+
     if (href.startsWith("http")) return false;
     if (href.startsWith("/#")) return false;
-    if (href === "/blog/")
+
+    const current = normalize(pathname);
+    const target = normalize(href);
+    if (target === "/blog") return current === "/blog" || current.startsWith("/blog/");
+    return current === target;
+    
+    /*if (href === "/blog/")
       return pathname === "/blog" || pathname.startsWith("/blog/");
-    return pathname === href;
+    return pathname === href;*/
   };
 
   return (

@@ -74,7 +74,9 @@ export default function TSCSection() {
                     <div className="flex flex-row gap-2 items-center max-w-[250px] mx-auto">
                       <button
                         className="text-red border-2 border-red border-solid rounded-full py-1 px-[26px] text-lg cursor-pointer"
-                        onClick={() => setOpenBio(bioId)}>
+                        onClick={() => {
+                          setOpenBio(bioId);
+                        }}>
                         Bio
                       </button>
                       <a
@@ -97,7 +99,9 @@ export default function TSCSection() {
                         aria-modal="true">
                         <button
                           className="absolute text-black top-1.5 right-1.5 cursor-pointer"
-                          onClick={() => setOpenBio(null)}
+                          onClick={() => {
+                            setOpenBio(null);
+                          }}
                           aria-label="Close bio">
                           <Image
                             src="/images/Hiero-Icon-ModalClose.svg"
@@ -119,7 +123,9 @@ export default function TSCSection() {
                         <p className="text-black mt-2">{member.bio}</p>
                         <button
                           className="text-black text-lg rounded-full py-1.5 px-[26px] bg-white-dark self-center mt-4 cursor-pointer"
-                          onClick={() => setOpenBio(null)}>
+                          onClick={() => {
+                            setOpenBio(null);
+                          }}>
                           Close
                         </button>
                       </div>

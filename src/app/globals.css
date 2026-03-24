@@ -58,6 +58,10 @@
 /* ============================================
    Base Styles
    ============================================ */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   @apply m-0 text-charcoal leading-normal font-serif;
 }

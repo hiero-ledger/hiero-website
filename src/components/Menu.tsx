@@ -10,6 +10,7 @@ interface MenuItem {
 }
 
 const menuItems: MenuItem[] = [
+  { name: "Contribute", href: "/#contribute" },
   { name: "Connect", href: "/#connect" },
   { name: "Blog", href: "/blog/" },
   { name: "TSC", href: "/tsc/" },

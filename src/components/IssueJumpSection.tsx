@@ -16,7 +16,10 @@ interface IssueJumpSectionProps {
 
 export default function IssueJumpSection({ data }: IssueJumpSectionProps) {
   return (
-    <section aria-labelledby="issue-jump-heading" className="bg-white">
+    <section
+      id="contribute"
+      aria-labelledby="issue-jump-heading"
+      className="bg-white anchor">
       <div className="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[80px]">
         <div className="mb-10 sm:mb-12">
           <h2

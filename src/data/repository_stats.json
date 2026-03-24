@@ -1,6 +1,6 @@
 {
   "hiero-consensus-node": {
-    "stars": 383
+    "stars": 384
   },
   "hiero-local-node": {
     "stars": 266
@@ -12,10 +12,10 @@
     "stars": 176
   },
   "hiero-sdk-js": {
-    "stars": 317
+    "stars": 320
   },
   "hiero-sdk-java": {
-    "stars": 250
+    "stars": 251
   },
   "hiero-json-rpc-relay": {
     "stars": 87
@@ -42,16 +42,16 @@
     "stars": 22
   },
   "hiero-sdk-cpp": {
-    "stars": 39
+    "stars": 40
   },
   "governance": {
     "stars": 13
   },
   "hiero-sdk-python": {
-    "stars": 54
+    "stars": 55
   },
   "hiero-sdk-swift": {
-    "stars": 33
+    "stars": 35
   },
   "sdk-collaboration-hub": {
     "stars": 7

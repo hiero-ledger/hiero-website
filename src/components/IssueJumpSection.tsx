@@ -1,3 +1,5 @@
+import { isSafeUrl } from '@/lib/utils';
+
 interface DifficultyLink {
   label: string;
   description: string;
@@ -30,29 +32,28 @@ export default function IssueJumpSection({ data }: IssueJumpSectionProps) {
           <p className="text-lg max-w-full md:max-w-[800px]">{data.text}</p>
         </div>
 
-        <ul
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
-          role="list">
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {data.difficulties.map(item => (
-            <li key={item.label}>
+            <div key={item.label}>
               {/*
                * Using <a> (not <button>) because this is always a navigation
                * action to an external URL — semantically correct and avoids
                * wrapping a link inside a button, which is invalid HTML.
                */}
               <a
-                href={item.href}
+                href={isSafeUrl(item.href) ? item.href : "#"}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="flex flex-col h-full min-w-0 border-2 border-white-dark rounded-2xl p-6 bg-white hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 transition-colors duration-200 no-underline text-charcoal">
                 <span className="text-xl font-medium text-red mb-2 break-words">
                   {item.label}
                 </span>
                 <span className="text-base text-gray">{item.description}</span>
               </a>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );

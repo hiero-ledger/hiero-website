@@ -10,10 +10,7 @@ interface MenuItem {
 }
 
 const menuItems: MenuItem[] = [
-  {
-    name: "Good First Issues",
-    href: "https://github.com/issues?q=is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%20archived%3Afalse%20no%3Aassignee%20(label%3A%22good%20first%20issue%22%20OR%20label%3A%22skill%3A%20good%20first%20issue%22)%20(repo%3Ahiero-ledger%2Fhiero-sdk-cpp%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-swift%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-python%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-js%20OR%20repo%3Ahiero-ledger%2Fhiero-website)",
-  },
+  { name: "Contribute", href: "/#jump-to-issues" },
   { name: "Connect", href: "/#connect" },
   { name: "Blog", href: "/blog/" },
   { name: "TSC", href: "/tsc/" },

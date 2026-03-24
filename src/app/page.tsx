@@ -2,6 +2,7 @@ import HeroSection from "@/components/HeroSection";
 import WhatIsHieroSection from "@/components/WhatIsHieroSection";
 import Divider from "@/components/Divider";
 import MeetSection from "@/components/MeetSection";
+import JumpToIssuesSection from "@/components/JumpToIssuesSection";
 import ReposCarousel from "@/components/ReposCarousel";
 import OpenSourceSection from "@/components/OpenSourceSection";
 import QuotesCarousel from "@/components/QuotesCarousel";
@@ -147,6 +148,37 @@ const meetData = {
       schedule: "Monthly",
       registerLink:
         "https://zoom-lfx.platform.linuxfoundation.org/meeting/94618152832?password=3b037576-2aab-4f7e-ab24-acf9ca2c3734&invite=true",
+    },
+  ],
+};
+
+const jumpToIssuesData = {
+  heading: "Jump to Issues",
+  text: "Whether you're just getting started or looking for a challenge, we have issues matching your skill level. Browse unassigned issues across our core SDK repositories and website.",
+  items: [
+    {
+      label: "Good First Issue",
+      description:
+        "Perfect for newcomers! These issues are great entry points to understand the codebase and make your first contribution.",
+      href: "https://github.com/issues?q=is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%20archived%3Afalse%20no%3Aassignee%20(label%3A%22good%20first%20issue%22%20OR%20label%3A%22skill%3A%20good%20first%20issue%22)%20(repo%3Ahiero-ledger%2Fhiero-sdk-cpp%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-swift%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-python%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-js%20OR%20repo%3Ahiero-ledger%2Fhiero-website)",
+    },
+    {
+      label: "Beginner",
+      description:
+        "You have some experience and are ready for more responsibility. These issues require fundamental skills but aren't beginner-only.",
+      href: "https://github.com/issues?q=is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%20archived%3Afalse%20no%3Aassignee%20(label%3A%22beginner%22%20OR%20label%3A%22skill%3A%20beginner%22)%20(repo%3Ahiero-ledger%2Fhiero-sdk-cpp%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-swift%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-python%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-js%20OR%20repo%3Ahiero-ledger%2Fhiero-website)",
+    },
+    {
+      label: "Intermediate",
+      description:
+        "You're comfortable with the codebase and ready for more complex work. These issues involve deeper knowledge and problem-solving.",
+      href: "https://github.com/issues?q=is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%20archived%3Afalse%20no%3Aassignee%20(label%3A%22intermediate%22%20OR%20label%3A%22skill%3A%20intermediate%22)%20(repo%3Ahiero-ledger%2Fhiero-sdk-cpp%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-swift%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-python%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-js%20OR%20repo%3Ahiero-ledger%2Fhiero-website)",
+    },
+    {
+      label: "Advanced",
+      description:
+        "For experienced developers. These issues require deep expertise, architectural decisions, or significant technical effort.",
+      href: "https://github.com/issues?q=is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%20archived%3Afalse%20no%3Aassignee%20(label%3A%22advanced%22%20OR%20label%3A%22skill%3A%20advanced%22)%20(repo%3Ahiero-ledger%2Fhiero-sdk-cpp%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-swift%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-python%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-js%20OR%20repo%3Ahiero-ledger%2Fhiero-website)",
     },
   ],
 };
@@ -348,6 +380,8 @@ export default function Home() {
       <WhatIsHieroSection data={whatIsHieroData} />
       <Divider />
       <MeetSection data={meetData} />
+      <Divider />
+      <JumpToIssuesSection data={jumpToIssuesData} />
       <Divider />
       <ReposCarousel data={reposData} />
       <Divider />

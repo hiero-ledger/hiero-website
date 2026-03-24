@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Decentralized Trust on Hiero</title>
+    <link>http://localhost:1313/tags/decentralized-trust/</link>
+    <description>Recent content in Decentralized Trust on Hiero</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 22 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/decentralized-trust/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hiero Graduates as the First Project under the Linux Foundation Decentralized Trust Umbrella and Its New Project Lifecycle Framework</title>
+      <link>http://localhost:1313/blog/hiero-graduation/</link>
+      <pubDate>Fri, 22 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/hiero-graduation/</guid>
+      <description>&lt;h2 id=&#34;hiero-becomes-the-first-graduated-project-under-lfdts-new-project-lifecycle-framework--and-the-first-to-achieve-graduation-since-lfdts-expanded-umbrella&#34;&gt;Hiero Becomes the First Graduated Project under LFDT’s New Project Lifecycle Framework — and the First to Achieve Graduation since LFDT’s Expanded Umbrella.&lt;/h2&gt;&#xA;&lt;p&gt;📣 We are proud to announce that &lt;strong&gt;Hiero&lt;/strong&gt; has officially reached &lt;strong&gt;graduated status&lt;/strong&gt; within the Linux Foundation Decentralized Trust (LFDT), becoming both the &lt;strong&gt;first project to do so under LFDT’s new project lifecycle framework&lt;/strong&gt; — and the &lt;strong&gt;first project to achieve graduation under the newly expanded LFDT umbrella organization&lt;/strong&gt;. 📣&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

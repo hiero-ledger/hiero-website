@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Hiero</title>
+    <link>http://localhost:1313/categories/blog/</link>
+    <description>Recent content in Blog on Hiero</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 30 Oct 2025 10:00:00 -0700</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A Month of Merges: How Hacktoberfest Turned Our Python SDK into a Pull-Request Party</title>
+      <link>http://localhost:1313/blog/a-month-of-merges-how-hacktoberfest-turned-our-python-sdk-into-a-pull-request-party/</link>
+      <pubDate>Thu, 30 Oct 2025 10:00:00 -0700</pubDate>
+      <guid>http://localhost:1313/blog/a-month-of-merges-how-hacktoberfest-turned-our-python-sdk-into-a-pull-request-party/</guid>
+      <description>&lt;p&gt;We just lived through our first real Hacktoberfest with the new Hiero Python SDK. To say it was &amp;ldquo;a bit busy&amp;rdquo; would be an understatement.&lt;/p&gt;&#xA;&lt;p&gt;It was a chaotic, fantastic, and eye-opening month of merges, new faces, and a whole lot of learning. For the Hiero Python SDK, this October wasn&amp;rsquo;t just another month on the calendar; it was the month our community truly came to life.&lt;/p&gt;&#xA;&lt;p&gt;Here’s the story of our wild, productive, and exciting month.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hiero Python SDK – Announcing Release v0.1.7</title>
+      <link>http://localhost:1313/blog/hiero-python-sdk-announcing-release-v0.1.7/</link>
+      <pubDate>Thu, 30 Oct 2025 14:00:00 +0530</pubDate>
+      <guid>http://localhost:1313/blog/hiero-python-sdk-announcing-release-v0.1.7/</guid>
+      <description>&lt;h1 id=&#34;-hiero-python-sdk--announcing-release-v017&#34;&gt;🚀 Hiero Python SDK – Announcing Release v0.1.7&lt;/h1&gt;&#xA;&lt;p&gt;We’re thrilled to announce &lt;strong&gt;version 0.1.7&lt;/strong&gt; of the Hiero Python SDK!&lt;/p&gt;&#xA;&lt;p&gt;This release focuses heavily on improving the developer experience with extensive new documentation, examples, and docstrings. It also introduces two new workflows, adds a checksum feature, and includes numerous refactors to make the SDK more robust and easier to use.&lt;/p&gt;&#xA;&lt;p&gt;A huge thank you to our 27 new contributors for making this rapid release possible! ❤️&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hiero Python SDK – Announcing Release v0.1.6</title>
+      <link>http://localhost:1313/blog/hiero-python-sdk-announcing-release-v0.1.6/</link>
+      <pubDate>Fri, 24 Oct 2025 11:00:00 +0100</pubDate>
+      <guid>http://localhost:1313/blog/hiero-python-sdk-announcing-release-v0.1.6/</guid>
+      <description>&lt;h1 id=&#34;-hiero-python-sdk--announcing-release-v016&#34;&gt;🚀 Hiero Python SDK – Announcing Release v0.1.6&lt;/h1&gt;&#xA;&lt;p&gt;We’re thrilled to announce &lt;strong&gt;version 0.1.6&lt;/strong&gt; of the Hiero Python SDK!&lt;br&gt;&#xA;This release introduces powerful new transaction capabilities, improved allowance management, and refinements across multiple SDK examples — making development on Hedera even smoother for Python users.&lt;/p&gt;&#xA;&lt;p&gt;A huge thank you to our talented contributors for making this release possible. ❤️&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-whats-new-in-016&#34;&gt;✨ What’s New in 0.1.6&lt;/h2&gt;&#xA;&lt;p&gt;This release expands the SDK’s transaction and topic management features, giving developers more flexibility and precision when interacting with Hedera.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Join the Next Chapter of the CLI! Explore Hiero CLI</title>
+      <link>http://localhost:1313/blog/join-the-next-chapter-of-the-cli-explore-hiero-cli/</link>
+      <pubDate>Fri, 17 Oct 2025 14:00:00 -0700</pubDate>
+      <guid>http://localhost:1313/blog/join-the-next-chapter-of-the-cli-explore-hiero-cli/</guid>
+      <description>&lt;h2 id=&#34;-join-the-next-chapter-of-the-cli-explore-hiero-cli&#34;&gt;📣 Join the Next Chapter of the CLI! Explore Hiero CLI&lt;/h2&gt;&#xA;&lt;p&gt;We’re thrilled to share a major milestone: the Hedera CLI is transitioned into Hiero CLI and is part of &lt;a href=&#34;https://github.com/hiero-ledger/hiero-cli&#34;&gt;hiero-ledger&lt;/a&gt;!.&#xA;This shift reflects not just a rebranding, but a deeper philosophical transition toward openness, extensibility, and community-driven development.&lt;/p&gt;&#xA;&lt;p&gt;Read the full announcement in the LFDT blog site here: &lt;a href=&#34;https://www.lfdecentralizedtrust.org/blog/transitioning-hedera-cli-to-hiero-cli-embracing-open-source-and-extensibility?utm_source=chatgpt.com&#34;&gt;“Transitioning Hedera CLI to Hiero CLI: Embracing Open Source and Extensibility”&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;summary-of-events&#34;&gt;Summary of events&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Project rehoming &amp;amp; governance shift&lt;/strong&gt; - The CLI is moving from its original Hedera home into Hiero (in hiero-ledger) as part of LFDT’s open governance model.&#xA;This unifies the tool with Hiero’s broader mission of neutral, collaborative infrastructure.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hacktoberfest 2025: Contribute to Hiero!</title>
+      <link>http://localhost:1313/blog/hacktoberfest-2025-contribute-to-hiero/</link>
+      <pubDate>Tue, 30 Sep 2025 14:00:00 -0700</pubDate>
+      <guid>http://localhost:1313/blog/hacktoberfest-2025-contribute-to-hiero/</guid>
+      <description>&lt;h2 id=&#34;-hacktoberfest-2025-contribute-to-hiero&#34;&gt;📣 Hacktoberfest 2025: Contribute to Hiero!&lt;/h2&gt;&#xA;&lt;p&gt;It’s that time of year again and Hacktoberfest 2025 is here! 🎉&lt;/p&gt;&#xA;&lt;p&gt;Every October, thousands of open source contributors from around the world come together to improve projects, learn new skills, and give back to the community.&#xA;This year, the Hiero project is excited to take part and welcome contributors of all levels.&lt;/p&gt;&#xA;&lt;h2 id=&#34;how-to-join-hacktoberfest&#34;&gt;How to Join Hacktoberfest&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Head over to &lt;a href=&#34;https://hacktoberfest.com/&#34;&gt;hacktoberfest.com&lt;/a&gt; and click &lt;strong&gt;Start Hacking&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Register using your GitHub account.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Results for September Hiero Technical Steering Committee Elections</title>
+      <link>http://localhost:1313/blog/results-for-september-hiero-technical-steering-committee-elections/</link>
+      <pubDate>Tue, 23 Sep 2025 00:00:00 -0700</pubDate>
+      <guid>http://localhost:1313/blog/results-for-september-hiero-technical-steering-committee-elections/</guid>
+      <description>&lt;h2 id=&#34;-september-hiero-technical-steering-committee-election-results-have-been-announced&#34;&gt;📣 September Hiero Technical Steering Committee election results have been announced!&lt;/h2&gt;&#xA;&lt;p&gt;We are pleased to announce the results of the recent election for the Hiero Technical Steering Committee (TSC) Contributor seat.&lt;/p&gt;&#xA;&lt;p&gt;Congratulations to &lt;a href=&#34;https://github.com/georgi-l95&#34;&gt;&lt;strong&gt;Georgi Lazarov&lt;/strong&gt;&lt;/a&gt;, who has been elected to the Contributor seat on the Hiero Technical Steering Committee.&lt;/p&gt;&#xA;&lt;p&gt;The result of this election has been announced in the Hiero TSC meeting scheduled for &lt;strong&gt;Sep 23rd&lt;/strong&gt;. For details on this and other Hiero project events, please refer to the &lt;a href=&#34;https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&#34;&gt;Hiero public calendar&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>September TSC Contributor Seat Voting</title>
+      <link>http://localhost:1313/blog/september-tsc-contributor-seat-voting/</link>
+      <pubDate>Wed, 17 Sep 2025 15:31:00 -0700</pubDate>
+      <guid>http://localhost:1313/blog/september-tsc-contributor-seat-voting/</guid>
+      <description>&lt;h2 id=&#34;-calling-all-maintainers-september-tsc-elections-for-contributor-seat-end-september-21&#34;&gt;🗳️ Calling all Maintainers!!! September TSC Elections for Contributor Seat end September 21&lt;/h2&gt;&#xA;&lt;p&gt;All current maintainers for the &lt;a href=&#34;https://github.com/hiero-ledger&#34;&gt;Hiero Project&lt;/a&gt; are welcomed to cast their vote for our TSC&amp;rsquo;s next Maintainer Seat representative.&lt;/p&gt;&#xA;&lt;h2 id=&#34;-tsc-election-timeline-for-september-2025&#34;&gt;📅 TSC Election Timeline for September 2025&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;The &lt;strong&gt;nomination&lt;/strong&gt; period for candidates will run from &lt;strong&gt;August 26&lt;/strong&gt; (start of day UTC) to &lt;strong&gt;September 9&lt;/strong&gt;, 2025 (end of day UTC).&lt;/li&gt;&#xA;&lt;li&gt;The &lt;strong&gt;election&lt;/strong&gt; will be held from &lt;strong&gt;September 10&lt;/strong&gt; (start of day UTC) to &lt;strong&gt;September 21&lt;/strong&gt;, 2025 (end of day UTC).&lt;/li&gt;&#xA;&lt;li&gt;The &lt;strong&gt;announcement&lt;/strong&gt; of the new TSC member will take place at the TSC meeting on &lt;strong&gt;September 23&lt;/strong&gt;, 2025.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;-the-nominees&#34;&gt;📝 The Nominees&lt;/h2&gt;&#xA;&lt;p&gt;Voters are able to select one of the following representatives who have been nominated by their peers for the election:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>September&#39;s Open Issues at the Python SDK</title>
+      <link>http://localhost:1313/blog/septembers-open-issues-at-the-python-sdk/</link>
+      <pubDate>Mon, 08 Sep 2025 11:00:00 -0700</pubDate>
+      <guid>http://localhost:1313/blog/septembers-open-issues-at-the-python-sdk/</guid>
+      <description>&lt;p&gt;The community team at the Hiero Python SDK has been working behind the scenes since November 2024 to help Python developers plug into Hedera’s decentralized network using Python code.&lt;/p&gt;&#xA;&lt;p&gt;We&amp;rsquo;re calling all Python developers—from seasoned veterans to enthusiastic beginners—to join us in this effort. Helping us solve these issues is a fantastic way to gain practical experience and strengthen our collective codebase.&lt;/p&gt;&#xA;&lt;p&gt;Here’s how you can roll up your sleeves, gain Python skills, and help our SDK blossom:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hiero Python SDK – Announcing Release v0.1.4</title>
+      <link>http://localhost:1313/blog/hiero-python-sdk-announcing-release-v0.1.4/</link>
+      <pubDate>Fri, 29 Aug 2025 11:00:00 +0100</pubDate>
+      <guid>http://localhost:1313/blog/hiero-python-sdk-announcing-release-v0.1.4/</guid>
+      <description>&lt;h1 id=&#34;-the-python-sdk-has-a-new-release--welcome-v014&#34;&gt;🚀 The Python SDK Has a New Release – Welcome v0.1.4&lt;/h1&gt;&#xA;&lt;p&gt;This extensive update represents a &lt;strong&gt;big leap&lt;/strong&gt; forward, especially for smart contract functionality, and comes with a range of improvements that make building on Hedera with Python easier, clearer, and more powerful. A huge thank you to our &lt;strong&gt;talented contributors&lt;/strong&gt; for making this release possible.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-whats-new-in-014&#34;&gt;✨ What’s New in 0.1.4&lt;/h2&gt;&#xA;&lt;p&gt;Using the Hiero Python SDK, you can now interact with the Hedera network in more ways than ever before.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Announcing the Hiero DID SDK JS: A Modern JavaScript Toolkit for Decentralized Identity on Hedera</title>
+      <link>http://localhost:1313/blog/announcing-the-hiero-did-sdk-js-a-modern-javascript-toolkit-for-decentralized-identity-on-hedera/</link>
+      <pubDate>Mon, 25 Aug 2025 13:26:50 -0700</pubDate>
+      <guid>http://localhost:1313/blog/announcing-the-hiero-did-sdk-js-a-modern-javascript-toolkit-for-decentralized-identity-on-hedera/</guid>
+      <description>&lt;h2 id=&#34;-announcing-the-hiero-did-sdk-js-a-modern-javascript-toolkit-for-decentralized-identity-on-hedera&#34;&gt;📣 Announcing the Hiero DID SDK JS: A Modern JavaScript Toolkit for Decentralized Identity on Hedera&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://github.com/hiero-ledger/hiero-did-sdk-js/raw/main/docs/modules/ROOT/images/component-view-diagram.png&#34; alt=&#34;Hiero DID SDK JS Component View Diagram&#34; title=&#34;Hiero DID SDK JS — Component View Diagram&#34;loading=&#34;lazy&#34;&#xD;&#xA;&gt;&lt;/p&gt;&#xA;&lt;p&gt;We’re excited to announce the initial GA release of the &lt;strong&gt;Hiero DID SDK JS&lt;/strong&gt;, a modern, open-source JavaScript/TypeScript SDK that empowers developers to build decentralized identity (DID) applications on the Hedera network. Now officially maintained under the Hiero GitHub organization, this SDK fully implements the Hedera DID Method and Hedera AnonCreds Method specifications, extending the foundation laid by the original Hashgraph DID SDK.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Introducing the Hiero Python SDK Office Hour</title>
+      <link>http://localhost:1313/blog/introducing-the-hiero-python-sdk-office-hour/</link>
+      <pubDate>Mon, 18 Aug 2025 11:00:00 +0100</pubDate>
+      <guid>http://localhost:1313/blog/introducing-the-hiero-python-sdk-office-hour/</guid>
+      <description>&lt;p&gt;We heard you loud and clear: you want more live, direct support time, and we’re excited to kick off a fortnightly Office Hour for the Python SDK. Grab your calendar and a cup of ☕—here’s what you need to know.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-when--where&#34;&gt;🗓️ When &amp;amp; Where&lt;/h2&gt;&#xA;&lt;p&gt;Every two weeks on &lt;strong&gt;Wednesday at 5 PM UTC&lt;/strong&gt;, starting &lt;strong&gt;Wednesday, 27 August, 2025&lt;/strong&gt;&lt;br&gt;&#xA;All python sdk enthusiasts are welcome to join: &lt;a href=&#34;https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&#34;&gt;LFDT Meeting Calendar&lt;/a&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-what-is-office-hour&#34;&gt;🎯 What Is Office Hour?&lt;/h2&gt;&#xA;&lt;p&gt;An Office Hour (fortnightly Wednesdays 5pm UTC) is your dedicated time to get real‑time help on:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Developer Community Interest in the Python SDK is Flourishing</title>
+      <link>http://localhost:1313/blog/developer-community-interest-in-the-python-sdk-is-flourishing/</link>
+      <pubDate>Sat, 09 Aug 2025 11:00:00 -0700</pubDate>
+      <guid>http://localhost:1313/blog/developer-community-interest-in-the-python-sdk-is-flourishing/</guid>
+      <description>&lt;p&gt;The &lt;strong&gt;Hiero Python SDK&lt;/strong&gt; provides functionality to interact with the &lt;strong&gt;Hedera Public DLT&lt;/strong&gt;(Distributed Ledger Technology), using the Python programming language.&lt;/p&gt;&#xA;&lt;p&gt;Since its creation in late &lt;strong&gt;September 2024&lt;/strong&gt;, and proposed to the &lt;strong&gt;TSC&lt;/strong&gt; in late &lt;strong&gt;November 2024&lt;/strong&gt;, the Python SDK has its origins as a &lt;strong&gt;community project&lt;/strong&gt;. The Python SDK was &lt;strong&gt;not&lt;/strong&gt; part of Hedera’s codebase that was donated to Hiero, a project in the &lt;strong&gt;Linux Foundation Decentralized Trust (LFDT)&lt;/strong&gt;. Until then, Hedera did not have a supported SDK in pure Python.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>August&#39;s Open Issues at the Python SDK</title>
+      <link>http://localhost:1313/blog/augusts-open-issues-at-the-python-sdk/</link>
+      <pubDate>Fri, 01 Aug 2025 11:00:00 -0700</pubDate>
+      <guid>http://localhost:1313/blog/augusts-open-issues-at-the-python-sdk/</guid>
+      <description>&lt;p&gt;The community team at the Hiero Python SDK has been working behind the scenes since November 2024 to help Python developers plug into Hedera’s decentralized network using Python code.&lt;/p&gt;&#xA;&lt;p&gt;If you’re interested in helping us grow our SDK codebase and documentation this August—whether you’re a smart‑contract wizard or just dipping your toes into technical contributions—we’re striving to create a welcoming space for you.&lt;/p&gt;&#xA;&lt;p&gt;Here’s how you can roll up your sleeves, gain Python skills, and help our SDK blossom:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Namespace Transition Announcement: Hedera Projects Moving to Hiero</title>
+      <link>http://localhost:1313/blog/namespace-transition-announcement-hedera-projects-moving-to-hiero/</link>
+      <pubDate>Fri, 25 Jul 2025 11:02:50 -0700</pubDate>
+      <guid>http://localhost:1313/blog/namespace-transition-announcement-hedera-projects-moving-to-hiero/</guid>
+      <description>&lt;p&gt;As previously announced in September 2024, Hedera projects have migrated to Hiero under Linux Foundation Decentralized Trust. This significant evolution involves a critical namespace transition from hashgraph to &lt;code&gt;hiero&lt;/code&gt; or &lt;code&gt;hiero-ledger&lt;/code&gt;, affecting project dependencies and SDK imports. This shift emphasizes greater transparency, collaboration, and open-source innovation, and developers are encouraged to update their dependencies accordingly to stay aligned.&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-the-migration-from-hedera-to-hiero&#34;&gt;Why the Migration from Hedera to Hiero?&lt;/h2&gt;&#xA;&lt;p&gt;In September 2024, Hedera took the strategic step of open sourcing its entire codebase, &lt;a href=&#34;https://hedera.com/blog/introducing-hiero-the-foundation-of-the-future&#34;&gt;creating Hiero&lt;/a&gt;—an open, vendor-neutral platform hosted by the Linux Foundation’s LF Decentralized Trust. Hiero inherits Hedera’s robust technology and expands its reach by inviting community-driven collaboration, governance, and continuous innovation.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hiero Python SDK – Announcing Release v0.1.3</title>
+      <link>http://localhost:1313/blog/hiero-python-sdk-announcing-release-v0.1.3/</link>
+      <pubDate>Fri, 18 Jul 2025 11:00:00 -0700</pubDate>
+      <guid>http://localhost:1313/blog/hiero-python-sdk-announcing-release-v0.1.3/</guid>
+      <description>&lt;p&gt;This July, our Python SDK is racing ahead, and we’re excited to share the latest in new transaction support and version milestones.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-latest-release-v013-july-7-2025&#34;&gt;🚀 Latest Release: v0.1.3 (July 7, 2025)&lt;/h2&gt;&#xA;&lt;p&gt;In this release, we packed dozens of new transaction classes, queries, and utility improvements:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Various new classes&lt;/strong&gt;, including:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;Duration&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;AccountInfoQuery&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Extensive token services&lt;/strong&gt;, such as:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;NFTTokenCreateTransaction&lt;/code&gt; for spinning up non‑fungible tokens&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;TokenUnfreezeTransaction&lt;/code&gt; to unfreeze tokens when needed&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;TokenWipeTransaction&lt;/code&gt; for wiping balances clean&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;TokenNFTInfoQuery&lt;/code&gt; to fetch NFT metadata&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;TokenRejectTransaction&lt;/code&gt; to manage association rejections&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;TokenUpdateNftsTransaction&lt;/code&gt; for batch NFT updates&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Abstractions &amp;amp; node implementation&lt;/strong&gt;&lt;br&gt;&#xA;– Introduced an &lt;code&gt;executable&lt;/code&gt; abstraction and &lt;code&gt;node&lt;/code&gt; implementation to simplify the codebase and make it easier to scale&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Improved testing &amp;amp; logging&lt;/strong&gt;&lt;br&gt;&#xA;– Individual &lt;code&gt;unit&lt;/code&gt; and &lt;code&gt;integration&lt;/code&gt; tests for each transaction type&lt;br&gt;&#xA;– Extensions to the &lt;code&gt;logging&lt;/code&gt; module&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Pythonic type hinting&lt;/strong&gt;&lt;br&gt;&#xA;– Added &lt;code&gt;type&lt;/code&gt; annotations across several modules, with documentation on setting up &lt;a href=&#34;https://mypy.readthedocs.io&#34;&gt;Mypy&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;See the full changelog at &lt;a href=&#34;https://raw.githubusercontent.com/hiero-ledger/hiero-sdk-python/main/CHANGELOG.md&#34;&gt;Github&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Help Shape Hiero’s Python SDK Office Hours</title>
+      <link>http://localhost:1313/blog/help-shape-hieros-python-sdk-office-hours/</link>
+      <pubDate>Wed, 02 Jul 2025 11:00:00 -0700</pubDate>
+      <guid>http://localhost:1313/blog/help-shape-hieros-python-sdk-office-hours/</guid>
+      <description>&lt;p&gt;Got 2 minutes?&lt;/p&gt;&#xA;&lt;p&gt;We’re excited to announce a new office hour initiative to help every newcomer - and seasoned Hiero contributor - hit the ground running in contributing to the Hiero Python SDK.&lt;/p&gt;&#xA;&lt;h2 id=&#34;-whats-the-hiero-python-sdk&#34;&gt;📣 What’s the Hiero Python SDK?&lt;/h2&gt;&#xA;&lt;p&gt;The Hiero Python SDK is one of Hiero’s newest community projects under the Linux Foundation Decentralized Trust (LFDT) umbrella. It lets Python devs hook into Hiero code services. The greater our development, the more developers will be able to build decentralized applications on networks such as Hedera using Python.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Introducing the Hiero SDK Collaboration Hub: Streamlining Contributions for a Thriving Developer Community</title>
+      <link>http://localhost:1313/blog/introducing-the-hiero-sdk-collaboration-hub-streamlining-contributions-for-a-thriving-developer-community/</link>
+      <pubDate>Wed, 04 Jun 2025 10:12:50 -0700</pubDate>
+      <guid>http://localhost:1313/blog/introducing-the-hiero-sdk-collaboration-hub-streamlining-contributions-for-a-thriving-developer-community/</guid>
+      <description>&lt;p&gt;Open-source contributions are the lifeblood of any vibrant software ecosystem, and Hiero recognizes this. That&amp;rsquo;s why the Hiero SDK Collaboration Hub was created—a centralized platform designed to enhance collaboration, streamline contributions, and provide transparent guidance for developers and maintainers involved with Hiero SDKs.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-the-hiero-sdk-collaboration-hub&#34;&gt;What is the Hiero SDK Collaboration Hub?&lt;/h2&gt;&#xA;&lt;p&gt;The Hiero SDK Collaboration Hub isn&amp;rsquo;t another SDK repository or a place for implementation-specific issues. Rather, it acts as a dedicated resource center to simplify and standardize the contribution process across all Hiero SDKs.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Results of the Hiero Technical Steering Committee Elections</title>
+      <link>http://localhost:1313/blog/results-of-the-hiero-technical-steering-committee-elections/</link>
+      <pubDate>Mon, 02 Jun 2025 00:00:00 -0700</pubDate>
+      <guid>http://localhost:1313/blog/results-of-the-hiero-technical-steering-committee-elections/</guid>
+      <description>&lt;h2 id=&#34;-the-results-for-the-hiero-technical-steering-committee-elections-are-here&#34;&gt;📣 The results for the Hiero Technical Steering Committee elections are here!&lt;/h2&gt;&#xA;&lt;p&gt;We are pleased to announce the results of the recent elections for the Hiero Technical Steering Committee (TSC) End User and Contributor seats.&lt;/p&gt;&#xA;&lt;p&gt;Congratulations to &lt;a href=&#34;https://github.com/kantorcodes&#34;&gt;&lt;strong&gt;Michael Kantor&lt;/strong&gt;&lt;/a&gt;, who has been elected to the Contributor seat, and to &lt;a href=&#34;https://github.com/MilanWR&#34;&gt;&lt;strong&gt;Milan Wiercx Van Rhijn&lt;/strong&gt;&lt;/a&gt;, who has been elected to the End User seat on the Hiero Technical Steering Committee.&lt;/p&gt;&#xA;&lt;p&gt;We look forward to formally recognizing their appointments at the upcoming Hiero TSC meeting scheduled for &lt;strong&gt;June 3rd&lt;/strong&gt;. For details on this and other Hiero project events, please refer to the &lt;a href=&#34;https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&#34;&gt;Hiero public calendar&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>TSC Voting Process</title>
+      <link>http://localhost:1313/blog/tsc-voting-process/</link>
+      <pubDate>Tue, 29 Apr 2025 10:12:50 -0700</pubDate>
+      <guid>http://localhost:1313/blog/tsc-voting-process/</guid>
+      <description>&lt;h2 id=&#34;-upcoming-hiero-tsc-elections---how-does-voting-work&#34;&gt;🗳️ Upcoming Hiero TSC Elections - How Does Voting Work?&lt;/h2&gt;&#xA;&lt;p&gt;In the earlier LF/DT &lt;a href=&#34;https://www.lfdecentralizedtrust.org/blog/announcing-the-upcoming-elections-for-end-user-and-community-seats-on-the-hiero-technical-steering-committee-tsc&#34;&gt;blog post&lt;/a&gt;, we announced the upcoming elections for the End User and Contributor seats on the Hiero Technical Steering Committee (TSC), set to take place from May 7 to May 31, 2025. These elections are a pivotal moment for the Hiero community, offering a chance to directly influence the project&amp;rsquo;s technical direction and governance.&lt;/p&gt;&#xA;&lt;p&gt;Now, as the election period approaches, it&amp;rsquo;s time to dive into how the voting process will unfold. In this follow-up post, we&amp;rsquo;ll walk you through the steps to cast your vote, the criteria for eligibility, and the tools you&amp;rsquo;ll use to participate. Whether you&amp;rsquo;re an experienced contributor or a first-time voter, understanding this process (and our commitment to offer transparency) is key to making your voice heard.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>📢 Get Involved: Elections Open for End-User and Contributor Seats on the Hiero Technical Steering Committee</title>
+      <link>http://localhost:1313/blog/get-involved-elections-open-for-end-user-and-contributor-seats-on-the-hiero-technical-steering-committee/</link>
+      <pubDate>Tue, 15 Apr 2025 09:17:00 -0700</pubDate>
+      <guid>http://localhost:1313/blog/get-involved-elections-open-for-end-user-and-contributor-seats-on-the-hiero-technical-steering-committee/</guid>
+      <description>&lt;p&gt;&#xD;&#xA;&lt;span class=&#34;font-bold&#34;&gt;April 15, 2025 — &lt;/span&gt; We’re excited to share that elections are now open for end-user and community contributor seats on the &lt;a href=&#34;https://www.lfdecentralizedtrust.org/blog/announcing-the-upcoming-elections-for-end-user-and-community-seats-on-the-hiero-technical-steering-committee-tsc&#34;&gt;Hiero Technical Steering Committee (TSC)&lt;/a&gt;. This is an important moment in Hiero’s evolution—bringing more diverse voices directly into the governance and technical direction of the project.&#xA;The TSC plays a crucial role in guiding Hiero’s roadmap, making key decisions about architecture, interoperability, and standards. These new seats are specifically designed to ensure the real-world needs of end users and community contributors are directly represented.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

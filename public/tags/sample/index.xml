@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sample on Hiero</title>
+    <link>http://localhost:1313/tags/sample/</link>
+    <description>Recent content in Sample on Hiero</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 15 Apr 2025 09:17:00 -0700</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/sample/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>📢 Get Involved: Elections Open for End-User and Contributor Seats on the Hiero Technical Steering Committee</title>
+      <link>http://localhost:1313/blog/get-involved-elections-open-for-end-user-and-contributor-seats-on-the-hiero-technical-steering-committee/</link>
+      <pubDate>Tue, 15 Apr 2025 09:17:00 -0700</pubDate>
+      <guid>http://localhost:1313/blog/get-involved-elections-open-for-end-user-and-contributor-seats-on-the-hiero-technical-steering-committee/</guid>
+      <description>&lt;p&gt;&#xD;&#xA;&lt;span class=&#34;font-bold&#34;&gt;April 15, 2025 — &lt;/span&gt; We’re excited to share that elections are now open for end-user and community contributor seats on the &lt;a href=&#34;https://www.lfdecentralizedtrust.org/blog/announcing-the-upcoming-elections-for-end-user-and-community-seats-on-the-hiero-technical-steering-committee-tsc&#34;&gt;Hiero Technical Steering Committee (TSC)&lt;/a&gt;. This is an important moment in Hiero’s evolution—bringing more diverse voices directly into the governance and technical direction of the project.&#xA;The TSC plays a crucial role in guiding Hiero’s roadmap, making key decisions about architecture, interoperability, and standards. These new seats are specifically designed to ensure the real-world needs of end users and community contributors are directly represented.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

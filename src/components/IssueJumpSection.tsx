@@ -1,5 +1,3 @@
-import { isSafeUrl } from '@/lib/utils';
-
 interface DifficultyLink {
   label: string;
   description: string;
@@ -42,7 +40,7 @@ export default function IssueJumpSection({ data }: IssueJumpSectionProps) {
                * wrapping a link inside a button, which is invalid HTML.
                */}
               <a
-                href={isSafeUrl(item.href) ? item.href : "#"}
+                href={item.href.startsWith('http') ? item.href : '#'}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="flex flex-col h-full min-w-0 border-2 border-white-dark rounded-2xl p-6 bg-white hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 transition-colors duration-200 no-underline text-charcoal">

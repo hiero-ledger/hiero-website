@@ -7,7 +7,7 @@
     "sync:repo-stats": "node src/scripts/sync-repo-stats.mjs",
     "dev": "pnpm sync:repo-stats && next dev",
     "build": "pnpm sync:repo-stats && next build",
-    "start": "next start",               
+    "start": "next start",
     "test": "vitest run",
     "coverage": "vitest run --coverage",
     "lint": "eslint .",

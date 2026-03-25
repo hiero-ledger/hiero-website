@@ -1,0 +1,18 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Divider > renders the Hiero divider icon 1`] = `
+<div
+  class="container py-[40px] sm:py-0 flex flex-row items-center gap-10"
+>
+  <img
+    alt=""
+    height="40"
+    loading="lazy"
+    src="/images/Hiero-Icon.svg"
+    width="40"
+  />
+  <div
+    class="w-full bg-white-dark h-[1px]"
+  />
+</div>
+`;

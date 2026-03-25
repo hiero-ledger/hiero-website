@@ -91,6 +91,7 @@ pnpm start
 - Repo overview: [docs/01-repo-overview.md](docs/01-repo-overview.md)
 - Content folder guide: [docs/02-content-folder.md](docs/02-content-folder.md)
 - Adding pages: [docs/03-adding-pages.md](docs/03-adding-pages.md)
+- Components guide: [docs/04-components.md](docs/04-components.md)
 - Contributor workflow: [docs/workflow.md](docs/workflow.md)
 - Blog writing guide: [docs/blogs.md](docs/blogs.md)
 - First contribution checklist: [docs/05-first-contribution-checklist.md](docs/05-first-contribution-checklist.md)

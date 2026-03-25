@@ -22,6 +22,12 @@ directories, following the same layout used in `adoptium.net`.
 The first baseline suite currently covers [src/lib/posts.ts](../src/lib/posts.ts)
 from [src/lib/__tests__/posts.test.ts](../src/lib/__tests__/posts.test.ts).
 
+Component tests live inside each component folder, for example
+`src/components/Header/__tests__/Header.test.tsx`. Snapshot files are added
+selectively under `__snapshots__` when they provide stable, useful coverage.
+See [04-components.md](./04-components.md) for the full component layout
+convention.
+
 Although some testing dependencies are installed, the current CI workflows only
 enforce formatting, linting, and a production build.
 

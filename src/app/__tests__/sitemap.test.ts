@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const postsMock = vi.hoisted(() => ({
   getAllPosts: vi.fn(),
@@ -8,10 +8,20 @@ vi.mock("../../lib/posts", () => ({
   getAllPosts: postsMock.getAllPosts,
 }));
 
+let previousSiteUrl: string | undefined;
+
 describe("sitemap", () => {
+  beforeEach(() => {
+    previousSiteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  });
+
   afterEach(() => {
     postsMock.getAllPosts.mockReset();
-    delete process.env.NEXT_PUBLIC_SITE_URL;
+    if (previousSiteUrl === undefined) {
+      delete process.env.NEXT_PUBLIC_SITE_URL;
+    } else {
+      process.env.NEXT_PUBLIC_SITE_URL = previousSiteUrl;
+    }
     vi.resetModules();
   });
 

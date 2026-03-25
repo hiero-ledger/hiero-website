@@ -17,7 +17,7 @@ The site uses the Next.js App Router under `src/app`.
 | Path | Purpose |
 | --- | --- |
 | `src/app` | Route files, layouts, metadata, and page entry points. |
-| `src/components` | Shared UI building blocks used across pages. |
+| `src/components` | Shared UI building blocks used across pages, organized as one folder per component with colocated tests. |
 | `src/lib/posts.ts` | Markdown parsing and content-loading helpers for blog posts and simple pages. |
 | `src/data` | Generated or static JSON used by the app. |
 | `src/scripts` | Local scripts such as `sync-repo-stats.mjs`, which runs before `pnpm dev` and `pnpm build`. |
@@ -104,8 +104,22 @@ The current parser only loads top-level markdown files directly inside
 Nested directories like `content/posts/some-slug/index.md` are not currently
 used by the runtime blog loader.
 
+## Components
+
+Shared UI now uses a folder-per-component structure under `src/components`.
+
+For example:
+
+- `src/components/Header/Header.tsx`
+- `src/components/Header/index.ts`
+- `src/components/Header/__tests__/Header.test.tsx`
+
+See [04-components.md](./04-components.md) for the component layout,
+import pattern, and testing convention.
+
 ## Related Guides
 
 - [02-content-folder.md](./02-content-folder.md)
 - [03-adding-pages.md](./03-adding-pages.md)
+- [04-components.md](./04-components.md)
 - [blogs.md](./blogs.md)

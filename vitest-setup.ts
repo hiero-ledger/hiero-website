@@ -46,6 +46,7 @@ if (typeof window !== "undefined") {
 }
 
 afterEach(() => {
+  vi.clearAllMocks();
   cleanup();
   document.body.style.overflow = "";
 });

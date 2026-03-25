@@ -54,6 +54,12 @@ Lint the codebase:
 pnpm lint
 ```
 
+Run the unit tests:
+
+```bash
+pnpm test
+```
+
 Format source files:
 
 ```bash

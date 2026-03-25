@@ -10,11 +10,17 @@ The current project scripts are:
 - `pnpm dev`
 - `pnpm build`
 - `pnpm start`
+- `pnpm test`
+- `pnpm coverage`
 - `pnpm lint`
 - `pnpm format`
 - `pnpm format:check`
 
-There is no `pnpm test` script wired into `package.json` today.
+Unit tests are colocated with the source they cover using `__tests__`
+directories, following the same layout used in `adoptium.net`.
+
+The first baseline suite currently covers [src/lib/posts.ts](../src/lib/posts.ts)
+from [src/lib/__tests__/posts.test.ts](../src/lib/__tests__/posts.test.ts).
 
 Although some testing dependencies are installed, the current CI workflows only
 enforce formatting, linting, and a production build.
@@ -26,6 +32,7 @@ Run these before opening a pull request:
 ```bash
 pnpm format:check
 pnpm lint
+pnpm test
 pnpm build
 ```
 
@@ -65,6 +72,20 @@ Runs ESLint across the repo using the Next.js configuration in
 
 This catches common TypeScript, React, and App Router issues.
 
+### `pnpm test`
+
+Runs the Vitest suite once in `jsdom`.
+
+Tests live beside the code they cover inside `__tests__` directories, for
+example `src/lib/__tests__/posts.test.ts`.
+
+### `pnpm coverage`
+
+Runs the same Vitest suite with V8 coverage enabled.
+
+Use this when you want a local coverage report while expanding the baseline
+test surface.
+
 ### `pnpm build`
 
 Runs:
@@ -93,7 +114,8 @@ The current `CI` workflow runs:
 1. `pnpm install --frozen-lockfile`
 2. `pnpm format:check`
 3. `pnpm lint`
-4. `pnpm build`
+4. `pnpm test`
+5. `pnpm build`
 
 If one of these fails locally, it will likely fail in GitHub Actions too.
 

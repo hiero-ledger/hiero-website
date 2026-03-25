@@ -3,6 +3,7 @@ import WhatIsHieroSection from "@/components/WhatIsHieroSection";
 import Divider from "@/components/Divider";
 import MeetSection from "@/components/MeetSection";
 import ReposCarousel from "@/components/ReposCarousel";
+import IssueJumpSection from "@/components/IssueJumpSection";
 import OpenSourceSection from "@/components/OpenSourceSection";
 import QuotesCarousel from "@/components/QuotesCarousel";
 
@@ -271,6 +272,37 @@ const reposData = {
   ],
 };
 
+const BASE_QUERY =
+  "is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%20archived%3Afalse%20no%3Aassignee";
+
+const issueJumpData = {
+  heading: "Jump to Open Issues",
+  text: "Find issues that match your skill level and start contributing to the Hiero ecosystem today.",
+  difficulties: [
+    {
+      label: "Good First Issue",
+      description: "Ideal for first-time contributors new to the project.",
+      href: `https://github.com/issues?q=${BASE_QUERY}%20(label%3A%22good%20first%20issue%22%20OR%20label%3A%22skill%3A%20good%20first%20issue%22)`,
+    },
+    {
+      label: "Beginner",
+      description: "Straightforward tasks that need light domain knowledge.",
+      href: `https://github.com/issues?q=${BASE_QUERY}%20(label%3Abeginner%20OR%20label%3A%22skill%3A%20beginner%22)`,
+    },
+    {
+      label: "Intermediate",
+      description:
+        "Moderately complex issues for developers gaining experience.",
+      href: `https://github.com/issues?q=${BASE_QUERY}%20(label%3Aintermediate%20OR%20label%3A%22skill%3A%20intermediate%22)`,
+    },
+    {
+      label: "Advanced",
+      description: "Challenging issues requiring deep technical expertise.",
+      href: `https://github.com/issues?q=${BASE_QUERY}%20(label%3Aadvanced%20OR%20label%3A%22skill%3A%20advanced%22)`,
+    },
+  ],
+};
+
 const openSourceData = {
   whyHeading: "Why is Hiero Open Source?",
   whyText:
@@ -350,6 +382,8 @@ export default function Home() {
       <MeetSection data={meetData} />
       <Divider />
       <ReposCarousel data={reposData} />
+      <Divider />
+      <IssueJumpSection data={issueJumpData} />
       <Divider />
       <OpenSourceSection data={openSourceData} />
       <Divider />

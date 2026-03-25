@@ -25,7 +25,9 @@ describe("IssueJumpSection", () => {
       />,
     );
 
-    expect(screen.getByRole("heading", { name: "Jump In" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Jump In" }),
+    ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Beginner/i })).toHaveAttribute(
       "href",
       "https://github.com/hiero-ledger/hiero-website/issues",

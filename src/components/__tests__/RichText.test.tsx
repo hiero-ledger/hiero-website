@@ -5,9 +5,7 @@ import RichText from "../RichText";
 describe("RichText", () => {
   it("renders internal and external links correctly", () => {
     render(
-      <RichText
-        markdown="See the [docs](/docs) or [email us](mailto:team@example.com)."
-      />,
+      <RichText markdown="See the [docs](/docs) or [email us](mailto:team@example.com)." />,
     );
 
     expect(screen.getByRole("link", { name: "docs" })).toHaveAttribute(

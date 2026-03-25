@@ -81,7 +81,9 @@ describe("IssueList", () => {
 
     const issueLinks = screen
       .getAllByRole("link")
-      .filter(link => link.getAttribute("href")?.startsWith("https://issues.example"));
+      .filter(link =>
+        link.getAttribute("href")?.startsWith("https://issues.example"),
+      );
 
     expect(issueLinks.map(link => link.textContent)).toEqual([
       "Go issue",

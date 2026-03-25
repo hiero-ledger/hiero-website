@@ -61,7 +61,9 @@ describe("BlogPostList", () => {
 
     render(<BlogPostList posts={posts} listTitle="Recent Articles" />);
 
-    expect(screen.getByRole("heading", { name: "Recent Articles" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Recent Articles" }),
+    ).toBeInTheDocument();
     expect(screen.getByText("Post One")).toBeInTheDocument();
     expect(screen.queryByText("Post Four")).not.toBeInTheDocument();
 

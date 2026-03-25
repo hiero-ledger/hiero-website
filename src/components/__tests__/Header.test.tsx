@@ -10,10 +10,9 @@ describe("Header", () => {
   it("renders the home link and menu", () => {
     render(<Header />);
 
-    expect(screen.getByRole("link", { name: "Go to homepage" })).toHaveAttribute(
-      "href",
-      "/",
-    );
+    expect(
+      screen.getByRole("link", { name: "Go to homepage" }),
+    ).toHaveAttribute("href", "/");
     expect(screen.getByTestId("menu")).toBeInTheDocument();
   });
 });

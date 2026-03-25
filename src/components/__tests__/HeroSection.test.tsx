@@ -16,6 +16,8 @@ describe("HeroSection", () => {
     expect(
       screen.getByRole("heading", { name: "Build with Hiero" }),
     ).toBeInTheDocument();
-    expect(screen.getByText("Open source, open governance.")).toBeInTheDocument();
+    expect(
+      screen.getByText("Open source, open governance."),
+    ).toBeInTheDocument();
   });
 });

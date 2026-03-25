@@ -29,7 +29,9 @@ describe("WhatIsHieroSection", () => {
       screen.getByRole("heading", { name: "What is Hiero?" }),
     ).toBeInTheDocument();
     expect(screen.getByText("A governance-led network.")).toBeInTheDocument();
-    expect(screen.getByText("The community shapes the roadmap.")).toBeInTheDocument();
+    expect(
+      screen.getByText("The community shapes the roadmap."),
+    ).toBeInTheDocument();
     expect(
       screen.getByText("SDKs and services are built in the open."),
     ).toBeInTheDocument();

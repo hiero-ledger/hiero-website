@@ -8,8 +8,7 @@ describe("SimpleContentPage", () => {
       <SimpleContentPage
         title="Hacktoberfest"
         description="Contribute this season"
-        contentMarkdown="Welcome to **Hiero**."
-      >
+        contentMarkdown="Welcome to **Hiero**.">
         <div>Extra section</div>
       </SimpleContentPage>,
     );

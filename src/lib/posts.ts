@@ -77,10 +77,30 @@ function parseDate(raw: unknown): string {
   return new Date(String(raw)).toISOString();
 }
 
+function sanitizeSlug(raw: string): string {
+  // Normalize whitespace and case.
+  let slug = raw.trim().toLowerCase();
+  // Remove any characters that could break out of the path or introduce HTML/JS context.
+  slug = slug.replace(/["'<>\\]/g, "");
+  // Replace spaces and consecutive separators with single hyphens.
+  slug = slug.replace(/[\s_]+/g, "-");
+  // Remove URL‑unsafe characters except for word chars, hyphens, and forward slashes.
+  slug = slug.replace(/[^a-z0-9/-]+/g, "");
+  // Prevent path traversal and schemes like "javascript:" by removing leading dots and colons.
+  slug = slug.replace(/^[.:]+/, "");
+  // Collapse multiple slashes.
+  slug = slug.replace(/\/{2,}/g, "/");
+  // Trim leading/trailing slashes.
+  slug = slug.replace(/^\/+|\/+$/g, "");
+  return slug;
+}
+
 function deriveSlug(data: Record<string, unknown>, filename: string): string {
-  if (typeof data.slug === "string" && data.slug.trim())
-    return data.slug.trim();
-  return filename.replace(/\.md$/, "");
+  if (typeof data.slug === "string" && data.slug.trim()) {
+    return sanitizeSlug(data.slug);
+  }
+  const base = filename.replace(/\.md$/, "");
+  return sanitizeSlug(base);
 }
 
 function buildMeta(data: Record<string, unknown>, filename: string): PostMeta {

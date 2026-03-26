@@ -110,8 +110,7 @@ Shared UI now uses a folder-per-component structure under `src/components`.
 
 For example:
 
-- `src/components/Header/Header.tsx`
-- `src/components/Header/index.ts`
+- `src/components/Header/index.tsx`
 - `src/components/Header/__tests__/Header.test.tsx`
 
 See [04-components.md](./04-components.md) for the component layout,

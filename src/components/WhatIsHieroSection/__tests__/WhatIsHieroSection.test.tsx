@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import WhatIsHieroSection from "../WhatIsHieroSection";
+import WhatIsHieroSection from "..";
 
 describe("WhatIsHieroSection", () => {
   it("renders the intro and supporting points", () => {

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import SimpleContentPage from "../SimpleContentPage";
+import SimpleContentPage from "..";
 
 describe("SimpleContentPage", () => {
   it("renders markdown content and child content", () => {

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import Header from "../Header";
+import Header from "..";
 
 vi.mock("@/components/Menu", () => ({
   default: () => <div data-testid="menu">Mock menu</div>,

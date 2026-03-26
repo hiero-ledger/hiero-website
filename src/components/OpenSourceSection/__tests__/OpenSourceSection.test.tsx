@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import OpenSourceSection from "../OpenSourceSection";
+import OpenSourceSection from "..";
 
 describe("OpenSourceSection", () => {
   it("renders headings and markdown links", () => {

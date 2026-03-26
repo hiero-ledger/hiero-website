@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import IssueJumpSection from "../IssueJumpSection";
+import IssueJumpSection from "..";
 
 describe("IssueJumpSection", () => {
   it("renders difficulty cards and falls back invalid links to #", () => {

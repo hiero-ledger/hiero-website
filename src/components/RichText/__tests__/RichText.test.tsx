@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import RichText from "../RichText";
+import RichText from "..";
 
 describe("RichText", () => {
   it("renders internal and external links correctly", () => {

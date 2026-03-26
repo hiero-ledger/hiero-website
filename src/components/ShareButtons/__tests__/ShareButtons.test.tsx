@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import ShareButtons from "../ShareButtons";
+import ShareButtons from "..";
 
 describe("ShareButtons", () => {
   it("builds share links from the current page url and title", () => {

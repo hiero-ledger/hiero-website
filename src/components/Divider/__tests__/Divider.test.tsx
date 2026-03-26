@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import Divider from "../Divider";
+import Divider from "..";
 
 describe("Divider", () => {
   it("renders the Hiero divider icon", () => {

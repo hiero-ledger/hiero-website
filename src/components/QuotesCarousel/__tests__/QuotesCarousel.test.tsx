@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import QuotesCarousel from "../QuotesCarousel";
+import QuotesCarousel from "..";
 
 const swiperActions = vi.hoisted(() => ({
   slidePrev: vi.fn(),

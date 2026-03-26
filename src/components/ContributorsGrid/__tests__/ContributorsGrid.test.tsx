@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
-import ContributorsGrid from "../ContributorsGrid";
+import ContributorsGrid from "..";
 
 const fetchMock = vi.fn();
 

@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { PostMeta } from "@/lib/posts";
-import BlogPostList from "../BlogPostList";
+import BlogPostList from "..";
 
 const posts: PostMeta[] = [
   {

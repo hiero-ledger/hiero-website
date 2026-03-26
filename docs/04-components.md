@@ -9,8 +9,7 @@ Shared components use a folder-per-component structure.
 ```text
 src/components/
 └── Header/
-    ├── Header.tsx
-    ├── index.ts
+    ├── index.tsx
     └── __tests__/
         ├── Header.test.tsx
         └── __snapshots__/
@@ -18,23 +17,16 @@ src/components/
 ```
 
 This gives each component one home for its source, tests, and optional
-snapshots while keeping imports stable through the folder `index.ts` file.
+snapshots while keeping imports stable through the folder entry file.
 
 ## Naming Convention
 
 - Name the folder after the component, for example `Header` or `IssueList`.
-- Keep the main component implementation in `ComponentName.tsx`.
-- Re-export both the default and named component export from `index.ts`.
-
-Example:
-
-```ts
-export { default } from "./Header";
-export { default as Header } from "./Header";
-```
+- Keep the main component implementation in `index.tsx`.
+- Export the component directly from that `index.tsx` file.
 
 This allows route and component code to keep using imports like
-`@/components/Header`, while also exposing a named export when that is helpful.
+`@/components/Header` without a separate barrel file.
 
 ## When To Create A Shared Component
 
@@ -51,11 +43,10 @@ that route.
 ## Adding A New Component
 
 1. Create a folder such as `src/components/FaqSection/`.
-2. Add `FaqSection.tsx` with the component implementation.
-3. Add `index.ts` to re-export it.
-4. Add `__tests__/FaqSection.test.tsx` when the component has meaningful
+2. Add `index.tsx` with the component implementation.
+3. Add `__tests__/FaqSection.test.tsx` when the component has meaningful
    behavior or rendering worth protecting.
-5. Add a snapshot only if the component output is stable and the snapshot will
+4. Add a snapshot only if the component output is stable and the snapshot will
    stay readable.
 
 ## Testing Convention

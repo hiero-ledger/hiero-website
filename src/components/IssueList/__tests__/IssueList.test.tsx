@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
-import IssueList from "../IssueList";
+import IssueList from "..";
 
 const fetchMock = vi.fn();
 

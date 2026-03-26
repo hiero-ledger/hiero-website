@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import MeetSection from "../MeetSection";
+import MeetSection from "..";
 
 describe("MeetSection", () => {
   it("renders community calls and register links", () => {

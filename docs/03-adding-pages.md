@@ -38,7 +38,7 @@ Use [blogs.md](./blogs.md) for anything under `content/posts`.
    `src/components/<ComponentName>/`.
 4. Add any new assets to `public/`.
 5. If the page should be discoverable from navigation, update
-   `src/components/Menu/Menu.tsx`.
+   `src/components/Menu/index.tsx`.
 
 Minimal example:
 
@@ -126,8 +126,7 @@ If you introduce a new shared component, follow the component structure in
 
 ```text
 src/components/FaqSection/
-├── FaqSection.tsx
-├── index.ts
+├── index.tsx
 └── __tests__/
     └── FaqSection.test.tsx
 ```
@@ -135,7 +134,7 @@ src/components/FaqSection/
 ## Navigation And Discovery
 
 If the page should appear in the site navigation, update the `menuItems` array
-in `src/components/Menu/Menu.tsx`.
+in `src/components/Menu/index.tsx`.
 
 Also consider whether you need to:
 

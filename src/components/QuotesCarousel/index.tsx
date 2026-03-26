@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import type { SwiperRef } from "swiper/react";
 import "swiper/css";
-import RichText from "./RichText";
+import RichText from "@/components/RichText";
 
 interface QuoteItem {
   quote: string;

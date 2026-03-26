@@ -7,6 +7,7 @@ Use this checklist before you open a pull request for the website.
 - `pnpm install` completed successfully
 - `pnpm format:check` passes
 - `pnpm lint` passes
+- `pnpm test` passes
 - `pnpm build` passes
 
 If you changed code under `src/`, run `pnpm format` before re-checking

@@ -1,4 +1,4 @@
-import RichText from "./RichText";
+import RichText from "@/components/RichText";
 
 interface MeetCall {
   name: string;

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import RichText from "./RichText";
+import RichText from "@/components/RichText";
 
 interface OpenSourceData {
   whyHeading: string;

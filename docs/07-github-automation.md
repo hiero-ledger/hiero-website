@@ -29,7 +29,8 @@ The workflow:
 5. installs dependencies with `pnpm install --frozen-lockfile`
 6. runs `pnpm format:check`
 7. runs `pnpm lint`
-8. runs `pnpm build`
+8. runs `pnpm test`
+9. runs `pnpm build`
 
 `NEXT_TELEMETRY_DISABLED=1` is set for the build step.
 
@@ -37,7 +38,6 @@ The workflow:
 
 The workflow does not currently run:
 
-- a `pnpm test` command
 - browser-based end-to-end tests
 - a markdown linter
 - translation or locale checks
@@ -69,6 +69,7 @@ Run the same validation steps locally before opening or updating a PR:
 ```bash
 pnpm format:check
 pnpm lint
+pnpm test
 pnpm build
 ```
 

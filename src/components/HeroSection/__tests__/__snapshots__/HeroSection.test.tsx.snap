@@ -1,0 +1,23 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`HeroSection > renders the hero heading and text 1`] = `
+<div
+  class="bg-linear-to-br from-red-dark via-red to-red relative"
+  id="hero"
+>
+  <div
+    class="container py-20 sm:py-36 text-white text-center"
+  >
+    <h1
+      class="text-4xl sm:text-5xl leading-none relative mb-2.5"
+    >
+      Build with Hiero
+    </h1>
+    <p
+      class="text-[24px] tracking-[-0.081rem] sm:text-xl relative"
+    >
+      Open source, open governance.
+    </p>
+  </div>
+</div>
+`;

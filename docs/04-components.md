@@ -24,16 +24,17 @@ snapshots while keeping imports stable through the folder `index.ts` file.
 
 - Name the folder after the component, for example `Header` or `IssueList`.
 - Keep the main component implementation in `ComponentName.tsx`.
-- Re-export the default export from `index.ts`.
+- Re-export both the default and named component export from `index.ts`.
 
 Example:
 
 ```ts
 export { default } from "./Header";
+export { default as Header } from "./Header";
 ```
 
 This allows route and component code to keep using imports like
-`@/components/Header`.
+`@/components/Header`, while also exposing a named export when that is helpful.
 
 ## When To Create A Shared Component
 

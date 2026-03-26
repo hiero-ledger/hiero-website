@@ -12,6 +12,7 @@ The current project scripts are:
 - `pnpm start`
 - `pnpm test`
 - `pnpm coverage`
+- `pnpm update-snap`
 - `pnpm lint`
 - `pnpm format`
 - `pnpm format:check`
@@ -20,13 +21,17 @@ Unit tests are colocated with the source they cover using `__tests__`
 directories, following the same layout used in `adoptium.net`.
 
 The first baseline suite currently covers [src/lib/posts.ts](../src/lib/posts.ts)
-from [src/lib/__tests__/posts.test.ts](../src/lib/__tests__/posts.test.ts).
+from [src/lib/**tests**/posts.test.ts](../src/lib/__tests__/posts.test.ts).
 
 Component tests live inside each component folder, for example
 `src/components/Header/__tests__/Header.test.tsx`. Snapshot files are added
 selectively under `__snapshots__` when they provide stable, useful coverage.
 See [04-components.md](./04-components.md) for the full component layout
 convention.
+
+App-level tests live under `src/app/__tests__`, for example
+`src/app/__tests__/not-found.test.tsx` and
+`src/app/__tests__/sitemap.test.ts`.
 
 Although some testing dependencies are installed, the current CI workflows only
 enforce formatting, linting, and a production build.
@@ -91,6 +96,13 @@ Runs the same Vitest suite with V8 coverage enabled.
 
 Use this when you want a local coverage report while expanding the baseline
 test surface.
+
+### `pnpm update-snap`
+
+Runs the Vitest suite in snapshot update mode.
+
+Use this after intentionally changing stable UI output that already has
+snapshot coverage.
 
 ### `pnpm build`
 

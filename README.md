@@ -60,6 +60,12 @@ Run the unit tests:
 pnpm test
 ```
 
+Update existing snapshots after an intentional UI change:
+
+```bash
+pnpm update-snap
+```
+
 Format source files:
 
 ```bash

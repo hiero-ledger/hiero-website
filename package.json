@@ -10,6 +10,7 @@
     "start": "next start",
     "test": "vitest run",
     "coverage": "vitest run --coverage",
+    "update-snap": "vitest run --update",
     "lint": "eslint .",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json}\"",
     "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json}\""

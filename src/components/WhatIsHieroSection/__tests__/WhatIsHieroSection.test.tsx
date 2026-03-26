@@ -4,7 +4,7 @@ import WhatIsHieroSection from "../WhatIsHieroSection";
 
 describe("WhatIsHieroSection", () => {
   it("renders the intro and supporting points", () => {
-    render(
+    const { asFragment } = render(
       <WhatIsHieroSection
         data={{
           heading: "What is Hiero?",
@@ -35,5 +35,6 @@ describe("WhatIsHieroSection", () => {
     expect(
       screen.getByText("SDKs and services are built in the open."),
     ).toBeInTheDocument();
+    expect(asFragment()).toMatchSnapshot();
   });
 });

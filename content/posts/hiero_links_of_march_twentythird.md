@@ -25,6 +25,7 @@ Below are links to some of the things that happened this past week. **Check it o
 **Sophie Bulloch** updated [Python SDK runners](https://github.com/hiero-ledger/hiero-sdk-python/pull/2018) to harden security. 
 
 **Events**
+--- 
 
 Check below for upcoming events!
 

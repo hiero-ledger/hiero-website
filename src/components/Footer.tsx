@@ -2,7 +2,7 @@ import Container from "@/components/Container";
 
 export default function Footer() {
   return (
-    <div className="bg-black text-base text-white-dark text-center py-8">
+    <div className="bg-black py-8 text-center text-base text-white-dark">
       <Container>
         <p>
           Copyright © Hiero a Series of LF Projects, LLC | For web site terms of
@@ -12,7 +12,7 @@ export default function Footer() {
             target="_blank"
             rel="noreferrer noopener"
             className="text-white underline hover:text-white">
-            https://lfprojects.org
+            LF Projects
           </a>
           .
         </p>

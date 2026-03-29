@@ -11,11 +11,11 @@ section_what_is_hiero_text = '''
 Hiero, a <a href="http://www.lfdecentralizedtrust.org/" target="_blank" rel="noreferrer noopener">Linux Foundation Decentralized Trust</a> project, is an open-source, vendor-neutral distributed ledger technology. Hiero is used to build the <a href="https://hedera.com/" target="_blank" rel="noreferrer noopener">Hedera</a> public ledger.'''
 
 section_why_open_source_heading = "Why is Hiero Open Source?"
-section_why_open_source_text = "The main goal of Hiero is to create a diverse community of developers, dreamers, and builders working to make the world more fair, fast, and secure. To achieve that goal it is critical that everyone can access the source of Hiero and move the project forward. A decentralized network that is used by enterprises and critical infrastructure around the world must be vendor-neutral and fully auditable."
+section_why_open_source_text = "The goal of Hiero is to build a diverse community of developers and innovators making the world fairer, faster, and more secure. Hiero's source is accessible so anyone can advance the project. As a decentralized network used by enterprises and critical infrastructure, it must remain vendor-neutral and fully auditable."
 
 section_what_parts_open_source_heading = "What parts of Hiero are Open Source?"
 section_what_parts_open_source_text = '''
-Hiero is 100% open-source. While the transition of the project to Linux Foundation Decentralized Trust is still ongoing, a view into some additional contributions can be found in <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera’s GitHub organization</a>. As a first step, the technical steering committee (TSC) of Hiero will provide oversight to include  projects that are needed to run an enterprise-ready decentralized network to a new Hiero GitHub organization. More information about the transition process can be found in the roadmap.
+Hiero is fully open source. While its transition to Linux Foundation Decentralized Trust continues, additional contributions are available in <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera’s GitHub organization</a>. The technical steering committee (TSC) of Hiero will initially oversee adding projects needed for an enterprise-ready decentralized network to a new Hiero Github organization. See the roadmap for more details.
 '''
 
 section_technical_steering_committee_heading = "The Technical Steering Committee of Hiero"

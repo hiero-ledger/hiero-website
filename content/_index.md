@@ -15,7 +15,7 @@ section_why_open_source_text = "The goal of Hiero is to build a diverse communit
 
 section_what_parts_open_source_heading = "What parts of Hiero are Open Source?"
 section_what_parts_open_source_text = '''
-Hiero is fully open source. While its transition to Linux Foundation Decentralized Trust continues, additional contributions are available in <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera’s GitHub organization</a>. The technical steering committee (TSC) of Hiero will initially oversee adding projects needed for an enterprise-ready decentralized network to a new Hiero Github organization. See the roadmap for more details.
+Hiero is fully open source. While its transition to Linux Foundation Decentralized Trust continues, additional contributions are available in <a href="https://github.com/hashgraph" target="_blank" rel="noreferrer noopener">Hedera’s GitHub organization</a>. The technical steering committee (TSC) of Hiero will initially oversee adding projects needed for an enterprise-ready decentralized network to a new Hiero GitHub organization. See the roadmap for more details.
 '''
 
 section_technical_steering_committee_heading = "The Technical Steering Committee of Hiero"

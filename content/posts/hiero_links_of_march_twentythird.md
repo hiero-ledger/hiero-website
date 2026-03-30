@@ -20,7 +20,7 @@ Below are links to some of the things that happened this past week. **Check it o
 
 **Mustafa Uzun** released an updated version of the [Java SDK](https://github.com/hiero-ledger/hiero-sdk-java/pull/2665) to provide details on recent changes.
 
-**venilin Vasilev** improved [chuncked type transactions](https://github.com/hiero-ledger/hiero-sdk-js/pull/3887) by fixing transaction body consistency in the JavaScript SDK.
+**Venilin Vasilev** improved [chunked type transactions](https://github.com/hiero-ledger/hiero-sdk-js/pull/3887) by fixing transaction body consistency in the JavaScript SDK.
 
 **Sophie Bulloch** updated [Python SDK runners](https://github.com/hiero-ledger/hiero-sdk-python/pull/2018) to harden security. 
 
@@ -29,7 +29,7 @@ Below are links to some of the things that happened this past week. **Check it o
 
 Check below for upcoming events!
 
-**Rar Evo** is coming! This event will be taking place in July. Click [here](https://rareevo.io/) for details and get your tickets now!
+**Rar Evo** is coming! This event will be taking place in July. Visit the [Rare Evo event page](https://rareevo.io/) for details and get your tickets now!
 
 **Want to be featured on the Hiero-Website?**
 ---

@@ -8,7 +8,7 @@ describe("Footer", () => {
 
     expect(screen.getByText(/Copyright/i)).toBeInTheDocument();
     expect(
-      screen.getByRole("link", { name: "https://lfprojects.org" }),
+      screen.getByRole("link", { name: "LF Projects" }),
     ).toHaveAttribute("href", "https://lfprojects.org");
     expect(container.firstChild).toMatchSnapshot();
   });

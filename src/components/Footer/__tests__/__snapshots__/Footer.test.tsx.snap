@@ -2,7 +2,7 @@
 
 exports[`Footer > renders the footer copy and policy link 1`] = `
 <div
-  class="bg-black text-base text-white-dark text-center py-8"
+  class="bg-black text-base text-white-dark py-8 text-center"
 >
   <div
     class="container"
@@ -16,7 +16,7 @@ exports[`Footer > renders the footer copy and policy link 1`] = `
         rel="noreferrer noopener"
         target="_blank"
       >
-        https://lfprojects.org
+        LF Projects
       </a>
       .
     </p>

@@ -38,7 +38,8 @@ export default function RichText({
     a({ href = "", children }: { href?: string; children?: ReactNode }) {
       if (!href) return <>{children}</>;
 
-      const linkClass = "underline hover:text-gray-200";
+      const linkClass =
+        "text-red underline hover:text-red-dark transition-colors";
 
       if (isExternalHref(href)) {
         return (
@@ -52,7 +53,11 @@ export default function RichText({
         );
       }
 
-      return <Link href={href}>{children}</Link>;
+      return (
+        <Link href={href} className={linkClass}>
+          {children}
+        </Link>
+      );
     },
     ...(inline ? { p: InlineParagraph } : {}),
   };

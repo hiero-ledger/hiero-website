@@ -1,3 +1,10 @@
+---
 exclude_paths:
   - "pnpm-lock.yaml"
-  - "vitest.config.ts"
+  - "build/**"
+  - "coverage/**"
+  - "out/**"
+  - "vitest.config.mts"
+  - "vitest-setup.ts"
+  - "**/__tests__/**"
+  - "**/__snapshots__/**"

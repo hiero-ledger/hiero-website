@@ -1,0 +1,31 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Header > renders the home link and menu 1`] = `
+<div
+  class="h-[90px] flex items-center fixed inset-x-0 top-0 z-50 bg-white"
+>
+  <div
+    class="container"
+  >
+    <div
+      class="flex flex-row justify-between items-center"
+    >
+      <a
+        aria-label="Go to homepage"
+        href="/"
+      >
+        <img
+          alt="Hiero logo"
+          class="h-[40px] w-[128px]"
+          src="/images/Hiero-Icon-wLogo.svg"
+        />
+      </a>
+      <div
+        data-testid="menu"
+      >
+        Mock menu
+      </div>
+    </div>
+  </div>
+</div>
+`;

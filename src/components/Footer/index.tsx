@@ -2,7 +2,7 @@ import Container from "@/components/Container";
 
 export default function Footer() {
   return (
-    <div className="bg-black py-8 text-center text-base text-white-dark">
+    <div className="bg-black text-base text-white-dark py-8 text-center">
       <Container>
         <p>
           Copyright © Hiero a Series of LF Projects, LLC | For web site terms of

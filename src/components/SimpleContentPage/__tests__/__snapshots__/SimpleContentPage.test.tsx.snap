@@ -1,0 +1,47 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SimpleContentPage > renders markdown content and child content 1`] = `
+<div>
+  <div
+    class="bg-gradient-to-br from-red-dark via-red to-red relative"
+    id="hero"
+  >
+    <div
+      class="container py-14 sm:py-[100px] xl:py-36 text-white text-center"
+    >
+      <h1
+        class="text-[42px] sm:text-5xl leading-none relative mb-2.5"
+      >
+        Hacktoberfest
+      </h1>
+      <p
+        class="text-[24px] tracking-[-0.081rem] sm:text-xl relative"
+      >
+        Contribute this season
+      </p>
+    </div>
+  </div>
+  <div
+    class="container py-14 sm:py-[80px] lg:py-[90px]"
+  >
+    <main
+      class="w-full min-w-0 max-w-[800px] mx-auto"
+    >
+      <div
+        class="content text-sm text-charcoal font-normal sm:text-base"
+      >
+        <p>
+          Welcome to 
+          <strong>
+            Hiero
+          </strong>
+          .
+        </p>
+      </div>
+      <div>
+        Extra section
+      </div>
+    </main>
+  </div>
+</div>
+`;

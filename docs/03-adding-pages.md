@@ -34,10 +34,11 @@ Use [blogs.md](./blogs.md) for anything under `content/posts`.
 
 1. Create a new route file such as `src/app/about/page.tsx`.
 2. Export route metadata.
-3. Build the page with existing components or new ones under `src/components`.
+3. Build the page with existing components or new shared ones under
+   `src/components/<ComponentName>/`.
 4. Add any new assets to `public/`.
 5. If the page should be discoverable from navigation, update
-   `src/components/Menu.tsx`.
+   `src/components/Menu/index.tsx`.
 
 Minimal example:
 
@@ -120,10 +121,20 @@ Prefer components when:
 - the page needs interactive or dynamic UI
 - the content needs richer composition than a single markdown body
 
+If you introduce a new shared component, follow the component structure in
+[04-components.md](./04-components.md):
+
+```text
+src/components/FaqSection/
+├── index.tsx
+└── __tests__/
+    └── FaqSection.test.tsx
+```
+
 ## Navigation And Discovery
 
 If the page should appear in the site navigation, update the `menuItems` array
-in `src/components/Menu.tsx`.
+in `src/components/Menu/index.tsx`.
 
 Also consider whether you need to:
 

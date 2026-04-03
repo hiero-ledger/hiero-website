@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Footer > renders the footer copy and policy link 1`] = `
+<div
+  class="bg-black text-base text-white-dark py-8 text-center"
+>
+  <div
+    class="container"
+  >
+    <p>
+      Copyright © Hiero a Series of LF Projects, LLC | For web site terms of use, trademark policy and other project policies please see
+       
+      <a
+        class="text-white underline hover:text-white"
+        href="https://lfprojects.org"
+        rel="noreferrer noopener"
+        target="_blank"
+      >
+        LF Projects
+      </a>
+      .
+    </p>
+  </div>
+</div>
+`;

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { format } from "date-fns";
-import type { PostMeta } from "../lib/posts";
+import type { PostMeta } from "@/lib/posts";
 
 const POSTS_PER_PAGE = 3;
 const PAGER_SIZE = 5;

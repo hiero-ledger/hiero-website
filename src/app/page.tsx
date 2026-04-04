@@ -378,13 +378,14 @@ export default function Home() {
     <>
       <HeroSection data={heroData} />
       <WhatIsHieroSection data={whatIsHieroData} />
+      <Divider /> 
+      <IssueJumpSection data={issueJumpData} />
       <Divider />
       <MeetSection data={meetData} />
       <Divider />
       <ReposCarousel data={reposData} />
       <Divider />
-      <IssueJumpSection data={issueJumpData} />
-      <Divider />
+     
       <OpenSourceSection data={openSourceData} />
       <Divider />
       <QuotesCarousel data={quotesData} />

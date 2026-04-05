@@ -14,8 +14,7 @@ defaults:
     shell: bash
 
 permissions:
-  contents: read
-  statuses: write
+  pull-requests: read
 
 concurrency:
   group: pr-formatting-${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -32,6 +31,6 @@ jobs:
           egress-policy: audit
 
       - name: Check PR Title
-        uses: step-security/conventional-pr-title-action@bb2263ec311ca158e9ffa6bd9b997fb425402034 # v3.2.6
+        uses: step-security/action-semantic-pull-request@bc0cf74f5be4ce34accdec1ae908dff38dc5def1 # v6.1.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

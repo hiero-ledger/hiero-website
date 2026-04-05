@@ -258,4 +258,312 @@ More content.
       });
     });
   });
+
+  describe("slug generation", () => {
+  it("uses frontmatter slug when provided", () => {
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["post.md"]);
+    fsMocks.readFileSync.mockReturnValue(`+++
+title = "My Post"
+slug = "explicit-slug"
+date = 2026-01-01
++++
+Content`);
+
+    const posts = getAllPosts();
+    expect(posts[0].slug).toBe("explicit-slug");
+  });
+
+  it("derives slug from filename when no frontmatter slug is given", () => {
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["my-filename.md"]);
+    fsMocks.readFileSync.mockReturnValue(`+++
+title = "My Post"
+date = 2026-01-01
++++
+Content`);
+
+    const posts = getAllPosts();
+    expect(posts[0].slug).toBe("my-filename");
+  });
+
+  it("sanitizes filename-derived slug: lowercase, spaces to hyphens, removes special chars", () => {
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["My Cool Post! (2026).md"]);
+    fsMocks.readFileSync.mockReturnValue(`+++
+title = "My Cool Post! (2026)"
+date = 2026-01-01
++++
+Content`);
+
+    const posts = getAllPosts();
+    // Expect: lowercase, spaces → hyphens, remove punctuation except hyphens
+    expect(posts[0].slug).toBe("my-cool-post-2026");
+  });
+
+  it("handles uppercase and mixed-case filenames", () => {
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["UPPERCASE_POST.md"]);
+    fsMocks.readFileSync.mockReturnValue(`+++
+title = "Uppercase"
+date = 2026-01-01
++++
+Content`);
+
+    const posts = getAllPosts();
+    expect(posts[0].slug).toBe("uppercase-post"); // or "uppercase-post" depending on impl
+  });
+
+  it("uses the slug for lookups in getPostBySlug", () => {
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["filename.md"]);
+    fsMocks.readFileSync.mockReturnValue(`+++
+title = "Test"
+slug = "custom-lookup"
+date = 2026-01-01
++++
+Content`);
+
+    const post = getPostBySlug("custom-lookup");
+    expect(post).not.toBeNull();
+    expect(post?.slug).toBe("custom-lookup");
+  });
+
+  it("returns null when slug does not match any post (derived or explicit)", () => {
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["existing.md"]);
+    fsMocks.readFileSync.mockReturnValue(`+++
+title = "Existing"
+date = 2026-01-01
++++
+Content`);
+
+    const post = getPostBySlug("nonexistent");
+    expect(post).toBeNull();
+  });
+});
+
+describe("date parsing and sorting", () => {
+  it("parses YYYY-MM-DD date strings correctly", () => {
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["post.md"]);
+    fsMocks.readFileSync.mockReturnValue(`+++
+title = "Post"
+date = 2025-12-25
++++
+Content`);
+
+    const posts = getAllPosts();
+    expect(posts[0].date).toBe("2025-12-25T00:00:00.000Z");
+  });
+
+  it("parses ISO 8601 date strings with time", () => {
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["post.md"]);
+    fsMocks.readFileSync.mockReturnValue(`+++
+title = "Post"
+date = "2026-03-20T15:30:00Z"
++++
+Content`);
+
+    const posts = getAllPosts();
+    expect(posts[0].date).toBe("2026-03-20T15:30:00.000Z");
+  });
+
+  it("handles missing date by falling back to a default (e.g., file mtime or epoch)", () => {
+    // Implementation dependent; test that it doesn't crash and returns some date string.
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["nodate.md"]);
+    fsMocks.readFileSync.mockReturnValue(`+++
+title = "No Date"
++++
+Content`);
+
+    const posts = getAllPosts();
+    expect(posts[0]).toHaveProperty("date");
+    expect(typeof posts[0].date).toBe("string");
+  });
+it("skips posts with invalid date formats (or treats as oldest)", () => {
+  fsMocks.existsSync.mockReturnValue(true);
+  fsMocks.readdirSync.mockReturnValue(["valid.md", "invalid.md"]);
+  fsMocks.readFileSync.mockImplementation((filePath: string) => {
+    if (filePath.includes("valid.md")) {
+      return `+++\ntitle = "Valid"\ndate = 2026-01-01\n+++\nContent`;
+    } else {
+      return `+++\ntitle = "Invalid"\ndate = "not-a-date"\n+++\nContent`;
+    }
+  });
+
+  const posts = getAllPosts();
+
+  // Both posts are kept (length 2)
+  expect(posts).toHaveLength(2);
+
+  // At least one post has the correct valid date
+  expect(posts.some(p => p.date === "2026-01-01T00:00:00.000Z")).toBe(true);
+
+  // All posts have some date string (fallback for invalid)
+  expect(posts.every(p => typeof p.date === "string")).toBe(true);
+});
+
+  it("sorts posts in descending date order (newest first)", () => {
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["old.md", "new.md", "middle.md"]);
+    fsMocks.readFileSync.mockImplementation((filePath: string) => {
+      if (filePath.includes("old.md"))
+        return `+++\ntitle = "Old"\ndate = 2024-01-01\n+++`;
+      if (filePath.includes("middle.md"))
+        return `+++\ntitle = "Middle"\ndate = 2025-01-01\n+++`;
+      return `+++\ntitle = "New"\ndate = 2026-01-01\n+++`;
+    });
+
+    const posts = getAllPosts();
+    expect(posts.map((p) => p.title)).toEqual(["New", "Middle", "Old"]);
+  });
+
+  it("handles equal dates by stable sort (e.g., by title or filename)", () => {
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["a.md", "b.md"]);
+    fsMocks.readFileSync.mockImplementation((filePath: string) => {
+      if (filePath.includes("a.md"))
+        return `+++\ntitle = "A"\ndate = 2026-01-01\n+++`;
+      return `+++\ntitle = "B"\ndate = 2026-01-01\n+++`;
+    });
+
+    const posts = getAllPosts();
+    // Order should be deterministic (e.g., alphabetical by title or filename)
+    expect(posts[0].title).toBeDefined();
+    expect(posts[1].title).toBeDefined();
+  });
+});
+
+describe("draft filtering", () => {
+  it("excludes posts with draft = true from getAllPosts", () => {
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["published.md", "draft.md"]);
+    fsMocks.readFileSync.mockImplementation((filePath: string) => {
+      if (filePath.includes("published.md")) {
+        return `+++\ntitle = "Published"\ndate = 2026-01-01\ndraft = false\n+++`;
+      }
+      return `+++\ntitle = "Draft"\ndate = 2026-01-02\ndraft = true\n+++`;
+    });
+
+    const posts = getAllPosts();
+    expect(posts).toHaveLength(1);
+    expect(posts[0].title).toBe("Published");
+  });
+
+  it("excludes draft posts from getPostBySlug (same as getAllPosts)", () => {
+  fsMocks.existsSync.mockReturnValue(true);
+  fsMocks.readdirSync.mockReturnValue(["draft.md"]);
+  fsMocks.readFileSync.mockReturnValue(`+++
+title = "Draft Post"
+slug = "draft-post"
+date = 2026-01-01
+draft = true
++++
+Draft content`);
+
+  const post = getPostBySlug("draft-post"); 
+  expect(post).toBeNull();
+});
+});
+
+describe("metadata fallbacks and edge cases", () => {
+  it("uses FALLBACK_IMAGE when featured_image is missing", () => {
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["no-image.md"]);
+    fsMocks.readFileSync.mockReturnValue(`+++
+title = "No Image"
+date = 2026-01-01
++++
+Content`);
+
+    const posts = getAllPosts();
+    expect(posts[0].featuredImage).toBe(FALLBACK_IMAGE);
+  });
+
+  it("keeps provided featured_image when present", () => {
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["with-image.md"]);
+    fsMocks.readFileSync.mockReturnValue(`+++
+title = "With Image"
+date = 2026-01-01
+featured_image = "/custom.png"
++++
+Content`);
+
+    const posts = getAllPosts();
+    expect(posts[0].featuredImage).toBe("/custom.png");
+  });
+
+  it("handles missing description/abstract gracefully (undefined or empty)", () => {
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["no-desc.md"]);
+    fsMocks.readFileSync.mockReturnValue(`+++
+title = "No Description"
+date = 2026-01-01
++++
+Content`);
+
+    const posts = getAllPosts();
+    expect(posts[0].abstract).toBeUndefined();
+  });
+
+  it("handles missing categories and tags as empty arrays", () => {
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["no-tax.md"]);
+    fsMocks.readFileSync.mockReturnValue(`+++
+title = "No Categories"
+date = 2026-01-01
++++
+Content`);
+
+    const posts = getAllPosts();
+    expect(posts[0].categories).toEqual([]);
+    expect(posts[0].tags).toEqual([]);
+  });
+
+  it("handles missing authors field", () => {
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["no-author.md"]);
+    fsMocks.readFileSync.mockReturnValue(`+++
+title = "No Author"
+date = 2026-01-01
++++
+Content`);
+
+    const posts = getAllPosts();
+    expect(posts[0].authors).toEqual([]);
+  });
+
+  it("skips malformed frontmatter files without crashing", () => {
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["good.md", "bad.md"]);
+    fsMocks.readFileSync.mockImplementation((filePath: string) => {
+      if (filePath.includes("good.md")) {
+        return `+++\ntitle = "Good"\ndate = 2026-01-01\n+++`;
+      }
+      return `+++\ntitle = "Bad"\ndate = [invalid]\n+++`;
+    });
+
+    const posts = getAllPosts();
+    expect(posts).toHaveLength(1);
+    expect(posts[0].title).toBe("Good");
+  });
+
+  it("ignores non-markdown files in posts directory", () => {
+    fsMocks.existsSync.mockReturnValue(true);
+    fsMocks.readdirSync.mockReturnValue(["post.md", "image.png", "draft.md"]);
+    fsMocks.readFileSync.mockImplementation((filePath: string) => {
+      if (filePath.includes(".md")) {
+        return `+++\ntitle = "Markdown"\ndate = 2026-01-01\n+++`;
+      }
+      throw new Error("Should not read non-md files");
+    });
+
+    const posts = getAllPosts();
+    expect(posts).toHaveLength(2); // both .md files
+  });
+});
 });

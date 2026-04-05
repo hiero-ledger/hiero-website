@@ -4,169 +4,126 @@
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/10697/badge)](https://bestpractices.coreinfrastructure.org/projects/10697)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-This repo contains the source for [hiero.org](https://hiero.org).
+Source code for [hiero.org](https://hiero.org) — the official website for the Hiero project.
 
-## Current Stack
+## About
 
-- Next.js `16.1.7`
-- React `19.2.3`
-- TypeScript `5`
-- Tailwind CSS `4`
-- `pnpm` for dependency management and scripts
+[Hiero](https://hiero.org) is an open-source, vendor-neutral distributed ledger technology project under [Linux Foundation Decentralized Trust](https://www.lfdecentralizedtrust.org/). It powers the [Hedera](https://hedera.com/) public ledger and provides a fair, fast, and secure platform for decentralized applications.
 
-The site uses the App Router under `src/app`, renders blog content from `content/posts`, and serves static assets from `public/`.
+This repository contains the source code, content, and documentation for the Hiero project website.
 
-## Requirements
+## Tech Stack
+
+- **Next.js** `16.1.7` (App Router)
+- **React** `19.2.4`
+- **TypeScript** `5`
+- **Tailwind CSS** `4`
+- **pnpm** for dependency management and scripts
+
+## Getting Started
+
+### Requirements
 
 - Node.js `20` or newer
-- `pnpm` `10` or newer
+- pnpm `10` or newer
 - Git
-
-## Install Dependencies
-
-```bash
-pnpm install
-```
 
 Platform-specific setup help:
 
-- Linux: [docs/setup/linux_setup.md](docs/setup/linux_setup.md)
-- Windows: [docs/setup/windows_setup.md](docs/setup/windows_setup.md)
-- macOS: [docs/setup/Macbook_setup.md](docs/setup/Macbook_setup.md)
+- [Linux](docs/setup/linux_setup.md)
+- [Windows](docs/setup/windows_setup.md)
+- [macOS](docs/setup/Macbook_setup.md)
 
-## Run Locally
-
-Start the development server:
+### Install and Run
 
 ```bash
+pnpm install
 pnpm dev
 ```
 
 The site will be available at `http://localhost:3000`.
 
-`pnpm dev` runs `pnpm sync:repo-stats` first, then starts Next.js in development mode.
+### Build and Checks
 
-## Build and Checks
+| Command | Description |
+| --- | --- |
+| `pnpm lint` | Lint the codebase |
+| `pnpm test` | Run unit tests |
+| `pnpm format` | Format source files |
+| `pnpm format:check` | Check formatting without changing files |
+| `pnpm build` | Build the production app |
+| `pnpm start` | Serve the production build locally |
+| `pnpm update-snap` | Update test snapshots after intentional UI changes |
 
-Lint the codebase:
+## Project Structure
 
-```bash
-pnpm lint
-```
+| Path | Purpose |
+| --- | --- |
+| `src/app` | Route files, layouts, metadata, and page entry points |
+| `src/components` | Shared UI components (one folder per component with colocated tests) |
+| `src/lib` | Markdown parsing and content-loading helpers |
+| `src/data` | Generated or static JSON used by the app |
+| `src/scripts` | Local scripts (e.g., `sync-repo-stats.mjs`) |
+| `content/posts` | Blog post markdown files |
+| `public` | Static images and assets |
+| `docs` | Contributor and developer documentation |
 
-Run the unit tests:
+For a detailed breakdown of routes, content model, and constraints, see the [Repository Overview](docs/01-repo-overview.md).
 
-```bash
-pnpm test
-```
+## Documentation
 
-Update existing snapshots after an intentional UI change:
+Detailed documentation lives in the [`docs/`](docs/) directory. Below is a guided index organized by audience.
 
-```bash
-pnpm update-snap
-```
+### For New Contributors
 
-Format source files:
+| Guide | Description |
+| --- | --- |
+| [First Contribution Checklist](docs/05-first-contribution-checklist.md) | Pre-PR validation checklist |
+| [Contribution Workflow](docs/workflow.md) | End-to-end guide: fork, branch, commit, and submit a PR |
+| [Commit Signing Guide](docs/signing.md) | Setting up DCO and GPG signing |
+| [Discord Guide](docs/discord.md) | Joining the community chat |
 
-```bash
-pnpm format
-```
+### For Developers
 
-Check formatting without changing files:
+| Guide | Description |
+| --- | --- |
+| [Repository Overview](docs/01-repo-overview.md) | Architecture, directories, and route model |
+| [Content Folder Guide](docs/02-content-folder.md) | How content is organized and loaded |
+| [Adding Pages](docs/03-adding-pages.md) | Creating new routes and markdown-backed pages |
+| [Components Guide](docs/04-components.md) | Component layout, imports, and testing conventions |
+| [Testing and Quality Checks](docs/06-testing-and-quality-checks.md) | Linting, testing, and CI expectations |
+| [Rebasing Guide](docs/rebasing.md) | Keeping your branch in sync with upstream |
+| [Merge Conflicts Guide](docs/merge_conflicts.md) | Resolving merge conflicts |
 
-```bash
-pnpm format:check
-```
+### For Content Authors
 
-Build the production app:
+| Guide | Description |
+| --- | --- |
+| [Blog Writing Guide](docs/blogs.md) | Templates, front matter reference, and publishing workflow |
 
-```bash
-pnpm build
-```
+### For Maintainers
 
-Run the production build locally:
-
-```bash
-pnpm start
-```
-
-## Project Docs
-
-- Contributor docs index: [docs/README.md](docs/README.md)
-- Local Next.js setup: [docs/nextjs-setup.md](docs/nextjs-setup.md)
-- Repo overview: [docs/01-repo-overview.md](docs/01-repo-overview.md)
-- Content folder guide: [docs/02-content-folder.md](docs/02-content-folder.md)
-- Adding pages: [docs/03-adding-pages.md](docs/03-adding-pages.md)
-- Components guide: [docs/04-components.md](docs/04-components.md)
-- Contributor workflow: [docs/workflow.md](docs/workflow.md)
-- Blog writing guide: [docs/blogs.md](docs/blogs.md)
-- First contribution checklist: [docs/05-first-contribution-checklist.md](docs/05-first-contribution-checklist.md)
-- Testing and quality checks: [docs/06-testing-and-quality-checks.md](docs/06-testing-and-quality-checks.md)
-- GitHub automation guide: [docs/07-github-automation.md](docs/07-github-automation.md)
-
-## Creating a New Blog Post
-
-Blog posts are loaded from top-level Markdown files in `content/posts`.
-
-Hiero does not currently support translations or localized content variants, so
-new posts should be authored as a single English source file.
-
-1. Create a new file such as `content/posts/my-first-post.md`.
-2. Use TOML front matter with `+++` delimiters.
-3. Add the required post metadata.
-4. Write the body in standard Markdown.
-5. Add any images to `public/images/...`.
-6. Run `pnpm dev` and preview the post at `/blog/<slug>`.
-
-Use this template:
-
-```toml
-+++
-title = "My First Post"
-date = 2026-03-15
-draft = false
-featured_image = "/images/my-first-post/hero.png"
-categories = ["Blog"]
-tags = ["Example", "Community"]
-duration = "4 min read"
-abstract = "A short summary used in the blog list and metadata."
-slug = "my-first-post"
-
-[[authors]]
-name = "Your Name"
-title = "Maintainer"
-organization = "Hiero"
-link = "https://github.com/your-handle"
-image = "/images/authors/your-name.png"
-+++
-
-Write the rest of the article here in Markdown.
-```
-
-Important notes:
-
-- Use `+++`, not YAML `---`.
-- The current site only scans `.md` files directly inside `content/posts`.
-- If `slug` is omitted, the filename becomes the URL slug.
-- If `draft = true`, the post is skipped locally and in production.
-- Raw HTML is not rendered in blog content. Use Markdown syntax instead.
-- Hugo shortcodes like `{{< ... >}}` and `{{% ... %}}` are stripped out by the current parser.
-
-For the full field reference and workflow, see [docs/blogs.md](docs/blogs.md).
+| Guide | Description |
+| --- | --- |
+| [GitHub Automation](docs/07-github-automation.md) | CI workflows and automation overview |
 
 ## Contributing
 
-We welcome contributions such as:
+We welcome contributions of all kinds — code, documentation, and blog posts.
 
-- Code additions or changes
-- Blog posts
+1. **Find an issue**: Browse [unassigned open issues](https://github.com/hiero-ledger/hiero-website/issues?q=is%3Aissue%20state%3Aopen%20no%3Aassignee) and comment `/assign` to claim one.
+2. **Set up your environment**: Follow the [Getting Started](#getting-started) section above.
+3. **Read the workflow**: See the [Contribution Workflow](docs/workflow.md) for the full process.
+4. **Sign your commits**: All commits must be DCO and GPG signed. See the [Signing Guide](docs/signing.md).
 
-### Code Changes and Additions
+New to the project? Start with a [Good First Issue](https://github.com/hiero-ledger/hiero-website/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good+first+issue%22%20no%3Aassignee).
 
-We have several [Open Issues](https://github.com/hiero-ledger/hiero-website/issues?q=is%3Aissue%20state%3Aopen%20no%3Aassignee) at the Hiero website that need help.
+## Community
 
-Read [Workflow Guide](docs/workflow.md) to get started.
+- **Discord**: Join us on [Discord](https://discord.gg/hiero) — see the [Discord Guide](docs/discord.md) for details.
+- **Community Calls**: Browse meeting schedules and recordings on the [LFX Calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week).
+- **Discussions**: Use [GitHub Discussions](https://github.com/hiero-ledger/hiero-website/discussions) for questions and ideas.
 
-### Blog Posts
+## License
 
-See the [Detailed Guide on Creating a Blog Post](docs/blogs.md).
+This project is licensed under the [MIT License](LICENSE).

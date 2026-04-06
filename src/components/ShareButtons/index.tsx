@@ -36,9 +36,9 @@ export default function ShareButtons() {
       ),
     },
     {
-      name: "Twitter",
-      href: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
-      bg: "bg-black hover:bg-gray-900",
+      name: "X",
+      href: `https://x.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
+      bg: "bg-black hover:bg-zinc-900",
       icon: (
         <svg viewBox="0 0 32 32" className="w-5 h-5 fill-white">
           <path d="M17.9686 14.1623L26.7065 4H24.6358L17.0488 12.8238L10.9891 4H4L13.1634 17.3432L4 28H6.07069L14.0827 18.6817L20.4822 28H27.4714L17.9681 14.1623H17.9686Z" />

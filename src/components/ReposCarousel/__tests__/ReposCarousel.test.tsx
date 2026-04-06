@@ -1,46 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import repoStats from "@/data/repository_stats.json";
 import ReposCarousel from "..";
 
-const swiperActions = vi.hoisted(() => ({
-  slidePrev: vi.fn(),
-  slideNext: vi.fn(),
-}));
-
-vi.mock("swiper/react", async () => {
-  const React = await import("react");
-
-  return {
-    Swiper: React.forwardRef(function MockSwiper(
-      { children }: { children: React.ReactNode },
-      ref,
-    ) {
-      React.useImperativeHandle(ref, () => ({
-        swiper: swiperActions,
-      }));
-
-      return <div data-testid="repos-swiper">{children}</div>;
-    }),
-    SwiperSlide: ({ children }: { children: React.ReactNode }) => (
-      <div data-testid="repos-slide">{children}</div>
-    ),
-  };
-});
-
-vi.mock("swiper/modules", () => ({
-  Pagination: {},
-}));
-
 describe("ReposCarousel", () => {
-  beforeEach(() => {
-    swiperActions.slidePrev.mockClear();
-    swiperActions.slideNext.mockClear();
-  });
-
-  it("renders repository cards, repo stats, and carousel navigation", async () => {
-    const user = userEvent.setup();
+  it("renders repository cards with star counts in a grid", () => {
     const starCount = repoStats["hiero-sdk-js"].stars;
 
     render(
@@ -64,14 +28,59 @@ describe("ReposCarousel", () => {
     ).toBeInTheDocument();
     expect(screen.getByText("JavaScript SDK")).toBeInTheDocument();
     expect(
-      screen.getByRole("link", { name: /View Repository/i }),
+      screen.getByRole("link", { name: /View hiero-sdk-js repository/i }),
     ).toHaveAttribute("href", "https://github.com/hiero-ledger/hiero-sdk-js");
     expect(screen.getByText(`⭐ ${starCount}`)).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: /View all repositories/i }),
+    ).toHaveAttribute(
+      "href",
+      "https://github.com/orgs/hiero-ledger/repositories",
+    );
+  });
 
-    await user.click(screen.getByRole("button", { name: "Previous slide" }));
-    await user.click(screen.getByRole("button", { name: "Next slide" }));
+  it("limits displayed repos to the top 9 by star count", () => {
+    const repos = [
+      "hiero-sdk-rust",
+      "solo",
+      "hiero-sdk-go",
+      "hiero-consensus-node",
+      "hiero-improvement-proposals",
+      "hiero-sdk-java",
+      "hiero-sdk-js",
+      "hiero-json-rpc-relay",
+      "hiero-local-node",
+      "hiero-mirror-node",
+      "hiero-cli",
+      "hiero-mirror-node-explorer",
+    ].map(name => ({
+      name,
+      description: `Description for ${name}`,
+      link: `https://github.com/hiero-ledger/${name}`,
+    }));
 
-    expect(swiperActions.slidePrev).toHaveBeenCalled();
-    expect(swiperActions.slideNext).toHaveBeenCalled();
+    render(
+      <ReposCarousel
+        data={{
+          heading: "Repositories",
+          text: "All repos",
+          repos,
+        }}
+      />,
+    );
+
+    expect(
+      screen.getAllByRole("heading", { level: 3 }).map(node => node.textContent),
+    ).toEqual([
+      "hiero-consensus-node",
+      "hiero-sdk-js",
+      "hiero-local-node",
+      "hiero-sdk-java",
+      "hiero-mirror-node",
+      "hiero-improvement-proposals",
+      "hiero-sdk-go",
+      "hiero-json-rpc-relay",
+      "hiero-sdk-rust",
+    ]);
   });
 });

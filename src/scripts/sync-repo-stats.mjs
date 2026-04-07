@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-import fs from "node:fs";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import prettier from "prettier";
 import fallbackRepositoryStats from "../data/repository_stats.json" with { type: "json" };
 
 const dataDirectory = "src/data";
@@ -87,6 +88,45 @@ function loadFallback(log = true) {
   return toStatsObject(createZeroStatsMap());
 }
 
+async function formatStatsForFile(stats) {
+  let formatted = `${JSON.stringify(stats, null, 2)}\n`;
+
+  try {
+    const prettierConfig = await prettier.resolveConfig(targetFile);
+    formatted = await prettier.format(JSON.stringify(stats), {
+      ...(prettierConfig ?? {}),
+      parser: "json",
+      filepath: targetFile,
+    });
+  } catch (error) {
+    console.warn(
+      `[sync-repo-stats] Prettier formatting failed (${error.message}), using fallback formatting.`,
+    );
+  }
+
+  if (!formatted.endsWith("\n")) {
+    formatted += "\n";
+  }
+
+  return formatted;
+}
+
+async function writeIfChanged(content) {
+  try {
+    const existingContent = await readFile(targetFile, "utf8");
+    if (existingContent === content) {
+      return false;
+    }
+  } catch (error) {
+    if (error?.code !== "ENOENT") {
+      throw error;
+    }
+  }
+
+  await writeFile(targetFile, content);
+  return true;
+}
+
 async function fetchFromGitHub() {
   const stats = new Map();
   const cachedStats = toStatsMap(loadFallback(false));
@@ -170,12 +210,13 @@ async function run() {
     stats = loadFallback();
   }
 
-  fs.mkdirSync(dataDirectory, { recursive: true });
-  fs.writeFileSync(targetFile, JSON.stringify(stats, null, 2));
+  await mkdir(dataDirectory, { recursive: true });
+  const formattedStats = await formatStatsForFile(stats);
+  const didWrite = await writeIfChanged(formattedStats);
 
   const totalStars = Object.values(stats).reduce((sum, r) => sum + r.stars, 0);
   console.log(
-    `[sync-repo-stats] Done. Total stars: ${totalStars.toLocaleString()}`,
+    `[sync-repo-stats] Done. Total stars: ${totalStars.toLocaleString()}${didWrite ? "" : " (no changes)"}`,
   );
 }
 

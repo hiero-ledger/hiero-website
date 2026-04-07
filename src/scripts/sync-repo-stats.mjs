@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import fs from "node:fs";
+import prettier from "prettier";
 import fallbackRepositoryStats from "../data/repository_stats.json" with { type: "json" };
 
 const dataDirectory = "src/data";
@@ -87,6 +88,41 @@ function loadFallback(log = true) {
   return toStatsObject(createZeroStatsMap());
 }
 
+async function formatStatsForFile(stats) {
+  let formatted = `${JSON.stringify(stats, null, 2)}\n`;
+
+  try {
+    const prettierConfig = await prettier.resolveConfig(targetFile);
+    formatted = await prettier.format(JSON.stringify(stats), {
+      ...(prettierConfig ?? {}),
+      parser: "json",
+      filepath: targetFile,
+    });
+  } catch (error) {
+    console.warn(
+      `[sync-repo-stats] Prettier formatting failed (${error.message}), using fallback formatting.`,
+    );
+  }
+
+  if (!formatted.endsWith("\n")) {
+    formatted += "\n";
+  }
+
+  return formatted;
+}
+
+function writeIfChanged(filePath, content) {
+  if (fs.existsSync(filePath)) {
+    const existingContent = fs.readFileSync(filePath, "utf8");
+    if (existingContent === content) {
+      return false;
+    }
+  }
+
+  fs.writeFileSync(filePath, content);
+  return true;
+}
+
 async function fetchFromGitHub() {
   const stats = new Map();
   const cachedStats = toStatsMap(loadFallback(false));
@@ -171,11 +207,12 @@ async function run() {
   }
 
   fs.mkdirSync(dataDirectory, { recursive: true });
-  fs.writeFileSync(targetFile, JSON.stringify(stats, null, 2));
+  const formattedStats = await formatStatsForFile(stats);
+  const didWrite = writeIfChanged(targetFile, formattedStats);
 
   const totalStars = Object.values(stats).reduce((sum, r) => sum + r.stars, 0);
   console.log(
-    `[sync-repo-stats] Done. Total stars: ${totalStars.toLocaleString()}`,
+    `[sync-repo-stats] Done. Total stars: ${totalStars.toLocaleString()}${didWrite ? "" : " (no changes)"}`,
   );
 }
 

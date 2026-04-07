@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import fs from "node:fs";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import prettier from "prettier";
 import fallbackRepositoryStats from "../data/repository_stats.json" with { type: "json" };
 
@@ -111,15 +111,19 @@ async function formatStatsForFile(stats) {
   return formatted;
 }
 
-function writeIfChanged(filePath, content) {
-  if (fs.existsSync(filePath)) {
-    const existingContent = fs.readFileSync(filePath, "utf8");
+async function writeIfChanged(content) {
+  try {
+    const existingContent = await readFile(targetFile, "utf8");
     if (existingContent === content) {
       return false;
     }
+  } catch (error) {
+    if (error?.code !== "ENOENT") {
+      throw error;
+    }
   }
 
-  fs.writeFileSync(filePath, content);
+  await writeFile(targetFile, content);
   return true;
 }
 
@@ -206,9 +210,9 @@ async function run() {
     stats = loadFallback();
   }
 
-  fs.mkdirSync(dataDirectory, { recursive: true });
+  await mkdir(dataDirectory, { recursive: true });
   const formattedStats = await formatStatsForFile(stats);
-  const didWrite = writeIfChanged(targetFile, formattedStats);
+  const didWrite = await writeIfChanged(formattedStats);
 
   const totalStars = Object.values(stats).reduce((sum, r) => sum + r.stars, 0);
   console.log(

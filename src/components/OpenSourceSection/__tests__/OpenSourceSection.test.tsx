@@ -7,8 +7,6 @@ describe("OpenSourceSection", () => {
     render(
       <OpenSourceSection
         data={{
-          whyHeading: "Why open source",
-          whyText: "It keeps governance transparent.",
           whatHeading: "What contributors do",
           whatText: "Read the [guide](/guide) and start contributing.",
         }}
@@ -16,11 +14,9 @@ describe("OpenSourceSection", () => {
     );
 
     expect(
-      screen.getByRole("heading", { name: "Why open source" }),
-    ).toBeInTheDocument();
-    expect(
       screen.getByRole("heading", { name: "What contributors do" }),
     ).toBeInTheDocument();
+
     expect(screen.getByRole("link", { name: "guide" })).toHaveAttribute(
       "href",
       "/guide",

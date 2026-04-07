@@ -2,8 +2,6 @@ import Image from "next/image";
 import RichText from "@/components/RichText";
 
 interface OpenSourceData {
-  whyHeading: string;
-  whyText: string;
   whatHeading: string;
   whatText: string;
 }
@@ -23,19 +21,6 @@ export default function OpenSourceSection({ data }: OpenSourceSectionProps) {
           className="sm:absolute w-full h-full sm:top-[50%] sm:left-[50%] sm:-translate-x-[50%] sm:-translate-y-[50%] pointer-events-none"
           loading="lazy"
         />
-        <div id="open-source" className="anchor anchor--open-source relative">
-          <div className="h-14 w-14 mb-5">
-            <Image
-              src="/images/Hiero-Icon-Heart.svg"
-              alt=""
-              width={56}
-              height={56}
-              loading="lazy"
-            />
-          </div>
-          <h2 className="text-2xl font-medium mb-5">{data.whyHeading}</h2>
-          <p className="text-base max-w-[565px]">{data.whyText}</p>
-        </div>
         <div className="relative">
           <div className="h-14 w-14 mb-5">
             <Image

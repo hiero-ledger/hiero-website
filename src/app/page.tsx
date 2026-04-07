@@ -304,9 +304,6 @@ const issueJumpData = {
 };
 
 const openSourceData = {
-  whyHeading: "Why is Hiero Open Source?",
-  whyText:
-    "The goal of Hiero is to build a diverse community of developers and innovators making the world fairer, faster, and more secure. Hiero's source is accessible so anyone can advance the project. As a decentralized network used by enterprises and critical infrastructure, it must remain vendor-neutral and fully auditable.",
   whatHeading: "What parts of Hiero are Open Source?",
   whatText:
     "Hiero is fully open source. While its transition to Linux Foundation Decentralized Trust continues, additional contributions are available in [Hedera’s GitHub organization](https://github.com/hashgraph). The technical steering committee (TSC) of Hiero will initially oversee adding projects needed for an enterprise-ready decentralized network to a new Hiero GitHub organization. See the roadmap for more details.",

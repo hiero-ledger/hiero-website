@@ -3,7 +3,6 @@ import RichText from "@/components/RichText";
 interface MeetCall {
   name: string;
   description: string;
-  schedule: string;
   registerLink: string;
 }
 
@@ -17,7 +16,11 @@ interface MeetSectionProps {
   data: MeetData;
 }
 
+const VISIBLE_COUNT = 9;
+
 export default function MeetSection({ data }: MeetSectionProps) {
+  const visibleCalls = data.calls.slice(0, VISIBLE_COUNT);
+
   return (
     <div id="meet" className="anchor">
       <div className="bg-white">
@@ -31,31 +34,33 @@ export default function MeetSection({ data }: MeetSectionProps) {
               className="text-lg max-w-full md:max-w-[800px] space-y-4"
             />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {data.calls.map((call, i) => (
-              <div
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+            {visibleCalls.map((call, i) => (
+              <a
                 key={i}
-                className="border-2 border-white-dark rounded-2xl p-8 hover:border-red transition-colors duration-200 bg-white">
+                href={call.registerLink}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label={`Register for ${call.name} (opens in new tab)`}
+                className="flex flex-col border-2 border-white-dark rounded-2xl p-8 hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 transition-colors duration-200 bg-white h-full no-underline text-charcoal">
                 <h3 className="text-xl sm:text-2xl font-medium mb-3">
                   {call.name}
                 </h3>
-                <p className="text-base mb-4 text-gray-600">
+                <p className="text-base mb-4 text-gray-600 flex-grow">
                   {call.description}
                 </p>
-                <p className="text-sm mb-4 text-gray-600">
-                  <strong>Schedule:</strong> {call.schedule}
-                </p>
-                <div className="flex flex-col gap-2 mt-4">
-                  <a
-                    href={call.registerLink}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="text-red hover:text-red-dark text-base font-medium underline">
-                    Register →
-                  </a>
-                </div>
-              </div>
+              </a>
             ))}
+          </div>
+          <div className="mt-10 text-center">
+            <a
+              href="https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=month"
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label="View all community calls on LFX Calendar (opens in new tab)"
+              className="text-red hover:text-red-dark text-lg font-medium underline">
+              View all community calls →
+            </a>
           </div>
         </div>
       </div>

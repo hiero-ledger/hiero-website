@@ -5,7 +5,7 @@ package-lock.json                               @hiero-ledger/hiero-website-main
 
 .remarkrc                                       @hiero-ledger/github-maintainers @hiero-ledger/hiero-website-maintainers
 
-/CODEOWNERS                                     @hiero-ledger/github-maintainers @hiero-ledger/hiero-website-maintainers
+/CODEOWNERS                                     @hiero-ledger/github-maintainers
 
 # Protect the repository root files
 /README.md                                      @hiero-ledger/github-maintainers @hiero-ledger/hiero-website-maintainers @hiero-ledger/hiero-website-committers

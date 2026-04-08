@@ -303,11 +303,6 @@ const issueJumpData = {
   ],
 };
 
-const openSourceData = {
-  whatHeading: "What parts of Hiero are Open Source?",
-  whatText:
-    "Hiero is fully open source. While its transition to Linux Foundation Decentralized Trust continues, additional contributions are available in [Hedera’s GitHub organization](https://github.com/hashgraph). The technical steering committee (TSC) of Hiero will initially oversee adding projects needed for an enterprise-ready decentralized network to a new Hiero GitHub organization. See the roadmap for more details.",
-};
 
 const quotesData = [
   {
@@ -383,8 +378,6 @@ export default function Home() {
       <ReposCarousel data={reposData} />
       <Divider />
 
-      <OpenSourceSection data={openSourceData} />
-      <Divider />
       <QuotesCarousel data={quotesData} />
     </>
   );

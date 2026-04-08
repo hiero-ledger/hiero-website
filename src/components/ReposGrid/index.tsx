@@ -85,14 +85,14 @@ function RepoCard({ repo, stars }: { repo: RepoItem; stars: number }) {
       target="_blank"
       rel="noreferrer noopener"
       aria-label={`View ${repo.name} repository on GitHub`}
-      className="flex flex-col border-2 border-white-dark rounded-2xl p-8 hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 transition-colors duration-200 bg-white h-full no-underline text-charcoal">
-      <h3 className="text-xl sm:text-2xl font-medium mb-3">{repo.name}</h3>
-      <p className="text-base mb-4 text-gray-600 flex-grow">
-        {repo.description}
-      </p>
-      <div className="flex flex-row justify-end items-center mt-4">
+      className="relative flex flex-col border-2 border-white-dark rounded-2xl p-8 hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 transition-colors duration-200 bg-white h-full no-underline text-charcoal">
+      <div className="absolute top-4 right-4 z-10">
         <span className="text-sm text-gray-600">⭐ {stars}</span>
       </div>
+      <h3 className="text-xl sm:text-2xl font-medium mb-3 pr-10">{repo.name}</h3>
+      <p className="text-base text-gray-600 flex-grow">
+        {repo.description}
+      </p>
     </a>
   );
 }

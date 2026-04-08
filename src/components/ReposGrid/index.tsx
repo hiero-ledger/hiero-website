@@ -92,10 +92,10 @@ function RepoCard({ repo, stars }: { repo: RepoItem; stars: number }) {
           <span className="sr-only">{stars} stars</span>
         </span>
       </div>
-      <h3 className="text-xl sm:text-2xl font-medium mb-3 pr-10">{repo.name}</h3>
-      <p className="text-base text-gray-600 flex-grow">
-        {repo.description}
-      </p>
+      <h3 className="text-xl sm:text-2xl font-medium mb-3 pr-10">
+        {repo.name}
+      </h3>
+      <p className="text-base text-gray-600 flex-grow">{repo.description}</p>
     </a>
   );
 }

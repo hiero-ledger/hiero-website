@@ -51,7 +51,7 @@ const whatIsHieroData = {
 
 const meetData = {
   heading: "Join our Hiero Community Calls",
-  text: "Join our open TSC, Community and Project meetings. We welcome your opinion and invite you to collaborate with the team!\n\nRegister to any of our current meeting series [HERE](https://github.com/hiero-ledger#open-community-meetings-and-tsc-schedules)\n\nView all meeting schedules and access recordings via our [LFX Calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week).",
+  text: "Join our open meetings to collaborate with the team. [Register here](https://github.com/hiero-ledger#open-community-meetings-and-tsc-schedules) or view schedules on the [LFX Calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week).",
   calls: [
     // Ranked by LFX Calendar sign-up counts
     {

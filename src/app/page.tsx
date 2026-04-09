@@ -4,7 +4,6 @@ import Divider from "@/components/Divider";
 import MeetSection from "@/components/MeetSection";
 import ReposCarousel from "@/components/ReposCarousel";
 import IssueJumpSection from "@/components/IssueJumpSection";
-import OpenSourceSection from "@/components/OpenSourceSection";
 import QuotesCarousel from "@/components/QuotesCarousel";
 
 const heroData = {

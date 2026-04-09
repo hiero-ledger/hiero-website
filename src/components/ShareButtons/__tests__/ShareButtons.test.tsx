@@ -13,7 +13,7 @@ describe("ShareButtons", () => {
       "href",
       expect.stringContaining(encodeURIComponent(window.location.href)),
     );
-    expect(screen.getByLabelText("Share on Twitter")).toHaveAttribute(
+    expect(screen.getByLabelText("Share on X")).toHaveAttribute(
       "href",
       expect.stringContaining(encodeURIComponent(document.title)),
     );

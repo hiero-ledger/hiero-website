@@ -303,7 +303,6 @@ const issueJumpData = {
   ],
 };
 
-
 const quotesData = [
   {
     quote:

@@ -14,7 +14,6 @@ export default function OpenSourceSection({ data }: OpenSourceSectionProps) {
   return (
     <div className="bg-white">
       <div className="container mx-auto pt-[40px] pb-[40px] sm:pt-[92px] sm:pb-[154px] grid grid-cols-1 gap-[40px]">
-        
         <div className="relative">
           <div className="h-14 w-14 mb-5">
             <Image
@@ -26,9 +25,7 @@ export default function OpenSourceSection({ data }: OpenSourceSectionProps) {
             />
           </div>
 
-          <h2 className="text-2xl font-medium mb-5">
-            {data.whatHeading}
-          </h2>
+          <h2 className="text-2xl font-medium mb-5">{data.whatHeading}</h2>
 
           <RichText
             inline
@@ -36,7 +33,6 @@ export default function OpenSourceSection({ data }: OpenSourceSectionProps) {
             className="text-base max-w-[565px]"
           />
         </div>
-
       </div>
     </div>
   );

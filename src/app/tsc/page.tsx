@@ -42,7 +42,7 @@ export default function TSCSection() {
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
-  const lastFocusedElementRef = useRef<HTMLElement | null>(null);
+  const lastFocusedTriggerIdRef = useRef<string | null>(null);
 
   const sorted = [...(tscMembers as Member[])].sort((a, b) =>
     `${a.lastName} ${a.firstName}`.localeCompare(
@@ -54,8 +54,6 @@ export default function TSCSection() {
     if (!selectedMember) {
       return;
     }
-
-    lastFocusedElementRef.current = document.activeElement as HTMLElement;
 
     const focusCloseButton = window.setTimeout(() => {
       closeButtonRef.current?.focus();
@@ -71,40 +69,8 @@ export default function TSCSection() {
         return;
       }
 
-      const modalElement = modalRef.current;
-
-      if (!modalElement) {
-        return;
-      }
-
-      const focusableElements = Array.from(
-        modalElement.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
-        ),
-      ).filter(
-        element =>
-          !element.hasAttribute("disabled") &&
-          element.getAttribute("aria-hidden") !== "true",
-      );
-
-      if (focusableElements.length === 0) {
-        event.preventDefault();
-        return;
-      }
-
-      const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
-      const activeElement = document.activeElement as HTMLElement | null;
-
-      if (!event.shiftKey && activeElement === lastElement) {
-        event.preventDefault();
-        firstElement.focus();
-      }
-
-      if (event.shiftKey && activeElement === firstElement) {
-        event.preventDefault();
-        lastElement.focus();
-      }
+      const focusableElements = getFocusableElements(modalRef.current);
+      trapFocusInModal(event, focusableElements);
     };
 
     document.body.style.overflow = "hidden";
@@ -114,7 +80,13 @@ export default function TSCSection() {
       window.clearTimeout(focusCloseButton);
       document.body.style.overflow = "";
       window.removeEventListener("keydown", handleKeyboardInteraction);
-      lastFocusedElementRef.current?.focus();
+
+      if (lastFocusedTriggerIdRef.current) {
+        const triggerButton = document.getElementById(
+          lastFocusedTriggerIdRef.current,
+        );
+        triggerButton?.focus();
+      }
     };
   }, [selectedMember]);
 
@@ -241,8 +213,10 @@ export default function TSCSection() {
 
                     {hasBio ? (
                       <button
+                        id={`tsc-read-profile-${index}`}
                         type="button"
                         onClick={() => {
+                          lastFocusedTriggerIdRef.current = `tsc-read-profile-${index}`;
                           setSelectedMember(member);
                         }}
                         className="mt-4 inline-flex items-center rounded-full border-2 border-white-dark px-4 py-1.5 text-sm font-medium text-charcoal transition-colors hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2"
@@ -383,6 +357,45 @@ function getBioPreview(bio: string, maxLength = 170): string {
   }
 
   return `${trimmedBio.slice(0, maxLength)}...`;
+}
+
+function getFocusableElements(container: HTMLDivElement | null): HTMLElement[] {
+  if (!container) {
+    return [];
+  }
+
+  return Array.from(
+    container.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    ),
+  ).filter(
+    element =>
+      !element.hasAttribute("disabled") &&
+      element.getAttribute("aria-hidden") !== "true",
+  );
+}
+
+function trapFocusInModal(
+  event: KeyboardEvent,
+  focusableElements: HTMLElement[],
+): void {
+  if (focusableElements.length === 0) {
+    event.preventDefault();
+    return;
+  }
+
+  const firstElement = focusableElements[0];
+  const lastElement = focusableElements[focusableElements.length - 1];
+
+  if (!event.shiftKey && document.activeElement === lastElement) {
+    event.preventDefault();
+    firstElement.focus();
+  }
+
+  if (event.shiftKey && document.activeElement === firstElement) {
+    event.preventDefault();
+    lastElement.focus();
+  }
 }
 
 function getGitHubHandle(gitHubAccount?: string): string | null {

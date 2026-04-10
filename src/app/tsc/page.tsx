@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import tscMembers from "@/data/technical_steering_committee.json";
 
@@ -40,6 +40,9 @@ const governanceResources = [
 
 export default function TSCSection() {
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const lastFocusedElementRef = useRef<HTMLElement | null>(null);
 
   const sorted = [...(tscMembers as Member[])].sort((a, b) =>
     `${a.lastName} ${a.firstName}`.localeCompare(
@@ -52,18 +55,66 @@ export default function TSCSection() {
       return;
     }
 
-    const handleEsc = (event: KeyboardEvent) => {
+    lastFocusedElementRef.current = document.activeElement as HTMLElement;
+
+    const focusCloseButton = window.setTimeout(() => {
+      closeButtonRef.current?.focus();
+    }, 0);
+
+    const handleKeyboardInteraction = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setSelectedMember(null);
+        return;
+      }
+
+      if (event.key !== "Tab") {
+        return;
+      }
+
+      const modalElement = modalRef.current;
+
+      if (!modalElement) {
+        return;
+      }
+
+      const focusableElements = Array.from(
+        modalElement.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter(
+        element =>
+          !element.hasAttribute("disabled") &&
+          element.getAttribute("aria-hidden") !== "true",
+      );
+
+      if (focusableElements.length === 0) {
+        event.preventDefault();
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+      const activeElement = document.activeElement as HTMLElement | null;
+
+      if (!event.shiftKey && activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
+
+      if (event.shiftKey && activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
       }
     };
 
     document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handleEsc);
+    window.addEventListener("keydown", handleKeyboardInteraction);
 
     return () => {
+      window.clearTimeout(focusCloseButton);
       document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleEsc);
+      window.removeEventListener("keydown", handleKeyboardInteraction);
+      lastFocusedElementRef.current?.focus();
     };
   }, [selectedMember]);
 
@@ -253,11 +304,13 @@ export default function TSCSection() {
             setSelectedMember(null);
           }}>
           <div
+            ref={modalRef}
             className="relative max-h-[90vh] w-full max-w-220 overflow-y-auto rounded-2xl border-2 border-white-dark bg-white p-6 sm:p-8"
             onClick={event => {
               event.stopPropagation();
             }}>
             <button
+              ref={closeButtonRef}
               type="button"
               onClick={() => {
                 setSelectedMember(null);

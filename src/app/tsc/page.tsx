@@ -42,7 +42,9 @@ export default function TSCSection() {
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
 
   const sorted = [...(tscMembers as Member[])].sort((a, b) =>
-    `${a.lastName} ${a.firstName}`.localeCompare(`${b.lastName} ${b.firstName}`),
+    `${a.lastName} ${a.firstName}`.localeCompare(
+      `${b.lastName} ${b.firstName}`,
+    ),
   );
 
   useEffect(() => {
@@ -229,7 +231,9 @@ export default function TSCSection() {
                 className="flex h-full flex-col rounded-2xl border-2 border-white-dark bg-white p-6 no-underline text-charcoal transition-colors hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2"
                 aria-label={`${resource.title} (opens in new tab)`}>
                 <h3 className="text-xl font-medium mb-3">{resource.title}</h3>
-                <p className="text-base text-gray grow">{resource.description}</p>
+                <p className="text-base text-gray grow">
+                  {resource.description}
+                </p>
                 <span className="mt-5 text-base font-medium text-red underline">
                   Open resource
                 </span>
@@ -282,7 +286,9 @@ export default function TSCSection() {
               )}
 
               <div>
-                <h3 id="tsc-member-modal-title" className="text-2xl sm:text-3xl mb-3">
+                <h3
+                  id="tsc-member-modal-title"
+                  className="text-2xl sm:text-3xl mb-3">
                   {selectedMember.firstName} {selectedMember.lastName}
                 </h3>
 
@@ -299,7 +305,8 @@ export default function TSCSection() {
                       width={16}
                       height={16}
                     />
-                    {getGitHubHandle(selectedMember.gitHubAccount) ?? "GitHub profile"}
+                    {getGitHubHandle(selectedMember.gitHubAccount) ??
+                      "GitHub profile"}
                   </a>
                 ) : null}
 

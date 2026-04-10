@@ -1,275 +1,232 @@
 name: Beginner Issue Template
-description: Create a Beginner Issue for fairly new contributors to the Hiero Website
-title: "[Beginner]: "
+description: Create a beginner issue for contributors ready to learn the codebase and own a small implementation.
 labels: ["beginner"]
 assignees: []
 body:
+
   - type: markdown
     attributes:
       value: |
         ---
-        ## **Thanks for contributing!** 😊
+        ## **Thanks for creating a beginner issue!** 😊
 
-        We truly appreciate your time and effort. If this is your first open-source contribution, welcome!
-        This template is designed to help you create a Beginner-friendly issue: an easy, well-scoped task that helps fairly new contributors learn the codebase and build their skills.
+        Beginner issues are well-scoped tasks designed to help you learn the codebase and follow best-practices.
+
+        Read more:
+        > [Contribution Workflow](https://github.com/hiero-ledger/hiero-website/blob/main/docs/workflow.md)
+        > [First Contribution Checklist](https://github.com/hiero-ledger/hiero-website/blob/main/docs/05-first-contribution-checklist.md)
         ---
 
   - type: textarea
     id: intro
     attributes:
-      label: 🐥 Beginner Friendly
-      description: Who is this issue for?
+      label: 🧑‍🎓 Beginner Issue
+      description: |
+        Adapt as needed. Welcome message.
       value: |
-        This issue is intended for contributors who have previously completed a Good First Issue in [Hiero Website](https://github.com/hiero-ledger/hiero-website) and are at a beginner level.
-        We recognize that gaining confidence and building skills are equally important steps in the open-source contributor journey.
-        The purpose of this issue—and others listed under [**Find a beginner issue**](https://github.com/hiero-ledger/hiero-website/issues?q=is%3Aissue%20state%3Aopen%20label%3Abeginner%20no%3Aassignee)—is to provide a supportive, low-pressure environment where you can learn, practice, and grow your contribution skills with confidence.
-    validations:
-      required: false
+        Welcome! This is a **[Beginner Issue](https://github.com/issues?q=is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%20archived%3Afalse%20no%3Aassignee%20label%3A%22beginner%22%20repo%3Ahiero-ledger%2Fhiero-website)** designed to help you learn the codebase.
 
-  - type: markdown
-    attributes:
-      value: |
-        > [!IMPORTANT]
-        > ### 🐥 Beginner Issue Guidelines
-        >
-        > Beginner Issues are intended for contributors who are familiar with the project workflow and have **some programming or web development experience** and are wanting opportunities to build skills.
-        > These issues may require **light investigation, interpretation of existing code, and some self-initiative**, but should remain **well-scoped with a clear intent**.
-        >
-        > **What we generally consider beginner issues:**
-        >
-        > - **Small, well-scoped updates to existing tests or lint rules**
-        > - **Narrow changes or additions to website functionality** using common HTML/CSS/JS skills, such as:
-        >   - Fixing a broken link or image
-        >   - Updating alt text for accessibility
-        >   - Correcting layout issues with simple CSS adjustments
-        > - **Documentation improvements** in examples such as clarifying steps or adding missing details
-        > - **Functional improvements to existing examples or snippets**:
-        >   - Adding steps or variations to better demonstrate functionality
-        >
-        > **What we generally do NOT consider beginner issues:**
-        > - Deep Hugo expertise or knowledge of advanced web development concepts
-        > - Other CSS or frontend development experience
-        > - Tasks better suited for Good First Issues (purely mechanical or fully guided changes)
-        > - Changes to core website architecture or frameworks
-        > - Work that requires deep knowledge across multiple areas of the codebase
-        >
-        > 📖 *For a more detailed explanation, refer to:  
-        > [`.github/maintainers/guidelines_beginner_issues.md`](.github/maintainers/guidelines_beginner_issues.md).*
+        🏁 **When this issue is complete, you will have:**
+
+        ✅ Researched a component or module in detail
+        ✅ Followed existing patterns to implement a solution
+        ✅ Researched and identified appropriate approaches to solve the problem
+        ✅ Created basic tests
+        ✅ Delivered a clean, review-ready pull request
 
   - type: textarea
-    id: issue
+    id: problem
     attributes:
-      label: 👾 Description of the issue
+      label: 🐞 Problem Description
       description: |
-        DESCRIBE THE ISSUE IN A WAY THAT IS UNDERSTANDABLE AND APPROACHABLE TO BEGINNER CONTRIBUTORS.
-        ASSUME SUCH CONTRIBUTORS HAVE AT MOST BEGINNER-LEVEL KNOWLEDGE ABOUT WEB DEVELOPMENT AND THE HIERO WEBSITE.
-        IT IS HELPFUL TO ADD LINKS TO THE RELEVANT DOCUMENTATION AND/OR CODE SECTIONS.
-        SLIGHTLY CHALLENGE THEM TO ENCOURAGE LEARNING AND RESEARCH BUT MAKE SURE THE ISSUE IS STILL SIMPLE.
+        Describe the issue so it is easy for a beginner contributor to understand what needs to be done and why. 
+        Include which file(s) to look at, what the current behaviour is, and what the desired behaviour is.    
       value: |
-        Describe the issue here.
+        <!-- Describe the issue here -->  
+
+        <!-- Identify which files to look at and patterns to recognise -->  
+
     validations:
       required: true
 
-  - type: markdown
-    attributes:
-      value: |
-        <!-- Example for problem (hidden in submission) -->
-         ## 👾 Description of the issue - Example
 
-        The Problem:
-        The blog post list layout in `layouts/posts/list.html` hardcodes the number of posts per page
-        to 3, but this should be configurable through the site's configuration file (`hugo. toml`) to
-        make it easier to adjust without touching layout code.
-
-        Current State:
-        In `layouts/posts/list.html` at line 17, you'll find:
-        ```html
-        {{ $paginator := .Paginate $pages 3 }}
-        ```
-
-        This hardcoded `3` means we always show 3 blog posts per page.  If we want to change this,
-        we have to edit the layout file directly. 
-
-        Where to Find It:
-        - **Layout file**: [`layouts/posts/list.html` (line 17)](https://github.com/hiero-ledger/hiero-website/blob/main/layouts/posts/list.html#L17)
-        - **Config file**: [`hugo.toml`](https://github.com/hiero-ledger/hiero-website/blob/main/hugo.toml)
-
-        Expected Behavior:
-        The number of posts per page should be: 
-        1. Defined in `hugo.toml` as a parameter (e.g., `postsPerPage = 3`)
-        2. Read from that parameter in the layout file
-        3. Fall back to 3 if the parameter isn't set
-
-        Why This Matters:
-        - **Maintainability**: Configuration belongs in config files, not layout code
-        - **Flexibility**: Makes it easy to experiment with different page sizes
-        - **Best practices**: Follows Hugo's convention of keeping configuration separate
-
-  
   - type: textarea
     id: solution
     attributes:
-      label: 💡 Proposed Solution
+      label: 💡 Expected Solution
       description: |
-        DESCRIBE THE STEPS NEEDED TO SOLVE THE ISSUE.
-        BREAK DOWN THE STEPS AS MUCH AS POSSIBLE AND MAKE SURE THEY ARE EASY TO FOLLOW.
-        ADD LINKS TO RELEVANT DOCUMENTATION OR CODE SECTIONS IF POSSIBLE.
+        Briefly describe what the contributor should build or fix.
+        This should be a short summary of the expected outcome — not a detailed implementation guide.
       value: |
-        Edit here.
+        <!-- Describe the solution here -->
     validations:
       required: true
 
-  - type: markdown
+  - type: textarea
+    id: research
     attributes:
+      label: 🔍 Research Pointers
+      description: |
+        Point the contributor toward relevant files, similar components, or documentation to study.
+        This is the most important, "investigate before you code" step.
+        Think: what would a colleague tell you if you asked "where do I start?"
+        Include links to React/Next.js documentation if the task involves a specific concept.
       value: |
-        <!-- Example for the solution (hidden in submission) -->
-        ### 💡 Solution - Example
-        
-        1. Update the Configuration File
+        <!-- Replace this with research pointers. -->
 
-          **File**:  `hugo.toml`
-
-          1. Open `hugo.toml` in your text editor
-          2. Find the `[params]` section (or create it if it doesn't exist)
-          3. Add this line:
-          ```toml
-          postsPerPage = 3
-          ```
-          4. Save the file
-
-          **Example of what it should look like**:
-          ```toml
-          [params]
-            enableImageLazyLoading = true
-            postsPerPage = 3
-            # ... other parameters
-          ```
-
-        2. Update the Layout Template
-
-          **File**: `layouts/posts/list.html`
-
-          1. Open `layouts/posts/list.html`
-          2. Find line 17: `{{ $paginator := .Paginate $pages 3 }}`
-          3. Replace it with:
-          ```html
-          {{ $postsPerPage := site.Params.postsPerPage | default 3 }}
-          {{ $paginator := .Paginate $pages $postsPerPage }}
-          ```
-          4. Save the file
-
-          3. Test Your Changes
-
-          Start the Hugo Server
-          ```bash
-          hugo server
-          ```
-
-        Test Case 1: Default Behavior
-          - Open http://localhost:1313/posts
-          - Verify you see 3 posts per page
-          - Check that pagination works correctly
-
-        Test Case 2: Different Value
-          - Change `postsPerPage = 3` to `postsPerPage = 5` in `hugo.toml`
-          - Refresh the browser (Hugo should auto-reload)
-          - Verify you now see 5 posts per page
-        
+        <!-- Link to similar examples or React/Next.js/TypeScript documentation. -->
+    validations:
+      required: true
 
   - type: textarea
     id: implementation
     attributes:
-      label: 👩‍💻 Implementation Steps
+      label: 🛠️ Implementation Notes
       description: |
-        DESCRIBE THE TECHNICAL STEPS NEEDED TO SOLVE THE ISSUE.
-        BREAK DOWN THE STEPS AS MUCH AS POSSIBLE AND MAKE SURE THEY ARE EASY TO FOLLOW.
+        Briefly outline the implementation, nudging them to research and make their own decisions.
       value: |
-        Edit here.
+        <!-- Outline how to apply the research and build the implementation. -->
     validations:
       required: true
-
-  - type: markdown
-    attributes:
-      value:  |
-        <!-- Example for the implementation (hidden in submission) -->
-        ## 👩‍💻 Implementation Steps - Example
-
-
-        What Needs to Change:
-          Move the hardcoded pagination number from the layout template to the Hugo configuration file.
-
-        Changes Needed:
-          1. Add Configuration Parameter in `hugo.toml`
-            Add a new parameter to define posts per page:
-
-            ```toml
-            [params]
-              postsPerPage = 3
-            ```
-
-            **Where to add it**:  Look at the existing `[params]` section in `hugo.toml` and add this
-            parameter there.  If there's no `[params]` section, create one.
-
-          2. Update the Layout Template in `layouts/posts/list.html`
-
-            **Change line 17 from:**
-            ```html
-            {{ $paginator := .Paginate $pages 3 }}
-            ```
-
-            **Change to:**
-            ```html
-            {{ $postsPerPage := site.Params.postsPerPage | default 3 }}
-            {{ $paginator := .Paginate $pages $postsPerPage }}
-            ```
-
-        Explanation of the Code:
-          - `site.Params.postsPerPage` - Reads the `postsPerPage` value from `hugo.toml`
-          - `| default 3` - If the parameter isn't set, use 3 as a fallback
-          - `$postsPerPage` - Stores this value in a variable
-          - `$paginator := .Paginate $pages $postsPerPage` - Uses the variable instead of hardcoded 3
-
-        Things to Keep in Mind:
-          - Make sure the parameter name matches exactly (case-sensitive)
-          - Test with different values to make sure it works
-          - The `default` filter is important for backwards compatibility
 
   - type: textarea
-    id: acceptance-criteria
+    id: beginner_contributors
     attributes:
-      label: ✅ Acceptance Criteria
-      description: Checklist of requirements for merging a PR
+      label: 🧠 Beginner Contributors — Prerequisites & Expectations
+      description: |
+        Adapt as needed. Concrete requirements before claiming this beginner issue. Adapt as needed.
       value: |
-        To be able to merge a pull request for this issue, we need:
+        > [!CAUTION]
+        > **Beginner issues are low-risk but we expect a working solution.**
 
-        - [ ] **Issue is Solved:** The implementation fully addresses the issue requirements
-        - [ ] **Netlify website previews as expected:** Netlify preview build is successful and shows expected changes
-        - [ ] **No Further Changes are Made:** Code review feedback has been addressed
-    validations:
-      required: true
+        > [!IMPORTANT]
+        > We recommend completing at least 3 good first issues before attempting a beginner issue.
+
+        **Difficulty:**
+
+        - Requires building knowledge of the specific file(s)
+        - Beginner to intermediate web development skills
+
+        > [!TIP]
+        > **You should be comfortable with:**
+        > - Forking, branching, committing (with DCO + GPG signing), and opening a pull request without a tutorial
+        > - Reading beginner to intermediate React/TypeScript code you did not write and following its patterns
+        > - Handling simple merge conflicts
+        > - Keeping your fork up to date with main by [rebasing](https://github.com/hiero-ledger/hiero-website/blob/main/docs/rebasing.md)
+        > - Looking things up on your own before asking for help
+
+        If any of that feels unfamiliar, good first issues might still be the most rewarding path for you right now — [find one here](https://github.com/issues?q=is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%20archived%3Afalse%20no%3Aassignee%20label%3A%22good%20first%20issue%22%20repo%3Ahiero-ledger%2Fhiero-website).
+        You can always come back when you are ready.
+
+        ### ⚠️ AI Usage Policy
+
+        - AI can help you understand the codebase and the problem
+        - Using AI to generate code for beginner issues is **strictly discouraged**
+        - Using AI as the main source of research is **strictly discouraged**, refer to React, Next.js, and TypeScript documentation.
+
+        ### ⏱️ Timeline & Workflow
+        - **Typical time:** ~1 Week / ~8 hours.
+        🧩 Difficulty: Manageable but requires investigation and testing
+        🎓 Best for: Beginner contributors
+
+        - 🔴 Completing a beginner issue in 1–3 hours is a **red flag**.
+
+        > [!TIP]
+        > **Suggested:** share your proposed implementation approach as a comment before writing code to get early feedback and avoid wasted effort.
+
+  - type: textarea
+    id: testing
+    attributes:
+      label: 🧪 Testing Requirements
+      description: |
+        Edit this section to set clear expectations for testing. 
+        What types of tests should they write? How should they run them? What should they link in their PR as evidence?
+      value: |
+        > [!IMPORTANT]
+        > At the beginner level, **testing will be necessary but a small component**.
+        > The components or functions you implement should be verified (happy path at least)
+
+        How you test depends on the type of change.
+
+        **Component or source code changes (e.g. in `src/`):**
+        - Write basic unit tests using Vitest and React Testing Library
+        - Run tests locally: `pnpm test`
+        - Verify the dev server renders correctly: `pnpm dev`
+
+        **GitHub Actions / workflow changes (e.g. in `.github/`):** [Guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/07-github-automation.md)
+        - Test by merging to your fork's `main` and simulating the scenario
+
+        **Content or styling changes:**
+        - Run the dev server and confirm visual output matches expected behavior
+        - Check responsive behavior across screen sizes
+
+  - type: textarea
+    id: quality_standards
+    attributes:
+      label: 🛡️ Quality & Review Standards
+      description: |
+        Adapt as needed. The quality standards expected for beginner PRs.
+      value: |        
+        Beginner PRs must be **working and follow best practices**.
+
+          1. **Working:** The implementation must solve the problem and meet the acceptance criteria.
+          3. **Best Practices:** The solution should fit well with existing component patterns and project conventions.
+          5. **Testing:** basic unit tests to demonstrate the implementation works as expected.
+
+        **⚠️ Breaking changes**
+        - Watch for any changes that could impact existing pages or components, even if they seem small.
+
+        **🤖 AI notes**
+        - AI has gaps or incorrect understanding of repo-specific patterns and component structures.
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: ✅ PR Quality Checklist
+      description: |
+        Adapt as needed. These are the standards the contributor must meet before opening a PR.
+      value: |
+        Before opening your PR, confirm:
+
+        - [ ] I have spent the majority of my time researching the problem and building my understanding of the codebase and components.
+        - [ ] My implementation works and is tested (if applicable).
+        - [ ] Every line of code is personally understood and explainable.
+        - [ ] My changes address what the issue asked for — nothing more, nothing less
+        - [ ] I have applied appropriate linting, code quality, and formatting tools used in this repo.
+
+        Before requesting a review, confirm:
+        - [ ] I did not modify files unrelated to this issue
+        - [ ] Clean git history — no rebase artifacts, merge commits, or unrelated files
+        - [ ] My commits are signed: `git commit -S -s -m "chore: description"` — [Signing guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/signing.md)
+        - [ ] I have included appropriate tests and all CI checks pass.
 
   - type: textarea
     id: contribution_steps
     attributes:
-      label: 📋 Step-by-Step Contribution Guide
-      description: Provide a contribution workflow suitable for new contributors
+      label: 📋 Workflow quick reference
+      description: |
+        Pre-filled reminders.
       value: |
-        If you have never contributed to an open source project at GitHub, the following step-by-step guide will introduce you to the workflow.
+        You have done this before — here are the links if you need them:
 
-        - [ ] **Read the README:** Familiarize yourself with the project by reading the [README](https://github.com/hiero-ledger/hiero-website/blob/main/README.md)
-        - [ ] **Fork, Branch and Work on the issue:** Create a fork, branch, and solve the problem. See [Contribution Guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/workflow.md)
-        - [ ] **DCO and GPG key sign each commit:** each commit must be -s and -S signed. See [Signing Guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/signing.md)
-        - [ ] **Push and Create a Pull Request:** Once your issue is resolved, push your changes and open a PR.
-        - [ ] **You did it 🎉:** A maintainer will review and merge if approved.
-    validations:
-      required: true
+        | Step | Guide |
+        |------|-------|
+        | Claim this issue | Comment `/assign` below |
+        | Sync with main | [Rebasing guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/rebasing.md) |
+        | Open a PR and link this issue | [PR guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/workflow.md#submitting-a-pull-request) |
+        | Resolve merge conflicts | [Merge conflicts guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/merge_conflicts.md) |
 
   - type: textarea
-    id: information
+    id: resources
     attributes:
-      label: 🤔 Additional Information
-      description: Provide extra resources or context for contributors to solve this beginner issue
+      label: 📚 Resources & Support
       value: |
-        For more help:
-        - Join our [Discord](https://github.com/hiero-ledger/hiero-website/blob/main/docs/discord.md)
-        - [Hiero Community Calls](https://zoom-lfx.platform.linuxfoundation.org/meeting/97122675754?password=7eaa865a-2f17-4a7c-97b0-aff51933991c)
+        **🆘 Stuck?**
+        > [!TIP]
+        > **Comment on this issue:** and describe what you have tried. A maintainer will respond.
+
+        **References:**
+        - [Next.js Documentation](https://nextjs.org/docs)
+        - [React Documentation](https://react.dev)
+        - [Community Calls](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week)
+        - [Discord](https://github.com/hiero-ledger/hiero-website/blob/main/docs/discord.md)

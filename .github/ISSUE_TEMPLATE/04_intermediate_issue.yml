@@ -1,254 +1,234 @@
-name: Intermediate Website Issue Template
-description: Create a well-documented issue for contributors with some familiarity with the Hiero Website codebase
-title: "[Intermediate]: "
+name: Intermediate Issue Template
+description: Create a well-documented issue for contributors ready to own larger tasks independently
 labels: ["intermediate"]
 assignees: []
-
 body:
+
   - type: markdown
     attributes:
       value: |
         ---
-        ## **Thanks for contributing to the Hiero Website!** 🌐✨
+        ## **Thanks for creating an intermediate issue!** 😊
 
-        We truly appreciate your time and effort.  
-        This template is designed to help you create an **Intermediate issue** for the Hiero Website project.
+        Intermediate issues are complex tasks requiring significant independent research.
 
-        The goal is to create an issue for contributors who have:
-        - basic familiarity with the Hiero Website codebase (HUGO, Tailwind, Markdown content, etc.)
-        - experience following our contribution workflow
-        - confidence navigating existing components, pages, and documentation
+        Read more:
+        > [Contribution Workflow](https://github.com/hiero-ledger/hiero-website/blob/main/docs/workflow.md)
+        > [First Contribution Checklist](https://github.com/hiero-ledger/hiero-website/blob/main/docs/05-first-contribution-checklist.md)
         ---
 
   - type: textarea
     id: intro
     attributes:
-      label: 🧩 Intermediate Contributors
-      description: Who is this issue for?
+      label: 🧑‍💻 Intermediate Issue
+      description: |
+        Adapt as needed. Welcome message.
       value: |
-        This issue is intended for contributors who are already very familiar with the
-        [Hiero Website](https://github.com/hiero-ledger/hiero-website) codebase and its architectural patterns.
-  
-        You should feel comfortable with:
-        - Netlify previews and tests
-        - The Hiero website repository structure
-        - understanding Hugo templating concepts without step-by-step guidance 
-        - Editing and organizing Markdown at scale
-        - Making pull requests with minimal guidance
-        - navigating `layouts/`, `content/`, `partials/`, and `static/` 
-        - following the standard PR workflow without additional onboarding
+        Welcome! This is an **[Intermediate Issue](https://github.com/issues?q=is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%20archived%3Afalse%20no%3Aassignee%20label%3A%22intermediate%22%20repo%3Ahiero-ledger%2Fhiero-website)** touching core website architecture.
 
-        If this is your very first contribution to the project, we recommend starting with a few
-        **Good First Issues** before working on this one.
-    validations:
-      required: false
+        🏁 **When this issue is complete, you will have:**
 
-  - type: markdown
-    attributes:
-      value: | 
-        > [!IMPORTANT] 
-        > ### 🧭 What we consider an *Intermediate Website Issue* 
-        > 
-        > This issue generally: 
-        > 
-        > - Requires **some knowledge of the Hugo codebase**, but not deep architectural knowledge 
-        > - Is **narrowly scoped** and well-contained 
-        > - Is **low to medium risk**, not touching highly sensitive or critical infrastructure 
-        > - May involve **refactors, content restructuring, or small feature additions** 
-        > - Provides **enough documentation or examples** to reason about a solution 
-        > - Often has **similar patterns elsewhere in the codebase** 
-        > 
-        > **What this issue is NOT:** 
-        > - A beginner-friendly onboarding task 
-        > - A large architectural redesign of the site 
-        > - A change requiring extensive cross-module refactors 
-        > - A breaking change to site infrastructure or deployment
+        ✅ Researched across multiple files and modules
+        ✅ Owned implementation decisions
+        ✅ Written thorough, meaningful tests
+        ✅ Delivered a clean, review-ready pull request
 
   - type: textarea
     id: problem
     attributes:
       label: 🐞 Problem Description
       description: |
-        Describe the problem clearly and precisely.
-
-        You may assume the reader:
-        - understands the website structure
-        - can navigate `layouts/`, `content/`, `partials/`, and `static/`
-        - is comfortable reading existing implementations
-
-        Still, explain:
-        - what is wrong or missing
-        - where it lives in the codebase
-        - why it matters
+        Clearly articulate the problem and its impact.
+        Assume the reader can navigate src/, components/, and pages/.
+        Explain: what is wrong or missing, where it lives, and why it matters.      
       value: |
-        Describe the problem here.
+        <!-- Describe the issue here -->      
     validations:
       required: true
-
-  - type: markdown
-    attributes:
-      value:  |
-        **🐞 Example of a helpful Problem Description:**
-
-        Current Behavior
-        The search functionality on the Hiero website currently uses client-side JavaScript to search through page content. 
-        This works well for small sites, but our website has grown to 200+ pages, causing: 
-        - Search indexing to take 3-5 seconds on initial page load
-        - High memory usage on mobile devices (often causing crashes on older phones)
-        - Poor search relevance for technical terms (no stemming or fuzzy matching)
-
-        Why This Matters
-        User analytics show that 40% of visitors use the search feature, and bounce rate increases by 25% 
-        when search takes longer than 2 seconds to initialize.
-
-        Components Involved
-        - `/layouts/partials/search.html` - Main search UI component
-        - `/static/js/search.js` - Client-side search logic
-        - `/layouts/_default/baseof.html` - Where search scripts are loaded
-        - Content files across `/content/` directory (all indexed)
-
-        Historical Context
-        The current implementation was added in PR #42 when the site had only 30 pages.
 
   - type: textarea
     id: solution
     attributes:
       label: 💡 Expected Solution
       description: |
-        Describe the intended outcome.
-
-        This does NOT need to be a full implementation plan,
-        but should explain:
-        - what should change
-        - what should NOT change
-        - any constraints or boundaries
+        Briefly state what the contributor should build or fix.
+        This should be a short summary of the expected outcome — not a detailed implementation guide.
       value: |
-        Describe the expected solution here.
+        <!-- Describe the solution here -->
     validations:
       required: true
-    
-  - type:  markdown
+
+  - type: textarea
+    id: research
     attributes:
-      value:  |
-        **💡 Example of a helpful Proposed Solution:**
+      label: 🔍 Background Research
+      description: |
+        Point the contributor toward relevant files, similar components, or documentation to study.
+        This is the most important, "investigate before you code" step.
+      value: |
+        <!-- Describe the research pointers here -->
 
-        Approach:
-        Migrate from client-side search to a pre-built search index using Hugo's built-in search capabilities 
-        with Fuse.js or Pagefind. 
+        <!-- Point to similar high-quality implementations here -->
 
-        Key Changes:
-        1. **Build-time indexing**: Generate a JSON search index during Hugo build
-        2. **Lazy loading**: Only load search scripts when the user opens the search UI
-        3. **Improved relevance**: Use Fuse.js fuzzy search with weighted fields (title > headings > body)
+        <!-- Link to React, Next.js, or TypeScript documentation here -->
 
-        Constraints:
-        - **Must maintain current search UI/UX** - users are familiar with the existing interface
-        - **Backwards compatible URLs** - search query parameters should continue to work
-        - **Accessibility** - maintain ARIA labels and keyboard navigation
-        - **Performance target**: Search index should load in < 500ms on 3G connection
-
-        Alternatives Considered:
-        - **Algolia/External Service**: Rejected due to cost and privacy concerns
-        - **Full Server-Side Search**: Rejected because we're a static site (no backend)
-        - **Keep Current Approach**: Would require significant optimization with diminishing returns
-
+    validations:
+      required: true
 
   - type: textarea
     id: implementation
     attributes:
-      label: 🧠 Implementation Notes
+      label: 🛠️ Implementation Notes
       description: |
-        Provide technical guidance to help implementation.
-
-        Examples:
-        - files or modules likely involved
-        - patterns already used elsewhere
-        - things to be careful about
-        - known edge cases
+        Guide the quality of their work with clear constraints.
       value: |
-        Add implementation notes here.
-    validations:
-      required: false
+        <!-- Clarify any key risk areas -->
 
-  - type: markdown
-    attributes:
-      value:  |
-        **🧠 Example of helpful Implementation Notes:**
+        <!-- Clarify any constraints -->
 
-        Modules and Components
-        
-        Files to Modify
-        - `/layouts/partials/search.html` - Update to load search index
-        - `/static/js/search.js` - Replace with Fuse.js implementation
-        - `/layouts/index.json` - Create new search index template
-        - `/config.toml` - Add output format for JSON index
-
-        Files to Add
-        - `/static/js/fuse.min.js` - Fuse.js library (version 6.6.2)
-        - `/layouts/_default/search-index.json` - Template for search entries
-
-        Suggested Refactoring Strategy
-        
-        1. **Phase 1**: Create JSON index without breaking existing search
-           - Add new `index.json` output format
-           - Generate search index at build time
-           - Test index generation locally
-        
-        2. **Phase 2**:  Implement lazy loading
-           - Wrap search script loading in intersection observer
-           - Add loading state to search UI
-           - Test on slow connections
-        
-        3. **Phase 3**: Replace search logic
-           - Swap out old search.js with Fuse.js implementation
-           - Maintain existing search API/interface
-           - Run A/B comparison of search results quality
-
-        Migration Concerns:
-        - Existing bookmarks with search queries must continue to work
-        - Search index should be cached by CDN (set appropriate headers)
-        - Consider index size - may need to exclude certain content types
-
-        Testing Strategy:
-        - Unit tests for search index generation
-        - E2E tests for search UI interaction (Playwright)
-        - Performance tests:  measure index load time and search speed
-        - Accessibility audit with screen reader
-        - Test on mobile devices (iOS Safari, Android Chrome)
-
-        Performance Considerations:
-        - Search index size should be < 500KB gzipped
-        - Consider splitting index by section if it grows too large
-        - Use CDN caching headers (1 week cache, revalidate on deploy)
-
-        Security Considerations:
-        - Ensure search index doesn't include draft/private content
-        - Validate search queries to prevent XSS (though Fuse.js handles this)
-
-  - type: textarea
-    id: acceptance-criteria
-    attributes:
-      label: ✅ Acceptance Criteria
-      description: Define what "done" means for this issue
-      value: |
-        To merge this issue, the pull request must:
-
-        - [ ] Fully address the problem described above
-        - [ ] Follow existing project conventions and patterns
-        - [ ] Include tests or example updates where appropriate
-        - [ ] Pass all CI checks
-        - [ ] Include a valid changelog entry
-        - [ ] Use DCO and GPG-signed commits
     validations:
       required: true
 
   - type: textarea
-    id: additional-info
+    id: domains
     attributes:
-      label: 📚 Additional Context or Resources
+      label: 🔬 Technical Domains
       description: |
-        Add any links, references, or extra notes that may help.
+        Adapt as needed. Technical areas this issue touches to help developers self-select based on expertise.
       value: |
-        - [Website Developer Docs](https://github.com/hiero-ledger/hiero-website/tree/main/docs)
-    validations:
-      required: false
+        <!-- Edit Technical Domains If needed -->      
+
+        - [ ] **Intermediate to Advanced Web Development** (React components, hooks, state management, Next.js routing)
+        - [ ] **Component Architecture** (reusable components, props design, composition patterns)
+        - [ ] **Styling & Responsiveness** (Tailwind CSS, responsive design, accessibility)
+        - [ ] **Performance** (image optimization, lazy loading, Core Web Vitals)
+        - [ ] **Testing** (unit, integration, snapshot, accessibility testing)
+
+
+  - type: textarea
+    id: intermediate_contributors
+    attributes:
+      label: 🧠 Intermediate Contributors — Prerequisites & Expectations
+      description: |
+        Adapt as needed. Concrete requirements before claiming this intermediate issue. Adapt as needed.
+      value: |
+        > [!CAUTION]
+        > **Intermediate issues are high-risk. We expect more than just a 'working solution' and will recommend beginner issues if the PR does not meet these standards.**
+
+        ### 🏁 Concrete Prerequisites
+        - **Web Development Skills:** Intermediate or advanced React/TypeScript/Next.js skills.
+        - **Expertise:** Strong understanding of files related to this issue (research before claiming!).
+        - **Proven History:** Successfully completed **≥ 5 beginner issues** in this repo.
+
+        > [!NOTE]
+        > **CI/CD Exception:** For issues focused on **GitHub Actions / Workflows**, the repo-specific thresholds above may be waived if the contributor demonstrates intermediate-level proficiency in CI/CD.
+
+        If this feels like too big a step, that is completely fine — try a [Beginner Issue](https://github.com/issues?q=is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%20archived%3Afalse%20no%3Aassignee%20label%3A%22beginner%22%20repo%3Ahiero-ledger%2Fhiero-website) first or a different **[Intermediate Issue](https://github.com/issues?q=is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%20archived%3Afalse%20no%3Aassignee%20label%3A%22intermediate%22%20repo%3Ahiero-ledger%2Fhiero-website)**. You can always come back when you are ready.
+
+        ### ⚠️ AI Usage Policy
+
+        - Using AI to generate code for Intermediate issues is **strictly discouraged**
+        - Using AI as the main source of research is **strictly discouraged**, refer to React, Next.js, and TypeScript documentation.
+
+        ### ⏱️ Timeline & Workflow
+        - **Typical time:** ~2 weeks / ~25 hours.
+        - 🔴 Completing an intermediate issue in 1–3 days is a **red flag**.
+
+        > [!TIP]
+        > **Suggested:** share your proposed implementation approach as a comment before writing code to get early feedback and avoid wasted effort.
+
+  - type: textarea
+    id: testing
+    attributes:
+      label: 🧪 Testing Requirements
+      description: |
+        Edit this section to set clear expectations for testing. 
+        What types of tests should they write? How should they run them? What should they link in their PR as evidence?
+      value: |
+        How you test depends on the type of change.
+
+        > [!IMPORTANT]
+        > At the intermediate level, **testing is a major component**.
+        > Each component or function you implement should be verified. Tests should cover happy paths,
+        > edge cases, and error handling.
+
+        **Component or source code changes (e.g. in `src/`):**
+        - Write unit tests covering happy path, edge cases, and error handling
+        - Run tests locally: `pnpm test`
+        - Verify the dev server renders correctly: `pnpm dev`
+        - Check consistency with similar components already in the codebase — use the same patterns
+
+        **GitHub Actions / workflow changes (e.g. in `.github/`):** [Guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/07-github-automation.md)
+        - Test by merging to your fork's `main` and simulating the scenario
+        - Create test issues or PRs as evidence and link them in your PR
+        - Include screenshots of workflow runs where applicable
+
+        **Content, styling, or layout changes:**
+        - Run the dev server and confirm visual output matches expected behavior
+        - Compare your changes with similar existing pages for consistency
+        - Check responsive behavior and accessibility
+
+
+  - type: textarea
+    id: quality_standards
+    attributes:
+      label: 🛡️ Quality & Review Standards
+      description: |
+        Adapt as needed. The quality standards expected for intermediate PRs.
+      value: |
+        Intermediate PRs must be **"working, maintainable, and aligned with project architecture."**
+
+          1. **Working:** The implementation must solve the problem and meet the acceptance criteria.
+          2. **Maintainable:** Code should be clear and concise enough for others to understand and debug without your assistance.
+          3. **Architectural Alignment:** The solution should fit well with existing component patterns and project conventions.
+          4. **Backward Compatibility:** Existing pages and components must not break. 
+          5. **Comprehensive Testing:** Must include unit tests covering all new logic paths, edge cases, and failure modes. AI generated tests based on AI generated code is grounds for immediate rejection.
+
+        **⚠️ Breaking changes**
+        - Before changing any component API, prop interface, or public-facing layout — stop and check
+        - If a breaking change is unavoidable: get explicit maintainer approval **before** implementing
+        - All existing tests should pass as-is.
+
+        **🤖 AI notes**
+        - AI often has out-dated real-world knowledge: it will not be able to identify current packages.
+        - AI has gaps or incorrect understanding of repo-specific patterns, logic, and component structures.
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: ✅ PR Quality Checklist
+      description: |
+        Adapt as needed. These are the standards the contributor must meet before opening a PR.
+      value: |
+        Before opening your PR, confirm:
+
+        - [ ] I have spent the majority of my time researching the problem and solution space extensively, including reviewing relevant code, documentation, and external resources.
+        - [ ] My implementation works but is also of high quality - including maintainability, readability, and architectural fit.
+        - [ ] I have checked for breaking changes - no existing pages or components regress.
+        - [ ] The design fits with the current website's architectural approaches.
+        - [ ] Every line of code is personally understood and explainable.
+
+        Before requesting a review, confirm:
+        - [ ] I have reviewed the diff line by line.
+        - [ ] My implementation fully addresses the problem described above.
+        - [ ] I did not modify files unrelated to this issue
+        - [ ] Clean git history — no rebase artifacts, merge commits, or unrelated files
+        - [ ] My commits are signed: `git commit -S -s -m "chore: description"` — [Signing guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/signing.md)
+        - [ ] I have applied appropriate linting, code quality, and formatting tools used in this repo.
+        - [ ] I have included appropriate tests and all CI checks pass.
+        - [ ] Double and triple check — intermediate PRs are time-consuming to review
+
+  - type: textarea
+    id: resources
+    attributes:
+      label: 📚 Resources & Support
+      value: |
+        **🆘 Stuck?**
+        > [!TIP]
+        > **Comment on this issue:** and describe what you have tried. A maintainer will respond.
+
+        **References:**
+        - [Next.js Documentation](https://nextjs.org/docs)
+        - [React Documentation](https://react.dev)
+        - [Community Calls](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week)
+        - [Discord](https://github.com/hiero-ledger/hiero-website/blob/main/docs/discord.md)

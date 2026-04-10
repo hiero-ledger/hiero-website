@@ -1,271 +1,145 @@
 name: Advanced Issue Template
-description: Create a high-impact issue for experienced contributors with deep familiarity with the Hiero Website codebase
-title: "[Advanced]: "
+description: For expert contributors tackling architectural, multi-module, or core-logic changes.
 labels: ["advanced"]
 assignees: []
 
 body:
+
   - type: markdown
     attributes:
       value: |
         ---
-        ## **Thanks for contributing!** 🚀
+        ## **Thanks for creating an advanced issue!** 😊
 
-        We truly appreciate your interest in tackling an **Advanced issue**.
+        Advanced issues are high-ownership, high-impact tasks requiring expert-level architectural understanding and significant independent research.
 
-        This template is designed for work that requires **deep familiarity with the Hiero Website**
-        and confidence making changes that may span multiple components or affect core behavior.
-
-        The goal is to create issues for contributors who:
-        - have strong familiarity with the Hiero Website internals
-        - are comfortable reasoning about trade-offs and design decisions
-        - can work independently with minimal guidance
+        Read more:
+        > [Contribution Workflow](https://github.com/hiero-ledger/hiero-website/blob/main/docs/workflow.md)
+        > [First Contribution Checklist](https://github.com/hiero-ledger/hiero-website/blob/main/docs/05-first-contribution-checklist.md)
         ---
 
   - type: textarea
     id: intro
     attributes:
-      label: 🧠 Advanced Contributors
-      description: Who is this issue intended for?
+      label: 🧑‍🔬 Advanced Issue
+      description: |
+        Adapt as needed. Welcome message.
       value: |
-        This issue is intended for contributors who are already very familiar with the
-        [Hiero Website](https://github.com/hiero-ledger/hiero-website) codebase and its architectural patterns.
+        Welcome! This is an **[Advanced Issue](https://github.com/issues?q=is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%20archived%3Afalse%20no%3Aassignee%20label%3A%22advanced%22%20repo%3Ahiero-ledger%2Fhiero-website)** touching core website architecture.
 
-        You should feel comfortable with:
-        - Netlify previews and tests
-        - Hugo content, layouts, templates, and shortcodes
-        - The full Hiero website structure and build process
-        - Reviewing changes holistically, not file-by-file
-        - Anticipating downstream and maintenance impact
-        - Communicating design decisions clearly in PRs
-
-        New developers should start with
-        **Good First Issues** or **Beginner Issues** first.
-    validations:
-      required: false
-
-  - type: markdown
-    attributes:
-      value: |
-        > [!WARNING]
-        > ### 🧭 What we consider an *Advanced Issue*
-        >
-        > This issue typically:
-        >
-        > - Requires **deep understanding of existing website design and behavior**
-        > - May touch **core templates**, shared utilities, or cross-cutting concerns
-        > - May involve **non-trivial refactors**, design changes, or behavior extensions
-        > - Has **medium to high risk** if implemented incorrectly
-        > - Requires careful consideration of **backwards compatibility and accessibility**
-        > - May require updating **tests, examples, and documentation together**
-        >
-        > **What this issue is NOT:**
-        > - A simple bug fix
-        > - A narrowly scoped refactor
-        > - A task solvable by following existing patterns alone
-        >
-        > 📖 Helpful references:
-        > - `.github/maintainers/guidelines_advanced_issues.md`
+        It is designed for expert contributors who have demonstrated deep architectural understanding and a proven track record of high-quality contributions.
 
   - type: textarea
     id: problem
     attributes:
       label: 🐞 Problem Description
       description: |
-        Describe the problem in depth.
-
-        You may assume the reader:
-        - understands the overall website architecture
-        - can navigate and reason about multiple components
-        - is comfortable reading and modifying core logic
-
-        Clearly explain:
-        - what the current behavior is
-        - why it is insufficient or incorrect
-        - which components or layers are involved
-        - any relevant historical or design context
+        Clearly articulate the problem and its impact. The solution may be unclear or require significant research.
       value: |
-        Describe the problem here.
+        <!-- Describe the issue here -->      
     validations:
       required: true
-
-  - type: markdown
-    attributes:
-      value:  |
-        **🐞 Example of a helpful Problem Description:**
-
-        Current Behavior
-        The search functionality on the Hiero website currently uses client-side JavaScript to search through page content. 
-        This works well for small sites, but our website has grown to 200+ pages, causing: 
-        - Search indexing to take 3-5 seconds on initial page load
-        - High memory usage on mobile devices (often causing crashes on older phones)
-        - Poor search relevance for technical terms (no stemming or fuzzy matching)
-
-        Why This Matters
-        User analytics show that 40% of visitors use the search feature, and bounce rate increases by 25% 
-        when search takes longer than 2 seconds to initialize.
-
-        Components Involved
-        - `/layouts/partials/search.html` - Main search UI component
-        - `/static/js/search.js` - Client-side search logic
-        - `/layouts/_default/baseof.html` - Where search scripts are loaded
-        - Content files across `/content/` directory (all indexed)
-
-        Historical Context
-        The current implementation was added in PR #42 when the site had only 30 pages.
-
-
-  - type: textarea
-    id: solution
-    attributes:
-      label: 💡 Proposed / Expected Solution
-      description: |
-        Describe the intended direction or design.
-
-        This should include:
-        - the high-level approach
-        - any new abstractions or changes to existing ones
-        - constraints (e.g. backwards compatibility, performance, accessibility)
-        - known alternatives and why they were rejected (if applicable)
-
-        A full design document is not required, but reasoning and intent should be clear.
-      value: |
-        Describe the proposed solution here.
-    validations:
-      required: true
-
-  - type:  markdown
-    attributes:
-      value:  |
-        **💡 Example of a helpful Proposed Solution:**
-
-        Approach:
-        Migrate from client-side search to a pre-built search index using Hugo's built-in search capabilities 
-        with Fuse.js or Pagefind. 
-
-        Key Changes:
-        1. **Build-time indexing**: Generate a JSON search index during Hugo build
-        2. **Lazy loading**: Only load search scripts when the user opens the search UI
-        3. **Improved relevance**: Use Fuse.js fuzzy search with weighted fields (title > headings > body)
-
-        Constraints:
-        - **Must maintain current search UI/UX** - users are familiar with the existing interface
-        - **Backwards compatible URLs** - search query parameters should continue to work
-        - **Accessibility** - maintain ARIA labels and keyboard navigation
-        - **Performance target**: Search index should load in < 500ms on 3G connection
-
-        Alternatives Considered:
-        - **Algolia/External Service**: Rejected due to cost and privacy concerns
-        - **Full Server-Side Search**: Rejected because we're a static site (no backend)
-        - **Keep Current Approach**: Would require significant optimization with diminishing returns
-
 
   - type: textarea
     id: implementation
     attributes:
-      label: 🧠 Implementation & Design Notes
+      label: 🛠️ Implementation Notes
       description: |
-        Provide detailed technical guidance.
+        Provide implementation context to understand the complexity and possible approaches.
 
-        This section is especially important for Advanced issues.
-
-        Consider including:
-        - specific modules or components involved
-        - suggested refactoring strategy
-        - migration or deprecation concerns
-        - testing strategy
-        - performance or security considerations
+        Add:
+        - Implementation ideas
+        - Clarify what is unknown or uncertain about the implementation
+        - Highlight any key risks or complexities
       value: |
-        Add detailed implementation notes here.
-    validations:
-      required: false
-
-  - type: markdown
-    attributes:
-      value:  |
-        **🧠 Example of helpful Implementation Notes:**
-
-        Modules and Components
-        
-        Files to Modify
-        - `/layouts/partials/search.html` - Update to load search index
-        - `/static/js/search.js` - Replace with Fuse.js implementation
-        - `/layouts/index.json` - Create new search index template
-        - `/config.toml` - Add output format for JSON index
-
-        Files to Add
-        - `/static/js/fuse.min.js` - Fuse.js library (version 6.6.2)
-        - `/layouts/_default/search-index.json` - Template for search entries
-
-        Suggested Refactoring Strategy
-        
-        1. **Phase 1**: Create JSON index without breaking existing search
-           - Add new `index.json` output format
-           - Generate search index at build time
-           - Test index generation locally
-        
-        2. **Phase 2**:  Implement lazy loading
-           - Wrap search script loading in intersection observer
-           - Add loading state to search UI
-           - Test on slow connections
-        
-        3. **Phase 3**: Replace search logic
-           - Swap out old search.js with Fuse.js implementation
-           - Maintain existing search API/interface
-           - Run A/B comparison of search results quality
-
-        Migration Concerns:
-        - Existing bookmarks with search queries must continue to work
-        - Search index should be cached by CDN (set appropriate headers)
-        - Consider index size - may need to exclude certain content types
-
-        Testing Strategy:
-        - Unit tests for search index generation
-        - E2E tests for search UI interaction (Playwright)
-        - Performance tests:  measure index load time and search speed
-        - Accessibility audit with screen reader
-        - Test on mobile devices (iOS Safari, Android Chrome)
-
-        Performance Considerations:
-        - Search index size should be < 500KB gzipped
-        - Consider splitting index by section if it grows too large
-        - Use CDN caching headers (1 week cache, revalidate on deploy)
-
-        Security Considerations:
-        - Ensure search index doesn't include draft/private content
-        - Validate search queries to prevent XSS (though Fuse.js handles this)
-
-
-  - type: textarea
-    id: acceptance-criteria
-    attributes:
-      label: ✅ Acceptance Criteria
-      description: Define what "done" means for this issue
-      value: |
-        To merge this issue, the pull request must:
-
-        - [ ] Fully address the problem and design goals described above
-        - [ ] Maintain backwards compatibility unless explicitly approved otherwise
-        - [ ] Follow existing architectural and coding conventions
-        - [ ] Include comprehensive tests covering new and existing behavior
-        - [ ] Update relevant examples and documentation
-        - [ ] Pass all CI checks
-        - [ ] Include a valid changelog entry
-        - [ ] Use DCO and GPG-signed commits
+        <!-- Describe the implementation notes -->      
     validations:
       required: true
 
   - type: textarea
-    id: additional-info
+    id: advanced_contributors
     attributes:
-      label: 📚 Additional Context, Links, or Prior Art
+      label: 🧠 Advanced Contributors — Prerequisites & Expectations
       description: |
-        Add any references that may help:
-        - design docs
-        - prior discussions
-        - related issues or PRs
-        - external references
+        Adapt as needed. Concrete requirements before claiming this advanced issue. Adapt as needed.
       value: |
-        Optional.
-    validations:
-      required: false
+        > [!CAUTION]
+        > **Advanced issues are the highest-risk work in this project. We will reject PRs that do not meet these standards.**
+
+        ### 🏁 Concrete Prerequisites
+        - **Advanced Web Development:** Proficient with React, Next.js, and TypeScript.
+        - **Expertise:** Deep architectural understanding of the website's component structure, routing, and build pipeline.
+        - **Proven History:** Successfully completed **≥ 10 intermediate issues** in this repo.
+        - **Consistency:** **≥ 3–4 months** of active, human-led contributions to this project.
+
+        > [!NOTE]
+        > **CI/CD Exception:** For issues focused on **GitHub Actions / Workflows**, the repo-specific thresholds above may be waived if the contributor demonstrates advanced-level proficiency in CI/CD.
+
+        ### ⚠️ AI Usage Policy
+
+        - Using AI to generate code for Advanced issues is **strictly discouraged**
+        - AI may be used to help explain file relationships, but cannot be the main source of research.
+        - Submitting AI-generated or unvalidated code is grounds for **immediate closure**
+
+        ### ⏱️ Timeline & Workflow
+        - **Typical time:** ~1 month / ~50 hours.
+        - 🔴 Completing an advanced issue in 1–3 days is a **red flag** and will likely be rejected.
+        - **Suggested:** Post your proposed architectural approach as a comment and wait for explicit maintainer approval **before writing any code.**
+
+  - type: textarea
+    id: domains
+    attributes:
+      label: 🔬 Technical Domains
+      description: |
+        Adapt as needed. Technical areas this issue touches to help developers self-select based on expertise.
+      value: |
+        <!-- Edit Technical Domains If needed -->
+
+        - [ ] **Advanced React / Next.js** (Server Components, App Router, dynamic routing, middleware)
+        - [ ] **Component Architecture** (design systems, reusable patterns, composition)
+        - [ ] **Performance & Optimization** (Core Web Vitals, image optimization, code splitting, caching)
+        - [ ] **Accessibility** (WCAG compliance, screen reader support, keyboard navigation)
+        - [ ] **Build & Deployment** (Next.js config, CI/CD, Netlify integration)
+        - [ ] **Testing** (unit, integration, E2E, accessibility testing, visual regression)
+
+  - type: textarea
+    id: quality_standards
+    attributes:
+      label: 🛡️ Quality & Review Standards
+      description: |
+        Adapt as needed. The quality standards expected for advanced PRs.
+      value: |
+        Advanced PRs must be **"safe, maintainable, architecturally sound, and production-ready."**
+
+        1. **Architectural Fit:** The solution must fit naturally into the existing website architecture.
+        2. **Security & Correctness:** Evaluate all logic for injection risks, XSS vulnerabilities, or state corruption issues. 
+        3. **Maintainability:** Code must be short and clear enough for any other maintainer to debug without your assistance. 
+        4. **Backward Compatibility:** Existing pages, routes, and components must not break. If a breaking change is required, it must be explicitly managed.
+        5. **Comprehensive Testing:** Must include unit and integration tests covering all new logic paths, edge cases, and failure modes. AI generated tests based on AI generated code is grounds for immediate rejection.
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: ✅ PR Quality Checklist
+      description: |
+        Adapt as needed. These are the standards the contributor must meet before opening a PR.
+      value: |
+        Before opening your PR, the contributor must confirm:
+        - [ ] I have spent the majority of my time researching the problem and solution space extensively, including reviewing relevant code, documentation, and external resources.
+        - [ ] I understand the system-wide impact of these changes on affected modules and performance.
+        - [ ] The design fits with the current website's architectural approaches.
+        - [ ] I have tested my changes extensively across browsers and screen sizes.
+        - [ ] Every line of code is personally understood and explainable.
+
+  - type: textarea
+    id: resources
+    attributes:
+      label: 📚 Resources & Support
+      value: |
+        **References:**
+        - [Next.js Documentation](https://nextjs.org/docs)
+        - [React Documentation](https://react.dev)
+
+        **🆘 Stuck?**
+        - [Community Calls](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week)
+        - [Discord](https://github.com/hiero-ledger/hiero-website/blob/main/docs/discord.md)

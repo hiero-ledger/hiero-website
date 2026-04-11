@@ -25,12 +25,6 @@ const governanceResources = [
     href: TECHNICAL_CHARTER_URL,
   },
   {
-    title: "Meeting Calendar",
-    description:
-      "Join upcoming open TSC and project meetings and follow recurring governance discussions.",
-    href: MEETING_CALENDAR_URL,
-  },
-  {
     title: "Governance Repository",
     description:
       "Track governance documents, committee updates, and cross-project policy changes on GitHub.",
@@ -99,9 +93,8 @@ export default function TSCSection() {
               The Technical Steering Committee of Hiero
             </h1>
             <p className="text-base sm:text-lg max-w-150 mx-auto">
-              The Hiero Technical Steering Committee (TSC) guides technical
-              direction, stewarding open governance and cross-project alignment
-              for the ecosystem.
+              The Hiero Technical Steering Committee (TSC) is the committee
+              responsible for technical governance within the Hiero project.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <a
@@ -133,16 +126,28 @@ export default function TSCSection() {
             <h2 id="tsc-about-heading" className="text-2xl sm:text-4xl mb-5">
               About the TSC
             </h2>
-            <p className="text-lg mb-4">
-              The TSC oversees technical governance for Hiero, helps prioritize
-              architectural decisions, and coordinates implementation direction
-              across maintainers and working groups.
-            </p>
-            <p className="text-lg text-gray">
-              Its role is to keep project evolution transparent, practical, and
-              aligned with open-source collaboration principles while preserving
-              quality, security, and long-term maintainability.
-            </p>
+            <div className="space-y-4 text-lg text-gray">
+              <p>
+                The Hiero Technical Steering Committee (TSC) is a committee of
+                members who serve the project&apos;s technical governance.
+              </p>
+              <p>
+                The duties, goals, and rights of the TSC are defined in the{" "}
+                <a
+                  href={TECHNICAL_CHARTER_URL}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="text-red underline hover:text-red-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2"
+                  aria-label="Read the technical charter (opens in new tab)">
+                  technical charter
+                </a>{" "}
+                of the Hiero project.
+              </p>
+              <p>
+                This page provides an overview of the current committee members
+                and links to the core governance resources used by the project.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -154,7 +159,7 @@ export default function TSCSection() {
               Committee Members
             </h2>
             <p className="text-lg max-w-205">
-              The committee includes contributors from across the Hiero
+              The committee is composed of contributors from across the Hiero
               ecosystem. Member bios reflect their current roles and ongoing
               work in open-source governance and technical delivery.
             </p>
@@ -238,15 +243,15 @@ export default function TSCSection() {
             <h2
               id="tsc-resources-heading"
               className="text-2xl sm:text-4xl mb-5">
-              Participation and Resources
+              Governance Resources
             </h2>
             <p className="text-lg">
-              Follow governance activity, review source documents, and join open
-              meetings to participate in shaping Hiero technical direction.
+              Review the charter and follow governance activity through the
+              project&apos;s primary source materials.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             {governanceResources.map(resource => (
               <a
                 key={resource.title}
@@ -337,9 +342,15 @@ export default function TSCSection() {
                   </a>
                 ) : null}
 
-                <p className="mt-5 text-base sm:text-lg">
-                  {selectedMember.bio ?? "Biography not available."}
-                </p>
+                <div className="mt-5 space-y-4 text-base text-gray sm:text-lg sm:leading-relaxed">
+                  {getBioParagraphs(
+                    selectedMember.bio ?? "Biography not available.",
+                  ).map((paragraph, index) => (
+                    <p key={`${selectedMember.lastName}-${index}`}>
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -357,6 +368,37 @@ function getBioPreview(bio: string, maxLength = 170): string {
   }
 
   return `${trimmedBio.slice(0, maxLength)}...`;
+}
+
+function getBioParagraphs(bio: string): string[] {
+  const trimmedBio = bio.trim();
+
+  if (!trimmedBio) {
+    return [];
+  }
+
+  const explicitParagraphs = trimmedBio
+    .split(/\n\s*\n/)
+    .map(paragraph => paragraph.trim())
+    .filter(Boolean);
+
+  if (explicitParagraphs.length > 1) {
+    return explicitParagraphs;
+  }
+
+  const sentences = trimmedBio.split(/(?<=[.!?])\s+/).filter(Boolean);
+
+  if (sentences.length <= 2) {
+    return [trimmedBio];
+  }
+
+  const paragraphs: string[] = [];
+
+  for (let index = 0; index < sentences.length; index += 2) {
+    paragraphs.push(sentences.slice(index, index + 2).join(" "));
+  }
+
+  return paragraphs;
 }
 
 function getFocusableElements(container: HTMLDivElement | null): HTMLElement[] {

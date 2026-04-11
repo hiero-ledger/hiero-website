@@ -79,11 +79,20 @@ describe("IssueList", () => {
     expect(screen.queryByText("Assigned issue")).not.toBeInTheDocument();
     expect(screen.queryByText("Closed issue")).not.toBeInTheDocument();
 
-    const issueLinks = screen
-      .getAllByRole("link")
-      .filter(link =>
-        link.getAttribute("href")?.startsWith("https://issues.example"),
-      );
+    const issueLinks = screen.getAllByRole("link").filter(link => {
+      const href = link.getAttribute("href");
+
+      if (!href) {
+        return false;
+      }
+
+      try {
+        const url = new URL(href);
+        return url.protocol === "https:" && url.hostname === "issues.example";
+      } catch {
+        return false;
+      }
+    });
 
     expect(issueLinks.map(link => link.textContent)).toEqual([
       "Go issue",

@@ -2,9 +2,8 @@ import HeroSection from "@/components/HeroSection";
 import WhatIsHieroSection from "@/components/WhatIsHieroSection";
 import Divider from "@/components/Divider";
 import MeetSection from "@/components/MeetSection";
-import ReposCarousel from "@/components/ReposCarousel";
+import ReposGrid from "@/components/ReposGrid";
 import IssueJumpSection from "@/components/IssueJumpSection";
-import OpenSourceSection from "@/components/OpenSourceSection";
 import QuotesCarousel from "@/components/QuotesCarousel";
 
 const heroData = {
@@ -51,95 +50,89 @@ const whatIsHieroData = {
 
 const meetData = {
   heading: "Join our Hiero Community Calls",
-  text: "Join our open TSC, Community and Project meetings. We welcome your opinion and invite you to collaborate with the team!\n\nRegister to any of our current meeting series [HERE](https://github.com/hiero-ledger#open-community-meetings-and-tsc-schedules)\n\nView all meeting schedules and access recordings via our [LFX Calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week).",
+  text: "Join our open meetings to collaborate with the team. [Register here](https://github.com/hiero-ledger#open-community-meetings-and-tsc-schedules) or view schedules on the [LFX Calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week).",
   calls: [
+    // Ranked by LFX Calendar sign-up counts
     {
       name: "TSC",
       description:
         "The Technical Steering Committee (TSC) meeting for project governance, roadmap planning, and key technical decisions.",
-      schedule: "Fortnightly",
+
       registerLink:
         "https://zoom-lfx.platform.linuxfoundation.org/meeting/95775743341?password=c07443bf-b0e6-4a68-93f1-5c7ce9bb49ab&invite=true",
-    },
-    {
-      name: "Community Call",
-      description:
-        "Open community meeting for general discussions, updates, and Q&A sessions with the Hiero community and TSC members.",
-      schedule: "Monthly",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/97122675754?password=7eaa865a-2f17-4a7c-97b0-aff51933991c&invite=true",
-    },
-    {
-      name: "Python SDK",
-      description:
-        "Focused discussions on the Hiero Python SDK development, including new features, issues, and contributions.",
-      schedule: "Monthly",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/92041330205?password=2f345bee-0c14-4dd5-9883-06fbc9c60581&invite=true",
-    },
-    {
-      name: "Docs",
-      description:
-        "Documentation working group meetings to improve and maintain Hiero project documentation.",
-      schedule: "Monthly",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/96247351493?password=54a04164-8618-458d-8176-4ca21b346291&invite=true",
-    },
-    {
-      name: "Solo",
-      description:
-        "Discussions and updates about Solo, an opinionated CLI tool to deploy and manage standalone test networks.",
-      schedule: "Fortnightly",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/94695703550?password=e8819002-3f6e-4905-9916-b049f501e866&invite=true",
-    },
-    {
-      name: "Solo Action",
-      description:
-        "Working sessions focused on Solo Action project development, issues, and contributions.",
-      schedule: "Fortnightly",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/92576669768?password=8dab94bb-7315-4d37-a944-b1fa0e924741&invite=true",
-    },
-    {
-      name: "SDK",
-      description:
-        "General SDK working group for cross-SDK discussions, standards, and coordination across all Hiero SDK implementations.",
-      schedule: "Monthly",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/94709702244?password=bcba4892-928c-47e0-9a21-e1abca95f7d3&invite=true",
-    },
-    {
-      name: "Hiero Website",
-      description:
-        "Planning and development meetings for the Hiero website, content strategy, and user experience improvements.",
-      schedule: "Monthly",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/94831465670?password=50e11cd2-6450-4a97-b9ae-7a7585c4409b&invite=true",
-    },
-    {
-      name: "Hiero Marketing",
-      description:
-        "Marketing and community outreach discussions, including events, communications, and ecosystem growth strategies.",
-      schedule: "Monthly",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/91725705912?password=57115f71-9576-46dc-90f7-98be38aade2d&invite=true",
     },
     {
       name: "Monthly Maintainers",
       description:
         "Regular meeting for maintainers across all Hiero projects to coordinate, share updates, and discuss best practices.",
-      schedule: "Monthly",
+
       registerLink:
         "https://zoom-lfx.platform.linuxfoundation.org/meeting/99574473075?password=deff3fc9-0e80-4877-80de-91499b5480e9&invite=true",
+    },
+    {
+      name: "Community Call",
+      description:
+        "Open community meeting for general discussions, updates, and Q&A sessions with the Hiero community and TSC members.",
+
+      registerLink:
+        "https://zoom-lfx.platform.linuxfoundation.org/meeting/97122675754?password=7eaa865a-2f17-4a7c-97b0-aff51933991c&invite=true",
+    },
+    {
+      name: "SDK",
+      description:
+        "General SDK working group for cross-SDK discussions, standards, and coordination across all Hiero SDK implementations.",
+
+      registerLink:
+        "https://zoom-lfx.platform.linuxfoundation.org/meeting/94709702244?password=bcba4892-928c-47e0-9a21-e1abca95f7d3&invite=true",
+    },
+    {
+      name: "Solo",
+      description:
+        "Discussions and updates about Solo, an opinionated CLI tool to deploy and manage standalone test networks.",
+
+      registerLink:
+        "https://zoom-lfx.platform.linuxfoundation.org/meeting/94695703550?password=e8819002-3f6e-4905-9916-b049f501e866&invite=true",
+    },
+    {
+      name: "Python SDK",
+      description:
+        "Focused discussions on the Hiero Python SDK development, including new features, issues, and contributions.",
+
+      registerLink:
+        "https://zoom-lfx.platform.linuxfoundation.org/meeting/92041330205?password=2f345bee-0c14-4dd5-9883-06fbc9c60581&invite=true",
     },
     {
       name: "Hiero/Hedera Identity",
       description:
         "Working group focused on identity-related projects, DID SDK development, and identity standards implementation.",
-      schedule: "Monthly",
+
       registerLink:
         "https://zoom-lfx.platform.linuxfoundation.org/meeting/99097542854?password=3ee2d9c9-32de-4758-8a23-417c751bd7ab&invite=true",
+    },
+    {
+      name: "Hiero Marketing",
+      description:
+        "Marketing and community outreach discussions, including events, communications, and ecosystem growth strategies.",
+
+      registerLink:
+        "https://zoom-lfx.platform.linuxfoundation.org/meeting/91725705912?password=57115f71-9576-46dc-90f7-98be38aade2d&invite=true",
+    },
+    {
+      name: "Docs",
+      description:
+        "Documentation working group meetings to improve and maintain Hiero project documentation.",
+
+      registerLink:
+        "https://zoom-lfx.platform.linuxfoundation.org/meeting/96247351493?password=54a04164-8618-458d-8176-4ca21b346291&invite=true",
+    },
+    // Below this line: hidden behind "View all community calls" link
+    {
+      name: "Hiero Website",
+      description:
+        "Planning and development meetings for the Hiero website, content strategy, and user experience improvements.",
+
+      registerLink:
+        "https://zoom-lfx.platform.linuxfoundation.org/meeting/94831465670?password=50e11cd2-6450-4a97-b9ae-7a7585c4409b&invite=true",
     },
     {
       name: "Hiero Mirror Node",
@@ -148,6 +141,14 @@ const meetData = {
       schedule: "Monthly",
       registerLink:
         "https://zoom-lfx.platform.linuxfoundation.org/meeting/94618152832?password=3b037576-2aab-4f7e-ab24-acf9ca2c3734&invite=true",
+    },
+    {
+      name: "Solo Action",
+      description:
+        "Working sessions focused on Solo Action project development, issues, and contributions.",
+      schedule: "Fortnightly",
+      registerLink:
+        "https://zoom-lfx.platform.linuxfoundation.org/meeting/92576669768?password=8dab94bb-7315-4d37-a944-b1fa0e924741&invite=true",
     },
   ],
 };
@@ -159,114 +160,114 @@ const reposData = {
     {
       name: "hiero-consensus-node",
       description:
-        "Crypto, token, consensus, file, and smart contract services for a Hiero based network",
+        "Crypto, token, consensus, file, and smart contract services for a Hiero based network.",
       link: "https://github.com/hiero-ledger/hiero-consensus-node",
     },
     {
       name: "hiero-local-node",
       description:
-        "Run your own local Hiero based network for development purposes",
+        "Run your own local Hiero based network for development purposes.",
       link: "https://github.com/hiero-ledger/hiero-local-node",
     },
     {
       name: "hiero-mirror-node",
       description:
-        "Archives data from consensus nodes and serves it via an API",
+        "Archives data from consensus nodes and serves it via an API.",
       link: "https://github.com/hiero-ledger/hiero-mirror-node",
     },
     {
       name: "hiero-improvement-proposals",
       description:
-        "Hiero Improvement Proposal repository for community-driven enhancements",
+        "Hiero Improvement Proposal repository for community-driven enhancements.",
       link: "https://github.com/hiero-ledger/hiero-improvement-proposals",
     },
     {
       name: "hiero-sdk-js",
       description:
-        "JavaScript/TypeScript SDK for interacting with a Hiero network",
+        "JavaScript/TypeScript SDK for interacting with a Hiero network.",
       link: "https://github.com/hiero-ledger/hiero-sdk-js",
     },
     {
       name: "hiero-sdk-java",
-      description: "Java SDK for Hiero distributed ledger technology",
+      description: "Java SDK for Hiero distributed ledger technology.",
       link: "https://github.com/hiero-ledger/hiero-sdk-java",
     },
     {
       name: "hiero-json-rpc-relay",
-      description: "Implementation of Ethereum JSON-RPC APIs for Hedera",
+      description: "Implementation of Ethereum JSON-RPC APIs for Hedera.",
       link: "https://github.com/hiero-ledger/hiero-json-rpc-relay",
     },
     {
       name: "hiero-sdk-go",
-      description: "Go SDK for Hiero distributed ledger technology",
+      description: "Go SDK for Hiero distributed ledger technology.",
       link: "https://github.com/hiero-ledger/hiero-sdk-go",
     },
     {
       name: "hiero-sdk-rust",
-      description: "The Hiero Rust SDK for building on Hiero networks",
+      description: "The Hiero Rust SDK for building on Hiero networks.",
       link: "https://github.com/hiero-ledger/hiero-sdk-rust",
     },
     {
       name: "hiero-mirror-node-explorer",
-      description: "Hedera Mirror Node Explorer for the Hedera Hashgraph DLT",
+      description: "Hedera Mirror Node Explorer for the Hedera Hashgraph DLT.",
       link: "https://github.com/hiero-ledger/hiero-mirror-node-explorer",
     },
     {
       name: "hiero-cli",
-      description: "Hiero command line tools for developers",
+      description: "Hiero command line tools for developers.",
       link: "https://github.com/hiero-ledger/hiero-cli",
     },
     {
       name: "solo",
       description:
-        "An opinionated CLI tool to deploy and manage standalone test networks",
+        "An opinionated CLI tool to deploy and manage standalone test networks.",
       link: "https://github.com/hiero-ledger/solo",
     },
     {
       name: "hiero-block-node",
-      description: "New Block Node services for Hiero networks",
+      description: "New Block Node services for Hiero networks.",
       link: "https://github.com/hiero-ledger/hiero-block-node",
     },
     {
       name: "hiero-sdk-tck",
       description:
-        "Technology Compatibility Kit used to verify compliant implementations of a Hiero SDK",
+        "Technology Compatibility Kit used to verify compliant implementations of a Hiero SDK.",
       link: "https://github.com/hiero-ledger/hiero-sdk-tck",
     },
     {
       name: "hiero-sdk-cpp",
       description:
-        "A C++ SDK for Hiero: A C++ toolkit for creating and interacting with on-ledger assets",
+        "A C++ SDK for Hiero: A C++ toolkit for creating and interacting with on-ledger assets.",
       link: "https://github.com/hiero-ledger/hiero-sdk-cpp",
     },
     {
       name: "governance",
       description:
-        "Configuration repository for managing all Hiero GitHub repositories",
+        "Configuration repository for managing all Hiero GitHub repositories.",
       link: "https://github.com/hiero-ledger/governance",
     },
     {
       name: "hiero-sdk-python",
       description:
-        "A Python SDK for Hiero: A Python toolkit for interacting with on-ledger assets",
+        "A Python SDK for Hiero: A Python toolkit for interacting with on-ledger assets.",
       link: "https://github.com/hiero-ledger/hiero-sdk-python",
     },
     {
       name: "hiero-sdk-swift",
       description:
-        "A Swift SDK for Hiero: A Swift toolkit for creating and interacting with on-ledger assets",
+        "A Swift SDK for Hiero: A Swift toolkit for creating and interacting with on-ledger assets.",
       link: "https://github.com/hiero-ledger/hiero-sdk-swift",
     },
     {
       name: "sdk-collaboration-hub",
       description:
-        "Collaboration hub for SDK-related discussions and coordination",
+        "Collaboration hub for SDK-related discussions and coordination.",
       link: "https://github.com/hiero-ledger/sdk-collaboration-hub",
     },
     {
       name: "tsc",
       description:
-        "Technical Steering Committee activity, discussions and decisions repository",
+        "Technical Steering Committee activity, discussions and decisions repository.",
       link: "https://github.com/hiero-ledger/tsc",
     },
   ],
@@ -301,15 +302,6 @@ const issueJumpData = {
       href: `https://github.com/issues?q=${BASE_QUERY}%20(label%3Aadvanced%20OR%20label%3A%22skill%3A%20advanced%22)`,
     },
   ],
-};
-
-const openSourceData = {
-  whyHeading: "Why is Hiero Open Source?",
-  whyText:
-    "The goal of Hiero is to build a diverse community of developers and innovators making the world fairer, faster, and more secure. Hiero's source is accessible so anyone can advance the project. As a decentralized network used by enterprises and critical infrastructure, it must remain vendor-neutral and fully auditable.",
-  whatHeading: "What parts of Hiero are Open Source?",
-  whatText:
-    "Hiero is fully open source. While its transition to Linux Foundation Decentralized Trust continues, additional contributions are available in [Hedera’s GitHub organization](https://github.com/hashgraph). The technical steering committee (TSC) of Hiero will initially oversee adding projects needed for an enterprise-ready decentralized network to a new Hiero GitHub organization. See the roadmap for more details.",
 };
 
 const quotesData = [
@@ -379,14 +371,13 @@ export default function Home() {
       <HeroSection data={heroData} />
       <WhatIsHieroSection data={whatIsHieroData} />
       <Divider />
-      <MeetSection data={meetData} />
-      <Divider />
-      <ReposCarousel data={reposData} />
-      <Divider />
       <IssueJumpSection data={issueJumpData} />
       <Divider />
-      <OpenSourceSection data={openSourceData} />
+      <MeetSection data={meetData} />
       <Divider />
+      <ReposGrid data={reposData} />
+      <Divider />
+
       <QuotesCarousel data={quotesData} />
     </>
   );

@@ -13,7 +13,6 @@ describe("MeetSection", () => {
             {
               name: "Maintainers Call",
               description: "Discuss active workstreams.",
-              schedule: "Every Tuesday",
               registerLink: "https://example.com/register",
             },
           ],
@@ -27,7 +26,6 @@ describe("MeetSection", () => {
     expect(
       screen.getByRole("heading", { name: "Maintainers Call" }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/Every Tuesday/)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Register/i })).toHaveAttribute(
       "href",
       "https://example.com/register",

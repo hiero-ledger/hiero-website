@@ -58,12 +58,12 @@ export default function QuotesCarousel({ data }: QuotesCarouselProps) {
                     <RichText
                       inline
                       markdown={quote.quote}
-                      className="mb-5 [&>a]:text-white"
+                      className="mb-5 [&>a]:text-white [&>a:hover]:text-white [&>a]:underline"
                     />
                     <RichText
                       inline
                       markdown={quote.author}
-                      className="font-bold mb-[155px] [&>a]:text-white"
+                      className="font-bold mb-[155px] [&>a]:text-white [&>a:hover]:text-white [&>a]:underline"
                     />
                   </SwiperSlide>
                 ))}

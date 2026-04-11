@@ -43,7 +43,7 @@ export default function IssueJumpSection({ data }: IssueJumpSectionProps) {
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="flex flex-col h-full min-w-0 border-2 border-white-dark rounded-2xl p-6 bg-white hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 transition-colors duration-200 no-underline text-charcoal">
-                <span className="text-xl font-medium text-red mb-2 break-words">
+                <span className="text-xl font-medium mb-2 break-words">
                   {item.label}
                 </span>
                 <span className="text-base text-gray">{item.description}</span>

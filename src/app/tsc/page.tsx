@@ -89,10 +89,10 @@ export default function TSCSection() {
       <section className="bg-linear-to-br from-red-dark via-red to-red text-white">
         <div className="container py-14 sm:py-22.5 lg:py-27.5">
           <div className="max-w-170 mx-auto text-center">
-            <h1 className="text-[42px] sm:text-[53px] leading-none mb-4 text-center text-white">
-              The Technical Steering Committee of Hiero
+            <h1 className="text-[42px] sm:text-5xl leading-none relative mb-2.5">
+              The TSC of Hiero
             </h1>
-            <p className="text-base sm:text-lg max-w-150 mx-auto">
+            <p className="text-[24px] tracking-[-0.081rem] sm:text-xl relative max-w-150 mx-auto">
               The Hiero Technical Steering Committee (TSC) is the committee
               responsible for technical governance within the Hiero project.
             </p>

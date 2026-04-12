@@ -49,8 +49,8 @@ const whatIsHieroData = {
 };
 
 const meetData = {
-  heading: "Join the conversation and help move ideas forward",
-  text: "Take part in our open meetings and help shape things with the team. [Register here](https://github.com/hiero-ledger#open-community-meetings-and-tsc-schedules) or view schedules on the [LFX Calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week).",
+  heading: "Participate in Live Discussion",
+  text: "Participate in our open meetings and shape things with the team. [Register here](https://github.com/hiero-ledger#open-community-meetings-and-tsc-schedules) or view schedules on the [LFX Calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week).",
   calls: [
     // Ranked by LFX Calendar sign-up counts
     {
@@ -154,8 +154,8 @@ const meetData = {
 };
 
 const reposData = {
-  heading: "Explore the codebase - your contributions shape what we build",
-  text: "Take a look at our most active repositories and see the core of the ecosystem in action.",
+  heading: "Dive in and take ownership",
+  text: "Study our most active repositories and see the core of the ecosystem in action.",
   repos: [
     {
       name: "hiero-consensus-node",
@@ -277,8 +277,8 @@ const BASE_QUERY =
   "is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%20archived%3Afalse%20no%3Aassignee";
 
 const issueJumpData = {
-  heading: "Explore where your voice and work have real influence",
-  text: "Discover issues that match your strengths and take your first step into the Hiero universe.",
+  heading: "Contribute to Hiero and have real influence",
+  text: "Discover issues that match your strengths and make meaningful impact in the Hiero universe.",
   difficulties: [
     {
       label: "Good First Issue",

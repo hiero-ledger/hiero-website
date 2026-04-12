@@ -277,7 +277,7 @@ const BASE_QUERY =
   "is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%20archived%3Afalse%20no%3Aassignee";
 
 const issueJumpData = {
-  heading: "Contribute to Hiero and have real influence",
+  heading: "Contribute and have an influence",
   text: "Discover issues that match your strengths and make meaningful impact in the Hiero universe.",
   difficulties: [
     {

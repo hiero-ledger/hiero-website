@@ -13,8 +13,8 @@ body:
         Beginner issues are well-scoped tasks designed to help you learn the codebase and follow best-practices.
 
         Read more:
-        > [Contribution Workflow](https://github.com/hiero-ledger/hiero-website/blob/main/docs/workflow.md)
-        > [First Contribution Checklist](https://github.com/hiero-ledger/hiero-website/blob/main/docs/05-first-contribution-checklist.md)
+        > [Contribution Workflow](https://github.com/hiero-ledger/sdk-collaboration-hub/blob/main/guides/issue-progression/for-developers/contributor-workflow.md)
+        > [Contributor Setup](https://github.com/hiero-ledger/sdk-collaboration-hub/blob/main/guides/issue-progression/for-developers/contributor-setup.md) (OS Guides: [Mac](https://github.com/hiero-ledger/hiero-website/blob/main/docs/setup/Macbook_setup.md) | [Windows](https://github.com/hiero-ledger/hiero-website/blob/main/docs/setup/windows_setup.md) | [Linux](https://github.com/hiero-ledger/hiero-website/blob/main/docs/setup/linux_setup.md))
         ---
 
   - type: textarea
@@ -112,7 +112,7 @@ body:
         > - Forking, branching, committing (with DCO + GPG signing), and opening a pull request without a tutorial
         > - Reading beginner to intermediate React/TypeScript code you did not write and following its patterns
         > - Handling simple merge conflicts
-        > - Keeping your fork up to date with main by [rebasing](https://github.com/hiero-ledger/hiero-website/blob/main/docs/rebasing.md)
+        > - Keeping your fork up to date with main by [rebasing](https://github.com/hiero-ledger/sdk-collaboration-hub/blob/main/guides/issue-progression/for-developers/rebasing.md)
         > - Looking things up on your own before asking for help
 
         If any of that feels unfamiliar, good first issues might still be the most rewarding path for you right now — [find one here](https://github.com/issues?q=is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%20archived%3Afalse%20no%3Aassignee%20label%3A%22good%20first%20issue%22%20repo%3Ahiero-ledger%2Fhiero-website).
@@ -153,7 +153,7 @@ body:
         - Run tests locally: `pnpm test`
         - Verify the dev server renders correctly: `pnpm dev`
 
-        **GitHub Actions / workflow changes (e.g. in `.github/`):** [Guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/07-github-automation.md)
+        **GitHub Actions / workflow changes (e.g. in `.github/`):** [Guide](https://github.com/hiero-ledger/sdk-collaboration-hub/blob/main/guides/issue-progression/for-developers/github-action-workflows.md)
         - Test by merging to your fork's `main` and simulating the scenario
 
         **Content or styling changes:**
@@ -192,12 +192,17 @@ body:
         - [ ] My implementation works and is tested (if applicable).
         - [ ] Every line of code is personally understood and explainable.
         - [ ] My changes address what the issue asked for — nothing more, nothing less
-        - [ ] I have applied appropriate linting, code quality, and formatting tools used in this repo.
+        - [ ] I have run the following commands locally and **all pass** (CI will automatically fail your PR if any of these fail):
+          - `pnpm format:check` — checks code formatting
+          - `pnpm lint` — runs the linter (**the CI lint check will block your PR if this fails**)
+          - `pnpm test` — runs the test suite
+          - `pnpm build` — ensures the project builds successfully
+          - [Testing guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/06-testing-and-quality-checks.md)
 
         Before requesting a review, confirm:
         - [ ] I did not modify files unrelated to this issue
         - [ ] Clean git history — no rebase artifacts, merge commits, or unrelated files
-        - [ ] My commits are signed: `git commit -S -s -m "chore: description"` — [Signing guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/signing.md)
+        - [ ] My commits are signed: `git commit -S -s -m "chore: description"` — [Signing guide](https://github.com/hiero-ledger/sdk-collaboration-hub/blob/main/guides/issue-progression/for-developers/signing.md)
         - [ ] I have included appropriate tests and all CI checks pass.
 
   - type: textarea
@@ -212,9 +217,9 @@ body:
         | Step | Guide |
         |------|-------|
         | Claim this issue | Comment `/assign` below |
-        | Sync with main | [Rebasing guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/rebasing.md) |
-        | Open a PR and link this issue | [PR guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/workflow.md#submitting-a-pull-request) |
-        | Resolve merge conflicts | [Merge conflicts guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/merge_conflicts.md) |
+        | Sync with main | [Rebasing guide](https://github.com/hiero-ledger/sdk-collaboration-hub/blob/main/guides/issue-progression/for-developers/rebasing.md) |
+        | Open a PR and link this issue | [PR guide](https://github.com/hiero-ledger/sdk-collaboration-hub/blob/main/guides/issue-progression/for-developers/contributor-workflow.md) |
+        | Resolve merge conflicts | [Merge conflicts guide](https://github.com/hiero-ledger/sdk-collaboration-hub/blob/main/guides/issue-progression/for-developers/merge_conflicts.md) |
 
   - type: textarea
     id: resources
@@ -229,4 +234,4 @@ body:
         - [Next.js Documentation](https://nextjs.org/docs)
         - [React Documentation](https://react.dev)
         - [Community Calls](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week)
-        - [Discord](https://github.com/hiero-ledger/hiero-website/blob/main/docs/discord.md)
+        - [Discord](https://github.com/hiero-ledger/sdk-collaboration-hub/blob/main/guides/issue-progression/for-developers/discord.md)

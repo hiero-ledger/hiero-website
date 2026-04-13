@@ -14,8 +14,8 @@ body:
         Advanced issues are high-ownership, high-impact tasks requiring expert-level architectural understanding and significant independent research.
 
         Read more:
-        > [Contribution Workflow](https://github.com/hiero-ledger/hiero-website/blob/main/docs/workflow.md)
-        > [First Contribution Checklist](https://github.com/hiero-ledger/hiero-website/blob/main/docs/05-first-contribution-checklist.md)
+        > [Contribution Workflow](https://github.com/hiero-ledger/sdk-collaboration-hub/blob/main/guides/issue-progression/for-developers/contributor-workflow.md)
+        > [Contributor Setup](https://github.com/hiero-ledger/sdk-collaboration-hub/blob/main/guides/issue-progression/for-developers/contributor-setup.md) (OS Guides: [Mac](https://github.com/hiero-ledger/hiero-website/blob/main/docs/setup/Macbook_setup.md) | [Windows](https://github.com/hiero-ledger/hiero-website/blob/main/docs/setup/windows_setup.md) | [Linux](https://github.com/hiero-ledger/hiero-website/blob/main/docs/setup/linux_setup.md))
         ---
 
   - type: textarea
@@ -142,4 +142,4 @@ body:
 
         **🆘 Stuck?**
         - [Community Calls](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week)
-        - [Discord](https://github.com/hiero-ledger/hiero-website/blob/main/docs/discord.md)
+        - [Discord](https://github.com/hiero-ledger/sdk-collaboration-hub/blob/main/guides/issue-progression/for-developers/discord.md)

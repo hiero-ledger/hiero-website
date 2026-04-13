@@ -177,7 +177,7 @@ export default function TSCSection() {
               return (
                 <article
                   key={`${fullName}-${index}`}
-                  className="h-full rounded-2xl border-2 border-white-dark bg-white p-6 sm:p-7">
+                  className="flex flex-col h-full rounded-2xl border-2 border-white-dark bg-white p-6 sm:p-7">
                   {member.photo ? (
                     <Image
                       src={`/images/tsc/${member.photo}`}
@@ -194,7 +194,7 @@ export default function TSCSection() {
                     />
                   )}
 
-                  <div className="mt-5">
+                  <div className="flex flex-1 flex-col mt-5">
                     <h3 className="text-xl sm:text-2xl mb-2">{fullName}</h3>
 
                     {member.gitHubAccount ? (
@@ -214,7 +214,9 @@ export default function TSCSection() {
                       </a>
                     ) : null}
 
-                    <p className="mt-4 text-base text-gray">{bioPreview}</p>
+                    <p className="grow mt-4 text-base text-gray">
+                      {bioPreview}
+                    </p>
 
                     {hasBio ? (
                       <button
@@ -224,7 +226,7 @@ export default function TSCSection() {
                           lastFocusedTriggerIdRef.current = `tsc-read-profile-${index}`;
                           setSelectedMember(member);
                         }}
-                        className="mt-4 inline-flex items-center rounded-full border-2 border-white-dark px-4 py-1.5 text-sm font-medium text-charcoal transition-colors hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2"
+                        className="mt-4 inline-flex items-center justify-center rounded-full border-2 border-white-dark px-4 py-1.5 text-sm font-medium text-charcoal transition-colors hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2"
                         aria-label={`Read full profile for ${fullName}`}>
                         Read full profile
                       </button>

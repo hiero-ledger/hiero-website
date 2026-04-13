@@ -226,7 +226,7 @@ export default function TSCSection() {
                           lastFocusedTriggerIdRef.current = `tsc-read-profile-${index}`;
                           setSelectedMember(member);
                         }}
-                        className="mt-4 inline-flex items-center rounded-full border-2 border-white-dark px-4 py-1.5 text-sm font-medium text-charcoal transition-colors hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2"
+                        className="mt-4 inline-flex items-center justify-center rounded-full border-2 border-white-dark px-4 py-1.5 text-sm font-medium text-charcoal transition-colors hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2"
                         aria-label={`Read full profile for ${fullName}`}>
                         Read full profile
                       </button>

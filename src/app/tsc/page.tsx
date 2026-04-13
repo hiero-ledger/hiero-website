@@ -264,9 +264,6 @@ export default function TSCSection() {
                 <p className="text-base text-gray grow">
                   {resource.description}
                 </p>
-                <span className="mt-5 text-base font-medium text-red underline">
-                  Open resource
-                </span>
               </a>
             ))}
           </div>

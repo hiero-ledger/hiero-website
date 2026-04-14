@@ -27,7 +27,11 @@ interface RepoGroupConfig {
 interface DisplayRepoGroup {
   heading: string;
   text: string;
-  repos: RepoItem[];
+  repos: DisplayRepoItem[];
+}
+
+interface DisplayRepoItem extends RepoItem {
+  stars: number;
 }
 
 const REPO_GROUPS: RepoGroupConfig[] = [
@@ -73,16 +77,22 @@ export default function ReposGrid({ data }: ReposGridProps) {
   }
 
   const reposByName = new Map(data.repos.map(repo => [repo.name, repo]));
+  const withStars = (repo: RepoItem): DisplayRepoItem => ({
+    ...repo,
+    stars: getStars(repo.name),
+  });
   const repoGroups = REPO_GROUPS.map(group => ({
     ...group,
     repos: group.repoNames
       .map(name => reposByName.get(name))
-      .filter((repo): repo is RepoItem => repo != null),
+      .filter((repo): repo is RepoItem => repo != null)
+      .map(withStars),
   })).filter(group => group.repos.length > 0);
   const fallbackRepos = data.repos
     .filter(repo => !featuredRepoNames.has(repo.name))
     .sort((a, b) => getStars(b.name) - getStars(a.name))
-    .slice(0, FALLBACK_REPO_COUNT);
+    .slice(0, FALLBACK_REPO_COUNT)
+    .map(withStars);
   const displayGroups: DisplayRepoGroup[] =
     repoGroups.length > 0
       ? repoGroups
@@ -124,11 +134,7 @@ export default function ReposGrid({ data }: ReposGridProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 items-stretch">
             {displayGroups.map(group => (
-              <RepoGroup
-                key={group.heading}
-                group={group}
-                getStars={getStars}
-              />
+              <RepoGroup key={group.heading} group={group} />
             ))}
           </div>
         </div>
@@ -137,13 +143,7 @@ export default function ReposGrid({ data }: ReposGridProps) {
   );
 }
 
-function RepoGroup({
-  group,
-  getStars,
-}: {
-  group: DisplayRepoGroup;
-  getStars: (name: string) => number;
-}) {
+function RepoGroup({ group }: { group: DisplayRepoGroup }) {
   return (
     <article className="hiero-repo-panel hiero-reveal flex h-full min-h-[360px] flex-col rounded-lg border border-t-4 border-white-dark border-t-red bg-white p-5 shadow-[0_10px_28px_rgba(30,30,30,0.05)]">
       <div className="min-h-[132px] border-b border-white-dark pb-5">
@@ -158,14 +158,14 @@ function RepoGroup({
 
       <div className="mt-1 divide-y divide-white-dark">
         {group.repos.map(repo => (
-          <RepoLink key={repo.name} repo={repo} stars={getStars(repo.name)} />
+          <RepoLink key={repo.name} repo={repo} />
         ))}
       </div>
     </article>
   );
 }
 
-function RepoLink({ repo, stars }: { repo: RepoItem; stars: number }) {
+function RepoLink({ repo }: { repo: DisplayRepoItem }) {
   return (
     <a
       href={repo.link}
@@ -183,8 +183,8 @@ function RepoLink({ repo, stars }: { repo: RepoItem; stars: number }) {
       </span>
       <span className="flex shrink-0 flex-col items-end justify-between">
         <span className="rounded-lg bg-gray-light px-2 py-1 font-ibm text-sm text-gray tracking-normal">
-          ⭐ {stars}
-          <span className="sr-only">{stars} stars</span>
+          ⭐ {repo.stars}
+          <span className="sr-only">{repo.stars} stars</span>
         </span>
         <span className="font-ibm text-sm text-red uppercase tracking-normal transition-transform duration-200 group-hover:translate-x-1">
           Open

@@ -181,6 +181,239 @@ nav a.active::after {
 }
 
 /* ============================================
+   Hiero contribution cards
+   ============================================ */
+.hiero-reveal {
+  opacity: 0;
+  transform: translateY(1rem);
+}
+
+.hiero-reveal:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.hiero-reveal:nth-child(3) {
+  animation-delay: 160ms;
+}
+
+.hiero-reveal:nth-child(4) {
+  animation-delay: 240ms;
+}
+
+.hiero-motion-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.hiero-motion-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: #B81A56;
+  transform: scaleX(0.18);
+  transform-origin: left;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 0;
+}
+
+.hiero-motion-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(184, 26, 86, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184, 26, 86, 0.06) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+  opacity: 0;
+  transition: opacity 220ms ease;
+  z-index: 0;
+}
+
+.hiero-motion-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hiero-motion-card:hover,
+.hiero-motion-card:focus-within {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 18px 44px rgba(30, 30, 30, 0.11);
+}
+
+.hiero-motion-card:hover::before,
+.hiero-motion-card:focus-within::before {
+  transform: scaleX(1);
+}
+
+.hiero-motion-card:hover::after,
+.hiero-motion-card:focus-within::after {
+  opacity: 1;
+}
+
+.hiero-card-arrow {
+  display: inline-block;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hiero-motion-card:hover .hiero-card-arrow,
+.hiero-motion-card:focus-within .hiero-card-arrow,
+.hiero-agenda-card:hover .hiero-card-arrow,
+.hiero-agenda-card:focus-within .hiero-card-arrow {
+  transform: translateX(0.25rem);
+}
+
+.hiero-node-mark {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 2.75rem;
+  height: 1.5rem;
+  opacity: 0.68;
+  pointer-events: none;
+  background:
+    linear-gradient(#B81A56, #B81A56) 0 0 / 6px 6px no-repeat,
+    linear-gradient(#B81A56, #B81A56) 100% 0 / 6px 6px no-repeat,
+    linear-gradient(#B81A56, #B81A56) 100% 100% / 6px 6px no-repeat,
+    linear-gradient(rgba(184, 26, 86, 0.45), rgba(184, 26, 86, 0.45)) 3px
+      3px / calc(100% - 6px) 1px no-repeat,
+    linear-gradient(rgba(184, 26, 86, 0.45), rgba(184, 26, 86, 0.45))
+      calc(100% - 3px) 3px / 1px calc(100% - 6px) no-repeat;
+}
+
+.hiero-path-grid {
+  position: relative;
+}
+
+.hiero-path-card::before {
+  inset: 0 auto 0 0;
+  width: 4px;
+  height: auto;
+  transform: scaleY(0.24);
+  transform-origin: top;
+}
+
+.hiero-path-card:hover::before,
+.hiero-path-card:focus-within::before {
+  transform: scaleY(1);
+}
+
+.hiero-agenda-card,
+.hiero-repo-panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.hiero-agenda-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: #B81A56;
+  transform: scaleY(0.38);
+  transform-origin: top;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+
+.hiero-agenda-card > *,
+.hiero-repo-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hiero-agenda-card:hover,
+.hiero-agenda-card:focus-within {
+  transform: translateX(0.25rem);
+  box-shadow: 0 18px 44px rgba(30, 30, 30, 0.12);
+}
+
+.hiero-agenda-card:hover::before,
+.hiero-agenda-card:focus-within::before {
+  transform: scaleY(1);
+}
+
+.hiero-repo-panel:hover,
+.hiero-repo-panel:focus-within {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 18px 44px rgba(30, 30, 30, 0.11);
+}
+
+@media (min-width: 1024px) {
+  .hiero-path-grid::before {
+    content: '';
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    height: 1px;
+    background: #E5E4D7;
+  }
+
+  .hiero-path-card:nth-child(even) {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hiero-reveal {
+    animation-name: hiero-reveal;
+    animation-duration: 560ms;
+    animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+    animation-fill-mode: forwards;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hiero-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hiero-motion-card,
+  .hiero-card-arrow,
+  .hiero-agenda-card,
+  .hiero-repo-panel {
+    transition-duration: 1ms;
+  }
+
+  .hiero-motion-card:hover,
+  .hiero-motion-card:focus-within,
+  .hiero-agenda-card:hover,
+  .hiero-agenda-card:focus-within,
+  .hiero-repo-panel:hover,
+  .hiero-repo-panel:focus-within,
+  .hiero-motion-card:hover .hiero-card-arrow,
+  .hiero-motion-card:focus-within .hiero-card-arrow,
+  .hiero-agenda-card:hover .hiero-card-arrow,
+  .hiero-agenda-card:focus-within .hiero-card-arrow {
+    transform: none;
+  }
+}
+
+@keyframes hiero-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
    Container
    ============================================ */
 .container {

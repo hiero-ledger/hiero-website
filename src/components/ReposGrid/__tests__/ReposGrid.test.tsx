@@ -10,7 +10,7 @@ const stats: Record<string, { stars: number }> = repoStats as Record<
 >;
 
 describe("ReposGrid", () => {
-  it("renders repository cards with star counts in a grid", () => {
+  it("renders grouped repository links with star counts", () => {
     render(
       <ReposGrid
         data={{
@@ -27,13 +27,19 @@ describe("ReposGrid", () => {
       />,
     );
 
+    expect(
+      screen.getByRole("heading", { name: "Repositories" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Build apps" }),
+    ).toBeInTheDocument();
     expect(screen.getByText("hiero-sdk-js")).toBeInTheDocument();
     expect(screen.getByText("JavaScript SDK")).toBeInTheDocument();
 
-    const repoCard = screen.getByRole("link", {
+    const repoLink = screen.getByRole("link", {
       name: /View hiero-sdk-js repository/i,
     });
-    expect(repoCard).toHaveAttribute(
+    expect(repoLink).toHaveAttribute(
       "href",
       "https://github.com/hiero-ledger/hiero-sdk-js",
     );
@@ -45,7 +51,7 @@ describe("ReposGrid", () => {
     ).toBeInTheDocument();
   });
 
-  it("limits displayed repos to the top 9 by star count", () => {
+  it("features curated starter repos instead of every available repo", () => {
     const allRepoNames = [
       "hiero-sdk-rust",
       "solo",
@@ -59,6 +65,7 @@ describe("ReposGrid", () => {
       "hiero-mirror-node",
       "hiero-cli",
       "hiero-mirror-node-explorer",
+      "tsc",
     ];
 
     const mappedRepos = allRepoNames.map(name => ({
@@ -77,14 +84,25 @@ describe("ReposGrid", () => {
       />,
     );
 
-    const expectedOrder = [...allRepoNames]
-      .sort((a, b) => (stats[b]?.stars ?? 0) - (stats[a]?.stars ?? 0))
-      .slice(0, 9);
-
     expect(
       screen
         .getAllByRole("heading", { level: 3 })
         .map(node => node.textContent),
-    ).toEqual(expectedOrder);
+    ).toEqual(["Build apps", "Run infrastructure", "Shape the project"]);
+
+    [
+      "hiero-sdk-js",
+      "hiero-sdk-java",
+      "hiero-consensus-node",
+      "hiero-mirror-node",
+      "hiero-improvement-proposals",
+      "tsc",
+    ].forEach(name => {
+      expect(screen.getByText(name)).toBeInTheDocument();
+    });
+
+    ["hiero-sdk-go", "solo", "hiero-local-node"].forEach(name => {
+      expect(screen.queryByText(name)).not.toBeInTheDocument();
+    });
   });
 });

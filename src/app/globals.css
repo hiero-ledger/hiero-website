@@ -381,10 +381,13 @@ nav a.active::after {
   }
 
   .hiero-motion-card,
+  .hiero-motion-card::before,
+  .hiero-motion-card::after,
   .hiero-card-arrow,
   .hiero-agenda-card,
+  .hiero-agenda-card::before,
   .hiero-repo-panel {
-    transition-duration: 1ms;
+    transition: none;
   }
 
   .hiero-motion-card:hover,
@@ -398,6 +401,26 @@ nav a.active::after {
   .hiero-agenda-card:hover .hiero-card-arrow,
   .hiero-agenda-card:focus-within .hiero-card-arrow {
     transform: none;
+  }
+
+  .hiero-motion-card:hover::before,
+  .hiero-motion-card:focus-within::before {
+    transform: scaleX(0.18);
+  }
+
+  .hiero-path-card:hover::before,
+  .hiero-path-card:focus-within::before {
+    transform: scaleY(0.24);
+  }
+
+  .hiero-agenda-card:hover::before,
+  .hiero-agenda-card:focus-within::before {
+    transform: scaleY(0.38);
+  }
+
+  .hiero-motion-card:hover::after,
+  .hiero-motion-card:focus-within::after {
+    opacity: 0;
   }
 }
 

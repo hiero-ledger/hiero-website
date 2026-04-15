@@ -1,7 +1,7 @@
 +++
 title = "Heka Identity Platform Joins Hiero to Advance Decentralized Identity"
 featured_image = "/images/hiero-heka-joins-hiero.png"
-date = 2026-04-10T10:01:11-07:00
+date = 2026-04-15T00:00:00-07:00
 categories = ["Blog"]
 abstract = "Heka Identity Platform Added to the Hiero Project Under LFDT to Advance Open-Source Decentralized Identity"
 [[authors]]

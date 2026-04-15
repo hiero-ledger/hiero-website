@@ -41,10 +41,11 @@ exports[`WhatIsHieroSection > renders the intro and supporting points 1`] = `
           >
             <img
               alt=""
-              height="55"
+              class="w-[55px] h-auto shrink-0"
+              height="57"
               loading="lazy"
               src="/images/icon-1.svg"
-              width="55"
+              width="56"
             />
             <div>
               <h3
@@ -67,10 +68,11 @@ exports[`WhatIsHieroSection > renders the intro and supporting points 1`] = `
           >
             <img
               alt=""
-              height="55"
+              class="w-[55px] h-auto shrink-0"
+              height="57"
               loading="lazy"
               src="/images/icon-2.svg"
-              width="55"
+              width="56"
             />
             <div>
               <h3

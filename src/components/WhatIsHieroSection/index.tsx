@@ -46,8 +46,9 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
                 <Image
                   src={point.icon}
                   alt=""
-                  width={55}
-                  height={55}
+                  width={56}
+                  height={57}
+                  className="w-[55px] h-auto shrink-0"
                   loading="lazy"
                 />
                 <div>

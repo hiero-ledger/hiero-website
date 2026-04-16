@@ -21,6 +21,7 @@ interface IssueJumpCardProps {
 }
 
 function IssueJumpCard({ item, index, className = "" }: IssueJumpCardProps) {
+  const isExternalLink = /^https?:\/\//.test(item.href);
   const cardClassName = [
     "hiero-motion-card hiero-path-card hiero-reveal flex min-h-[230px] flex-col rounded-lg border border-white-dark bg-white p-5 no-underline text-charcoal shadow-[0_10px_28px_rgba(30,30,30,0.05)] hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 xl:p-6",
     className,
@@ -30,9 +31,9 @@ function IssueJumpCard({ item, index, className = "" }: IssueJumpCardProps) {
 
   return (
     <a
-      href={item.href.startsWith("http") ? item.href : "#"}
-      target="_blank"
-      rel="noopener noreferrer nofollow"
+      href={item.href}
+      target={isExternalLink ? "_blank" : undefined}
+      rel={isExternalLink ? "noopener noreferrer nofollow" : undefined}
       className={cardClassName}
       style={{ animationDelay: `${index * 80}ms` }}>
       <span aria-hidden="true" className="hiero-node-mark" />

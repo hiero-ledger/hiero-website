@@ -84,14 +84,13 @@ describe("ReposGrid", () => {
       screen
         .getAllByRole("heading", { level: 3 })
         .map(node => node.textContent),
-    ).toEqual(["Shape the project", "Run infrastructure", "Build apps"]);
+    ).toEqual(["Shape the project", "Infrastructure", "Build apps"]);
 
     [
       "hiero-improvement-proposals",
       "tsc",
       "hiero-consensus-node",
       "hiero-mirror-node",
-      "hiero-local-node",
       "hiero-block-node",
       "solo",
       "hiero-sdk-js",
@@ -104,10 +103,13 @@ describe("ReposGrid", () => {
       expect(screen.getByText(name)).toBeInTheDocument();
     });
 
-    ["hiero-json-rpc-relay", "hiero-cli", "hiero-mirror-node-explorer"].forEach(
-      name => {
-        expect(screen.queryByText(name)).not.toBeInTheDocument();
-      },
-    );
+    [
+      "hiero-local-node",
+      "hiero-json-rpc-relay",
+      "hiero-cli",
+      "hiero-mirror-node-explorer",
+    ].forEach(name => {
+      expect(screen.queryByText(name)).not.toBeInTheDocument();
+    });
   });
 });

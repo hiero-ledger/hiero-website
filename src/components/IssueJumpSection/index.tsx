@@ -53,7 +53,8 @@ function IssueJumpCard({ item, index, className = "" }: IssueJumpCardProps) {
 }
 
 export default function IssueJumpSection({ data }: IssueJumpSectionProps) {
-  const [featuredDifficulty, ...remainingDifficulties] = data.difficulties;
+  const featuredDifficulty = data.difficulties.at(0);
+  const remainingDifficulties = data.difficulties.slice(1);
 
   return (
     <section

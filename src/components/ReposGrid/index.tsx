@@ -1,3 +1,4 @@
+import Image from "next/image";
 import repoStats from "@/data/repository_stats.json";
 
 interface RepoItem {
@@ -36,19 +37,31 @@ interface DisplayRepoItem extends RepoItem {
 
 const REPO_GROUPS: RepoGroupConfig[] = [
   {
-    heading: "Build apps",
-    text: "SDKs for teams building products on Hiero.",
-    repoNames: ["hiero-sdk-js", "hiero-sdk-java"],
-  },
-  {
-    heading: "Run infrastructure",
-    text: "Core services for operating and inspecting networks.",
-    repoNames: ["hiero-consensus-node", "hiero-mirror-node"],
-  },
-  {
     heading: "Shape the project",
     text: "Governance and proposal work that guides the ecosystem.",
     repoNames: ["hiero-improvement-proposals", "tsc"],
+  },
+  {
+    heading: "Infrastructure",
+    text: "Core services for operating and inspecting networks.",
+    repoNames: [
+      "hiero-consensus-node",
+      "hiero-mirror-node",
+      "hiero-block-node",
+      "solo",
+    ],
+  },
+  {
+    heading: "Build apps",
+    text: "SDKs for teams building products on Hiero.",
+    repoNames: [
+      "hiero-sdk-js",
+      "hiero-sdk-java",
+      "hiero-sdk-go",
+      "hiero-sdk-rust",
+      "hiero-sdk-python",
+      "hiero-sdk-swift",
+    ],
   },
 ];
 
@@ -105,90 +118,163 @@ export default function ReposGrid({ data }: ReposGridProps) {
             },
           ]
         : [];
+  const [featuredGroup, ...remainingGroups] = displayGroups;
 
   return (
     <section id="repos" className="anchor">
       <div className="bg-white">
-        <div className="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px] grid grid-cols-1 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.45fr)] gap-10 lg:gap-20">
-          <div>
-            <p className="font-ibm text-sm text-red uppercase tracking-normal mb-4">
-              Explore the code
-            </p>
-            <h2 className="text-2xl mb-2.5 sm:text-4xl sm:mb-5 tracking-normal">
-              {data.heading}
-            </h2>
-            <div className="text-lg max-w-full md:max-w-[560px] whitespace-pre-line tracking-normal">
-              {data.text}
+        <div className="container grid grid-cols-1 gap-10 pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px] lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.52fr)] lg:gap-16 xl:gap-20">
+          <div className="flex min-w-0 flex-col">
+            <div>
+              <p className="font-ibm text-sm text-red uppercase tracking-normal mb-4">
+                Explore the code
+              </p>
+              <h2 className="text-2xl mb-2.5 sm:text-4xl sm:mb-5 tracking-normal">
+                {data.heading}
+              </h2>
+              <div className="text-lg max-w-full md:max-w-[560px] whitespace-pre-line tracking-normal">
+                {data.text}
+              </div>
+
+              <div className="mt-8">
+                <a
+                  href="https://github.com/orgs/hiero-ledger/repositories"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label="View all repositories on GitHub (opens in new tab)"
+                  className="inline-flex items-center gap-3 rounded-lg border border-red px-5 py-3 font-ibm text-sm text-red no-underline uppercase tracking-normal transition-colors duration-200 hover:bg-gray-light hover:text-red-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2">
+                  <Image
+                    src="/images/Hiero-Icon-Github.svg"
+                    alt=""
+                    aria-hidden="true"
+                    width={15}
+                    height={17}
+                    className="h-4 w-4"
+                  />
+                  View all repositories →
+                </a>
+              </div>
             </div>
-            <div className="mt-8">
-              <a
-                href="https://github.com/orgs/hiero-ledger/repositories"
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label="View all repositories on GitHub (opens in new tab)"
-                className="text-red hover:text-red-dark text-lg font-medium underline tracking-normal">
-                View all repositories →
-              </a>
-            </div>
+
+            {featuredGroup ? (
+              <RepoGroup
+                group={featuredGroup}
+                index={0}
+                featured
+                className="mt-10"
+              />
+            ) : null}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 items-stretch">
-            {displayGroups.map(group => (
-              <RepoGroup key={group.heading} group={group} />
-            ))}
-          </div>
+          {remainingGroups.length > 0 ? (
+            <div className="grid grid-cols-1 items-start gap-5 xl:grid-cols-2">
+              {remainingGroups.map((group, index) => (
+                <RepoGroup
+                  key={group.heading}
+                  group={group}
+                  index={index + 1}
+                />
+              ))}
+            </div>
+          ) : null}
         </div>
       </div>
     </section>
   );
 }
 
-function RepoGroup({ group }: { group: DisplayRepoGroup }) {
+function RepoGroup({
+  group,
+  index,
+  featured = false,
+  className = "",
+}: {
+  group: DisplayRepoGroup;
+  index: number;
+  featured?: boolean;
+  className?: string;
+}) {
+  const panelClassName = [
+    "hiero-repo-panel hiero-reveal flex h-full min-w-0 flex-col rounded-lg border border-white-dark bg-white shadow-[0_10px_28px_rgba(30,30,30,0.05)]",
+    featured ? "lg:max-w-[560px]" : "",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <article className="hiero-repo-panel hiero-reveal flex h-full min-h-[360px] flex-col rounded-lg border border-t-4 border-white-dark border-t-red bg-white p-5 shadow-[0_10px_28px_rgba(30,30,30,0.05)]">
-      <div className="min-h-[132px] border-b border-white-dark pb-5">
-        <p className="font-ibm text-sm text-red uppercase tracking-normal mb-4">
-          Code area
-        </p>
-        <h3 className="text-xl sm:text-2xl font-medium tracking-normal">
+    <article
+      className={panelClassName}
+      style={{ animationDelay: `${index * 110}ms` }}>
+      <header className="border-b border-white-dark p-5 sm:p-6">
+        <div className="mb-5 flex items-center justify-between gap-4">
+          <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-red font-ibm text-sm text-white tracking-normal">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span className="rounded-lg bg-gray-light px-3 py-1 font-ibm text-sm text-gray uppercase tracking-normal">
+            Code area
+          </span>
+        </div>
+        <h3 className="text-xl font-medium tracking-normal sm:text-2xl">
           {group.heading}
         </h3>
         <p className="text-base text-gray mt-2 tracking-normal">{group.text}</p>
-      </div>
+      </header>
 
-      <div className="mt-1 divide-y divide-white-dark">
-        {group.repos.map(repo => (
-          <RepoLink key={repo.name} repo={repo} />
+      <div className="flex flex-1 flex-col divide-y divide-white-dark">
+        {group.repos.map((repo, repoIndex) => (
+          <RepoLink
+            key={repo.name}
+            repo={repo}
+            featured={repoIndex === 0}
+            index={repoIndex}
+          />
         ))}
       </div>
     </article>
   );
 }
 
-function RepoLink({ repo }: { repo: DisplayRepoItem }) {
+function RepoLink({
+  repo,
+  featured,
+  index,
+}: {
+  repo: DisplayRepoItem;
+  featured: boolean;
+  index: number;
+}) {
   return (
     <a
       href={repo.link}
       target="_blank"
       rel="noreferrer noopener"
       aria-label={`View ${repo.name} repository on GitHub`}
-      className="group grid min-h-[112px] grid-cols-[minmax(0,1fr)_auto] gap-4 py-5 no-underline text-charcoal transition-colors duration-200 hover:text-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2">
-      <span className="min-w-0">
-        <span className="block text-base sm:text-lg font-medium break-words tracking-normal">
-          {repo.name}
-        </span>
-        <span className="block text-sm text-gray mt-1 tracking-normal">
-          {repo.description}
+      className="hiero-repo-link group grid min-w-0 grid-cols-1 gap-4 px-5 py-5 no-underline text-charcoal hover:bg-gray-light hover:text-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-inset sm:grid-cols-[minmax(0,1fr)_auto] sm:px-6"
+      style={{ animationDelay: `${180 + index * 70}ms` }}>
+      <span className="flex min-w-0 gap-3">
+        <span
+          aria-hidden="true"
+          className={`hiero-repo-dot mt-2 h-2.5 w-2.5 shrink-0 rounded-full ${
+            featured ? "bg-red" : "bg-white-dark"
+          }`}
+        />
+        <span className="min-w-0">
+          {featured ? (
+            <span className="mb-2 block font-ibm text-xs text-red uppercase tracking-normal">
+              Featured path
+            </span>
+          ) : null}
+          <span className="block break-words text-base font-medium tracking-normal sm:text-lg">
+            {repo.name}
+          </span>
+          <span className="mt-1 block text-sm text-gray tracking-normal">
+            {repo.description}
+          </span>
         </span>
       </span>
-      <span className="flex shrink-0 flex-col items-end justify-between">
-        <span className="rounded-lg bg-gray-light px-2 py-1 font-ibm text-sm text-gray tracking-normal">
-          ⭐ {repo.stars}
-          <span className="sr-only">{repo.stars} stars</span>
-        </span>
-        <span className="font-ibm text-sm text-red uppercase tracking-normal transition-transform duration-200 group-hover:translate-x-1">
-          Open
-        </span>
+      <span className="flex shrink-0 items-center self-start rounded-lg border border-red px-3 py-2 font-ibm text-sm text-red uppercase tracking-normal transition-transform duration-200 group-hover:translate-x-1">
+        Open →
       </span>
     </a>
   );

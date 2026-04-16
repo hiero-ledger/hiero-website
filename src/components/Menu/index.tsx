@@ -14,6 +14,7 @@ const menuItems: MenuItem[] = [
   { name: "Connect", href: "/#connect" },
   { name: "Blog", href: "/blog/" },
   { name: "TSC", href: "/tsc/" },
+  { name: "Issue Explorer", href: "/issues/" }, //Need to add back issues/page.tsx -> in tmp folder
   {
     name: "Calendar",
     href: "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week",

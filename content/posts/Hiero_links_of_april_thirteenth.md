@@ -13,7 +13,7 @@ the week of April 13th."""
 ## Hiero Links For The Week Of April 13th
 
 This week featured a lot of new and exciting updates within the Hiero Organization. 
-Below are links to some of things that happend this past week. **Check it out!**
+Below are links to some of things that happened this past week. **Check it out!**
 
 ---
 **Akshat patil** updated the tsc page in the hiero-website by aligning [Read full profile](https://github.com/hiero-ledger/hiero-website/pull/383) buttons at bottom of member cards.

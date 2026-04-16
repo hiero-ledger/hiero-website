@@ -25,7 +25,7 @@ describe("ReposGrid", () => {
       screen.getByRole("heading", { name: "Repositories" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { name: "Build apps" }),
+      screen.getByRole("heading", { name: "Developer SDKs" }),
     ).toBeInTheDocument();
     expect(screen.getByText("hiero-sdk-js")).toBeInTheDocument();
     expect(screen.getByText("JavaScript SDK")).toBeInTheDocument();
@@ -38,7 +38,7 @@ describe("ReposGrid", () => {
       "https://github.com/hiero-ledger/hiero-sdk-js",
     );
 
-    expect(screen.getByText("Featured path")).toBeInTheDocument();
+    expect(screen.getByText("Recommended start")).toBeInTheDocument();
     expect(
       screen.getByRole("link", { name: /View all repositories/i }),
     ).toBeInTheDocument();
@@ -84,26 +84,26 @@ describe("ReposGrid", () => {
       screen
         .getAllByRole("heading", { level: 3 })
         .map(node => node.textContent),
-    ).toEqual(["Shape the project", "Infrastructure", "Build apps"]);
+    ).toEqual(["Core infrastructure", "Developer SDKs"]);
 
     [
-      "hiero-improvement-proposals",
-      "tsc",
       "hiero-consensus-node",
       "hiero-mirror-node",
-      "hiero-block-node",
       "solo",
       "hiero-sdk-js",
       "hiero-sdk-java",
       "hiero-sdk-go",
-      "hiero-sdk-rust",
       "hiero-sdk-python",
-      "hiero-sdk-swift",
     ].forEach(name => {
       expect(screen.getByText(name)).toBeInTheDocument();
     });
 
     [
+      "hiero-improvement-proposals",
+      "tsc",
+      "hiero-block-node",
+      "hiero-sdk-rust",
+      "hiero-sdk-swift",
       "hiero-local-node",
       "hiero-json-rpc-relay",
       "hiero-cli",

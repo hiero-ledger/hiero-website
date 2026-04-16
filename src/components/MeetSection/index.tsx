@@ -23,8 +23,8 @@ export default function MeetSection({ data }: MeetSectionProps) {
 
   return (
     <section id="meet" className="anchor bg-gray-light">
-      <div className="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px] grid grid-cols-1 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.35fr)] gap-10 lg:gap-20">
-        <div>
+      <div className="container grid grid-cols-1 gap-10 pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px] xl:grid-cols-[minmax(0,0.85fr)_minmax(0,1.35fr)] xl:gap-20">
+        <div className="min-w-0">
           <p className="font-ibm text-sm text-red uppercase tracking-normal mb-4">
             Meet the community
           </p>
@@ -41,13 +41,13 @@ export default function MeetSection({ data }: MeetSectionProps) {
               target="_blank"
               rel="noreferrer noopener"
               aria-label="View all community calls on LFX Calendar (opens in new tab)"
-              className="text-red hover:text-red-dark text-lg font-medium underline underline-offset-4 tracking-normal">
+              className="inline-block max-w-full text-lg font-medium break-words text-red underline underline-offset-4 tracking-normal hover:text-red-dark">
               View all community calls →
             </a>
           </div>
         </div>
 
-        <div>
+        <div className="min-w-0">
           <h3 className="text-xl sm:text-2xl font-medium mb-5 tracking-normal">
             Start with these calls
           </h3>
@@ -66,14 +66,14 @@ export default function MeetSection({ data }: MeetSectionProps) {
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="min-w-0">
-                  <h4 className="text-xl sm:text-2xl font-medium tracking-normal">
+                  <h4 className="break-words text-xl font-medium tracking-normal sm:text-2xl">
                     {call.name}
                   </h4>
-                  <p className="mt-2 text-base text-gray tracking-normal">
+                  <p className="mt-2 break-words text-base text-gray tracking-normal">
                     {call.description}
                   </p>
                 </span>
-                <span className="hiero-card-arrow self-start sm:self-center font-ibm text-sm text-red uppercase tracking-normal">
+                <span className="hiero-card-arrow self-start justify-self-start whitespace-nowrap font-ibm text-sm text-red uppercase tracking-normal sm:self-center sm:justify-self-end">
                   Register →
                 </span>
               </a>

@@ -10,6 +10,10 @@ interface GitHubIssue {
   repository_url: string;
 }
 
+interface GitHubSearchResponse {
+  items: GitHubIssue[];
+}
+
 function hasKey<T extends object>(
   obj: T,
   key: PropertyKey
@@ -24,147 +28,70 @@ export default function GoodFirstIssues() {
   const [difficulty, setDifficulty] = useState("good first issue");
   const [sdk, setSdk] = useState("");
 
-  // Map difficulty → GitHub labels
-  const difficultyMap: Record<string, string> = {
+  // Maps
+  const difficultyMap = {
     "good first issue": 'label:"good first issue"',
     beginner: "label:beginner",
     intermediate: "label:intermediate",
     advanced: "label:advanced",
-  };
+  } as const;
 
-  // Map SDK → repo (EDIT THESE to match your org)
-  const sdkMap: Record<string, string> = {
+  const sdkMap = {
     python: "repo:hiero-ledger/hiero-sdk-python",
     javascript: "repo:hiero-ledger/hiero-sdk-js",
     cpp: "repo:hiero-ledger/hiero-sdk-cpp",
     java: "repo:hiero-ledger/hiero-sdk-java",
     go: "repo:hiero-ledger/hiero-sdk-go",
-  };
+  } as const;
 
-  type SdkKey = keyof typeof sdkMap;
-  type DifficultyKey = keyof typeof difficultyMap;
-
-  const validSdk = Object.prototype.hasOwnProperty.call(
-    sdkMap,
-    sdk as SdkKey
-  );
-
-  const validDifficulty = Object.prototype.hasOwnProperty.call(
-    difficultyMap,
-    difficulty as DifficultyKey
-  );
-  
-  /*const buildQuery = () => {
-    let q = "state:open";
-
-    // If SDK selected → ONLY use repo
-    /*if (sdk && sdkMap[sdk]) {
-        q += ` ${sdkMap[sdk]}`;
-    } else {
-        // Otherwise use org
-            q += " org:hiero-ledger";
-    }
-
-    if (difficulty && difficultyMap[difficulty]) {
-            q += ` ${difficultyMap[difficulty]}`;
-    }
-
-    return q;
-    const validSdk = Object.prototype.hasOwnProperty.call(sdkMap, sdk);
-    const validDifficulty = Object.prototype.hasOwnProperty.call(difficultyMap, difficulty);
-
-    if (sdk && validSdk) {
-        q += ` ${sdkMap[sdk]}`;
-    } else {
-        q += " org:hiero-ledger";
-    }
-
-    if (difficulty && validDifficulty) {
-        q += ` ${difficultyMap[difficulty]}`;
-    }
-    return q;
-  };*/
-
-  function hasKey<T extends object>(
-    obj: T,
-    key: PropertyKey
-  ): key is keyof T {
-    return key in obj;
-  }
-  
   const buildQuery = () => {
     let q = "state:open";
 
-    const sdkKey = sdk && hasKey(sdkMap, sdk) ? sdk : null;
-    const difficultyKey =
-      difficulty && hasKey(difficultyMap, difficulty)
-        ? difficulty
-        : null;
-
-    if (sdkKey) {
-      q += ` ${sdkMap[sdkKey]}`;
+    if (sdk && hasKey(sdkMap, sdk)) {
+      q += ` ${sdkMap[sdk]}`;
     } else {
       q += " org:hiero-ledger";
     }
 
-    if (difficultyKey) {
-      q += ` ${difficultyMap[difficultyKey]}`;
+    if (difficulty && hasKey(difficultyMap, difficulty)) {
+      q += ` ${difficultyMap[difficulty]}`;
     }
 
     return q;
   };
 
-  /*useEffect(() => {
-    const query = buildQuery();
+  useEffect(() => {
+    const fetchIssues = async () => {
+      const query = buildQuery();
 
-    fetch(`https://api.github.com/search/issues?q=${encodeURIComponent(query)}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("GitHub response:", data);
-        setIssues(data.items || []);
-      });
-  }, [difficulty, sdk]);*/
+      try {
+        const res = await fetch(
+          `https://api.github.com/search/issues?q=${encodeURIComponent(query)}`
+        );
 
-  interface GitHubSearchResponse {
-  items: GitHubIssue[];
-}
+        if (!res.ok) {
+          throw new Error(`GitHub API error: ${res.status}`);
+        }
 
-useEffect(() => {
-  const fetchIssues = async () => {
-    const query = buildQuery();
+        const data = (await res.json()) as GitHubSearchResponse;
 
-    try {
-      const res = await fetch(
-        `https://api.github.com/search/issues?q=${encodeURIComponent(query)}`
-      );
-
-      if (!res.ok) {
-        throw new Error(`GitHub API error: ${res.status}`);
+        setIssues(data.items);
+      } catch (err) {
+        console.error("Failed to fetch issues:", err);
+        setIssues([]);
       }
+    };
 
-      const data: GitHubSearchResponse = await res.json();
-
-      console.log("GitHub response:", data);
-      setIssues(data.items);
-    } catch (err) {
-      console.error("Failed to fetch issues:", err);
-      setIssues([]); // optional fallback
-    }
-  };
-
-  fetchIssues();
-}, [difficulty, sdk]);
+    void fetchIssues(); // satisfies Codacy
+  }, [difficulty, sdk]);
 
   return (
     <div>
       {/* Filters */}
       <div className="flex gap-4 mb-6">
-        {/* Difficulty */}
         <select
           value={difficulty}
-          onChange={(e) => {
-                setDifficulty(e.target.value);
-            }}
+          onChange={(e) => setDifficulty(e.target.value)}
           className="p-2 rounded border"
         >
           <option value="good first issue">Good First Issue</option>
@@ -173,12 +100,9 @@ useEffect(() => {
           <option value="advanced">Advanced</option>
         </select>
 
-        {/* SDK */}
         <select
           value={sdk}
-          onChange={(e) => {
-                setSdk(e.target.value);
-            }}
+          onChange={(e) => setSdk(e.target.value)}
           className="p-2 rounded border"
         >
           <option value="">All Repo's</option>

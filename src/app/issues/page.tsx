@@ -14,13 +14,6 @@ interface GitHubSearchResponse {
   items: GitHubIssue[];
 }
 
-/*function hasKey<T extends object>(
-  obj: T,
-  key: PropertyKey
-): key is keyof T {
-  return key in obj;
-}*/
-
 export default function GoodFirstIssues() {
   const [issues, setIssues] = useState<GitHubIssue[]>([]);
 
@@ -43,46 +36,6 @@ export default function GoodFirstIssues() {
     java: "repo:hiero-ledger/hiero-sdk-java",
     go: "repo:hiero-ledger/hiero-sdk-go",
   } as const;
-
-  /*const buildQuery = () => {
-    let q = "state:open";
-
-    if (sdk && hasKey(sdkMap, sdk)) {
-      q += ` ${sdkMap[sdk]}`;
-    } else {
-      q += " org:hiero-ledger";
-    }
-
-    if (difficulty && hasKey(difficultyMap, difficulty)) {
-      q += ` ${difficultyMap[difficulty]}`;
-    }
-
-    return q;
-  };*/
-
-  /*const buildQuery = () => {
-    let q = "state:open";
-
-    const sdkValue =
-      sdk && hasKey(sdkMap, sdk) ? sdkMap[sdk] : undefined;
-
-    const difficultyValue =
-      difficulty && hasKey(difficultyMap, difficulty)
-        ? difficultyMap[difficulty]
-        : undefined;
-
-    if (sdkValue) {
-      q += ` ${sdkValue}`;
-    } else {
-      q += " org:hiero-ledger";
-    }
-
-    if (difficultyValue) {
-      q += ` ${difficultyValue}`;
-    }
-
-    return q;
-  };*/
 
   const buildQuery = () => {
     let q = "state:open";

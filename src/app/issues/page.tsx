@@ -38,7 +38,7 @@ export default function GoodFirstIssues() {
     let q = "state:open";
 
     // If SDK selected → ONLY use repo
-    if (sdk && sdkMap[sdk]) {
+    /*if (sdk && sdkMap[sdk]) {
         q += ` ${sdkMap[sdk]}`;
     } else {
         // Otherwise use org
@@ -49,7 +49,21 @@ export default function GoodFirstIssues() {
             q += ` ${difficultyMap[difficulty]}`;
     }
 
-    return q;
+    return q;*/
+
+    const validSdk = Object.prototype.hasOwnProperty.call(sdkMap, sdk);
+    const validDifficulty = Object.prototype.hasOwnProperty.call(difficultyMap, difficulty);
+
+    if (sdk && validSdk) {
+        q += ` ${sdkMap[sdk]}`;
+    } else {
+        q += " org:hiero-ledger";
+    }
+
+    if (difficulty && validDifficulty) {
+        q += ` ${difficultyMap[difficulty]}`;
+    }
+     return q;
    };
 
   useEffect(() => {
@@ -70,7 +84,9 @@ export default function GoodFirstIssues() {
         {/* Difficulty */}
         <select
           value={difficulty}
-          onChange={(e) => setDifficulty(e.target.value)}
+          onChange={(e) => {
+                setDifficulty(e.target.value);
+            }}
           className="p-2 rounded border"
         >
           <option value="good first issue">Good First Issue</option>
@@ -82,7 +98,9 @@ export default function GoodFirstIssues() {
         {/* SDK */}
         <select
           value={sdk}
-          onChange={(e) => setSdk(e.target.value)}
+          onChange={(e) => {
+                setSdk(e.target.value);
+            }}
           className="p-2 rounded border"
         >
           <option value="">All Repo's</option>

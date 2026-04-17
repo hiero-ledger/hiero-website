@@ -223,7 +223,7 @@ Before your PR is ready:
 
 - Current example post: `content/posts/hiero-enterprise-java.md`
 - Blog index metadata: `content/posts/_index.md`
-- Contributor docs index: [README.md](./README.md)
-- Local setup guide: [nextjs-setup.md](./nextjs-setup.md)
+- Contributor docs index: [README.md](../README.md)
+- Local setup guide: [Getting Started](../README.md#getting-started)
 - Repo overview: [01-repo-overview.md](./01-repo-overview.md)
 - Workflow guide: [workflow.md](./workflow.md)

@@ -60,7 +60,7 @@ export default function GoodFirstIssues() {
     return q;
   };*/
 
-  const buildQuery = () => {
+  /*const buildQuery = () => {
     let q = "state:open";
 
     const sdkValue =
@@ -70,6 +70,39 @@ export default function GoodFirstIssues() {
       difficulty && hasKey(difficultyMap, difficulty)
         ? difficultyMap[difficulty]
         : undefined;
+
+    if (sdkValue) {
+      q += ` ${sdkValue}`;
+    } else {
+      q += " org:hiero-ledger";
+    }
+
+    if (difficultyValue) {
+      q += ` ${difficultyValue}`;
+    }
+
+    return q;
+  };*/
+
+  const buildQuery = () => {
+    let q = "state:open";
+
+    const getSdkValue = (key: string | null) => {
+      if (key && key in sdkMap) {
+        return sdkMap[key as keyof typeof sdkMap];
+      }
+      return undefined;
+    };
+
+    const getDifficultyValue = (key: string | null) => {
+      if (key && key in difficultyMap) {
+        return difficultyMap[key as keyof typeof difficultyMap];
+      }
+      return undefined;
+    };
+
+    const sdkValue = getSdkValue(sdk);
+    const difficultyValue = getDifficultyValue(difficulty);
 
     if (sdkValue) {
       q += ` ${sdkValue}`;

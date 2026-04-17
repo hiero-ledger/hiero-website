@@ -44,7 +44,7 @@ export default function GoodFirstIssues() {
     go: "repo:hiero-ledger/hiero-sdk-go",
   } as const;
 
-  const buildQuery = () => {
+  /*const buildQuery = () => {
     let q = "state:open";
 
     if (sdk && hasKey(sdkMap, sdk)) {
@@ -55,6 +55,30 @@ export default function GoodFirstIssues() {
 
     if (difficulty && hasKey(difficultyMap, difficulty)) {
       q += ` ${difficultyMap[difficulty]}`;
+    }
+
+    return q;
+  };*/
+
+  const buildQuery = () => {
+    let q = "state:open";
+
+    const sdkValue =
+      sdk && hasKey(sdkMap, sdk) ? sdkMap[sdk] : undefined;
+
+    const difficultyValue =
+      difficulty && hasKey(difficultyMap, difficulty)
+        ? difficultyMap[difficulty]
+        : undefined;
+
+    if (sdkValue) {
+      q += ` ${sdkValue}`;
+    } else {
+      q += " org:hiero-ledger";
+    }
+
+    if (difficultyValue) {
+      q += ` ${difficultyValue}`;
     }
 
     return q;
@@ -91,7 +115,9 @@ export default function GoodFirstIssues() {
       <div className="flex gap-4 mb-6">
         <select
           value={difficulty}
-          onChange={(e) => setDifficulty(e.target.value)}
+          onChange={(e) => {
+            setDifficulty(e.target.value);
+          }}
           className="p-2 rounded border"
         >
           <option value="good first issue">Good First Issue</option>
@@ -102,7 +128,7 @@ export default function GoodFirstIssues() {
 
         <select
           value={sdk}
-          onChange={(e) => setSdk(e.target.value)}
+          onChange={(e) => {setSdk(e.target.value)}}
           className="p-2 rounded border"
         >
           <option value="">All Repo's</option>

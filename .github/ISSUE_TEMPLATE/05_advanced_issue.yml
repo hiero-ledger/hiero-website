@@ -52,7 +52,16 @@ body:
         - Clarify what is unknown or uncertain about the implementation
         - Highlight any key risks or complexities
       value: |
-        <!-- Describe the implementation notes -->      
+        <!-- Describe the implementation notes -->
+
+        **Blog & Content Workflow:**
+        - [Writing Blog Posts](https://github.com/hiero-ledger/hiero-website/blob/main/docs/blogs.md) — covers the current posting flow, front matter format, and content conventions
+
+        **Project Conventions:**
+        - Components live in `src/components/` — follow existing patterns for props, naming, and file structure
+        - Pages are under `src/app/` using the Next.js App Router
+        - Content (blog posts, etc.) lives in `content/`
+        - Styling uses [Tailwind CSS](https://tailwindcss.com/docs)
     validations:
       required: true
 
@@ -99,7 +108,7 @@ body:
         - [ ] **Component Architecture** (design systems, reusable patterns, composition)
         - [ ] **Performance & Optimization** (Core Web Vitals, image optimization, code splitting, caching)
         - [ ] **Accessibility** (WCAG compliance, screen reader support, keyboard navigation)
-        - [ ] **Build & Deployment** (Next.js config, CI/CD, Netlify integration)
+        - [ ] **Build & Deployment** (Next.js config, CI/CD, hosting/deployment integration)
         - [ ] **Testing** (unit, integration, E2E, accessibility testing, visual regression)
 
   - type: textarea
@@ -115,7 +124,7 @@ body:
         2. **Security & Correctness:** Evaluate all logic for injection risks, XSS vulnerabilities, or state corruption issues. 
         3. **Maintainability:** Code must be short and clear enough for any other maintainer to debug without your assistance. 
         4. **Backward Compatibility:** Existing pages, routes, and components must not break. If a breaking change is required, it must be explicitly managed.
-        5. **Comprehensive Testing:** Must include unit and integration tests covering all new logic paths, edge cases, and failure modes. AI generated tests based on AI generated code is grounds for immediate rejection.
+        5. **Comprehensive Testing:** Must include unit and integration tests covering all new logic paths, edge cases, and failure modes. AI-generated tests based on AI-generated code are grounds for immediate rejection.
 
   - type: textarea
     id: acceptance
@@ -139,6 +148,9 @@ body:
         **References:**
         - [Next.js Documentation](https://nextjs.org/docs)
         - [React Documentation](https://react.dev)
+        - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+        - [Vitest Documentation](https://vitest.dev)
+        - [Writing Blog Posts](https://github.com/hiero-ledger/hiero-website/blob/main/docs/blogs.md)
 
         **🆘 Stuck?**
         - [Community Calls](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week)

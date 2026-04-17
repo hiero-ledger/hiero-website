@@ -72,6 +72,15 @@ body:
 
         <!-- Link to React, Next.js, or TypeScript documentation here -->
 
+        **Blog & Content Workflow:**
+        - [Writing Blog Posts](https://github.com/hiero-ledger/hiero-website/blob/main/docs/blogs.md) — covers the current posting flow, front matter format, and content conventions
+
+        **Project Conventions:**
+        - Components live in `src/components/` — follow existing patterns for props, naming, and file structure
+        - Pages are under `src/app/` using the Next.js App Router
+        - Content (blog posts, etc.) lives in `content/`
+        - Styling uses [Tailwind CSS](https://tailwindcss.com/docs)
+
     validations:
       required: true
 
@@ -100,7 +109,7 @@ body:
 
         - [ ] **Intermediate to Advanced Web Development** (React components, hooks, state management, Next.js routing)
         - [ ] **Component Architecture** (reusable components, props design, composition patterns)
-        - [ ] **Styling & Responsiveness** (Tailwind CSS, responsive design, accessibility)
+        - [ ] **Styling & Responsiveness** ([Tailwind CSS](https://tailwindcss.com/docs), responsive design, accessibility)
         - [ ] **Performance** (image optimization, lazy loading, Core Web Vitals)
         - [ ] **Testing** (unit, integration, snapshot, accessibility testing)
 
@@ -182,7 +191,7 @@ body:
           2. **Maintainable:** Code should be clear and concise enough for others to understand and debug without your assistance.
           3. **Architectural Alignment:** The solution should fit well with existing component patterns and project conventions.
           4. **Backward Compatibility:** Existing pages and components must not break. 
-          5. **Comprehensive Testing:** Must include unit tests covering all new logic paths, edge cases, and failure modes. AI generated tests based on AI generated code is grounds for immediate rejection.
+          5. **Comprehensive Testing:** Must include unit tests covering all new logic paths, edge cases, and failure modes. AI-generated tests based on AI-generated code are grounds for immediate rejection.
 
         **⚠️ Breaking changes**
         - Before changing any component API, prop interface, or public-facing layout — stop and check
@@ -235,5 +244,8 @@ body:
         **References:**
         - [Next.js Documentation](https://nextjs.org/docs)
         - [React Documentation](https://react.dev)
+        - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+        - [Vitest Documentation](https://vitest.dev)
+        - [Writing Blog Posts](https://github.com/hiero-ledger/hiero-website/blob/main/docs/blogs.md)
         - [Community Calls](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week)
         - [Discord](https://github.com/hiero-ledger/sdk-collaboration-hub/blob/main/guides/issue-progression/for-developers/discord.md)

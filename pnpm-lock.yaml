@@ -37,6 +37,9 @@ importers:
         specifier: ^4.1.1
         version: 4.1.1
     devDependencies:
+      '@netlify/plugin-nextjs':
+        specifier: ^5.15.9
+        version: 5.15.9
       '@tailwindcss/postcss':
         specifier: ^4.2.2
         version: 4.2.2

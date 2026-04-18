@@ -10,12 +10,12 @@ interface GitHubIssue {
   repository_url: string;
 }
 
-interface GitHubSearchResponse {
-  items: GitHubIssue[];
-}
-
 export default function GoodFirstIssues() {
   const [issues, setIssues] = useState<GitHubIssue[]>([]);
+
+  //New
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Filters
   const [difficulty, setDifficulty] = useState("good first issue");
@@ -38,7 +38,7 @@ export default function GoodFirstIssues() {
   } as const;
 
   const buildQuery = () => {
-    let q = "state:open";
+    let q = "is:issue state:open";
 
     const getSdkValue = (key: string | null) => {
       if (key && key in sdkMap) {
@@ -71,28 +71,39 @@ export default function GoodFirstIssues() {
   };
 
   useEffect(() => {
+    console.log("Fetching issues with difficulty:", difficulty, "and sdk:", sdk);
     const fetchIssues = async () => {
       const query = buildQuery();
 
+      console.log("Constructed query:", query);
+      setLoading(true);
+      setError(null);
+
       try {
         const res = await fetch(
-          `https://api.github.com/search/issues?q=${encodeURIComponent(query)}`
+          `/api/issues?q=${encodeURIComponent(query)}`
         );
-
+        console.log("API response status:", res.status);
+        const data = await res.json();
+        console.log("API response data:", data);
+        console.log("RETURNING DATA:", JSON.stringify(data).slice(0, 300));
         if (!res.ok) {
-          throw new Error(`GitHub API error: ${res.status}`);
+          throw new Error(data?.error || "Failed to fetch issues");
         }
 
-        const data = (await res.json()) as GitHubSearchResponse;
-
-        setIssues(data.items);
+        setIssues(data.items ?? []);
       } catch (err) {
         console.error("Failed to fetch issues:", err);
+        setError(
+          err instanceof Error ? err.message : "Unknown error occurred"
+        );
         setIssues([]);
+      } finally {
+        setLoading(false);
       }
     };
 
-    void fetchIssues(); // satisfies Codacy
+    void fetchIssues();
   }, [difficulty, sdk]);
 
   return (

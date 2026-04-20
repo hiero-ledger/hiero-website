@@ -328,7 +328,7 @@ const quotesData = [
     quote:
       "\u201cHedera's contribution of its codebase to the Linux Foundation's Decentralized Trust initiative is great news for SentX.io. By open-sourcing the Hashgraph technology, Hedera is reinforcing its commitment to innovation and decentralization. We expect this move to boost developer engagement, speed up the adoption of decentralized applications, and attract more retail users, driving growth across the ecosystem.\u201d",
     author:
-      "Sam Jimenez & Patr\u00edcia Carapinha, Founders, [SentX.io](http://sentx.io/)",
+      "Sam & Patr\u00edcia Carapinha, Founders, [SentX.io](http://sentx.io/)",
     logo: "/images/Hiero-Logo-Sentx.png",
   },
   {

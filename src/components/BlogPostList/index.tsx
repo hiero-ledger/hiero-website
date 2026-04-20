@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { format } from "date-fns";
 import type { PostMeta } from "@/lib/posts";
 
@@ -51,12 +52,14 @@ export default function BlogPostList({ posts, listTitle }: BlogPostListProps) {
                     key={post.slug}
                     href={`/blog/${post.slug}`}
                     className="grid grid-cols-[1fr] gap-0 sm:grid-cols-[280px_1fr] sm:gap-x-8 no-underline">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       src={post.featuredImage}
                       alt={post.title}
+                      width={560}
+                      height={280}
+                      sizes="(min-width: 640px) 280px, 100vw"
                       className="w-full md:h-[140px] object-cover"
-                      loading="lazy"
+                      unoptimized
                     />
                     <div>
                       <h3 className="mt-3 sm:mt-0 text-[20px] font-medium text-black">
@@ -83,79 +86,71 @@ export default function BlogPostList({ posts, listTitle }: BlogPostListProps) {
             {totalPages > 1 && (
               <ul className="pagination pagination-default">
                 <li className={`page-item ${page === 1 ? "disabled" : ""}`}>
-                  <a
-                    aria-disabled={page === 1 ? "true" : undefined}
+                  <button
+                    type="button"
+                    disabled={page === 1}
                     aria-label="First"
                     className="page-link"
-                    role="button"
-                    tabIndex={page === 1 ? -1 : 0}
-                    onClick={e => {
-                      e.preventDefault();
+                    onClick={() => {
                       if (page !== 1) goTo(1);
                     }}>
                     <span aria-hidden="true">&laquo;&laquo;</span>
-                  </a>
+                  </button>
                 </li>
                 <li className={`page-item ${page === 1 ? "disabled" : ""}`}>
-                  <a
-                    aria-disabled={page === 1 ? "true" : undefined}
+                  <button
+                    type="button"
+                    disabled={page === 1}
                     aria-label="Previous"
                     className="page-link"
-                    role="button"
-                    tabIndex={page === 1 ? -1 : 0}
-                    onClick={e => {
-                      e.preventDefault();
+                    onClick={() => {
                       if (page > 1) goTo(page - 1);
                     }}>
                     <span aria-hidden="true">&laquo;</span>
-                  </a>
+                  </button>
                 </li>
                 {visiblePages.map(p => (
                   <li
                     key={p}
                     className={`page-item ${p === page ? "active" : ""}`}>
-                    <a
+                    <button
+                      type="button"
+                      disabled={p === page}
                       aria-current={p === page ? "page" : undefined}
                       aria-label={`Page ${p}`}
                       className="page-link"
-                      role="button"
-                      onClick={e => {
-                        e.preventDefault();
+                      onClick={() => {
                         goTo(p);
                       }}>
                       {p}
-                    </a>
+                    </button>
                   </li>
                 ))}
                 <li
                   className={`page-item ${page === totalPages ? "disabled" : ""}`}>
-                  <a
-                    aria-disabled={page === totalPages ? "true" : undefined}
+                  <button
+                    type="button"
+                    disabled={page === totalPages}
                     aria-label="Next"
                     className="page-link"
-                    role="button"
-                    tabIndex={page === totalPages ? -1 : 0}
-                    onClick={e => {
-                      e.preventDefault();
+                    onClick={() => {
                       if (page < totalPages) goTo(page + 1);
                     }}>
                     <span aria-hidden="true">&raquo;</span>
-                  </a>
+                  </button>
                 </li>
                 <li
                   className={`page-item ${page === totalPages ? "disabled" : ""}`}>
-                  <a
-                    aria-disabled={page === totalPages ? "true" : undefined}
+                  <button
+                    type="button"
+                    disabled={page === totalPages}
                     aria-label="Last"
                     className="page-link"
-                    role="button"
-                    tabIndex={page === totalPages ? -1 : 0}
-                    onClick={e => {
-                      e.preventDefault();
+                    onClick={() => {
                       if (page < totalPages) goTo(totalPages);
                     }}>
                     <span aria-hidden="true">&raquo;&raquo;</span>
-                  </a>
+                  </button>
                 </li>
               </ul>
             )}

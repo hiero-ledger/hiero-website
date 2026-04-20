@@ -59,7 +59,6 @@ export default function BlogPostList({ posts, listTitle }: BlogPostListProps) {
                       height={280}
                       sizes="(min-width: 640px) 280px, 100vw"
                       className="w-full md:h-[140px] object-cover"
-                      unoptimized
                     />
                     <div>
                       <h3 className="mt-3 sm:mt-0 text-[20px] font-medium text-black">

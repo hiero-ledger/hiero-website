@@ -9,6 +9,7 @@ interface MenuItem {
   name: string;
   href: string;
   external?: boolean;
+  newTab?: boolean;
 }
 
 const menuItems: MenuItem[] = [
@@ -120,6 +121,7 @@ export default function Menu() {
           {menuItems.map(item => {
             const active = isActive(item.href);
             const isExternal = item.external ?? item.href.startsWith("http");
+            const openInNewTab = item.newTab ?? isExternal;
 
             return (
               <li
@@ -128,6 +130,8 @@ export default function Menu() {
                 {isExternal ? (
                   <a
                     href={item.href}
+                    target={openInNewTab ? "_blank" : undefined}
+                    rel={openInNewTab ? "noopener noreferrer" : undefined}
                     className={active ? "active" : ""}
                     aria-current={active ? "page" : undefined}
                     onClick={() => {

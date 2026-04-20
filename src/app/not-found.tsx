@@ -49,8 +49,9 @@ export default function NotFound() {
               <Image
                 src="/images/Hiero-Icon.svg"
                 alt="Hiero"
-                width={40}
-                height={40}
+                width={68}
+                height={67}
+                className="w-10 h-auto shrink-0"
               />
               <p className="text-lg font-medium">Try one of these paths</p>
             </div>

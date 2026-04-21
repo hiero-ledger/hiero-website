@@ -283,7 +283,7 @@ quote = '''
 &#8220;Hedera’s contribution of its codebase to the Linux Foundation’s Decentralized Trust initiative is great news for SentX.io. By open-sourcing the Hashgraph technology, Hedera is reinforcing its commitment to innovation and decentralization. We expect this move to boost developer engagement, speed up the adoption of decentralized applications, and attract more retail users, driving growth across the ecosystem.&#8221;
 '''
 author = '''
-Sam Jimenez & Patrícia Carapinha, Founders, <a href="http://sentx.io/" target="_blank" rel="noreferrer noopener">SentX.io</a>
+Sam & Patrícia Carapinha, Founders, <a href="http://sentx.io/" target="_blank" rel="noreferrer noopener">SentX.io</a>
 '''
 logo = "images/Hiero-Logo-Sentx.png"
 

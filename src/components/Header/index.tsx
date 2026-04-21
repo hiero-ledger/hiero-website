@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/Container";
 import Menu from "@/components/Menu";
@@ -8,10 +9,11 @@ export default function Header() {
       <Container>
         <div className="flex flex-row justify-between items-center">
           <Link href="/" aria-label="Go to homepage">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/Hiero-Icon-wLogo.svg"
               alt="Hiero logo"
+              width={128}
+              height={40}
               className="h-[40px] w-[128px]"
             />
           </Link>

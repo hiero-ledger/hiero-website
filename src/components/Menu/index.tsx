@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -7,6 +9,7 @@ interface MenuItem {
   name: string;
   href: string;
   external?: boolean;
+  newTab?: boolean;
 }
 
 const menuItems: MenuItem[] = [
@@ -76,10 +79,11 @@ export default function Menu() {
         }}
         aria-label="Open menu"
         aria-expanded={isOpen}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src="/images/Hiero-Icon-Nav-Menu.svg"
           alt="Open menu"
+          width={20}
+          height={20}
           className="w-5 h-5"
         />
       </button>
@@ -89,10 +93,11 @@ export default function Menu() {
         className={`absolute hidden items-center justify-center w-full h-screen bg-black top-0 left-0 text-white sm:relative sm:h-auto sm:top-auto sm:bg-transparent sm:left-auto sm:w-9/12 sm:max-w-xl sm:block ${isOpen ? "active-navigation" : ""}`}
         aria-hidden={isDesktop ? false : !isOpen}>
         <div className="absolute top-[27px] sm:hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src="/images/Hiero-Icon-wLogo-white-text.svg"
             alt="Hiero logo"
+            width={128}
+            height={40}
             className="h-[40px] w-[128px]"
           />
         </div>
@@ -104,29 +109,48 @@ export default function Menu() {
             setIsOpen(false);
           }}
           aria-label="Close menu">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src="/images/Hiero-Icon-ModalClose.svg"
             alt="Close menu"
+            width={20}
+            height={20}
             className="w-5 h-5"
           />
         </button>
 
         <ul id="menu" className="flex flex-col sm:flex-row justify-between">
           {menuItems.map(item => {
+            const active = isActive(item.href);
+            const isExternal = item.external ?? item.href.startsWith("http");
+            const openInNewTab = item.newTab ?? isExternal;
+
             return (
               <li
                 key={item.name}
                 className={`text-center sm:text-left ${item.name === "Connect" ? "sm:hidden" : ""}`.trim()}>
-                <a
-                  href={item.href}
-                  className={isActive(item.href) ? "active" : ""}
-                  aria-current={isActive(item.href) ? "page" : undefined}
-                  onClick={() => {
-                    setIsOpen(false);
-                  }}>
-                  {item.name}
-                </a>
+                {isExternal ? (
+                  <a
+                    href={item.href}
+                    target={openInNewTab ? "_blank" : undefined}
+                    rel={openInNewTab ? "noopener noreferrer" : undefined}
+                    className={active ? "active" : ""}
+                    aria-current={active ? "page" : undefined}
+                    onClick={() => {
+                      setIsOpen(false);
+                    }}>
+                    {item.name}
+                  </a>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className={active ? "active" : ""}
+                    aria-current={active ? "page" : undefined}
+                    onClick={() => {
+                      setIsOpen(false);
+                    }}>
+                    {item.name}
+                  </Link>
+                )}
               </li>
             );
           })}
@@ -135,12 +159,13 @@ export default function Menu() {
             <a
               href="https://github.com/hiero-ledger/"
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               className="flex">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/images/Hiero-Icon-Github.svg"
                 alt="GitHub"
+                width={35}
+                height={35}
                 className="h-[35px] w-[35px] sm:h-[17px] sm:w-[17px]"
               />
             </a>

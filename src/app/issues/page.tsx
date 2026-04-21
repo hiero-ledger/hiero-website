@@ -71,7 +71,12 @@ export default function GoodFirstIssues() {
   };
 
   useEffect(() => {
-    console.log("Fetching issues with difficulty:", difficulty, "and sdk:", sdk);
+    console.log(
+      "Fetching issues with difficulty:",
+      difficulty,
+      "and sdk:",
+      sdk,
+    );
     const fetchIssues = async () => {
       const query = buildQuery();
 
@@ -80,9 +85,7 @@ export default function GoodFirstIssues() {
       setError(null);
 
       try {
-        const res = await fetch(
-          `/api/issues?q=${encodeURIComponent(query)}`
-        );
+        const res = await fetch(`/api/issues?q=${encodeURIComponent(query)}`);
         console.log("API response status:", res.status);
         const data = await res.json();
         console.log("API response data:", data);
@@ -94,9 +97,7 @@ export default function GoodFirstIssues() {
         setIssues(data.items ?? []);
       } catch (err) {
         console.error("Failed to fetch issues:", err);
-        setError(
-          err instanceof Error ? err.message : "Unknown error occurred"
-        );
+        setError(err instanceof Error ? err.message : "Unknown error occurred");
         setIssues([]);
       } finally {
         setLoading(false);
@@ -112,11 +113,10 @@ export default function GoodFirstIssues() {
       <div className="flex gap-4 mb-6">
         <select
           value={difficulty}
-          onChange={(e) => {
+          onChange={e => {
             setDifficulty(e.target.value);
           }}
-          className="p-2 rounded border"
-        >
+          className="p-2 rounded border">
           <option value="good first issue">Good First Issue</option>
           <option value="beginner">Beginner</option>
           <option value="intermediate">Intermediate</option>
@@ -125,9 +125,10 @@ export default function GoodFirstIssues() {
 
         <select
           value={sdk}
-          onChange={(e) => {setSdk(e.target.value)}}
-          className="p-2 rounded border"
-        >
+          onChange={e => {
+            setSdk(e.target.value);
+          }}
+          className="p-2 rounded border">
           <option value="">All Repo's</option>
           <option value="python">Python</option>
           <option value="javascript">JavaScript</option>
@@ -139,11 +140,10 @@ export default function GoodFirstIssues() {
 
       {/* Issues Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {issues.map((issue) => (
+        {issues.map(issue => (
           <div
             key={issue.id}
-            className="bg-gradient-to-br from-white-dark via-white to-white p-4 rounded-xl shadow-md"
-          >
+            className="bg-gradient-to-br from-white-dark via-white to-white p-4 rounded-xl shadow-md">
             <a href={issue.html_url} target="_blank" rel="noopener noreferrer">
               <RichText markdown={issue.title} />
             </a>

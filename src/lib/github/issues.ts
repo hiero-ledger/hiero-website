@@ -10,7 +10,7 @@ export async function searchIssues(query: string) {
 
   const res = await fetch(
     `https://api.github.com/search/issues?q=${encodeURIComponent(query)}`,
-    { headers }
+    { headers },
   );
 
   if (!res.ok) throw new Error("GitHub request failed");

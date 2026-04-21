@@ -1,10 +1,10 @@
 {
-  "hiero-consensus-node": { "stars": 389 },
+  "hiero-consensus-node": { "stars": 390 },
   "hiero-local-node": { "stars": 266 },
   "hiero-mirror-node": { "stars": 183 },
   "hiero-improvement-proposals": { "stars": 176 },
   "hiero-sdk-js": { "stars": 320 },
-  "hiero-sdk-java": { "stars": 255 },
+  "hiero-sdk-java": { "stars": 256 },
   "hiero-json-rpc-relay": { "stars": 87 },
   "hiero-sdk-go": { "stars": 123 },
   "hiero-sdk-rust": { "stars": 59 },
@@ -15,7 +15,7 @@
   "hiero-sdk-tck": { "stars": 22 },
   "hiero-sdk-cpp": { "stars": 41 },
   "governance": { "stars": 13 },
-  "hiero-sdk-python": { "stars": 57 },
+  "hiero-sdk-python": { "stars": 58 },
   "hiero-sdk-swift": { "stars": 35 },
   "sdk-collaboration-hub": { "stars": 9 },
   "tsc": { "stars": 5 }

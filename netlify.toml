@@ -1,6 +1,6 @@
 [build]
 command = "pnpm build"
-publish = "."
+publish = ".next"
 
 [build.environment]
 NODE_VERSION = "20"

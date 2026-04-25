@@ -2,7 +2,7 @@ import { searchIssues } from "src/lib/github/issues";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const q = searchParams.get("q") || "";
+  const q = searchParams.get("q") ?? "";
 
   const data = await searchIssues(q);
 

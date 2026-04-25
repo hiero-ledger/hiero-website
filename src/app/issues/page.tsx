@@ -10,6 +10,11 @@ interface GitHubIssue {
   repository_url: string;
 }
 
+interface GitHubSearchResponse {
+  items: GitHubIssue[];
+  error?: string;
+}
+
 export default function GoodFirstIssues() {
   const [issues, setIssues] = useState<GitHubIssue[]>([]);
 
@@ -87,11 +92,11 @@ export default function GoodFirstIssues() {
       try {
         const res = await fetch(`/api/issues?q=${encodeURIComponent(query)}`);
         console.log("API response status:", res.status);
-        const data = await res.json();
+        const data: GitHubSearchResponse = await res.json();
         console.log("API response data:", data);
         console.log("RETURNING DATA:", JSON.stringify(data).slice(0, 300));
         if (!res.ok) {
-          throw new Error(data?.error || "Failed to fetch issues");
+          throw new Error(data?.error ?? "Failed to fetch issues");
         }
 
         setIssues(data.items ?? []);
@@ -139,6 +144,8 @@ export default function GoodFirstIssues() {
       </div>
 
       {/* Issues Grid */}
+      {loading && <p>Loading issues...</p>}
+      {error && <p className="text-red-500">{error}</p>}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {issues.map(issue => (
           <div

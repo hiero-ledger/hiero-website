@@ -13,7 +13,7 @@ interface GitHubSearchResponse {
 }
 
 const searchIssues = rawSearchIssues as (
-  arg: string
+  _: string
 ) => Promise<GitHubSearchResponse>;
 
 export async function GET(req: Request) {

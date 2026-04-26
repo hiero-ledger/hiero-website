@@ -1,4 +1,4 @@
-import { searchIssues } from "src/lib/github/issues";
+import { searchIssues as rawSearchIssues } from "src/lib/github/issues";
 
 interface GitHubIssue {
   id: number;
@@ -12,11 +12,15 @@ interface GitHubSearchResponse {
   error?: string;
 }
 
+const searchIssues = rawSearchIssues as (
+  q: string
+) => Promise<GitHubSearchResponse>;
+
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const q = searchParams.get("q") ?? "";
 
-  const data = (await searchIssues(q)) as GitHubSearchResponse;
+  const data = await searchIssues(q);
 
   return Response.json(data);
 }

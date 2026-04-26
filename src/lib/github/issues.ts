@@ -1,4 +1,16 @@
-export async function searchIssues(query: string) {
+export interface GitHubIssue {
+  id: number;
+  title: string;
+  html_url: string;
+  repository_url: string;
+}
+
+export interface GitHubSearchResponse {
+  items: GitHubIssue[];
+  total_count: number;
+}
+
+export async function searchIssues(query: string): Promise<GitHubSearchResponse> {
   const headers: Record<string, string> = {
     Accept: "application/vnd.github+json",
     "User-Agent": "hiero-website",

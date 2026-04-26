@@ -75,33 +75,27 @@ export default function GoodFirstIssues() {
     return q;
   };
 
-  useEffect(() => {
-    console.log(
-      "Fetching issues with difficulty:",
-      difficulty,
-      "and sdk:",
-      sdk,
-    );
-    const fetchIssues = async () => {
-      const query = buildQuery();
+  const getIssues = async (query: string): Promise<GitHubSearchResponse> => {
+    const res = await fetch(`/api/issues?q=${encodeURIComponent(query)}`);
+    const data = (await res.json()) as unknown as GitHubSearchResponse;
 
-      console.log("Constructed query:", query);
+    if (!res.ok) {
+      throw new Error(data.error ?? "Failed to fetch issues");
+    }
+
+    return data;
+  };
+
+  useEffect(() => {
+    const fetchIssues = async () => {
       setLoading(true);
       setError(null);
 
       try {
-        const res = await fetch(`/api/issues?q=${encodeURIComponent(query)}`);
-        console.log("API response status:", res.status);
-        const data: GitHubSearchResponse = await res.json();
-        console.log("API response data:", data);
-        console.log("RETURNING DATA:", JSON.stringify(data).slice(0, 300));
-        if (!res.ok) {
-          throw new Error(data?.error ?? "Failed to fetch issues");
-        }
-
-        setIssues(data.items ?? []);
+        const query = buildQuery();
+        const data = await getIssues(query);
+        setIssues(data.items);
       } catch (err) {
-        console.error("Failed to fetch issues:", err);
         setError(err instanceof Error ? err.message : "Unknown error occurred");
         setIssues([]);
       } finally {

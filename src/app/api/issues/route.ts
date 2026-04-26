@@ -12,9 +12,7 @@ interface GitHubSearchResponse {
   error?: string;
 }
 
-type SearchIssuesFn = (query: string) => Promise<GitHubSearchResponse>;
-/*const searchIssues = rawSearchIssues as searchIssues;*/
-const searchIssues = rawSearchIssues as SearchIssuesFn;
+const searchIssues: (q: string) => Promise<GitHubSearchResponse> = rawSearchIssues;
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);

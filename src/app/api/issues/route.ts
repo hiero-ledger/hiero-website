@@ -12,7 +12,10 @@ interface GitHubSearchResponse {
   error?: string;
 }
 
-const searchIssues: (q: string) => Promise<GitHubSearchResponse> = rawSearchIssues;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type SearchIssuesFn = (_query: string) => Promise<GitHubSearchResponse>;
+/*const searchIssues = rawSearchIssues as searchIssues;*/
+const searchIssues = rawSearchIssues as SearchIssuesFn;
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);

@@ -12,7 +12,6 @@ interface GitHubSearchResponse {
   error?: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type SearchIssuesFn = (_query: string) => Promise<GitHubSearchResponse>;
 const searchIssues = rawSearchIssues as SearchIssuesFn;
 

@@ -128,7 +128,7 @@ export default function GoodFirstIssues() {
             setSdk(e.target.value);
           }}
           className="p-2 rounded border">
-          <option value="">All Repo's</option>
+          <option value="">All Repo&apos;s</option>
           <option value="python">Python</option>
           <option value="javascript">JavaScript</option>
           <option value="cpp">C++</option>

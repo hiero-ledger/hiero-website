@@ -10,97 +10,141 @@ interface GitHubIssue {
   repository_url: string;
 }
 
+interface GitHubSearchResponse {
+  items: GitHubIssue[];
+  error?: string;
+}
+
 export default function GoodFirstIssues() {
   const [issues, setIssues] = useState<GitHubIssue[]>([]);
+
+  //New
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Filters
   const [difficulty, setDifficulty] = useState("good first issue");
   const [sdk, setSdk] = useState("");
 
-  // Map difficulty → GitHub labels
-  const difficultyMap: Record<string, string> = {
+  // Maps
+  const difficultyMap = {
     "good first issue": 'label:"good first issue"',
     beginner: "label:beginner",
     intermediate: "label:intermediate",
     advanced: "label:advanced",
-  };
+  } as const;
 
-  // Map SDK → repo (EDIT THESE to match your org)
-  const sdkMap: Record<string, string> = {
+  const sdkMap = {
     python: "repo:hiero-ledger/hiero-sdk-python",
     javascript: "repo:hiero-ledger/hiero-sdk-js",
     cpp: "repo:hiero-ledger/hiero-sdk-cpp",
     java: "repo:hiero-ledger/hiero-sdk-java",
     go: "repo:hiero-ledger/hiero-sdk-go",
-  };
-  
-  const buildQuery = () => {
-    let q = "state:open";
+  } as const;
 
-    // If SDK selected → ONLY use repo
-    if (sdk && sdkMap[sdk]) {
-        q += ` ${sdkMap[sdk]}`;
+  const buildQuery = () => {
+    let q = "is:issue state:open";
+
+    const getSdkValue = (key: string | null) => {
+      if (key && key in sdkMap) {
+        return sdkMap[key as keyof typeof sdkMap];
+      }
+      return undefined;
+    };
+
+    const getDifficultyValue = (key: string | null) => {
+      if (key && key in difficultyMap) {
+        return difficultyMap[key as keyof typeof difficultyMap];
+      }
+      return undefined;
+    };
+
+    const sdkValue = getSdkValue(sdk);
+    const difficultyValue = getDifficultyValue(difficulty);
+
+    if (sdkValue) {
+      q += ` ${sdkValue}`;
     } else {
-        // Otherwise use org
-            q += " org:hiero-ledger";
+      q += " org:hiero-ledger";
     }
 
-    if (difficulty && difficultyMap[difficulty]) {
-            q += ` ${difficultyMap[difficulty]}`;
+    if (difficultyValue) {
+      q += ` ${difficultyValue}`;
     }
 
     return q;
-   };
+  };
+
+  const getIssues = async (query: string): Promise<GitHubSearchResponse> => {
+    const res = await fetch(`/api/issues?q=${encodeURIComponent(query)}`);
+    const data = (await res.json()) as unknown as GitHubSearchResponse;
+
+    if (!res.ok) {
+      throw new Error(data.error ?? "Failed to fetch issues");
+    }
+
+    return data;
+  };
 
   useEffect(() => {
-    const query = buildQuery();
+    const fetchIssues = async () => {
+      setLoading(true);
+      setError(null);
 
-    fetch(`https://api.github.com/search/issues?q=${encodeURIComponent(query)}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("GitHub response:", data);
-        setIssues(data.items || []);
-      });
+      try {
+        const query = buildQuery();
+        const data = await getIssues(query);
+        setIssues(data.items);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Unknown error occurred");
+        setIssues([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    void fetchIssues();
   }, [difficulty, sdk]);
 
   return (
     <div>
       {/* Filters */}
       <div className="flex gap-4 mb-6">
-        {/* Difficulty */}
         <select
           value={difficulty}
-          onChange={(e) => setDifficulty(e.target.value)}
-          className="p-2 rounded border"
-        >
+          onChange={e => {
+            setDifficulty(e.target.value);
+          }}
+          className="p-2 rounded border">
           <option value="good first issue">Good First Issue</option>
           <option value="beginner">Beginner</option>
           <option value="intermediate">Intermediate</option>
           <option value="advanced">Advanced</option>
         </select>
 
-        {/* SDK */}
         <select
           value={sdk}
-          onChange={(e) => setSdk(e.target.value)}
-          className="p-2 rounded border"
-        >
+          onChange={e => {
+            setSdk(e.target.value);
+          }}
+          className="p-2 rounded border">
           <option value="">All Repo's</option>
           <option value="python">Python</option>
           <option value="javascript">JavaScript</option>
           <option value="cpp">C++</option>
           <option value="java">Java</option>
           <option value="go">Go</option>
-        </select>Expand commentComment on lines R71 to R94Resolved
+        </select>
       </div>
 
       {/* Issues Grid */}
+      {loading && <p>Loading issues...</p>}
+      {error && <p className="text-red-500">{error}</p>}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {issues.map((issue) => (
+        {issues.map(issue => (
           <div
             key={issue.id}
-            className="bg-gradient-to-br from-white-dark via-white to-white p-4 rounded-xl shadow-md"
-          >
+            className="bg-gradient-to-br from-white-dark via-white to-white p-4 rounded-xl shadow-md">
             <a href={issue.html_url} target="_blank" rel="noopener noreferrer">
               <RichText markdown={issue.title} />
             </a>

@@ -9,6 +9,7 @@ The repo currently includes:
 
 - `.github/workflows/ci.yml`
 - `.github/workflows/pr-formatting.yaml`
+- `.github/workflows/codeql.yml`
 
 ## CI Workflow
 
@@ -53,6 +54,29 @@ The workflow does not currently run:
 
 This workflow checks the pull request title against conventional commit style.
 
+## CodeQL Workflow
+
+`codeql.yml` runs security analysis via GitHub's CodeQL scanning. It triggers on:
+
+- pushes to `main`
+- pull requests targeting `main` (ignoring `.md` file-only changes)
+- a daily schedule at 23:28 UTC
+
+### Languages Analyzed
+
+The workflow uses a matrix strategy to analyze two languages in parallel:
+
+- **GitHub Actions** (`actions`) — analyzes the repository's own Actions workflow files
+- **JavaScript/TypeScript** (`javascript-typescript`) — analyzes the website's source code
+
+Both use `build-mode: none` since JavaScript/TypeScript and Actions are interpreted languages
+that do not require compilation.
+
+### Security Queries
+
+The workflow uses the `security-extended` query suite for comprehensive security coverage,
+including CWE classifications and security hardening recommendations.
+
 ## What Contributors Should Expect
 
 Before asking for review, contributors should expect GitHub to reject:
@@ -61,6 +85,7 @@ Before asking for review, contributors should expect GitHub to reject:
 - source changes that are not formatted
 - lint-breaking changes
 - changes that break the production build
+- changes that introduce security vulnerabilities (detected by CodeQL)
 
 ## Recommended Habit
 

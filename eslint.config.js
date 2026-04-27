@@ -15,6 +15,11 @@ const eslintConfig = defineConfig([
     "docs/**",
     "node_modules/**",
   ]),
+  {
+    rules: {
+      "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+    },
+  },
 ]);
 
 export default eslintConfig;

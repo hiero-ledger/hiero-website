@@ -16,12 +16,9 @@ const eslintConfig = defineConfig([
     "node_modules/**",
   ]),
   {
-    /*rules: {
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        { argsIgnorePattern: "^_" },
-      ],
-    },*/
+    "@typescript-eslint/no-unused-vars": ["error", {
+      "argsIgnorePattern": "^_"
+    }]
   },
 ]);
 

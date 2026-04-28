@@ -42,7 +42,7 @@ export default function GoodFirstIssues() {
     go: "repo:hiero-ledger/hiero-sdk-go",
   } as const;
 
-  const buildQuery = () => {
+  /*const buildQuery = () => {
     let q = "is:issue state:open";
 
     const getSdkValue = (key: string | null) => {
@@ -73,7 +73,7 @@ export default function GoodFirstIssues() {
     }
 
     return q;
-  };
+  };*/
 
   const getIssues = async (query: string): Promise<GitHubSearchResponse> => {
     const res = await fetch(`/api/issues?q=${encodeURIComponent(query)}`);
@@ -86,7 +86,51 @@ export default function GoodFirstIssues() {
     return data;
   };
 
+  /*useEffect(() => {
+    const fetchIssues = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const query = buildQuery();
+        const data = await getIssues(query);
+        setIssues(data.items);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Unknown error occurred");
+        setIssues([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    void fetchIssues();
+  }, [difficulty, sdk]);*/
+
   useEffect(() => {
+    const buildQuery = () => {
+      let q = "is:issue state:open";
+
+      const sdkValue =
+        sdk && sdk in sdkMap ? sdkMap[sdk as keyof typeof sdkMap] : undefined;
+
+      const difficultyValue =
+        difficulty && difficulty in difficultyMap
+          ? difficultyMap[difficulty as keyof typeof difficultyMap]
+          : undefined;
+
+      if (sdkValue) {
+        q += ` ${sdkValue}`;
+      } else {
+        q += " org:hiero-ledger";
+      }
+
+      if (difficultyValue) {
+        q += ` ${difficultyValue}`;
+      }
+
+      return q;
+    };
+
     const fetchIssues = async () => {
       setLoading(true);
       setError(null);
@@ -105,7 +149,6 @@ export default function GoodFirstIssues() {
 
     void fetchIssues();
   }, [difficulty, sdk]);
-
   return (
     <div>
       {/* Filters */}

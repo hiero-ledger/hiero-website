@@ -12,7 +12,7 @@ the week of April 27th."""
 ## Hiero Links For The Week Of April 27th
 
 This week featured a lot of new and exciting updates within the Hiero Organization. 
-Below are links to some of things that happend this past week. **Check it out!**
+Below are links to some of things that happened this past week. **Check it out!**
 
 ---
 

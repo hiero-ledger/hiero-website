@@ -6,8 +6,9 @@ export default function Divider() {
       <Image
         src="/images/Hiero-Icon.svg"
         alt=""
-        width={40}
-        height={40}
+        width={68}
+        height={67}
+        className="w-10 h-auto shrink-0"
         loading="lazy"
       />
       <div className="w-full bg-white-dark h-[1px]" />

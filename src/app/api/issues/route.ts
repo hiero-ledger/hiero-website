@@ -8,22 +8,14 @@ function getStatus(error: unknown): number {
   return 502;
 }
 
-interface GitHubIssue {
-  id: number;
-  title: string;
-  html_url: string;
-  repository_url: string;
-}
-
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const q = searchParams.get("q") ?? "";
 
   try {
-    const data = (await searchIssues(q)) as {
-      items: unknown[];
-      error?: string;
-    };
+    const raw = await searchIssues(q);
+
+    const data: { items: unknown[]; error?: string } = raw;
 
     return Response.json(data);
   } catch (error) {

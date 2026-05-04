@@ -75,8 +75,10 @@ const cache = new Map<string, GitHubSearchResponse>();
    Helpers (splits complexity)
 ------------------------------ */
 function getKeywords(difficulty: string): string[] {
-  if (Object.prototype.hasOwnProperty.call(difficultyMap, difficulty)) {
-    return difficultyMap[difficulty];
+  const key = difficulty as keyof typeof difficultyMap;
+
+  if (key in difficultyMap) {
+    return difficultyMap[key];
   }
 
   return [];
@@ -105,9 +107,10 @@ async function fetchFromApi(query: string, signal?: AbortSignal) {
     if (cached) return cached;
   }
 
-  const url = `/api/issues?q=${encodeURIComponent(query)}`;
+  const url = new URL("/api/issues", window.location.origin);
+  url.searchParams.set("q", query);
 
-  const res = await fetch(url, { signal });
+  const res = await fetch(url.toString(), { signal });
 
   const data = (await res.json()) as GitHubSearchResponse;
 
@@ -182,7 +185,9 @@ export default function GoodFirstIssues() {
       <div className="flex gap-4 mb-6">
         <select
           value={difficulty}
-          onChange={e => setDifficulty(e.target.value)}
+          onChange={e => {
+            setDifficulty(e.target.value);
+          }}
           className="p-2 rounded border">
           <option value="">All Difficulties</option>
           <option value="good first issue">Good First Issue</option>
@@ -193,7 +198,9 @@ export default function GoodFirstIssues() {
 
         <select
           value={sdk}
-          onChange={e => setSdk(e.target.value)}
+          onChange={e => {
+            setSdk(e.target.value);
+          }}
           className="p-2 rounded border">
           <option value="">All Repos</option>
           <option value="python">Python</option>

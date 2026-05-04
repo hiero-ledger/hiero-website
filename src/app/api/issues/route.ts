@@ -25,7 +25,7 @@ export async function GET(req: Request) {
   const q = searchParams.get("q") ?? "";
 
   try {
-    const data = (await searchIssues(q)) as GitHubSearchResponse;
+    const data = await searchIssues(q);
 
     return Response.json(data);
   } catch (error) {

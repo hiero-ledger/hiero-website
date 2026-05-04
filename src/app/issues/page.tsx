@@ -26,9 +26,7 @@ function useDebouncedValue<T>(value: T, delay = 400) {
   const [debounced, setDebounced] = useState(value);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebounced(value);
-    }, delay);
+    const timer = setTimeout(() => setDebounced(value), delay);
 
     return () => {
       clearTimeout(timer);
@@ -72,16 +70,40 @@ const difficultyMap: Record<string, string[]> = {
 const cache = new Map<string, GitHubSearchResponse>();
 
 /* -----------------------------
-   Helpers
+   Helpers (splits complexity)
 ------------------------------ */
+function getKeywords(difficulty: string): string[] {
+  return difficultyMap[difficulty] ?? [];
+}
+
 function matchesDifficulty(issue: GitHubIssue, difficulty: string) {
   if (!difficulty) return true;
 
   const text = issue.title.toLowerCase();
+  const keywords = getKeywords(difficulty);
 
-  const keywords = difficultyMap[difficulty] ?? [];
+  return keywords.length > 0 ? keywords.some(k => text.includes(k)) : true;
+}
 
-  return keywords.length === 0 ? true : keywords.some(k => text.includes(k));
+function buildRepoList(selected: string): string[] {
+  if (selected && Object.prototype.hasOwnProperty.call(sdkMap, selected)) {
+    return [sdkMap[selected]];
+  }
+  return Object.values(sdkMap);
+}
+
+async function fetchFromApi(query: string, signal?: AbortSignal) {
+  const url = `/api/issues?q=${encodeURIComponent(query)}`;
+
+  const res = await fetch(url, { signal });
+
+  const data = (await res.json()) as GitHubSearchResponse;
+
+  if (!res.ok) {
+    throw new Error(data.error ?? "Failed to fetch issues");
+  }
+
+  return data;
 }
 
 /* -----------------------------
@@ -98,26 +120,6 @@ export default function GoodFirstIssues() {
   const debouncedDifficulty = useDebouncedValue(difficulty);
   const debouncedSdk = useDebouncedValue(sdk);
 
-  const getIssues = async (query: string, signal?: AbortSignal) => {
-    if (cache.has(query)) {
-      const cached = cache.get(query);
-      if (cached) return cached;
-    }
-
-    const res = await fetch(`/api/issues?q=${encodeURIComponent(query)}`, {
-      signal,
-    });
-
-    const data = (await res.json()) as GitHubSearchResponse;
-
-    if (!res.ok) {
-      throw new Error(data.error ?? "Failed to fetch issues");
-    }
-
-    cache.set(query, data);
-    return data;
-  };
-
   useEffect(() => {
     const controller = new AbortController();
 
@@ -127,14 +129,10 @@ export default function GoodFirstIssues() {
 
       try {
         const base = "is:issue state:open";
-
-        const repos =
-          debouncedSdk && debouncedSdk in sdkMap
-            ? [sdkMap[debouncedSdk]]
-            : Object.values(sdkMap);
+        const repos = buildRepoList(debouncedSdk);
 
         const results = await Promise.all(
-          repos.map(repo => getIssues(`${base} ${repo}`, controller.signal)),
+          repos.map(repo => fetchFromApi(`${base} ${repo}`, controller.signal)),
         );
 
         const merged = results.flatMap(r => r.items);
@@ -147,11 +145,10 @@ export default function GoodFirstIssues() {
 
         setIssues(filtered);
       } catch (err) {
-        if (err instanceof DOMException && err.name === "AbortError") {
-          return;
-        }
+        if (err instanceof DOMException && err.name === "AbortError") return;
 
         setError(err instanceof Error ? err.message : "Unknown error occurred");
+
         setIssues([]);
       } finally {
         setLoading(false);
@@ -160,9 +157,7 @@ export default function GoodFirstIssues() {
 
     void fetchIssues();
 
-    return () => {
-      controller.abort();
-    };
+    return () => controller.abort();
   }, [debouncedDifficulty, debouncedSdk]);
 
   return (
@@ -171,9 +166,7 @@ export default function GoodFirstIssues() {
       <div className="flex gap-4 mb-6">
         <select
           value={difficulty}
-          onChange={e => {
-            setDifficulty(e.target.value);
-          }}
+          onChange={e => setDifficulty(e.target.value)}
           className="p-2 rounded border">
           <option value="">All Difficulties</option>
           <option value="good first issue">Good First Issue</option>
@@ -184,9 +177,7 @@ export default function GoodFirstIssues() {
 
         <select
           value={sdk}
-          onChange={e => {
-            setSdk(e.target.value);
-          }}
+          onChange={e => setSdk(e.target.value)}
           className="p-2 rounded border">
           <option value="">All Repos</option>
           <option value="python">Python</option>

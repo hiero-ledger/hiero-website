@@ -31,4 +31,29 @@ describe("MeetSection", () => {
       "https://example.com/register",
     );
   });
+
+  it("keeps the starter call list focused", () => {
+    const calls = Array.from({ length: 5 }, (_, index) => ({
+      name: `Call ${index + 1}`,
+      description: `Description ${index + 1}`,
+      registerLink: `https://example.com/register-${index + 1}`,
+    }));
+
+    render(
+      <MeetSection
+        data={{
+          heading: "Meet the community",
+          text: "Join the calls.",
+          calls,
+        }}
+      />,
+    );
+
+    expect(screen.getByText("Call 1")).toBeInTheDocument();
+    expect(screen.getByText("Call 4")).toBeInTheDocument();
+    expect(screen.queryByText("Call 5")).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: /View all community calls/i }),
+    ).toBeInTheDocument();
+  });
 });

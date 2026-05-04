@@ -26,7 +26,9 @@ function useDebouncedValue<T>(value: T, delay = 400) {
   const [debounced, setDebounced] = useState(value);
 
   useEffect(() => {
-    const timer = setTimeout(() => setDebounced(value), delay);
+    const timer = setTimeout(() => {
+      setDebounced(value);
+    }, delay);
 
     return () => {
       clearTimeout(timer);
@@ -73,7 +75,11 @@ const cache = new Map<string, GitHubSearchResponse>();
    Helpers (splits complexity)
 ------------------------------ */
 function getKeywords(difficulty: string): string[] {
-  return difficultyMap[difficulty] ?? [];
+  if (Object.prototype.hasOwnProperty.call(difficultyMap, difficulty)) {
+    return difficultyMap[difficulty];
+  }
+
+  return [];
 }
 
 function matchesDifficulty(issue: GitHubIssue, difficulty: string) {
@@ -86,13 +92,19 @@ function matchesDifficulty(issue: GitHubIssue, difficulty: string) {
 }
 
 function buildRepoList(selected: string): string[] {
-  if (selected && Object.prototype.hasOwnProperty.call(sdkMap, selected)) {
-    return [sdkMap[selected]];
+  if (Object.prototype.hasOwnProperty.call(sdkMap, selected)) {
+    return [sdkMap[selected as keyof typeof sdkMap]];
   }
+
   return Object.values(sdkMap);
 }
 
 async function fetchFromApi(query: string, signal?: AbortSignal) {
+  if (cache.has(query)) {
+    const cached = cache.get(query);
+    if (cached) return cached;
+  }
+
   const url = `/api/issues?q=${encodeURIComponent(query)}`;
 
   const res = await fetch(url, { signal });
@@ -102,6 +114,8 @@ async function fetchFromApi(query: string, signal?: AbortSignal) {
   if (!res.ok) {
     throw new Error(data.error ?? "Failed to fetch issues");
   }
+
+  cache.set(query, data);
 
   return data;
 }
@@ -157,7 +171,9 @@ export default function GoodFirstIssues() {
 
     void fetchIssues();
 
-    return () => controller.abort();
+    return () => {
+      controller.abort();
+    };
   }, [debouncedDifficulty, debouncedSdk]);
 
   return (

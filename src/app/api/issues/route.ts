@@ -15,17 +15,15 @@ interface GitHubIssue {
   repository_url: string;
 }
 
-interface GitHubSearchResponse {
-  items: GitHubIssue[];
-  error?: string;
-}
-
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const q = searchParams.get("q") ?? "";
 
   try {
-    const data = await searchIssues(q);
+    const data = (await searchIssues(q)) as {
+      items: unknown[];
+      error?: string;
+    };
 
     return Response.json(data);
   } catch (error) {

@@ -1,12 +1,23 @@
-import { searchIssues as searchIssues } from "src/lib/github/issues";
+import { searchIssues } from "src/lib/github/issues";
 
 function getStatus(error: unknown): number {
   if (typeof error === "object" && error !== null && "status" in error) {
     const status = (error as { status?: unknown }).status;
     if (typeof status === "number") return status;
   }
-
   return 502;
+}
+
+interface GitHubIssue {
+  id: number;
+  title: string;
+  html_url: string;
+  repository_url: string;
+}
+
+interface GitHubSearchResponse {
+  items: GitHubIssue[];
+  error?: string;
 }
 
 export async function GET(req: Request) {
@@ -14,7 +25,8 @@ export async function GET(req: Request) {
   const q = searchParams.get("q") ?? "";
 
   try {
-    const data = await searchIssues(q);
+    const data = (await searchIssues(q)) as GitHubSearchResponse;
+
     return Response.json(data);
   } catch (error) {
     const status = getStatus(error);

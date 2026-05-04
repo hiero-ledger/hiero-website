@@ -78,11 +78,10 @@ function matchesDifficulty(issue: GitHubIssue, difficulty: string) {
   if (!difficulty) return true;
 
   const text = issue.title.toLowerCase();
-  const keywords = difficultyMap[difficulty];
 
-  if (!keywords) return true;
+  const keywords = difficultyMap[difficulty] ?? [];
 
-  return keywords.some(k => text.includes(k));
+  return keywords.length === 0 ? true : keywords.some(k => text.includes(k));
 }
 
 /* -----------------------------
@@ -101,7 +100,8 @@ export default function GoodFirstIssues() {
 
   const getIssues = async (query: string, signal?: AbortSignal) => {
     if (cache.has(query)) {
-      return cache.get(query)!;
+      const cached = cache.get(query);
+      if (cached) return cached;
     }
 
     const res = await fetch(`/api/issues?q=${encodeURIComponent(query)}`, {
@@ -134,10 +134,7 @@ export default function GoodFirstIssues() {
             : Object.values(sdkMap);
 
         const results = await Promise.all(
-          repos.map(repo => {
-            const query = `${base} ${repo}`;
-            return getIssues(query, controller.signal);
-          }),
+          repos.map(repo => getIssues(`${base} ${repo}`, controller.signal)),
         );
 
         const merged = results.flatMap(r => r.items);
@@ -150,7 +147,9 @@ export default function GoodFirstIssues() {
 
         setIssues(filtered);
       } catch (err) {
-        if (err instanceof DOMException && err.name === "AbortError") return;
+        if (err instanceof DOMException && err.name === "AbortError") {
+          return;
+        }
 
         setError(err instanceof Error ? err.message : "Unknown error occurred");
         setIssues([]);
@@ -172,7 +171,9 @@ export default function GoodFirstIssues() {
       <div className="flex gap-4 mb-6">
         <select
           value={difficulty}
-          onChange={e => setDifficulty(e.target.value)}
+          onChange={e => {
+            setDifficulty(e.target.value);
+          }}
           className="p-2 rounded border">
           <option value="">All Difficulties</option>
           <option value="good first issue">Good First Issue</option>
@@ -183,7 +184,9 @@ export default function GoodFirstIssues() {
 
         <select
           value={sdk}
-          onChange={e => setSdk(e.target.value)}
+          onChange={e => {
+            setSdk(e.target.value);
+          }}
           className="p-2 rounded border">
           <option value="">All Repos</option>
           <option value="python">Python</option>

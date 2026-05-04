@@ -1,9 +1,12 @@
 "use client";
 
 import RichText from "@/components/RichText";
-import { useEffect, useState } from "react";
 import Container from "@/components/Container";
+import { useEffect, useState } from "react";
 
+/* -----------------------------
+   Types
+------------------------------ */
 interface GitHubIssue {
   id: number;
   title: string;
@@ -23,8 +26,13 @@ function useDebouncedValue<T>(value: T, delay = 400) {
   const [debounced, setDebounced] = useState(value);
 
   useEffect(() => {
-    const t = setTimeout(() => setDebounced(value), delay);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => {
+      setDebounced(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, [value, delay]);
 
   return debounced;
@@ -33,7 +41,7 @@ function useDebouncedValue<T>(value: T, delay = 400) {
 /* -----------------------------
    Maps
 ------------------------------ */
-const sdkMap = {
+const sdkMap: Record<string, string> = {
   python: "repo:hiero-ledger/hiero-sdk-python",
   javascript: "repo:hiero-ledger/hiero-sdk-js",
   cpp: "repo:hiero-ledger/hiero-sdk-cpp",
@@ -44,13 +52,42 @@ const sdkMap = {
   mirror_node: "repo:hiero-ledger/hiero-mirror-node",
   consensus_node: "repo:hiero-ledger/hiero-consensus-node",
   hiero_docs: "repo:hiero-ledger/hiero-docs",
-} as const;
+};
+
+const difficultyMap: Record<string, string[]> = {
+  "good first issue": [
+    "good first issue",
+    "good-first-issue",
+    "starter",
+    "easy",
+  ],
+  beginner: ["beginner", "easy", "starter"],
+  intermediate: ["intermediate"],
+  advanced: ["advanced"],
+};
 
 /* -----------------------------
    Cache
 ------------------------------ */
 const cache = new Map<string, GitHubSearchResponse>();
 
+/* -----------------------------
+   Helpers
+------------------------------ */
+function matchesDifficulty(issue: GitHubIssue, difficulty: string) {
+  if (!difficulty) return true;
+
+  const text = issue.title.toLowerCase();
+  const keywords = difficultyMap[difficulty];
+
+  if (!keywords) return true;
+
+  return keywords.some(k => text.includes(k));
+}
+
+/* -----------------------------
+   Component
+------------------------------ */
 export default function GoodFirstIssues() {
   const [issues, setIssues] = useState<GitHubIssue[]>([]);
   const [loading, setLoading] = useState(false);
@@ -62,10 +99,7 @@ export default function GoodFirstIssues() {
   const debouncedDifficulty = useDebouncedValue(difficulty);
   const debouncedSdk = useDebouncedValue(sdk);
 
-  const getIssues = async (
-    query: string,
-    signal?: AbortSignal,
-  ): Promise<GitHubSearchResponse> => {
+  const getIssues = async (query: string, signal?: AbortSignal) => {
     if (cache.has(query)) {
       return cache.get(query)!;
     }
@@ -84,29 +118,6 @@ export default function GoodFirstIssues() {
     return data;
   };
 
-  /* -----------------------------
-     Local difficulty filtering
-  ------------------------------ */
-  const matchesDifficulty = (issue: GitHubIssue, difficulty: string) => {
-    if (!difficulty) return true;
-
-    const text = issue.title.toLowerCase();
-
-    const map: Record<string, string[]> = {
-      "good first issue": [
-        "good first issue",
-        "good-first-issue",
-        "starter",
-        "easy",
-      ],
-      beginner: ["beginner", "easy", "starter"],
-      intermediate: ["intermediate"],
-      advanced: ["advanced"],
-    };
-
-    return map[difficulty]?.some(keyword => text.includes(keyword)) ?? true;
-  };
-
   useEffect(() => {
     const controller = new AbortController();
 
@@ -119,41 +130,29 @@ export default function GoodFirstIssues() {
 
         const repos =
           debouncedSdk && debouncedSdk in sdkMap
-            ? [sdkMap[debouncedSdk as keyof typeof sdkMap]]
+            ? [sdkMap[debouncedSdk]]
             : Object.values(sdkMap);
 
-        const chunkSize = 3;
-        const results: GitHubSearchResponse[] = [];
-
-        for (let i = 0; i < repos.length; i += chunkSize) {
-          const chunk = repos.slice(i, i + chunkSize);
-
-          const batch = await Promise.all(
-            chunk.map(repo => {
-              const query = `${base} ${repo}`;
-              return getIssues(query, controller.signal);
-            }),
-          );
-
-          results.push(...batch);
-        }
+        const results = await Promise.all(
+          repos.map(repo => {
+            const query = `${base} ${repo}`;
+            return getIssues(query, controller.signal);
+          }),
+        );
 
         const merged = results.flatMap(r => r.items);
 
         const unique = Array.from(new Map(merged.map(i => [i.id, i])).values());
 
-        // ✅ LOCAL filtering (this fixes your issue)
         const filtered = debouncedDifficulty
-          ? unique.filter(issue =>
-              matchesDifficulty(issue, debouncedDifficulty),
-            )
+          ? unique.filter(i => matchesDifficulty(i, debouncedDifficulty))
           : unique;
 
         setIssues(filtered);
       } catch (err) {
         if (err instanceof DOMException && err.name === "AbortError") return;
 
-        setError(err instanceof Error ? err.message : "Unknown error");
+        setError(err instanceof Error ? err.message : "Unknown error occurred");
         setIssues([]);
       } finally {
         setLoading(false);
@@ -162,7 +161,9 @@ export default function GoodFirstIssues() {
 
     void fetchIssues();
 
-    return () => controller.abort();
+    return () => {
+      controller.abort();
+    };
   }, [debouncedDifficulty, debouncedSdk]);
 
   return (

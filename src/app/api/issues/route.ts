@@ -1,21 +1,13 @@
-import { searchIssues as rawSearchIssues } from "src/lib/github/issues";
+import { searchIssues as searchIssues } from "src/lib/github/issues";
 
-interface GitHubIssue {
-  id: number;
-  title: string;
-  html_url: string;
-  repository_url: string;
+function getStatus(error: unknown): number {
+  if (typeof error === "object" && error !== null && "status" in error) {
+    const status = (error as { status?: unknown }).status;
+    if (typeof status === "number") return status;
+  }
+
+  return 502;
 }
-
-interface GitHubSearchResponse {
-  items: GitHubIssue[];
-  error?: string;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-type SearchIssuesFn = (_query: string) => Promise<GitHubSearchResponse>;
-/*const searchIssues = rawSearchIssues as searchIssues;*/
-const searchIssues = rawSearchIssues as SearchIssuesFn;
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -25,13 +17,7 @@ export async function GET(req: Request) {
     const data = await searchIssues(q);
     return Response.json(data);
   } catch (error) {
-    const status =
-      typeof error === "object" &&
-      error !== null &&
-      "status" in error &&
-      typeof (error as { status: unknown }).status === "number"
-        ? (error as { status: number }).status
-        : 502;
+    const status = getStatus(error);
 
     const message =
       error instanceof Error ? error.message : "Failed to fetch issues";

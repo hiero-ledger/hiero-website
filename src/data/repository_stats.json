@@ -1,5 +1,5 @@
 {
-  "hiero-consensus-node": { "stars": 388 },
+  "hiero-consensus-node": { "stars": 389 },
   "hiero-local-node": { "stars": 266 },
   "hiero-mirror-node": { "stars": 183 },
   "hiero-improvement-proposals": { "stars": 176 },
@@ -10,7 +10,7 @@
   "hiero-sdk-rust": { "stars": 59 },
   "hiero-mirror-node-explorer": { "stars": 47 },
   "hiero-cli": { "stars": 41 },
-  "solo": { "stars": 39 },
+  "solo": { "stars": 41 },
   "hiero-block-node": { "stars": 35 },
   "hiero-sdk-tck": { "stars": 22 },
   "hiero-sdk-cpp": { "stars": 41 },

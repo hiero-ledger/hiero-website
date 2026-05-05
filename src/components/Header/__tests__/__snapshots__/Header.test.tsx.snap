@@ -17,7 +17,9 @@ exports[`Header > renders the home link and menu 1`] = `
         <img
           alt="Hiero logo"
           class="h-[40px] w-[128px]"
+          height="40"
           src="/images/Hiero-Icon-wLogo.svg"
+          width="128"
         />
       </a>
       <div

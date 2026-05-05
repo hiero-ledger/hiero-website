@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 
 interface Contributor {
@@ -46,12 +47,13 @@ export default function ContributorsGrid({ endpoint }: { endpoint: string }) {
             href={`https://github.com/${c.userName}`}
             className="no-underline">
             <div className="flex flex-col justify-center items-center">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 className="rounded-full h-32 w-32 bg-slate-600 p-0.5"
                 src={c.avatarUrl}
                 alt={`Avatar of ${c.userName}`}
-                loading="lazy"
+                width={128}
+                height={128}
+                unoptimized
               />
               <span className="text-center mt-1">{c.userName}</span>
             </div>

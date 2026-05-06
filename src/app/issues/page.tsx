@@ -4,10 +4,12 @@ import Container from "@/components/Container";
 import RichText from "@/components/RichText";
 import { useState } from "react";
 import { useIssues } from "@/hooks/useIssues";
+import { Issue } from "next/dist/build/swc/types";
+import { GitHubIssue } from "@/issues/types";
 
 export default function GoodFirstIssues() {
-  const [difficulty, setDifficulty] = useState("");
-  const [sdk, setSdk] = useState("");
+  const [difficulty, setDifficulty] = useState<string>("");
+  const [sdk, setSdk] = useState<string>("");
 
   const { issues, loading, error } = useIssues(difficulty, sdk);
 
@@ -40,16 +42,21 @@ export default function GoodFirstIssues() {
       {error && <p>{error}</p>}
 
       <div className="grid grid-cols-4 gap-6">
-        {issues.map(issue => (
-          <div key={issue.id}>
-            <a href={issue.html_url} target="_blank">
-              <RichText markdown={issue.title} className="line-clamp-2" />
-            </a>
-            <p className="text-sm opacity-70 mt-2">
-              {issue.repository_url.split("/").pop()}
-            </p>
-          </div>
-        ))}
+        {Array.isArray(issues) &&
+          issues.map((issue: GitHubIssue) => (
+            <div key={issue.id}>
+              <a href={issue.html_url} target="_blank" rel="noreferrer">
+                <RichText
+                  markdown={issue.title ?? ""}
+                  className="line-clamp-2"
+                />
+              </a>
+
+              <p className="text-sm opacity-70 mt-2">
+                {issue.repository_url?.split("/").pop() ?? "unknown"}
+              </p>
+            </div>
+          ))}
       </div>
     </Container>
   );

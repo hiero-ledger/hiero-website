@@ -2,7 +2,14 @@ import { useEffect, useState } from "react";
 import { parseGitHubResponse, GitHubIssue } from "@/issues/types";
 import { buildRepoList, matchesDifficulty } from "@/issues/filter";
 
-export function useIssues(difficulty: string, sdk: string) {
+export function useIssues(
+  difficulty: string,
+  sdk: string,
+): {
+  issues: GitHubIssue[];
+  loading: boolean;
+  error: string | null;
+} {
   const [issues, setIssues] = useState<GitHubIssue[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -24,7 +31,7 @@ export function useIssues(difficulty: string, sdk: string) {
               signal: controller.signal,
             });
 
-            const json = await res.json();
+            const json: GitHubIssue[] = await res.json();
             return parseGitHubResponse(json);
           }),
         );

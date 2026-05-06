@@ -6,10 +6,11 @@ exports[`Divider > renders the Hiero divider icon 1`] = `
 >
   <img
     alt=""
-    height="40"
+    class="w-10 h-auto shrink-0"
+    height="67"
     loading="lazy"
     src="/images/Hiero-Icon.svg"
-    width="40"
+    width="68"
   />
   <div
     class="w-full bg-white-dark h-[1px]"

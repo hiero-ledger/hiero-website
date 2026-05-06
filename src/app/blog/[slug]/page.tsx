@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import {
   getAllPosts,
   getPostBySlug,
@@ -92,12 +93,14 @@ export default async function BlogPostPage({
                     <Link
                       href={`/blog/${rp.slug}`}
                       className="no-underline grid grid-cols-1 sm:grid-cols-2 sm:gap-9 xl:gap-0 xl:grid-cols-1">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                      <Image
                         src={rp.featuredImage}
                         alt={rp.title}
+                        width={560}
+                        height={280}
+                        sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
                         className="w-full md:h-[140px] object-cover"
-                        loading="lazy"
+                        unoptimized
                       />
                       <div>
                         <h3 className="mt-3 sm:mt-0 xl:mt-3 text-[20px] font-medium text-black line-clamp-1">
@@ -142,12 +145,13 @@ function AuthorBlock({
   const inner = (
     <>
       {author.image && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
+        <Image
           src={author.image}
           alt={author.name ?? ""}
+          width={72}
+          height={72}
           className="inline-block h-[72px] w-[72px] rounded-full bg-white"
-          loading="lazy"
+          unoptimized
         />
       )}
       <div className="font-normal">

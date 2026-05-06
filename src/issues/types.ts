@@ -29,13 +29,23 @@ export function isGitHubIssue(value: unknown): value is GitHubIssue {
 }
 
 export function parseGitHubResponse(data: unknown): GitHubSearchResponse {
-  if (
-    typeof data === "object" &&
-    data !== null &&
-    "items" in data &&
-    Array.isArray((data as any).items)
-  ) {
-    return data as GitHubSearchResponse;
+  if (typeof data === "object" && data !== null && "items" in data) {
+    const items = (data as { items: unknown }).items;
+
+    if (
+      Array.isArray(items) &&
+      items.every(
+        item =>
+          typeof item === "object" &&
+          item !== null &&
+          "id" in item &&
+          "title" in item &&
+          "html_url" in item &&
+          "repository_url" in item,
+      )
+    ) {
+      return { items: items as GitHubIssue[] };
+    }
   }
 
   throw new Error("Invalid GitHub response");

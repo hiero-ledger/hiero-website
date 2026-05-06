@@ -49,7 +49,6 @@ export const meetData = {
       name: "TSC",
       description:
         "The Technical Steering Committee (TSC) meeting for project governance, roadmap planning, and key technical decisions.",
-
       registerLink:
         "https://zoom-lfx.platform.linuxfoundation.org/meeting/95775743341?password=c07443bf-b0e6-4a68-93f1-5c7ce9bb49ab&invite=true",
     },
@@ -57,7 +56,6 @@ export const meetData = {
       name: "Monthly Maintainers",
       description:
         "Regular meeting for maintainers across all Hiero projects to coordinate, share updates, and discuss best practices.",
-
       registerLink:
         "https://zoom-lfx.platform.linuxfoundation.org/meeting/99574473075?password=deff3fc9-0e80-4877-80de-91499b5480e9&invite=true",
     },
@@ -65,7 +63,6 @@ export const meetData = {
       name: "Community Call",
       description:
         "Open community meeting for general discussions, updates, and Q&A sessions with the Hiero community and TSC members.",
-
       registerLink:
         "https://zoom-lfx.platform.linuxfoundation.org/meeting/97122675754?password=7eaa865a-2f17-4a7c-97b0-aff51933991c&invite=true",
     },
@@ -73,7 +70,6 @@ export const meetData = {
       name: "SDK",
       description:
         "General SDK working group for cross-SDK discussions, standards, and coordination across all Hiero SDK implementations.",
-
       registerLink:
         "https://zoom-lfx.platform.linuxfoundation.org/meeting/94709702244?password=bcba4892-928c-47e0-9a21-e1abca95f7d3&invite=true",
     },
@@ -81,7 +77,6 @@ export const meetData = {
       name: "Solo",
       description:
         "Discussions and updates about Solo, an opinionated CLI tool to deploy and manage standalone test networks.",
-
       registerLink:
         "https://zoom-lfx.platform.linuxfoundation.org/meeting/94695703550?password=e8819002-3f6e-4905-9916-b049f501e866&invite=true",
     },
@@ -89,7 +84,6 @@ export const meetData = {
       name: "Python SDK",
       description:
         "Focused discussions on the Hiero Python SDK development, including new features, issues, and contributions.",
-
       registerLink:
         "https://zoom-lfx.platform.linuxfoundation.org/meeting/92041330205?password=2f345bee-0c14-4dd5-9883-06fbc9c60581&invite=true",
     },
@@ -97,7 +91,6 @@ export const meetData = {
       name: "Hiero/Hedera Identity",
       description:
         "Working group focused on identity-related projects, DID SDK development, and identity standards implementation.",
-
       registerLink:
         "https://zoom-lfx.platform.linuxfoundation.org/meeting/99097542854?password=3ee2d9c9-32de-4758-8a23-417c751bd7ab&invite=true",
     },
@@ -105,7 +98,6 @@ export const meetData = {
       name: "Hiero Marketing",
       description:
         "Marketing and community outreach discussions, including events, communications, and ecosystem growth strategies.",
-
       registerLink:
         "https://zoom-lfx.platform.linuxfoundation.org/meeting/91725705912?password=57115f71-9576-46dc-90f7-98be38aade2d&invite=true",
     },
@@ -113,7 +105,6 @@ export const meetData = {
       name: "Docs",
       description:
         "Documentation working group meetings to improve and maintain Hiero project documentation.",
-
       registerLink:
         "https://zoom-lfx.platform.linuxfoundation.org/meeting/96247351493?password=54a04164-8618-458d-8176-4ca21b346291&invite=true",
     },
@@ -122,7 +113,6 @@ export const meetData = {
       name: "Hiero Website",
       description:
         "Planning and development meetings for the Hiero website, content strategy, and user experience improvements.",
-
       registerLink:
         "https://zoom-lfx.platform.linuxfoundation.org/meeting/94831465670?password=50e11cd2-6450-4a97-b9ae-7a7585c4409b&invite=true",
     },
@@ -265,8 +255,10 @@ export const reposData = {
   ],
 };
 
+// Fix: replaced org:hiero-ledger with specific repo: filters
+// to only include active repos (python sdk, c++ sdk, website, swift sdk). (fixes #411)
 const BASE_QUERY =
-  "is%3Aopen%20is%3Aissue%20org%3Ahiero-ledger%20archived%3Afalse%20no%3Aassignee";
+  "is%3Aopen%20is%3Aissue%20archived%3Afalse%20no%3Aassignee%20(repo%3Ahiero-ledger%2Fhiero-sdk-python%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-cpp%20OR%20repo%3Ahiero-ledger%2Fhiero-website%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-swift)";
 
 export const issueJumpData = {
   heading: "Jump to Open Issues",

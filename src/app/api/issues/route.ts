@@ -6,13 +6,12 @@ export async function GET(req: Request) {
   const q = searchParams.get("q") ?? "";
 
   try {
-    const raw = await searchIssues(q);
+    const raw: unknown = await searchIssues(q);
 
-    // ✅ validate here
     const data = parseGitHubResponse(raw);
 
     return Response.json(data);
-  } catch (error) {
+  } catch (error: unknown) {
     const message =
       error instanceof Error ? error.message : "Failed to fetch issues";
 

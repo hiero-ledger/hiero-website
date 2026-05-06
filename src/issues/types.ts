@@ -35,10 +35,8 @@ export function parseGitHubResponse(data: unknown): GitHubSearchResponse {
     "items" in data &&
     Array.isArray((data as any).items)
   ) {
-    const validItems = (data as any).items.filter(isGitHubIssue);
-
-    return { items: validItems };
+    return data as GitHubSearchResponse;
   }
 
-  throw new Error("Invalid GitHub response shape");
+  throw new Error("Invalid GitHub response");
 }

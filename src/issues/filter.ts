@@ -1,11 +1,14 @@
-export const sdkMap: Record<string, string> = {
+type SDK = "python" | "javascript" | "go" | "rust" | "java" | "cpp" | "swift";
+type Difficulty = "good first issue" | "beginner" | "intermediate" | "advanced";
+
+export const sdkMap: Record<SDK, string> = {
   python: "repo:hiero-ledger/hiero-sdk-python",
   javascript: "repo:hiero-ledger/hiero-sdk-js",
   go: "repo:hiero-ledger/hiero-sdk-go",
   rust: "repo:hiero-ledger/hiero-sdk-rust",
   java: "repo:hiero-ledger/hiero-sdk-java",
   cpp: "repo:hiero-ledger/hiero-sdk-cpp",
-  swift: "repo:hiero-ledger/hiero-sdk-swift", // ✅ add this
+  swift: "repo:hiero-ledger/hiero-sdk-swift",
 };
 
 ///Keeping for now ; accidentally works on "skill: beginner" (will remove later)
@@ -16,7 +19,7 @@ export const sdkMap: Record<string, string> = {
   advanced: ["advanced"],
 };*/
 
-export const difficultyMap: Record<string, RegExp[]> = {
+export const difficultyMap: Record<Difficulty, RegExp[]> = {
   "good first issue": [/good[- ]first[- ]issue/i],
   beginner: [/beginner/i, /starter/i, /easy/i],
   intermediate: [/intermediate/i],
@@ -24,7 +27,11 @@ export const difficultyMap: Record<string, RegExp[]> = {
 };
 
 export function buildRepoList(selected: string): string[] {
-  return sdkMap[selected] ? [sdkMap[selected]] : Object.values(sdkMap);
+  if (selected in sdkMap) {
+    return [sdkMap[selected as SDK]];
+  }
+
+  return Object.values(sdkMap);
 }
 
 ///Keeping for now ; accidentally works on "skill: beginner" (will remove later)
@@ -49,7 +56,9 @@ export function matchesDifficulty(
 ) {
   if (!difficulty) return true;
 
-  const patterns = difficultyMap[difficulty] ?? [];
+  if (!(difficulty in difficultyMap)) return true;
+
+  const patterns = difficultyMap[difficulty as Difficulty];
 
   return labels.some(label =>
     patterns.some(pattern => pattern.test(label.name)),

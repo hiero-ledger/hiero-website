@@ -50,10 +50,10 @@ function isBasicGitHubIssue(item: unknown): boolean {
 
   const idOk = typeof v.id === "number";
   const titleOk = typeof v.title === "string";
-  const urlOk = typeof v.html_url === "string";
+  const urlIsValid = typeof v.html_url === "string";
   const repoOk = typeof v.repository_url === "string";
 
-  return idOk && titleOk && urlOk && repoOk;
+  return idOk && titleOk && urlIsValid && repoOk;
 }
 
 export function parseGitHubResponse(data: unknown): GitHubSearchResponse {

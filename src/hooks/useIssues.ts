@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { parseGitHubResponse, GitHubIssue } from "@/issues/types";
+import {
+  parseGitHubResponse,
+  GitHubIssue,
+  GitHubSearchResponse,
+} from "@/issues/types";
 import { buildRepoList, matchesDifficulty } from "@/issues/filter";
 
 export function useIssues(
@@ -25,13 +29,14 @@ export function useIssues(
         const base = "is:issue state:open";
         const repos = buildRepoList(sdk);
 
-        const results = await Promise.all(
-          repos.map(async (repo: string) => {
+        const results: GitHubSearchResponse[] = await Promise.all(
+          repos.map(async (repo: string): Promise<GitHubSearchResponse> => {
             const res = await fetch(`/api/issues?q=${base} ${repo}`, {
               signal: controller.signal,
             });
 
             const json: unknown = await res.json();
+
             return parseGitHubResponse(json);
           }),
         );
@@ -40,11 +45,11 @@ export function useIssues(
           (r: { items: GitHubIssue[] }) => r.items,
         );
 
-        const unique = Array.from(
-          new Map(merged.map((i: GitHubIssue) => [i.id, i])).values(),
+        const unique: GitHubIssue[] = Array.from(
+          new Map(merged.map((i: GitHubIssue) => [i.id, i] as const)).values(),
         );
 
-        const filtered = unique.filter((i: GitHubIssue) =>
+        const filtered = unique.filter(i =>
           matchesDifficulty(i.labels, difficulty),
         );
 
@@ -61,7 +66,9 @@ export function useIssues(
 
     void fetchIssues();
 
-    return () => controller.abort();
+    return () => {
+      controller.abort();
+    };
   }, [difficulty, sdk]);
 
   return { issues, loading, error };

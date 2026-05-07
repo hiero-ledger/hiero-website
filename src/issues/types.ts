@@ -29,7 +29,7 @@ export function isGitHubIssue(value: unknown): value is GitHubIssue {
 
   if (!Array.isArray(v.labels)) return false;
 
-  return v.labels.every((label) => {
+  return v.labels.every(label => {
     if (typeof label !== "object" || label === null) return false;
     return typeof (label as Record<string, unknown>).name === "string";
   });

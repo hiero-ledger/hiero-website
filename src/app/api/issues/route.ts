@@ -1,12 +1,12 @@
 import { searchIssues } from "@/lib/github/issues";
-import { parseGitHubResponse, GitHubSearchResponse } from "@/issues/types";
+import { parseGitHubResponse } from "@/issues/types";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const q = searchParams.get("q") ?? "";
 
   try {
-    const raw = await searchIssues(q); 
+    const raw = await searchIssues(q);
 
     const data = parseGitHubResponse(raw);
 

@@ -18,19 +18,21 @@ export function isGitHubIssue(value: unknown): value is GitHubIssue {
 
   const v = value as Record<string, unknown>;
 
-  return (
-    typeof v.id === "number" &&
-    typeof v.title === "string" &&
-    typeof v.html_url === "string" &&
-    typeof v.repository_url === "string" &&
-    Array.isArray(v.labels) &&
-    v.labels.every(
-      (label): label is { name: string } =>
-        typeof label === "object" &&
-        label !== null &&
-        typeof (label as Record<string, unknown>).name === "string",
-    )
-  );
+  if (
+    typeof v.id !== "number" ||
+    typeof v.title !== "string" ||
+    typeof v.html_url !== "string" ||
+    typeof v.repository_url !== "string"
+  ) {
+    return false;
+  }
+
+  if (!Array.isArray(v.labels)) return false;
+
+  return v.labels.every((label) => {
+    if (typeof label !== "object" || label === null) return false;
+    return typeof (label as Record<string, unknown>).name === "string";
+  });
 }
 
 /* -----------------------------

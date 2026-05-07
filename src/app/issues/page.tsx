@@ -4,7 +4,6 @@ import Container from "@/components/Container";
 import RichText from "@/components/RichText";
 import { useState } from "react";
 import { useIssues } from "@/hooks/useIssues";
-import { Issue } from "next/dist/build/swc/types";
 import { GitHubIssue } from "@/issues/types";
 
 export default function GoodFirstIssues() {
@@ -18,7 +17,9 @@ export default function GoodFirstIssues() {
       <div className="flex gap-4 mb-6">
         <select
           value={difficulty}
-          onChange={e => setDifficulty(e.target.value)}>
+          onChange={e => {
+            setDifficulty(e.target.value);
+          }}>
           <option value="">All Difficulties</option>
           <option value="good first issue">Good First Issue</option>
           <option value="beginner">Beginner</option>
@@ -26,7 +27,11 @@ export default function GoodFirstIssues() {
           <option value="advanced">Advanced</option>
         </select>
 
-        <select value={sdk} onChange={e => setSdk(e.target.value)}>
+        <select
+          value={sdk}
+          onChange={e => {
+            setSdk(e.target.value);
+          }}>
           <option value="">All Repos</option>
           <option value="python">Python</option>
           <option value="javascript">JavaScript</option>

@@ -6,7 +6,7 @@ export async function GET(req: Request) {
   const q = searchParams.get("q") ?? "";
 
   try {
-    const raw = await searchIssues(q);
+    const raw: unknown = await searchIssues(q);
 
     const data = parseGitHubResponse(raw);
 

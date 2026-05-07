@@ -17,7 +17,7 @@ export function useIssues(
   useEffect(() => {
     const controller = new AbortController();
 
-    async function fetchIssues() {
+    const fetchIssues = async (): Promise<void> => {
       setLoading(true);
       setError(null);
 
@@ -26,26 +26,30 @@ export function useIssues(
         const repos = buildRepoList(sdk);
 
         const results = await Promise.all(
-          repos.map(async repo => {
+          repos.map(async (repo: string) => {
             const res = await fetch(`/api/issues?q=${base} ${repo}`, {
               signal: controller.signal,
             });
 
-            const json: GitHubIssue[] = await res.json();
+            const json: unknown = await res.json();
             return parseGitHubResponse(json);
           }),
         );
 
-        const merged = results.flatMap(r => r.items);
+        const merged: GitHubIssue[] = results.flatMap(
+          (r: { items: GitHubIssue[] }) => r.items,
+        );
 
-        const unique = Array.from(new Map(merged.map(i => [i.id, i])).values());
+        const unique = Array.from(
+          new Map(merged.map((i: GitHubIssue) => [i.id, i])).values(),
+        );
 
-        const filtered = unique.filter(i =>
+        const filtered = unique.filter((i: GitHubIssue) =>
           matchesDifficulty(i.labels, difficulty),
         );
 
         setIssues(filtered);
-      } catch (err) {
+      } catch (err: unknown) {
         if (err instanceof DOMException) return;
 
         setError(err instanceof Error ? err.message : "Unknown error");
@@ -53,9 +57,9 @@ export function useIssues(
       } finally {
         setLoading(false);
       }
-    }
+    };
 
-    fetchIssues();
+    void fetchIssues();
 
     return () => controller.abort();
   }, [difficulty, sdk]);

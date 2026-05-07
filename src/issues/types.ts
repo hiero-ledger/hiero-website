@@ -46,19 +46,14 @@ function hasItems(data: unknown): data is { items: unknown } {
 function isBasicGitHubIssue(item: unknown): boolean {
   if (typeof item !== "object" || item === null) return false;
 
-  if (!("id" in item)) return false;
-  if (!("title" in item)) return false;
-  if (!("html_url" in item)) return false;
-  if (!("repository_url" in item)) return false;
-
   const v = item as Record<string, unknown>;
 
-  return (
-    typeof v.id === "number" &&
-    typeof v.title === "string" &&
-    typeof v.html_url === "string" &&
-    typeof v.repository_url === "string"
-  );
+  const idOk = typeof v.id === "number";
+  const titleOk = typeof v.title === "string";
+  const urlOk = typeof v.html_url === "string";
+  const repoOk = typeof v.repository_url === "string";
+
+  return idOk && titleOk && urlOk && repoOk;
 }
 
 export function parseGitHubResponse(data: unknown): GitHubSearchResponse {

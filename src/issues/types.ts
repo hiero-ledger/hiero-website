@@ -43,7 +43,7 @@ function hasItems(data: unknown): data is { items: unknown } {
   return typeof data === "object" && data !== null && "items" in data;
 }
 
-function isBasicGitHubIssue(item: unknown): boolean {
+function validateGitHubIssueShape(item: unknown): boolean {
   if (typeof item !== "object" || item === null) return false;
 
   const v = item as Record<string, unknown>;
@@ -63,7 +63,7 @@ export function parseGitHubResponse(data: unknown): GitHubSearchResponse {
 
   const items = data.items;
 
-  if (!Array.isArray(items) || !items.every(isBasicGitHubIssue)) {
+  if (!Array.isArray(items) || !items.every(validateGitHubIssueShape)) {
     throw new Error("Invalid GitHub response");
   }
 

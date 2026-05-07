@@ -11,6 +11,7 @@ export default function GoodFirstIssues() {
   const [sdk, setSdk] = useState<string>("");
 
   const { issues, loading, error } = useIssues(difficulty, sdk);
+  const safeIssues: GitHubIssue[] = Array.isArray(issues) ? issues : [];
 
   return (
     <Container>
@@ -44,24 +45,20 @@ export default function GoodFirstIssues() {
       </div>
 
       {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+      {typeof error === "string" && <p>{error}</p>}
 
       <div className="grid grid-cols-4 gap-6">
-        {Array.isArray(issues) &&
-          issues.map((issue: GitHubIssue) => (
-            <div key={issue.id}>
-              <a href={issue.html_url} target="_blank" rel="noreferrer">
-                <RichText
-                  markdown={issue.title ?? ""}
-                  className="line-clamp-2"
-                />
-              </a>
+        {safeIssues.map(issue => (
+          <div key={issue.id}>
+            <a href={issue.html_url} target="_blank" rel="noreferrer">
+              <RichText markdown={issue.title ?? ""} className="line-clamp-2" />
+            </a>
 
-              <p className="text-sm opacity-70 mt-2">
-                {issue.repository_url?.split("/").pop() ?? "unknown"}
-              </p>
-            </div>
-          ))}
+            <p className="text-sm opacity-70 mt-2">
+              {issue.repository_url?.split("/").pop() ?? "unknown"}
+            </p>
+          </div>
+        ))}
       </div>
     </Container>
   );

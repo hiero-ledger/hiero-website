@@ -43,15 +43,11 @@ export function useIssues(
           }),
         );
 
-        const merged: GitHubIssue[] = results.flatMap(
-          (r: { items: GitHubIssue[] }) => r.items,
-        );
+        const merged = results.flatMap(r => r.items);
 
-        const unique: GitHubIssue[] = Array.from(
-          new Map<number, GitHubIssue>(merged.map(i => [i.id, i])).values(),
-        );
+        const unique = Array.from(new Map(merged.map(i => [i.id, i])).values());
 
-        const filtered: GitHubIssue[] = unique.filter((i: GitHubIssue) =>
+        const filtered: GitHubIssue[] = unique.filter(i =>
           matchesDifficulty(i.labels, difficulty),
         );
 

@@ -11,14 +11,6 @@ export const sdkMap: Record<SDK, string> = {
   swift: "repo:hiero-ledger/hiero-sdk-swift",
 };
 
-///Keeping for now ; accidentally works on "skill: beginner" (will remove later)
-/*export const difficultyMap: Record<string, string[]> = {
-  "good first issue": ["good first issue", "good-first-issue", "starter", "easy"],
-  beginner: ["beginner", "easy", "starter"],
-  intermediate: ["intermediate"],
-  advanced: ["advanced"],
-};*/
-
 export const difficultyMap: Record<Difficulty, RegExp[]> = {
   "good first issue": [/good[- ]first[- ]issue/i],
   beginner: [/beginner/i, /starter/i, /easy/i],
@@ -33,22 +25,6 @@ export function buildRepoList(selected: string): string[] {
 
   return Object.values(sdkMap);
 }
-
-///Keeping for now ; accidentally works on "skill: beginner" (will remove later)
-/*export function matchesDifficulty(
-  labels: { name: string }[],
-  difficulty: string
-) {
-  if (!difficulty) return true;
-
-  const keywords = difficultyMap[difficulty] ?? [];
-
-  const labelNames = labels.map(l => l.name.toLowerCase());
-
-  return keywords.some(k =>
-    labelNames.some(label => label.includes(k))
-  );
-}*/
 
 export function matchesDifficulty(
   labels: { name: string }[],

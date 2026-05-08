@@ -27,7 +27,7 @@ export function useIssues(
 
       try {
         const base = "is:issue state:open";
-        const repos = buildRepoList(sdk);
+        const repos: string[] = buildRepoList(sdk);
 
         const results: GitHubSearchResponse[] = await Promise.all(
           repos.map(async (repo: string): Promise<GitHubSearchResponse> => {
@@ -46,7 +46,7 @@ export function useIssues(
         );
 
         const unique: GitHubIssue[] = Array.from(
-          new Map(merged.map((i: GitHubIssue) => [i.id, i] as const)).values(),
+          new Map<number, GitHubIssue>(merged.map(i => [i.id, i])).values(),
         );
 
         const filtered = unique.filter(i =>

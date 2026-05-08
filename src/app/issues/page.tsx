@@ -55,7 +55,7 @@ export default function GoodFirstIssues() {
             </a>
 
             <p className="text-sm opacity-70 mt-2">
-              {issue.repository_url?.split("/").pop() ?? "unknown"}
+              {issue.repository_url.split("/").pop() ?? "unknown"}
             </p>
           </div>
         ))}

@@ -37,7 +37,9 @@ export function useIssues(
 
             const json: unknown = await res.json();
 
-            return parseGitHubResponse(json);
+            const parsed: GitHubSearchResponse = parseGitHubResponse(json);
+
+            return parsed;
           }),
         );
 
@@ -49,7 +51,7 @@ export function useIssues(
           new Map<number, GitHubIssue>(merged.map(i => [i.id, i])).values(),
         );
 
-        const filtered = unique.filter(i =>
+        const filtered: GitHubIssue[] = unique.filter((i: GitHubIssue) =>
           matchesDifficulty(i.labels, difficulty),
         );
 

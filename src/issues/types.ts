@@ -50,7 +50,7 @@ function isBasicGitHubIssue(item: unknown): boolean {
 
   const idOk = typeof v.id === "number";
   const titleOk = typeof v.title === "string";
-  const isValidUrl = typeof v.html_url === "string";
+  const isValidUrl: boolean = typeof v.html_url === "string";
   const repoOk = typeof v.repository_url === "string";
 
   return idOk && titleOk && isValidUrl && repoOk;

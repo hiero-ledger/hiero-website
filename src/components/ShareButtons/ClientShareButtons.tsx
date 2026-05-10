@@ -1,12 +1,13 @@
 "use client";
 
-import type { ComponentType } from "react";
-import dynamic from "next/dynamic";
+import { lazy, Suspense } from "react";
 
-const ShareButtons: ComponentType = dynamic(() => import("./index"), {
-  ssr: false,
-});
+const ShareButtons = lazy(() => import("./index"));
 
 export default function ClientShareButtons() {
-  return <ShareButtons />;
+  return (
+    <Suspense fallback={null}>
+      <ShareButtons />
+    </Suspense>
+  );
 }

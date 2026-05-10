@@ -3,11 +3,6 @@
 import React from "react";
 
 export default function ShareButtons() {
-  // Guard for SSR (even though "use client" ensures client-side)
-  if (typeof window === "undefined") {
-    return null;
-  }
-
   const shareUrl = window.location.href;
   const shareTitle = document.title;
 

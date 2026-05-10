@@ -10,7 +10,7 @@ import {
 import { format } from "date-fns";
 import Link from "next/link";
 import RichText from "@/components/RichText";
-import ShareButtons from "@/components/ShareButtons";
+import ShareButtons from "@/components/ShareButtons/ClientShareButtons";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams(): { slug: string }[] {

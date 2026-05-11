@@ -7,7 +7,11 @@ export async function searchIssues(
     `https://api.github.com/search/issues?q=${encodeURIComponent(query)}`,
   );
 
-  const data: GitHubSearchResponse = parseGitHubResponse(await res.json());
+  if (!res.ok) {
+    throw new Error(`GitHub API error: ${res.status}`);
+  }
 
-  return data;
+  const json = await res.json();
+
+  return parseGitHubResponse(json);
 }

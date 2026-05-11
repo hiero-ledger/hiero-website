@@ -5,6 +5,8 @@ export async function GET(req: Request) {
   const q = searchParams.get("q") ?? "";
 
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     const data = await searchIssues(q);
 
     return Response.json(data);

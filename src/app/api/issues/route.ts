@@ -1,3 +1,4 @@
+import { GitHubSearchResponse, parseGitHubResponse } from "@/issues/types";
 import { searchIssues } from "@/lib/github/issues";
 
 export async function GET(req: Request) {
@@ -5,9 +6,7 @@ export async function GET(req: Request) {
   const q = searchParams.get("q") ?? "";
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    const data = await searchIssues(q);
+    const data: GitHubSearchResponse = await searchIssues(q);
 
     return Response.json(data);
   } catch (error) {

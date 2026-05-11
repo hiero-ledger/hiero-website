@@ -155,7 +155,7 @@ export default function Menu() {
             );
           })}
 
-          <li className="self-center">
+          <li className="self-center flex items-center gap-2">
             <a
               href="https://github.com/hiero-ledger/"
               target="_blank"
@@ -164,6 +164,19 @@ export default function Menu() {
               <Image
                 src="/images/Hiero-Icon-Github.svg"
                 alt="GitHub"
+                width={35}
+                height={35}
+                className="h-[35px] w-[35px] sm:h-[17px] sm:w-[17px]"
+              />
+            </a>
+            <a
+              href="https://discord.com/channels/905194001349627914/1289954446712770600"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex">
+              <Image
+                src="/images/Hiero-Icon-Discord.svg"
+                alt="Discord"
                 width={35}
                 height={35}
                 className="h-[35px] w-[35px] sm:h-[17px] sm:w-[17px]"

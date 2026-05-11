@@ -1,9 +1,13 @@
+export interface GitHubLabel {
+  name: string;
+}
+
 export interface GitHubIssue {
   id: number;
   title: string;
   html_url: string;
   repository_url: string;
-  labels: { name: string }[];
+  labels: GitHubLabel[];
 }
 
 export interface GitHubSearchResponse {
@@ -13,66 +17,42 @@ export interface GitHubSearchResponse {
 /* -----------------------------
    Runtime validation
 ------------------------------ */
+
+function isObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}
+
+function isGitHubLabel(value: unknown): value is GitHubLabel {
+  return isObject(value) && typeof value.name === "string";
+}
+
 export function isGitHubIssue(value: unknown): value is GitHubIssue {
-  if (typeof value !== "object" || value === null) return false;
-
-  const v = value as Record<string, unknown>;
-
-  if (
-    typeof v.id !== "number" ||
-    typeof v.title !== "string" ||
-    typeof v.html_url !== "string" ||
-    typeof v.repository_url !== "string"
-  ) {
-    return false;
-  }
-
-  if (!Array.isArray(v.labels)) return false;
-
-  return v.labels.every(label => {
-    if (typeof label !== "object" || label === null) return false;
-    return typeof (label as Record<string, unknown>).name === "string";
-  });
-}
-
-/* -----------------------------
-   Helper Functions
------------------------------- */
-
-function hasItems(data: unknown): data is { items: unknown } {
-  return typeof data === "object" && data !== null && "items" in data;
-}
-
-function isBasicGitHubIssue(item: unknown): item is GitHubIssue {
-  if (typeof item !== "object" || item === null) return false;
-
-  const v = item as Record<string, unknown>;
+  if (!isObject(value)) return false;
 
   return (
-    typeof v.id === "number" &&
-    typeof v.title === "string" &&
-    typeof v.html_url === "string" &&
-    typeof v.repository_url === "string" &&
-    Array.isArray(v.labels) &&
-    v.labels.every(
-      label =>
-        typeof label === "object" &&
-        label !== null &&
-        typeof (label as Record<string, unknown>).name === "string",
-    )
+    typeof value.id === "number" &&
+    typeof value.title === "string" &&
+    typeof value.html_url === "string" &&
+    typeof value.repository_url === "string" &&
+    Array.isArray(value.labels) &&
+    value.labels.every(isGitHubLabel)
   );
 }
 
 export function parseGitHubResponse(data: unknown): GitHubSearchResponse {
-  if (!hasItems(data)) {
+  if (!isObject(data)) {
     throw new Error("Invalid GitHub response");
   }
 
-  const items = data.items;
-
-  if (!Array.isArray(items) || !items.every(isBasicGitHubIssue)) {
+  if (!("items" in data) || !Array.isArray(data.items)) {
     throw new Error("Invalid GitHub response");
   }
 
-  return { items: items as GitHubIssue[] };
+  if (!data.items.every(isGitHubIssue)) {
+    throw new Error("Invalid GitHub response");
+  }
+
+  return {
+    items: data.items,
+  };
 }

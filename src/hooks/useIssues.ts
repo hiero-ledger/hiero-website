@@ -43,7 +43,9 @@ export function useIssues(
           }),
         );
 
-        const merged = results.flatMap(r => r.items);
+        const merged: GitHubIssue[] = results.flatMap(
+          (r: GitHubSearchResponse) => r.items,
+        );
 
         const unique = Array.from(new Map(merged.map(i => [i.id, i])).values());
 
@@ -53,7 +55,9 @@ export function useIssues(
 
         setIssues(filtered);
       } catch (err: unknown) {
-        if (err instanceof DOMException) return;
+        if (err instanceof DOMException && err.name === "AbortError") {
+          return;
+        }
 
         setError(err instanceof Error ? err.message : "Unknown error");
         setIssues([]);

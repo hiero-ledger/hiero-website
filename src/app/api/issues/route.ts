@@ -1,19 +1,14 @@
-import { searchIssues as _searchIssues } from "@/lib/github/issues";
-import { parseGitHubResponse } from "@/issues/types";
-
-const searchIssues: typeof _searchIssues = _searchIssues;
+import { searchIssues } from "@/lib/github/issues";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const q = searchParams.get("q") ?? "";
 
   try {
-    const raw = await searchIssues(q);
-
-    const data = parseGitHubResponse(raw);
+    const data = await searchIssues(q);
 
     return Response.json(data);
-  } catch (error: unknown) {
+  } catch (error) {
     return Response.json(
       {
         items: [],

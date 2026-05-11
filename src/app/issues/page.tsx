@@ -10,8 +10,15 @@ export default function GoodFirstIssues() {
   const [difficulty, setDifficulty] = useState<string>("");
   const [sdk, setSdk] = useState<string>("");
 
-  const { issues, loading, error } = useIssues(difficulty, sdk);
-  const safeIssues: GitHubIssue[] = Array.isArray(issues) ? issues : [];
+  const {
+    issues,
+    loading,
+    error,
+  }: {
+    issues: GitHubIssue[];
+    loading: boolean;
+    error: string | null;
+  } = useIssues(difficulty, sdk);
 
   return (
     <Container>
@@ -48,7 +55,7 @@ export default function GoodFirstIssues() {
       {typeof error === "string" && <p>{error}</p>}
 
       <div className="grid grid-cols-4 gap-6">
-        {safeIssues.map(issue => (
+        {issues.map(issue => (
           <div key={issue.id}>
             <a href={issue.html_url} target="_blank" rel="noreferrer">
               <RichText markdown={issue.title ?? ""} className="line-clamp-2" />

@@ -1,4 +1,4 @@
-import { GitHubSearchResponse, parseGitHubResponse } from "@/issues/types";
+import { GitHubSearchResponse } from "@/issues/types";
 import { searchIssues } from "@/lib/github/issues";
 
 export async function GET(req: Request) {

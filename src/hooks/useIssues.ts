@@ -37,17 +37,12 @@ export function useIssues(
 
             const json: unknown = await res.json();
 
-            const parsed = parseGitHubResponse(json);
+            const parsed: GitHubSearchResponse = parseGitHubResponse(json);
 
-            if (parsed instanceof Error) {
-              // Handle error safely
-              console.error("Failed to parse GitHub response:", parsed.message);
-              return { items: [] } as GitHubSearchResponse;
-            }
-            // Now TypeScript knows parsed is GitHubSearchResponse
             for (const i of parsed.items) {
               matchesDifficulty(i.labels, difficulty);
             }
+
             return parsed;
           }),
         );

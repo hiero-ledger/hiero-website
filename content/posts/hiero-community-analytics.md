@@ -58,4 +58,4 @@ Both charts come from scripts in [hiero-hackers/analytics](https://github.com/hi
 
 ---
 
-*Charts generated from data as of early May 2026.*
+*Charts generated from data as of early TO BE UPDATED WHEN READY FOR REVIEW.*

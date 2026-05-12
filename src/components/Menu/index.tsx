@@ -169,7 +169,7 @@ export default function Menu() {
               />
             </a>
             <a
-              href="https://discord.com/channels/905194001349627914/1289954446712770600"
+              href="https://discord.com/invite/hyperledger"
               target="_blank"
               rel="noopener noreferrer"
               className="flex">

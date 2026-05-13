@@ -35,6 +35,11 @@ export function useIssues(
               signal: controller.signal,
             });
 
+            if (!res.ok) {
+              const errorBody = await res.json();
+              throw new Error(errorBody.error || `API error: ${res.status}`);
+            }
+
             const json: unknown = await res.json();
 
             const parsed: GitHubSearchResponse = parseGitHubResponse(json);

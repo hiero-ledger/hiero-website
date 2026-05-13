@@ -22,37 +22,38 @@ export async function searchIssues(
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 10000);
 
-  const res = await fetch(
-    `https://api.github.com/search/issues?q=${encodeURIComponent(query)}`,
-    {
-      headers: {
-        Accept: "application/vnd.github+json",
-        "User-Agent": "hiero-issue-explorer",
+  try {
+    const res = await fetch(
+      `https://api.github.com/search/issues?q=${encodeURIComponent(query)}`,
+      {
+        headers: {
+          Accept: "application/vnd.githubjson",
+          "User-Agent": "hiero-issue-explorer",
 
-        // Optional token support
-        ...(process.env.GITHUB_TOKEN && {
-          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-        }),
+          // Optional token support
+          ...(process.env.GITHUB_TOKEN && {
+            Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+          }),
+        },
+        signal: controller.signal,
       },
-      signal: controller.signal,
-    },
-  );
+    );
 
-  clearTimeout(timeoutId);
+    if (!res.ok) {
+      throw new Error(`GitHub API error: ${res.status}`);
+    }
 
-  if (!res.ok) {
-    throw new Error(`GitHub API error: ${res.status}`);
+    const json = await res.json();
+    const parsed = parseGitHubResponse(json);
+
+    // Store in cache
+    cache.set(query, {
+      data: parsed,
+      expires: Date.now() + CACHE_TTL,
+    });
+
+    return parsed;
+  } finally {
+    clearTimeout(timeoutId);
   }
-
-  const json = await res.json();
-
-  const parsed = parseGitHubResponse(json);
-
-  // Store in cache
-  cache.set(query, {
-    data: parsed,
-    expires: Date.now() + CACHE_TTL,
-  });
-
-  return parsed;
 }

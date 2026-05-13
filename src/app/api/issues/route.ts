@@ -1,4 +1,5 @@
-import { GitHubSearchResponse } from "@/issues/types";
+import { GitHubSearchResponse, IssuesResponse } from "@/issues/types";
+
 import { searchIssues } from "@/lib/github/issues";
 
 export async function GET(req: Request) {
@@ -8,15 +9,19 @@ export async function GET(req: Request) {
   try {
     const data: GitHubSearchResponse = await searchIssues(q);
 
-    return Response.json(data);
-  } catch (error) {
-    return Response.json(
-      {
-        items: [],
-        error:
-          error instanceof Error ? error.message : "Failed to fetch issues",
+    return Response.json(data, {
+      headers: {
+        "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
       },
-      { status: 500 },
-    );
+    });
+  } catch (error) {
+    const errorResponse: IssuesResponse = {
+      items: [],
+      error: error instanceof Error ? error.message : "Failed to fetch issues",
+    };
+
+    return Response.json(errorResponse, {
+      status: 500,
+    });
   }
 }

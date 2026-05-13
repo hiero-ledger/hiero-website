@@ -39,10 +39,6 @@ export function useIssues(
 
             const parsed: GitHubSearchResponse = parseGitHubResponse(json);
 
-            for (const i of parsed.items) {
-              matchesDifficulty(i.labels, difficulty);
-            }
-
             return parsed;
           }),
         );

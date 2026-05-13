@@ -14,6 +14,13 @@ export interface GitHubSearchResponse {
   items: GitHubIssue[];
 }
 
+export type ErrorResponse = {
+  items: [];
+  error: string;
+};
+
+export type IssuesResponse = GitHubSearchResponse | ErrorResponse;
+
 /* -----------------------------
    Runtime validation
 ------------------------------ */

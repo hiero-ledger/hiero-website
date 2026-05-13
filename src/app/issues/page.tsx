@@ -53,11 +53,14 @@ export default function GoodFirstIssues() {
 
       {loading && <p>Loading...</p>}
       {typeof error === "string" && <p>{error}</p>}
+      {!loading && !error && issues.length === 0 && (
+        <p>No issues found matching the selected filters.</p>
+      )}
 
       <div className="grid grid-cols-4 gap-6">
         {issues.map(issue => (
           <div key={issue.id}>
-            <a href={issue.html_url} target="_blank" rel="noreferrer">
+            <a href={issue.html_url} target="_blank" rel="noopener noreferrer">
               <RichText markdown={issue.title ?? ""} className="line-clamp-2" />
             </a>
 

@@ -71,7 +71,7 @@ export function useIssues(
       }
     };
 
-    void fetchIssues();
+    fetchIssues();
 
     return () => {
       controller.abort();

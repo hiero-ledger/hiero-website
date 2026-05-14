@@ -35,6 +35,7 @@ export async function searchIssues(
             Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
           }),
         },
+        next: { revalidate: 300 },
         signal: controller.signal,
       },
     );

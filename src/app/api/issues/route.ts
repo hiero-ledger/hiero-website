@@ -9,11 +9,7 @@ export async function GET(req: Request) {
   try {
     const data: GitHubSearchResponse = await searchIssues(q);
 
-    return Response.json(data, {
-      headers: {
-        "Cache-Control": "private, no-store",
-      },
-    });
+    return Response.json(data);
   } catch (error) {
     const errorResponse: IssuesResponse = {
       items: [],

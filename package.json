@@ -40,7 +40,7 @@
     "eslint-config-next": "16.2.6",
     "jsdom": "^29.1.1",
     "prettier": "^3.8.3",
-    "tailwindcss": "^4.2.4",
+    "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",
     "vite": "8.0.5",
     "vitest": "4.1.3"

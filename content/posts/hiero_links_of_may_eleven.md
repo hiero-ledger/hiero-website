@@ -23,6 +23,6 @@ Below are links to some of things that happened this past week. **Check it out!*
 **Xin Li** implemented [TSS system transaction types](https://github.com/hiero-ledger/hiero-mirror-node/pull/13525) to REST to ensure TSS system transaction types are properly recognized in the REST transactions endpoint instead of appearing as unknown transaction types in Hiero Mirror Node.
 
 **Samrajniii** added a [broken link checker](https://github.com/hiero-ledger/hiero-sdk-java/pull/2729) script to check for broken links in the Java SDK.
----
+--
 
 Follow this link to be featured on the Hiero-Website: [Discord Guide](https://github.com/hiero-ledger/hiero-website/blob/main/docs/discord.md)!

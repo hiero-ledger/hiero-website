@@ -19,11 +19,12 @@ export function useIssues(
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    let cancelled = false;
     const controller = new AbortController();
 
     const fetchIssues = async (): Promise<void> => {
-      setLoading(true);
-      setError(null);
+      if (!cancelled) setLoading(true);
+      if (!cancelled) setError(null);
 
       try {
         const base = "is:issue state:open";
@@ -48,6 +49,8 @@ export function useIssues(
           }),
         );
 
+        if (cancelled) return;
+
         const merged: GitHubIssue[] = results.flatMap(
           (r: GitHubSearchResponse) => r.items,
         );
@@ -60,6 +63,7 @@ export function useIssues(
 
         setIssues(filtered);
       } catch (err: unknown) {
+        if (cancelled) return;
         if (err instanceof DOMException && err.name === "AbortError") {
           return;
         }
@@ -67,13 +71,14 @@ export function useIssues(
         setError(err instanceof Error ? err.message : "Unknown error");
         setIssues([]);
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     };
 
     void fetchIssues();
 
     return () => {
+      cancelled = true;
       controller.abort();
     };
   }, [difficulty, sdk]);

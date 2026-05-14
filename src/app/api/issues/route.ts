@@ -11,7 +11,7 @@ export async function GET(req: Request) {
 
     return Response.json(data, {
       headers: {
-        "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
+        "Cache-Control": "private, no-store",
       },
     });
   } catch (error) {

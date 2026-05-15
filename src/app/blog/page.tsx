@@ -10,6 +10,14 @@ import {
 export const metadata: Metadata = {
   title: "Blog",
   description: "Stay up to date with our latest news and announcements.",
+  alternates: {
+    types: {
+      "application/rss+xml": [
+        { url: "/index.xml", title: "Hiero Blog RSS Feed" },
+        { url: "/posts/index.xml", title: "Hiero Posts RSS Feed" },
+      ],
+    },
+  },
 };
 
 export default function BlogPage() {

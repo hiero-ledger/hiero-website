@@ -1,6 +1,6 @@
 import { getAllPosts } from "@/lib/posts";
 
-const SITE_URL = "https://hiero.org";
+const DEFAULT_SITE_URL = "https://hiero.org";
 const FEED_LIMIT = 20;
 
 function escapeXml(value: string): string {
@@ -13,8 +13,22 @@ function escapeXml(value: string): string {
 }
 
 function toAbsoluteUrl(path: string): string {
+  const siteUrl = getSiteUrl();
   if (path.startsWith("http://") || path.startsWith("https://")) return path;
-  return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+  return `${siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
+}
+
+function getSiteUrl(): string {
+  const raw =
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    process.env.SITE_URL ??
+    process.env.URL ??
+    DEFAULT_SITE_URL;
+  const normalized = raw.trim().replace(/\/+$/, "");
+  if (normalized.startsWith("http://") || normalized.startsWith("https://")) {
+    return normalized;
+  }
+  return `https://${normalized}`;
 }
 
 export function buildRssXml(feedPath: string): string {

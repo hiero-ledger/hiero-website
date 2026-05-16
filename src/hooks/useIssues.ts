@@ -1,0 +1,87 @@
+import { useEffect, useState } from "react";
+import {
+  parseGitHubResponse,
+  GitHubIssue,
+  GitHubSearchResponse,
+} from "@/issues/types";
+import { buildRepoList, matchesDifficulty } from "@/issues/filter";
+
+export function useIssues(
+  difficulty: string,
+  sdk: string,
+): {
+  issues: GitHubIssue[];
+  loading: boolean;
+  error: string | null;
+} {
+  const [issues, setIssues] = useState<GitHubIssue[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const controller = new AbortController();
+
+    const fetchIssues = async (): Promise<void> => {
+      if (!cancelled) setLoading(true);
+      if (!cancelled) setError(null);
+
+      try {
+        const base = "is:issue state:open";
+        const repos: string[] = buildRepoList(sdk);
+
+        const results: GitHubSearchResponse[] = await Promise.all(
+          repos.map(async (repo: string): Promise<GitHubSearchResponse> => {
+            const res = await fetch(`/api/issues?q=${base} ${repo}`, {
+              signal: controller.signal,
+            });
+
+            if (!res.ok) {
+              const errorBody = await res.json();
+              throw new Error(errorBody.error || `API error: ${res.status}`);
+            }
+
+            const json: unknown = await res.json();
+
+            const parsed: GitHubSearchResponse = parseGitHubResponse(json);
+
+            return parsed;
+          }),
+        );
+
+        if (cancelled) return;
+
+        const merged: GitHubIssue[] = results.flatMap(
+          (r: GitHubSearchResponse) => r.items,
+        );
+
+        const unique = Array.from(new Map(merged.map(i => [i.id, i])).values());
+
+        const filtered: GitHubIssue[] = unique.filter(i =>
+          matchesDifficulty(i.labels, difficulty),
+        );
+
+        setIssues(filtered);
+      } catch (err: unknown) {
+        if (cancelled) return;
+        if (err instanceof DOMException && err.name === "AbortError") {
+          return;
+        }
+
+        setError(err instanceof Error ? err.message : "Unknown error");
+        setIssues([]);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+
+    void fetchIssues();
+
+    return () => {
+      cancelled = true;
+      controller.abort();
+    };
+  }, [difficulty, sdk]);
+
+  return { issues, loading, error };
+}

@@ -13,8 +13,7 @@ export const metadata: Metadata = {
   alternates: {
     types: {
       "application/rss+xml": [
-        { url: "/index.xml", title: "Hiero Blog RSS Feed" },
-        { url: "/posts/index.xml", title: "Hiero Posts RSS Feed" },
+        { url: "/feed.xml", title: "Hiero Blog RSS Feed" },
       ],
     },
   },

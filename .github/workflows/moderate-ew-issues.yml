@@ -1,0 +1,61 @@
+# SPDX-License-Identifier: Apache-2.0
+
+name: "Moderate New Issues"
+
+on:
+  issues:
+    types:
+      - opened
+
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  issues: write
+
+concurrency:
+  group: moderate-issues-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  moderate:
+    name: Moderate Issue
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@fe104658747b27e96e4f7e80cd0a94068e53901d # v2.16.1
+        with:
+          egress-policy: audit
+
+      - name: Add pending-review label
+        uses: actions-ecosystem/action-add-labels@bd52874380e3909a1ac983768df6976535ece7f8 # v1.1.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: pending-review
+
+      - name: Comment on issue
+        uses: peter-evans/create-or-update-comment@e8674b075228eee787fea43ef493e45ece1004c9 # v5.0.0
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Thanks for your submission.
+
+            This issue is awaiting approval from @hiero-website-committers and @hiero-website-maintainers.
+            
+      - name: Close issue temporarily
+        uses: peter-evans/close-issue@05dff7ca07116e5707cfb3a3cd4af7bb5e43524c # v3.0.2
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          comment: |
+            This issue is temporarily closed pending moderator approval.
+            
+      - name: Lock issue (IMPORTANT FIX)
+        run: |
+          gh api \
+            -X PUT \
+            repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/lock \
+            -f lock_reason=off-topic
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

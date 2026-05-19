@@ -53,4 +53,4 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            Approved by @hiero-website-committers and @hiero-website-maintainers.
+            Approved by @hiero-ledger/hiero-website-committers and @hiero-ledger/hiero-website-maintainers.

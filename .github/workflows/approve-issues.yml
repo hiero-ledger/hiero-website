@@ -18,7 +18,7 @@ jobs:
   approve:
     if: github.event.label.name == 'approved'
     name: Approve Issue
-    runs-on: ubuntu-latest
+    runs-on: hl-web-lin-md
 
     steps:
       - name: Harden Runner

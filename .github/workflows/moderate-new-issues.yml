@@ -42,7 +42,7 @@ jobs:
           body: |
             Thanks for your submission.
 
-            This issue is awaiting approval from @hiero-website-committers and @hiero-website-maintainers.
+            This issue is awaiting approval from @hiero-ledger/hiero-website-committers and @hiero-ledger/hiero-website-maintainers.
             
       - name: Close issue temporarily
         uses: peter-evans/close-issue@05dff7ca07116e5707cfb3a3cd4af7bb5e43524c # v3.0.2

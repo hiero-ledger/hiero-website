@@ -44,13 +44,6 @@ jobs:
 
             This issue is awaiting approval from @hiero-ledger/hiero-website-committers and @hiero-ledger/hiero-website-maintainers.
             
-      - name: Close issue temporarily
-        uses: peter-evans/close-issue@05dff7ca07116e5707cfb3a3cd4af7bb5e43524c # v3.0.2
-        with:
-          issue-number: ${{ github.event.issue.number }}
-          comment: |
-            This issue is temporarily closed pending moderator approval.
-            
       - name: Lock issue (IMPORTANT FIX)
         run: |
           gh api \

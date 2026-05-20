@@ -31,15 +31,6 @@ jobs:
         with:
           labels: pending-review
 
-      - name: Reopen issue
-        run: |
-          gh api \
-            -X PATCH \
-            repos/${{ github.repository }}/issues/${{ github.event.issue.number }} \
-            -f state=open
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Unlock issue
         run: |
           gh api \

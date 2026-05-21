@@ -1,6 +1,6 @@
 +++
-title = "Hiero Links: Automation Progress Across The Organization"
-featured_image = "/images/hiero-links-automation-2026.png"
+title = "Automation Across The Hiero Organization: Progress, Security, and Best Practices"
+featured_image = "/images/automation-banner-2026.svg"
 date = 2026-05-21
 categories = ["Blog"]
 tags = ["Automation", "CI/CD", "Security", "Contributors"]
@@ -12,7 +12,7 @@ organization = "Hiero"
 link = "https://github.com/ayesigaisaac"
 +++
 
-## Hiero Links: Automation Progress Across The Organization
+## Automation Across The Hiero Organization
 
 Automation continues to improve delivery speed and reliability across the Hiero ecosystem. This post shares practical security guidance, ongoing automation efforts, and key outcomes from the **Automation Migration Meeting held on Thursday, May 21, 2026**.
 

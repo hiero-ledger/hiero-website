@@ -16,7 +16,7 @@ This week featured a lot of new and exciting updates within the Hiero Organizati
 Below are links to some of things that happened this past week. **Check it out!**
 
 ---
-**Daniel Marvin** implemented [HIP 1137 Block Node discoverability via on chain registry](https://github.com/hiero-ledger/hiero-sdk-python/pull/2248) in the Python SDK to create, update, delete, and/or discover Block Nodes via on-chain data.
+**Daniel Ntege** implemented [HIP 1137 Block Node discoverability via on chain registry](https://github.com/hiero-ledger/hiero-sdk-python/pull/2248) in the Python SDK to create, update, delete, and/or discover Block Nodes via on-chain data.
 
 **Renuthomas** added unit tests for the [native sha384 implementation](https://github.com/hiero-ledger/hiero-sdk-js/pull/4079) to ensure parity and reliability across environments in the JavaScript SDK.
 

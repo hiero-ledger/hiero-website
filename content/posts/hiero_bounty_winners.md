@@ -20,7 +20,7 @@ Hedera has already published the full breakdown of the [main track winners](http
 
 ## The Hiero Bounty
 
-Hiero is the open-source project built on the Hedera network. Strong applications on Hedera depend on strong libraries, SDKs, and infrastructure tooling underneath them. The Hiero bounty exists to push that layer forward.
+Hiero is the open-source project that powers the Hedera network. Strong applications on Hedera depend on strong libraries, SDKs, and infrastructure tooling underneath them. The Hiero bounty exists to push that layer forward.
 
 These bounty submissions are an essential plumbing: SDKs in new languages, mirror node clients, framework integrations, and developer ergonomics. The kind of work that quietly makes the next hundred projects easier to build.
 
@@ -95,7 +95,7 @@ Hiero is open source year-round and there's always more to do.
 A few good places to start:
 
 - Browse open issues across the [Hiero org](https://github.com/hiero-ledger) and look for the `good first issue` label
-- Read the [contributor docs](../README.md) for the workflow
+- Read the [contributor docs](/README.md) for the workflow
 - Drop into the community Discord channel and tell us what you're working on
 
 Huge thanks to everyone who submitted, the judges who reviewed, and the wider Hedera and Hiero communities that made Apex a fitting close to the trilogy. The bar these projects set is the new baseline. We can't wait to see what gets built on top of them.

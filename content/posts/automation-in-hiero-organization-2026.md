@@ -1,6 +1,6 @@
 +++
 title = "Automation Across The Hiero Organization: Progress, Security, and Best Practices"
-featured_image = "/images/automation-banner-2026.svg"
+featured_image = "/images/automation-banner-2026.png"
 date = 2026-05-21
 categories = ["Blog"]
 tags = ["Automation", "CI/CD", "Security", "Contributors"]

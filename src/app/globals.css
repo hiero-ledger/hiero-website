@@ -5,16 +5,16 @@
   /* Colors */
   --color-transparent: transparent;
   --color-current: currentColor;
-  --color-white: #FFFFFF;
-  --color-white-dark: #E5E4D7;
+  --color-white: #ffffff;
+  --color-white-dark: #e5e4d7;
   --color-black: #000000;
-  --color-charcoal: #1E1E1E;
-  --color-red: #B81A56;
+  --color-charcoal: #1e1e1e;
+  --color-red: #b81a56;
   --color-red-dark: #992350;
-  --color-red-light: #D92D6A;
-  --color-sand: #E5E4D7;
+  --color-red-light: #d92d6a;
+  --color-sand: #e5e4d7;
   --color-gray: #616161;
-  --color-gray-light: #EFEFEE;
+  --color-gray-light: #efefee;
 
   /* Fonts — variables set by next/font in layout.tsx */
   --font-serif: var(--font-space-grotesk), ui-serif, serif;
@@ -92,7 +92,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #D92D6A;
+  color: #d92d6a;
 }
 
 nav a.active {
@@ -100,13 +100,13 @@ nav a.active {
 }
 
 nav a.active::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 2rem;
   left: 25%;
   width: 50%;
   height: 3px;
-  background-color: #D92D6A;
+  background-color: #d92d6a;
   transform: translateX(-50%);
 }
 
@@ -116,10 +116,10 @@ nav a.active::after {
     @apply text-charcoal text-base leading-normal;
   }
   nav a:hover {
-    color: #B81A56;
+    color: #b81a56;
   }
   nav a.active {
-    color: #B81A56;
+    color: #b81a56;
   }
   nav a.active::after {
     bottom: -4px;
@@ -133,7 +133,7 @@ nav a.active::after {
 @media (max-width: 640px) {
   nav a.active {
     background-color: rgba(184, 26, 86, 0.1) !important;
-    border-bottom: 2px solid #B81A56 !important;
+    border-bottom: 2px solid #b81a56 !important;
     box-shadow: none !important;
   }
   nav a.active::after {
@@ -269,14 +269,16 @@ nav a.active::after {
   }
 
   @media (min-width: 640px) {
-    :where(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    :where(blockquote):not(
+      :where([class~="not-prose"], [class~="not-prose"] *)
+    ) {
       @apply my-6 py-4;
       margin-left: 92px;
     }
   }
 
   :where(blockquote)::before {
-    content: '';
+    content: "";
     @apply block absolute;
     top: -60px;
     left: -3px;
@@ -360,7 +362,7 @@ nav a.active::after {
 
 .highlight pre {
   @apply pt-8 pb-3 px-3 rounded-md;
-  background-color: #1E1E1E !important;
+  background-color: #f6f8fa !important;
 }
 
 code {
@@ -381,7 +383,7 @@ code {
 }
 
 .copy-button > svg > path {
-  @apply fill-white;
+  @apply fill-charcoal;
 }
 
 /* ============================================
@@ -421,7 +423,7 @@ code {
 
 .pagination .page-item:has([aria-label="Previous"]) .page-link::before,
 .pagination .page-item:has([aria-label="Next"]) .page-link::before {
-  content: '';
+  content: "";
   width: 0.5rem;
   height: 0.75rem;
   background-image: url("data:image/svg+xml,%3Csvg id='arrow-single' xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 8 12'%3E%3Cpath d='M6.1,12l1.4-1.4L2.9,6,7.5,1.4,6.1,0,0,6l6,6Z'/%3E%3C/svg%3E");
@@ -429,7 +431,7 @@ code {
 
 .pagination .page-item:has([aria-label="First"]) .page-link::before,
 .pagination .page-item:has([aria-label="Last"]) .page-link::before {
-  content: '';
+  content: "";
   width: 14px;
   height: 0.75rem;
   background-image: url("data:image/svg+xml,%3Csvg id='arrow-double' xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 14 12'%3E%3Cpath d='M6.1,12l1.4-1.4L2.9,6,7.5,1.4,6.1,0,0,6l6,6Z'/%3E%3Cpath d='M12.1,12l1.4-1.4-4.6-4.6L13.5,1.4,12.1,0l-6,6,6,6Z'/%3E%3C/svg%3E");

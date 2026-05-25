@@ -10,52 +10,57 @@ tags = ["community", "analytics", "open-source", "contributors"]
 name = "Daniel Ntege and Sophie Bulloch, Hiero community"
 +++
 
-We've been building out analytics tooling in the [hiero-hackers/analytics](https://github.com/hiero-hackers/analytics) repo to get a better picture of how the Hiero community is growing. Instead of guessing, we wanted real numbers — so here are two charts we're excited to share, along with what we think they mean.
+A growing number of people have become involved in the Hiero community. To understand this shift more clearly, we have been developing community analytics at [hiero-hackers/analytics](https://github.com/hiero-hackers/analytics). 
+
+Here are two charts that stand out to tell the story that we are excited to share.
+---
+
+## Contributors are Growing
+
+![Stacked bar chart showing unique active contributors by role (General User, Triage, Committer, Maintainer) from 2018 to 2026.](/images/maintainer_pipeline_yearly.png)
+*Active contributors by role, 2018–2026*
+
+This one is probably the most exciting chart for us. It counts how many people were active on Hiero's GitHub each year — opening pull requests, filing issues, leaving comments, or reviewing code — broken down by their role in the organisation.
+
+Since Hiero became open source in September 2024, **the number of active contributors has grown from 363 in 2024 to 645 in 2026**, a growth of 78%.
+
+Most of that growth came from **General Users**. This group has experienced phenomenal growth: people without a formal role in Hiero who are contributing to Hiero's codebase and community. That group has grown from around 220 in 2024 to roughly 450 in 2026, testament to the passion of the community, the benefits of open-source, and the stewardship of the LFDT.
+
+We also wanted to highlight the Trige role at Hiero which has grown from just a handful in 2024 to over 20 members by 2026. The triage team plays a crucial role at Hiero, being the first contact point for incoming issues and pull requests, and is the first step in the ladder to becoming a committer or maintainer. This indicates more community members are training to gain even more responsibility.
+
+The way we think about it: people often start by contributing casually, and over time some take on more responsibility. So, not only does this chart show strong community growth, this chart is showing early signs of the community gaining real responsibility at Hiero and reflects the hard work existing maintainers and committers are doing to open up issues to new users.
 
 ---
 
-## Who's showing up? Active contributors by year
-
-![Stacked bar chart showing unique active contributors by role (General User, Triage, Committer, Maintainer) for 2025 and 2026.](/images/maintainer_pipeline_yearly.png)
-*Maintainer Pipeline: Unique Active Contributors by Role — PR & Issue Activity (Yearly)*
-
-This one is probably the most exciting chart for us. It counts how many unique people were active on Hiero's GitHub in each year — opening PRs, filing issues, commenting, reviewing — broken down by their role in the organization.
-
-**We went from 282 active contributors in 2025 to 596 in 2026.** That's more than double in a single year, and honestly it's been incredible to watch.
-
-Most of that growth came from **General Users** — people who don't hold a formal role in the Hiero org but are showing up, filing issues, opening PRs, and joining the conversation. That segment jumped from about 140 to over 400. This is exactly the kind of growth we want to see, because a healthy contributor base is how you find your next wave of Triagers, Committers, and Maintainers.
-
-The **Triage, Committer, and Maintainer** tiers all grew too, even if they're a smaller slice of the bigger pie. Triagers in particular do a lot of the behind-the-scenes work — labeling issues, reproducing bugs, routing things to the right people — and it's great to see that group expanding alongside the broader community.
-
-We think of this as a pipeline: people start by contributing casually, and over time some of them take on more responsibility. Tracking these numbers year over year helps us see whether that pipeline is actually working.
-
----
-
-## How are we labeling issues by difficulty?
+## Issues are getting easier to navigate
 
 ![Stacked area chart showing open issues by difficulty label (Good First Issue, Beginner, Intermediate, Advanced) from May 2025 to May 2026.](/images/difficulty_over_time_event_based_weekly.png)
-*Open Issues by Difficulty Over Time (Event-Based) — weekly resolution*
+*Open issues by difficulty label over time*
 
-This chart shows how many open issues have a difficulty label at any given time, split into four tiers: **Good First Issue**, **Beginner**, **Intermediate**, and **Advanced**. An important note: this only tracks issues that have been tagged with a difficulty label — it doesn't represent all open issues across Hiero, which is a much larger number.
+One of the things that makes an open-source project welcoming is being able to find an issue that matches your skill level. 
 
-A few things jump out:
+This chart counts open issues at Hiero from the moment they are labeled tagged as Good First Issue, Intermediate or Advanced.
 
-**Labeling really got going in late 2025.** Maintainers started tagging issues with difficulty labels around December 2025. Because many of those labels were added to older issues, the chart counts each issue from the moment it was labeled — not from when it was originally created. This avoids a misleading spike and gives us an honest picture of when we actually started organizing issues by difficulty.
+In June 2025, some repositories at Hiero created **Good First Issues** and we quickly learned there was overwhelming interest and the community wanted to contribute more meaningfully beyond this level.
 
-**From January 2026 onward, all tiers grew quickly.** As of May 2026, there are about 140 difficulty-labeled open issues, with Intermediate and Advanced making up the bulk. This growth reflects both new issues being filed and maintainers going back to label existing ones.
+Since December 2025, maintainers at several repositories at Hiero have been working on creating automations and documentation to support a wave of new contributors beyond the good first issue level. We have piloted new issue categories **Beginner**, **Intermediate**, and **Advanced**, and many of Hiero's open issues are now tagged by difficulty.
 
-**Good First Issues are keeping pace.** There are currently around 35–40 Good First Issues available, which is a solid pool for newcomers looking for a place to start. The fact that this tier has grown alongside the others tells us maintainers are being intentional about keeping entry points available.
+A few things stand out:
 
-## A note on how the chart works
+- **Hiero has a diverse mix of issues**. Hiero's open issues have a good mix from GFI, Beginner, Intermediate to Advanced.
+- **Labeling by Difficulty Continues to Grow**. In December 2025, we labelled 60 issues by difficulty and this has reached 140 issues by May 2026.
+- **Around 35–40 Good First Issues are open right now**, which is a healthy pool for newcomers.
 
-You might wonder why the chart starts mostly flat and then ramps up in late 2025. That's because we count each issue from the date it received its difficulty label, not from when it was opened. Since labeling started in December 2025, issues that existed before then only appear in the chart once they were tagged. This keeps the data honest — it shows what we actually knew at each point in time.
+This tells us maintainers are being intentional about leaving the door open for new contributors. If you've been thinking about jumping in, now might be a good time to get involved.
 
----
-
-## Want to dig into the data?
-
-Both charts come from scripts in [hiero-hackers/analytics](https://github.com/hiero-hackers/analytics). The tooling pulls data from the GitHub API and generates charts using Python. If you're curious or want to contribute — whether it's improving the charts, adding new ones, or helping label issues — the repo is open and we'd love the help. Check the README for setup instructions, and look for `good-first-issue` tags to get started.
+> A quick caveat: this chart only counts open issues that have been tagged with a difficulty label — not every open issue across Hiero. The total number of open issues is much higher. It also does not tell us which of these issues are already assigned.
 
 ---
 
-*Charts generated from data as of early TO BE UPDATED WHEN READY FOR REVIEW.*
+## Want to get involved?
+
+If you'd like to start contributing, the easiest place to begin is by browsing issues tagged **`good-first-issue`** across the [Hiero repos](https://hiero.org/issues).
+
+The charts above come from our community analytics work at [hiero-hackers/analytics](https://github.com/hiero-hackers/analytics). If you're curious about the data, or want to help improve the tooling, add new charts, or pitch in on what to prioritise — the repo is open and we'd love the help.
+
+---

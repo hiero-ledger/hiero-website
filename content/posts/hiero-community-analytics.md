@@ -1,6 +1,6 @@
 +++
 title = "Hiero by the Numbers: Community Growth and Progression"
-date = 2026-05-10
+date = 2026-05-25
 draft = false
 featured_image = "/images/hiero-community-analytics.png"
 abstract = "A data-driven look at Hiero's community growth and issue difficulty trends since 2025."

@@ -185,7 +185,9 @@ ${body}`);
               tags: expect.any(Array),
             }),
           );
-          expect(post.date).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
+          expect(post.date).toMatch(
+            /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/,
+          );
           expect(post.slug).not.toMatch(/["'<>\\]/);
         }
       }),

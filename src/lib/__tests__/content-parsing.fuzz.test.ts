@@ -109,7 +109,7 @@ describe("content parsing fuzz tests", () => {
 
   it("fuzzes arbitrary markdown and YAML frontmatter through simple page parsing", () => {
     fc.assert(
-      fc.property(fc.string({ maxLength: 1500 }), raw => {
+      fc.property(fc.string({ unit: "binary", maxLength: 1500 }), raw => {
         mockSimplePage(raw);
 
         const page = getSimplePage(SIMPLE_CONTENT_PATH);
@@ -139,7 +139,7 @@ describe("content parsing fuzz tests", () => {
         fc.record({
           title: safeTomlText,
           description: safeTomlText,
-          body: fc.string({ maxLength: 1000 }),
+          body: fc.string({ unit: "binary", maxLength: 1000 }),
         }),
         ({ title, description, body }) => {
           mockSimplePage(`---
@@ -165,7 +165,7 @@ ${body}`);
 
   it("fuzzes arbitrary markdown and TOML frontmatter through blog post listing", () => {
     fc.assert(
-      fc.property(fc.string({ maxLength: 1500 }), raw => {
+      fc.property(fc.string({ unit: "binary", maxLength: 1500 }), raw => {
         mockPost(raw);
 
         const posts = getAllPosts();
@@ -185,7 +185,7 @@ ${body}`);
               tags: expect.any(Array),
             }),
           );
-          expect(Number.isNaN(Date.parse(post.date))).toBe(false);
+          expect(post.date).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
           expect(post.slug).not.toMatch(/["'<>\\]/);
         }
       }),
@@ -207,7 +207,7 @@ ${body}`);
           category: safeTomlText,
           tag: safeTomlText,
           authorName: safeNonEmptyTomlText,
-          body: fc.string({ maxLength: 1000 }),
+          body: fc.string({ unit: "binary", maxLength: 1000 }),
         }),
         ({ slug, title, date, abstract, category, tag, authorName, body }) => {
           mockPost(`+++
@@ -251,7 +251,7 @@ ${body}`);
 
   it("fails safely for malformed TOML frontmatter in blog posts", () => {
     fc.assert(
-      fc.property(fc.string({ maxLength: 1000 }), body => {
+      fc.property(fc.string({ unit: "binary", maxLength: 1000 }), body => {
         mockPost(`+++
 date = [
 +++
@@ -269,7 +269,7 @@ ${body}`);
 
   it("reports arbitrary TOML parser failures as Error instances", () => {
     fc.assert(
-      fc.property(fc.string({ maxLength: 500 }), input => {
+      fc.property(fc.string({ unit: "binary", maxLength: 500 }), input => {
         try {
           const parsed = parseToml(input.endsWith("\n") ? input : `${input}\n`);
 
@@ -288,7 +288,7 @@ ${body}`);
 
   it("fuzzes arbitrary TOML frontmatter through blog index metadata parsing", () => {
     fc.assert(
-      fc.property(fc.string({ maxLength: 1000 }), raw => {
+      fc.property(fc.string({ unit: "binary", maxLength: 1000 }), raw => {
         mockBlogIndex(raw);
 
         const meta = getBlogIndexMeta();

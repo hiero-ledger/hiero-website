@@ -3,6 +3,5 @@ annotations:
       - sast
       - packaging
       - signed-releases
-      - fuzzing
     reasons:
       - reason: not-applicable # The code hosted in this repo is purely documentation. No functional code is released from this repo.

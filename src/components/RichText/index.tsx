@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
 
 interface RichTextProps {
   as?: "div" | "h3" | "p" | "span";
@@ -64,7 +65,10 @@ export default function RichText({
 
   return (
     <Tag className={className}>
-      <ReactMarkdown skipHtml components={components}>
+      <ReactMarkdown
+        skipHtml
+        components={components}
+        rehypePlugins={[rehypeHighlight]}>
         {markdown}
       </ReactMarkdown>
     </Tag>

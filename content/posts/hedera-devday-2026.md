@@ -40,9 +40,9 @@ The team also welcomed new contributors to participate in the work that is happe
 
 The booth helped strengthen awareness that Hiero is the open, vendor-neutral home for the code powering Hedera, bringing together core services, improvement proposal initiatives, SDK development, and community innovation projects under open governance.
 
-## 📣 What's New In The Roadmap In Hiero
+## 📣 What Do We Hope For The Future
 
-Richard Bair delivered an exciting roadmap preview, outlining several bold “moonshot” initiatives that are actively being developed in the open under LF Decentralized Trust within the [hiero-ledger](https://github.com/hiero-ledger) GitHub organization.
+Richard Bair delivered an exciting preview, outlining several bold “moonshot” initiatives. While many of them are great to have, some of them are actively being developed in the open under LF Decentralized Trust within the [hiero-ledger](https://github.com/hiero-ledger) GitHub organization.
 
 These initiatives represent a great transformation in the future of the project:
 

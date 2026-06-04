@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import IssueJumpSection from "..";
 
 describe("IssueJumpSection", () => {
-  it("renders difficulty cards and falls back invalid links to #", () => {
+  it("renders difficulty cards with external and internal links", () => {
     render(
       <IssueJumpSection
         data={{
@@ -28,13 +28,17 @@ describe("IssueJumpSection", () => {
     expect(
       screen.getByRole("heading", { name: "Jump In" }),
     ).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Beginner/i })).toHaveAttribute(
+    const externalLink = screen.getByRole("link", { name: /Beginner/i });
+    const internalLink = screen.getByRole("link", { name: /Offline/i });
+
+    expect(externalLink).toHaveAttribute(
       "href",
       "https://github.com/hiero-ledger/hiero-website/issues",
     );
-    expect(screen.getByRole("link", { name: /Offline/i })).toHaveAttribute(
-      "href",
-      "#",
-    );
+    expect(externalLink).toHaveAttribute("target", "_blank");
+    expect(externalLink).toHaveAttribute("rel", "noopener noreferrer nofollow");
+    expect(internalLink).toHaveAttribute("href", "/internal-only");
+    expect(internalLink).not.toHaveAttribute("target");
+    expect(internalLink).not.toHaveAttribute("rel");
   });
 });

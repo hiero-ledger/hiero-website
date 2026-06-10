@@ -3,7 +3,7 @@ title = "Save the Date: Hiero Community Day Comes to Berlin on July 7, 2026"
 featured_image = "/images/hiero-community-day.png"
 date = 2026-06-10T00:00:00-07:00
 categories = ["Blog"]
-abstract = "Don't miss on the opportunity to meet with the Hiero community in Berlin! Learn about what the Hiero project is doing and how you can be part of it."
+abstract = "Don't miss out on the opportunity to meet with the Hiero community in Berlin! Learn about what the Hiero project is doing and how you can be part of it."
 [[authors]]
 name = "Jessica Gonzalez, Technical Community Architect in collaboration with Hiero maintainers"
 image = "/images/profile-hiero.png"
@@ -51,5 +51,5 @@ Hiero is an open source project under [**LF Decentralized Trust**](https://www.l
 
 More details about the agenda, speakers, and sessions will be shared soon.
 
-**Save the date and join us in Berlin on July 7, 2026. We look forward to seeing you!!.**
+**Save the date and join us in Berlin on July 7, 2026. We look forward to seeing you!**
 ```

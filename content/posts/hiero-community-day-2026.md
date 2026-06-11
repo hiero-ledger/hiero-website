@@ -3,7 +3,7 @@ title = "Save the Date: Hiero Community Day Comes to Berlin on July 7, 2026"
 featured_image = "/images/hiero-community-day.png"
 date = 2026-06-10T00:00:00-07:00
 categories = ["Blog"]
-abstract = "Don't miss out on the opportunity to meet with the Hiero community in Berlin! Learn about what the Hiero project is doing and how you can be part of it."
+abstract = "Don't miss out on the opportunity to meet with the Hiero community in Berlin!"
 [[authors]]
 name = "Jessica Gonzalez, Technical Community Architect in collaboration with Hiero maintainers"
 image = "/images/profile-hiero.png"

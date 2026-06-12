@@ -6,7 +6,7 @@
 // merge conflicts, and issue link (with assignment verification).
 // Each function returns a structured result object with no side effects.
 
-const { getLogger } = require('./logger');
+import { getLogger } from './logger.js';
 
 /**
  * Checks whether a commit message contains a valid DCO sign-off line.
@@ -235,7 +235,7 @@ async function checkIssueLink(botContext, { fetchIssue, fetchClosingIssueNumbers
   return { passed: true, reason: null, issues: linkedIssues };
 }
 
-module.exports = {
+export default {
   hasDCOSignoff,
   hasVerifiedGPGSignature,
   isMergeCommit,

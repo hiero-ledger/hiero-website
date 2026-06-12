@@ -6,7 +6,10 @@
 // structure so future sections (commands, instructions) can be added alongside
 // checks without changing the overall shape.
 
-const { MAINTAINER_TEAM, DOCUMENTATION } = require('./constants');
+import {
+  MAINTAINER_TEAM, 
+  DOCUMENTATION
+} from './constants.js';
 
 const MARKER = '<!-- bot:pr-helper -->';
 
@@ -201,7 +204,7 @@ function buildBotComment({ prAuthor, dco, gpg, merge, issueLink }) {
   return { marker: MARKER, body, allPassed: passed };
 }
 
-module.exports = {
+export default {
   MARKER,
   buildBotComment,
   buildChecksSection,

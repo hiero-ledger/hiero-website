@@ -1,7 +1,7 @@
 {
   "name": "nextjs",
   "version": "0.1.0",
-  "type": "commonjs",
+  "type": "module",
   "private": true,
   "scripts": {
     "sync:repo-stats": "node src/scripts/sync-repo-stats.mjs",

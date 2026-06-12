@@ -12,7 +12,7 @@ const api = require('./api');
 const checks = require('./checks');
 const comments = require('./comments');
 
-module.exports = {
+export default {
   ...constants,
   ...logger,
   ...validation,

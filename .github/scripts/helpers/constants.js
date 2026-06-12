@@ -4,7 +4,7 @@
 //
 // Shared constants for bot scripts: maintainer team, labels, issue state.
 
-const { loadAutomationConfig, buildConstants } = require('./config-loader');
+import { loadAutomationConfig, buildConstants } from './config-loader.js';
 
 /**
  * Parsed and validated automation config loaded from .github/hiero-automation.json.
@@ -76,7 +76,7 @@ const DOCUMENTATION = derived.DOCUMENTATION;
  */
 const COMMUNITY = derived.COMMUNITY;
 
-module.exports = {
+export default {
   MAINTAINER_TEAM,
   GFI_SUPPORT_TEAM,
   LABELS,

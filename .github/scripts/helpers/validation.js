@@ -86,7 +86,7 @@ function requireSafeUsername(value, label) {
   }
 }
 
-module.exports = {
+export default {
   isNonNegativeInteger,
   isSafeSearchToken,
   requireObject,

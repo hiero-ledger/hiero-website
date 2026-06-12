@@ -19,7 +19,7 @@ Maintainers are assigned the following scopes in this repository:
 | Hendrik Ebbers      | hendrikebbers|   Hashgraph         |
 | Sophie Bulloch      | exploreriii  |   None              |
 | Angelina Ceppaluni  | aceppaluni   |   None              |
-| Daniel Ntege        | danielmarv   |   OpenElements      |
+| Daniel Ntege        | danielmarv   |   Open Elements      |
 
 ## Emeritus Hiero Website Maintainers
 

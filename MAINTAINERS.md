@@ -14,10 +14,12 @@ Maintainers are assigned the following scopes in this repository:
 
 ## Active Hiero Website Maintainers
 
-| Name             | GitHub ID     | Company Affiliation |
-|------------------|--------------|---------------------|
-| Hendrik Ebbers   | hendrikebbers|   Hashgraph         |
-| Sophie Bulloch   | exploreriii  |   None              |
+| Name                | GitHub ID     | Company Affiliation |
+|---------------------|--------------|---------------------|
+| Hendrik Ebbers      | hendrikebbers|   Hashgraph         |
+| Sophie Bulloch      | exploreriii  |   None              |
+| Angelina Ceppaluni  | aceppaluni   |   None              |
+| Daniel Ntege        | danielmarv   |   Open Elements      |
 
 ## Emeritus Hiero Website Maintainers
 

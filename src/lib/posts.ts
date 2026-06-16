@@ -71,7 +71,9 @@ function parseStructuredData(input: unknown): Record<string, unknown> {
 function extractFrontmatter(raw: string, delimiter: "+++" | "---") {
   const normalized = raw.replace(/\r\n/g, "\n");
   const escaped = delimiter === "+++" ? "\\+\\+\\+" : "---";
-  const matcher = new RegExp(`^${escaped}\\n([\\s\\S]*?)\\n${escaped}(?:\\n|$)`);
+  const matcher = new RegExp(
+    `^${escaped}\\n([\\s\\S]*?)\\n${escaped}(?:\\n|$)`,
+  );
   const match = normalized.match(matcher);
   if (!match) {
     return null;

@@ -10,6 +10,11 @@ overrides:
   vite: ^8.0.16
   js-yaml: ^4.2.0
 
+patchedDependencies:
+  gray-matter@4.0.3:
+    hash: 29f0096cd632088263a4056e015be5f446453e54f7976a267f9044bcb1635d85
+    path: patches/gray-matter@4.0.3.patch
+
 importers:
 
   .:
@@ -19,7 +24,7 @@ importers:
         version: 4.4.0
       gray-matter:
         specifier: ^4.0.3
-        version: 4.0.3
+        version: 4.0.3(patch_hash=29f0096cd632088263a4056e015be5f446453e54f7976a267f9044bcb1635d85)
       next:
         specifier: 16.2.9
         version: 16.2.9(@babel/core@7.29.7)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -4587,7 +4592,7 @@ snapshots:
 
   graceful-fs@4.2.11: {}
 
-  gray-matter@4.0.3:
+  gray-matter@4.0.3(patch_hash=29f0096cd632088263a4056e015be5f446453e54f7976a267f9044bcb1635d85):
     dependencies:
       js-yaml: 4.2.0
       kind-of: 6.0.3

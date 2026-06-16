@@ -54,6 +54,9 @@
       "tinyexec": "1.0.2",
       "vite": "^8.0.16",
       "js-yaml": "^4.2.0"
+    },
+    "patchedDependencies": {
+      "gray-matter@4.0.3": "patches/gray-matter@4.0.3.patch"
     }
   }
 }

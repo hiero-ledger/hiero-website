@@ -11,7 +11,6 @@ export default function ShareButtons({
   shareUrl,
   shareTitle,
 }: ShareButtonsProps) {
-
   const encodedUrl = encodeURIComponent(shareUrl);
   const encodedTitle = encodeURIComponent(shareTitle);
 

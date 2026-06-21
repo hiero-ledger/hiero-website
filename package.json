@@ -27,8 +27,8 @@
     "toml": "^4.1.1"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^5.15.11",
-    "@tailwindcss/postcss": "^4.3.0",
+    "@netlify/plugin-nextjs": "^5.15.12",
+    "@tailwindcss/postcss": "^4.3.1",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -44,7 +44,7 @@
     "fast-check": "4.8.0",
     "jsdom": "^29.1.1",
     "prettier": "^3.8.4",
-    "tailwindcss": "^4.3.0",
+    "tailwindcss": "^4.3.1",
     "typescript": "^6.0.3",
     "vite": "^8.0.16",
     "vitest": "4.1.3"

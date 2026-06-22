@@ -1,5 +1,6 @@
 +++
 title = "Hiero Enterprise Java – Announcing Release v0.20.0"
+featured_image = "/images/hiero-enterprise-java-0.20.0.png"
 date = 2026-06-22T00:00:00+00:00
 categories = ["Blog"]
 abstract = "The Hiero Enterprise Java project has a new release: v0.20.0."

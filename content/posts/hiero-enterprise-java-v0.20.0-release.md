@@ -24,8 +24,8 @@ This release introduces multiple API and framework enhancements, for example:
 
 ## Release Information And Artifacts?
 
-- **Repository:** `hiero-ledger/hiero-enterprise-java`
-- **Version:** `v0.20.0`
+- **Repository:** hiero-ledger/hiero-enterprise-java
+- **Version:** v0.20.0
 - **Published:** June 17, 2026
 - **Release URL in GitHub:** [v0.20.0](https://github.com/hiero-ledger/hiero-enterprise-java/releases/tag/v0.20.0)
 - **Release URL in Maven Central:**
@@ -43,7 +43,7 @@ For the complete details of commits included, see the original GitHub release: [
 
 ## Get Involved!
 
-Clone and take a look at the code for [hiero-enterprise-java in GitHub.](https://github.com/hiero-ledger/hiero-enterprise-java).
-Join our [LF Decentralized Trust Discord](https://discord.com/invite/hyperledger) for real time discussions on Hiero topics includding hiero-enterprise-java.
-Take a look at [Hiero's public calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero) and join us in the next meeting. 
-To learn more about Hiero, explore our [full content in GitHub](https://github.com/hiero-ledger).
+- Clone and take a look at the code for [hiero-enterprise-java in GitHub.](https://github.com/hiero-ledger/hiero-enterprise-java).
+- Join our [LF Decentralized Trust Discord](https://discord.com/invite/hyperledger) for real time discussions on Hiero topics includding hiero-enterprise-java.
+- Take a look at [Hiero's public calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero) and join us in the next meeting. 
+- To learn more about Hiero, explore our [full content in GitHub](https://github.com/hiero-ledger).

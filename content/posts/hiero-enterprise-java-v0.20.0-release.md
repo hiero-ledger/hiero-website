@@ -38,9 +38,6 @@ This release introduces multiple API and framework enhancements, for example:
 
 ## Release Notes
 
-
-## Detailed Changelog
-
 For the complete details of commits included, see the original GitHub release: [Release v0.20.0](https://github.com/hiero-ledger/hiero-enterprise-java/releases/tag/v0.20.0)
 
 ## Get Involved!

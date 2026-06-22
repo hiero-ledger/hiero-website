@@ -11,6 +11,8 @@ organization = "Hiero"
 
 We’re excited to share the news of our first release for [**hiero-enterprise-java**](https://github.com/hiero-ledger/hiero-enterprise-java/releases)!
 
+This release marks an exciting milestone for the Hiero Enterprise Java team! It is the **first** release published under the Hiero namespace, now available in Maven under **org.hiero**.
+
 * * *
 
 ## What Does This Release Include?

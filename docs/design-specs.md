@@ -10,7 +10,7 @@ mirrors those values for reference.
 The site uses two typefaces, both loaded via `next/font/google` in
 `src/app/layout.tsx`.
 
-| Role | Typeface | Weights | CSS variable | Theme token |
+| Role | Typeface | Weights | CSS variable | Theme specs |
 |------|----------|---------|--------------|-------------|
 | Primary (body + headings) | **Space Grotesk** | 300, 400, 500, 600, 700 | `--font-space-grotesk` | `--font-serif` |
 | Monospace (code, snippets) | **IBM Plex Mono** | 400 | `--font-ibm-plex-mono` | `--font-ibm` |
@@ -31,7 +31,7 @@ Defined in the `@theme` block in `globals.css`. Sizes pair a `font-size`
 with a matching `line-height` and, for most steps, a negative
 `letter-spacing` for tighter display headings.
 
-| Token | Size | Line height | Letter spacing |
+| Specs | Size | Line height | Letter spacing |
 |-------|------|-------------|----------------|
 | `text-xs`  | 0.75rem  | 1rem     | — |
 | `text-sm`  | 0.875rem | 1.25rem  | — |
@@ -50,7 +50,7 @@ utility classes (`text-red`, `bg-sand`, `border-charcoal`, etc.).
 
 ### Brand
 
-| Token | Hex | Notes |
+| Specs | Hex | Notes |
 |-------|-----|-------|
 | `--color-red`       | `#B81A56` | The official Hiero brand color. Links, primary accents, table headers. |
 | `--color-red-dark`  | `#992350` | Darker shade — hover/emphasis. |

@@ -21,10 +21,11 @@ This event included members from Hashgraph, OpenElements, BlockyDevs, Linux Foun
 
 ## A Day of Learning in Berlin
 
+The day started with a warm welcome from [Hendrik Ebbers](https://github.com/hendrikebbers) who helped organize this event. 
 
-## Bringing the Hiero Community Together
+After a short introduction to the agenda, the conversaition was led by [Sophie Bulloch](https://github.com/exploreriii) on the importance of the open-source community and our Hiero community latest [analytics](https://hiero-hackers.github.io/analytics/) which reflect a promising future for the project's health so far in the first half of the year.
 
-
+[Hendrik](https://github.com/hendrikebbers) and [Jessica](https://github.com/jwagantall) presented the keynote which included a conversation about what defines a blockchain and how Hiero is defined in a nutshell. Following that, the group reviewed a report on the current status of Hiero and what the plans are for the near future using several scenarios as examples including an introduction to CLPR which is a new bridgeless Cross-Ledger Protocol depeveloped by Hashgraph.    
 
 ## Building Momentum For What Comes Next
 

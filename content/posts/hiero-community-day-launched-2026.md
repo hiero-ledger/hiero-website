@@ -28,7 +28,7 @@ This event included members from Hashgraph, OpenElements, BlockyDevs, Linux Foun
 
 ## Building Momentum For What Comes Next
 
-July 2026 marks a very important milestone for the Hiero Community: Come together as a community once more for a day of celebrating the projects achievements and mutually encorage each other to amplify the participation and reach across the open-source community.
+July 2026 marks a very important milestone for the Hiero Community: Come together as a community once more for a day of celebrating the projects achievements and mutually encourage each other to amplify the participation and reach across the open-source community.
 
 
 ## Thank You to Our Community
@@ -44,7 +44,7 @@ Events like this are possible because of the people behind the project: maintain
 
 ## Get involved
 
-Whether you attended Hiero Community Day in Berlin and/or are currently contributin to the project, there are many ways to get involved.
+Whether you attended Hiero Community Day in Berlin and/or are currently contribuiting to the project, there are many ways to get involved.
 - Explore the [Hiero repositories](https://github.com/hiero-ledger)
 - Join [community discussions in Discord](https://discord.com/invite/hyperledger)
 - Participate in our [open meetings](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week)

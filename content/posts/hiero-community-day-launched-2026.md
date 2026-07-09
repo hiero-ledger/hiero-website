@@ -38,10 +38,11 @@ Thank you to everyone who joined us in Berlin, participated in the sessions, ask
 
 Events like this are possible because of the people behind the project: maintainers, contributors, adopters, developers, and community members who continue to show up and help build together.
 
-<img width="40%" alt="" src="https://github.com/user-attachments/assets/7dca2ca0-370d-4e31-a542-a5911e78bf11" />
-<img width="40%" alt="" src="https://github.com/user-attachments/assets/794ee0e4-0f62-4eff-b544-b8f70411e425" />
-<img width="40%" alt="" src="https://github.com/user-attachments/assets/c6d3784f-cb1f-4f60-a6ac-b816c4e5ba26" />
-
+![Hiero Community Day 2026](/images/hcd-1.jpg)
+![Hiero Community Day 2026](/images/hcd-2.jpg)
+![Hiero Community Day 2026](/images/hcd-3.jpg)
+![Hiero Community Day 2026](/images/hcd-4.jpg)
+![Hiero Community Day 2026](/images/hcd-5.jpg)
 
 ## Get involved
 

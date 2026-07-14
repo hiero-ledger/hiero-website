@@ -21,19 +21,19 @@ This event included members from Hashgraph, OpenElements, BlockyDevs, Linux Foun
 
 ## A Day of Learning in Berlin
 
-The day started with a warm welcome from [**Hendrik Ebbers**](https://github.com/hendrikebbers) who helped organize this event. 
+The day started with a warm welcome from [**Hendrik Ebbers** (Hiero Director of Open-source)](https://github.com/hendrikebbers) who helped organize this event. 
 
-After a short introduction to the agenda, the conversation was led by [**Sophie Bulloch** (Hiero Python SDK Maintainer)](https://github.com/exploreriii) on the importance of the open-source community and our Hiero community latest [analytics](https://hiero-hackers.github.io/analytics/) which reflect a promising future for the project's health so far in the first half of the year.
+After a short introduction to the agenda, the conversation started by [**Sophie Bulloch** (Hiero Python SDK Maintainer)](https://github.com/exploreriii) on [Why Community Matters](https://github.com/hiero-ledger/awesome-contributions/blob/main/hiero-community-day-2026/Why-community-matters-v2-3.pdf) and our Hiero community latest [analytics](https://hiero-hackers.github.io/analytics/) which reflect a promising future for the project's health so far in the first half of the year.
 
-[**Hendrik Ebbers**(Hiero Director of OpenSource)](https://github.com/hendrikebbers) and [**Jessica Gonzalez** (LF Decentralized Trust)](https://github.com/jwagantall) presented the keynote which included a conversation about what defines a blockchain and how Hiero is defined in a nutshell. Following that, the group reviewed a report on the current status of Hiero and what the plans are for the near future using several scenarios as examples including an introduction to CLPR which is a new bridgeless Cross-Ledger Protocol developed by Hashgraph.    
+[**Hendrik Ebbers** (Hiero Director of OpenSource)](https://github.com/hendrikebbers) and [**Jessica Gonzalez** (LF Decentralized Trust)](https://github.com/jwagantall) presented the [Hiero Keynote](https://github.com/hiero-ledger/awesome-contributions/blob/main/hiero-community-day-2026/HieroCommunityDayKeynote.pdf) which included a conversation about what defines a blockchain and how Hiero is defined in a nutshell. Following that, the group reviewed a report on the current status of Hiero and what the plans are for the near future using several scenarios as examples including an introduction to CLPR which is a new bridgeless Cross-Ledger Protocol developed by Hashgraph.    
 
-[**Piotr Świerzy** (BlockyDevs)](https://github.com/piotrswierzy) gave a presentation on Agentic AI and how the Hiero project can benefit by leveraging successfully the tools that we have available. 
+[**Piotr Świerzy** (BlockyDevs)](https://github.com/piotrswierzy) gave a presentation on [Agentic Commerce](https://github.com/hiero-ledger/awesome-contributions/blob/main/hiero-community-day-2026/AgenticCommerce-WAD2026.pdf) and how the Hiero project can benefit by leveraging successfully the tools that we have available. 
 
-[**Rob Walworth** (Hiero SDK Maintainer)](https://github.com/rwalworth) presented a review on the current state of the Hiero SDKs and the future that is being designed to continue their development. 
+[**Rob Walworth** (Hiero SDK Maintainer)](https://github.com/rwalworth) presented a review on the current state of the [Hiero SDKs](https://github.com/hiero-ledger/awesome-contributions/blob/main/hiero-community-day-2026/HieroSDKsEvolveintoCommunityProjects.pdf) and the future that is being designed to continue their development. 
 
-[**Jessica Gonzalez**](https://github.com/jwagantall) and [**Alexander Shechin** (DSR)](https://github.com/AlexanderShenshin) led a discussion on Proof of Personhood and how the Hiero Heka project is working to develop a solution to digital identity in this era where AI is becoming fast and more convincing at faking contributions that can have a negative impact in open-source projects. 
+[**Jessica Gonzalez**](https://github.com/jwagantall) and [**Alexander Shenshin** (DSR)](https://github.com/AlexanderShenshin) led a discussion on [Proof of Personhood](https://github.com/hiero-ledger/awesome-contributions/blob/main/hiero-community-day-2026/ProofofPersonhood.pdf) and how the [Hiero Heka](https://github.com/hiero-ledger/awesome-contributions/blob/main/hiero-community-day-2026/Hiero-Heka-LFDT-052126.pdf) project is working to develop a solution to digital identity in this era where AI is becoming fast and more convincing at faking contributions that can have a negative impact in open-source projects. 
 
-[**Noah Tayebwa** (Open Elements)](https://github.com/Ndacyayisenga-droid) offered an update on Solo and Solo Action which are core components of the Hiero project. 
+[**Noah Tayebwa** (Open Elements)](https://github.com/Ndacyayisenga-droid) offered an update on [Solo and Solo Action](https://github.com/hiero-ledger/awesome-contributions/blob/main/hiero-community-day-2026/Solo-presentation.pdf) which are core components of the Hiero project. 
 
 The event's sessions came to a conclusion with the weekly [Technical Steering Commitee meeting](https://zoom.us/rec/share/k1oXUWttx4QTBzpfi1mSmwyzjXGIHq9mcHgmjZqJVzmOsND9ja7ly8Qfu5_WxJad.NWCUiZYbvcnbbByO) happening live for the very first time! Remote participants of the meeting were delighted to see several members of the community together in one place to attend this call and make a more dynamic interaction possible.   
 
@@ -49,11 +49,11 @@ Thank you to everyone who joined us in Berlin, participated in the sessions, ask
 
 We look forward to more events like this!
 
-![Hiero Community Day 2026](/images/hcd-1.jpg)
-![Hiero Community Day 2026](/images/hcd-2.jpg)
-![Hiero Community Day 2026](/images/hcd-3.jpg)
-![Hiero Community Day 2026](/images/hcd-4.jpg)
-![Hiero Community Day 2026](/images/hcd-5.jpg)
+![HCD-2026_Presentation_Room](/images/hcd-1.jpg)
+![HCD-2026 Networking](/images/hcd-2.jpg)
+![HCD-2026_Venue_Welcome](/images/hcd-3.jpg)
+![HCD-2026_Hiero_Swag](/images/hcd-4.jpg)
+![HCD-2026_LFDT_Swag](/images/hcd-5.jpg)
 
 ## Get involved
 

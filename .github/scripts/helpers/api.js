@@ -5,30 +5,21 @@
 // Bot context builder and GitHub API wrappers (labels, assignees, comments,
 // commit/issue fetching, and label swap helpers).
 
-import { getLogger } from './logger.js';
+const { getLogger } = require('./logger');
 
-import {
+const {
   isSafeSearchToken,
   requireObject,
   requireNonEmptyString,
   requirePositiveInt,
   requireSafeUsername,
-} from './validation.js';
+} = require('./validation');
 
-import {
-  LABELS,
-  SKILL_HIERARCHY,
-  ISSUE_STATE,
-} from './constants.js';
+const { LABELS, SKILL_HIERARCHY, ISSUE_STATE } = require('./constants');
 
-import {
-  checkDCO,
-  checkGPG,
-  checkMergeConflict,
-  checkIssueLink,
-} from './checks.js';
+const { checkDCO, checkGPG, checkMergeConflict, checkIssueLink } = require('./checks');
 
-import { buildBotComment } from './comments.js';
+const { buildBotComment } = require('./comments');
 
 /**
  * Builds the bot context for any bot. Validates github, context, and payload; throws if invalid.
@@ -851,7 +842,7 @@ function getHighestIssueSkillLevel(issue) {
  *
  * @param {object} github - Octokit GitHub API client (must support github.rest).
  * @param {string} owner - Repository owner (e.g. 'hiero-ledger').
- * @param {string} repo - Repository name (e.g. 'hiero-website').
+ * @param {string} repo - Repository name (e.g. 'hiero-enterprise-java').
  * @param {string} username - GitHub username to search for.
  * @param {string} state - Issue state filter: ISSUE_STATE.OPEN or ISSUE_STATE.CLOSED.
  * @param {string|null} [label=null] - Optional label filter (e.g. 'skill: good first issue').
@@ -968,7 +959,7 @@ async function countIssuesByAssignee(
  *
  * @param {object} github - Octokit GitHub API client (must support github.rest).
  * @param {string} owner - Repository owner (e.g. 'hiero-ledger').
- * @param {string} repo - Repository name (e.g. 'hiero-website').
+ * @param {string} repo - Repository name (e.g. 'hiero-enterprise-java').
  * @param {string} username - GitHub username to search for.
  * @returns {Promise<Array|null>} Array of issue objects, or null if inputs are invalid or the API call fails.
  */
@@ -1112,7 +1103,7 @@ async function hasNeedsReviewPR(github, owner, repo, username, issueNumber) {
   }
 }
 
-export default {
+module.exports = {
   buildBotContext,
   addLabels,
   removeLabel,

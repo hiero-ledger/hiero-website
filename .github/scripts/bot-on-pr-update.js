@@ -7,16 +7,16 @@
 // dashboard comment, and conditionally swaps the status label.
 // For edited events, exits early if only the title or base branch changed.
 
-import {
+const {
   createLogger,
   buildBotContext,
   swapStatusLabel,
   runAllChecksAndComment,
-} from './helpers.js';
+} = require('./helpers');
 
 const logger = createLogger('on-pr-update');
 
-export default async ({ github, context }) => {
+module.exports = async ({ github, context }) => {
   try {
     const botContext = buildBotContext({ github, context });
 

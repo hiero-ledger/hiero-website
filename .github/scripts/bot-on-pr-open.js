@@ -7,14 +7,14 @@
 // the unified dashboard comment, auto-assigns the author, and applies the
 // appropriate status label.
 
-import {
+const {
   createLogger,
   buildBotContext,
   addAssignees,
   requireSafeUsername,
   runAllChecksAndComment,
   swapStatusLabel,
-} from './helpers.js';
+} = require('./helpers');
 
 const logger = createLogger('on-pr-open');
 
@@ -46,7 +46,7 @@ async function autoAssignAuthor(botContext) {
   await addAssignees(botContext, [prAuthor]);
 }
 
-export default async ({ github, context }) => {
+module.exports = async ({ github, context }) => {
   try {
     const botContext = buildBotContext({ github, context });
 

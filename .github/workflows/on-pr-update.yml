@@ -13,11 +13,10 @@ on:
 permissions:
   contents: read
   pull-requests: write
-  checks: write
 
 jobs:
   on-pr-update:
-    runs-on: hiero-client-sdk-linux-large
+    runs-on: hl-web-lin-md
     if: github.event.pull_request.draft == false
 
     concurrency:
@@ -32,6 +31,8 @@ jobs:
 
       - name: Checkout Repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
       - name: Run Bot
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0

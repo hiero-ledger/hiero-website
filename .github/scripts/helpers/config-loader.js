@@ -7,8 +7,9 @@
 // the nested config structure back into the flat constant shapes
 // consumed by the rest of the bot scripts.
 
-import fs from 'fs';
-import path from 'path';
+const fs = require('fs');
+
+const path = require('path');
 
 /**
  * Default path to the repository automation config file.
@@ -361,7 +362,7 @@ function buildConstants(config) {
   };
 }
 
-export default {
+module.exports = {
   DEFAULT_CONFIG_PATH,
   loadAutomationConfig,
   buildConstants,

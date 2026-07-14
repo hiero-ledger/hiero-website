@@ -15,7 +15,7 @@ Berlin, Germany — July 7, 2026
 
 The first in-person [Hiero Community Day 2026](https://luma.com/Hiero-day-berlin) officially launched in Berlin, bringing together maintainers, contributors, and open-source community members for a full day of insights into the current topics of conversation in the community, technical updates, and a fun evening of community connection.
 
-The Hiero community came together at TreeHouse Berlin for a day that delivered engaging presentations including Agentic AI, Hiero SDK updates, Proof of Personhood, Core Component Updates as well as discussions about the importance of having a thriving community helping us shape the path to success among other technical discussions.
+The Hiero community came together at TreeHouse Berlin for a day that delivered engaging presentations including Agentic AI, Hiero SDK updates, Proof of Personhood, Core Component updates as well as discussions about the importance of having a thriving community helping us shape the path to success among other technical discussions.
 
 This event included members from Hashgraph, OpenElements, BlockyDevs, Linux Foundation Decentralized Trust, DSR and independent community members excited to meet with the talented people that have contributed to the growth and expansion of Hiero since it first came to be in September 2024. 
 
@@ -39,7 +39,7 @@ The event's sessions came to a conclusion with the weekly [Technical Steering Co
 
 ## Building Momentum For What Comes Next
 
-July 2026 marks a very important milestone for the Hiero community: Coming together as a community once more for a day of celebrating the projects achievements and mutually encourage each other to amplify the participation and reach across the open-source community.
+July 2026 marks a very important milestone for the Hiero community: Coming together as a community once more for a day of celebrating the project achievements and mutually encourage each other to amplify the participation and reach across the open-source community.
 
 We believe in the power of collaboration. Hiero has reached its current [level of maturity](https://insights.linuxfoundation.org/project/hiero?) thanks to the dedication and ongoing work of its maintainers, contributors, adopters, developers, and users. Their continued support makes it possible for us to proudly showcase this progress, share it with new audiences, and welcome more people into the community to help shape the future of Hiero.
 

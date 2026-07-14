@@ -5,21 +5,27 @@
 // Bot context builder and GitHub API wrappers (labels, assignees, comments,
 // commit/issue fetching, and label swap helpers).
 
-const { getLogger } = require('./logger');
+import { getLogger } from './logger.js';
 
-const {
+import {
   isSafeSearchToken,
   requireObject,
   requireNonEmptyString,
   requirePositiveInt,
   requireSafeUsername,
-} = require('./validation');
+} from './validation.js';
 
-const { LABELS, SKILL_HIERARCHY, ISSUE_STATE } = require('./constants');
+import { LABELS, SKILL_HIERARCHY, ISSUE_STATE } from './constants.js';
 
-const { checkDCO, checkGPG, checkMergeConflict, checkIssueLink } = require('./checks');
+import {
+  checkDCO,
+  checkGPG,
+  checkMergeConflict,
+  checkIssueLink,
+} from './checks.js';
 
-const { buildBotComment } = require('./comments');
+import { buildBotComment } from './comments.js';
+
 
 /**
  * Builds the bot context for any bot. Validates github, context, and payload; throws if invalid.
@@ -1103,7 +1109,7 @@ async function hasNeedsReviewPR(github, owner, repo, username, issueNumber) {
   }
 }
 
-module.exports = {
+export {
   buildBotContext,
   addLabels,
   removeLabel,

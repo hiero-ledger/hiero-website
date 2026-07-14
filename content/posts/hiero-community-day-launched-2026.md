@@ -41,7 +41,7 @@ The event's sessions came to a conclusion with the weekly [Technical Steering Co
 
 July 2026 marks a very important milestone for the Hiero community: Coming together as a community once more for a day of celebrating the projects achievements and mutually encourage each other to amplify the participation and reach across the open-source community.
 
-We believe in the power of collaboration. Hiero has reached its current [level of maturity]((https://insights.linuxfoundation.org/project/hiero?) ) thanks to the dedication and ongoing work of its maintainers, contributors, adopters, developers, and users. Their continued support makes it possible for us to proudly showcase this progress, share it with new audiences, and welcome more people into the community to help shape the future of Hiero.
+We believe in the power of collaboration. Hiero has reached its current [level of maturity](https://insights.linuxfoundation.org/project/hiero?) thanks to the dedication and ongoing work of its maintainers, contributors, adopters, developers, and users. Their continued support makes it possible for us to proudly showcase this progress, share it with new audiences, and welcome more people into the community to help shape the future of Hiero.
 
 ## Thank You to Our Community
 

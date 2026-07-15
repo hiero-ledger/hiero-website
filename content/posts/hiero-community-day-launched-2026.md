@@ -54,6 +54,12 @@ We look forward to more events like this!
 ![HCD-2026_Venue_Welcome](/images/hcd-3.jpg)
 ![HCD-2026_Hiero_Swag](/images/hcd-4.jpg)
 ![HCD-2026_LFDT_Swag](/images/hcd-5.jpg)
+![HCD-2026_LFDT_Dinner](/images/hcd-6.jpg)
+![HCD-2026_LFDT_DJ](/images/hcd-7.jpg)
+![HCD-2026_LFDT_Hello](/images/hcd-8.jpg)
+![HCD-2026_LFDT_Hello2](/images/hcd-9.jpg)
+![HCD-2026_LFDT_Lunch](/images/hcd-10.jpg)
+![HCD-2026_LFDT_Learning](/images/hcd-11.jpg)
 
 ## Get involved
 

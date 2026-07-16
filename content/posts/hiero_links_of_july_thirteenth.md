@@ -13,7 +13,7 @@ the week of July 13th."""
 ## Hiero Links For The Week Of July 13th
 
 This week featured a lot of new and exciting updates within the Hiero Organization. 
-Below are links to some of things that happened this past week. **Check it out!**
+Below are links to some of the things that happened this past week. **Check it out!**
 
 ---
 **[Angelina C](https://github.com/aceppaluni)** added a [PR dashboard](https://github.com/hiero-ledger/hiero-enterprise-java/pull/223) to Hiero Enterprise Java to track PR changes in real time. 

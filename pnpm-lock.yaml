@@ -40,8 +40,8 @@ importers:
         specifier: ^14.0.2
         version: 14.0.2
       toml:
-        specifier: ^4.1.1
-        version: 4.1.1
+        specifier: ^5.0.0
+        version: 5.0.0
     devDependencies:
       '@netlify/plugin-nextjs':
         specifier: ^5.15.12
@@ -2656,8 +2656,8 @@ packages:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
 
-  toml@4.1.1:
-    resolution: {integrity: sha512-EBJnVBr3dTXdA89WVFoAIPUqkBjxPMwRqsfuo1r240tKFHXv3zgca4+NJib/h6TyvGF7vOawz0jGuryJCdNHrw==}
+  toml@5.0.0:
+    resolution: {integrity: sha512-bsqEd+g7fzlrw7LEynQ6W6aOK/lTOlepz5x1sJyIV9fTZVJS2Q76nuju6FK+gZhW5bUpvB7mCEqdR0u4WziMFw==}
     engines: {node: '>=20'}
 
   tough-cookie@6.0.1:
@@ -5785,7 +5785,7 @@ snapshots:
     dependencies:
       is-number: 7.0.0
 
-  toml@4.1.1: {}
+  toml@5.0.0: {}
 
   tough-cookie@6.0.1:
     dependencies:

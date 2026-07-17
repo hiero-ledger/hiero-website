@@ -24,7 +24,7 @@
     "react-markdown": "^10.1.0",
     "rehype-highlight": "^7.0.2",
     "swiper": "^14.0.2",
-    "toml": "^4.1.1"
+    "toml": "^5.0.0"
   },
   "devDependencies": {
     "@netlify/plugin-nextjs": "^5.15.12",

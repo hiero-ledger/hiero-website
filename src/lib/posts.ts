@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import matter from "gray-matter";
+import { load as parseYaml } from "js-yaml";
 import { parse as parseToml } from "toml";
 
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
@@ -56,13 +56,56 @@ function safeParseToml(input: string): object {
   return parseToml(s);
 }
 
-const MATTER_OPTIONS = {
-  language: "toml" as const,
-  delimiters: "+++" as const,
-  engines: {
-    toml: safeParseToml,
-  },
-};
+interface FrontmatterResult {
+  data: Record<string, unknown>;
+  content: string;
+}
+
+function parseStructuredData(input: unknown): Record<string, unknown> {
+  if (!input || typeof input !== "object" || Array.isArray(input)) {
+    return {};
+  }
+  return input as Record<string, unknown>;
+}
+
+function extractFrontmatter(raw: string, delimiter: "+++" | "---") {
+  const normalized = raw.replace(/\r\n/g, "\n").replace(/^\uFEFF/, "");
+  const escaped = delimiter === "+++" ? "\\+\\+\\+" : "---";
+  const matcher = new RegExp(
+    `^[^\\S\\n]*${escaped}[^\\S\\n]*\\n([\\s\\S]*?)\\n?[^\\S\\n]*${escaped}[^\\S\\n]*(?:\\n|$)`,
+  );
+  const match = normalized.match(matcher);
+  if (!match) {
+    return null;
+  }
+
+  return {
+    frontmatter: match[1],
+    content: normalized.slice(match[0].length),
+  };
+}
+
+function parseTomlFrontmatter(raw: string): FrontmatterResult {
+  const extracted = extractFrontmatter(raw, "+++");
+  if (!extracted) {
+    return { data: {}, content: raw };
+  }
+  return {
+    data: parseStructuredData(safeParseToml(extracted.frontmatter)),
+    content: extracted.content,
+  };
+}
+
+function parseYamlFrontmatter(raw: string): FrontmatterResult {
+  const extracted = extractFrontmatter(raw, "---");
+  if (!extracted) {
+    return { data: {}, content: raw };
+  }
+  return {
+    data: parseStructuredData(parseYaml(extracted.frontmatter)),
+    content: extracted.content,
+  };
+}
 
 function cleanContent(content: string): string {
   return content
@@ -142,9 +185,7 @@ export function getAllPosts(): PostMeta[] {
   for (const file of files) {
     try {
       const raw = fs.readFileSync(path.join(POSTS_DIR, file), "utf8");
-      const { data } = matter(raw, MATTER_OPTIONS) as unknown as {
-        data: Record<string, unknown>;
-      };
+      const { data } = parseTomlFrontmatter(raw);
       if (data.draft === true) continue;
       posts.push(buildMeta(data, file));
     } catch {
@@ -163,10 +204,7 @@ export function getPostBySlug(slug: string): PostFull | null {
   for (const file of files) {
     try {
       const raw = fs.readFileSync(path.join(POSTS_DIR, file), "utf8");
-      const { data, content } = matter(raw, MATTER_OPTIONS) as unknown as {
-        data: Record<string, unknown>;
-        content: string;
-      };
+      const { data, content } = parseTomlFrontmatter(raw);
       if (data.draft === true) continue;
       if (deriveSlug(data, file) !== slug) continue;
       return {
@@ -189,9 +227,7 @@ export function getBlogIndexMeta(): BlogIndexMeta {
   if (!fs.existsSync(BLOG_INDEX_FILE)) return fallback;
   try {
     const raw = fs.readFileSync(BLOG_INDEX_FILE, "utf8");
-    const { data } = matter(raw, MATTER_OPTIONS) as unknown as {
-      data: Record<string, unknown>;
-    };
+    const { data } = parseTomlFrontmatter(raw);
     return {
       title: String(data.title ?? fallback.title),
       subtitle: String(data.subtitle ?? fallback.subtitle),
@@ -208,7 +244,7 @@ export function getSimplePage(contentPath: string): SimplePageContent | null {
   if (!fs.existsSync(filePath)) return null;
   try {
     const raw = fs.readFileSync(filePath, "utf8");
-    const { data, content } = matter(raw);
+    const { data, content } = parseYamlFrontmatter(raw);
     return {
       title: String(data.title ?? ""),
       description: String(data.description ?? ""),

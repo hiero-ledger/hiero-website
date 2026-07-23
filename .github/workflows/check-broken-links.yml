@@ -25,11 +25,11 @@ jobs:
           egress-policy: audit
 
       - name: Checkout repository
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Check Markdown links (Lychee)
         id: lychee
-        uses: lycheeverse/lychee-action@8646ba30535128ac92d33dfc9133794bfdd9b411 # v2.8.0
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
         continue-on-error: true
         with:
           args: --verbose --no-progress './**/*.md'
@@ -38,7 +38,7 @@ jobs:
 
       - name: Report Broken Links (Idempotent Issue Management)
         if: steps.lychee.outcome == 'failure'
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             // Determine if this is a dry run

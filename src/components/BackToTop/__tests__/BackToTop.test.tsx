@@ -20,4 +20,23 @@ describe("BackToTop", () => {
 
     expect(scrollTo).toHaveBeenCalledWith({ top: 0, behavior: "smooth" });
   });
+
+  it("disables smooth scrolling when reduced motion is preferred", async () => {
+    vi.spyOn(window, "matchMedia").mockReturnValue({
+      matches: true,
+    } as MediaQueryList);
+    const scrollTo = vi
+      .spyOn(window, "scrollTo")
+      .mockImplementation(() => undefined);
+    const user = userEvent.setup();
+
+    render(<BackToTop />);
+
+    await user.click(screen.getByRole("button", { name: "Back to top" }));
+
+    expect(window.matchMedia).toHaveBeenCalledWith(
+      "(prefers-reduced-motion: reduce)",
+    );
+    expect(scrollTo).toHaveBeenCalledWith({ top: 0, behavior: "auto" });
+  });
 });

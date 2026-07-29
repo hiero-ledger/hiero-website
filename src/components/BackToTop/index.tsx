@@ -6,7 +6,14 @@ export default function BackToTop() {
       type="button"
       aria-label="Back to top"
       onClick={() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        const prefersReducedMotion =
+          typeof window.matchMedia === "function" &&
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion ? "auto" : "smooth",
+        });
       }}
       className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-charcoal/20 text-charcoal transition-colors duration-300 ease-in-out hover:border-red hover:bg-red hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2 focus-visible:ring-offset-sand">
       <svg

@@ -65,9 +65,9 @@ describe("Footer", () => {
     render(<Footer />);
 
     const footerNav = screen.getByRole("navigation", { name: "Footer" });
-    const externalItems = menuItems.filter(item =>
-      item.href.startsWith("http"),
-    );
+    const externalItems = footerNavGroups
+      .flatMap(group => group.items)
+      .filter(item => item.external ?? item.href.startsWith("http"));
 
     expect(externalItems.length).toBeGreaterThan(0);
 

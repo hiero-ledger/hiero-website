@@ -126,14 +126,6 @@ exports[`Footer > renders the footer copy and policy link 1`] = `
                   Issue Explorer
                 </a>
               </li>
-              <li>
-                <a
-                  class="group/link text-[0.9375rem] leading-6 text-sand/85 no-underline transition-colors duration-200 ease-out hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal"
-                  href="/heroes/"
-                >
-                  Hiero Heroes
-                </a>
-              </li>
             </ul>
           </div>
           <div>

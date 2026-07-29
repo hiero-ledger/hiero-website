@@ -142,16 +142,15 @@ header nav a.active::after {
   header nav a.active::after {
     display: none;
   }
-  header nav a:focus,
-  header nav a.active:focus {
-    outline: none !important;
-    box-shadow: none !important;
+  header nav a:focus-visible {
+    outline: 2px solid #D92D6A;
+    outline-offset: 3px;
   }
 }
 
 /* Desktop focus */
 @media (min-width: 640px) {
-  header nav a:focus {
+  header nav a:focus-visible {
     @apply outline-none ring-2 ring-red-light ring-offset-2;
   }
 }

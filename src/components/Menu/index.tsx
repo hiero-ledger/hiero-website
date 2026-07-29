@@ -4,7 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { menuItems, socialLinks } from "@/data/navigation";
+import {
+  isExternalLink,
+  menuItems,
+  opensInNewTab,
+  socialLinks,
+  withNewTabHint,
+} from "@/data/navigation";
 
 export default function Menu() {
   const pathname = usePathname();
@@ -103,8 +109,8 @@ export default function Menu() {
         <ul id="menu" className="flex flex-col sm:flex-row justify-between">
           {menuItems.map(item => {
             const active = isActive(item.href);
-            const isExternal = item.external ?? item.href.startsWith("http");
-            const openInNewTab = item.newTab ?? isExternal;
+            const isExternal = isExternalLink(item);
+            const openInNewTab = opensInNewTab(item);
 
             return (
               <li
@@ -117,6 +123,9 @@ export default function Menu() {
                     rel={openInNewTab ? "noopener noreferrer" : undefined}
                     className={active ? "active" : ""}
                     aria-current={active ? "page" : undefined}
+                    aria-label={
+                      openInNewTab ? withNewTabHint(item.name) : undefined
+                    }
                     onClick={() => {
                       setIsOpen(false);
                     }}>
@@ -144,6 +153,7 @@ export default function Menu() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={withNewTabHint(social.name)}
                 className="flex">
                 <Image
                   src={social.icon}

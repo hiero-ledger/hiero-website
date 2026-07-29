@@ -5,9 +5,23 @@ import Container from "@/components/Container";
 import {
   affiliations,
   footerNavGroups,
+  isExternalLink,
+  opensInNewTab,
   socialLinks,
+  withNewTabHint,
+  type AffiliationName,
   type MenuItem,
 } from "@/data/navigation";
+
+/**
+ * Rendered heights, keyed by affiliation. These two lockups have very
+ * different aspect ratios, so they cannot share one size. Kept here rather
+ * than in `@/data/navigation` so styling stays out of the data module.
+ */
+const affiliationClasses: Record<AffiliationName, string> = {
+  "LF Decentralized Trust": "h-3.5 w-auto sm:h-4",
+  "The Linux Foundation": "h-7 w-auto sm:h-8",
+};
 
 // Inline rather than inline-flex so the external-link icon stays on the same
 // line as the last word when a long label wraps.
@@ -36,10 +50,8 @@ function ExternalLinkIcon() {
 }
 
 function FooterLink({ item }: { item: MenuItem }) {
-  const isExternal = item.external ?? item.href.startsWith("http");
-  const openInNewTab = item.newTab ?? isExternal;
-
-  if (isExternal) {
+  if (isExternalLink(item)) {
+    const openInNewTab = opensInNewTab(item);
     // Tie the icon to the last word so it can never wrap onto a line by itself.
     const words = item.name.split(" ");
     const lastWord = words.pop() ?? item.name;
@@ -49,6 +61,7 @@ function FooterLink({ item }: { item: MenuItem }) {
         href={item.href}
         target={openInNewTab ? "_blank" : undefined}
         rel={openInNewTab ? "noopener noreferrer" : undefined}
+        aria-label={openInNewTab ? withNewTabHint(item.name) : undefined}
         className={linkClasses}>
         {words.length > 0 ? `${words.join(" ")} ` : null}
         <span className="whitespace-nowrap">
@@ -125,6 +138,7 @@ export default function Footer() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={withNewTabHint(social.name)}
                       className="flex h-10 w-10 items-center justify-center rounded-full border border-sand/20 bg-white/5 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-red-light hover:bg-red-light focus:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal">
                       {/* The source icons have different aspect ratios (GitHub
                           is 15x17, Discord 127x96), so letterbox them in a
@@ -189,13 +203,14 @@ export default function Footer() {
                         href={affiliation.href}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={withNewTabHint(affiliation.name)}
                         className="inline-flex max-w-full rounded-sm transition-opacity duration-200 ease-out hover:opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-4 focus-visible:ring-offset-sand">
                         <Image
                           src={affiliation.logo}
                           alt={affiliation.name}
                           width={affiliation.width}
                           height={affiliation.height}
-                          className={`max-w-full object-contain ${affiliation.className}`}
+                          className={`max-w-full object-contain ${affiliationClasses[affiliation.name]}`}
                         />
                       </a>
                     </li>
@@ -209,7 +224,8 @@ export default function Footer() {
                   <a
                     href="https://lfprojects.org"
                     target="_blank"
-                    rel="noreferrer noopener"
+                    rel="noopener noreferrer"
+                    aria-label={withNewTabHint("LF Projects")}
                     className="font-medium text-red underline decoration-red/35 underline-offset-2 transition-colors duration-200 ease-out hover:text-red-dark hover:decoration-red-dark">
                     LF Projects
                   </a>

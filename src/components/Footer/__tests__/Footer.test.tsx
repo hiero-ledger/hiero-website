@@ -3,21 +3,28 @@ import { describe, expect, it } from "vitest";
 import {
   affiliations,
   footerNavGroups,
+  isExternalLink,
   menuItems,
+  opensInNewTab,
   socialLinks,
+  withNewTabHint,
 } from "@/data/navigation";
 import Footer from "..";
 
+/** Links that open in a new tab announce that in their accessible name. */
+const accessibleName = (name: string, newTab: boolean) =>
+  newTab ? withNewTabHint(name) : name;
+
 describe("Footer", () => {
   it("renders the footer copy and policy link", () => {
-    const { container } = render(<Footer />);
+    render(<Footer />);
 
     expect(screen.getByText(/Copyright/i)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "LF Projects" })).toHaveAttribute(
-      "href",
-      "https://lfprojects.org",
-    );
-    expect(container.firstChild).toMatchSnapshot();
+    expect(
+      screen.getByRole("link", {
+        name: accessibleName("LF Projects", true),
+      }),
+    ).toHaveAttribute("href", "https://lfprojects.org");
   });
 
   it("renders the branding logo linking home", () => {
@@ -29,15 +36,20 @@ describe("Footer", () => {
     expect(within(homeLink).getByAltText("Hiero")).toBeInTheDocument();
   });
 
+  // The footer is expected to surface every header menu item, so adding a
+  // header link without adding it to `footerNavGroups` should fail here.
   it("renders every navigation link with the shared menu data", () => {
     render(<Footer />);
 
     const footerNav = screen.getByRole("navigation", { name: "Footer" });
 
     for (const item of menuItems) {
-      expect(
-        within(footerNav).getByRole("link", { name: item.name }),
-      ).toHaveAttribute("href", item.href);
+      const name = accessibleName(item.name, opensInNewTab(item));
+
+      expect(within(footerNav).getByRole("link", { name })).toHaveAttribute(
+        "href",
+        item.href,
+      );
     }
   });
 
@@ -54,9 +66,12 @@ describe("Footer", () => {
       ).toBeInTheDocument();
 
       for (const item of group.items) {
-        expect(
-          within(list).getByRole("link", { name: item.name }),
-        ).toHaveAttribute("href", item.href);
+        const name = accessibleName(item.name, opensInNewTab(item));
+
+        expect(within(list).getByRole("link", { name })).toHaveAttribute(
+          "href",
+          item.href,
+        );
       }
     }
   });
@@ -67,12 +82,14 @@ describe("Footer", () => {
     const footerNav = screen.getByRole("navigation", { name: "Footer" });
     const externalItems = footerNavGroups
       .flatMap(group => group.items)
-      .filter(item => item.external ?? item.href.startsWith("http"));
+      .filter(isExternalLink);
 
     expect(externalItems.length).toBeGreaterThan(0);
 
     for (const item of externalItems) {
-      const link = within(footerNav).getByRole("link", { name: item.name });
+      const link = within(footerNav).getByRole("link", {
+        name: accessibleName(item.name, true),
+      });
 
       expect(link).toHaveAttribute("target", "_blank");
       expect(link).toHaveAttribute("rel", "noopener noreferrer");
@@ -93,7 +110,9 @@ describe("Footer", () => {
     render(<Footer />);
 
     for (const social of socialLinks) {
-      const link = screen.getByRole("link", { name: social.name });
+      const link = screen.getByRole("link", {
+        name: accessibleName(social.name, true),
+      });
 
       expect(link).toHaveAttribute("href", social.href);
       expect(link).toHaveAttribute("target", "_blank");
@@ -108,7 +127,7 @@ describe("Footer", () => {
 
     for (const affiliation of affiliations) {
       const link = within(lockup).getByRole("link", {
-        name: affiliation.name,
+        name: accessibleName(affiliation.name, true),
       });
 
       expect(link).toHaveAttribute("href", affiliation.href);

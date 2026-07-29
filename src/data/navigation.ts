@@ -5,6 +5,28 @@ export interface MenuItem {
   newTab?: boolean;
 }
 
+/** Anything absolute leaves the site unless the item says otherwise. */
+export function isExternalLink(item: MenuItem): boolean {
+  return item.external ?? item.href.startsWith("http");
+}
+
+/** External links open in a new tab unless the item opts out. */
+export function opensInNewTab(item: MenuItem): boolean {
+  return item.newTab ?? isExternalLink(item);
+}
+
+/**
+ * Warning appended to the accessible name of a link that opens in a new tab,
+ * so screen reader users get what the `↗` glyph gives sighted users. It has to
+ * ride on `aria-label`: the name algorithm joins inline elements without a
+ * separator, so a visually hidden span comes out jammed against the link text.
+ */
+export const newTabHintText = "(opens in a new tab)";
+
+export function withNewTabHint(name: string): string {
+  return `${name} ${newTabHintText}`;
+}
+
 /**
  * Declared `as const` so the item names are available as a literal type for
  * `fromMenu` below; `menuItems` re-exports them as plain `MenuItem`s.
@@ -49,8 +71,15 @@ export const socialLinks: SocialLink[] = [
   },
 ];
 
+/**
+ * Named as a union so components sizing these logos can be checked for
+ * exhaustiveness — adding an affiliation then breaks the build rather than
+ * rendering an unsized image.
+ */
+export type AffiliationName = "LF Decentralized Trust" | "The Linux Foundation";
+
 export interface AffiliationLogo {
-  name: string;
+  name: AffiliationName;
   href: string;
   /**
    * Official full-colour logo. Both marks are black/grey artwork, so the band
@@ -60,8 +89,6 @@ export interface AffiliationLogo {
   /** Intrinsic dimensions of `logo`, so the aspect ratio is preserved. */
   width: number;
   height: number;
-  /** Rendered height; these lockups have very different aspect ratios. */
-  className: string;
 }
 
 /**
@@ -75,7 +102,6 @@ export const affiliations: AffiliationLogo[] = [
     logo: "/images/LFDT-Logo-Horizontal-color.svg",
     width: 699,
     height: 39,
-    className: "h-3.5 w-auto sm:h-4",
   },
   {
     name: "The Linux Foundation",
@@ -83,7 +109,6 @@ export const affiliations: AffiliationLogo[] = [
     logo: "/images/LF-Logo-black.svg",
     width: 150,
     height: 50,
-    className: "h-7 w-auto sm:h-8",
   },
 ];
 
@@ -92,22 +117,23 @@ export interface FooterNavGroup {
   items: MenuItem[];
 }
 
+const menuItemsByName = Object.fromEntries(
+  menuItemDefinitions.map(item => [item.name, item]),
+) as Record<MenuItemName, MenuItem>;
+
 /**
  * Picks header menu items by name so the footer reuses their hrefs instead of
  * restating them. Names are checked against `menuItems` at compile time, so a
  * renamed menu item breaks the build rather than silently dropping a link.
  */
 function fromMenu(...names: MenuItemName[]): MenuItem[] {
-  return names.flatMap(name => menuItems.filter(item => item.name === name));
+  return names.map(name => menuItemsByName[name]);
 }
 
 export const footerNavGroups: FooterNavGroup[] = [
   {
     title: "Project",
-    items: [
-      ...fromMenu("Blog", "TSC", "Issue Explorer"),
-      // { name: "Hiero Heroes", href: "/heroes/" },
-    ],
+    items: fromMenu("Blog", "TSC", "Issue Explorer"),
   },
   {
     title: "Community",

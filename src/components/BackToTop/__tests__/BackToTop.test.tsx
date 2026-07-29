@@ -39,4 +39,23 @@ describe("BackToTop", () => {
     );
     expect(scrollTo).toHaveBeenCalledWith({ top: 0, behavior: "auto" });
   });
+
+  it("moves focus to the top of the page so tabbing continues from there", async () => {
+    vi.spyOn(window, "scrollTo").mockImplementation(() => undefined);
+    const user = userEvent.setup();
+
+    const header = document.createElement("header");
+    const headerLink = document.createElement("a");
+    headerLink.href = "/";
+    header.appendChild(headerLink);
+    document.body.appendChild(header);
+
+    render(<BackToTop />);
+
+    await user.click(screen.getByRole("button", { name: "Back to top" }));
+
+    expect(document.activeElement).toBe(headerLink);
+
+    header.remove();
+  });
 });

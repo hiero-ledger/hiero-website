@@ -71,10 +71,8 @@ header {
   @apply border-b border-charcoal border-solid;
 }
 
-/* The footer draws its own gradient top edge, see components/Footer. */
-footer {
-  @apply border-0;
-}
+/* The footer has no border rule of its own: it draws a gradient top edge
+   inside the component, see components/Footer. */
 
 main a:not([class]) {
   @apply text-red underline;

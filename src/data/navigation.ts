@@ -106,7 +106,7 @@ export const footerNavGroups: FooterNavGroup[] = [
     title: "Project",
     items: [
       ...fromMenu("Blog", "TSC", "Issue Explorer"),
-      { name: "Hiero Heroes", href: "/heroes/" },
+      // { name: "Hiero Heroes", href: "/heroes/" },
     ],
   },
   {

@@ -158,7 +158,7 @@ export default function Menu() {
             );
           })}
 
-          <li className="mt-8 flex w-full items-center gap-3 md:mt-0 md:ml-4 md:w-auto md:border-l md:border-charcoal/15 md:pl-4">
+          <li className="self-center flex items-center gap-2">
             {socialLinks.map(social => (
               <a
                 key={social.name}
@@ -166,22 +166,14 @@ export default function Menu() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={withNewTabHint(social.name)}
-                className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-white/25 px-4 text-base leading-none text-white no-underline transition-[color,background-color,border-color,box-shadow] duration-200 hover:border-transparent hover:bg-red-light focus:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal md:h-9 md:flex-none md:border-charcoal/20 md:px-3.5 md:text-sm md:text-charcoal md:hover:border-transparent md:hover:bg-red md:hover:text-white md:hover:shadow-[0_6px_16px_rgba(184,26,86,0.25)] md:focus-visible:ring-red md:focus-visible:ring-offset-white">
-                <Image
-                  src={social.iconOnDark}
-                  alt=""
-                  width={35}
-                  height={35}
-                  className="h-5 w-5 md:hidden"
-                />
+                className="flex">
                 <Image
                   src={social.icon}
-                  alt=""
+                  alt={social.name}
                   width={35}
                   height={35}
-                  className="hidden h-4 w-4 md:block"
+                  className="h-[35px] w-[35px] sm:h-[17px] sm:w-[17px]"
                 />
-                <span>{social.name}</span>
               </a>
             ))}
           </li>

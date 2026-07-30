@@ -28,7 +28,7 @@ describe("Menu", () => {
     const user = userEvent.setup();
 
     mockNavigation.pathname = "/";
-    setWindowWidth(500);
+    setWindowWidth(640);
 
     const { container } = render(<Menu />);
     const nav = container.querySelector("#navigation");
@@ -59,6 +59,25 @@ describe("Menu", () => {
         "aria-current",
         "page",
       );
+    });
+  });
+
+  it("shows names on social links", async () => {
+    setWindowWidth(1024);
+
+    render(<Menu />);
+
+    await waitFor(() => {
+      expect(
+        screen.getByRole("link", {
+          name: "GitHub (opens in a new tab)",
+        }),
+      ).toHaveTextContent("GitHub");
+      expect(
+        screen.getByRole("link", {
+          name: "Discord (opens in a new tab)",
+        }),
+      ).toHaveTextContent("Discord");
     });
   });
 });

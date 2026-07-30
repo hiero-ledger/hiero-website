@@ -19,7 +19,7 @@ export default function Menu() {
 
   useEffect(() => {
     const handleResize = () => {
-      const desktop = window.innerWidth >= 640;
+      const desktop = window.innerWidth >= 768;
       setIsDesktop(desktop);
 
       if (desktop) {
@@ -57,11 +57,21 @@ export default function Menu() {
     return current === target;
   };
 
+  const linkClass = (active: boolean) =>
+    [
+      "block rounded-full no-underline transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+      "px-5 py-3 text-xl focus-visible:ring-red-light focus-visible:ring-offset-charcoal",
+      "md:px-3.5 md:py-2 md:text-sm md:focus-visible:ring-red md:focus-visible:ring-offset-white",
+      active
+        ? "font-semibold bg-white/10 text-white md:bg-red/10 md:text-red"
+        : "text-white/80 hover:bg-white/10 hover:text-white md:text-charcoal md:hover:bg-charcoal/5 md:hover:text-red",
+    ].join(" ");
+
   return (
     <>
       <button
         type="button"
-        className="sm:hidden"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-200 hover:bg-charcoal/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2 md:hidden"
         onClick={() => {
           setIsOpen(true);
         }}
@@ -78,21 +88,21 @@ export default function Menu() {
 
       <nav
         id="navigation"
-        className={`absolute hidden items-center justify-center w-full h-screen bg-black top-0 left-0 text-white sm:relative sm:h-auto sm:top-auto sm:bg-transparent sm:left-auto sm:w-9/12 sm:max-w-xl sm:block ${isOpen ? "active-navigation" : ""}`}
+        className={`fixed inset-0 z-40 flex h-screen w-full flex-col items-center justify-center bg-charcoal text-white transition-[opacity,translate,visibility] duration-300 ease-out md:visible md:pointer-events-auto md:relative md:z-auto md:h-auto md:w-auto md:translate-y-0 md:flex-row md:bg-transparent md:text-charcoal md:opacity-100 md:transition-none ${isOpen ? "translate-y-0 opacity-100" : "pointer-events-none invisible -translate-y-3 opacity-0"}`}
         aria-hidden={isDesktop ? false : !isOpen}>
-        <div className="absolute top-[27px] sm:hidden">
+        <div className="absolute left-6 top-7 md:hidden">
           <Image
             src="/images/Hiero-Icon-wLogo-white-text.svg"
             alt="Hiero logo"
             width={128}
             height={40}
-            className="h-[40px] w-[128px]"
+            className="h-10 w-32"
           />
         </div>
 
         <button
           type="button"
-          className="absolute text-white top-[35px] right-[25px] sm:hidden"
+          className="absolute right-6 top-7 inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition-colors duration-200 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal md:hidden"
           onClick={() => {
             setIsOpen(false);
           }}
@@ -106,7 +116,9 @@ export default function Menu() {
           />
         </button>
 
-        <ul id="menu" className="flex flex-col sm:flex-row justify-between">
+        <ul
+          id="menu"
+          className="flex w-full flex-col items-center gap-2 px-6 md:w-auto md:flex-row md:gap-1 md:px-0">
           {menuItems.map(item => {
             const active = isActive(item.href);
             const isExternal = isExternalLink(item);
@@ -115,13 +127,13 @@ export default function Menu() {
             return (
               <li
                 key={item.name}
-                className={`text-center sm:text-left ${item.name === "Connect" ? "sm:hidden" : ""}`.trim()}>
+                className={`w-full text-center md:w-auto md:text-left ${item.name === "Connect" ? "md:hidden" : ""}`.trim()}>
                 {isExternal ? (
                   <a
                     href={item.href}
                     target={openInNewTab ? "_blank" : undefined}
                     rel={openInNewTab ? "noopener noreferrer" : undefined}
-                    className={active ? "active" : ""}
+                    className={linkClass(active)}
                     aria-current={active ? "page" : undefined}
                     aria-label={
                       openInNewTab ? withNewTabHint(item.name) : undefined
@@ -134,7 +146,7 @@ export default function Menu() {
                 ) : (
                   <Link
                     href={item.href}
-                    className={active ? "active" : ""}
+                    className={linkClass(active)}
                     aria-current={active ? "page" : undefined}
                     onClick={() => {
                       setIsOpen(false);
@@ -146,7 +158,7 @@ export default function Menu() {
             );
           })}
 
-          <li className="self-center flex items-center gap-2">
+          <li className="mt-8 flex w-full items-center gap-3 md:mt-0 md:ml-4 md:w-auto md:border-l md:border-charcoal/15 md:pl-4">
             {socialLinks.map(social => (
               <a
                 key={social.name}
@@ -154,14 +166,22 @@ export default function Menu() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={withNewTabHint(social.name)}
-                className="flex">
+                className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-white/25 px-4 text-base leading-none text-white no-underline transition-[color,background-color,border-color,box-shadow] duration-200 hover:border-transparent hover:bg-red-light focus:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal md:h-9 md:flex-none md:border-charcoal/20 md:px-3.5 md:text-sm md:text-charcoal md:hover:border-transparent md:hover:bg-red md:hover:text-white md:hover:shadow-[0_6px_16px_rgba(184,26,86,0.25)] md:focus-visible:ring-red md:focus-visible:ring-offset-white">
                 <Image
-                  src={social.icon}
-                  alt={social.name}
+                  src={social.iconOnDark}
+                  alt=""
                   width={35}
                   height={35}
-                  className="h-[35px] w-[35px] sm:h-[17px] sm:w-[17px]"
+                  className="h-5 w-5 md:hidden"
                 />
+                <Image
+                  src={social.icon}
+                  alt=""
+                  width={35}
+                  height={35}
+                  className="hidden h-4 w-4 md:block"
+                />
+                <span>{social.name}</span>
               </a>
             ))}
           </li>

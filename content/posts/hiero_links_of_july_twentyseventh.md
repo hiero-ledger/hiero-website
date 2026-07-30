@@ -20,7 +20,7 @@ Below are links to some of the things that happened this past week. **Check it o
 
 **[Mustafa U](https://github.com/mustafauzunn)** deprecated the [privateKey fromString](https://github.com/hiero-ledger/hiero-sdk-java/pull/2855) method in the Java SDK to maintain current SDK specifications.
 
-**[Simon V](https://github.com/svienot)** updated the [Docker container release workflow](https://github.com/hiero-ledger/hiero-mirror-node-explorer/pull/2664) in Hierro Mirror Node to use the hiero-mirror-node-linux-large runner, aligning it with the existing explorer code compilation workflow.
+**[Simon V](https://github.com/svienot)** updated the [Docker container release workflow](https://github.com/hiero-ledger/hiero-mirror-node-explorer/pull/2664) in Hiero Mirror Node to use the hiero-mirror-node-linux-large runner, aligning it with the existing explorer code compilation workflow.
 
 **[Michael H](https://github.com/netopyr)** moved the [PlatformStatusConfig and UptimeConfig](https://github.com/hiero-ledger/hiero-consensus-node/pull/26601) classes into the consensus-status-monitor module as part of the StatusMonitor configuration refactoring in the Hiero Consensus Node.
 

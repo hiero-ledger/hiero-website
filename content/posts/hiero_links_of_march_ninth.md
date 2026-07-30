@@ -16,7 +16,7 @@ This week featured a lot of new and exciting updates within the Hiero Organizati
 Below are links to some of the things that happened this past week. **Check it out!**
 
 ---
-**Sophie Bulloch** created a blog post on the [Issue Progression Initiative](https://hiero.org/blog/the-issue-progression-initiative-at-hiero/) detailing the progress this initiative has made across Hiero. 
+**Sophie Bulloch** created a blog post on the [Issue Progression Initiative](https://hiero.org/blog/hiero-issue-progression-initiative) detailing the progress this initiative has made across Hiero. 
 
 **Daniel Marvin** updated the [Windows Setup Instructions](https://github.com/hiero-ledger/hiero-sdk-python/pull/1958) in the Python SDK to help Windows users set up the SDK on their local Windows machine.
 

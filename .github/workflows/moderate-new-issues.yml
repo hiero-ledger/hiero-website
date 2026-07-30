@@ -1,0 +1,62 @@
+# SPDX-License-Identifier: Apache-2.0
+
+name: "Moderate New Issues"
+
+on:
+  issues:
+    types:
+      - opened
+
+concurrency:
+  group: issue-moderation-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  issues: write
+
+jobs:
+  moderate:
+    name: Moderate Issue
+    if: >-
+      !contains(
+        fromJSON('["OWNER","MEMBER","COLLABORATOR"]'),
+        github.event.issue.author_association
+      )
+    runs-on: hl-web-lin-md
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@fe104658747b27e96e4f7e80cd0a94068e53901d # v2.16.1
+        with:
+          egress-policy: audit
+
+      - name: Add pending-review label
+        run: gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label pending-review
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+
+      - name: Comment on issue
+        uses: peter-evans/create-or-update-comment@e8674b075228eee787fea43ef493e45ece1004c9 # v5.0.0
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Thanks for your submission.
+
+            This issue is awaiting approval from @hiero-ledger/hiero-website-committers and @hiero-ledger/hiero-website-maintainers.
+            
+      - name: Lock issue
+        run: |
+          gh api \
+            -X PUT \
+            "repos/${REPO}/issues/${ISSUE_NUMBER}/lock" \
+            -f lock_reason=off-topic
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}

@@ -1,13 +1,15 @@
 "use client";
 
-import { lazy, Suspense } from "react";
+import ShareButtons from "./index";
 
-const ShareButtons = lazy(() => import("./index"));
+interface ClientShareButtonsProps {
+  shareUrl: string;
+  shareTitle: string;
+}
 
-export default function ClientShareButtons() {
-  return (
-    <Suspense fallback={null}>
-      <ShareButtons />
-    </Suspense>
-  );
+export default function ClientShareButtons({
+  shareUrl,
+  shareTitle,
+}: ClientShareButtonsProps) {
+  return <ShareButtons shareUrl={shareUrl} shareTitle={shareTitle} />;
 }

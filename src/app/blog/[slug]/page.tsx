@@ -13,6 +13,8 @@ import RichText from "@/components/RichText";
 import ShareButtons from "@/components/ShareButtons/ClientShareButtons";
 import { notFound } from "next/navigation";
 
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hiero.org";
+
 export function generateStaticParams(): { slug: string }[] {
   const posts: PostMeta[] = getAllPosts();
   return posts.map((post: PostMeta) => ({ slug: post.slug }));
@@ -37,6 +39,8 @@ export default async function BlogPostPage({
   const { slug } = await params;
   const post: PostFull | null = getPostBySlug(slug);
   if (!post) notFound();
+
+  const shareUrl = `${BASE_URL}/blog/${post.slug}`;
 
   const allPosts: PostMeta[] = getAllPosts();
   const recentPosts: PostMeta[] = allPosts
@@ -75,7 +79,7 @@ export default async function BlogPostPage({
               className="content text-sm text-charcoal font-normal sm:text-base"
             />
             <div className="mt-11 mx-auto w-fit">
-              <ShareButtons />
+              <ShareButtons shareUrl={shareUrl} shareTitle={post.title} />
             </div>
           </main>
         </div>

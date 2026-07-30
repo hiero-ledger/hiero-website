@@ -3,19 +3,19 @@ import { describe, expect, it } from "vitest";
 import ShareButtons from "..";
 
 describe("ShareButtons", () => {
-  it("builds share links from the current page url and title", () => {
-    document.title = "Shareable Post";
-    window.history.pushState({}, "", "/blog/shareable-post");
+  it("builds share links from provided url and title", () => {
+    const shareUrl = "https://hiero.org/blog/shareable-post";
+    const shareTitle = "Shareable Post";
 
-    render(<ShareButtons />);
+    render(<ShareButtons shareUrl={shareUrl} shareTitle={shareTitle} />);
 
     expect(screen.getByLabelText("Share on LinkedIn")).toHaveAttribute(
       "href",
-      expect.stringContaining(encodeURIComponent(window.location.href)),
+      expect.stringContaining(encodeURIComponent(shareUrl)),
     );
     expect(screen.getByLabelText("Share on X")).toHaveAttribute(
       "href",
-      expect.stringContaining(encodeURIComponent(document.title)),
+      expect.stringContaining(encodeURIComponent(shareTitle)),
     );
     expect(screen.getByLabelText("Share on Email")).toHaveAttribute(
       "href",

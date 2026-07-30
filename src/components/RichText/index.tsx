@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
+import remarkGfm from "remark-gfm";
 
 interface RichTextProps {
   as?: "div" | "h3" | "p" | "span";
@@ -60,6 +61,27 @@ export default function RichText({
         </Link>
       );
     },
+    table({ children }: { children?: ReactNode }) {
+      return (
+        <div className="overflow-x-auto my-6">
+          <table className="w-full border-collapse text-left">{children}</table>
+        </div>
+      );
+    },
+    th({ children }: { children?: ReactNode }) {
+      return (
+        <th className="border-b-2 border-white-dark px-4 py-2.5 font-medium align-top">
+          {children}
+        </th>
+      );
+    },
+    td({ children }: { children?: ReactNode }) {
+      return (
+        <td className="border-b border-white-dark px-4 py-2.5 align-top">
+          {children}
+        </td>
+      );
+    },
     ...(inline ? { p: InlineParagraph } : {}),
   };
 
@@ -68,6 +90,7 @@ export default function RichText({
       <ReactMarkdown
         skipHtml
         components={components}
+        remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeHighlight]}>
         {markdown}
       </ReactMarkdown>

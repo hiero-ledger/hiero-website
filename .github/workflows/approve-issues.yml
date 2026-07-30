@@ -6,6 +6,9 @@ on:
   issues:
     types:
       - labeled
+concurrency:
+  group: issue-moderation-${{ github.event.issue.number }}
+  cancel-in-progress: false
 
 defaults:
   run:
@@ -27,9 +30,11 @@ jobs:
           egress-policy: audit
 
       - name: Remove pending-review label
-        uses: actions-ecosystem/action-remove-labels@2ce5d41b4b6aa8503e285553f75ed56e0a40bae0 # v1.3.0
-        with:
-          labels: pending-review
+        run: gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --remove-label pending-review
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
 
       - name: Unlock issue
         run: |

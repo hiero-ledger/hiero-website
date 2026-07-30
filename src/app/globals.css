@@ -71,9 +71,8 @@ header {
   @apply border-b border-charcoal border-solid;
 }
 
-footer {
-  @apply border-t border-charcoal border-solid;
-}
+/* The footer has no border rule of its own: it draws a gradient top edge
+   inside the component, see components/Footer. */
 
 main a:not([class]) {
   @apply text-red underline;
@@ -81,8 +80,10 @@ main a:not([class]) {
 
 /* ============================================
    Navbar Styles
+   Scoped to the header so the footer navigation
+   can define its own styling.
    ============================================ */
-nav a {
+header nav a {
   @apply text-white no-underline;
   font-size: 2.375rem;
   line-height: 5.188rem;
@@ -91,15 +92,15 @@ nav a {
   position: relative;
 }
 
-nav a:hover {
+header nav a:hover {
   color: #D92D6A;
 }
 
-nav a.active {
+header nav a.active {
   @apply font-bold;
 }
 
-nav a.active::after {
+header nav a.active::after {
   content: '';
   position: absolute;
   bottom: 2rem;
@@ -112,16 +113,16 @@ nav a.active::after {
 
 /* Desktop nav */
 @media (min-width: 640px) {
-  nav a {
+  header nav a {
     @apply text-charcoal text-base leading-normal;
   }
-  nav a:hover {
+  header nav a:hover {
     color: #B81A56;
   }
-  nav a.active {
+  header nav a.active {
     color: #B81A56;
   }
-  nav a.active::after {
+  header nav a.active::after {
     bottom: -4px;
     left: 0;
     width: 100%;
@@ -131,24 +132,23 @@ nav a.active::after {
 
 /* Mobile menu */
 @media (max-width: 640px) {
-  nav a.active {
+  header nav a.active {
     background-color: rgba(184, 26, 86, 0.1) !important;
     border-bottom: 2px solid #B81A56 !important;
     box-shadow: none !important;
   }
-  nav a.active::after {
+  header nav a.active::after {
     display: none;
   }
-  nav a:focus,
-  nav a.active:focus {
-    outline: none !important;
-    box-shadow: none !important;
+  header nav a:focus-visible {
+    outline: 2px solid #D92D6A;
+    outline-offset: 3px;
   }
 }
 
 /* Desktop focus */
 @media (min-width: 640px) {
-  nav a:focus {
+  header nav a:focus-visible {
     @apply outline-none ring-2 ring-red-light ring-offset-2;
   }
 }

@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useIssues } from "@/hooks/useIssues";
 import { GitHubIssue } from "@/issues/types";
 
-export default function GoodFirstIssues() {
+export default function IssueExplorer() {
   const [difficulty, setDifficulty] = useState<string>("");
   const [sdk, setSdk] = useState<string>("");
 
@@ -22,6 +22,14 @@ export default function GoodFirstIssues() {
 
   return (
     <Container>
+      <div className="mb-10">
+        <h1 className="text-2xl mb-2.5 sm:text-4xl sm:mb-5">Issue Explorer</h1>
+        <RichText
+          className="text-lg max-w-full md:max-w-[800px]"
+          markdown="Browse open issues across the Hiero SDKs by difficulty. The four levels below are the rungs of the [Issue Progression Initiative](/blog/hiero-issue-progression-initiative)."
+        />
+      </div>
+
       <div className="flex gap-4 mb-6">
         <select
           value={difficulty}

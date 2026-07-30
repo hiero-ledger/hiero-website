@@ -10,6 +10,31 @@ This guide summarizes how to choose the most helpful **difficulty label** for is
 
 ---
 
+## Part of the Issue Progression Initiative
+
+These labels are not a standalone scheme. They are the rungs of the
+**Issue Progression Initiative (IPI)** — Hiero's structured pathway for helping
+developers enter a project, build skills safely, and gradually take on deeper
+responsibility.
+
+Read the background in
+[The Issue Progression Initiative at Hiero](https://hiero.org/blog/hiero-issue-progression-initiative).
+
+**A note on wording:**
+
+- **Issue Progression Initiative (IPI)** is the name of the initiative as a whole.
+
+The levels are:
+- **Good First Issue (GFI)** refers to the *first* difficulty level.
+- **Beginner** refers to the *second* difficulty level.
+- **Intermediate** refers to the *third* difficulty level.
+- **Advanced** refers to the *fourth* difficulty level.
+
+Please use "Issue Progression Initiative" when describing the programme, and reserve "Good First Issue", "Beginner", "Intermediate", "Advanced" for the issue labels. Earlier documents sometimes called the whole
+programme the "Good First Issue initiative"; that wording is retired.
+
+---
+
 ## Difficulty Levels at a Glance
 
 | Label | Who It’s For | Guidance Level | Scope | Risk |
@@ -163,6 +188,7 @@ not **time, size, or importance**.
 
 ## Helpful Links
 
+- [The Issue Progression Initiative at Hiero](https://hiero.org/blog/hiero-issue-progression-initiative)  
 - [Advanced Guidelines](guidelines_advanced_issues.md)  
 - [Intermediate Guidelines](guidelines_intermediate_issues.md)  
 - [Beginner Guidelines](guidelines_beginner_issues.md)  

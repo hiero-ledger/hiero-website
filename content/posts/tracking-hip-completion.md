@@ -37,7 +37,7 @@ This produces a few things:
 - a full **audit trail** — every (HIP, pull request) pair, with where it matched and the text that matched, downloadable as CSV
 
 ![Funnel chart for HIPs created since September 2024: 100% proposed, 88% approved by the TSC, 59% with implementation evidence, 26% implemented in five or more repositories.](/images/hip-adoption-funnel.png)
-*The adoption funnel for HIPs created since September 2024. Of the specs proposed, 88% were approved by the TSC, 59% show implementation evidence somewhere in the organisation, and 26% show merged work in five or more repositories.*
+*The adoption funnel for the 34 HIPs created since September 2024. Of those, 30 have reached Approved status or beyond, 20 show implementation evidence somewhere in the organisation, and 9 show merged work in five or more repositories. Read the first stage carefully: it counts proposals that already have a HIP number and a merged file, so it measures how far accepted proposals travel — **not how many ideas were turned away**, which this data cannot see.*
 
 ![Matrix of HIPs against hiero-ledger repositories, grouped into Final/Active and Approved/Accepted blocks. A dark blue cell means the repository has merged pull requests referencing that HIP; a light blue cell means only open pull requests reference it. The consensus node and mirror node columns are the densest, the SDKs cluster in the middle, and several recent HIPs such as HIP-1137, HIP-1195 and HIP-1313 show evidence across nearly every column.](/images/hip-coverage-matrix.png)
 *The coverage matrix, restricted to HIPs at a stage where implementation is expected. Dark cells are merged referencing pull requests; light cells are open ones. Wide rows — like HIP-991, HIP-1137 and HIP-1313 — are specifications being picked up right across the organisation. A row with a single cell may be complete, or may be work that stalled: **the matrix can't tell you which**, and that's the point of this post.*
@@ -62,10 +62,13 @@ The matrix above makes the same limit visible from the other direction. Of the *
 
 **But it gives us something to work from:** for the first time, an automated, organisation-wide HIP progression tracker that can be regenerated in minutes at the click of a button. The community has already shared feedback on ways to improve its underlying accuracy.
 
+The funnel needs reading carefully too. An 88% approval rate sounds extraordinary, and it would be — if it meant the TSC waves through seven proposals in eight. It doesn't. **The denominator is 34**: only proposals that already have a HIP number and a merged file. Ideas rejected or abandoned before that point never enter the dataset at all, so the funnel shows how far accepted proposals travel, not how selective the process is.
+
 We also had to work quite hard to avoid overclaiming:
 
 - Pull requests in the proposals repository itself are excluded — writing a specification is not implementing it
 - Numbers that don't match any known HIP are quarantined into a review table rather than counted, since they're usually assigned-but-unmerged HIPs, legacy numbers, or false positives
+- The matrix is restricted to HIPs at Approved, Accepted, Final or Active status — stages where implementation is actually expected. Including Draft or Deferred specs would count exploratory work as delivery
 
 None of this is a substitute for actually knowing. The accurate picture of which HIPs are complete has been maintained by hand, by diving deep into the code — largely by Angelina Ceppaluni, whose manual tracking gives us a ground truth to measure the automated method against.
 

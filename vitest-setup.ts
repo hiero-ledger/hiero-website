@@ -15,7 +15,7 @@ vi.mock("next/image", () => ({
     createElement("img", {
       ...props,
       alt,
-      src: typeof src === "string" ? src : src?.src ?? "",
+      src: typeof src === "string" ? src : (src?.src ?? ""),
     }),
 }));
 
@@ -32,7 +32,7 @@ vi.mock("next/link", () => ({
       "a",
       {
         ...props,
-        href: typeof href === "string" ? href : href?.pathname ?? "",
+        href: typeof href === "string" ? href : (href?.pathname ?? ""),
       },
       children,
     ),
@@ -41,6 +41,22 @@ vi.mock("next/link", () => ({
 if (typeof window !== "undefined") {
   Object.defineProperty(window, "scrollTo", {
     value: vi.fn(),
+    writable: true,
+  });
+
+  // jsdom does not implement matchMedia, so provide a no-match default that
+  // individual tests can spy on or override.
+  Object.defineProperty(window, "matchMedia", {
+    value: (query: string) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    }),
     writable: true,
   });
 }

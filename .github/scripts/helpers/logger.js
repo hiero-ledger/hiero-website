@@ -47,7 +47,7 @@ function createDelegatingLogger() {
   };
 }
 
-module.exports = {
+export {
   createLogger,
   getLogger,
   createDelegatingLogger,

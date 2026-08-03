@@ -40,63 +40,49 @@ These projects form the core of the Hiero ecosystem.
 [[section_meet_calls]]
 name = "TSC"
 description = "The Technical Steering Committee (TSC) meeting for project governance, roadmap planning, and key technical decisions."
-schedule = "Fortnightly"
+schedule = "Weekly"
 calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1758031200"
 register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/95775743341?password=c07443bf-b0e6-4a68-93f1-5c7ce9bb49ab&invite=true"
 
 [[section_meet_calls]]
 name = "Community Call"
 description = "Open community meeting for general discussions, updates, and Q&A sessions with the Hiero community and TSC members."
-schedule = "Monthly"
+schedule = "Bi-weekly"
 calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1758207600"
 register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/97122675754?password=7eaa865a-2f17-4a7c-97b0-aff51933991c&invite=true"
 
 [[section_meet_calls]]
 name = "Python SDK"
-description = "Focused discussions on the Hiero Python SDK development, including new features, issues, and contributions."
-schedule = "Monthly"
+description = "Bi-weekly on Wednesdays, alternating between community calls covering roadmap, features, and contributions, and office hours for open Q&A and troubleshooting on the Hiero Python SDK."
+schedule = "Bi-weekly"
 calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1758117600"
 register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/92041330205?password=2f345bee-0c14-4dd5-9883-06fbc9c60581&invite=true"
 
 [[section_meet_calls]]
-name = "Docs"
-description = "Documentation working group meetings to improve and maintain Hiero project documentation."
-schedule = "Monthly"
-calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1757516400"
-register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/96247351493?password=54a04164-8618-458d-8176-4ca21b346291&invite=true"
-
-[[section_meet_calls]]
-name = "Solo"
+name = "Hiero Solo Community Call"
 description = "Discussions and updates about Solo, an opinionated CLI tool to deploy and manage standalone test networks."
-schedule = "Fortnightly"
+schedule = "Bi-weekly"
 calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1757433600"
 register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/94695703550?password=e8819002-3f6e-4905-9916-b049f501e866&invite=true"
 
 [[section_meet_calls]]
-name = "Solo Action"
+name = "Hiero Solo Action Community Call"
 description = "Working sessions focused on Solo Action project development, issues, and contributions."
-schedule = "Fortnightly"
+schedule = "Bi-weekly"
 calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1757944800"
 register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/92576669768?password=8dab94bb-7315-4d37-a944-b1fa0e924741&invite=true"
 
 [[section_meet_calls]]
 name = "SDK"
 description = "General SDK working group for cross-SDK discussions, standards, and coordination across all Hiero SDK implementations."
-schedule = "Monthly"
+schedule = "Bi-weekly"
 calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1757340000"
 register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/94709702244?password=bcba4892-928c-47e0-9a21-e1abca95f7d3&invite=true"
 
 [[section_meet_calls]]
-name = "Hiero Website"
-description = "Planning and development meetings for the Hiero website, content strategy, and user experience improvements."
-schedule = "Monthly"
-calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1755529200"
-register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/94831465670?password=50e11cd2-6450-4a97-b9ae-7a7585c4409b&invite=true"
-
-[[section_meet_calls]]
-name = "Hiero Marketing"
-description = "Marketing and community outreach discussions, including events, communications, and ecosystem growth strategies."
-schedule = "Monthly"
+name = "Hiero Marketing / Website / Docs"
+description = "Bi-weekly working sessions covering marketing and community outreach, website development, and documentation improvements for the Hiero project."
+schedule = "Bi-weekly"
 calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1761663600"
 register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/91725705912?password=57115f71-9576-46dc-90f7-98be38aade2d&invite=true"
 
@@ -108,15 +94,15 @@ calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?vi
 register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/99574473075?password=deff3fc9-0e80-4877-80de-91499b5480e9&invite=true"
 
 [[section_meet_calls]]
-name = "Hiero/Hedera Identity"
+name = "Hiero Identity Community Call"
 description = "Working group focused on identity-related projects, DID SDK development, and identity standards implementation."
 schedule = "Monthly"
 calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1763049600"
 register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/99097542854?password=3ee2d9c9-32de-4758-8a23-417c751bd7ab&invite=true"
 
 [[section_meet_calls]]
-name = "Hiero Mirror Node"
-description = "Development and maintenance discussions for the Hiero Mirror Node, which archives data from consensus nodes and serves it via an API."
+name = "Blockstream Community Group"
+description = "Monthly community group for all consumers of blockstreams, covering block nodes and mirror nodes."
 schedule = "Monthly"
 calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1763053200"
 register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/94618152832?password=3b037576-2aab-4f7e-ab24-acf9ca2c3734&invite=true"

@@ -38,5 +38,6 @@ jobs:
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
-            const script = require('./.github/scripts/bot-on-pr-update.js');
+            // Script is ESM, so require() returns the namespace; unwrap the default export.
+            const { default: script } = require('./.github/scripts/bot-on-pr-update.js');
             await script({ github, context });

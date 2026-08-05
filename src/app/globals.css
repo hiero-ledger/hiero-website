@@ -75,98 +75,12 @@
     @apply m-0 text-charcoal leading-normal font-serif;
   }
 
-  header {
-    @apply border-b border-charcoal border-solid;
-  }
-
-  /* The footer has no border rule of its own: it draws a gradient top edge
-     inside the component, see components/Footer. */
+  /* Neither the header nor the footer has a border rule here: each draws its
+     own edge inside the component, see components/Header and components/Footer. */
 
   main a:not([class]) {
     @apply text-red underline;
   }
-
-  /* ============================================
-     Navbar Styles
-     Scoped to the header so the footer navigation
-     can define its own styling.
-     ============================================ */
-  header nav a {
-    @apply text-white no-underline;
-    font-size: 2.375rem;
-    line-height: 5.188rem;
-    letter-spacing: -0.128rem;
-    @apply transition-colors duration-300 ease-in-out;
-    position: relative;
-  }
-
-  header nav a:hover {
-    color: #D92D6A;
-  }
-
-  header nav a.active {
-    @apply font-bold;
-  }
-
-  header nav a.active::after {
-    content: '';
-    position: absolute;
-    bottom: 2rem;
-    left: 25%;
-    width: 50%;
-    height: 3px;
-    background-color: #D92D6A;
-    transform: translateX(-50%);
-  }
-
-  /* Desktop nav */
-  @media (min-width: 640px) {
-    header nav a {
-      @apply text-charcoal text-base leading-normal;
-    }
-    header nav a:hover {
-      color: #B81A56;
-    }
-    header nav a.active {
-      color: #B81A56;
-    }
-    header nav a.active::after {
-      bottom: -4px;
-      left: 0;
-      width: 100%;
-      transform: none;
-    }
-  }
-
-  /* Mobile menu */
-  @media (max-width: 640px) {
-    header nav a.active {
-      background-color: rgba(184, 26, 86, 0.1) !important;
-      border-bottom: 2px solid #B81A56 !important;
-      box-shadow: none !important;
-    }
-    header nav a.active::after {
-      display: none;
-    }
-    header nav a:focus-visible {
-      outline: 2px solid #D92D6A;
-      outline-offset: 3px;
-    }
-  }
-
-  /* Desktop focus */
-  @media (min-width: 640px) {
-    header nav a:focus-visible {
-      @apply outline-none ring-2 ring-red-light ring-offset-2;
-    }
-  }
-}
-
-/* Deliberately unlayered: this has to beat the `hidden` utility that Menu
-   puts on the nav, and a layered rule always loses to a utility. Delete it
-   together with the `.active-navigation` hook in components/Menu. */
-.active-navigation {
-  @apply flex;
 }
 
 /* ============================================

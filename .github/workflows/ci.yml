@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - main
+      - websiteRedesign
   pull_request:
     branches:
       - main
+      # Long-lived redesign branch. 
+      - websiteRedesign
   workflow_dispatch:
 
 concurrency:

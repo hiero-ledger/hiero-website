@@ -11,7 +11,7 @@
  * @param {*} value
  * @returns {boolean}
  */
-function isObject(value) {
+export function isObject(value) {
   return value !== null && typeof value === 'object';
 }
 
@@ -21,7 +21,7 @@ function isObject(value) {
  * @param {*} value
  * @returns {boolean}
  */
-function isNonNegativeInteger(value) {
+export function isNonNegativeInteger(value) {
   return Number.isInteger(value) && value >= 0;
 }
 
@@ -33,7 +33,7 @@ function isNonNegativeInteger(value) {
  * @param {*} value
  * @returns {boolean}
  */
-function isSafeSearchToken(value) {
+export function isSafeSearchToken(value) {
   return typeof value === 'string' && /^[a-zA-Z0-9._/-]+(\[bot\])?$/.test(value);
 }
 
@@ -43,7 +43,7 @@ function isSafeSearchToken(value) {
  * @param {string} label - Label for error message.
  * @throws {Error}
  */
-function requireObject(value, label) {
+export function requireObject(value, label) {
   if (!isObject(value)) {
     throw new Error(`Bot context invalid: missing or invalid ${label}`);
   }
@@ -55,7 +55,7 @@ function requireObject(value, label) {
  * @param {string} label - Label for error message.
  * @throws {Error}
  */
-function requireNonEmptyString(value, label) {
+export function requireNonEmptyString(value, label) {
   if (typeof value !== 'string' || !value.trim()) {
     throw new Error(`Bot context invalid: missing or invalid ${label}`);
   }
@@ -67,7 +67,7 @@ function requireNonEmptyString(value, label) {
  * @param {string} label - Label for error message.
  * @throws {Error}
  */
-function requirePositiveInt(value, label) {
+export function requirePositiveInt(value, label) {
   if (!Number.isInteger(value) || value < 1) {
     throw new Error(`Bot context invalid: missing or invalid ${label}`);
   }
@@ -79,18 +79,9 @@ function requirePositiveInt(value, label) {
  * @param {string} label - Label for error message.
  * @throws {Error}
  */
-function requireSafeUsername(value, label) {
+export function requireSafeUsername(value, label) {
   requireNonEmptyString(value, label);
   if (!isSafeSearchToken(value)) {
     throw new Error(`Bot context invalid: ${label} contains invalid characters`);
   }
 }
-
-module.exports = {
-  isNonNegativeInteger,
-  isSafeSearchToken,
-  requireObject,
-  requireNonEmptyString,
-  requirePositiveInt,
-  requireSafeUsername,
-};

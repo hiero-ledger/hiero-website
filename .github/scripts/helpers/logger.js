@@ -14,7 +14,7 @@ let _logger = null;
  * @param {string} botName - The name of the bot (e.g., 'on-commit', 'on-pr', 'on-comment').
  * @returns {object} - Logger object with log and error methods.
  */
-function createLogger(botName) {
+export function createLogger(botName) {
   const prefix = `[${botName}]`;
   const logger = {
     log: (...args) => console.log(prefix, ...args),
@@ -29,7 +29,7 @@ function createLogger(botName) {
  * Returns the logger last set by createLogger(), or a default logger if none set yet.
  * @returns {{ log: function, error: function }}
  */
-function getLogger() {
+export function getLogger() {
   if (!_logger) _logger = createLogger('bot-helpers');
   return _logger;
 }
@@ -40,15 +40,9 @@ function getLogger() {
  * so log calls automatically pick up the prefix set by the dispatcher.
  * @returns {{ log: function, error: function }}
  */
-function createDelegatingLogger() {
+export function createDelegatingLogger() {
   return {
     log: (...args) => getLogger().log(...args),
     error: (...args) => getLogger().error(...args),
   };
 }
-
-module.exports = {
-  createLogger,
-  getLogger,
-  createDelegatingLogger,
-};

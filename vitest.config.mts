@@ -16,5 +16,9 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: ["./vitest-setup.ts"],
     testTimeout: 10000,
+    // e2e/ is Playwright's; it imports @playwright/test, which Vitest cannot
+    // run. `.next` is excluded too because `output: "standalone"` copies the
+    // specs into the traced bundle, where they would be picked up again.
+    exclude: ["**/node_modules/**", "**/dist/**", "e2e/**", ".next/**"],
   },
 });

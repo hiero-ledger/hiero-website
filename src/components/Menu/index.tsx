@@ -88,7 +88,7 @@ export default function Menu() {
 
       <nav
         id="navigation"
-        className={`fixed inset-0 z-40 flex h-screen w-full flex-col items-center justify-center bg-charcoal text-white transition-[opacity,translate,visibility] duration-300 ease-out md:visible md:pointer-events-auto md:relative md:z-auto md:h-auto md:w-auto md:translate-y-0 md:flex-row md:bg-transparent md:text-charcoal md:opacity-100 md:transition-none ${isOpen ? "translate-y-0 opacity-100" : "pointer-events-none invisible -translate-y-3 opacity-0"}`}
+        className={`fixed inset-0 z-40 flex h-screen w-full flex-col items-center justify-center overflow-y-auto bg-charcoal text-white transition-[opacity,translate,visibility] duration-300 ease-out md:visible md:pointer-events-auto md:relative md:z-auto md:h-auto md:w-auto md:translate-y-0 md:flex-row md:overflow-visible md:bg-transparent md:text-charcoal md:opacity-100 md:transition-none ${isOpen ? "translate-y-0 opacity-100" : "pointer-events-none invisible -translate-y-3 opacity-0"}`}
         aria-hidden={isDesktop ? false : !isOpen}>
         <div className="absolute left-6 top-7 md:hidden">
           <Image
@@ -172,7 +172,7 @@ export default function Menu() {
                   alt={social.name}
                   width={35}
                   height={35}
-                  className="h-[35px] w-[35px] sm:h-[17px] sm:w-[17px]"
+                  className="h-[35px] w-[35px] md:h-[17px] md:w-[17px]"
                 />
               </a>
             ))}

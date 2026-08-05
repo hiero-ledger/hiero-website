@@ -71,7 +71,10 @@
   },
 
   "documentation": {
-    "workflowGuide": "https://github.com/hiero-ledger/hiero-website/blob/main/docs/training/workflow.md"
+    "workflowGuide": "https://github.com/hiero-ledger/hiero-website/blob/main/docs/training/workflow.md",
+    "readme": "https://github.com/hiero-ledger/hiero-website/blob/main/README.md",
+    "signingGuide": "https://github.com/hiero-ledger/sdk-collaboration-hub/tree/main/guides/issue-progression/for-developers",
+    "mergeConflictsGuide": "https://github.com/hiero-ledger/sdk-collaboration-hub/tree/main/guides/issue-progression/for-developers"
   },
 
   "community": {

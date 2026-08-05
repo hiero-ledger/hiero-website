@@ -33,10 +33,16 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
+      - name: Debug logger export
+        run: |
+          echo "=== logger files ==="
+          find .github -name "logger.js" -print
 
+          echo "=== logger contents ==="
+          sed -n '1,120p' .github/scripts/helpers/logger.js
       - name: Run Bot
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
-            const script = require('./.github/scripts/bot-on-pr-update.js');
-            await script({ github, context });
+            const script = await import('./.github/scripts/bot-on-pr-update.js');
+            await script.default({ github, context });

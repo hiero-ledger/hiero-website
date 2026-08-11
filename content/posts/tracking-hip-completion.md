@@ -29,7 +29,7 @@ After final status, a HIP is implemented when community members make an issue an
 
 [Angelina Ceppaluni](https://github.com/aceppaluni) has made great strides manually tracking HIP completion across the SDKs. Their work can be viewed at [HIP SDK Tracking](https://github.com/orgs/hiero-ledger/projects/46/views). However, there has not been an automated way to support that effort across the organization.
 
-For more information on HIPs and the HIP workflow processes, visit the [HIP Presentation PowerPoint](http:///images/Hiero-Improvement-Proposals.pdf) or the [July 7th TSC Call](https://zoom.us/rec/play/Mu6L6WVjWIWpzaa8rODuo0IKfSL4E4UvuKjMMulmOG3z756uThk06PhbxRF0TvjAByNNhTDGTa-vBu2R.ns3mZmQnk6CyeD-Z?accessLevel=meeting%26canPlayFromShare=true%26from=share_recording_detail%26continueMode=true%26oldStyle=true%26componentName=rec-play%26originRequestUrl=https%3A%2F%2Fzoom.us%2Frec%2Fshare%2Fk1oXUWttx4QTBzpfi1mSmwyzjXGIHq9mcHgmjZqJVzmOsND9ja7ly8Qfu5_WxJad.NWCUiZYbvcnbbByO). Within this call, fast-forward to **15:53** to hear [Michael Garber's](https://github.com/mgarbs) presentation of the HIP Workflow process.
+For more information on HIPs and the HIP workflow processes, visit the [HIP Presentation PowerPoint](/images/Hiero-Improvement-Proposals.pdf) or the [July 7th TSC Call](https://zoom.us/rec/play/Mu6L6WVjWIWpzaa8rODuo0IKfSL4E4UvuKjMMulmOG3z756uThk06PhbxRF0TvjAByNNhTDGTa-vBu2R.ns3mZmQnk6CyeD-Z?accessLevel=meeting%26canPlayFromShare=true%26from=share_recording_detail%26continueMode=true%26oldStyle=true%26componentName=rec-play%26originRequestUrl=https%3A%2F%2Fzoom.us%2Frec%2Fshare%2Fk1oXUWttx4QTBzpfi1mSmwyzjXGIHq9mcHgmjZqJVzmOsND9ja7ly8Qfu5_WxJad.NWCUiZYbvcnbbByO). Within this call, fast-forward to **15:53** to hear [Michael Garber's](https://github.com/mgarbs) presentation of the HIP Workflow process.
 
 ---
 
@@ -52,7 +52,7 @@ This produces several useful views:
 >
 > Of those, 30 have reached approved status or beyond, 20 show evidence of implementation somewhere in the organization, and 9 show merged work in five or more repositories. Read the first stage carefully: it counts proposals that already have a HIP number and a merged file. It is a measure of how far accepted proposals travel.
 
-![HIP coverage matrix](http:///images/hip-coverage-matrix.png)
+![HIP coverage matrix](/images/hip-coverage-matrix.png)
 
 *Matrix of HIPs against Hiero Ledger repositories, grouped into Final/Active and Approved/Accepted blocks. A dark blue cell means the repository has merged pull requests referencing that HIP. A light blue cell indicates only open pull requests reference it. The consensus node and mirror node columns are the densest. The SDKs cluster in the middle, and several recent HIPs (i.e., HIP-1137, HIP-1195, and HIP-1313) show evidence across nearly every column.*
 
@@ -122,7 +122,7 @@ The TCK only covers HIPs with an SDK-facing surface. **Core, Mirror, Block Node,
 
 Two ideas are on the table:
 
-* [Steven Sheehy](http://) suggested at the TSC that **each repository could have its own HIP tracker**, where maintainers declare completion.
+* [Steven Sheehy](https://github.com/steven-sheehy) suggested at the TSC that **each repository could have its own HIP tracker**, where maintainers declare completion.
 * Alternatively, a [central HIP tracker](https://github.com/hiero-ledger/governance/issues/678) in the governance repository.
 
 ---

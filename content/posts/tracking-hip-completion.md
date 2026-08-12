@@ -11,7 +11,7 @@ name = "Sophie Bulloch"
 organization = "Hiero Community"
 +++
 
-# Hiero Improvement Proposals (HIPs)
+## Hiero Improvement Proposals (HIPs)
 
 Hiero Improvement Proposals (HIPs) are intended to provide information or initiate engineering efforts to update functionality under the Hiero governance. HIPs can be categorized in three ways:
 

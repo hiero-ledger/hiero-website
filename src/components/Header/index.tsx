@@ -34,7 +34,7 @@ export default function Header() {
 
   return (
     <div
-      className={`h-22.5 flex items-center fixed inset-x-0 top-0 z-50 border-b bg-white/80 backdrop-blur-xl transition-[translate,border-color,box-shadow] duration-300 ease-in-out ${isScrolled ? "border-charcoal/10 shadow-[0_8px_30px_rgba(30,30,30,0.06)]" : "border-transparent"} ${isVisible ? "translate-y-0" : "-translate-y-full"}`}>
+      className={`h-22.5 flex items-center fixed inset-x-0 top-0 z-50 border-b bg-white/80 backdrop-blur-xl transition-[translate,border-color,box-shadow] duration-300 ease-in-out motion-reduce:transition-none ${isScrolled ? "border-charcoal/10 shadow-[0_8px_30px_rgba(30,30,30,0.06)]" : "border-transparent"} ${isVisible ? "translate-y-0" : "-translate-y-full"}`}>
       <Container>
         <div className="flex flex-row justify-between items-center">
           <Link

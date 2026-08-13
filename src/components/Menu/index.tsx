@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   isExternalLink,
   menuItems,
@@ -16,8 +16,11 @@ import {
  * Desktop type matches the live site exactly: `text-base` is 16px and carries
  * the -0.054rem tracking measured on hiero.org (-0.864px at 16px), at weight
  * 400 in full charcoal, with red on hover. The mobile overlay keeps `text-xl`.
- * Horizontal padding tightens at `md`/`lg` purely to buy room — see the gap
- * ladder on the `<ul>` below.
+ *
+ * Desktop links carry no horizontal padding, so the `<ul>`'s gap *is* the
+ * measured distance between labels — the same construction as the live site.
+ * The pill background is gone from `md` up: the sliding rule underneath is the
+ * hover affordance now, and two competing ones read as noise.
  */
 const linkClass = (active: boolean) =>
   [
@@ -25,11 +28,98 @@ const linkClass = (active: boolean) =>
     // "Issue Explorer" is long enough to wrap onto two lines without it.
     "block rounded-full whitespace-nowrap no-underline transition-colors duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
     "px-5 py-3 text-xl focus-visible:ring-red-light focus-visible:ring-offset-charcoal",
-    "md:px-2 md:py-2 md:text-base lg:px-2.5 xl:px-3 md:focus-visible:ring-red md:focus-visible:ring-offset-white",
+    "md:rounded-sm md:px-0 md:py-2 md:text-base md:focus-visible:ring-red md:focus-visible:ring-offset-white",
     active
-      ? "font-semibold bg-white/10 text-white md:bg-red/10 md:text-red"
-      : "font-medium text-white/80 hover:bg-white/10 hover:text-white md:font-normal md:text-charcoal md:hover:bg-charcoal/5 md:hover:text-red",
+      ? "font-semibold bg-white/10 text-white md:bg-transparent md:font-normal md:text-red"
+      : "font-medium text-white/80 hover:bg-white/10 hover:text-white md:bg-transparent md:font-normal md:text-charcoal md:hover:text-red",
   ].join(" ");
+
+/** Horizontal extent of one label, measured relative to the list. */
+interface Rule {
+  left: number;
+  width: number;
+}
+
+/**
+ * The spec assigns `red-light` to the active-link underline. Rather than give
+ * each link its own rule, one shared rule slides between them: it marks the
+ * current page at rest and follows the pointer or keyboard focus, which is what
+ * makes the bar feel considered rather than decorated.
+ *
+ * Width and offset have to be measured, so this is deliberately the only
+ * JS-driven flourish in the component — and it degrades to nothing when there
+ * is no active page and no pointer, rather than parking somewhere arbitrary.
+ */
+function useSlidingRule(pathname: string) {
+  const listRef = useRef<HTMLUListElement>(null);
+  const [rule, setRule] = useState<Rule | null>(null);
+  // Suppresses the transition on first placement, so the rule fades in where it
+  // belongs instead of sliding in from the left edge.
+  const [placed, setPlaced] = useState(false);
+  const placedRef = useRef(false);
+
+  /**
+   * Offsets are relative to the list, not the viewport, which is why a plain
+   * window resize needs no handling: unless the list itself reflows, every
+   * offset within it stays valid.
+   */
+  const measure = useCallback((label: Element | null): Rule | null => {
+    const list = listRef.current;
+    if (!list || !label) return null;
+    const listBox = list.getBoundingClientRect();
+    const box = label.getBoundingClientRect();
+    if (box.width === 0) return null;
+    return { left: box.left - listBox.left, width: box.width };
+  }, []);
+
+  /** Return the rule to the current page's label, or hide it if none is active. */
+  const settle = useCallback(() => {
+    setRule(
+      measure(
+        listRef.current?.querySelector('[data-nav-current="true"]') ?? null,
+      ),
+    );
+  }, [measure]);
+
+  const moveTo = useCallback(
+    (link: Element | null) => {
+      const next = measure(link?.querySelector("[data-nav-label]") ?? null);
+      if (next) setRule(next);
+    },
+    [measure],
+  );
+
+  /**
+   * One observer covers every reflow that can invalidate a measurement: the
+   * initial layout (it fires on observe), the webfont swap that changes label
+   * widths, and the gap changes at each breakpoint. Progressive enhancement —
+   * without ResizeObserver the rule simply never appears.
+   */
+  useEffect(() => {
+    const list = listRef.current;
+    if (!list || typeof ResizeObserver === "undefined") return;
+
+    const observer = new ResizeObserver(() => {
+      settle();
+      if (!placedRef.current) {
+        placedRef.current = true;
+        setPlaced(true);
+      }
+    });
+    observer.observe(list);
+
+    return () => observer.disconnect();
+  }, [settle]);
+
+  // A new active page does not resize the list, so the observer stays quiet;
+  // re-measure on the next frame, once the new markup has been laid out.
+  useEffect(() => {
+    const frame = requestAnimationFrame(settle);
+    return () => cancelAnimationFrame(frame);
+  }, [pathname, settle]);
+
+  return { listRef, rule, placed, settle, moveTo };
+}
 
 /**
  * GitHub and Discord read as buttons rather than bare glyphs: icon plus name,
@@ -43,9 +133,9 @@ const linkClass = (active: boolean) =>
  * the names cannot ride along until `xl`.
  */
 const socialClass = [
-  "group inline-flex items-center justify-center gap-2 rounded-full border no-underline transition-[color,background-color,border-color,box-shadow,translate] duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+  "group inline-flex items-center justify-center gap-2 rounded-full border no-underline transition-[color,background-color,border-color] duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
   "h-11 flex-1 border-white/25 px-4 text-base leading-none text-white hover:border-transparent hover:bg-red-light focus-visible:ring-red-light focus-visible:ring-offset-charcoal",
-  "md:h-9 md:w-9 md:flex-none md:border-charcoal/15 md:px-0 md:text-base md:text-charcoal md:hover:-translate-y-px md:hover:border-red md:hover:bg-red md:hover:text-white md:hover:shadow-[0_6px_16px_rgba(184,26,86,0.25)] md:focus-visible:ring-red md:focus-visible:ring-offset-white",
+  "md:h-9 md:w-9 md:flex-none md:border-charcoal/15 md:px-0 md:text-base md:text-charcoal md:hover:border-red md:hover:bg-red md:hover:text-white md:focus-visible:ring-red md:focus-visible:ring-offset-white",
   "xl:w-auto xl:px-3.5",
 ].join(" ");
 
@@ -101,10 +191,23 @@ function SocialIcon({
   );
 }
 
+/**
+ * The rule is measured against this span rather than the link box, so it tracks
+ * the label's true extent regardless of any padding on the link.
+ */
+function NavLabel({ name, current }: { name: string; current: boolean }) {
+  return (
+    <span data-nav-label data-nav-current={current ? "true" : undefined}>
+      {name}
+    </span>
+  );
+}
+
 export default function Menu() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+  const { listRef, rule, placed, settle, moveTo } = useSlidingRule(pathname);
 
   useEffect(() => {
     const handleResize = () => {
@@ -197,10 +300,21 @@ export default function Menu() {
 
         <ul
           id="menu"
-          // Gap ladder: `xl:gap-6` plus the links' 12px side padding puts 48px
-          // between labels, the rhythm measured on hiero.org (49px). Narrower
-          // breakpoints tighten it only as far as the row needs.
-          className="flex w-full flex-col items-center gap-2 px-6 md:w-auto md:flex-row md:items-center md:gap-1 md:px-0 lg:gap-3 xl:gap-6">
+          ref={listRef}
+          // Links have no side padding from `md` up, so gap is the label-to-label
+          // distance directly: `xl:gap-12` is 48px, the rhythm measured on
+          // hiero.org (49px). Narrower steps tighten only as far as the row needs.
+          className="relative flex w-full flex-col items-center gap-2 px-6 md:w-auto md:flex-row md:items-center md:gap-5 md:px-0 lg:gap-9 xl:gap-12"
+          onPointerLeave={settle}>
+          <span
+            aria-hidden="true"
+            style={
+              rule
+                ? { width: rule.width, transform: `translateX(${rule.left}px)` }
+                : { width: 0 }
+            }
+            className={`pointer-events-none absolute bottom-1 left-0 hidden h-0.5 rounded-full bg-red-light md:block ${rule ? "opacity-100" : "opacity-0"} ${placed ? "transition-[transform,width,opacity] duration-300 ease-out motion-reduce:transition-none" : ""}`}
+          />
           {menuItems.map(item => {
             const active = isActive(item.href);
             const isExternal = isExternalLink(item);
@@ -220,20 +334,24 @@ export default function Menu() {
                     aria-label={
                       openInNewTab ? withNewTabHint(item.name) : undefined
                     }
+                    onPointerEnter={event => moveTo(event.currentTarget)}
+                    onFocus={event => moveTo(event.currentTarget)}
                     onClick={() => {
                       setIsOpen(false);
                     }}>
-                    {item.name}
+                    <NavLabel name={item.name} current={active} />
                   </a>
                 ) : (
                   <Link
                     href={item.href}
                     className={linkClass(active)}
                     aria-current={active ? "page" : undefined}
+                    onPointerEnter={event => moveTo(event.currentTarget)}
+                    onFocus={event => moveTo(event.currentTarget)}
                     onClick={() => {
                       setIsOpen(false);
                     }}>
-                    {item.name}
+                    <NavLabel name={item.name} current={active} />
                   </Link>
                 )}
               </li>

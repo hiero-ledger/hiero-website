@@ -2,7 +2,7 @@
 
 exports[`Header > renders the home link and menu 1`] = `
 <div
-  class="h-22.5 flex items-center fixed inset-x-0 top-0 z-50 border-b bg-white/80 backdrop-blur-xl transition-[translate,border-color,box-shadow] duration-300 ease-in-out border-transparent translate-y-0"
+  class="h-22.5 flex items-center fixed inset-x-0 top-0 z-50 border-b bg-white/80 backdrop-blur-xl transition-[translate,border-color,box-shadow] duration-300 ease-in-out motion-reduce:transition-none border-transparent translate-y-0"
 >
   <div
     class="container"

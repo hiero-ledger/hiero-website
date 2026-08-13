@@ -41,12 +41,18 @@ export default function Header() {
             href="/"
             aria-label="Go to homepage"
             className="rounded-lg transition-opacity duration-200 hover:opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-4">
+            {/* Sized by height with `w-auto`: this mark's viewBox is cropped to
+                the artwork, so pinning both axes would stretch it. Intrinsic
+                dimensions match the footer's copy of the same artwork.
+                34px is the height the old padded logo's artwork actually
+                rendered at (40px box x 17.05/20 of viewBox), so swapping in the
+                cropped file changes the background and nothing else. */}
             <Image
-              src="/images/Hiero-Icon-wLogo.svg"
+              src="/images/Hiero-Logo-wText.svg"
               alt="Hiero logo"
-              width={128}
-              height={40}
-              className="h-10 w-32"
+              width={207}
+              height={60}
+              className="h-8 w-auto md:h-8.5"
             />
           </Link>
           <Menu />

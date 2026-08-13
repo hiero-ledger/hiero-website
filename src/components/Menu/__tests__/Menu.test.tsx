@@ -62,10 +62,10 @@ describe("Menu", () => {
     });
   });
 
-  // The social links are icon-only by design, so their accessible name comes
-  // from aria-label rather than text content. That name is the whole point:
-  // without it a screen reader announces nothing usable, and the new-tab hint
-  // is what gives non-sighted users the cue the icon gives everyone else.
+  // The social links pair their icon with a visible name, but the accessible
+  // name still comes from aria-label: it has to carry the new-tab hint, which
+  // gives non-sighted users the cue the icon gives everyone else. aria-label
+  // overrides the text content, so the hint cannot simply be appended.
   it("gives social links an accessible name including the new-tab hint", async () => {
     setWindowWidth(1024);
 
@@ -82,6 +82,23 @@ describe("Menu", () => {
           name: "Discord (opens in a new tab)",
         }),
       ).toBeInTheDocument();
+    });
+  });
+
+  // Guards the icon+name treatment: the name is what tells a sighted user which
+  // button is which, and the icons alone are unlabelled artwork. A regression
+  // that drops the span would still satisfy the aria-label test above.
+  it("renders a visible name alongside each social icon", async () => {
+    setWindowWidth(1024);
+
+    render(<Menu />);
+
+    await waitFor(() => {
+      for (const name of ["GitHub", "Discord"]) {
+        expect(
+          screen.getByRole("link", { name: `${name} (opens in a new tab)` }),
+        ).toHaveTextContent(name);
+      }
     });
   });
 });

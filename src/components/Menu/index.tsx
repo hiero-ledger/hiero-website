@@ -12,6 +12,95 @@ import {
   withNewTabHint,
 } from "@/data/navigation";
 
+/**
+ * Desktop type matches the live site exactly: `text-base` is 16px and carries
+ * the -0.054rem tracking measured on hiero.org (-0.864px at 16px), at weight
+ * 400 in full charcoal, with red on hover. The mobile overlay keeps `text-xl`.
+ * Horizontal padding tightens at `md`/`lg` purely to buy room — see the gap
+ * ladder on the `<ul>` below.
+ */
+const linkClass = (active: boolean) =>
+  [
+    // `whitespace-nowrap` matters from `md` up: the bar is a single row, and
+    // "Issue Explorer" is long enough to wrap onto two lines without it.
+    "block rounded-full whitespace-nowrap no-underline transition-colors duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+    "px-5 py-3 text-xl focus-visible:ring-red-light focus-visible:ring-offset-charcoal",
+    "md:px-2 md:py-2 md:text-base lg:px-2.5 xl:px-3 md:focus-visible:ring-red md:focus-visible:ring-offset-white",
+    active
+      ? "font-semibold bg-white/10 text-white md:bg-red/10 md:text-red"
+      : "font-medium text-white/80 hover:bg-white/10 hover:text-white md:font-normal md:text-charcoal md:hover:bg-charcoal/5 md:hover:text-red",
+  ].join(" ");
+
+/**
+ * GitHub and Discord read as buttons rather than bare glyphs: icon plus name,
+ * in the same font and size as the links beside them. `group` drives the icon
+ * swap in `SocialIcon` — the artwork is fixed-colour SVG, so the white copy
+ * has to fade in over the red one as the pill fills.
+ *
+ * From `md` to `lg` the pill collapses to a 36px circle and `socialLabel` hides
+ * the name. At 16px link text the labelled row needs ~753px, and 1024px leaves
+ * only ~606px beside the logo once the container's 140px gutters are taken, so
+ * the names cannot ride along until `xl`.
+ */
+const socialClass = [
+  "group inline-flex items-center justify-center gap-2 rounded-full border no-underline transition-[color,background-color,border-color,box-shadow,translate] duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+  "h-11 flex-1 border-white/25 px-4 text-base leading-none text-white hover:border-transparent hover:bg-red-light focus-visible:ring-red-light focus-visible:ring-offset-charcoal",
+  "md:h-9 md:w-9 md:flex-none md:border-charcoal/15 md:px-0 md:text-base md:text-charcoal md:hover:-translate-y-px md:hover:border-red md:hover:bg-red md:hover:text-white md:hover:shadow-[0_6px_16px_rgba(184,26,86,0.25)] md:focus-visible:ring-red md:focus-visible:ring-offset-white",
+  "xl:w-auto xl:px-3.5",
+].join(" ");
+
+/**
+ * Visible on mobile (roomy overlay) and from `xl` up, hidden only in the band
+ * where the row would otherwise overflow. `aria-label` on the link carries the
+ * name throughout, so nothing is lost to assistive tech.
+ */
+const socialLabel = "inline md:hidden xl:inline";
+
+/**
+ * The two source icons have different aspect ratios (GitHub is 15x17, Discord
+ * 127x96), so they are letterboxed inside a square box rather than stretched
+ * to fill it — same reasoning as the footer's social row.
+ *
+ * Marked `aria-hidden` with empty `alt`s: the adjacent name is the accessible
+ * label, so announcing the artwork too would just repeat it.
+ */
+function SocialIcon({
+  icon,
+  iconOnDark,
+}: {
+  icon: string;
+  iconOnDark: string;
+}) {
+  return (
+    <span
+      aria-hidden="true"
+      className="relative inline-flex h-5 w-5 shrink-0 items-center justify-center md:h-4 md:w-4">
+      {/* The overlay is charcoal, so mobile shows the white copy outright. */}
+      <Image
+        src={iconOnDark}
+        alt=""
+        width={20}
+        height={20}
+        className="h-full w-full object-contain md:hidden"
+      />
+      <Image
+        src={icon}
+        alt=""
+        width={20}
+        height={20}
+        className="hidden h-full w-full object-contain transition-opacity duration-200 ease-out md:block md:group-hover:opacity-0 md:group-focus-visible:opacity-0"
+      />
+      <Image
+        src={iconOnDark}
+        alt=""
+        width={20}
+        height={20}
+        className="absolute inset-0 hidden h-full w-full object-contain opacity-0 transition-opacity duration-200 ease-out md:block md:group-hover:opacity-100 md:group-focus-visible:opacity-100"
+      />
+    </span>
+  );
+}
+
 export default function Menu() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -56,16 +145,6 @@ export default function Menu() {
       return current === "/blog" || current.startsWith("/blog/");
     return current === target;
   };
-
-  const linkClass = (active: boolean) =>
-    [
-      "block rounded-full no-underline transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
-      "px-5 py-3 text-xl focus-visible:ring-red-light focus-visible:ring-offset-charcoal",
-      "md:px-3.5 md:py-2 md:text-sm md:focus-visible:ring-red md:focus-visible:ring-offset-white",
-      active
-        ? "font-semibold bg-white/10 text-white md:bg-red/10 md:text-red"
-        : "text-white/80 hover:bg-white/10 hover:text-white md:text-charcoal md:hover:bg-charcoal/5 md:hover:text-red",
-    ].join(" ");
 
   return (
     <>
@@ -118,7 +197,10 @@ export default function Menu() {
 
         <ul
           id="menu"
-          className="flex w-full flex-col items-center gap-2 px-6 md:w-auto md:flex-row md:gap-1 md:px-0">
+          // Gap ladder: `xl:gap-6` plus the links' 12px side padding puts 48px
+          // between labels, the rhythm measured on hiero.org (49px). Narrower
+          // breakpoints tighten it only as far as the row needs.
+          className="flex w-full flex-col items-center gap-2 px-6 md:w-auto md:flex-row md:items-center md:gap-1 md:px-0 lg:gap-3 xl:gap-6">
           {menuItems.map(item => {
             const active = isActive(item.href);
             const isExternal = isExternalLink(item);
@@ -158,7 +240,7 @@ export default function Menu() {
             );
           })}
 
-          <li className="self-center flex items-center gap-2">
+          <li className="mt-8 flex w-full items-center gap-3 md:mt-0 md:ml-3 md:w-auto md:gap-2 md:border-l md:border-charcoal/15 md:pl-3">
             {socialLinks.map(social => (
               <a
                 key={social.name}
@@ -166,14 +248,9 @@ export default function Menu() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={withNewTabHint(social.name)}
-                className="flex">
-                <Image
-                  src={social.icon}
-                  alt={social.name}
-                  width={35}
-                  height={35}
-                  className="h-[35px] w-[35px] md:h-[17px] md:w-[17px]"
-                />
+                className={socialClass}>
+                <SocialIcon icon={social.icon} iconOnDark={social.iconOnDark} />
+                <span className={socialLabel}>{social.name}</span>
               </a>
             ))}
           </li>

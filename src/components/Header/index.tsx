@@ -34,13 +34,17 @@ export default function Header() {
 
   return (
     <div
-      className={`h-22.5 flex items-center fixed inset-x-0 top-0 z-50 border-b bg-white/80 backdrop-blur-xl transition-[translate,border-color,box-shadow] duration-300 ease-in-out motion-reduce:transition-none ${isScrolled ? "border-charcoal/10 shadow-[0_8px_30px_rgba(30,30,30,0.06)]" : "border-transparent"} ${isVisible ? "translate-y-0" : "-translate-y-full"}`}>
+      // `sand` rather than white: it is the same warm neutral the footer's lower
+      // band uses, so the two ends of the page frame the white content between
+      // them. Held at 85% so the composite stays light enough for charcoal text
+      // even when the red hero scrolls underneath.
+      className={`h-22.5 flex items-center fixed inset-x-0 top-0 z-50 border-b bg-sand/85 backdrop-blur-xl transition-[translate,border-color,box-shadow] duration-300 ease-in-out motion-reduce:transition-none ${isScrolled ? "border-charcoal/10 shadow-[0_8px_30px_rgba(30,30,30,0.06)]" : "border-transparent"} ${isVisible ? "translate-y-0" : "-translate-y-full"}`}>
       <Container>
         <div className="flex flex-row justify-between items-center">
           <Link
             href="/"
             aria-label="Go to homepage"
-            className="rounded-lg transition-opacity duration-200 hover:opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-4">
+            className="rounded-lg transition-opacity duration-200 hover:opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-4 focus-visible:ring-offset-sand">
             {/* Sized by height with `w-auto`: this mark's viewBox is cropped to
                 the artwork, so pinning both axes would stretch it. Intrinsic
                 dimensions match the footer's copy of the same artwork.

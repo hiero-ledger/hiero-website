@@ -28,7 +28,7 @@ const linkClass = (active: boolean) =>
     // "Issue Explorer" is long enough to wrap onto two lines without it.
     "block rounded-full whitespace-nowrap no-underline transition-colors duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
     "px-5 py-3 text-xl focus-visible:ring-red-light focus-visible:ring-offset-charcoal",
-    "md:rounded-sm md:px-0 md:py-2 md:text-base md:focus-visible:ring-red md:focus-visible:ring-offset-white",
+    "md:rounded-sm md:px-0 md:py-2 md:text-base md:focus-visible:ring-red md:focus-visible:ring-offset-sand",
     active
       ? "font-semibold bg-white/10 text-white md:bg-transparent md:font-normal md:text-red"
       : "font-medium text-white/80 hover:bg-white/10 hover:text-white md:bg-transparent md:font-normal md:text-charcoal md:hover:text-red",
@@ -135,7 +135,7 @@ function useSlidingRule(pathname: string) {
 const socialClass = [
   "group inline-flex items-center justify-center gap-2 rounded-full border no-underline transition-[color,background-color,border-color] duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
   "h-11 flex-1 border-white/25 px-4 text-base leading-none text-white hover:border-transparent hover:bg-red-light focus-visible:ring-red-light focus-visible:ring-offset-charcoal",
-  "md:h-9 md:w-9 md:flex-none md:border-charcoal/15 md:px-0 md:text-base md:text-charcoal md:hover:border-red md:hover:bg-red md:hover:text-white md:focus-visible:ring-red md:focus-visible:ring-offset-white",
+  "md:h-9 md:w-9 md:flex-none md:border-charcoal/15 md:px-0 md:text-base md:text-charcoal md:hover:border-red md:hover:bg-red md:hover:text-white md:focus-visible:ring-red md:focus-visible:ring-offset-sand",
   "xl:w-auto xl:px-3.5",
 ].join(" ");
 

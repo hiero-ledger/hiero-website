@@ -101,8 +101,8 @@ calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?vi
 register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/99097542854?password=3ee2d9c9-32de-4758-8a23-417c751bd7ab&invite=true"
 
 [[section_meet_calls]]
-name = "Blockstream Community Group"
-description = "Monthly community group for all consumers of blockstreams, covering block nodes and mirror nodes."
+name = "Block Stream Community Group"
+description = "Monthly community group for all consumers of block streams, covering block nodes and mirror nodes."
 schedule = "Monthly"
 calendar_link = "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1763053200"
 register_link = "https://zoom-lfx.platform.linuxfoundation.org/meeting/94618152832?password=3b037576-2aab-4f7e-ab24-acf9ca2c3734&invite=true"

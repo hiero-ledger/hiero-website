@@ -10,13 +10,16 @@
 import fs from 'node:fs';
 
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
 
 /**
  * Default path to the repository automation config file.
  * Resolves from helpers/ → scripts/ → .github/hiero-automation.json.
  * @type {string}
  */
-const DEFAULT_CONFIG_PATH = path.resolve(__dirname, '../../hiero-automation.json');
+const DEFAULT_CONFIG_PATH = path.resolve(HERE, '../../hiero-automation.json');
 
 /**
  * Validates that a value is a non-empty string.

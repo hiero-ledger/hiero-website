@@ -304,8 +304,7 @@ export const quotesData = [
   {
     quote:
       "\u201cThe HBAR Foundry community is excited to see the contribution of the Hedera software to the Linux Foundation Decentralized Trust project. We're delighted to see Hedera's commitment to growing an independently governed and transparent community with more resources and opportunities to engage and grow the ecosystem.\u201d",
-    author:
-      "[The HBAR Foundry](https://hbarfoundry.com/), A Community Of Expert Hedera Builders",
+    author: "The HBAR Foundry, A Community Of Expert Hedera Builders",
     logo: "/images/Hiero-Logo-HbarFoundry.png",
   },
   {

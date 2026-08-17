@@ -31,7 +31,7 @@ The repository is thoughtfully organized into the following key directories:
 - **[Proposals](https://github.com/hiero-ledger/sdk-collaboration-hub/tree/main/proposals) (`proposals/`):** Home to already-discussed and approved design proposals.
 - **[Guides](https://github.com/hiero-ledger/sdk-collaboration-hub/tree/main/guides) (`guides/`):** Essential reading for newcomers and seasoned contributors alike, covering everything from best practices to detailed contribution workflows.
 - **[Templates](https://github.com/hiero-ledger/sdk-collaboration-hub/tree/main/templates) (`templates/`):** Streamline your submissions and communications with standardized templates for consistency and clarity.
-- **[Meeting Notes](https://github.com/hiero-ledger/sdk-collaboration-hub/tree/main/meetings) (`meetings/`):** Keep informed and up-to-date with summaries of past technical discussions and decisions.
+- **[Meeting Notes](https://github.com/hiero-ledger/governance/wiki):** Keep informed and up-to-date with summaries of past technical discussions and decisions.
 - **[Discussions](https://github.com/hiero-ledger/sdk-collaboration-hub/discussions) (in GitHub Discussions):** Participate in discussions around design proposals, enabling collaboration around new features or improvements.
 
 ## Who is it for?
@@ -44,7 +44,7 @@ This hub caters to:
 ## How to Use the Hiero SDK Collaboration Hub
 
 Getting started is simple:
-1. **Explore Documentation:** Dive into the `guides/` folder to quickly grasp the contribution standards and best practices. Currently, you can find the [SDK changelog and release notes](https://github.com/hiero-ledger/sdk-collaboration-hub/blob/main/guides/SDK_CHANGELOG_AND_RELEASE_NOTES_GUIDELINES.md) guidelines.
+1. **Explore Documentation:** Dive into the `guides/` folder to quickly grasp the contribution standards and best practices. Currently, you can find the [SDK changelog and release notes](https://github.com/hiero-ledger/sdk-collaboration-hub/blob/main/guides/sdk-changelog-and-release-notes-guidelines.md) guidelines.
 2. **Review Existing Proposals:** Visit the `proposals/` directory to understand current discussions and contribute to them.
 3. **Utilize Templates:** Create clear, structured proposals or reports using ready-to-use templates from the `templates/` directory.
 4. **Stay Updated:** Regularly read through the `meetings/` to remain aligned with ongoing project developments and decisions.

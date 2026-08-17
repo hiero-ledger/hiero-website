@@ -28,13 +28,13 @@ This year, the Hiero project is excited to take part and welcome contributors of
 ## Get Started with Hiero
 
 We’ve prepared a set of issues that are perfect for newcomers to our project. You can find them in any repo in our [Hiero GitHub organization](https://github.com/hiero-ledger)
-under the label [good first issue](https://github.com/issues?q=is%3Aopen+is%3Aissue+org%3Ahiero-ledger+archived%3Afalse+label%3A%22good+first+issue%22+).
+under the label [good first issue](https://github.com/search?q=org%3Ahiero-ledger+label%3A%22good+first+issue%22+state%3Aopen&type=issues).
 
 These issues are designed to be approachable and are a great way to learn how Hiero works while making a meaningful contribution.
 
 ## Guidelines for Good First Issues
 
-To keep the experience smooth for both contributors and maintainers, we’ve documented clear [guidelines for creating and reviewing good first issues](https://github.com/hiero-ledger/governance/blob/main/guidelines/good-first-issues.md).
+To keep the experience smooth for both contributors and maintainers, we’ve documented clear [guidelines for creating and reviewing good first issues](https://github.com/hiero-ledger/governance/blob/main/rules-and-guidelines/good-first-issues.md).
 We encourage you to check them out and we welcome you to create more issues that new contributors can pick up.
 
 ## Why Contribute?

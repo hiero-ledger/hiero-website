@@ -13,9 +13,9 @@ image = "/images/profile-hiero.png"
 
 On February 17th, builders, maintainers and ecosystem collaborators gathered in Denver for Hedera’s DevDay event. This was an exciting day for the Hedera community guided by exciting deep dive presentations into what’s next for the Hedera projects and the broader open source community around it.
 
-Hosted as part of the Hedera community’s ongoing commitment to transparency and developer engagement, [Hedera DevDay 2026](https://devday.hedera.com/home) delivered roadmap updates, technical insights, hands-on demos, and exciting opportunities to collaborate across projects.
+Hosted as part of the Hedera community’s ongoing commitment to transparency and developer engagement, Hedera DevDay 2026 delivered roadmap updates, technical insights, hands-on demos, and exciting opportunities to collaborate across projects.
 
-The [event's agenda](https://devday.hedera.com/agenda) featured several workshops including:
+The event's agenda featured several workshops including:
 
 - Deploying Smart Contracts That Run Themselves
 - Designing for Scale: Batch 1,000 Records On-Chain Using Merkle Proofs

@@ -274,7 +274,7 @@ quote = '''
 &#8220;The HBAR Foundry community is excited to see the contribution of the Hedera software to the Linux Foundation Decentralized Trust project. We're delighted to see Hedera's commitment to growing an independently governed and transparent community with more resources and opportunities to engage and grow the ecosystem.&#8221;
 '''
 author = '''
-<a href="https://hbarfoundry.com/" target="_blank" rel="noreferrer noopener">The HBAR Foundry</a>, A Community Of Expert Hedera Builders
+The HBAR Foundry, A Community Of Expert Hedera Builders
 '''
 logo = "images/Hiero-Logo-HbarFoundry.png"
 

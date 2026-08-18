@@ -5,8 +5,10 @@
   "private": true,
   "scripts": {
     "sync:repo-stats": "node src/scripts/sync-repo-stats.mjs",
-    "dev": "pnpm sync:repo-stats && next dev",
-    "build": "pnpm sync:repo-stats && next build",
+    "sync:community-calls": "node src/scripts/sync-community-calls.mjs",
+    "sync:data": "pnpm sync:repo-stats && pnpm sync:community-calls",
+    "dev": "pnpm sync:data && next dev",
+    "build": "pnpm sync:data && next build",
     "start": "next start",
     "test": "vitest run",
     "coverage": "vitest run --coverage",

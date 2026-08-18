@@ -1,4 +1,5 @@
 import communityCalls from "@/data/community_calls.json";
+import { normaliseCallName } from "@/lib/community-calls";
 
 export const heroData = {
   heading: "Hiero",
@@ -43,68 +44,63 @@ export const whatIsHieroData = {
 };
 
 // Editorial overrides for the community calls, keyed by LFX meeting ID.
+//
 // Order, registration links and cadence come from src/data/community_calls.json,
-// which `pnpm sync:community-calls` regenerates from the LFX calendar API.
-// Only naming and wording are maintained by hand here; anything without an entry
-// falls back to the calendar's own title and agenda.
+// which `pnpm sync:community-calls` regenerates from the LFX calendar API. Names
+// are derived from the calendar title by normaliseCallName, so a rename upstream
+// reaches the site on the next build.
+//
+// Only list a name here when normalisation cannot get it right. Descriptions are
+// editorial: without one, the card falls back to the calendar's own agenda.
 const callOverrides: Record<string, { name?: string; description?: string }> = {
   "95775743341": {
-    name: "TSC",
     description:
       "The Technical Steering Committee (TSC) meeting for project governance, roadmap planning, and key technical decisions.",
   },
   "99574473075": {
-    name: "Monthly Maintainers",
     description:
       "Regular meeting for maintainers across all Hiero projects to coordinate, share updates, and discuss best practices.",
   },
   "97122675754": {
-    name: "Community Call",
     description:
       "Open community meeting for general discussions, updates, and Q&A sessions with the Hiero community and TSC members.",
   },
   "94709702244": {
-    name: "SDK Community Call",
     description:
       "General SDK working group for cross-SDK discussions, standards, and coordination across all Hiero SDK implementations.",
   },
   "99097542854": {
-    name: "Hiero Identity Community Call",
     description:
       "Working group focused on identity-related projects, DID SDK development, and identity standards implementation.",
   },
   "92041330205": {
-    name: "Python SDK Community Call",
     description:
       "Roadmap, features, blockers, and contributions for the Hiero Python SDK.",
   },
   "94695703550": {
-    name: "Hiero Solo Community Call",
     description:
       "Discussions and updates about Solo, an opinionated CLI tool to deploy and manage standalone test networks.",
   },
   "98394707679": {
-    name: "Hiero Community Management",
     description:
       "Good first issues, mentorship, growing the maintainer base, and hackathons across the Hiero community.",
   },
   "92576669768": {
-    name: "Hiero Solo Action Community Call",
     description:
       "Working sessions focused on Solo Action project development, issues, and contributions.",
   },
   "99912667426": {
+    // The calendar says "SDK Python" here but "Python SDK" on the sibling
+    // community call. Align the two so the pair reads as one series.
     name: "Python SDK Office Hours",
     description:
       "Open Q&A and hands-on help from maintainers, for newcomers and existing contributors to the Hiero Python SDK.",
   },
   "99434549287": {
-    name: "Automation Migration Community Call",
     description:
       "Strategy and planning for supporting the good first issue pipelines at Hiero.",
   },
   "94618152832": {
-    name: "Block Stream Community Group",
     description:
       "Community group for all consumers of block streams, covering block nodes and mirror nodes.",
   },
@@ -128,7 +124,7 @@ export const meetData = {
   calls: communityCalls
     .filter(call => !hiddenCallIds.has(call.meetingId))
     .map(call => ({
-      name: callOverrides[call.meetingId]?.name ?? call.name,
+      name: callOverrides[call.meetingId]?.name ?? normaliseCallName(call.name),
       description: callOverrides[call.meetingId]?.description ?? call.agenda,
       registerLink: call.registerLink,
     })),

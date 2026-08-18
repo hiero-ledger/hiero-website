@@ -29,15 +29,15 @@ describe("Header", () => {
     const { container } = render(<Header />);
     const header = container.firstElementChild;
 
-    expect(header).toHaveClass("translate-y-0");
+    expect(header).not.toHaveClass("site-header--hidden");
 
     window.scrollY = 100;
     fireEvent.scroll(window);
-    expect(header).toHaveClass("-translate-y-full");
+    expect(header).toHaveClass("site-header--hidden");
 
     window.scrollY = 50;
     fireEvent.scroll(window);
-    expect(header).toHaveClass("translate-y-0");
+    expect(header).not.toHaveClass("site-header--hidden");
   });
 
   it("shows at the top and ignores an unchanged scroll position", () => {
@@ -47,11 +47,11 @@ describe("Header", () => {
     window.scrollY = 100;
     fireEvent.scroll(window);
     fireEvent.scroll(window);
-    expect(header).toHaveClass("-translate-y-full");
+    expect(header).toHaveClass("site-header--hidden");
 
     window.scrollY = 0;
     fireEvent.scroll(window);
-    expect(header).toHaveClass("translate-y-0");
+    expect(header).not.toHaveClass("site-header--hidden");
   });
 
   it("uses the current scroll position as its initial baseline", () => {
@@ -61,7 +61,7 @@ describe("Header", () => {
     window.scrollY = 250;
     fireEvent.scroll(window);
 
-    expect(container.firstElementChild).toHaveClass("-translate-y-full");
+    expect(container.firstElementChild).toHaveClass("site-header--hidden");
   });
 
   it("removes its scroll listener when unmounted", () => {

@@ -2,24 +2,25 @@
 
 exports[`Header > renders the home link and menu 1`] = `
 <div
-  class="h-[90px] flex items-center fixed inset-x-0 top-0 z-50 bg-white"
+  class="site-header"
 >
   <div
     class="container"
   >
     <div
-      class="flex flex-row justify-between items-center"
+      class="site-header-row"
     >
       <a
         aria-label="Go to homepage"
+        class="site-header-brand"
         href="/"
       >
         <img
           alt="Hiero logo"
-          class="h-[40px] w-[128px]"
-          height="40"
-          src="/images/Hiero-Icon-wLogo.svg"
-          width="128"
+          class="site-header-logo"
+          height="60"
+          src="/images/Hiero-Logo-wText.svg"
+          width="207"
         />
       </a>
       <div

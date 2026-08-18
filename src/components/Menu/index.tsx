@@ -76,8 +76,11 @@ function useSlidingRule(pathname: string) {
   /**
    * One observer covers every reflow that can invalidate a measurement: the
    * initial layout (it fires on observe), the webfont swap that changes label
-   * widths, and the gap changes at each breakpoint. Progressive enhancement —
-   * without ResizeObserver the rule simply never appears.
+   * widths, and the gap changes at each breakpoint.
+   *
+   * Without ResizeObserver the rule still appears — the pathname effect below
+   * measures on mount regardless — but `placed` never flips, so it arrives
+   * without the fade rather than sliding in from the left edge.
    */
   useEffect(() => {
     const list = listRef.current;
@@ -260,7 +263,15 @@ export default function Menu() {
           id="menu"
           ref={listRef}
           className="menu-list"
-          onPointerLeave={settle}>
+          onPointerLeave={settle}
+          // The keyboard counterpart to `onPointerLeave`. Without it the rule
+          // stays parked on the last link that held focus, so after tabbing out
+          // of the bar it marks a page the reader is not on. React's onBlur is
+          // focusout, so one handler on the list covers every link inside it;
+          // relatedTarget lets us ignore focus moving between them.
+          onBlur={event => {
+            if (!event.currentTarget.contains(event.relatedTarget)) settle();
+          }}>
           <span
             aria-hidden="true"
             style={

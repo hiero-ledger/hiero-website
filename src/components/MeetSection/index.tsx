@@ -46,7 +46,7 @@ export default function MeetSection({ data }: MeetSectionProps) {
           </div>
           <div
             id="meet-calls"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {visibleCalls.map((call, i) => (
               <a
                 key={i}
@@ -54,29 +54,29 @@ export default function MeetSection({ data }: MeetSectionProps) {
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label={`Register for ${call.name} (opens in new tab)`}
-                className="flex flex-col border-2 border-white-dark rounded-2xl p-8 hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 transition-colors duration-200 bg-white h-full no-underline text-charcoal">
-                <h3 className="text-xl sm:text-2xl font-medium mb-1">
-                  {call.name}
-                </h3>
-                {call.cadence && (
-                  <p className="flex items-center gap-1.5 text-sm text-gray-500 mb-3">
-                    <svg
-                      aria-hidden="true"
-                      focusable="false"
-                      viewBox="0 0 16 16"
-                      className="h-4 w-4 shrink-0"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round">
-                      <rect x="2" y="3" width="12" height="11" rx="2" />
-                      <path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3" />
-                    </svg>
-                    {call.cadence}
-                  </p>
-                )}
-                <p className="text-base mb-4 text-gray-600 flex-grow">
+                className="grid grid-rows-subgrid row-span-3 gap-0 border-2 border-white-dark rounded-2xl p-8 hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 transition-colors duration-200 bg-white no-underline text-charcoal">
+                <h3 className="text-xl sm:text-2xl font-medium">{call.name}</h3>
+                <p className="flex items-center gap-1.5 text-sm text-gray-500 pt-1">
+                  {call.cadence && (
+                    <>
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        viewBox="0 0 16 16"
+                        className="h-4 w-4 shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round">
+                        <rect x="2" y="3" width="12" height="11" rx="2" />
+                        <path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3" />
+                      </svg>
+                      {call.cadence}
+                    </>
+                  )}
+                </p>
+                <p className="text-base text-gray-600 pt-3">
                   {call.description}
                 </p>
               </a>

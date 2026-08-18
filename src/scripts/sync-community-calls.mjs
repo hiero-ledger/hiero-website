@@ -51,7 +51,7 @@ function collapseToSeries(meetings, now) {
       registrantCount:
         typeof props.registrant_count === "number" ? props.registrant_count : 0,
       registerLink,
-      cadence: describeRecurrence(props.recurrence, start),
+      cadence: describeRecurrence(props.recurrence),
       agenda: typeof props.agenda === "string" ? props.agenda.trim() : "",
     });
   }
@@ -59,32 +59,20 @@ function collapseToSeries(meetings, now) {
   return series;
 }
 
-const WEEKDAYS = [
-  "Sundays",
-  "Mondays",
-  "Tuesdays",
-  "Wednesdays",
-  "Thursdays",
-  "Fridays",
-  "Saturdays",
-];
-
-function describeRecurrence(recurrence, start) {
+// How often a meeting runs. Deliberately omits the weekday: the exact day and
+// time are on the LFX calendar behind the card, and keeping this to the interval
+// alone keeps the line short and uniform across cards.
+function describeRecurrence(recurrence) {
   if (!isRecord(recurrence)) return "";
 
-  const day = WEEKDAYS[new Date(start).getUTCDay()];
   const interval = recurrence.repeat_interval;
 
   // type 2 = weekly, type 3 = monthly, in the Zoom recurrence vocabulary.
   if (recurrence.type === 2) {
-    if (interval === 1) return `Weekly, ${day}`;
-    if (interval === 2) return `Every 2 weeks, ${day}`;
-    return `Every ${interval} weeks, ${day}`;
+    return interval === 1 ? "Weekly" : `Every ${interval} weeks`;
   }
   if (recurrence.type === 3) {
-    return interval === 1
-      ? `Monthly, ${day}`
-      : `Every ${interval} months, ${day}`;
+    return interval === 1 ? "Monthly" : `Every ${interval} months`;
   }
 
   return "";

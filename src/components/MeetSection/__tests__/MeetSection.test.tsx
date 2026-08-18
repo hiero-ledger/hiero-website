@@ -87,4 +87,35 @@ describe("MeetSection", () => {
 
     expect(screen.queryByRole("button")).toBeNull();
   });
+  it("renders cadence when present and omits it when not", () => {
+    render(
+      <MeetSection
+        data={{
+          heading: "Meet",
+          text: "Join us.",
+          calls: [
+            {
+              name: "With Cadence",
+              description: "Has a recurrence rule.",
+              cadence: "Every 2 weeks, Thursdays",
+              registerLink: "https://example.com/a",
+            },
+            {
+              name: "Without Cadence",
+              description: "One-off meeting.",
+              cadence: "",
+              registerLink: "https://example.com/b",
+            },
+          ],
+        }}
+      />,
+    );
+
+    expect(screen.getByText("Every 2 weeks, Thursdays")).toBeInTheDocument();
+
+    const withoutCadence = screen
+      .getByRole("heading", { name: "Without Cadence" })
+      .closest("a");
+    expect(withoutCadence?.querySelector("svg")).toBeNull();
+  });
 });

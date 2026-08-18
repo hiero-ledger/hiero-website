@@ -7,6 +7,9 @@ import RichText from "@/components/RichText";
 interface MeetCall {
   name: string;
   description: string;
+  // Derived from the LFX recurrence rule, e.g. "Every 2 weeks, Thursdays".
+  // Empty for a meeting with no recurrence, in which case it is not rendered.
+  cadence?: string;
   registerLink: string;
 }
 
@@ -52,9 +55,27 @@ export default function MeetSection({ data }: MeetSectionProps) {
                 rel="noreferrer noopener"
                 aria-label={`Register for ${call.name} (opens in new tab)`}
                 className="flex flex-col border-2 border-white-dark rounded-2xl p-8 hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 transition-colors duration-200 bg-white h-full no-underline text-charcoal">
-                <h3 className="text-xl sm:text-2xl font-medium mb-3">
+                <h3 className="text-xl sm:text-2xl font-medium mb-1">
                   {call.name}
                 </h3>
+                {call.cadence && (
+                  <p className="flex items-center gap-1.5 text-sm text-gray-500 mb-3">
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      viewBox="0 0 16 16"
+                      className="h-4 w-4 shrink-0"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round">
+                      <rect x="2" y="3" width="12" height="11" rx="2" />
+                      <path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3" />
+                    </svg>
+                    {call.cadence}
+                  </p>
+                )}
                 <p className="text-base mb-4 text-gray-600 flex-grow">
                   {call.description}
                 </p>

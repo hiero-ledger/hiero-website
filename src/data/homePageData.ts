@@ -126,6 +126,7 @@ export const meetData = {
     .map(call => ({
       name: callOverrides[call.meetingId]?.name ?? normaliseCallName(call.name),
       description: callOverrides[call.meetingId]?.description ?? call.agenda,
+      cadence: call.cadence,
       registerLink: call.registerLink,
     })),
 };

@@ -12,6 +12,7 @@ const projectSlug = "hiero";
 const apiUrl =
   "https://pcc-bff.platform.linuxfoundation.org/production/api/v2/itx-services" +
   `/public/meetings/${projectSlug}?view=pcc&pageSize=9999`;
+const FETCH_TIMEOUT_MS = 15_000;
 
 function isRecord(value) {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -65,7 +66,12 @@ function collapseToSeries(meetings, now) {
 function describeRecurrence(recurrence) {
   if (!isRecord(recurrence)) return "";
 
-  const interval = recurrence.repeat_interval;
+  // Zoom omits repeat_interval when it is 1. Anything else non-integer is
+  // unexpected, and a wrong cadence is worse than none, so bail rather than
+  // interpolate it into the string shown on the card.
+  const rawInterval = recurrence.repeat_interval ?? 1;
+  if (!Number.isInteger(rawInterval) || rawInterval < 1) return "";
+  const interval = rawInterval;
 
   // type 2 = weekly, type 3 = monthly, in the Zoom recurrence vocabulary.
   if (recurrence.type === 2) {
@@ -142,11 +148,15 @@ async function writeIfChanged(content) {
 async function fetchFromLfx() {
   console.log("[sync-community-calls] Fetching community calls from LFX...");
 
+  // `pnpm build` and `pnpm dev` both run this first, and fetch has no default
+  // timeout — without this a stalled connection hangs the build instead of
+  // falling through to the bundled cache.
   const response = await fetch(apiUrl, {
     headers: {
       "User-Agent": "hiero-website-build",
       Accept: "application/json",
     },
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
   });
 
   if (!response.ok) {

@@ -97,7 +97,7 @@ describe("MeetSection", () => {
             {
               name: "With Cadence",
               description: "Has a recurrence rule.",
-              cadence: "Every 2 weeks, Thursdays",
+              cadence: "Every 2 weeks",
               registerLink: "https://example.com/a",
             },
             {
@@ -111,7 +111,7 @@ describe("MeetSection", () => {
       />,
     );
 
-    expect(screen.getByText("Every 2 weeks, Thursdays")).toBeInTheDocument();
+    expect(screen.getByText("Every 2 weeks")).toBeInTheDocument();
 
     const withoutCadence = screen
       .getByRole("heading", { name: "Without Cadence" })

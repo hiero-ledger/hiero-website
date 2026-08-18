@@ -7,7 +7,7 @@ import RichText from "@/components/RichText";
 interface MeetCall {
   name: string;
   description: string;
-  // Derived from the LFX recurrence rule, e.g. "Every 2 weeks, Thursdays".
+  // Derived from the LFX recurrence rule, e.g. "Weekly" or "Every 2 weeks".
   // Empty for a meeting with no recurrence, in which case it is not rendered.
   cadence?: string;
   registerLink: string;

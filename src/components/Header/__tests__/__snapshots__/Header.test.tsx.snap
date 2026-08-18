@@ -2,22 +2,22 @@
 
 exports[`Header > renders the home link and menu 1`] = `
 <div
-  class="h-22.5 flex items-center fixed inset-x-0 top-0 z-50 border-b bg-sand/85 backdrop-blur-xl transition-[translate,border-color,box-shadow] duration-300 ease-in-out motion-reduce:transition-none border-transparent translate-y-0"
+  class="site-header"
 >
   <div
     class="container"
   >
     <div
-      class="flex flex-row justify-between items-center"
+      class="site-header-row"
     >
       <a
         aria-label="Go to homepage"
-        class="rounded-lg transition-opacity duration-200 hover:opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-4 focus-visible:ring-offset-sand"
+        class="site-header-brand"
         href="/"
       >
         <img
           alt="Hiero logo"
-          class="h-8 w-auto md:h-8.5"
+          class="site-header-logo"
           height="60"
           src="/images/Hiero-Logo-wText.svg"
           width="207"

@@ -8,6 +8,15 @@ import { defineConfig, devices } from "@playwright/test";
  * Every regression these guard against shipped green through lint, Prettier
  * and the vitest suite.
  */
+/**
+ * Overridable so the suite can run beside a dev server. `reuseExistingServer`
+ * adopts whatever already answers on this port — which is a trap on the default
+ * one: a `pnpm dev` left running means the tests quietly grade a different
+ * branch than the one you built. `PORT=3100 pnpm test:e2e` sidesteps it.
+ */
+const PORT = process.env.PORT ?? "3000";
+const BASE_URL = `http://localhost:${PORT}`;
+
 export default defineConfig({
   testDir: "./e2e",
   fullyParallel: true,
@@ -15,7 +24,7 @@ export default defineConfig({
   retries: 0,
   reporter: process.env.CI ? "github" : "list",
   use: {
-    baseURL: "http://localhost:3000",
+    baseURL: BASE_URL,
     trace: "retain-on-failure",
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
@@ -23,7 +32,8 @@ export default defineConfig({
     // Runs against the production build, so the CSS under test is the CSS we ship.
     // CI builds in an earlier step, so `start` finds .next already there.
     command: "pnpm start",
-    url: "http://localhost:3000",
+    url: BASE_URL,
+    env: { PORT },
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },

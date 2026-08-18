@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 import RichText from "@/components/RichText";
 
 interface MeetCall {
@@ -16,10 +20,13 @@ interface MeetSectionProps {
   data: MeetData;
 }
 
-const VISIBLE_COUNT = 9;
+export const VISIBLE_COUNT = 9;
 
 export default function MeetSection({ data }: MeetSectionProps) {
-  const visibleCalls = data.calls.slice(0, VISIBLE_COUNT);
+  const [expanded, setExpanded] = useState(false);
+  const hasMore = data.calls.length > VISIBLE_COUNT;
+  const visibleCalls =
+    expanded || !hasMore ? data.calls : data.calls.slice(0, VISIBLE_COUNT);
 
   return (
     <div id="meet" className="anchor">
@@ -34,7 +41,9 @@ export default function MeetSection({ data }: MeetSectionProps) {
               className="text-lg max-w-full md:max-w-[800px] space-y-4"
             />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+          <div
+            id="meet-calls"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
             {visibleCalls.map((call, i) => (
               <a
                 key={i}
@@ -52,16 +61,20 @@ export default function MeetSection({ data }: MeetSectionProps) {
               </a>
             ))}
           </div>
-          <div className="mt-10 text-center">
-            <a
-              href="https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=month"
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label="View all community calls on LFX Calendar (opens in new tab)"
-              className="text-red hover:text-red-dark text-lg font-medium underline">
-              View all community calls →
-            </a>
-          </div>
+          {hasMore && (
+            <div className="mt-10 text-center">
+              <button
+                type="button"
+                onClick={() => setExpanded(!expanded)}
+                aria-expanded={expanded}
+                aria-controls="meet-calls"
+                className="text-red hover:text-red-dark text-lg font-medium underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 rounded">
+                {expanded
+                  ? "Show fewer community calls ↑"
+                  : `View all ${data.calls.length} community calls ↓`}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

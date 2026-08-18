@@ -27,12 +27,38 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
+      # Persists .lycheecache between runs. Note that --max-cache-age below is
+      # deliberately shorter than the weekly cron: every scheduled run re-checks
+      # every URL from scratch, so a link that rots mid-week is still caught.
+      # The cache exists to make same-day repeats cheap -- manual
+      # workflow_dispatch runs and re-runs of a failed job -- rather than to
+      # skip work on the weekly pass.
+      - name: Restore Lychee cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .lycheecache
+          key: lychee-cache-${{ github.run_id }}
+          restore-keys: |
+            lychee-cache-
+
       - name: Check Markdown links (Lychee)
         id: lychee
         uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
         continue-on-error: true
         with:
-          args: --verbose --no-progress './**/*.md'
+          # --root-dir is required for root-relative links such as
+          # /images/foo.png to resolve against public/ instead of the
+          # filesystem root; without it every such link is reported broken.
+          # Concurrency, retries, timeout and accepted status codes come from
+          # lychee.toml; skipped hosts come from .lycheeignore.
+          args: >-
+            --verbose
+            --no-progress
+            --root-dir "${{ github.workspace }}/public"
+            --cache
+            --max-cache-age 1d
+            './**/*.md'
+          output: ./lychee/out.md
           fail: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -41,6 +67,8 @@ jobs:
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
+            const fs = require('fs');
+
             // Determine if this is a dry run
             const isManual = context.eventName === 'workflow_dispatch';
             const dryRun = isManual ? String(context.payload.inputs.dry_run).toLowerCase() === 'true' : false;
@@ -52,14 +80,55 @@ jobs:
 
             console.log(`Event: ${context.eventName}, Dry Run: ${dryRun}`);
 
-            // Define Issue Body
-            const body = `### 🔗 Broken Links Detected\n\n` +
-              `The scheduled markdown link check workflow has detected broken links.\n\n` +
-              `**Run Details:**\n` +
-              `- **Timestamp:** ${new Date().toISOString()}\n` +
-              `- **Workflow Run:** [View Logs](${runUrl})\n\n` +
-              `> **Note:** We use [Lychee](https://github.com/lycheeverse/lychee) for link checking. ` +
-              `Please check the "Check Markdown links" step in the logs to see the specific URLs that failed.`;
+            // Pull in Lychee's own markdown report so the issue names the
+            // offending URLs and their source files. Without this the report
+            // only ever existed in the run logs, which is why this issue
+            // accumulated timestamps with nothing actionable in them.
+            //
+            // GitHub rejects bodies over 65536 characters, so leave headroom
+            // for the surrounding text and say so explicitly when truncating.
+            const REPORT_LIMIT = 60000;
+            const reportPath = './lychee/out.md';
+
+            function readReport() {
+              try {
+                const raw = fs.readFileSync(reportPath, 'utf8').trim();
+                if (!raw) {
+                  console.log(`${reportPath} is empty; falling back to the log pointer.`);
+                  return null;
+                }
+                if (raw.length <= REPORT_LIMIT) return raw;
+                return raw.slice(0, REPORT_LIMIT) +
+                  `\n\n> **Report truncated** at ${REPORT_LIMIT} characters. ` +
+                  `See the [full run logs](${runUrl}) for the complete list.`;
+              } catch (error) {
+                // A missing artefact must never fail the reporting step.
+                console.log(`Could not read ${reportPath}: ${error.message}`);
+                return null;
+              }
+            }
+
+            const report = readReport();
+            const details = report
+              ? `<details open>\n<summary><strong>Lychee report</strong></summary>\n\n${report}\n\n</details>`
+              : `> **Note:** The Lychee report could not be read for this run. ` +
+                `Please check the "Check Markdown links (Lychee)" step in the logs ` +
+                `to see the specific URLs that failed.`;
+
+            // Shared by both the create and the update path, so recurring
+            // comments carry the current failure list rather than a timestamp.
+            function buildBody(heading) {
+              return `### 🔗 ${heading}\n\n` +
+                `**Run Details:**\n` +
+                `- **Timestamp:** ${new Date().toISOString()}\n` +
+                `- **Workflow Run:** [View Logs](${runUrl})\n\n` +
+                `${details}\n\n` +
+                `> Link checking uses [Lychee](https://github.com/lycheeverse/lychee). ` +
+                `Hosts that cannot be verified by a headless checker are listed, with reasons, ` +
+                `in \`.lycheeignore\`.`;
+            }
+
+            const body = buildBody('Broken Links Detected');
 
             if (dryRun) {
               console.log("DRY RUN: Would have created or updated an issue.");
@@ -84,7 +153,7 @@ jobs:
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: existingIssue.number,
-                  body: `**Update ${new Date().toISOString()}:** Still finding broken links.\nCheck new run logs: ${runUrl}`
+                  body: buildBody('Still Finding Broken Links')
                 });
               } else {
                 console.log("Creating a new issue...");

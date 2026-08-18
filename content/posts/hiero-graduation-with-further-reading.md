@@ -52,7 +52,7 @@ Graduation confirms that Hiero has achieved LFDT’s highest standards for:
 - **Neutral governance** and diverse community leadership.
 - **Production readiness** with enterprise-grade deployments (including powering the Hedera mainnet since February 2025).
 - **Security and compliance** with OpenSSF, GitHub Insights, and CI/CD best practices.
-- **Growing adoption** by enterprises, developers, and public sector innovators. [More Information](https://github.com/hiero-ledger/hiero/blob/main/ADOPTERS.md)
+- **Growing adoption** by enterprises, developers, and public sector innovators. [More Information](https://github.com/hiero-ledger/governance/blob/main/ADOPTERS.md)
 
 ---
 

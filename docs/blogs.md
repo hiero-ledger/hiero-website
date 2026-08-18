@@ -137,7 +137,7 @@ If you want to preview the post locally, set `draft = false` while testing.
 
 ### 6. Open Your Pull Request
 
-Follow the normal contributor workflow in [workflow.md](./workflow.md).
+Follow the normal contributor workflow in the [Contributing guide](../README.md#contributing).
 
 Before opening a PR, run:
 
@@ -226,4 +226,4 @@ Before your PR is ready:
 - Contributor docs index: [README.md](../README.md)
 - Local setup guide: [Getting Started](../README.md#getting-started)
 - Repo overview: [01-repo-overview.md](./01-repo-overview.md)
-- Workflow guide: [workflow.md](./workflow.md)
+- Contribution workflow: [Contributing](../README.md#contributing)

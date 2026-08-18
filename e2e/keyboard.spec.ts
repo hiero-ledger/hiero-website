@@ -24,6 +24,27 @@ async function rule(page: import("@playwright/test").Page) {
   });
 }
 
+/**
+ * Geometry of the rule once it has stopped moving.
+ *
+ * The rule fades and slides into place on first paint, so anything measured
+ * straight after `goto` can catch it mid-transition and become a baseline the
+ * rule never returns to.
+ */
+async function settledRule(
+  page: import("@playwright/test").Page,
+  opacity: string,
+) {
+  await expect.poll(async () => (await rule(page))?.opacity).toBe(opacity);
+  await page.waitForFunction(() =>
+    document
+      .querySelector(".menu-rule")
+      ?.getAnimations()
+      .every(animation => animation.playState === "finished"),
+  );
+  return rule(page);
+}
+
 /** Move focus to the first control outside the header, without using a pointer. */
 async function focusOutsideHeader(page: import("@playwright/test").Page) {
   await page.evaluate(() => {
@@ -42,24 +63,28 @@ test.describe("desktop keyboard navigation", () => {
     page,
   }) => {
     await page.goto("/blog/");
-    const atRest = await rule(page);
-    expect(atRest, "the rule should mark the current page at rest").not.toBeNull();
-    expect(atRest!.opacity).toBe("1");
+    const atRest = await settledRule(page, "1");
+    expect(
+      atRest,
+      "the rule should mark the current page at rest",
+    ).not.toBeNull();
 
     await page.locator('.menu-link:has-text("Calendar")').focus();
-    await expect
-      .poll(async () => (await rule(page))!.x)
-      .not.toBe(atRest!.x);
+    await expect.poll(async () => (await rule(page))!.x).not.toBe(atRest!.x);
 
     await focusOutsideHeader(page);
 
-    // Left parked, the underline marks a page the reader is not on.
+    // Left parked, the underline marks a page the reader is not on. Offset and
+    // width travel together, so both have to land back on the active label.
     await expect
-      .poll(async () => (await rule(page))!.x, {
-        message: "rule should settle back onto the active page",
-      })
-      .toBe(atRest!.x);
-    expect((await rule(page))!.width).toBe(atRest!.width);
+      .poll(
+        async () => {
+          const now = (await rule(page))!;
+          return { width: now.width, x: now.x };
+        },
+        { message: "rule should settle back onto the active page" },
+      )
+      .toEqual({ width: atRest!.width, x: atRest!.x });
   });
 
   test("a page with no active nav item hides the rule again after focus leaves", async ({
@@ -86,22 +111,26 @@ test.describe("desktop keyboard navigation", () => {
   }) => {
     await page.goto("/blog/");
     const bar = page.locator("header > div");
+    const brand = page.locator('header a[aria-label="Go to homepage"]');
 
     await page.mouse.move(640, 500);
     await page.mouse.wheel(0, 600);
     await expect(bar).toHaveClass(/site-header--hidden/);
 
     // Shift-tabbing back up lands here; the bar is off-screen at this point.
-    await page.locator('header a[aria-label="Go to homepage"]').focus();
+    await brand.focus();
 
     await expect(
       bar,
       "focus must not land on an off-screen control",
     ).not.toHaveClass(/site-header--hidden/);
-    const box = await page
-      .locator('header a[aria-label="Go to homepage"]')
-      .boundingBox();
-    expect(box, "the focused link should have a box").not.toBeNull();
-    expect(box!.y, "focused link should be inside the viewport").toBeGreaterThanOrEqual(0);
+
+    // Dropping the class only starts the slide, which runs for 300ms; until it
+    // lands, the box still reports the link above the top edge.
+    await expect
+      .poll(async () => (await brand.boundingBox())?.y ?? null, {
+        message: "focused link should come to rest inside the viewport",
+      })
+      .toBeGreaterThanOrEqual(0);
   });
 });

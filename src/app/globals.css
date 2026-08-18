@@ -5,16 +5,16 @@
   /* Colors */
   --color-transparent: transparent;
   --color-current: currentColor;
-  --color-white: #FFFFFF;
-  --color-white-dark: #E5E4D7;
+  --color-white: #ffffff;
+  --color-white-dark: #e5e4d7;
   --color-black: #000000;
-  --color-charcoal: #1E1E1E;
-  --color-red: #B81A56;
+  --color-charcoal: #1e1e1e;
+  --color-red: #b81a56;
   --color-red-dark: #992350;
-  --color-red-light: #D92D6A;
-  --color-sand: #E5E4D7;
+  --color-red-light: #d92d6a;
+  --color-sand: #e5e4d7;
   --color-gray: #616161;
-  --color-gray-light: #EFEFEE;
+  --color-gray-light: #efefee;
 
   /* Fonts — variables set by next/font in layout.tsx */
   --font-serif: var(--font-space-grotesk), ui-serif, serif;
@@ -122,6 +122,173 @@
 
 @layer components {
   /* ============================================
+     Site menu — components/Menu
+
+     One full-screen overlay below `md`, one horizontal bar from `md` up. Each
+     rule states the overlay treatment first and re-states the bar's under
+     `md:`, which is why so many properties appear twice.
+
+     Where a hand-written media query is needed, it is `48rem` — Tailwind's own
+     `md` — so these rules line up with the `md:` utilities they sit beside.
+     ============================================ */
+
+  /* Hamburger; the bar itself replaces it from `md` up. */
+  .menu-toggle {
+    @apply inline-flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-200 hover:bg-charcoal/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2 md:hidden;
+  }
+
+  .menu-close {
+    @apply absolute right-6 top-7 inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition-colors duration-200 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal md:hidden;
+  }
+
+  /* The wordmark repeated inside the overlay, which covers the header's own. */
+  .menu-brand {
+    @apply absolute left-6 top-7 md:hidden;
+  }
+
+  .menu-nav {
+    @apply fixed inset-0 z-40 flex h-screen w-full flex-col items-center justify-center overflow-y-auto bg-charcoal text-white;
+    @apply transition-[opacity,translate,visibility] duration-300 ease-out;
+    @apply md:relative md:z-auto md:h-auto md:w-auto md:translate-y-0 md:flex-row md:overflow-visible md:bg-transparent md:text-charcoal md:transition-none;
+  }
+
+  /* The overlay only exists below `md`, so its two states are scoped to that
+     range rather than reset breakpoint by breakpoint. Unscoped they would sit
+     later in this file than `.menu-nav` at equal specificity, and the closed
+     state would take the desktop bar down with it. */
+  @media (width < 48rem) {
+    .menu-nav--open {
+      @apply translate-y-0 opacity-100;
+    }
+
+    .menu-nav--closed {
+      @apply pointer-events-none invisible -translate-y-3 opacity-0;
+    }
+  }
+
+  /* Links have no side padding from `md` up, so the gap *is* the label-to-label
+     distance: `xl:gap-12` is 48px, the rhythm measured on hiero.org (49px).
+     Narrower steps tighten only as far as the row needs. */
+  .menu-list {
+    @apply relative flex w-full flex-col items-center gap-2 px-6 md:w-auto md:flex-row md:gap-5 md:px-0 lg:gap-9 xl:gap-12;
+  }
+
+  .menu-item {
+    @apply w-full text-center md:w-auto md:text-left;
+  }
+
+  /* "Connect" is an overlay-only entry; the bar has no room for it. */
+  .menu-item--overlay-only {
+    @apply md:hidden;
+  }
+
+  /* The shared sliding underline. Width and offset have to be measured, so they
+     arrive as inline styles from the component; everything else lives here. */
+  .menu-rule {
+    @apply pointer-events-none absolute bottom-1 left-0 hidden h-0.5 rounded-full bg-red-light opacity-0 md:block;
+  }
+
+  .menu-rule--visible {
+    @apply opacity-100;
+  }
+
+  /* Withheld until the first measurement lands, so the rule fades in where it
+     belongs instead of sliding in from the left edge. */
+  .menu-rule--animated {
+    @apply transition-[transform,width,opacity] duration-300 ease-out motion-reduce:transition-none;
+  }
+
+  /* Desktop type matches the live site exactly: `text-base` is 16px and carries
+     the -0.054rem tracking measured on hiero.org (-0.864px at 16px), at weight
+     400 in full charcoal, with red on hover. The overlay keeps `text-xl`.
+
+     `whitespace-nowrap` matters from `md` up: the bar is a single row, and
+     "Issue Explorer" is long enough to wrap onto two lines without it. */
+  .menu-link {
+    @apply block rounded-full whitespace-nowrap no-underline transition-colors duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+    @apply px-5 py-3 text-xl font-medium text-white/80 hover:bg-white/10 hover:text-white focus-visible:ring-red-light focus-visible:ring-offset-charcoal;
+    /* The pill background is gone from `md` up: the sliding rule underneath is
+       the hover affordance now, and two competing ones read as noise. */
+    @apply md:rounded-sm md:bg-transparent md:px-0 md:py-2 md:text-base md:font-normal md:text-charcoal md:hover:text-red md:focus-visible:ring-red md:focus-visible:ring-offset-sand;
+  }
+
+  .menu-link--active {
+    @apply bg-white/10 font-semibold text-white md:bg-transparent md:font-normal md:text-red;
+  }
+
+  .menu-social-group {
+    @apply mt-8 flex w-full items-center gap-3 md:mt-0 md:ml-3 md:w-auto md:gap-2 md:border-l md:border-charcoal/15 md:pl-3;
+  }
+
+  /* GitHub and Discord read as buttons rather than bare glyphs: icon plus name,
+     in the same font and size as the links beside them. From `md` to `lg` the
+     pill collapses to a 36px circle and the name hides — at 16px link text the
+     labelled row needs ~753px, and 1024px leaves only ~606px beside the logo
+     once the container's 140px gutters are taken, so the names cannot ride
+     along until `xl`. */
+  .menu-social {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border no-underline transition-[color,background-color,border-color] duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+    @apply h-11 flex-1 border-white/25 px-4 text-base leading-none text-white hover:border-transparent hover:bg-red-light focus-visible:ring-red-light focus-visible:ring-offset-charcoal;
+    @apply md:h-9 md:w-9 md:flex-none md:border-charcoal/15 md:px-0 md:text-charcoal md:hover:border-red md:hover:bg-red md:hover:text-white md:focus-visible:ring-red md:focus-visible:ring-offset-sand;
+    @apply xl:w-auto xl:px-3.5;
+  }
+
+  /* Visible on mobile (roomy overlay) and from `xl` up, hidden only in the band
+     where the row would otherwise overflow. `aria-label` on the link carries
+     the name throughout, so nothing is lost to assistive tech. */
+  .menu-social-name {
+    @apply inline md:hidden xl:inline;
+  }
+
+  /* The two source icons have different aspect ratios (GitHub is 15x17, Discord
+     127x96), so they are letterboxed inside a square box rather than stretched
+     to fill it — same reasoning as the footer's social row. */
+  .menu-social-icon {
+    @apply relative inline-flex h-5 w-5 shrink-0 items-center justify-center md:h-4 md:w-4;
+  }
+
+  .menu-social-glyph {
+    @apply h-full w-full object-contain;
+  }
+
+  /* The overlay is charcoal, so mobile shows the white copy outright. */
+  .menu-social-glyph--overlay {
+    @apply md:hidden;
+  }
+
+  /* The artwork is fixed-colour SVG, so from `md` up the white copy cross-fades
+     in over the red one as the pill fills, rather than the fill recolouring it. */
+  .menu-social-glyph--rest {
+    @apply hidden transition-opacity duration-200 ease-out md:block;
+  }
+
+  .menu-social-glyph--hover {
+    @apply absolute inset-0 hidden opacity-0 transition-opacity duration-200 ease-out md:block;
+  }
+
+  @media (width >= 48rem) {
+    /* `(hover: hover)` matches what Tailwind's own `hover:` compiles to, so a
+       touch device at tablet width does not stick on the filled state. */
+    @media (hover: hover) {
+      .menu-social:hover .menu-social-glyph--rest {
+        @apply opacity-0;
+      }
+
+      .menu-social:hover .menu-social-glyph--hover {
+        @apply opacity-100;
+      }
+    }
+
+    .menu-social:focus-visible .menu-social-glyph--rest {
+      @apply opacity-0;
+    }
+
+    .menu-social:focus-visible .menu-social-glyph--hover {
+      @apply opacity-100;
+    }
+  }
+
+  /* ============================================
      Anchors & section offsets
      ============================================ */
   .anchor {
@@ -189,7 +356,9 @@
      Blog / Article content prose styles
      ============================================ */
   .content {
-    :where(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    :where(blockquote):not(
+      :where([class~="not-prose"], [class~="not-prose"] *)
+    ) {
       @apply relative text-charcoal border-red py-2 pr-6;
       margin-top: 86px;
       @apply mb-6 first:mt-0;
@@ -198,14 +367,16 @@
     }
 
     @media (min-width: 640px) {
-      :where(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+      :where(blockquote):not(
+        :where([class~="not-prose"], [class~="not-prose"] *)
+      ) {
         @apply my-6 py-4;
         margin-left: 92px;
       }
     }
 
     :where(blockquote)::before {
-      content: '';
+      content: "";
       @apply block absolute;
       top: -60px;
       left: -3px;
@@ -289,7 +460,7 @@
 
   .highlight pre {
     @apply pt-8 pb-3 px-3 rounded-md;
-    background-color: #1E1E1E !important;
+    background-color: #1e1e1e !important;
   }
 
   code {
@@ -350,7 +521,7 @@
 
   .pagination .page-item:has([aria-label="Previous"]) .page-link::before,
   .pagination .page-item:has([aria-label="Next"]) .page-link::before {
-    content: '';
+    content: "";
     width: 0.5rem;
     height: 0.75rem;
     background-image: url("data:image/svg+xml,%3Csvg id='arrow-single' xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 8 12'%3E%3Cpath d='M6.1,12l1.4-1.4L2.9,6,7.5,1.4,6.1,0,0,6l6,6Z'/%3E%3C/svg%3E");
@@ -358,7 +529,7 @@
 
   .pagination .page-item:has([aria-label="First"]) .page-link::before,
   .pagination .page-item:has([aria-label="Last"]) .page-link::before {
-    content: '';
+    content: "";
     width: 14px;
     height: 0.75rem;
     background-image: url("data:image/svg+xml,%3Csvg id='arrow-double' xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 14 12'%3E%3Cpath d='M6.1,12l1.4-1.4L2.9,6,7.5,1.4,6.1,0,0,6l6,6Z'/%3E%3Cpath d='M12.1,12l1.4-1.4-4.6-4.6L13.5,1.4,12.1,0l-6,6,6,6Z'/%3E%3C/svg%3E");

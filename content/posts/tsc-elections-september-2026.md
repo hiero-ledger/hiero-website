@@ -9,7 +9,8 @@ name = "Hiero Team"
 image = "/images/profile-hiero.png"
 +++
 
-## 🗳️🗳️🗳️ Calling all Contributors!!! 2026 September TSC Nominations are now open! 🗳️🗳️🗳️
+## 📣📣📣  Calling all Contributors!!!  📣📣📣
+## 2026 September TSC Nominations are now open! 
 
 All current contributors for the [Hiero Project](https://github.com/hiero-ledger) are welcomed to cast their nominations for our upcoming TSC's Maintainer Seat elections.
 
@@ -20,9 +21,24 @@ Three positions will be open for elections:
 
 ## 📅 TSC Election Timeline for September 2026
 
-The nomination period for candidates will run from August 25 (start of day UTC) to September 8, 2026 (end of day UTC). The election will be held from September 9 (start of day UTC) to September 20, 2026 (end of day UTC). The announcement of the new TSC member will take place at the TSC meeting on September 22, 2026.
+- Nominations run from August 25 (start of day UTC) to September 8, 2026 (end of day UTC).
+- Election run from September 9 (start of day UTC) to September 20, 2026 (end of day UTC).
+- Results will be announced at the TSC meeting on September 22, 2026.
 
 <img width="1097" height="398" alt="Nomination Timeline Sep 2026" src="https://github.com/user-attachments/assets/311a1069-efd8-468c-a5c2-5f1d74e167f3" />
+
+## Who is a Good Candidate for Nominations
+
+A nominee is someone who is able to:
+
+- Cover deep technical domains from the Hiero project and understand its composition.
+- Have the available bandwidth to make the time to invest in the TSC responsabilities. 
+- Demonstrate an advanced level of professional experience as engineers in the scope of Hiero
+- Operate neutrally in discussions and put the goals and success of Hiero in balance with any particular sub-project governed by the TSC.
+
+Candidates can nominate themselves or be nominated by someone else with their consent.
+
+Our [documentation](https://github.com/hiero-ledger/governance/tree/main/elections/nominees/sep-2026-election#how-to-nominate-a-candidate) describes the process for filing a nomination. 
 
 ## 🗳️ How Will the Vote Work
 

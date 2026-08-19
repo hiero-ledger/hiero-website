@@ -20,9 +20,9 @@ Three positions will be open for elections:
 
 ## 📅 TSC Election Timeline for September 2026
 
-The nomination period for candidates will run from August 25 (start of day UTC) to September 8, 2026 (end of day UTC). The election will be held from September 8 (start of day UTC) to September 20, 2026 (end of day UTC). The announcement of the new TSC member will take place at the TSC meeting on September 22, 2026.
+The nomination period for candidates will run from August 25 (start of day UTC) to September 8, 2026 (end of day UTC). The election will be held from September 9 (start of day UTC) to September 20, 2026 (end of day UTC). The announcement of the new TSC member will take place at the TSC meeting on September 22, 2026.
 
-<img width="1097" height="398" alt="image" src="https://github.com/user-attachments/assets/311a1069-efd8-468c-a5c2-5f1d74e167f3" />
+<img width="1097" height="398" alt="Nomination Timeline Sep 2026" src="https://github.com/user-attachments/assets/311a1069-efd8-468c-a5c2-5f1d74e167f3" />
 
 ## 🗳️ How Will the Vote Work
 
@@ -33,13 +33,13 @@ There will be two ballots created:
 
 Helios sends notifications to all eligible voters via your configured GitHub Notifications.
 
-At the same time, the links to the ballots will be made available once the vote becomes open to the public. 
+At the same time, the links to the ballots will be made available once the vote becomes open. 
 
 As a reminder, please locate the "Log In" button in the lower left side of the screen and use your GitHub ID to register.
 
 ## 📣 Announcing the winner
 
-Once voting has concluded, the results for each Maintainer seat will be reviewed by the LFDT Community Architects and formally announced during the next [TSC meeting happening
+Once voting has concluded, the results for each Maintainer seat and the TSC Voted seat will be reviewed by the LFDT Community Architects and formally announced during the next [TSC meeting happening
 Sep 22](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week&occurrence=1790085600).
 
 ## ✅ Questions

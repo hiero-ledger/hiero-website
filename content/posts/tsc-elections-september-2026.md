@@ -27,7 +27,7 @@ Three positions will be open for elections:
 
 <img width="1097" height="398" alt="Nomination Timeline Sep 2026" src="https://github.com/user-attachments/assets/311a1069-efd8-468c-a5c2-5f1d74e167f3" />
 
-## Who is a Good Candidate for Nominations
+## 📝 Who is a Good Candidate for Nominations
 
 A nominee is someone who is able to:
 

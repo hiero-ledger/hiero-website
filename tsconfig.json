@@ -10,6 +10,7 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "allowArbitraryExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,

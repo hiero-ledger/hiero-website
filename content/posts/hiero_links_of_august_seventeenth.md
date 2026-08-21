@@ -18,7 +18,7 @@ Below are links to some of the things that happened this past week. **Check it o
 ---
 **[Angelina C](https://github.com/aceppaluni)** added the [unfreezeToken RPC](https://github.com/hiero-ledger/hiero-sdk-python/pull/2529) method to the TCK module in the Python SDK.
 
-**[Sophie B](https://github.com/exploreriii)** added a blog post on [Hips](https://github.com/hiero-ledger/hiero-website/pull/572) to the Hiero Website. 
+**[Sophie B](https://github.com/exploreriii), [Angelina C](https://github.com/aceppaluni), [Daniel N](https://github.com/danielmarv)** added a blog post on [Hips](https://github.com/hiero-ledger/hiero-website/pull/572) to the Hiero Website. 
 
 **[Noah T](https://github.com/Ndacyayisenga-droid)** added the [updateNftmetadata and createNftTypeMetadata](https://github.com/hiero-ledger/hiero-enterprise-java/pull/283) methods to the NftClient in the Enterprise-Java repository. 
 

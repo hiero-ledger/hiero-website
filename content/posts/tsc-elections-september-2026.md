@@ -37,7 +37,7 @@ The TSC selects the third candidate from the candidates remaining after the firs
 The results of both ballots are announced at the [TSC meeting](https://zoom-lfx.platform.linuxfoundation.org/meeting/95775743341?password=c07443bf-b0e6-4a68-93f1-5c7ce9bb49ab), establishing the three newly selected TSC members.
 The newly formed TSC will collectively select its Chair and Co-Chair.
 
-<img width="876" height="665" alt="Nomination Timeline Sep 2026" src="https://github.com/user-attachments/assets/c7ec7726-dfac-492f-9e5e-09c287d01fc4" />
+![Nomination Timeline Sep 2026](https://github.com/user-attachments/assets/c7ec7726-dfac-492f-9e5e-09c287d01fc4)
 
 ## 📝 Who is a Good Candidate for Nominations
 

@@ -1,7 +1,7 @@
 +++
 title = '2026 September TSC Elections are Open!'
 featured_image = "/images/tsc-elections-september-2026.png"
-date = 2026-08-19T12:58:27-07:00
+date = 2026-08-25T11:50:51-07:00
 categories = ["Blog"]
 abstract = "Nominate your candidate for the next TSC positions!"
 [[authors]]

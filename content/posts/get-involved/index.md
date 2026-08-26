@@ -31,7 +31,7 @@ Whether you're a civic tech org, an NGO, a DAO, or an enterprise exploring verif
 
 
 ## 📌 Not Ready to Run? List Yourself as an Adopter!
-Even if you’re not ready to run for a seat just yet, there’s still a meaningful way to contribute: **add your organization to the [adopters.md](https://github.com/hiero-identity/hiero/blob/main/adopters.md) file** in the Hiero GitHub repo.
+Even if you’re not ready to run for a seat just yet, there’s still a meaningful way to contribute: **add your organization to the [ADOPTERS.md](https://github.com/hiero-ledger/governance/blob/main/ADOPTERS.md) file** in the Hiero GitHub repo.
 
 This public list of adopters helps:
 - Signal real-world demand for the protocol.

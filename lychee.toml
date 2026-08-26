@@ -1,0 +1,37 @@
+# Configuration for Lychee, the link checker used by
+# .github/workflows/check-broken-links.yml
+#
+# Host exclusions live in .lycheeignore, one commented regex per entry.
+
+# The weekly run checks ~500 unique external URLs, ~70% of them on github.com,
+# all from a single self-hosted runner egress IP. Lychee's default concurrency
+# of 128 reliably trips GitHub's secondary rate limit, so cap it well below.
+max_concurrency = 16
+
+# Retry with backoff instead of failing on the first transient error.
+max_retries = 3
+retry_wait_time = 5
+
+# Some linked hosts are slow to respond; 20s (the default) produced timeouts.
+timeout = 30
+
+# 429 is accepted so explicit rate limiting cannot turn into a red run that
+# masks a genuine regression. Drop it from this list if 429s should be surfaced.
+#
+# Be aware that this does not cover github.com. When it throttles a client it
+# answers 404 on the web endpoints rather than 429, which is indistinguishable
+# from a genuinely missing file. So if a run reports a large batch of
+# github.com 404s at once -- especially for paths that resolve fine in a
+# browser -- read it as throttling, not as rot, and re-run before editing any
+# content. The real protections against that are max_concurrency above, the
+# retries, and the GITHUB_TOKEN the workflow passes to the action.
+accept = ["200", "204", "206", "429"]
+
+# Keep local runs of the same command usable: none of these are committed, but
+# each holds markdown that would otherwise be crawled.
+#
+# `lychee/` matters in CI as well as locally: the run writes its own report to
+# lychee/out.md, and because that report is markdown containing every failed
+# URL, a later run would crawl it and re-report those links against the report
+# file instead of the file that actually contains them.
+exclude_path = ["node_modules", ".next", "lychee"]

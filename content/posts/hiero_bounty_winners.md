@@ -95,7 +95,7 @@ Hiero is open source year-round and there's always more to do.
 A few good places to start:
 
 - Browse open issues across the [Hiero org](https://github.com/hiero-ledger) and look for the `good first issue` label
-- Read the [contributor docs](/README.md) for the workflow
+- Read the [contributor docs](https://github.com/hiero-ledger/hiero-website/blob/main/README.md) for the workflow
 - Drop into the community Discord channel and tell us what you're working on
 
 Huge thanks to everyone who submitted, the judges who reviewed, and the wider Hedera and Hiero communities that made Apex a fitting close to the trilogy. The bar these projects set is the new baseline. We can't wait to see what gets built on top of them.

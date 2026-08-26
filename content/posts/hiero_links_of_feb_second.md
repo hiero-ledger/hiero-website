@@ -27,7 +27,7 @@ a ready-to-use decentralized identity (SSI) solution for the Hiero ecosystem, pr
 
 **Angelina Ceppaluni** added a [protobuf training](https://github.com/hiero-ledger/hiero-sdk-python/pull/1645) guide to the Python SDK to enhance protobuf understanding of serialization and deserialization
 
-**Angelina Ceppaluni** added the first blog post highlighting the events in January. [Click here](https://hiero.org/blog/hiero-links-of-january/) to see whats new!
+**Angelina Ceppaluni** added the first blog post highlighting the events in January. [Click here](https://hiero.org/blog/hiero-links-of-jan) to see whats new!
 
 **Want to be featured on the Hiero-Website?**
 --

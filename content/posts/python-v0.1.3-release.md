@@ -36,7 +36,7 @@ In this release, we packed dozens of new transaction classes, queries, and utili
 - **Pythonic type hinting**  
   – Added `type` annotations across several modules, with documentation on setting up [Mypy](https://mypy.readthedocs.io)
 
-See the full changelog at [Github](https://raw.githubusercontent.com/hiero-ledger/hiero-sdk-python/main/CHANGELOG.md)
+See the full changelog at [Github](https://github.com/hiero-ledger/hiero-sdk-python/releases/tag/v0.1.3)
 
 ---
 

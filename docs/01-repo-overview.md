@@ -66,8 +66,8 @@ The content directory is not fully generic.
 - `content/posts/_index.md` is used for blog landing-page metadata.
 - `content/posts/*.md` are blog posts.
 - `content/hacktoberfest/index.md` and `content/heroes/index.md` are still read.
-- `content/_index.md` exists, but the homepage is currently hard-coded in
-  `src/app/page.tsx` and does not read that file.
+- `content/_index.md` exists, but the homepage is driven by
+  `src/data/homePageData.ts` and does not read that file.
 
 When updating documentation, prefer the current runtime behavior over legacy
 Hugo conventions.

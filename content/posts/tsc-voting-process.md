@@ -17,7 +17,7 @@ Now, as the election period approaches, it's time to dive into how the voting pr
 
 ## 📅 TSC Election Timeline for May 2025
 
-The following timeline borrows its process from the sample in the [LF Decentralized Trust documentation](https://lf-decentralized-trust.github.io/governance/member-info/election-timeline.html).
+The following timeline borrows its process from the sample in the [LF Decentralized Trust documentation](https://lf-decentralized-trust.github.io/governance/member-info/election-timeline/).
 
 ### 📝 Nomination Timeline
 

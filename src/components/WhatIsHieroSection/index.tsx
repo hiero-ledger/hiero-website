@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import RichText from "@/components/RichText";
 
@@ -24,12 +24,65 @@ interface WhatIsHieroSectionProps {
 
 const HEADING_ID = "what-is-hiero-heading";
 
+/**
+ * The property is whatever the copy emphasises — the same half of the phrase
+ * the type treatment enlarges — so the index, the anchors and the heading can
+ * never disagree about which word this entry is about.
+ */
+const EMPHASISED = /\*\*(.+?)\*\*/;
+
+function propertyOf(heading: string) {
+  return EMPHASISED.exec(heading)?.[1] ?? heading;
+}
+
+function anchorFor(property: string) {
+  return `hiero-is-${property.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+}
+
 export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
+  const thesisRef = useRef<HTMLDivElement>(null);
+  const itemsRef = useRef<Array<HTMLLIElement | null>>([]);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  // The reveal is opt-in from script: `data-motion` is what arms the hidden
-  // starting state, so with JS off, a stalled hydration, or reduced motion
-  // preferred, the list is simply there.
+  const entries = data.points.map(point => {
+    const property = propertyOf(point.heading);
+
+    return { ...point, property, anchor: anchorFor(property) };
+  });
+
+  // Which entry the reader is on. Not motion — it is the state the index
+  // reports — so it runs whatever the reader's motion preference is, and only
+  // the marker's travel is a transition that `motion-reduce` can drop.
+  useEffect(() => {
+    const items = itemsRef.current.filter(Boolean) as HTMLLIElement[];
+
+    if (!items.length || !("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver(
+      observed => {
+        // The root is a thin band across the middle of the viewport, so the
+        // entry that intersects it is the one the reader is looking at.
+        const reached = observed
+          .filter(entry => entry.isIntersecting)
+          .map(entry => items.indexOf(entry.target as HTMLLIElement))
+          .filter(index => index >= 0);
+
+        if (!reached.length) return;
+
+        setActiveIndex(Math.min(...reached));
+      },
+      { rootMargin: "-45% 0px -45% 0px" },
+    );
+
+    items.forEach(item => observer.observe(item));
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Each entry arrives as it is reached rather than the whole list arriving at
+  // once, which is what the old single section-level observer did: by the time
+  // you scrolled to the sixth entry it had already played, off screen.
   useEffect(() => {
     const section = sectionRef.current;
     const reduceMotion = window.matchMedia(
@@ -43,16 +96,20 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
     section.dataset.motion = "ready";
 
     const observer = new IntersectionObserver(
-      entries => {
-        if (!entries.some(entry => entry.isIntersecting)) return;
+      observed => {
+        observed.forEach(entry => {
+          if (!entry.isIntersecting) return;
 
-        section.dataset.visible = "true";
-        observer.disconnect();
+          (entry.target as HTMLElement).dataset.revealed = "true";
+          observer.unobserve(entry.target);
+        });
       },
-      { threshold: 0.18 },
+      { threshold: 0.12 },
     );
 
-    observer.observe(section);
+    [thesisRef.current, ...itemsRef.current]
+      .filter(Boolean)
+      .forEach(element => observer.observe(element as Element));
 
     return () => observer.disconnect();
   }, []);
@@ -61,10 +118,10 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
     <section
       ref={sectionRef}
       id="what-is-hiero"
-      className="hiero-principles"
-      aria-labelledby={HEADING_ID}>
+      aria-labelledby={HEADING_ID}
+      className="hiero-principles">
       <div className="container hiero-principles-inner">
-        <div className="hiero-principles-thesis">
+        <div ref={thesisRef} className="hiero-principles-thesis">
           <p className="hiero-principles-eyebrow">{data.eyebrow}</p>
           <h2 id={HEADING_ID} className="hiero-principles-heading">
             {data.heading}
@@ -74,13 +131,35 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
             className="hiero-principles-intro"
             markdown={data.text}
           />
+
+          <nav className="hiero-principles-index" aria-label={data.heading}>
+            <ul className="hiero-principles-index-list">
+              {entries.map((entry, index) => (
+                <li key={entry.anchor}>
+                  <a
+                    href={`#${entry.anchor}`}
+                    className="hiero-principles-index-link"
+                    aria-current={index === activeIndex ? "true" : undefined}>
+                    {entry.property}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
 
         <ul className="hiero-principles-list">
-          {data.points.map(point => (
-            <li key={point.heading} className="hiero-principles-item">
+          {entries.map((entry, index) => (
+            <li
+              key={entry.anchor}
+              id={entry.anchor}
+              ref={item => {
+                itemsRef.current[index] = item;
+              }}
+              data-active={index === activeIndex ? "true" : undefined}
+              className="hiero-principles-item">
               <Image
-                src={point.icon}
+                src={entry.icon}
                 alt=""
                 width={56}
                 height={57}
@@ -91,10 +170,10 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
                 <RichText
                   as="h3"
                   inline
-                  markdown={point.heading}
+                  markdown={entry.heading}
                   className="hiero-principles-term"
                 />
-                <p className="hiero-principles-detail">{point.text}</p>
+                <p className="hiero-principles-detail">{entry.text}</p>
               </div>
             </li>
           ))}

@@ -9,6 +9,10 @@ vi.mock("../ConsensusLattice", () => ({
   default: () => <div data-testid="consensus-lattice" />,
 }));
 
+vi.mock("../HeroTraces", () => ({
+  default: () => <div data-testid="hero-traces" />,
+}));
+
 const data = {
   eyebrow: "A Linux Foundation Decentralized Trust project",
   heading: "Hiero",

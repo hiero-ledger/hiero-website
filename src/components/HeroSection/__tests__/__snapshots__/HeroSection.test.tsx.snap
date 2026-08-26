@@ -7,7 +7,7 @@ exports[`HeroSection > matches the rendered structure 1`] = `
   id="hero"
 >
   <div
-    data-testid="consensus-lattice"
+    data-testid="hero-traces"
   />
   <div
     class="container hero-section-inner"
@@ -17,6 +17,9 @@ exports[`HeroSection > matches the rendered structure 1`] = `
     >
       A Linux Foundation Decentralized Trust project
     </p>
+    <div
+      data-testid="consensus-lattice"
+    />
     <div
       class="hero-section-lockup"
     >

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ConsensusLattice from "./ConsensusLattice";
+import HeroTraces from "./HeroTraces";
 import {
   isExternalLink,
   opensInNewTab,
@@ -80,10 +81,12 @@ function HeroAction({
 export default function HeroSection({ data }: HeroSectionProps) {
   return (
     <section id="hero" className="hero-section" aria-labelledby="hero-title">
-      <ConsensusLattice />
+      <HeroTraces />
 
       <div className="container hero-section-inner">
         <p className="hero-section-eyebrow">{data.eyebrow}</p>
+
+        <ConsensusLattice />
 
         <div className="hero-section-lockup">
           <h1 id="hero-title" className="hero-section-title">

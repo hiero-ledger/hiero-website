@@ -84,7 +84,7 @@
     --hero-shadow: #23060f;
 
     @apply relative isolate overflow-hidden text-white;
-    @apply min-h-[clamp(34rem,calc(100svh-5.625rem),50rem)];
+    @apply min-h-[32rem] xl:min-h-[clamp(34rem,calc(100svh-5.625rem),50rem)];
 
     /* Front to back: a ground veil, the volume of light the lattice sits
        inside, and the brand ramp run down into its own shadow. Three stacked
@@ -246,6 +246,32 @@
     }
   }
 
+  /* The gossip field behind everything. Faint enough to read as texture rather
+     than as a second subject, and masked so it thins out across the lower-left
+     where the wordmark and the sentence sit. `slice` rather than `meet`: the
+     drawing is a crop of a larger network, so it should fill the frame at any
+     ratio instead of letterboxing inside it. */
+  .hero-traces {
+    @apply pointer-events-none absolute inset-0 -z-20 h-full w-full;
+
+    mask-image: radial-gradient(
+      116% 94% at 78% 16%,
+      black 6%,
+      rgb(0 0 0 / 34%) 44%,
+      transparent 78%
+    );
+  }
+
+  .hero-traces-links {
+    @apply fill-none stroke-white/14;
+
+    stroke-width: 0.6;
+  }
+
+  .hero-traces-events {
+    @apply fill-white/28;
+  }
+
   /* ============================================
      Hero consensus lattice — components/HeroSection/ConsensusLattice
 
@@ -260,12 +286,21 @@
      and none of the ~50 elements needs a counter-rotation to keep facing front.
      ============================================ */
 
-  /* Bled off the right edge: the object continues past the frame rather than
-     sitting inside it like a stock illustration. */
+  /* Below `xl` the lattice is a band of its own between the credential and the
+     wordmark. The space above the wordmark was empty at those widths and the
+     object was bled so far past the right edge that only a cropped sliver of it
+     stayed on screen; giving it a row in the flow fixes both at once, and the
+     hero is content-height there so no gap is left over to fill.
+
+     From `xl` there is a free half to stand it in, so it lifts out of the flow
+     and takes the right of the frame, bled past the edge — the object carries
+     on past the frame rather than sitting inside it like a stock illustration. */
   .hero-lattice {
-    @apply pointer-events-none absolute -z-10 grid place-items-center;
-    @apply inset-y-0 right-[-4%] left-auto w-[min(48rem,56%)];
-    @apply perspective-[74rem];
+    @apply pointer-events-none relative grid w-full place-items-center;
+    @apply mt-3 h-34 perspective-[74rem] sm:h-[clamp(9.5rem,24vh,16rem)];
+    @apply xl:mt-0;
+    @apply xl:absolute xl:inset-y-0 xl:right-[-4%] xl:left-auto xl:-z-10;
+    @apply xl:h-auto xl:w-[min(48rem,56%)];
   }
 
   .hero-lattice-tilt {
@@ -285,7 +320,8 @@
      clamp: `scale` takes a number, and a number cannot be calc'd against vw. */
   .hero-lattice-stage {
     @apply relative h-0 w-0 transform-3d;
-    @apply scale-100 max-[90rem]:scale-[0.88] max-xl:scale-[0.74] max-md:scale-[0.56];
+    @apply scale-[0.42] sm:scale-[0.5] md:scale-[0.56];
+    @apply xl:scale-[0.88] min-[90rem]:scale-100;
 
     transform: rotateX(9deg);
     animation: hero-lattice-turn 26s ease-in-out infinite alternate;
@@ -398,38 +434,6 @@
     100% {
       opacity: 0;
       transform: translateX(var(--edge-length, 0));
-    }
-  }
-
-  /* Below two columns there is no free half to stand the object in, so it moves
-     behind the type and becomes atmosphere. The mask is what makes that safe:
-     it keeps the lit part of the lattice in the top-right corner and fades it
-     out across the reading column, so a bright node never lands under a line of
-     12px type. It sits on `.hero-lattice` rather than on the stage below —
-     masking a `transform-3d` element would flatten the scene it is masking. */
-  @media (width < 80rem) {
-    .hero-lattice {
-      @apply inset-[-12%_-24%_auto_auto] h-[74%] w-[34rem] opacity-[0.62];
-
-      mask-image: radial-gradient(
-        118% 88% at 84% 22%,
-        black 24%,
-        rgb(0 0 0 / 35%) 58%,
-        transparent 80%
-      );
-    }
-  }
-
-  @media (width < 48rem) {
-    .hero-lattice {
-      @apply inset-[-6%_-28%_auto_auto] h-[50%] w-[25rem] opacity-[0.6];
-
-      mask-image: radial-gradient(
-        90% 80% at 82% 26%,
-        black 34%,
-        rgb(0 0 0 / 30%) 64%,
-        transparent 84%
-      );
     }
   }
 

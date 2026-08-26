@@ -7,6 +7,9 @@ exports[`HeroSection > matches the rendered structure 1`] = `
   id="hero"
 >
   <div
+    data-testid="consensus-lattice"
+  />
+  <div
     class="container hero-section-inner"
   >
     <p

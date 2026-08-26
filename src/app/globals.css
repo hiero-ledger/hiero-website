@@ -62,270 +62,158 @@
 
      A masthead rather than a billboard: a credential line, the wordmark at
      display size, the positioning sentence and its two doors set beside it,
-     and a colophon of live project counts closing the bottom edge. Every
-     decorative layer that did not carry meaning was removed; the ambient work
-     is done by the background stack alone, so the markup has no filler divs.
+     and a colophon of live project counts closing the bottom edge.
+
+     Written `@apply`-first, on the same convention as the header and menu
+     below. What stays as plain declarations is only what Tailwind has no
+     utility for — composite paints, masks, keyframes and `content` — and each
+     of those is a value rather than a layout decision.
      ============================================ */
 
   /* Height is the viewport minus the header spacer in layout.tsx (`h-22.5`, so
      5.625rem), which lands the colophon on the fold instead of guessing at a
      band. `svh` rather than `vh`: mobile browsers report `vh` against the
      *expanded* viewport, which would push the colophon under the address bar
-     on first paint. */
+     on first paint. The ceiling is higher than the type needs because the
+     lattice needs the volume. */
   .hero-section {
-    position: relative;
-    min-height: clamp(30rem, calc(100svh - 5.625rem), 42rem);
-    isolation: isolate;
-    overflow: hidden;
-    color: var(--color-white);
-    /* Three layers, front to back. The ground veil darkens the lower half,
-       which is both a composition choice — the wordmark gets something to
-       stand on — and a contrast one: every piece of text in this section sits
-       in that band, so white stays well clear of the AA floor no matter where
-       the gradient happens to land behind it. */
+    /* Two darkenings of `--color-red-dark`, kept local rather than added to the
+       theme: they exist so a luminous object has something to be luminous
+       against, and nothing outside this section should reach for them. */
+    --hero-deep: #3a0a1e;
+    --hero-shadow: #23060f;
+
+    @apply relative isolate overflow-hidden text-white;
+    @apply min-h-[clamp(34rem,calc(100svh-5.625rem),50rem)];
+
+    /* Front to back: a ground veil, the volume of light the lattice sits
+       inside, and the brand ramp run down into its own shadow. Three stacked
+       gradients are a paint, not a utility — `bg-[…]` here would be one
+       400-character token nobody could read or change. */
     background:
       linear-gradient(
         to bottom,
-        rgb(38 6 22 / 0%) 42%,
-        rgb(38 6 22 / 26%) 100%
+        rgb(35 6 15 / 0%) 34%,
+        rgb(35 6 15 / 30%) 100%
       ),
       radial-gradient(
-        58rem 40rem at 84% -8%,
-        rgb(217 45 106 / 45%),
+        46rem 38rem at 79% 44%,
+        rgb(217 45 106 / 46%),
         transparent 62%
       ),
       linear-gradient(
-        150deg,
-        var(--color-red-dark),
-        var(--color-red) 58%,
-        var(--color-red-dark)
+        152deg,
+        var(--hero-deep),
+        var(--color-red-dark) 44%,
+        #6d1338 74%,
+        var(--hero-shadow)
       );
   }
 
-  /* A drafting grid, not a texture: it reads as the substrate a specification
-     is set on, which is what the rest of this section is dressed as. Held at
-     6% and masked out before the colophon so it never competes with the type. */
-  .hero-section::before {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    content: "";
-    background-image:
-      linear-gradient(rgb(255 255 255 / 6%) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(255 255 255 / 6%) 1px, transparent 1px);
-    background-size: clamp(3.5rem, 6vw, 6.5rem) clamp(3.5rem, 6vw, 6.5rem);
-    mask-image: linear-gradient(to bottom, black, transparent 78%);
-  }
-
-  /* `min-height: inherit` rather than a second copy of the clamp above: the
-     two boxes have to stay the same height for the colophon to sit on the
-     section's bottom edge, and one declaration cannot drift from the other. */
+  /* `min-h-[inherit]` rather than a second copy of the clamp above: the two
+     boxes have to stay the same height for the colophon to sit on the section's
+     bottom edge, and one declaration cannot drift from the other. The gap is a
+     floor under the three bands, so a short window — a laptop in landscape, a
+     phone with the browser chrome out — closes them evenly instead of letting
+     the auto margin below collapse the wordmark onto the eyebrow. */
   .hero-section-inner {
-    position: relative;
-    display: flex;
-    min-height: inherit;
-    flex-direction: column;
-    /* A floor under the three bands, so a short window — a laptop in landscape,
-       a phone with the browser chrome out — closes the gaps evenly instead of
-       letting the auto margin below collapse the wordmark onto the eyebrow. */
-    gap: clamp(1.25rem, 3vh, 2.5rem);
-    padding-top: clamp(3rem, 6vw, 5rem);
-    padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    @apply relative flex min-h-[inherit] flex-col;
+    @apply gap-[clamp(1.25rem,3vh,2.5rem)];
+    @apply pt-[clamp(3rem,6vw,5rem)] pb-[clamp(1.5rem,3vw,2.5rem)];
   }
 
   .hero-section-eyebrow {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.875rem;
-    margin: 0;
-    color: rgb(255 255 255 / 88%);
-    font-family: var(--font-ibm);
-    font-size: 0.75rem;
-    line-height: 1.5;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+    @apply m-0 flex items-start gap-3.5;
+    @apply font-ibm text-xs leading-normal tracking-[0.16em] text-white/88 uppercase;
   }
 
   /* Offset to half the first line rather than centred by the flex row: the
      credential wraps to two lines on a phone, and a centred rule would then
      float between them instead of marking where the line starts. */
   .hero-section-eyebrow::before {
-    width: clamp(1.5rem, 4vw, 3rem);
-    height: 1px;
-    flex: none;
-    margin-top: 0.75em;
+    @apply mt-[0.75em] h-px w-[clamp(1.5rem,4vw,3rem)] flex-none bg-current;
+
     content: "";
-    background: currentcolor;
   }
 
-  /* `margin-top: auto` against a measured bottom margin, rather than `flex: 1`
-     with `justify-content`: the lockup has to take up the slack the eyebrow and
-     the colophon leave, and once this turns into a row below, `justify-content`
-     is spoken for by the horizontal axis. The two margins are deliberately
-     unequal — the wordmark sits low, near the colophon it belongs with, and the
-     air collects above it rather than being split evenly around it. */
+  /* `mt-auto` against a measured bottom margin: the lockup takes up the slack
+     the eyebrow and the colophon leave. The two are deliberately unequal — the
+     wordmark sits low, near the colophon it belongs with, and the air collects
+     above it rather than being split evenly around it. From `xl` the type keeps
+     the left of the frame and the lattice takes the right, so the reading order
+     is wordmark, sentence, action, straight down one column. */
   .hero-section-lockup {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(1.75rem, 3.5vw, 2.75rem);
-    margin-top: auto;
-    margin-bottom: clamp(0rem, 3vh, 2rem);
+    @apply mt-auto mb-[clamp(0rem,3vh,2rem)] flex flex-col;
+    @apply gap-[clamp(1.75rem,3.5vw,2.75rem)] xl:max-w-[53%];
   }
 
-  /* `line-height: 0.78` is measured, not tightened by eye: Space Grotesk puts
-     its baseline at 0.984em, so at this leading the line box ends within
-     0.04em of the baseline and starts just above the cap. The wordmark's box
-     therefore hugs its own ink — nothing overflows into `overflow: hidden`,
-     and `align-items: end` below can bottom-align the two columns on the
-     baseline without a magic offset. */
+  /* `leading-[0.78]` is measured, not tightened by eye: Space Grotesk puts its
+     baseline at 0.984em, so at this leading the line box ends within 0.04em of
+     the baseline and starts just above the cap. The wordmark's box therefore
+     hugs its own ink and nothing overflows into `overflow-hidden`. The negative
+     left margin pulls the `H` stem's side bearing back into the gutter. */
   .hero-section-title {
-    margin: 0;
-    /* The `H` stem carries a left side bearing the rule above it does not, so
-       the wordmark is pulled back to sit flush in the container's gutter. */
-    margin-left: -0.045em;
-    font-size: clamp(5.5rem, 26vw, 13.5rem);
-    font-weight: 500;
-    line-height: 0.78;
-    letter-spacing: -0.055em;
+    @apply m-0 ml-[-0.045em];
+    @apply text-[clamp(5.5rem,26vw,13.5rem)] leading-[0.78] font-medium tracking-[-0.055em];
   }
 
   .hero-section-pitch {
-    display: flex;
-    max-width: 34rem;
-    flex-direction: column;
-    gap: clamp(1.5rem, 2.5vw, 2rem);
+    @apply flex max-w-[34rem] flex-col gap-[clamp(1.5rem,2.5vw,2rem)];
   }
 
   .hero-section-lede {
-    margin: 0;
-    color: rgb(255 255 255 / 92%);
-    font-size: clamp(1.0625rem, 1.35vw, 1.3125rem);
-    line-height: 1.5;
-    letter-spacing: -0.015em;
-    text-wrap: balance;
+    @apply m-0 text-[clamp(1.0625rem,1.35vw,1.3125rem)];
+    @apply leading-normal tracking-[-0.015em] text-balance text-white/92;
   }
 
   .hero-section-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
+    @apply flex flex-wrap gap-3;
   }
 
   .hero-section-action {
-    display: inline-flex;
-    height: 3rem;
-    align-items: center;
-    gap: 0.5rem;
-    padding-inline: 1.625rem;
-    border: 1px solid transparent;
-    border-radius: 999px;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1;
-    text-decoration: none;
-    transition:
-      background-color 200ms ease-out,
-      border-color 200ms ease-out,
-      translate 200ms ease-out;
-  }
-
-  .hero-section-action:hover {
-    translate: 0 -1px;
-  }
-
-  /* A white outline rather than the site's red ring: red on a red field is not
-     a focus indicator. Offset keeps it clear of the pill's own edge. */
-  .hero-section-action:focus-visible {
-    outline: 2px solid var(--color-white);
-    outline-offset: 3px;
+    @apply inline-flex h-12 items-center gap-2 rounded-full px-6.5;
+    @apply border border-transparent text-base font-medium leading-none no-underline;
+    @apply transition-[background-color,border-color,translate] duration-200 ease-out;
+    @apply hover:-translate-y-px;
+    /* A white ring rather than the site's red one: red on a red field is not a
+       focus indicator. The offset keeps it clear of the pill's own edge. */
+    @apply focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-white;
   }
 
   .hero-section-action--primary {
-    color: var(--color-charcoal);
-    background: var(--color-white);
-  }
-
-  .hero-section-action--primary:hover {
-    background: var(--color-sand);
+    @apply bg-white text-charcoal hover:bg-sand;
   }
 
   .hero-section-action--ghost {
-    border-color: rgb(255 255 255 / 45%);
-    color: var(--color-white);
-  }
-
-  .hero-section-action--ghost:hover {
-    border-color: rgb(255 255 255 / 80%);
-    background: rgb(255 255 255 / 12%);
+    @apply border-white/45 text-white hover:border-white/80 hover:bg-white/12;
   }
 
   .hero-section-action-glyph {
-    font-size: 0.875em;
-    line-height: 1;
+    @apply text-[0.875em] leading-none;
   }
 
+  /* Three facts stop fitting on one line well before the container narrows to a
+     phone, and the third then hangs alone under the other two, so the row only
+     forms from `sm` up. */
   .hero-section-colophon {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.875rem clamp(1.5rem, 4vw, 3.5rem);
-    margin: 0;
-    padding: clamp(1.25rem, 2.5vw, 1.75rem) 0 0;
-    border-top: 1px solid rgb(255 255 255 / 22%);
-    list-style: none;
+    @apply m-0 flex list-none flex-col gap-3.5 p-0;
+    @apply border-t border-white/22 pt-[clamp(1.25rem,2.5vw,1.75rem)];
+    @apply sm:flex-row sm:flex-wrap sm:gap-x-[clamp(1.5rem,4vw,3.5rem)] sm:gap-y-3.5;
   }
 
   .hero-section-fact {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-    color: rgb(255 255 255 / 80%);
-    font-family: var(--font-ibm);
-    font-size: 0.75rem;
-    line-height: 1;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    @apply flex items-baseline gap-2;
+    @apply font-ibm text-xs leading-none tracking-[0.12em] text-white/80 uppercase;
   }
 
   .hero-section-fact-value {
-    color: var(--color-white);
-    font-size: 0.9375rem;
-    letter-spacing: 0.02em;
-  }
-
-  /* Three facts stop fitting on one line well before the container narrows to
-     a phone, and the third then hangs alone under the other two. A single
-     column is the tidier reading of the same list. */
-  @media (width < 40rem) {
-    .hero-section-colophon {
-      flex-direction: column;
-      gap: 0.875rem;
-    }
-  }
-
-  /* The two columns only sit side by side once the container is wide enough to
-     give the sentence a readable measure next to a 13.5rem wordmark: below
-     80rem the container has around 1000px to split, and the pitch would drop
-     under 30 characters a line. */
-  @media (width >= 80rem) {
-    .hero-section-lockup {
-      flex-direction: row;
-      align-items: end;
-      justify-content: space-between;
-      gap: clamp(3rem, 5vw, 5.5rem);
-    }
-
-    .hero-section-title {
-      flex: none;
-    }
-
-    .hero-section-pitch {
-      padding-bottom: 0.35em;
-    }
+    @apply text-[0.9375rem] tracking-[0.02em] text-white;
   }
 
   /* One orchestrated entrance rather than scattered ambient motion: the parts
      arrive in reading order and then the section is still. CSS-only, so the
-     hero stays a server component and the sequence survives with JS disabled. */
+     hero stays a server component and the sequence survives with JS disabled.
+     `animation-delay` has no utility, so the stagger is written out. */
   @media (prefers-reduced-motion: no-preference) {
     .hero-section-eyebrow,
     .hero-section-title,
@@ -359,6 +247,207 @@
   }
 
   /* ============================================
+     Hero consensus lattice — components/HeroSection/ConsensusLattice
+
+     A real 3D scene rather than a picture of one: five node timelines standing
+     around a circle, five rings for the consensus rounds, and gossip crossing
+     between them, all in the browser's own perspective so depth comes from the
+     projection instead of from shading.
+
+     The scene turns through a limited arc — roughly ±15° — rather than spinning.
+     That is a rendering decision as much as a calm one: at that amplitude a flat
+     disc foreshortens by under 4%, so every point can stay a plain round div
+     and none of the ~50 elements needs a counter-rotation to keep facing front.
+     ============================================ */
+
+  /* Bled off the right edge: the object continues past the frame rather than
+     sitting inside it like a stock illustration. */
+  .hero-lattice {
+    @apply pointer-events-none absolute -z-10 grid place-items-center;
+    @apply inset-y-0 right-[-4%] left-auto w-[min(48rem,56%)];
+    @apply perspective-[74rem];
+  }
+
+  .hero-lattice-tilt {
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+
+    /* Long enough that the object follows the pointer rather than snapping to
+       it, which is what makes it read as mass. */
+    @apply transform-3d transition-transform duration-500;
+    @apply ease-[cubic-bezier(0.22,0.85,0.28,1)] motion-reduce:transition-none;
+
+    transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  }
+
+  /* The scene is authored at a fixed size in px so the geometry stays exact,
+     then scaled once here to meet the viewport. A ladder rather than a fluid
+     clamp: `scale` takes a number, and a number cannot be calc'd against vw. */
+  .hero-lattice-stage {
+    @apply relative h-0 w-0 transform-3d;
+    @apply scale-100 max-[90rem]:scale-[0.88] max-xl:scale-[0.74] max-md:scale-[0.56];
+
+    transform: rotateX(9deg);
+    animation: hero-lattice-turn 26s ease-in-out infinite alternate;
+  }
+
+  /* A pool of light on the ground plane. It is the one piece of the scene that
+     is not structure — it is there so the lattice reads as standing in a space
+     rather than floating in front of a gradient. */
+  .hero-lattice-stage::before {
+    @apply absolute top-0 left-0 h-[470px] w-[470px] rounded-full;
+    @apply -mt-[235px] -ml-[235px];
+
+    content: "";
+    background: radial-gradient(
+      circle,
+      rgb(255 150 195 / 40%),
+      rgb(217 45 106 / 14%) 40%,
+      transparent 66%
+    );
+    transform: translate3d(0, 196px, 0) rotateX(90deg);
+  }
+
+  .hero-lattice-ring,
+  .hero-lattice-column,
+  .hero-lattice-node,
+  .hero-lattice-edge {
+    @apply absolute top-0 left-0;
+  }
+
+  /* Rounds. Lying flat in the ground plane, they project as ellipses, which is
+     what tells the eye there is a third axis before anything starts moving. */
+  .hero-lattice-ring {
+    @apply rounded-full border border-white/30;
+    @apply shadow-[0_0_24px_rgb(255_130_185_/_16%),inset_0_0_32px_rgb(255_130_185_/_8%)];
+  }
+
+  /* Node timelines. Equal length, equal weight, equal distance from a centre
+     that is deliberately empty. */
+  .hero-lattice-column {
+    @apply -ml-[0.5px] w-px;
+
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(255 255 255 / 52%) 18%,
+      rgb(255 255 255 / 52%) 82%,
+      transparent
+    );
+  }
+
+  .hero-lattice-node {
+    @apply -mt-1.5 -ml-1.5 h-3 w-3 rounded-full;
+    @apply shadow-[0_0_12px_rgb(255_160_200_/_90%),0_0_30px_rgb(217_45_106_/_60%)];
+
+    background: radial-gradient(
+      circle,
+      var(--color-white) 0 30%,
+      rgb(255 210 230 / 95%) 46%,
+      rgb(233 92 148 / 70%) 62%,
+      transparent 72%
+    );
+  }
+
+  .hero-lattice-edge {
+    @apply -mt-[0.5px] h-px origin-left;
+
+    background: linear-gradient(
+      to right,
+      rgb(255 255 255 / 6%),
+      rgb(255 186 214 / 85%),
+      rgb(255 255 255 / 6%)
+    );
+  }
+
+  /* One gossip event travelling the edge it was sent along. The timelines and
+     rounds are the structure; this is the only thing in the scene that is an
+     event, so it is the only thing that moves along a path. */
+  .hero-lattice-edge::after {
+    @apply absolute top-[-2px] left-0 h-[5px] w-[5px] rounded-full bg-white;
+    @apply shadow-[0_0_10px_rgb(255_170_205_/_90%)];
+
+    content: "";
+    animation: hero-lattice-gossip 4.4s ease-in-out infinite;
+    animation-delay: var(--edge-delay, 0ms);
+  }
+
+  @keyframes hero-lattice-turn {
+    from {
+      transform: rotateX(9deg) rotateY(-15deg);
+    }
+
+    to {
+      transform: rotateX(9deg) rotateY(15deg);
+    }
+  }
+
+  @keyframes hero-lattice-gossip {
+    0%,
+    8% {
+      opacity: 0;
+      transform: translateX(0);
+    }
+
+    18%,
+    72% {
+      opacity: 1;
+    }
+
+    82%,
+    100% {
+      opacity: 0;
+      transform: translateX(var(--edge-length, 0));
+    }
+  }
+
+  /* Below two columns there is no free half to stand the object in, so it moves
+     behind the type and becomes atmosphere. The mask is what makes that safe:
+     it keeps the lit part of the lattice in the top-right corner and fades it
+     out across the reading column, so a bright node never lands under a line of
+     12px type. It sits on `.hero-lattice` rather than on the stage below —
+     masking a `transform-3d` element would flatten the scene it is masking. */
+  @media (width < 80rem) {
+    .hero-lattice {
+      @apply inset-[-12%_-24%_auto_auto] h-[74%] w-[34rem] opacity-[0.62];
+
+      mask-image: radial-gradient(
+        118% 88% at 84% 22%,
+        black 24%,
+        rgb(0 0 0 / 35%) 58%,
+        transparent 80%
+      );
+    }
+  }
+
+  @media (width < 48rem) {
+    .hero-lattice {
+      @apply inset-[-6%_-28%_auto_auto] h-[50%] w-[25rem] opacity-[0.6];
+
+      mask-image: radial-gradient(
+        90% 80% at 82% 26%,
+        black 34%,
+        rgb(0 0 0 / 30%) 64%,
+        transparent 84%
+      );
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-lattice-stage {
+      animation: none;
+      transform: rotateX(9deg) rotateY(-9deg);
+    }
+
+    .hero-lattice-edge::after {
+      @apply opacity-100;
+
+      animation: none;
+      transform: translateX(calc(var(--edge-length, 0px) / 2));
+    }
+  }
+
+  /* ============================================
      Hiero principles — components/WhatIsHieroSection
 
      The page's explanatory beat, so it is set as a specification rather than a
@@ -372,144 +461,92 @@
      them; they left the list without a left edge to read down, and the stack
      they mimed was not a fact about Hiero either.
      ============================================ */
+
   /* Flat sand, no wash. The corner tint that used to sit here reached the
      eyebrow on a narrow viewport and pulled brand red down to 4.4:1 against it;
      on plain sand the same red holds 4.9:1, which is the ratio the site's links
      already run at everywhere else. The hero carries the colour on this page. */
   .hiero-principles {
-    position: relative;
-    background: var(--color-sand);
+    @apply relative bg-sand;
   }
 
+  /* The thesis is short and the list is long, so from two columns up the layout
+     turns into a grid and the thesis sticks. */
   .hiero-principles-inner {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(3rem, 6vw, 4.5rem);
-    padding-top: clamp(4.5rem, 9vw, 8rem);
-    padding-bottom: clamp(4.5rem, 9vw, 8rem);
+    @apply flex flex-col gap-[clamp(3rem,6vw,4.5rem)] py-[clamp(4.5rem,9vw,8rem)];
+    @apply xl:grid xl:grid-cols-[minmax(0,23rem)_minmax(0,1fr)] xl:gap-[clamp(4rem,7vw,8rem)];
+  }
+
+  /* `self-start` is not optional here: a stretched grid item has no room left
+     to stick in. */
+  .hiero-principles-thesis {
+    @apply xl:sticky xl:top-32 xl:self-start;
   }
 
   /* The same rule-and-label device the hero opens with, so a reader crossing
      from one section to the next meets a vocabulary they have already learnt. */
   .hiero-principles-eyebrow {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.875rem;
-    margin: 0 0 clamp(1rem, 2vw, 1.5rem);
-    color: var(--color-red);
-    font-family: var(--font-ibm);
-    font-size: 0.75rem;
-    line-height: 1.5;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+    @apply m-0 mb-[clamp(1rem,2vw,1.5rem)] flex items-start gap-3.5;
+    @apply font-ibm text-xs leading-normal tracking-[0.16em] text-red uppercase;
   }
 
   .hiero-principles-eyebrow::before {
-    width: clamp(1.5rem, 4vw, 3rem);
-    height: 1px;
-    flex: none;
-    margin-top: 0.75em;
+    @apply mt-[0.75em] h-px w-[clamp(1.5rem,4vw,3rem)] flex-none bg-current;
+
     content: "";
-    background: currentcolor;
   }
 
   .hiero-principles-heading {
-    margin: 0 0 clamp(1rem, 2vw, 1.5rem);
-    font-size: clamp(2.25rem, 4vw, 3.5rem);
-    font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -0.045em;
+    @apply m-0 mb-[clamp(1rem,2vw,1.5rem)];
+    @apply text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.05] font-normal tracking-[-0.045em];
   }
 
   .hiero-principles-intro {
-    max-width: 34rem;
-    color: rgb(30 30 30 / 78%);
-    font-size: clamp(1.0625rem, 1.25vw, 1.1875rem);
-    line-height: 1.6;
-    letter-spacing: -0.012em;
+    @apply max-w-[34rem] text-[clamp(1.0625rem,1.25vw,1.1875rem)];
+    @apply leading-[1.6] tracking-[-0.012em] text-charcoal/78;
   }
 
   .hiero-principles-intro p {
-    margin: 0;
+    @apply m-0;
   }
 
   .hiero-principles-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    @apply m-0 list-none p-0;
   }
 
-  /* A rule above every entry, the first one included: the list opens on a line
-     rather than drifting into the first property, and the ruled entries are
-     what the section is instead of six shadowed cards. */
+  /* A rule above every entry, the first one included, and a closing one under
+     the last: the list opens on a line and reads as a bracketed set rather than
+     trailing off into the sand above the divider. */
   .hiero-principles-item {
-    display: grid;
-    grid-template-columns: clamp(2.25rem, 3vw, 2.75rem) minmax(0, 1fr);
-    gap: clamp(1.25rem, 2.5vw, 2rem);
-    padding: clamp(1.75rem, 3vw, 2.5rem) 0;
-    border-top: 1px solid rgb(30 30 30 / 14%);
+    @apply grid grid-cols-[clamp(2.25rem,3vw,2.75rem)_minmax(0,1fr)];
+    @apply gap-[clamp(1.25rem,2.5vw,2rem)] py-[clamp(1.75rem,3vw,2.5rem)];
+    @apply border-t border-charcoal/14 last:border-b;
   }
 
-  /* Closes the list, so it reads as a bracketed set rather than trailing off
-     into the sand above the divider. */
-  .hiero-principles-item:last-child {
-    border-bottom: 1px solid rgb(30 30 30 / 14%);
-  }
-
+  /* Optically seated on the term's cap height rather than its line box. */
   .hiero-principles-icon {
-    width: clamp(2.25rem, 3vw, 2.75rem);
-    height: auto;
-    /* Optically seated on the term's cap height rather than its line box. */
-    margin-top: 0.15em;
+    @apply mt-[0.15em] h-auto w-[clamp(2.25rem,3vw,2.75rem)];
   }
 
   .hiero-principles-body {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(0.5rem, 1vw, 0.75rem);
+    @apply flex flex-col gap-[clamp(0.5rem,1vw,0.75rem)];
   }
 
   .hiero-principles-term {
-    margin: 0;
-    font-size: clamp(1.5rem, 2.4vw, 2.125rem);
-    font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -0.04em;
+    @apply m-0 text-[clamp(1.5rem,2.4vw,2.125rem)];
+    @apply leading-[1.1] font-normal tracking-[-0.04em];
   }
 
   /* The property is the emphasised half of the phrase in the source markdown,
      so the colour marks what the entry is actually about and "Hiero is" stays
      the quiet, repeating lead-in it reads as. */
   .hiero-principles-term strong {
-    color: var(--color-red);
-    font-weight: 500;
+    @apply font-medium text-red;
   }
 
   .hiero-principles-detail {
-    max-width: 46rem;
-    margin: 0;
-    color: rgb(30 30 30 / 78%);
-    font-size: 1rem;
-    line-height: 1.65;
-    letter-spacing: -0.008em;
-    text-wrap: pretty;
-  }
-
-  /* The thesis is short and the list is long, so from two columns up the thesis
-     stays with whichever property the reader has reached. `align-self` is not
-     optional here: a stretched grid item has no room left to stick in. */
-  @media (width >= 80rem) {
-    .hiero-principles-inner {
-      display: grid;
-      grid-template-columns: minmax(0, 23rem) minmax(0, 1fr);
-      gap: clamp(4rem, 7vw, 8rem);
-    }
-
-    .hiero-principles-thesis {
-      position: sticky;
-      top: 8rem;
-      align-self: start;
-    }
+    @apply m-0 max-w-[46rem] text-base;
+    @apply leading-[1.65] tracking-[-0.008em] text-pretty text-charcoal/78;
   }
 
   /* Scroll-triggered, and armed only once `data-motion` lands from the
@@ -517,8 +554,7 @@
      entrance gesture rather than one per section. */
   .hiero-principles[data-motion="ready"] .hiero-principles-thesis,
   .hiero-principles[data-motion="ready"] .hiero-principles-item {
-    opacity: 0;
-    transform: translateY(1.25rem);
+    @apply translate-y-5 opacity-0;
   }
 
   .hiero-principles[data-motion="ready"][data-visible="true"]

@@ -1,3 +1,6 @@
+import communityCalls from "@/data/community_calls.json";
+import { normaliseCallName } from "@/lib/community-calls";
+
 export const heroData = {
   heading: "Hiero",
   text: "Open Source Distributed Ledger Technology",
@@ -40,99 +43,92 @@ export const whatIsHieroData = {
   ],
 };
 
+// Editorial overrides for the community calls, keyed by LFX meeting ID.
+//
+// Order, registration links and cadence come from src/data/community_calls.json,
+// which `pnpm sync:community-calls` regenerates from the LFX calendar API. Names
+// are derived from the calendar title by normaliseCallName, so a rename upstream
+// reaches the site on the next build.
+//
+// Only list a name here when normalisation cannot get it right. Descriptions are
+// editorial: without one, the card falls back to the calendar's own agenda.
+const callOverrides: Record<string, { name?: string; description?: string }> = {
+  "95775743341": {
+    description:
+      "The Technical Steering Committee (TSC) meeting for project governance, roadmap planning, and key technical decisions.",
+  },
+  "99574473075": {
+    description:
+      "Regular meeting for maintainers across all Hiero projects to coordinate, share updates, and discuss best practices.",
+  },
+  "97122675754": {
+    description:
+      "Open community meeting for general discussions, updates, and Q&A sessions with the Hiero community and TSC members.",
+  },
+  "94709702244": {
+    description:
+      "General SDK working group for cross-SDK discussions, standards, and coordination across all Hiero SDK implementations.",
+  },
+  "99097542854": {
+    description:
+      "Working group focused on identity-related projects, DID SDK development, and identity standards implementation.",
+  },
+  "92041330205": {
+    description:
+      "Roadmap, features, blockers, and contributions for the Hiero Python SDK.",
+  },
+  "94695703550": {
+    description:
+      "Discussions and updates about Solo, an opinionated CLI tool to deploy and manage standalone test networks.",
+  },
+  "98394707679": {
+    description:
+      "Good first issues, mentorship, growing the maintainer base, and hackathons across the Hiero community.",
+  },
+  "92576669768": {
+    description:
+      "Working sessions focused on Solo Action project development, issues, and contributions.",
+  },
+  "99912667426": {
+    // The calendar says "SDK Python" here but "Python SDK" on the sibling
+    // community call. Align the two so the pair reads as one series.
+    name: "Python SDK Office Hours",
+    description:
+      "Open Q&A and hands-on help from maintainers, for newcomers and existing contributors to the Hiero Python SDK.",
+  },
+  "99434549287": {
+    description:
+      "Strategy and planning for supporting the good first issue pipelines at Hiero.",
+  },
+  "94618152832": {
+    description:
+      "Community group for all consumers of block streams, covering block nodes and mirror nodes.",
+  },
+  "99471977018": {
+    description:
+      "Working group on shifting agent security to a post-quantum cryptographic baseline and verifiable regulatory compliance.",
+  },
+  "96385796810": {
+    description:
+      "Subcommittee facilitating working groups for agentic trust scores, adapters, registries, and related standards.",
+  },
+};
+
+// Meeting IDs to keep off the site even while they remain on the LFX calendar.
+const hiddenCallIds = new Set<string>([]);
+
 export const meetData = {
   heading: "Join our Hiero Community Calls",
   text: "Join our open meetings to collaborate with the team. [Register here](https://github.com/hiero-ledger#open-community-meetings-and-tsc-schedules) or view schedules on the [LFX Calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week).",
-  calls: [
-    // Ranked by LFX Calendar sign-up counts
-    {
-      name: "TSC",
-      description:
-        "The Technical Steering Committee (TSC) meeting for project governance, roadmap planning, and key technical decisions.",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/95775743341?password=c07443bf-b0e6-4a68-93f1-5c7ce9bb49ab&invite=true",
-    },
-    {
-      name: "Monthly Maintainers",
-      description:
-        "Regular meeting for maintainers across all Hiero projects to coordinate, share updates, and discuss best practices.",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/99574473075?password=deff3fc9-0e80-4877-80de-91499b5480e9&invite=true",
-    },
-    {
-      name: "Community Call",
-      description:
-        "Open community meeting for general discussions, updates, and Q&A sessions with the Hiero community and TSC members.",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/97122675754?password=7eaa865a-2f17-4a7c-97b0-aff51933991c&invite=true",
-    },
-    {
-      name: "SDK",
-      description:
-        "General SDK working group for cross-SDK discussions, standards, and coordination across all Hiero SDK implementations.",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/94709702244?password=bcba4892-928c-47e0-9a21-e1abca95f7d3&invite=true",
-    },
-    {
-      name: "Solo",
-      description:
-        "Discussions and updates about Solo, an opinionated CLI tool to deploy and manage standalone test networks.",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/94695703550?password=e8819002-3f6e-4905-9916-b049f501e866&invite=true",
-    },
-    {
-      name: "Python SDK",
-      description:
-        "Focused discussions on the Hiero Python SDK development, including new features, issues, and contributions.",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/92041330205?password=2f345bee-0c14-4dd5-9883-06fbc9c60581&invite=true",
-    },
-    {
-      name: "Hiero/Hedera Identity",
-      description:
-        "Working group focused on identity-related projects, DID SDK development, and identity standards implementation.",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/99097542854?password=3ee2d9c9-32de-4758-8a23-417c751bd7ab&invite=true",
-    },
-    {
-      name: "Hiero Marketing",
-      description:
-        "Marketing and community outreach discussions, including events, communications, and ecosystem growth strategies.",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/91725705912?password=57115f71-9576-46dc-90f7-98be38aade2d&invite=true",
-    },
-    {
-      name: "Docs",
-      description:
-        "Documentation working group meetings to improve and maintain Hiero project documentation.",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/96247351493?password=54a04164-8618-458d-8176-4ca21b346291&invite=true",
-    },
-    // Below this line: hidden behind "View all community calls" link
-    {
-      name: "Hiero Website",
-      description:
-        "Planning and development meetings for the Hiero website, content strategy, and user experience improvements.",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/94831465670?password=50e11cd2-6450-4a97-b9ae-7a7585c4409b&invite=true",
-    },
-    {
-      name: "Hiero Mirror Node",
-      description:
-        "Development and maintenance discussions for the Hiero Mirror Node, which archives data from consensus nodes and serves it via an API.",
-      schedule: "Monthly",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/94618152832?password=3b037576-2aab-4f7e-ab24-acf9ca2c3734&invite=true",
-    },
-    {
-      name: "Solo Action",
-      description:
-        "Working sessions focused on Solo Action project development, issues, and contributions.",
-      schedule: "Fortnightly",
-      registerLink:
-        "https://zoom-lfx.platform.linuxfoundation.org/meeting/92576669768?password=8dab94bb-7315-4d37-a944-b1fa0e924741&invite=true",
-    },
-  ],
+  // Already sorted by sign-up count, highest first.
+  calls: communityCalls
+    .filter(call => !hiddenCallIds.has(call.meetingId))
+    .map(call => ({
+      name: callOverrides[call.meetingId]?.name ?? normaliseCallName(call.name),
+      description: callOverrides[call.meetingId]?.description ?? call.agenda,
+      cadence: call.cadence,
+      registerLink: call.registerLink,
+    })),
 };
 
 export const reposData = {
@@ -304,8 +300,7 @@ export const quotesData = [
   {
     quote:
       "\u201cThe HBAR Foundry community is excited to see the contribution of the Hedera software to the Linux Foundation Decentralized Trust project. We're delighted to see Hedera's commitment to growing an independently governed and transparent community with more resources and opportunities to engage and grow the ecosystem.\u201d",
-    author:
-      "[The HBAR Foundry](https://hbarfoundry.com/), A Community Of Expert Hedera Builders",
+    author: "The HBAR Foundry, A Community Of Expert Hedera Builders",
     logo: "/images/Hiero-Logo-HbarFoundry.png",
   },
   {

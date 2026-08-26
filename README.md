@@ -1,7 +1,7 @@
 # Hiero Website
 
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/hiero-ledger/hiero-website/badge)](https://scorecard.dev/viewer/?uri=github.com/hiero-ledger/hiero-website)
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/10697/badge)](https://bestpractices.coreinfrastructure.org/projects/10697)
+[![CII Best Practices](https://www.bestpractices.dev/projects/10697/badge)](https://www.bestpractices.dev/projects/10697)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 Source code for [hiero.org](https://hiero.org) — the official website for the Hiero project.
@@ -71,9 +71,7 @@ Detailed documentation lives in the [`docs/`](docs/) directory. Below is a guide
 
 | Guide | Description |
 | --- | --- |
-| [First Contribution Checklist](docs/05-first-contribution-checklist.md) | Pre-PR validation checklist |
-| [Contribution Workflow](docs/workflow.md) | End-to-end guide: fork, branch, commit, and submit a PR |
-| [Commit Signing Guide](docs/signing.md) | Setting up DCO and GPG signing |
+| [Testing and Quality Checks](docs/06-testing-and-quality-checks.md) | Pre-PR validation: format, lint, test, and build |
 | [Discord Guide](docs/discord.md) | Joining the community chat |
 
 ### For Developers
@@ -85,8 +83,6 @@ Detailed documentation lives in the [`docs/`](docs/) directory. Below is a guide
 | [Adding Pages](docs/03-adding-pages.md) | Creating new routes and markdown-backed pages |
 | [Components Guide](docs/04-components.md) | Component layout, imports, and testing conventions |
 | [Testing and Quality Checks](docs/06-testing-and-quality-checks.md) | Linting, testing, and CI expectations |
-| [Rebasing Guide](docs/rebasing.md) | Keeping your branch in sync with upstream |
-| [Merge Conflicts Guide](docs/merge_conflicts.md) | Resolving merge conflicts |
 
 ### For Content Authors
 
@@ -94,20 +90,14 @@ Detailed documentation lives in the [`docs/`](docs/) directory. Below is a guide
 | --- | --- |
 | [Blog Writing Guide](docs/blogs.md) | Templates, front matter reference, and publishing workflow |
 
-### For Maintainers
-
-| Guide | Description |
-| --- | --- |
-| [GitHub Automation](docs/07-github-automation.md) | CI workflows and automation overview |
-
 ## Contributing
 
 We welcome contributions of all kinds — code, documentation, and blog posts.
 
 1. **Find an issue**: Browse [unassigned open issues](https://github.com/hiero-ledger/hiero-website/issues?q=is%3Aissue%20state%3Aopen%20no%3Aassignee) and comment `/assign` to claim one.
 2. **Set up your environment**: Follow the [Getting Started](#getting-started) section above.
-3. **Read the workflow**: See the [Contribution Workflow](docs/workflow.md) for the full process.
-4. **Sign your commits**: All commits must be DCO and GPG signed. See the [Signing Guide](docs/signing.md).
+3. **Read the docs**: Start with the [Repository Overview](docs/01-repo-overview.md), then run the [Testing and Quality Checks](docs/06-testing-and-quality-checks.md) before opening a PR.
+4. **Sign your commits**: All commits must be DCO and GPG signed.
 
 New to the project? Start with a [Good First Issue](https://github.com/hiero-ledger/hiero-website/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good+first+issue%22%20no%3Aassignee).
 

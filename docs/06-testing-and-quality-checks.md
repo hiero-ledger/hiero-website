@@ -171,7 +171,7 @@ snapshot coverage.
 Runs:
 
 ```bash
-pnpm sync:repo-stats && next build
+pnpm sync:data && next build
 ```
 
 This is the closest thing to a production validation step and should pass
@@ -182,7 +182,7 @@ before opening a PR.
 Runs:
 
 ```bash
-pnpm sync:repo-stats && next dev
+pnpm sync:data && next dev
 ```
 
 Use this while developing to preview page changes at `http://localhost:3000`.

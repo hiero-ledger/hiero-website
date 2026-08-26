@@ -1,0 +1,54 @@
+# SPDX-License-Identifier: Apache-2.0
+
+name: "Approve Issues"
+
+on:
+  issues:
+    types:
+      - labeled
+concurrency:
+  group: issue-moderation-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  issues: write
+
+jobs:
+  approve:
+    if: github.event.label.name == 'approved'
+    name: Approve Issue
+    runs-on: hl-web-lin-md
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c # v2.21.0
+        with:
+          egress-policy: audit
+
+      - name: Remove pending-review label
+        run: gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --remove-label pending-review
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+
+      - name: Unlock issue
+        run: |
+          gh api \
+            -X DELETE \
+            "repos/${REPO}/issues/${ISSUE_NUMBER}/lock"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+
+      - name: Approval comment
+        uses: peter-evans/create-or-update-comment@e8674b075228eee787fea43ef493e45ece1004c9 # v5.0.0
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Approved by @hiero-ledger/hiero-website-committers and @hiero-ledger/hiero-website-maintainers.

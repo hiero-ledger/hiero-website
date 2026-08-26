@@ -1,0 +1,47 @@
+# URL patterns (regex) skipped by the weekly Lychee link check.
+# See .github/workflows/check-broken-links.yml and lychee.toml.
+#
+# Every entry must state WHY it is excluded. Only add a host here when it
+# cannot be verified by a headless checker -- a host that is genuinely dead
+# belongs in a content fix, not in this file.
+
+# --- Hosts that reject non-browser clients -----------------------------------
+
+# LFX meeting calendar: returns 403 to any client without a browser session.
+zoom-lfx\.platform\.linuxfoundation\.org
+
+# Zoom join links: redirect to an auth wall for unauthenticated clients.
+zoom\.us
+
+# Discord: answers 403/405 to bots on both the invite and app domains.
+discord\.(com|gg)
+
+# LinkedIn: serves HTTP 999 (a non-standard bot deterrent) to all crawlers.
+linkedin\.com
+
+# Meetup: behind Cloudflare bot protection, returns 403.
+meetup\.com
+
+# HIP documents: hips.hedera.com answers 403 to non-browser clients. The pages
+# resolve normally in a browser, so this is bot protection, not a dead target.
+hips\.hedera\.com
+
+# --- Hosts that are unreliable rather than hostile ---------------------------
+
+# Contributor-stats API on a free Koyeb tier: cold starts exceed the timeout.
+# The endpoint is consumed at runtime by src/components/ContributorsGrid, so a
+# real outage surfaces on the site itself rather than only in this check.
+hedera-issues\.koyeb\.app
+
+# --- Local development URLs --------------------------------------------------
+
+# docs/setup/*.md document the local dev server; nothing listens on port 3000
+# inside CI, so this is expected to be unreachable there.
+^https?://localhost(:\d+)?
+
+# --- Next.js routes with no counterpart under public/ ------------------------
+
+# /heroes and /hacktoberfest are real routes (src/app/heroes, src/app/hacktoberfest)
+# but are rendered by Next.js, so --root-dir cannot resolve them to a file.
+# Matched on the resolved file:// URI that --root-dir produces.
+file:///.*/public/(heroes|hacktoberfest)$

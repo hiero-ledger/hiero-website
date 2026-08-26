@@ -45,3 +45,7 @@ next-env.d.ts
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# lychee link checker (report output and response cache)
+/lychee/
+.lycheecache

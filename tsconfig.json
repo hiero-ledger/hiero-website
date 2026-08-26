@@ -10,6 +10,7 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "allowArbitraryExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -32,5 +33,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", ".next", "e2e", "playwright.config.ts"]
 }

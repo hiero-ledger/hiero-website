@@ -24,7 +24,7 @@ Below are links to some of things that happend this past week. **Check it out!**
 
 **Venilin Vasilev** implemented an [agnostic fix](https://github.com/hiero-ledger/hiero-sdk-js/pull/3691) that will enable the JS SDK to be build locally on a users machine.
 
-**Hiero Team** will be at [HederaDev Day](https://devday.hedera.com/) in Denver on February 17th. Come by to meet our amazing team!
+**Hiero Team** will be at HederaDev Day in Denver on February 17th. Come by to meet our amazing team!
 
 **Hiero Team** had its first [mentorship meeting](https://zoom.us/rec/share/-8eWrQ72LcCJalrnPQCuYkBlQkJw2f3nz-xSwq1nEA5ACnWgdFS9WaNF2LulqZPF.Upy7yIXegf5Wl2_Q) to introduce mentorships into the Hiero Ecosystem.
 

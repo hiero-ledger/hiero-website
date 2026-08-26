@@ -1,0 +1,114 @@
+[
+  {
+    "meetingId": "95775743341",
+    "name": "Hiero TSC Meeting",
+    "registrantCount": 66,
+    "registerLink": "https://zoom-lfx.platform.linuxfoundation.org/meeting/95775743341?password=c07443bf-b0e6-4a68-93f1-5c7ce9bb49ab",
+    "cadence": "Weekly",
+    "agenda": ""
+  },
+  {
+    "meetingId": "99574473075",
+    "name": "Hiero Monthly Maintainers community call",
+    "registrantCount": 61,
+    "registerLink": "https://zoom-lfx.platform.linuxfoundation.org/meeting/99574473075?password=deff3fc9-0e80-4877-80de-91499b5480e9",
+    "cadence": "Monthly",
+    "agenda": "This meeting welcomes all maintainers from all hiero-ledger projects to interact and learn from each other.\nCurrent and future agendas can be found here: https://github.com/hiero-ledger/governance/wiki."
+  },
+  {
+    "meetingId": "97122675754",
+    "name": "Hiero Community Call",
+    "registrantCount": 55,
+    "registerLink": "https://zoom-lfx.platform.linuxfoundation.org/meeting/97122675754?password=7eaa865a-2f17-4a7c-97b0-aff51933991c",
+    "cadence": "Every 2 weeks",
+    "agenda": "Hiero's Community Call welcomes new or existing contributors, collaborators and maintainers to join an open floor discussion regarding any issues, questions, how to's, lessons learnt and anything Hiero related. \nCurrent and future agendas can be found here: https://github.com/hiero-ledger/governance/wiki."
+  },
+  {
+    "meetingId": "94709702244",
+    "name": "Hiero SDK Community Call",
+    "registrantCount": 52,
+    "registerLink": "https://zoom-lfx.platform.linuxfoundation.org/meeting/94709702244?password=bcba4892-928c-47e0-9a21-e1abca95f7d3",
+    "cadence": "Every 2 weeks",
+    "agenda": "This call is reserved to discuss SDK topics, issues and updates.\nCurrent and future agendas can be found here: https://github.com/hiero-ledger/governance/wiki."
+  },
+  {
+    "meetingId": "99097542854",
+    "name": "Hiero Identity Community Call",
+    "registrantCount": 25,
+    "registerLink": "https://zoom-lfx.platform.linuxfoundation.org/meeting/99097542854?password=3ee2d9c9-32de-4758-8a23-417c751bd7ab",
+    "cadence": "Monthly",
+    "agenda": "Discuss all the latest and greatest in Decentralized Identity on Hiero/Hedera. Target participants can include operators of identity platforms supporting Hedera, and developers interested in using and contributing to Hiero identity repos."
+  },
+  {
+    "meetingId": "92041330205",
+    "name": "Hiero Python SDK Community Call",
+    "registrantCount": 25,
+    "registerLink": "https://zoom-lfx.platform.linuxfoundation.org/meeting/92041330205?password=2f345bee-0c14-4dd5-9883-06fbc9c60581",
+    "cadence": "Every 2 weeks",
+    "agenda": "Let's discuss any questions, issues and plans for our Hiero Python SDK!\nCurrent and future agendas can be found here: https://github.com/hiero-ledger/governance/wiki."
+  },
+  {
+    "meetingId": "94695703550",
+    "name": "Hiero Solo Community Call",
+    "registrantCount": 20,
+    "registerLink": "https://zoom-lfx.platform.linuxfoundation.org/meeting/94695703550?password=e8819002-3f6e-4905-9916-b049f501e866",
+    "cadence": "Every 2 weeks",
+    "agenda": "Hiero bi-weekly Solo Community Call"
+  },
+  {
+    "meetingId": "98394707679",
+    "name": "Hiero Community Management",
+    "registrantCount": 17,
+    "registerLink": "https://zoom-lfx.platform.linuxfoundation.org/meeting/98394707679?password=47f9cfb9-3704-4396-b5b3-6cfe76e510d2",
+    "cadence": "Weekly",
+    "agenda": "Our idea is to discuss \"How to\" about GFI / Mentorship / grow Maintainers / Hackathons in this weekly meeting.\nIn the \"Hiero Community Call\" we will do the execution of the discussions and outcome of the \"Hiero Community Management\" meeting."
+  },
+  {
+    "meetingId": "92576669768",
+    "name": "Hiero Solo Action Community Call",
+    "registrantCount": 16,
+    "registerLink": "https://zoom-lfx.platform.linuxfoundation.org/meeting/92576669768?password=8dab94bb-7315-4d37-a944-b1fa0e924741",
+    "cadence": "Every 2 weeks",
+    "agenda": "Community Call to discuss solo-action"
+  },
+  {
+    "meetingId": "99912667426",
+    "name": "Hiero SDK Python Office Hours",
+    "registrantCount": 14,
+    "registerLink": "https://zoom-lfx.platform.linuxfoundation.org/meeting/99912667426?password=5b584a0e-1ed7-49d3-b2fc-dc5ddc888338",
+    "cadence": "Every 2 weeks",
+    "agenda": "Welcome to the Hiero SDK Python Office Hours. This is a place to ask questions and receive some feedback on the latest Python SDK work happening."
+  },
+  {
+    "meetingId": "99434549287",
+    "name": "Automation Migration Community Call",
+    "registrantCount": 12,
+    "registerLink": "https://zoom-lfx.platform.linuxfoundation.org/meeting/99434549287?password=6e659f58-1b9e-4205-ac7d-7f352f3bd340",
+    "cadence": "Every 2 weeks",
+    "agenda": "A place to discuss strategy and make plans for supporting good first issue pipelines at Hiero"
+  },
+  {
+    "meetingId": "94618152832",
+    "name": "Block Stream Community Group",
+    "registrantCount": 11,
+    "registerLink": "https://zoom-lfx.platform.linuxfoundation.org/meeting/94618152832?password=3b037576-2aab-4f7e-ab24-acf9ca2c3734",
+    "cadence": "Monthly",
+    "agenda": "This group is meant to cover all consumers of blockstreams - block nodes and mirror nodes."
+  },
+  {
+    "meetingId": "99471977018",
+    "name": "HOL Cryptographic Agent Execution Standards Working Group",
+    "registrantCount": 2,
+    "registerLink": "https://zoom-lfx.platform.linuxfoundation.org/meeting/99471977018?password=437ea3eb-ab72-4b08-b79c-c66d05b96402",
+    "cadence": "Weekly",
+    "agenda": "Agent security relies on fragile software policies. Regulators demand verifiable compliance. We must shift to a post-quantum cryptographic baseline: ZK proofs for authorization and execution, Threshold Decryption for keys, collusion resistance, and SMPC for data privacy under adversarial conditions."
+  },
+  {
+    "meetingId": "96385796810",
+    "name": "HOL: Registries Subcommittee",
+    "registrantCount": 1,
+    "registerLink": "https://zoom-lfx.platform.linuxfoundation.org/meeting/96385796810?password=bc55bb77-86f1-497e-b093-fdcafa5200a6",
+    "cadence": "Every 2 weeks",
+    "agenda": "The HOL Registries Subcommittee facilitates Working Groups for Agentic Trust Scores, Adapters, Registries, and more. \nVisit the Partner Dashboard to manage your organization: \nhttps://hol.org/partner-program/dashboard"
+  }
+]

@@ -1,0 +1,43 @@
+name: Bot - On PR Update
+
+# Runs on new commits (synchronize) and PR body edits (edited). Performs all
+# 4 checks (DCO, GPG, merge conflict, issue link), posts/updates unified
+# comment, and conditionally swaps the status label via bot-on-pr-update.js.
+# For edited events, exits early if only title/base changed.
+on:
+  pull_request_target:
+    types:
+      - synchronize
+      - edited
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  on-pr-update:
+    runs-on: hl-web-lin-md
+    if: github.event.pull_request.draft == false
+
+    concurrency:
+      group: pr-bot-${{ github.event.pull_request.number }}
+      cancel-in-progress: false
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c # v2.21.0
+        with:
+          egress-policy: audit
+
+      - name: Checkout Repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Run Bot
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            // Script is ESM, so require() returns the namespace; unwrap the default export.
+            const { default: script } = require('./.github/scripts/bot-on-pr-update.js');
+            await script({ github, context });

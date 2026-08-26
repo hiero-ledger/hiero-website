@@ -1,13 +1,18 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import RichText from "@/components/RichText";
 
 interface WhatIsHieroPoint {
+  /** Markdown; the property itself is the emphasised half of the phrase. */
   heading: string;
   text: string;
   icon: string;
 }
 
 interface WhatIsHieroData {
+  eyebrow: string;
   heading: string;
   text: string;
   points: WhatIsHieroPoint[];
@@ -17,54 +22,84 @@ interface WhatIsHieroSectionProps {
   data: WhatIsHieroData;
 }
 
+const HEADING_ID = "what-is-hiero-heading";
+
 export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // The reveal is opt-in from script: `data-motion` is what arms the hidden
+  // starting state, so with JS off, a stalled hydration, or reduced motion
+  // preferred, the list is simply there.
+  useEffect(() => {
+    const section = sectionRef.current;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (!section || reduceMotion || !("IntersectionObserver" in window)) {
+      return;
+    }
+
+    section.dataset.motion = "ready";
+
+    const observer = new IntersectionObserver(
+      entries => {
+        if (!entries.some(entry => entry.isIntersecting)) return;
+
+        section.dataset.visible = "true";
+        observer.disconnect();
+      },
+      { threshold: 0.18 },
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div id="what-is-hiero" className="anchor">
-      <div className="bg-white">
-        <div
-          id="what-is-hiero-content"
-          className="container pt-[80px] pb-[40px] sm:pt-[120px] sm:pb-[120px] grid grid-cols-1 lg:grid-cols-[35%_1fr] gap-[60px] lg:gap-32">
-          <div id="what-is-hiero-intro-column" className="relative">
-            <div
-              id="what-is-hiero-intro"
-              className="sticky top-1/2 -translate-y-1/2 md:mt-20">
-              <h2 className="text-3xl mb-2.5 sm:text-4xl sm:mb-0">
-                {data.heading}
-              </h2>
-              <RichText
-                inline
-                markdown={data.text}
-                className="text-base sm:text-lg max-w-[390px]"
-              />
-            </div>
-          </div>
-          <div className="flex flex-col gap-[60px] sm:gap-10">
-            {data.points.map((point, i) => (
-              <div
-                key={i}
-                className="grid grid-cols-[1fr] sm:grid-cols-[55px_1fr] gap-5 sm:gap-10">
-                <Image
-                  src={point.icon}
-                  alt=""
-                  width={56}
-                  height={57}
-                  className="w-[55px] h-auto shrink-0"
-                  loading="lazy"
-                />
-                <div>
-                  <RichText
-                    as="h3"
-                    inline
-                    markdown={point.heading}
-                    className="text-2xl mb-5 sm:mb-2 [&>strong]:text-red"
-                  />
-                  <p className="text-base">{point.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+    <section
+      ref={sectionRef}
+      id="what-is-hiero"
+      className="hiero-principles"
+      aria-labelledby={HEADING_ID}>
+      <div className="container hiero-principles-inner">
+        <div className="hiero-principles-thesis">
+          <p className="hiero-principles-eyebrow">{data.eyebrow}</p>
+          <h2 id={HEADING_ID} className="hiero-principles-heading">
+            {data.heading}
+          </h2>
+          <RichText
+            as="div"
+            className="hiero-principles-intro"
+            markdown={data.text}
+          />
         </div>
+
+        <ul className="hiero-principles-list">
+          {data.points.map(point => (
+            <li key={point.heading} className="hiero-principles-item">
+              <Image
+                src={point.icon}
+                alt=""
+                width={56}
+                height={57}
+                className="hiero-principles-icon"
+                loading="lazy"
+              />
+              <div className="hiero-principles-body">
+                <RichText
+                  as="h3"
+                  inline
+                  markdown={point.heading}
+                  className="hiero-principles-term"
+                />
+                <p className="hiero-principles-detail">{point.text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
-    </div>
+    </section>
   );
 }

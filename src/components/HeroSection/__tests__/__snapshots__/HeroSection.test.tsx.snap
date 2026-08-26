@@ -1,23 +1,97 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`HeroSection > renders the hero heading and text 1`] = `
-<div
-  class="bg-linear-to-br from-red-dark via-red to-red relative"
+exports[`HeroSection > matches the rendered structure 1`] = `
+<section
+  aria-labelledby="hero-title"
+  class="hero-section"
   id="hero"
 >
   <div
-    class="container py-20 sm:py-36 text-white text-center"
+    class="container hero-section-inner"
   >
-    <h1
-      class="text-4xl sm:text-5xl leading-none relative mb-2.5"
-    >
-      Build with Hiero
-    </h1>
     <p
-      class="text-[24px] tracking-[-0.081rem] sm:text-xl relative"
+      class="hero-section-eyebrow"
     >
-      Open source, open governance.
+      A Linux Foundation Decentralized Trust project
     </p>
+    <div
+      class="hero-section-lockup"
+    >
+      <h1
+        class="hero-section-title"
+        id="hero-title"
+      >
+        Hiero
+      </h1>
+      <div
+        class="hero-section-pitch"
+      >
+        <p
+          class="hero-section-lede"
+        >
+          Open-source, vendor-neutral distributed ledger technology.
+        </p>
+        <div
+          class="hero-section-actions"
+        >
+          <a
+            class="hero-section-action hero-section-action--primary"
+            href="/#contribute"
+          >
+            Start contributing
+          </a>
+          <a
+            aria-label="Browse the code (opens in a new tab)"
+            class="hero-section-action hero-section-action--ghost"
+            href="https://github.com/hiero-ledger/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Browse the code
+            <span
+              aria-hidden="true"
+              class="hero-section-action-glyph"
+            >
+              ↗
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <ul
+      class="hero-section-colophon"
+    >
+      <li
+        class="hero-section-fact"
+      >
+        <span
+          class="hero-section-fact-value"
+        >
+          20
+        </span>
+        Core repositories
+      </li>
+      <li
+        class="hero-section-fact"
+      >
+        <span
+          class="hero-section-fact-value"
+        >
+          2,256
+        </span>
+        GitHub stars
+      </li>
+      <li
+        class="hero-section-fact"
+      >
+        <span
+          class="hero-section-fact-value"
+        >
+          14
+        </span>
+        Community calls
+      </li>
+    </ul>
   </div>
-</div>
+</section>
 `;

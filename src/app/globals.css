@@ -56,6 +56,512 @@
   --text-5xl--letter-spacing: -0.625rem;
 }
 
+@layer components {
+  /* ============================================
+     Home hero — components/HeroSection
+
+     A masthead rather than a billboard: a credential line, the wordmark at
+     display size, the positioning sentence and its two doors set beside it,
+     and a colophon of live project counts closing the bottom edge. Every
+     decorative layer that did not carry meaning was removed; the ambient work
+     is done by the background stack alone, so the markup has no filler divs.
+     ============================================ */
+
+  /* Height is the viewport minus the header spacer in layout.tsx (`h-22.5`, so
+     5.625rem), which lands the colophon on the fold instead of guessing at a
+     band. `svh` rather than `vh`: mobile browsers report `vh` against the
+     *expanded* viewport, which would push the colophon under the address bar
+     on first paint. */
+  .hero-section {
+    position: relative;
+    min-height: clamp(30rem, calc(100svh - 5.625rem), 42rem);
+    isolation: isolate;
+    overflow: hidden;
+    color: var(--color-white);
+    /* Three layers, front to back. The ground veil darkens the lower half,
+       which is both a composition choice — the wordmark gets something to
+       stand on — and a contrast one: every piece of text in this section sits
+       in that band, so white stays well clear of the AA floor no matter where
+       the gradient happens to land behind it. */
+    background:
+      linear-gradient(
+        to bottom,
+        rgb(38 6 22 / 0%) 42%,
+        rgb(38 6 22 / 26%) 100%
+      ),
+      radial-gradient(
+        58rem 40rem at 84% -8%,
+        rgb(217 45 106 / 45%),
+        transparent 62%
+      ),
+      linear-gradient(
+        150deg,
+        var(--color-red-dark),
+        var(--color-red) 58%,
+        var(--color-red-dark)
+      );
+  }
+
+  /* A drafting grid, not a texture: it reads as the substrate a specification
+     is set on, which is what the rest of this section is dressed as. Held at
+     6% and masked out before the colophon so it never competes with the type. */
+  .hero-section::before {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    content: "";
+    background-image:
+      linear-gradient(rgb(255 255 255 / 6%) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 6%) 1px, transparent 1px);
+    background-size: clamp(3.5rem, 6vw, 6.5rem) clamp(3.5rem, 6vw, 6.5rem);
+    mask-image: linear-gradient(to bottom, black, transparent 78%);
+  }
+
+  /* `min-height: inherit` rather than a second copy of the clamp above: the
+     two boxes have to stay the same height for the colophon to sit on the
+     section's bottom edge, and one declaration cannot drift from the other. */
+  .hero-section-inner {
+    position: relative;
+    display: flex;
+    min-height: inherit;
+    flex-direction: column;
+    /* A floor under the three bands, so a short window — a laptop in landscape,
+       a phone with the browser chrome out — closes the gaps evenly instead of
+       letting the auto margin below collapse the wordmark onto the eyebrow. */
+    gap: clamp(1.25rem, 3vh, 2.5rem);
+    padding-top: clamp(3rem, 6vw, 5rem);
+    padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .hero-section-eyebrow {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    margin: 0;
+    color: rgb(255 255 255 / 88%);
+    font-family: var(--font-ibm);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  /* Offset to half the first line rather than centred by the flex row: the
+     credential wraps to two lines on a phone, and a centred rule would then
+     float between them instead of marking where the line starts. */
+  .hero-section-eyebrow::before {
+    width: clamp(1.5rem, 4vw, 3rem);
+    height: 1px;
+    flex: none;
+    margin-top: 0.75em;
+    content: "";
+    background: currentcolor;
+  }
+
+  /* `margin-top: auto` against a measured bottom margin, rather than `flex: 1`
+     with `justify-content`: the lockup has to take up the slack the eyebrow and
+     the colophon leave, and once this turns into a row below, `justify-content`
+     is spoken for by the horizontal axis. The two margins are deliberately
+     unequal — the wordmark sits low, near the colophon it belongs with, and the
+     air collects above it rather than being split evenly around it. */
+  .hero-section-lockup {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.75rem, 3.5vw, 2.75rem);
+    margin-top: auto;
+    margin-bottom: clamp(0rem, 3vh, 2rem);
+  }
+
+  /* `line-height: 0.78` is measured, not tightened by eye: Space Grotesk puts
+     its baseline at 0.984em, so at this leading the line box ends within
+     0.04em of the baseline and starts just above the cap. The wordmark's box
+     therefore hugs its own ink — nothing overflows into `overflow: hidden`,
+     and `align-items: end` below can bottom-align the two columns on the
+     baseline without a magic offset. */
+  .hero-section-title {
+    margin: 0;
+    /* The `H` stem carries a left side bearing the rule above it does not, so
+       the wordmark is pulled back to sit flush in the container's gutter. */
+    margin-left: -0.045em;
+    font-size: clamp(5.5rem, 26vw, 13.5rem);
+    font-weight: 500;
+    line-height: 0.78;
+    letter-spacing: -0.055em;
+  }
+
+  .hero-section-pitch {
+    display: flex;
+    max-width: 34rem;
+    flex-direction: column;
+    gap: clamp(1.5rem, 2.5vw, 2rem);
+  }
+
+  .hero-section-lede {
+    margin: 0;
+    color: rgb(255 255 255 / 92%);
+    font-size: clamp(1.0625rem, 1.35vw, 1.3125rem);
+    line-height: 1.5;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  .hero-section-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .hero-section-action {
+    display: inline-flex;
+    height: 3rem;
+    align-items: center;
+    gap: 0.5rem;
+    padding-inline: 1.625rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1;
+    text-decoration: none;
+    transition:
+      background-color 200ms ease-out,
+      border-color 200ms ease-out,
+      translate 200ms ease-out;
+  }
+
+  .hero-section-action:hover {
+    translate: 0 -1px;
+  }
+
+  /* A white outline rather than the site's red ring: red on a red field is not
+     a focus indicator. Offset keeps it clear of the pill's own edge. */
+  .hero-section-action:focus-visible {
+    outline: 2px solid var(--color-white);
+    outline-offset: 3px;
+  }
+
+  .hero-section-action--primary {
+    color: var(--color-charcoal);
+    background: var(--color-white);
+  }
+
+  .hero-section-action--primary:hover {
+    background: var(--color-sand);
+  }
+
+  .hero-section-action--ghost {
+    border-color: rgb(255 255 255 / 45%);
+    color: var(--color-white);
+  }
+
+  .hero-section-action--ghost:hover {
+    border-color: rgb(255 255 255 / 80%);
+    background: rgb(255 255 255 / 12%);
+  }
+
+  .hero-section-action-glyph {
+    font-size: 0.875em;
+    line-height: 1;
+  }
+
+  .hero-section-colophon {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem clamp(1.5rem, 4vw, 3.5rem);
+    margin: 0;
+    padding: clamp(1.25rem, 2.5vw, 1.75rem) 0 0;
+    border-top: 1px solid rgb(255 255 255 / 22%);
+    list-style: none;
+  }
+
+  .hero-section-fact {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    color: rgb(255 255 255 / 80%);
+    font-family: var(--font-ibm);
+    font-size: 0.75rem;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .hero-section-fact-value {
+    color: var(--color-white);
+    font-size: 0.9375rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* Three facts stop fitting on one line well before the container narrows to
+     a phone, and the third then hangs alone under the other two. A single
+     column is the tidier reading of the same list. */
+  @media (width < 40rem) {
+    .hero-section-colophon {
+      flex-direction: column;
+      gap: 0.875rem;
+    }
+  }
+
+  /* The two columns only sit side by side once the container is wide enough to
+     give the sentence a readable measure next to a 13.5rem wordmark: below
+     80rem the container has around 1000px to split, and the pitch would drop
+     under 30 characters a line. */
+  @media (width >= 80rem) {
+    .hero-section-lockup {
+      flex-direction: row;
+      align-items: end;
+      justify-content: space-between;
+      gap: clamp(3rem, 5vw, 5.5rem);
+    }
+
+    .hero-section-title {
+      flex: none;
+    }
+
+    .hero-section-pitch {
+      padding-bottom: 0.35em;
+    }
+  }
+
+  /* One orchestrated entrance rather than scattered ambient motion: the parts
+     arrive in reading order and then the section is still. CSS-only, so the
+     hero stays a server component and the sequence survives with JS disabled. */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-section-eyebrow,
+    .hero-section-title,
+    .hero-section-pitch,
+    .hero-section-colophon {
+      animation: hero-rise 720ms cubic-bezier(0.22, 0.85, 0.28, 1) both;
+    }
+
+    .hero-section-eyebrow {
+      animation-delay: 60ms;
+    }
+
+    .hero-section-title {
+      animation-delay: 150ms;
+    }
+
+    .hero-section-pitch {
+      animation-delay: 280ms;
+    }
+
+    .hero-section-colophon {
+      animation-delay: 400ms;
+    }
+  }
+
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(0.875rem);
+    }
+  }
+
+  /* ============================================
+     Hiero principles — components/WhatIsHieroSection
+
+     The page's explanatory beat, so it is set as a specification rather than a
+     slogan wall: a thesis column that states what Hiero is, and beside it the
+     six properties as ruled entries — each one named and then argued.
+
+     What was removed matters as much as what is here. The 01–06 markers are
+     gone: fair, fast, secure, decentralized, leaderless and open are six
+     independent claims, not a sequence, and numbering them told the reader
+     something untrue about the content. The tilted, overlapping cards went with
+     them; they left the list without a left edge to read down, and the stack
+     they mimed was not a fact about Hiero either.
+     ============================================ */
+  /* Flat sand, no wash. The corner tint that used to sit here reached the
+     eyebrow on a narrow viewport and pulled brand red down to 4.4:1 against it;
+     on plain sand the same red holds 4.9:1, which is the ratio the site's links
+     already run at everywhere else. The hero carries the colour on this page. */
+  .hiero-principles {
+    position: relative;
+    background: var(--color-sand);
+  }
+
+  .hiero-principles-inner {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3rem, 6vw, 4.5rem);
+    padding-top: clamp(4.5rem, 9vw, 8rem);
+    padding-bottom: clamp(4.5rem, 9vw, 8rem);
+  }
+
+  /* The same rule-and-label device the hero opens with, so a reader crossing
+     from one section to the next meets a vocabulary they have already learnt. */
+  .hiero-principles-eyebrow {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    margin: 0 0 clamp(1rem, 2vw, 1.5rem);
+    color: var(--color-red);
+    font-family: var(--font-ibm);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .hiero-principles-eyebrow::before {
+    width: clamp(1.5rem, 4vw, 3rem);
+    height: 1px;
+    flex: none;
+    margin-top: 0.75em;
+    content: "";
+    background: currentcolor;
+  }
+
+  .hiero-principles-heading {
+    margin: 0 0 clamp(1rem, 2vw, 1.5rem);
+    font-size: clamp(2.25rem, 4vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.045em;
+  }
+
+  .hiero-principles-intro {
+    max-width: 34rem;
+    color: rgb(30 30 30 / 78%);
+    font-size: clamp(1.0625rem, 1.25vw, 1.1875rem);
+    line-height: 1.6;
+    letter-spacing: -0.012em;
+  }
+
+  .hiero-principles-intro p {
+    margin: 0;
+  }
+
+  .hiero-principles-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* A rule above every entry, the first one included: the list opens on a line
+     rather than drifting into the first property, and the ruled entries are
+     what the section is instead of six shadowed cards. */
+  .hiero-principles-item {
+    display: grid;
+    grid-template-columns: clamp(2.25rem, 3vw, 2.75rem) minmax(0, 1fr);
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+    padding: clamp(1.75rem, 3vw, 2.5rem) 0;
+    border-top: 1px solid rgb(30 30 30 / 14%);
+  }
+
+  /* Closes the list, so it reads as a bracketed set rather than trailing off
+     into the sand above the divider. */
+  .hiero-principles-item:last-child {
+    border-bottom: 1px solid rgb(30 30 30 / 14%);
+  }
+
+  .hiero-principles-icon {
+    width: clamp(2.25rem, 3vw, 2.75rem);
+    height: auto;
+    /* Optically seated on the term's cap height rather than its line box. */
+    margin-top: 0.15em;
+  }
+
+  .hiero-principles-body {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.5rem, 1vw, 0.75rem);
+  }
+
+  .hiero-principles-term {
+    margin: 0;
+    font-size: clamp(1.5rem, 2.4vw, 2.125rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+  }
+
+  /* The property is the emphasised half of the phrase in the source markdown,
+     so the colour marks what the entry is actually about and "Hiero is" stays
+     the quiet, repeating lead-in it reads as. */
+  .hiero-principles-term strong {
+    color: var(--color-red);
+    font-weight: 500;
+  }
+
+  .hiero-principles-detail {
+    max-width: 46rem;
+    margin: 0;
+    color: rgb(30 30 30 / 78%);
+    font-size: 1rem;
+    line-height: 1.65;
+    letter-spacing: -0.008em;
+    text-wrap: pretty;
+  }
+
+  /* The thesis is short and the list is long, so from two columns up the thesis
+     stays with whichever property the reader has reached. `align-self` is not
+     optional here: a stretched grid item has no room left to stick in. */
+  @media (width >= 80rem) {
+    .hiero-principles-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 23rem) minmax(0, 1fr);
+      gap: clamp(4rem, 7vw, 8rem);
+    }
+
+    .hiero-principles-thesis {
+      position: sticky;
+      top: 8rem;
+      align-self: start;
+    }
+  }
+
+  /* Scroll-triggered, and armed only once `data-motion` lands from the
+     component — the same rise the hero uses on load, so the page has one
+     entrance gesture rather than one per section. */
+  .hiero-principles[data-motion="ready"] .hiero-principles-thesis,
+  .hiero-principles[data-motion="ready"] .hiero-principles-item {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+
+  .hiero-principles[data-motion="ready"][data-visible="true"]
+    .hiero-principles-thesis,
+  .hiero-principles[data-motion="ready"][data-visible="true"]
+    .hiero-principles-item {
+    animation: hiero-principles-rise 700ms cubic-bezier(0.22, 0.85, 0.28, 1)
+      both;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+
+  .hiero-principles-item:nth-child(1) {
+    --reveal-delay: 80ms;
+  }
+
+  .hiero-principles-item:nth-child(2) {
+    --reveal-delay: 150ms;
+  }
+
+  .hiero-principles-item:nth-child(3) {
+    --reveal-delay: 220ms;
+  }
+
+  .hiero-principles-item:nth-child(4) {
+    --reveal-delay: 290ms;
+  }
+
+  .hiero-principles-item:nth-child(5) {
+    --reveal-delay: 360ms;
+  }
+
+  .hiero-principles-item:nth-child(6) {
+    --reveal-delay: 430ms;
+  }
+
+  @keyframes hiero-principles-rise {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
 /* ============================================
    Authored CSS lives in Tailwind's cascade layers.
    Unlayered rules outrank every utility regardless of

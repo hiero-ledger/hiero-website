@@ -42,8 +42,8 @@ importers:
         specifier: ^4.0.1
         version: 4.0.1
       swiper:
-        specifier: ^14.0.6
-        version: 14.0.6
+        specifier: ^14.1.0
+        version: 14.1.0
       toml:
         specifier: ^5.0.0
         version: 5.0.0
@@ -2797,8 +2797,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  swiper@14.0.6:
-    resolution: {integrity: sha512-ArptjmcZMBvpLCbvzSKuqvQpjjITCbZdymiGOrbZQffQ3ZSjgpvMByXX0WZBUt+FV4PPIumdYfZ9ZdBbFsdH6g==}
+  swiper@14.1.0:
+    resolution: {integrity: sha512-ppit/AqmGvThKlXy4I1/9N/gEyb9s/BDHWciWNeIxbfteFKUhPQXrYuOMKszomXKd9WiLd+/0vKdPHW+0N0mhA==}
     engines: {node: '>= 4.7.0'}
 
   symbol-tree@3.2.4:
@@ -6133,7 +6133,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  swiper@14.0.6: {}
+  swiper@14.1.0: {}
 
   symbol-tree@3.2.4: {}
 

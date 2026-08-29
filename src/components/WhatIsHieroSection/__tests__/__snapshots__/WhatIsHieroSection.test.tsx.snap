@@ -1,0 +1,138 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`WhatIsHieroSection > matches the rendered structure 1`] = `
+<section
+  aria-labelledby="what-is-hiero-heading"
+  class="hiero-principles"
+  id="what-is-hiero"
+>
+  <div
+    class="container hiero-principles-inner"
+  >
+    <div
+      class="hiero-principles-thesis"
+    >
+      <p
+        class="hiero-principles-eyebrow"
+      >
+        Principles
+      </p>
+      <h2
+        class="hiero-principles-heading"
+        id="what-is-hiero-heading"
+      >
+        What is Hiero?
+      </h2>
+      <div
+        class="hiero-principles-intro"
+      >
+        <p>
+          Hiero, a 
+          <a
+            class="text-red underline hover:text-red-dark transition-colors"
+            href="https://www.lfdecentralizedtrust.org/"
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            Linux Foundation Decentralized Trust
+          </a>
+           project, is vendor-neutral.
+        </p>
+      </div>
+      <nav
+        aria-label="What is Hiero?"
+        class="hiero-principles-index"
+      >
+        <ul
+          class="hiero-principles-index-list"
+          role="list"
+        >
+          <li>
+            <a
+              aria-current="location"
+              class="hiero-principles-index-link"
+              href="#hiero-is-open"
+            >
+              open
+            </a>
+          </li>
+          <li>
+            <a
+              class="hiero-principles-index-link"
+              href="#hiero-is-leaderless"
+            >
+              leaderless
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <ul
+      class="hiero-principles-list"
+      role="list"
+    >
+      <li
+        class="hiero-principles-item"
+        data-active="true"
+        id="hiero-is-open"
+      >
+        <img
+          alt=""
+          class="hiero-principles-icon"
+          height="57"
+          loading="lazy"
+          src="/images/icon-1.svg"
+          width="56"
+        />
+        <div
+          class="hiero-principles-body"
+        >
+          <h3
+            class="hiero-principles-term"
+          >
+            Hiero is 
+            <strong>
+              open
+            </strong>
+          </h3>
+          <p
+            class="hiero-principles-detail"
+          >
+            Open governance and collaboration.
+          </p>
+        </div>
+      </li>
+      <li
+        class="hiero-principles-item"
+        id="hiero-is-leaderless"
+      >
+        <img
+          alt=""
+          class="hiero-principles-icon"
+          height="57"
+          loading="lazy"
+          src="/images/icon-2.svg"
+          width="56"
+        />
+        <div
+          class="hiero-principles-body"
+        >
+          <h3
+            class="hiero-principles-term"
+          >
+            Hiero is 
+            <strong>
+              leaderless
+            </strong>
+          </h3>
+          <p
+            class="hiero-principles-detail"
+          >
+            Every node participates equally.
+          </p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+`;

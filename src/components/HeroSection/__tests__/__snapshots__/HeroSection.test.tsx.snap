@@ -66,6 +66,7 @@ exports[`HeroSection > matches the rendered structure 1`] = `
     </div>
     <ul
       class="hero-section-colophon"
+      role="list"
     >
       <li
         class="hero-section-fact"
@@ -73,9 +74,10 @@ exports[`HeroSection > matches the rendered structure 1`] = `
         <span
           class="hero-section-fact-value"
         >
-          20
+          42
         </span>
-        Core repositories
+         
+        Total repositories
       </li>
       <li
         class="hero-section-fact"
@@ -83,8 +85,9 @@ exports[`HeroSection > matches the rendered structure 1`] = `
         <span
           class="hero-section-fact-value"
         >
-          2,256
+          3,021
         </span>
+         
         GitHub stars
       </li>
       <li
@@ -95,6 +98,7 @@ exports[`HeroSection > matches the rendered structure 1`] = `
         >
           14
         </span>
+         
         Community calls
       </li>
     </ul>

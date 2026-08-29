@@ -185,7 +185,7 @@
   }
 
   .hero-section-action--ghost {
-    @apply border-white/45 text-white hover:border-white/80 hover:bg-white/12;
+    @apply border-white/55 text-white hover:border-white/80 hover:bg-white/12;
   }
 
   .hero-section-action-glyph {
@@ -458,20 +458,19 @@
      slogan wall: a thesis column that states what Hiero is, and beside it the
      six properties as ruled entries — each one named and then argued.
 
-     What was removed matters as much as what is here. The 01–06 markers are
-     gone: fair, fast, secure, decentralized, leaderless and open are six
-     independent claims, not a sequence, and numbering them told the reader
-     something untrue about the content. The tilted, overlapping cards went with
-     them; they left the list without a left edge to read down, and the stack
-     they mimed was not a fact about Hiero either.
+     Deliberately absent: sequence markers (fair, fast, secure, decentralized,
+     leaderless and open are six independent claims, not a countdown) and any
+     card or stack treatment, which would give the list no left edge to read
+     down.
      ============================================ */
 
-  /* Flat sand, no wash. The corner tint that used to sit here reached the
-     eyebrow on a narrow viewport and pulled brand red down to 4.4:1 against it;
-     on plain sand the same red holds 4.9:1, which is the ratio the site's links
-     already run at everywhere else. The hero carries the colour on this page. */
+  /* Flat sand, no wash: a corner tint would pull brand red below 4.5:1 against
+     it on a narrow viewport, and on plain sand the same red holds 4.9:1 — the
+     ratio the site's links already run at everywhere else. The hero carries
+     the colour on this page. The scroll margin clears the fixed header
+     (`h-22.5` in layout.tsx) for /#what-is-hiero deep links. */
   .hiero-principles {
-    @apply relative bg-sand;
+    @apply relative scroll-mt-22.5 bg-sand;
   }
 
   /* The thesis is short and the list is long, so from two columns up the layout
@@ -569,7 +568,11 @@
   .hiero-principles-item {
     @apply grid grid-cols-[clamp(2.25rem,3vw,2.75rem)_minmax(0,1fr)];
     @apply gap-[clamp(1.25rem,2.5vw,2rem)] py-[clamp(1.5rem,2.6vw,2.25rem)];
-    @apply scroll-mt-28 border-t border-charcoal/14 last:border-b;
+    /* 45vh rather than a header-sized offset: the aria-current observer band
+       is the middle tenth of the viewport, so a clicked index entry has to
+       land inside it — a smaller margin scrolls the entry above the band and
+       the marker lights up the entry after the one the reader chose. */
+    @apply scroll-mt-[45vh] border-t border-charcoal/14 last:border-b;
     @apply transition-colors duration-300 ease-out motion-reduce:transition-none;
   }
 
@@ -611,23 +614,33 @@
 
   /* Armed only once `data-motion` lands from the component, and played per
      entry as each one is reached — the same rise the hero uses on load, so the
-     page has one entrance gesture rather than one per section. */
-  .hiero-principles[data-motion="ready"] .hiero-principles-thesis,
-  .hiero-principles[data-motion="ready"] .hiero-principles-item {
-    @apply translate-y-5 opacity-0;
-  }
+     page has one entrance gesture rather than one per section.
 
-  .hiero-principles[data-motion="ready"]
-    .hiero-principles-thesis[data-revealed],
-  .hiero-principles[data-motion="ready"] .hiero-principles-item[data-revealed] {
-    animation: hiero-principles-rise 640ms cubic-bezier(0.22, 0.85, 0.28, 1)
-      both;
+     Scoped to screen + no-preference: print runs no observers, so unrevealed
+     entries would render as blank pages, and a reader who turns reduced motion
+     on mid-session gets their content back without waiting for a reload. The
+     hidden offset is the `translate` property (that is what `translate-y-5`
+     compiles to), so the keyframe has to resolve `translate`, not `transform` —
+     animating `transform` would leave the offset in place forever. */
+  @media screen and (prefers-reduced-motion: no-preference) {
+    .hiero-principles[data-motion="ready"] .hiero-principles-thesis,
+    .hiero-principles[data-motion="ready"] .hiero-principles-item {
+      @apply translate-y-5 opacity-0;
+    }
+
+    .hiero-principles[data-motion="ready"]
+      .hiero-principles-thesis[data-revealed],
+    .hiero-principles[data-motion="ready"]
+      .hiero-principles-item[data-revealed] {
+      animation: hiero-principles-rise 640ms cubic-bezier(0.22, 0.85, 0.28, 1)
+        both;
+    }
   }
 
   @keyframes hiero-principles-rise {
     to {
       opacity: 1;
-      transform: translateY(0);
+      translate: 0 0;
     }
   }
 }
@@ -645,6 +658,15 @@
      ============================================ */
   html {
     scroll-behavior: smooth;
+  }
+
+  /* An in-page jump is a multi-thousand-pixel animation for anyone using the
+     section index or the hero's contribute action, so the smooth behaviour has
+     to yield to a stated motion preference. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {

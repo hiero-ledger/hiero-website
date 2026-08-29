@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import HeroTraces from "../HeroTraces";
 
 describe("HeroTraces", () => {
@@ -10,10 +10,16 @@ describe("HeroTraces", () => {
     expect(container.querySelectorAll("line").length).toBeGreaterThan(10);
   });
 
-  it("draws the same field every time, so the server and the browser agree", () => {
-    const first = render(<HeroTraces />).container.innerHTML;
-    const second = render(<HeroTraces />).container.innerHTML;
+  it("draws the same field every time, so the server and the browser agree", async () => {
+    vi.resetModules();
+    const { default: FirstLoad } = await import("../HeroTraces");
+    const first = render(<FirstLoad />).container.innerHTML;
 
+    vi.resetModules();
+    const { default: SecondLoad } = await import("../HeroTraces");
+    const second = render(<SecondLoad />).container.innerHTML;
+
+    expect(FirstLoad).not.toBe(SecondLoad);
     expect(first).toBe(second);
   });
 

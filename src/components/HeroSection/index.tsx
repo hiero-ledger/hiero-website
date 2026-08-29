@@ -108,10 +108,10 @@ export default function HeroSection({ data }: HeroSectionProps) {
           </div>
         </div>
 
-        <ul className="hero-section-colophon">
+        <ul role="list" className="hero-section-colophon">
           {data.facts.map(fact => (
             <li key={fact.label} className="hero-section-fact">
-              <span className="hero-section-fact-value">{fact.value}</span>
+              <span className="hero-section-fact-value">{fact.value}</span>{" "}
               {fact.label}
             </li>
           ))}

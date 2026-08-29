@@ -5,7 +5,7 @@ import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
 
 interface RichTextProps {
-  as?: "div" | "h2" | "h3" | "p" | "span";
+  as?: "div" | "h3" | "p" | "span";
   className?: string;
   inline?: boolean;
   markdown: string;

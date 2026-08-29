@@ -1,10 +1,10 @@
 {
-  "hiero-consensus-node": { "stars": 405 },
+  "hiero-consensus-node": { "stars": 404 },
   "hiero-local-node": { "stars": 262 },
   "hiero-mirror-node": { "stars": 184 },
   "hiero-improvement-proposals": { "stars": 178 },
   "hiero-sdk-js": { "stars": 328 },
-  "hiero-sdk-java": { "stars": 260 },
+  "hiero-sdk-java": { "stars": 262 },
   "hiero-json-rpc-relay": { "stars": 92 },
   "hiero-sdk-go": { "stars": 128 },
   "hiero-sdk-rust": { "stars": 59 },

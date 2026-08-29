@@ -74,7 +74,7 @@ describe("HeroSection", () => {
 
     expect(facts).toHaveLength(data.facts.length);
     data.facts.forEach((fact, index) => {
-      expect(facts[index]).toHaveTextContent(`${fact.value}${fact.label}`);
+      expect(facts[index]).toHaveTextContent(`${fact.value} ${fact.label}`);
       expect(within(facts[index]).getByText(fact.value)).toBeInTheDocument();
     });
   });

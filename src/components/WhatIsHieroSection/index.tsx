@@ -81,17 +81,26 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
   }, []);
 
   // Each entry arrives as it is reached rather than the whole list arriving at
-  // once, which is what the old single section-level observer did: by the time
-  // you scrolled to the sixth entry it had already played, off screen.
+  // once, so the sixth entry still gets its rise when the reader gets there.
+  // The CSS side of this gate is scoped to `prefers-reduced-motion:
+  // no-preference`, which answers a preference change live; the check here
+  // only saves wiring observers nobody will see.
   useEffect(() => {
     const section = sectionRef.current;
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    const reduceMotion =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (!section || reduceMotion || !("IntersectionObserver" in window)) {
       return;
     }
+
+    const targets = [thesisRef.current, ...itemsRef.current].filter(
+      Boolean,
+    ) as HTMLElement[];
+
+    const alreadyVisible = (element: HTMLElement) =>
+      element.getBoundingClientRect().top < window.innerHeight;
 
     section.dataset.motion = "ready";
 
@@ -107,9 +116,13 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
       { threshold: 0.12 },
     );
 
-    [thesisRef.current, ...itemsRef.current]
-      .filter(Boolean)
-      .forEach(element => observer.observe(element as Element));
+    targets.forEach(element => {
+      if (alreadyVisible(element)) {
+        element.dataset.revealed = "true";
+      } else {
+        observer.observe(element);
+      }
+    });
 
     return () => observer.disconnect();
   }, []);
@@ -133,13 +146,15 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
           />
 
           <nav className="hiero-principles-index" aria-label={data.heading}>
-            <ul className="hiero-principles-index-list">
+            <ul role="list" className="hiero-principles-index-list">
               {entries.map((entry, index) => (
                 <li key={entry.anchor}>
                   <a
                     href={`#${entry.anchor}`}
                     className="hiero-principles-index-link"
-                    aria-current={index === activeIndex ? "true" : undefined}>
+                    aria-current={
+                      index === activeIndex ? "location" : undefined
+                    }>
                     {entry.property}
                   </a>
                 </li>
@@ -148,7 +163,7 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
           </nav>
         </div>
 
-        <ul className="hiero-principles-list">
+        <ul role="list" className="hiero-principles-list">
           {entries.map((entry, index) => (
             <li
               key={entry.anchor}

@@ -1,44 +1,25 @@
 #!/usr/bin/env node
 
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import prettier from "prettier";
 import fallbackRepositoryStats from "../data/repository_stats.json" with { type: "json" };
 import fallbackOrganizationStats from "../data/organization_stats.json" with { type: "json" };
+import trackedRepositories from "../data/tracked_repositories.json" with { type: "json" };
+import { isRecord, writeJsonIfChanged } from "./lib/sync-helpers.mjs";
 
-const dataDirectory = "src/data";
 const targetFile = "src/data/repository_stats.json";
 const organizationTargetFile = "src/data/organization_stats.json";
 
-const repos = [
-  "hiero-consensus-node",
-  "hiero-local-node",
-  "hiero-mirror-node",
-  "hiero-improvement-proposals",
-  "hiero-sdk-js",
-  "hiero-sdk-java",
-  "hiero-json-rpc-relay",
-  "hiero-sdk-go",
-  "hiero-sdk-rust",
-  "hiero-mirror-node-explorer",
-  "hiero-cli",
-  "solo",
-  "hiero-block-node",
-  "hiero-sdk-tck",
-  "hiero-sdk-cpp",
-  "governance",
-  "hiero-sdk-python",
-  "hiero-sdk-swift",
-  "sdk-collaboration-hub",
-  "tsc",
-];
+// One source of truth with the repository grid: src/data/tracked_repositories.json
+// is also what `reposData` in src/data/homePageData.ts renders, so the grid and
+// these stats can never track different repo sets.
+const organization = trackedRepositories.organization;
+const repos = trackedRepositories.repositories.map(repo => repo.name);
 const repoSet = new Set(repos);
+
+const rateLimitHint =
+  "Set GITHUB_TOKEN to raise the rate limit for local builds.";
 
 function createZeroStatsMap() {
   return new Map(repos.map(repo => [repo, { stars: 0 }]));
-}
-
-function isRecord(value) {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
 function getStars(repoStats) {
@@ -90,45 +71,6 @@ function loadFallback(log = true) {
   return toStatsObject(createZeroStatsMap());
 }
 
-async function formatStatsForFile(stats, filePath = targetFile) {
-  let formatted = `${JSON.stringify(stats, null, 2)}\n`;
-
-  try {
-    const prettierConfig = await prettier.resolveConfig(filePath);
-    formatted = await prettier.format(JSON.stringify(stats), {
-      ...(prettierConfig ?? {}),
-      parser: "json",
-      filepath: filePath,
-    });
-  } catch (error) {
-    console.warn(
-      `[sync-repo-stats] Prettier formatting failed (${error.message}), using fallback formatting.`,
-    );
-  }
-
-  if (!formatted.endsWith("\n")) {
-    formatted += "\n";
-  }
-
-  return formatted;
-}
-
-async function writeIfChanged(content, filePath = targetFile) {
-  try {
-    const existingContent = await readFile(filePath, "utf8");
-    if (existingContent === content) {
-      return false;
-    }
-  } catch (error) {
-    if (error?.code !== "ENOENT") {
-      throw error;
-    }
-  }
-
-  await writeFile(filePath, content);
-  return true;
-}
-
 function isValidOrganizationStats(value) {
   return (
     isRecord(value) &&
@@ -150,50 +92,6 @@ function loadOrganizationFallback() {
     "[sync-repo-stats] No cached organization data available, writing zeroes.",
   );
   return { publicRepositories: 0, totalStars: 0 };
-}
-
-/**
- * The hero's headline facts cover the whole hiero-ledger organization, not
- * just the curated grid list above, so the two numbers can never describe
- * different repo sets: both come from one listing of every public repository.
- */
-async function fetchOrganizationStats(headers) {
-  console.log(
-    "[sync-repo-stats] Fetching organization statistics from GitHub...",
-  );
-
-  let publicRepositories = 0;
-  let totalStars = 0;
-
-  for (let page = 1; ; page += 1) {
-    const response = await fetch(
-      `https://api.github.com/orgs/hiero-ledger/repos?type=public&per_page=100&page=${page}`,
-      { headers },
-    );
-
-    if (!response.ok) {
-      throw new Error(`GitHub API responded with ${response.status}`);
-    }
-
-    const pageRepos = await response.json();
-    if (!Array.isArray(pageRepos)) {
-      throw new Error("GitHub API returned an unexpected payload");
-    }
-
-    publicRepositories += pageRepos.length;
-    totalStars += pageRepos.reduce(
-      (sum, repo) => sum + (repo.stargazers_count ?? 0),
-      0,
-    );
-
-    if (pageRepos.length < 100) break;
-  }
-
-  console.log(
-    `  ✓ hiero-ledger: ${publicRepositories} public repositories, ${totalStars.toLocaleString()} stars`,
-  );
-
-  return { publicRepositories, totalStars };
 }
 
 function buildHeaders() {
@@ -221,7 +119,7 @@ async function fetchFromGitHub() {
 
   for (const repo of repos) {
     const response = await fetch(
-      `https://api.github.com/repos/hiero-ledger/${repo}`,
+      `https://api.github.com/repos/${organization}/${repo}`,
       { headers },
     );
     if (response.ok) {
@@ -251,7 +149,7 @@ async function fetchFromGitHub() {
       if (resetAt) {
         const resetTime = new Date(Number(resetAt) * 1000).toISOString();
         console.warn(
-          `[sync-repo-stats] GitHub access currently limited; rate limit resets at ${resetTime}.`,
+          `[sync-repo-stats] GitHub access currently limited; rate limit resets at ${resetTime}. ${rateLimitHint}`,
         );
       }
       break;
@@ -271,6 +169,54 @@ async function fetchFromGitHub() {
   }
 
   return toStatsObject(stats);
+}
+
+/**
+ * The hero's headline facts cover the whole organization, not just the curated
+ * grid list, so the two numbers can never describe different repo sets: both
+ * come from one listing of every public repository.
+ */
+async function fetchOrganizationStats(headers) {
+  console.log(
+    "[sync-repo-stats] Fetching organization statistics from GitHub...",
+  );
+
+  let publicRepositories = 0;
+  let totalStars = 0;
+
+  for (let page = 1; ; page += 1) {
+    const response = await fetch(
+      `https://api.github.com/orgs/${organization}/repos?type=public&per_page=100&page=${page}`,
+      { headers },
+    );
+
+    if (!response.ok) {
+      const suffix =
+        response.status === 401 || response.status === 403
+          ? ` ${rateLimitHint}`
+          : "";
+      throw new Error(`GitHub API responded with ${response.status}.${suffix}`);
+    }
+
+    const pageRepos = await response.json();
+    if (!Array.isArray(pageRepos)) {
+      throw new Error("GitHub API returned an unexpected payload");
+    }
+
+    publicRepositories += pageRepos.length;
+    totalStars += pageRepos.reduce(
+      (sum, repo) => sum + (repo.stargazers_count ?? 0),
+      0,
+    );
+
+    if (pageRepos.length < 100) break;
+  }
+
+  console.log(
+    `  ✓ ${organization}: ${publicRepositories} public repositories, ${totalStars.toLocaleString()} stars`,
+  );
+
+  return { publicRepositories, totalStars };
 }
 
 async function run() {
@@ -294,17 +240,15 @@ async function run() {
     organizationStats = loadOrganizationFallback();
   }
 
-  await mkdir(dataDirectory, { recursive: true });
-  const formattedStats = await formatStatsForFile(stats);
-  const didWrite = await writeIfChanged(formattedStats);
-
-  const formattedOrganizationStats = await formatStatsForFile(
+  const didWrite = await writeJsonIfChanged(
+    stats,
+    targetFile,
+    "[sync-repo-stats]",
+  );
+  const didWriteOrganization = await writeJsonIfChanged(
     organizationStats,
     organizationTargetFile,
-  );
-  const didWriteOrganization = await writeIfChanged(
-    formattedOrganizationStats,
-    organizationTargetFile,
+    "[sync-repo-stats]",
   );
 
   const totalStars = Object.values(stats).reduce((sum, r) => sum + r.stars, 0);

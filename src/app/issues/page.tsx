@@ -12,22 +12,10 @@ type Difficulty = {
 };
 
 const difficultyAliases: Record<string, string[]> = {
-  "good first issue": [
-    "good first issue",
-    "skill: good first issue",
-  ],
-  beginner: [
-    "beginner",
-    "skill: beginner",
-  ],
-  intermediate: [
-    "intermediate",
-    "skill: intermediate",
-  ],
-  advanced: [
-    "advanced",
-    "skill: advanced",
-  ],
+  "good first issue": ["good first issue", "skill: good first issue"],
+  beginner: ["beginner", "skill: beginner"],
+  intermediate: ["intermediate", "skill: intermediate"],
+  advanced: ["advanced", "skill: advanced"],
 };
 
 function getDifficulty(issue: GitHubIssue): Difficulty | null {
@@ -38,7 +26,7 @@ function getDifficulty(issue: GitHubIssue): Difficulty | null {
   const labels = issueWithLabels.labels ?? [];
 
   const labelNames = labels.map(label =>
-    (typeof label === "string" ? label : label.name ?? "").toLowerCase(),
+    (typeof label === "string" ? label : (label.name ?? "")).toLowerCase(),
   );
 
   for (const [difficulty, aliases] of Object.entries(difficultyAliases)) {
@@ -128,10 +116,7 @@ export default function IssueExplorer() {
         />
 
         {/* Decorative network nodes */}
-        <div
-          className="absolute inset-0 opacity-30"
-          aria-hidden="true"
-        >
+        <div className="absolute inset-0 opacity-30" aria-hidden="true">
           <span className="absolute left-[29%] top-[42%] h-3 w-3 rounded-full bg-white/70 shadow-[0_0_0_12px_rgba(255,255,255,0.08)]" />
           <span className="absolute left-[47%] top-[62%] h-4 w-4 rounded-full bg-white/60 shadow-[0_0_0_18px_rgba(255,255,255,0.07)]" />
           <span className="absolute left-[69%] top-[28%] h-3 w-3 rounded-full bg-white/60 shadow-[0_0_0_14px_rgba(255,255,255,0.07)]" />
@@ -187,8 +172,7 @@ export default function IssueExplorer() {
                 <select
                   value={difficulty}
                   onChange={e => setDifficulty(e.target.value)}
-                  className="h-10 min-w-[140px] appearance-none rounded-lg border border-gray-light bg-white px-4 pr-10 text-sm font-medium text-charcoal outline-none transition-colors hover:border-gray focus:border-red focus:ring-2 focus:ring-red-light/20"
-                >
+                  className="h-10 min-w-[140px] appearance-none rounded-lg border border-gray-light bg-white px-4 pr-10 text-sm font-medium text-charcoal outline-none transition-colors hover:border-gray focus:border-red focus:ring-2 focus:ring-red-light/20">
                   <option value="">All Difficulties</option>
                   <option value="good first issue">Good First Issue</option>
                   <option value="beginner">Beginner</option>
@@ -206,8 +190,7 @@ export default function IssueExplorer() {
                 <select
                   value={sdk}
                   onChange={e => setSdk(e.target.value)}
-                  className="h-10 min-w-[110px] appearance-none rounded-lg border border-gray-light bg-white px-4 pr-10 text-sm font-medium text-charcoal outline-none transition-colors hover:border-gray focus:border-red focus:ring-2 focus:ring-red-light/20"
-                >
+                  className="h-10 min-w-[110px] appearance-none rounded-lg border border-gray-light bg-white px-4 pr-10 text-sm font-medium text-charcoal outline-none transition-colors hover:border-gray focus:border-red focus:ring-2 focus:ring-red-light/20">
                   <option value="">All Repos</option>
                   <option value="python">Python</option>
                   <option value="javascript">JavaScript</option>
@@ -267,8 +250,7 @@ export default function IssueExplorer() {
                       href={issue.html_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex min-h-[185px] flex-col rounded-xl border border-[#E8E8E6] bg-white p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-red/30 hover:shadow-[0_8px_30px_rgba(30,30,30,0.08)]"
-                    >
+                      className="group flex min-h-[185px] flex-col rounded-xl border border-[#E8E8E6] bg-white p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-red/30 hover:shadow-[0_8px_30px_rgba(30,30,30,0.08)]">
                       {/* Repository */}
                       <div>
                         <span className="inline-flex rounded-md bg-red/5 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.04em] text-red">
@@ -291,8 +273,7 @@ export default function IssueExplorer() {
                             <span
                               className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-medium ${getDifficultyClasses(
                                 issueDifficulty.value,
-                              )}`}
-                            >
+                              )}`}>
                               <span className="h-1.5 w-1.5 rounded-full bg-current" />
                               {issueDifficulty.label}
                             </span>

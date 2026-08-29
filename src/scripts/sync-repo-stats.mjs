@@ -3,9 +3,11 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import prettier from "prettier";
 import fallbackRepositoryStats from "../data/repository_stats.json" with { type: "json" };
+import fallbackOrganizationStats from "../data/organization_stats.json" with { type: "json" };
 
 const dataDirectory = "src/data";
 const targetFile = "src/data/repository_stats.json";
+const organizationTargetFile = "src/data/organization_stats.json";
 
 const repos = [
   "hiero-consensus-node",
@@ -88,15 +90,15 @@ function loadFallback(log = true) {
   return toStatsObject(createZeroStatsMap());
 }
 
-async function formatStatsForFile(stats) {
+async function formatStatsForFile(stats, filePath = targetFile) {
   let formatted = `${JSON.stringify(stats, null, 2)}\n`;
 
   try {
-    const prettierConfig = await prettier.resolveConfig(targetFile);
+    const prettierConfig = await prettier.resolveConfig(filePath);
     formatted = await prettier.format(JSON.stringify(stats), {
       ...(prettierConfig ?? {}),
       parser: "json",
-      filepath: targetFile,
+      filepath: filePath,
     });
   } catch (error) {
     console.warn(
@@ -111,9 +113,9 @@ async function formatStatsForFile(stats) {
   return formatted;
 }
 
-async function writeIfChanged(content) {
+async function writeIfChanged(content, filePath = targetFile) {
   try {
-    const existingContent = await readFile(targetFile, "utf8");
+    const existingContent = await readFile(filePath, "utf8");
     if (existingContent === content) {
       return false;
     }
@@ -123,13 +125,78 @@ async function writeIfChanged(content) {
     }
   }
 
-  await writeFile(targetFile, content);
+  await writeFile(filePath, content);
   return true;
 }
 
-async function fetchFromGitHub() {
-  const stats = new Map();
-  const cachedStats = toStatsMap(loadFallback(false));
+function isValidOrganizationStats(value) {
+  return (
+    isRecord(value) &&
+    Number.isFinite(value.publicRepositories) &&
+    Number.isFinite(value.totalStars)
+  );
+}
+
+function loadOrganizationFallback() {
+  if (isValidOrganizationStats(fallbackOrganizationStats)) {
+    console.warn("[sync-repo-stats] Using bundled organization stats cache.");
+    return {
+      publicRepositories: fallbackOrganizationStats.publicRepositories,
+      totalStars: fallbackOrganizationStats.totalStars,
+    };
+  }
+
+  console.warn(
+    "[sync-repo-stats] No cached organization data available, writing zeroes.",
+  );
+  return { publicRepositories: 0, totalStars: 0 };
+}
+
+/**
+ * The hero's headline facts cover the whole hiero-ledger organization, not
+ * just the curated grid list above, so the two numbers can never describe
+ * different repo sets: both come from one listing of every public repository.
+ */
+async function fetchOrganizationStats(headers) {
+  console.log(
+    "[sync-repo-stats] Fetching organization statistics from GitHub...",
+  );
+
+  let publicRepositories = 0;
+  let totalStars = 0;
+
+  for (let page = 1; ; page += 1) {
+    const response = await fetch(
+      `https://api.github.com/orgs/hiero-ledger/repos?type=public&per_page=100&page=${page}`,
+      { headers },
+    );
+
+    if (!response.ok) {
+      throw new Error(`GitHub API responded with ${response.status}`);
+    }
+
+    const pageRepos = await response.json();
+    if (!Array.isArray(pageRepos)) {
+      throw new Error("GitHub API returned an unexpected payload");
+    }
+
+    publicRepositories += pageRepos.length;
+    totalStars += pageRepos.reduce(
+      (sum, repo) => sum + (repo.stargazers_count ?? 0),
+      0,
+    );
+
+    if (pageRepos.length < 100) break;
+  }
+
+  console.log(
+    `  ✓ hiero-ledger: ${publicRepositories} public repositories, ${totalStars.toLocaleString()} stars`,
+  );
+
+  return { publicRepositories, totalStars };
+}
+
+function buildHeaders() {
   const headers = {
     "User-Agent": "hiero-website-build",
     Accept: "application/vnd.github+json",
@@ -138,6 +205,13 @@ async function fetchFromGitHub() {
   if (process.env.GITHUB_TOKEN) {
     headers["Authorization"] = `Bearer ${process.env.GITHUB_TOKEN}`;
   }
+  return headers;
+}
+
+async function fetchFromGitHub() {
+  const stats = new Map();
+  const cachedStats = toStatsMap(loadFallback(false));
+  const headers = buildHeaders();
 
   console.log(
     "[sync-repo-stats] Fetching repository statistics from GitHub...",
@@ -210,13 +284,32 @@ async function run() {
     stats = loadFallback();
   }
 
+  let organizationStats;
+  try {
+    organizationStats = await fetchOrganizationStats(buildHeaders());
+  } catch (error) {
+    console.warn(
+      `[sync-repo-stats] Organization fetch failed (${error.message}), falling back to cached data.`,
+    );
+    organizationStats = loadOrganizationFallback();
+  }
+
   await mkdir(dataDirectory, { recursive: true });
   const formattedStats = await formatStatsForFile(stats);
   const didWrite = await writeIfChanged(formattedStats);
 
+  const formattedOrganizationStats = await formatStatsForFile(
+    organizationStats,
+    organizationTargetFile,
+  );
+  const didWriteOrganization = await writeIfChanged(
+    formattedOrganizationStats,
+    organizationTargetFile,
+  );
+
   const totalStars = Object.values(stats).reduce((sum, r) => sum + r.stars, 0);
   console.log(
-    `[sync-repo-stats] Done. Total stars: ${totalStars.toLocaleString()}${didWrite ? "" : " (no changes)"}`,
+    `[sync-repo-stats] Done. Tracked stars: ${totalStars.toLocaleString()}, organization: ${organizationStats.publicRepositories} repos / ${organizationStats.totalStars.toLocaleString()} stars${didWrite || didWriteOrganization ? "" : " (no changes)"}`,
   );
 }
 

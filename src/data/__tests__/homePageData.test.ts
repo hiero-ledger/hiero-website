@@ -1,15 +1,19 @@
 import { describe, expect, it } from "vitest";
+import organizationStats from "@/data/organization_stats.json";
 import repositoryStats from "@/data/repository_stats.json";
 import { heroData, meetData, reposData } from "@/data/homePageData";
 
 /**
- * The hero states two numbers about "our repositories": how many there are and
- * how many stars they have between them. They come from two different lists —
+ * The repository grid states per-repo star counts from two different lists —
  * the curated `reposData.repos` here and the list hardcoded in
  * `src/scripts/sync-repo-stats.mjs`, which is what keys
  * `repository_stats.json`. Nothing in the code makes the two agree, so these
- * tests do: if either list gains or loses a repository on its own, the hero
- * would quietly count one set of repositories and total the stars of another.
+ * tests do: if either list gains or loses a repository on its own, the grid
+ * would show missing or zeroed star badges.
+ *
+ * The hero's headline facts are different: both come from
+ * `organization_stats.json`, one GitHub listing of every public hiero-ledger
+ * repository, so its repo count and star sum agree by construction.
  */
 const listedRepos = reposData.repos.map(repo => repo.name);
 const statsRepos = Object.keys(repositoryStats);
@@ -28,9 +32,9 @@ describe("homePageData", () => {
     expect(new Set(statsRepos).size).toBe(statsRepos.length);
   });
 
-  it("counts the same repositories it totals the stars of", () => {
+  it("has grid stats for exactly the repositories the grid lists", () => {
     // Compared as sets: the two lists are written in the same order today, but
-    // order is not what the hero's numbers depend on.
+    // order is not what the star badges depend on.
     expect(new Set(listedRepos)).toEqual(new Set(statsRepos));
   });
 
@@ -41,19 +45,33 @@ describe("homePageData", () => {
     });
   });
 
-  it("counts the repositories it actually lists", () => {
-    expect(factFor("Core repositories").value).toBe(
-      String(reposData.repos.length),
-    );
-  });
+  it("carries sane organization-wide statistics", () => {
+    expect(Number.isFinite(organizationStats.publicRepositories)).toBe(true);
+    expect(Number.isFinite(organizationStats.totalStars)).toBe(true);
 
-  it("sums the stars of the whole repository set, punctuated for en-US", () => {
-    const stars = Object.values(repositoryStats).reduce(
+    // The whole organization can never hold fewer repositories, or fewer
+    // stars, than the curated subset the grid tracks.
+    expect(organizationStats.publicRepositories).toBeGreaterThanOrEqual(
+      reposData.repos.length,
+    );
+
+    const trackedStars = Object.values(repositoryStats).reduce(
       (total, repository) => total + repository.stars,
       0,
     );
+    expect(organizationStats.totalStars).toBeGreaterThanOrEqual(trackedStars);
+  });
 
-    expect(factFor("GitHub stars").value).toBe(stars.toLocaleString("en-US"));
+  it("counts the organization's public repositories", () => {
+    expect(factFor("Total repositories").value).toBe(
+      String(organizationStats.publicRepositories),
+    );
+  });
+
+  it("sums the organization's stars, punctuated for en-US", () => {
+    expect(factFor("GitHub stars").value).toBe(
+      organizationStats.totalStars.toLocaleString("en-US"),
+    );
   });
 
   it("counts the community calls it actually lists", () => {

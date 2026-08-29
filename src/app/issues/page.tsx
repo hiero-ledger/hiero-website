@@ -145,7 +145,7 @@ export default function IssueExplorer() {
               <div className="my-8 h-px w-24 bg-white" />
 
               <p className="max-w-[520px] text-lg leading-7 tracking-[-0.02em] text-white/80 sm:text-xl">
-                Find open issues across Hiero SDKs and start contributing
+                Find open issues across Hiero and start contributing!
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">

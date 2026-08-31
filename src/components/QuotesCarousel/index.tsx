@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import RichText from "@/components/RichText";
 import GossipField from "@/components/GossipField";
@@ -22,10 +22,27 @@ interface QuotesCarouselProps {
   data: QuotesData;
 }
 
+export const AUTO_ADVANCE_MS = 10_000;
+
 export default function QuotesCarousel({ data }: QuotesCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState<"next" | "previous">("next");
+  const [autoPlayEnabled, setAutoPlayEnabled] = useState(true);
+  const [interactionPaused, setInteractionPaused] = useState(false);
   const activeQuote = data.quotes[activeIndex];
+
+  useEffect(() => {
+    if (!autoPlayEnabled || interactionPaused || data.quotes.length <= 1) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setDirection("next");
+      setActiveIndex(index => (index + 1) % data.quotes.length);
+    }, AUTO_ADVANCE_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [activeIndex, autoPlayEnabled, data.quotes.length, interactionPaused]);
 
   const showPrevious = () => {
     setDirection("previous");
@@ -59,10 +76,20 @@ export default function QuotesCarousel({ data }: QuotesCarouselProps) {
           className="quotes-carousel-stage"
           role="region"
           aria-roledescription="carousel"
-          aria-label="Community testimonials">
+          aria-label="Community testimonials"
+          onMouseEnter={() => setInteractionPaused(true)}
+          onMouseLeave={() => setInteractionPaused(false)}
+          onFocusCapture={() => setInteractionPaused(true)}
+          onBlurCapture={event => {
+            if (
+              !event.currentTarget.contains(event.relatedTarget as Node | null)
+            ) {
+              setInteractionPaused(false);
+            }
+          }}>
           <div
             className="quotes-carousel-viewport"
-            aria-live="polite"
+            aria-live={autoPlayEnabled && !interactionPaused ? "off" : "polite"}
             aria-atomic="true">
             <article
               key={activeQuote.author}
@@ -122,6 +149,19 @@ export default function QuotesCarousel({ data }: QuotesCarouselProps) {
               </div>
 
               <div className="quotes-carousel-buttons">
+                <button
+                  type="button"
+                  onClick={() => setAutoPlayEnabled(enabled => !enabled)}
+                  aria-label={
+                    autoPlayEnabled
+                      ? "Pause automatic quote rotation"
+                      : "Resume automatic quote rotation"
+                  }
+                  aria-pressed={!autoPlayEnabled}
+                  className="quotes-carousel-control quotes-carousel-control--autoplay">
+                  <span aria-hidden="true">{autoPlayEnabled ? "Ⅱ" : "▶"}</span>
+                  <span>{autoPlayEnabled ? "Pause" : "Play"}</span>
+                </button>
                 <button
                   type="button"
                   onClick={showPrevious}

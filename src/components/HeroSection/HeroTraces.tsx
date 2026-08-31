@@ -3,10 +3,9 @@
  *
  * A flat field of gossip traces — events and the links between them — spread
  * across the whole hero behind the type. It is the same material as the
- * ConsensusLattice beside it, drawn without perspective and at a fraction of
- * the brightness, so the object in the frame reads as a close-up of a network
- * that carries on past the edges rather than an illustration parked on a
- * gradient.
+ * HieroMarkScene beside it, drawn without perspective and at a fraction of the
+ * brightness, so the framed mark reads as part of a network that carries on
+ * past the edges rather than an illustration parked on a gradient.
  *
  * No JS: the scatter comes from a seeded generator evaluated once at module
  * scope, so the markup is identical on the server and in the browser and the

@@ -311,181 +311,233 @@
   }
 
   /* ============================================
-     Hero consensus lattice — components/HeroSection/ConsensusLattice
+     Hero brand scene — components/HeroSection/HieroMarkScene
 
-     A real 3D scene rather than a picture of one: five node timelines standing
-     around a circle, five rings for the consensus rounds, and gossip crossing
-     between them, all in the browser's own perspective so depth comes from the
-     projection instead of from shading.
-
-     The scene turns through a limited arc — roughly ±15° — rather than spinning.
-     That is a rendering decision as much as a calm one: at that amplitude a flat
-     disc foreshortens by under 4%, so every point can stay a plain round div
-     and none of the ~50 elements needs a counter-rotation to keep facing front.
+     Hedera's homepage gives the right side of its hero to one tall, luminous
+     visual and lets a dark gradient blend that object back into the copy. This
+     follows the same composition with Hiero's own material: the real monogram
+     is embedded in a ledger plane, while rails and event nodes connect it to
+     the gossip field already spread behind the hero.
      ============================================ */
 
-  /* Below `xl` the lattice is a band of its own between the credential and the
-     wordmark. The space above the wordmark was empty at those widths and the
-     object was bled so far past the right edge that only a cropped sliver of it
-     stayed on screen; giving it a row in the flow fixes both at once, and the
-     hero is content-height there so no gap is left over to fill.
+  .hero-mark-scene {
+    @apply pointer-events-none relative mt-1 h-[clamp(12rem,38vw,17rem)] w-full;
+    @apply xl:absolute xl:inset-y-0 xl:right-[-3%] xl:left-auto xl:mt-0;
+    @apply xl:h-auto xl:w-[60%] xl:-z-10;
 
-     From `xl` there is a free half to stand it in, so it lifts out of the flow
-     and takes the right of the frame, bled past the edge — the object carries
-     on past the frame rather than sitting inside it like a stock illustration. */
-  .hero-lattice {
-    @apply pointer-events-none relative grid w-full place-items-center;
-    @apply mt-3 h-34 perspective-[74rem] sm:h-[clamp(9.5rem,24vh,16rem)];
-    @apply xl:mt-0;
-    @apply xl:absolute xl:inset-y-0 xl:right-[-4%] xl:left-auto xl:-z-10;
-    @apply xl:h-auto xl:w-[min(48rem,56%)];
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 19%,
+      black 100%
+    );
   }
 
-  .hero-lattice-tilt {
-    --tilt-x: 0deg;
-    --tilt-y: 0deg;
-
-    /* Long enough that the object follows the pointer rather than snapping to
-       it, which is what makes it read as mass. */
-    @apply transform-3d transition-transform duration-500;
-    @apply ease-[cubic-bezier(0.22,0.85,0.28,1)] motion-reduce:transition-none;
-
-    transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
-  }
-
-  /* The scene is authored at a fixed size in px so the geometry stays exact,
-     then scaled once here to meet the viewport. A ladder rather than a fluid
-     clamp: `scale` takes a number, and a number cannot be calc'd against vw. */
-  .hero-lattice-stage {
-    @apply relative h-0 w-0 transform-3d;
-    @apply scale-[0.42] sm:scale-[0.5] md:scale-[0.56];
-    @apply xl:scale-[0.88] min-[90rem]:scale-100;
-
-    transform: rotateX(9deg);
-    animation: hero-lattice-turn 26s ease-in-out infinite alternate;
-  }
-
-  /* A pool of light on the ground plane. It is the one piece of the scene that
-     is not structure — it is there so the lattice reads as standing in a space
-     rather than floating in front of a gradient. */
-  .hero-lattice-stage::before {
-    @apply absolute top-0 left-0 h-[470px] w-[470px] rounded-full;
-    @apply -mt-[235px] -ml-[235px];
+  /* A soft pool of brand light makes the white mark feel lit by the scene,
+     rather than laid on top of it. */
+  .hero-mark-scene::before {
+    @apply absolute top-1/2 right-[-10%] h-[125%] w-[88%] -translate-y-1/2;
 
     content: "";
     background: radial-gradient(
-      circle,
-      rgb(255 150 195 / 40%),
-      rgb(217 45 106 / 14%) 40%,
-      transparent 66%
-    );
-    transform: translate3d(0, 196px, 0) rotateX(90deg);
-  }
-
-  .hero-lattice-ring,
-  .hero-lattice-column,
-  .hero-lattice-node,
-  .hero-lattice-edge {
-    @apply absolute top-0 left-0;
-  }
-
-  /* Rounds. Lying flat in the ground plane, they project as ellipses, which is
-     what tells the eye there is a third axis before anything starts moving. */
-  .hero-lattice-ring {
-    @apply rounded-full border border-white/30;
-    @apply shadow-[0_0_24px_rgb(255_130_185_/_16%),inset_0_0_32px_rgb(255_130_185_/_8%)];
-  }
-
-  /* Node timelines. Equal length, equal weight, equal distance from a centre
-     that is deliberately empty. */
-  .hero-lattice-column {
-    @apply -ml-[0.5px] w-px;
-
-    background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(255 255 255 / 52%) 18%,
-      rgb(255 255 255 / 52%) 82%,
-      transparent
-    );
-  }
-
-  .hero-lattice-node {
-    @apply -mt-1.5 -ml-1.5 h-3 w-3 rounded-full;
-    @apply shadow-[0_0_12px_rgb(255_160_200_/_90%),0_0_30px_rgb(217_45_106_/_60%)];
-
-    background: radial-gradient(
-      circle,
-      var(--color-white) 0 30%,
-      rgb(255 210 230 / 95%) 46%,
-      rgb(233 92 148 / 70%) 62%,
+      ellipse,
+      rgb(255 158 199 / 50%) 0%,
+      rgb(217 45 106 / 24%) 40%,
       transparent 72%
     );
   }
 
-  .hero-lattice-edge {
-    @apply -mt-[0.5px] h-px origin-left;
+  /* The angled ledger plane gives the mark a setting and depth. Its grid is
+     deliberately sparse enough to remain texture behind the logo. */
+  .hero-mark-grid {
+    @apply absolute top-[12%] right-[-7%] h-[76%] w-[78%];
+    @apply border border-white/14 shadow-[0_34px_70px_rgb(25_1_10_/_28%)];
+
+    clip-path: polygon(11% 0, 100% 0, 89% 100%, 0 100%);
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0 4.9rem,
+        rgb(255 255 255 / 7%) 4.9rem calc(4.9rem + 1px)
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 4rem,
+        rgb(255 255 255 / 6%) 4rem calc(4rem + 1px)
+      ),
+      linear-gradient(135deg, rgb(255 255 255 / 9%), rgb(255 255 255 / 1%));
+    transform: perspective(60rem) rotateY(-12deg) rotateZ(-5deg);
+  }
+
+  .hero-mark-rail {
+    @apply absolute right-[-12%] h-px w-[88%] origin-right rotate-[-13deg];
 
     background: linear-gradient(
       to right,
-      rgb(255 255 255 / 6%),
-      rgb(255 186 214 / 85%),
-      rgb(255 255 255 / 6%)
+      transparent,
+      rgb(255 255 255 / 25%) 20%,
+      rgb(255 207 228 / 76%) 64%,
+      transparent
     );
+    box-shadow: 0 0 18px rgb(255 156 198 / 35%);
   }
 
-  /* One gossip event travelling the edge it was sent along. The timelines and
-     rounds are the structure; this is the only thing in the scene that is an
-     event, so it is the only thing that moves along a path. */
-  .hero-lattice-edge::after {
-    @apply absolute top-[-2px] left-0 h-[5px] w-[5px] rounded-full bg-white;
-    @apply shadow-[0_0_10px_rgb(255_170_205_/_90%)];
+  .hero-mark-rail::after {
+    @apply absolute top-[-2px] left-[18%] h-[5px] w-[5px] rounded-full bg-white;
+    @apply shadow-[0_0_12px_rgb(255_174_208_/_95%)];
 
     content: "";
-    animation: hero-lattice-gossip 4.4s ease-in-out infinite;
-    animation-delay: var(--edge-delay, 0ms);
   }
 
-  @keyframes hero-lattice-turn {
+  .hero-mark-rail--top {
+    @apply top-[23%];
+  }
+
+  .hero-mark-rail--middle {
+    @apply top-[52%] right-[-4%] w-[94%];
+  }
+
+  .hero-mark-rail--bottom {
+    @apply top-[79%] right-[-18%] w-[82%];
+  }
+
+  .hero-mark-emblem,
+  .hero-mark-echo {
+    @apply absolute top-1/2 right-[7%] aspect-square w-[min(13rem,56vw)];
+
+    translate: 0 -50%;
+  }
+
+  /* The echo is a low-contrast second plane, not a second logo. It gives the
+     solid mark a trailing edge like the layered forms in the reference. */
+  .hero-mark-echo {
+    @apply right-[2%] opacity-12;
+
+    filter: blur(0.4px);
+    scale: 1.13;
+    translate: 0 -43%;
+  }
+
+  .hero-mark-emblem {
+    @apply grid place-items-center rounded-[clamp(1.5rem,3vw,3rem)];
+    @apply border border-white/22;
+    @apply shadow-[0_34px_85px_rgb(29_2_12_/_45%),inset_0_1px_0_rgb(255_255_255_/_20%)];
+
+    background:
+      radial-gradient(
+        circle at 30% 18%,
+        rgb(255 255 255 / 17%),
+        transparent 38%
+      ),
+      linear-gradient(145deg, rgb(104 12 48 / 72%), rgb(50 4 20 / 44%));
+    backdrop-filter: blur(6px);
+  }
+
+  .hero-mark-emblem::before {
+    @apply absolute inset-[5%] rounded-[inherit] border border-white/8;
+
+    content: "";
+  }
+
+  .hero-mark-image {
+    @apply h-[72%] w-[72%] object-contain;
+
+    filter: brightness(0) invert(1) drop-shadow(0 0 24px rgb(255 181 213 / 34%));
+  }
+
+  .hero-mark-node {
+    @apply absolute h-2.5 w-2.5 rounded-full bg-white;
+    @apply shadow-[0_0_12px_rgb(255_174_208_/_95%),0_0_34px_rgb(217_45_106_/_75%)];
+  }
+
+  .hero-mark-node--one {
+    @apply top-[19%] right-[43%];
+  }
+
+  .hero-mark-node--two {
+    @apply top-[39%] right-[12%] h-1.5 w-1.5;
+  }
+
+  .hero-mark-node--three {
+    @apply right-[49%] bottom-[20%] h-1.5 w-1.5;
+  }
+
+  .hero-mark-node--four {
+    @apply right-[5%] bottom-[12%];
+  }
+
+  @media (min-width: 80rem) {
+    .hero-mark-emblem,
+    .hero-mark-echo {
+      @apply right-[8%] w-[min(33rem,66%)];
+    }
+
+    .hero-mark-echo {
+      @apply right-[3%];
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-mark-emblem {
+      animation: hero-mark-float 8s ease-in-out infinite alternate;
+    }
+
+    .hero-mark-grid {
+      animation: hero-mark-plane 12s ease-in-out infinite alternate;
+    }
+
+    .hero-mark-rail::after {
+      animation: hero-mark-signal 5.5s ease-in-out infinite;
+    }
+
+    .hero-mark-rail--middle::after {
+      animation-delay: -1.8s;
+    }
+
+    .hero-mark-rail--bottom::after {
+      animation-delay: -3.6s;
+    }
+  }
+
+  @keyframes hero-mark-float {
     from {
-      transform: rotateX(9deg) rotateY(-15deg);
+      translate: 0 -50%;
+      rotate: -1deg;
     }
 
     to {
-      transform: rotateX(9deg) rotateY(15deg);
+      translate: -0.4rem calc(-50% - 0.6rem);
+      rotate: 1.25deg;
     }
   }
 
-  @keyframes hero-lattice-gossip {
-    0%,
-    8% {
-      opacity: 0;
-      transform: translateX(0);
+  @keyframes hero-mark-plane {
+    from {
+      transform: perspective(60rem) rotateY(-12deg) rotateZ(-5deg) translateX(0);
     }
 
-    18%,
+    to {
+      transform: perspective(60rem) rotateY(-9deg) rotateZ(-3.5deg)
+        translateX(-0.6rem);
+    }
+  }
+
+  @keyframes hero-mark-signal {
+    0%,
+    10% {
+      opacity: 0;
+      translate: 0;
+    }
+
+    20%,
     72% {
       opacity: 1;
     }
 
-    82%,
+    90%,
     100% {
       opacity: 0;
-      transform: translateX(var(--edge-length, 0));
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-lattice-stage {
-      animation: none;
-      transform: rotateX(9deg) rotateY(-9deg);
-    }
-
-    .hero-lattice-edge::after {
-      @apply opacity-100;
-
-      animation: none;
-      transform: translateX(calc(var(--edge-length, 0px) / 2));
+      translate: 34vw;
     }
   }
 

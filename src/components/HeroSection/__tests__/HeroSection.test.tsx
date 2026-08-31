@@ -2,11 +2,10 @@ import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import HeroSection from "..";
 
-// The lattice is ~40 positioned elements of generated geometry. Stubbed here so
-// the snapshot below stays a readable record of the hero's own markup; the
-// scene has its own tests in ConsensusLattice.test.tsx.
-vi.mock("../ConsensusLattice", () => ({
-  default: () => <div data-testid="consensus-lattice" />,
+// The visual has its own markup and styles. Stubbed here so the snapshot stays
+// a readable record of the hero's content and document structure.
+vi.mock("../HieroMarkScene", () => ({
+  default: () => <div data-testid="hiero-mark-scene" />,
 }));
 
 vi.mock("../HeroTraces", () => ({

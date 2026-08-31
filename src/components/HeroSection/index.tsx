@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ConsensusLattice from "./ConsensusLattice";
+import HieroMarkScene from "./HieroMarkScene";
 import HeroTraces from "./HeroTraces";
 import {
   isExternalLink,
@@ -86,7 +86,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
       <div className="container hero-section-inner">
         <p className="hero-section-eyebrow">{data.eyebrow}</p>
 
-        <ConsensusLattice />
+        <HieroMarkScene />
 
         <div className="hero-section-lockup">
           <h1 id="hero-title" className="hero-section-title">

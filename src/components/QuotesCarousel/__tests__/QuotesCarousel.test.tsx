@@ -1,40 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import QuotesCarousel from "..";
 
-const swiperActions = vi.hoisted(() => ({
-  slidePrev: vi.fn(),
-  slideNext: vi.fn(),
-}));
-
-vi.mock("swiper/react", async () => {
-  const React = await import("react");
-
-  return {
-    Swiper: React.forwardRef(function MockSwiper(
-      { children }: { children: React.ReactNode },
-      ref,
-    ) {
-      React.useImperativeHandle(ref, () => ({
-        swiper: swiperActions,
-      }));
-
-      return <div data-testid="quotes-swiper">{children}</div>;
-    }),
-    SwiperSlide: ({ children }: { children: React.ReactNode }) => (
-      <div data-testid="quotes-slide">{children}</div>
-    ),
-  };
-});
-
 describe("QuotesCarousel", () => {
-  beforeEach(() => {
-    swiperActions.slidePrev.mockClear();
-    swiperActions.slideNext.mockClear();
-  });
-
-  it("renders quotes and wires the custom navigation buttons", async () => {
+  it("changes the visible quote with the navigation buttons", async () => {
     const user = userEvent.setup();
 
     render(
@@ -64,11 +34,19 @@ describe("QuotesCarousel", () => {
     ).toBeInTheDocument();
     expect(screen.getByText("A great project.")).toBeInTheDocument();
     expect(screen.getByText("Jane Doe")).toBeInTheDocument();
+    expect(screen.queryByText("Built together.")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Quote 1 of 2")).toBeInTheDocument();
 
-    await user.click(screen.getByRole("button", { name: "Previous quote" }));
     await user.click(screen.getByRole("button", { name: "Next quote" }));
 
-    expect(swiperActions.slidePrev).toHaveBeenCalled();
-    expect(swiperActions.slideNext).toHaveBeenCalled();
+    expect(screen.getByText("Built together.")).toBeInTheDocument();
+    expect(screen.getByText("Alex Doe")).toBeInTheDocument();
+    expect(screen.queryByText("A great project.")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Quote 2 of 2")).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Previous quote" }));
+
+    expect(screen.getByText("A great project.")).toBeInTheDocument();
+    expect(screen.getByLabelText("Quote 1 of 2")).toBeInTheDocument();
   });
 });

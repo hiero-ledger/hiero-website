@@ -1453,10 +1453,10 @@
   /* ============================================
      Ecosystem voices — components/QuotesCarousel
 
-     Testimonials are reading material, so the carousel is quiet and fully
-     reader-controlled: no autoplay, no coloured billboard and no centred wall
-     of text. The organisation mark identifies the voice, while the quote gets
-     the wide editorial column it needs.
+     Testimonials remain reader-controlled, with the Hiero red giving every
+     voice one shared stage. The supplied logos are white, so the brand field
+     gives each mark its intended contrast while the quote keeps a wide,
+     left-aligned editorial measure.
      ============================================ */
 
   .quotes-carousel {
@@ -1507,63 +1507,126 @@
   }
 
   .quotes-carousel-stage {
-    @apply border-y border-charcoal/18;
+    @apply relative;
   }
 
-  /* These selectors deliberately outrank the site's old global Swiper rules,
-     which centre slide text and cap every carousel at 932px. This carousel is
-     the full editorial measure of its section. */
-  .quotes-carousel .swiper {
-    @apply h-auto w-full max-w-none;
-  }
-
-  .quotes-carousel .swiper-slide {
-    @apply h-auto text-left font-serif;
+  .quotes-carousel-viewport {
+    @apply relative;
   }
 
   .quotes-carousel-slide {
-    @apply grid gap-[clamp(2.5rem,6vw,6rem)] py-[clamp(2.5rem,6vw,5.5rem)];
-    @apply lg:grid-cols-[minmax(9rem,14rem)_minmax(0,1fr)];
+    @apply relative isolate grid overflow-hidden rounded-[clamp(1.5rem,3vw,2.25rem)] bg-red text-white;
+    @apply shadow-[0_28px_70px_rgba(30,30,30,0.16)];
+    @apply lg:grid-cols-[minmax(13rem,0.32fr)_minmax(0,0.68fr)];
+
+    background-image: radial-gradient(
+      38rem 30rem at 92% 8%,
+      rgb(255 255 255 / 13%),
+      transparent 70%
+    );
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .quotes-carousel-slide[data-direction="next"] {
+      animation: quote-enter-next 520ms cubic-bezier(0.22, 0.85, 0.28, 1) both;
+    }
+
+    .quotes-carousel-slide[data-direction="previous"] {
+      animation: quote-enter-previous 520ms cubic-bezier(0.22, 0.85, 0.28, 1)
+        both;
+    }
+  }
+
+  @keyframes quote-enter-next {
+    from {
+      opacity: 0;
+      translate: 1.75rem 0;
+    }
+  }
+
+  @keyframes quote-enter-previous {
+    from {
+      opacity: 0;
+      translate: -1.75rem 0;
+    }
+  }
+
+  /* A partial ring gives the coloured field depth without adding another
+     image or competing with the organisation logo. */
+  .quotes-carousel-slide::after {
+    @apply pointer-events-none absolute -top-35 -right-30 -z-10 h-80 w-80 rounded-full border border-white/12;
+
+    content: "";
   }
 
   .quotes-carousel-logo-wrap {
-    @apply flex min-h-12 items-start;
+    @apply flex min-h-44 flex-col justify-between gap-10 border-b border-white/18 bg-black/10;
+    @apply p-[clamp(1.75rem,4vw,3.5rem)];
+    @apply lg:min-h-[34rem] lg:border-r lg:border-b-0;
+  }
+
+  .quotes-carousel-logo-label {
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.14em] text-white/78 uppercase;
   }
 
   .quotes-carousel-logo {
-    @apply h-auto max-h-13 w-auto max-w-[11rem] object-contain object-left;
+    @apply h-auto max-h-15 w-auto max-w-[12rem] object-contain object-left;
   }
 
   .quotes-carousel-testimonial {
-    @apply m-0 max-w-[62rem];
+    @apply relative z-10 m-0 max-w-[62rem] p-[clamp(1.75rem,5vw,4.75rem)];
   }
 
   .quotes-carousel-mark {
-    @apply h-auto w-[clamp(2.5rem,4vw,3.25rem)];
+    @apply h-auto w-[clamp(2.5rem,4vw,3.25rem)] brightness-0 invert opacity-75;
   }
 
   .quotes-carousel-quote {
     @apply mt-[clamp(1.5rem,3vw,2.25rem)];
-    @apply text-[clamp(1.35rem,2.4vw,2.25rem)] leading-[1.38] tracking-[-0.035em] text-pretty text-charcoal;
+    @apply text-[clamp(1.0625rem,1.55vw,1.5rem)] leading-[1.55] tracking-[-0.022em] text-pretty text-white;
   }
 
   .quotes-carousel-author {
     @apply mt-[clamp(1.75rem,3vw,2.5rem)] max-w-[48rem];
-    @apply text-base leading-[1.55] font-medium tracking-[-0.01em] text-charcoal/72;
+    @apply text-[0.9375rem] leading-[1.55] font-medium tracking-[-0.008em] text-white/88;
   }
 
   .quotes-carousel-quote a,
   .quotes-carousel-author a {
-    @apply text-red underline decoration-red/35 underline-offset-4 transition-colors hover:text-red-dark;
+    @apply underline decoration-white/55 underline-offset-4 transition-colors;
+
+    color: var(--color-white) !important;
+  }
+
+  .quotes-carousel-quote a:hover,
+  .quotes-carousel-author a:hover {
+    color: rgb(255 255 255 / 78%) !important;
   }
 
   .quotes-carousel-controls {
-    @apply flex flex-col gap-4 border-t border-charcoal/18 py-5;
+    @apply mt-6 flex flex-col gap-5;
     @apply sm:flex-row sm:items-center sm:justify-between;
   }
 
-  .quotes-carousel-controls > p {
+  .quotes-carousel-status {
+    @apply flex flex-col gap-3;
+  }
+
+  .quotes-carousel-status > p {
     @apply m-0 font-ibm text-[0.6875rem] leading-none tracking-[0.12em] text-charcoal/52 uppercase;
+  }
+
+  .quotes-carousel-progress {
+    @apply flex items-center gap-1.5;
+  }
+
+  .quotes-carousel-progress span {
+    @apply h-1 w-4 rounded-full bg-charcoal/16;
+    @apply transition-[background-color,width] duration-300 ease-out motion-reduce:transition-none;
+  }
+
+  .quotes-carousel-progress span[data-active] {
+    @apply w-9 bg-red;
   }
 
   .quotes-carousel-buttons {
@@ -1577,6 +1640,10 @@
     @apply hover:border-red hover:bg-red hover:text-white;
     @apply focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-red;
     @apply motion-reduce:transition-none;
+  }
+
+  .quotes-carousel-control:last-child {
+    @apply border-red bg-red text-white hover:border-red-dark hover:bg-red-dark;
   }
 }
 

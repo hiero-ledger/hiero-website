@@ -149,8 +149,10 @@ const BASE_QUERY =
   "is%3Aopen%20is%3Aissue%20archived%3Afalse%20no%3Aassignee%20(repo%3Ahiero-ledger%2Fhiero-sdk-python%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-cpp%20OR%20repo%3Ahiero-ledger%2Fhiero-website%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-swift%20OR%20repo%3Ahiero-ledger%2Fhiero-sdk-js)";
 
 export const issueJumpData = {
+  eyebrow: "Contribute",
   heading: "Jump to Open Issues",
   text: "Find issues that match your skill level and start contributing to the Hiero ecosystem today.",
+  filters: ["Open", "Unassigned", "Active repositories"],
   difficulties: [
     {
       label: "Good First Issue",

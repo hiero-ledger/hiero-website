@@ -643,6 +643,146 @@
       translate: 0 0;
     }
   }
+
+  /* ============================================
+     Open issues — components/IssueJumpSection
+
+     Contribution is the page's first direct invitation, so this section
+     shifts from the sand specification above to a clean working surface. The
+     four searches are an ordered wayfinding index rather than four
+     interchangeable cards: each row names the level, explains it and ends
+     with the same clear exit to GitHub.
+     ============================================ */
+
+  .issue-jump {
+    @apply relative scroll-mt-22.5 overflow-hidden bg-sand text-charcoal;
+  }
+
+  .issue-jump-inner {
+    @apply py-[clamp(4.5rem,9vw,8rem)];
+  }
+
+  /* The headline occupies the open side of the frame and the useful context
+     sits beside its baseline. Until that relationship has room, both remain a
+     simple reading column. */
+  .issue-jump-header {
+    @apply mb-[clamp(3.5rem,7vw,6.5rem)] grid gap-8;
+    @apply lg:grid-cols-[minmax(0,1.25fr)_minmax(18rem,0.75fr)] lg:items-end lg:gap-[clamp(4rem,8vw,9rem)];
+  }
+
+  .issue-jump-eyebrow {
+    @apply m-0 mb-[clamp(1rem,2vw,1.5rem)] flex items-start gap-3.5;
+    @apply font-ibm text-xs leading-normal tracking-[0.16em] text-red uppercase;
+  }
+
+  .issue-jump-eyebrow::before {
+    @apply mt-[0.75em] h-px w-[clamp(1.5rem,4vw,3rem)] flex-none bg-current;
+
+    content: "";
+  }
+
+  .issue-jump-heading {
+    @apply m-0 max-w-[13ch] text-balance;
+    @apply text-[clamp(2.75rem,6.25vw,6.5rem)] leading-[0.94] font-normal tracking-[-0.06em];
+  }
+
+  .issue-jump-intro {
+    @apply flex flex-col gap-6 lg:pb-1;
+  }
+
+  .issue-jump-copy {
+    @apply m-0 max-w-[34rem] text-[clamp(1.0625rem,1.35vw,1.25rem)];
+    @apply leading-[1.55] tracking-[-0.014em] text-charcoal/72;
+  }
+
+  /* These are not decorative tags: they expose the three constraints shared
+     by all four GitHub queries, which saves a contributor from discovering
+     after the jump that the result set is already narrowed. */
+  .issue-jump-filters {
+    @apply m-0 flex list-none flex-wrap gap-2 p-0;
+  }
+
+  .issue-jump-filter {
+    @apply rounded-full border border-charcoal/18 px-3 py-1.5;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.1em] text-charcoal/68 uppercase;
+  }
+
+  .issue-jump-list-heading {
+    @apply flex items-center justify-between border-b border-charcoal/18 pb-3;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.14em] text-charcoal/48 uppercase;
+  }
+
+  .issue-jump-list-heading span:last-child {
+    @apply hidden sm:block;
+  }
+
+  .issue-jump-list {
+    @apply m-0 list-none p-0;
+  }
+
+  .issue-jump-item {
+    @apply border-b border-charcoal/18;
+  }
+
+  /* The coloured inset is painted by the link itself, so the full hit target
+     responds on hover and keyboard focus. At desktop the row reads as a table;
+     on mobile the label and explanation stack while the number and exit keep
+     their edges. */
+  .issue-jump-link {
+    @apply grid min-w-0 grid-cols-[2.25rem_minmax(0,1fr)_auto] items-start;
+    @apply gap-x-4 gap-y-3 py-6 text-charcoal no-underline;
+    @apply transition-[background-color,padding] duration-300 ease-out;
+    @apply hover:bg-red hover:px-4 hover:text-white;
+    @apply focus-visible:bg-red focus-visible:px-4 focus-visible:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-dark;
+    @apply motion-reduce:transition-none;
+    @apply md:grid-cols-[3rem_minmax(10rem,0.75fr)_minmax(15rem,1.25fr)_auto] md:items-center md:gap-6 md:py-7;
+  }
+
+  .issue-jump-number {
+    @apply pt-1 font-ibm text-xs leading-none tracking-[0.12em] text-charcoal/45;
+    @apply transition-colors duration-300;
+    @apply md:pt-0;
+  }
+
+  .issue-jump-link:hover .issue-jump-number,
+  .issue-jump-link:focus-visible .issue-jump-number {
+    @apply text-white/75;
+  }
+
+  .issue-jump-label {
+    @apply m-0 text-[clamp(1.5rem,2.5vw,2.25rem)] leading-[1.05] font-medium tracking-[-0.04em];
+  }
+
+  .issue-jump-description {
+    @apply col-start-2 m-0 max-w-[36rem] text-base leading-[1.55] tracking-[-0.008em] text-charcoal/65;
+    @apply transition-colors duration-300;
+    @apply md:col-start-3;
+  }
+
+  .issue-jump-link:hover .issue-jump-description,
+  .issue-jump-link:focus-visible .issue-jump-description {
+    @apply text-white/86;
+  }
+
+  .issue-jump-action {
+    @apply col-start-3 row-span-2 row-start-1 flex items-center gap-3 self-center;
+    @apply md:col-start-4 md:row-span-1;
+  }
+
+  .issue-jump-action-label {
+    @apply hidden whitespace-nowrap font-ibm text-xs leading-none tracking-[0.1em] uppercase;
+    @apply lg:inline;
+  }
+
+  .issue-jump-action-glyph {
+    @apply grid h-10 w-10 place-items-center rounded-full border border-charcoal/25;
+    @apply text-lg leading-none transition-[background-color,border-color,color,translate] duration-300 ease-out;
+  }
+
+  .issue-jump-link:hover .issue-jump-action-glyph,
+  .issue-jump-link:focus-visible .issue-jump-action-glyph {
+    @apply translate-x-0.5 -translate-y-0.5 border-white bg-white text-red;
+  }
 }
 
 /* ============================================

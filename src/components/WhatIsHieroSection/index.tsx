@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import RichText from "@/components/RichText";
+import GossipField from "@/components/GossipField";
 
 interface WhatIsHieroPoint {
   /** Markdown; the property itself is the emphasised half of the phrase. */
@@ -133,6 +134,8 @@ export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
       id="what-is-hiero"
       aria-labelledby={HEADING_ID}
       className="hiero-principles">
+      <GossipField placement="principles" />
+
       <div className="container hiero-principles-inner">
         <div ref={thesisRef} className="hiero-principles-thesis">
           <p className="hiero-principles-eyebrow">{data.eyebrow}</p>

@@ -61,6 +61,37 @@
   --text-5xl: 7.5rem;
   --text-5xl--line-height: 6.875rem;
   --text-5xl--letter-spacing: -0.625rem;
+
+  /* Vertical rhythm
+     One scale for the whole page rather than the same maxed-out clamp copied
+     into every section. Before this, each band ran a 4.5rem-8rem clamp and
+     every header a 3.5rem-6.5rem one, so a heading sat up to 104px from the
+     content it introduced and two neighbouring bands put 256px of empty ground
+     between them. Flat maximums read as dead space, not as air.
+
+     The three steps are deliberately far apart, so the gap between a band and
+     its neighbour is unmistakably larger than the gap inside a band, and the
+     reader can tell where one section ends without needing the divider to say
+     so. `vw` growth is halved against the old values: a clamp that tracks the
+     viewport that steeply turns a wide desktop into a scroll exercise. */
+  /* Band lights
+     Channel triplets, not `--color-*`, so each composes at several alphas
+     without generating a dozen near-identical utilities.
+
+     `--band-light` is the brand red opened up toward white until it carries the
+     hue but none of the darkness — measured at 5.1:1 for red text at the
+     strengths used, against 4.94:1 on bare sand. `--band-cool` is the site's
+     own `gray-light`, used as a counter-light from the opposite corner so a
+     band sweeps warm to cool across its width rather than glowing in one spot.
+     See the band backgrounds below for why lighting is the only safe way to
+     get brand colour into these sections. */
+  --band-light: 255 228 238;
+  --band-cool: 239 239 238;
+
+
+  --space-band: clamp(3.5rem, 5vw, 5.5rem);
+  --space-band-header: clamp(2rem, 3vw, 3rem);
+  --space-band-tight: clamp(1.25rem, 2vw, 2rem);
 }
 
 @layer components {
@@ -459,6 +490,268 @@
   }
 
   /* ============================================
+     Band backgrounds — `--band-bloom` / `--band-counter`
+
+     Five sand sections in a row is a lot of one flat colour, so each one is
+     lit: a wide, soft brand-pink light from one corner and a cool counter-light
+     from the opposite one, so a band sweeps warm to cool across its width.
+
+     Every light is kept clear of its band's top and bottom edges, and that is a
+     hard constraint rather than a preference. The dividers between sections are
+     flat sand and cannot be lit to match, because a divider belongs to neither
+     of the bands it separates — so any light still burning at a band's
+     horizontal edge puts a visible step across the seam. Two earlier versions
+     did exactly that: first a lift along the top edge, then corner lights
+     centred at 82% height. Both stepped. Hence the vertical placements below
+     sit mid-band and fade out well inside the edge, and the `70%` stop is part
+     of that budget. Move one and check the seams.
+
+     Horizontally there is no such limit — the sections clip left and right, and
+     nothing abuts them there.
+
+     Light, never tint. That distinction is the whole rule here, and it is a
+     contrast decision before it is an aesthetic one. Brand red (#b81a56) holds
+     4.94:1 on bare sand; stain the sand with red and it falls through the 4.5
+     floor (4.50:1 at 6% red, 4.37:1 at 8%). Lighten the sand with the same hue
+     opened up toward white and every ratio in the section improves instead —
+     red lands between 5.3:1 and 5.7:1 across the strengths used below, and
+     `charcoal/72` body copy goes from 5.83:1 to about 6.4:1. So nothing in
+     this file may darken a band; the only move available is to lift it.
+
+     Each light is placed at the corner its section's gossip field is densest —
+     the same corner that field's mask is cut from — so the light falls on the
+     fabric rather than across a column of type.
+
+     Measured on the built page across all 37 red text runs on the home page,
+     sampling the composited background under each glyph: the worst case is
+     4.90:1 against a 4.5 floor, with most runs at 4.94:1 or better and the
+     lifted corners reaching 5.2:1. If you strengthen a light, re-measure — a
+     pink light buys less contrast per unit of lift than the cool one does,
+     because it sits nearer brand red in hue.
+     ============================================ */
+
+  /* ============================================
+     Gossip ground — components/GossipField
+
+     The network drawing that sits under the sand sections. Everything here is
+     paint and masking; the geometry is in the component.
+
+     Full bleed: each field covers its whole section and is cropped by it, so
+     the sections read as windows onto one continuous network. What keeps that
+     legible is the mask, not the size — every placement below thins the field
+     across the side its own section fills with type, and the ink underneath is
+     set low enough that removing the whole layer would change the page's
+     texture and not its content.
+     ============================================ */
+
+  /* Full width always; height capped rather than stretched.
+     `slice` scales the drawing to cover its box, so letting the box be the
+     full height of a section made the scale a function of that section's
+     content: the community-calls band is 3484px tall on a phone, which blew
+     one 1200x760 drawing up 4.6x and turned its accent nodes into 52px discs.
+     The cap makes the height the dominant term at every viewport, so every
+     field on the page resolves to the same ~1.3x and the network looks like
+     one network. Which edge the box is pinned to is set per placement below,
+     to the same side that placement's mask is cut from. */
+  .gossip-field {
+    @apply pointer-events-none absolute inset-x-0 -z-10 h-full w-full;
+
+    max-height: 62rem;
+  }
+
+  /* The drawing itself, oversized inside the masked box above so the drift
+     below can never pull a hard edge into the aperture. */
+  .gossip-field-web {
+    @apply absolute -top-[6%] -left-[6%] h-[112%] w-[112%];
+  }
+
+  /* Charcoal on sand, not white on red: this is the same material as the
+     hero's field, but a light ground needs the ink an order of magnitude
+     quieter than a dark one to sit at the same visual weight. */
+  .gossip-field-links {
+    @apply fill-none stroke-charcoal/20;
+
+    stroke-width: 0.7;
+  }
+
+  .gossip-field-events {
+    @apply fill-charcoal/26;
+  }
+
+  /* The one part of the layer meant to be seen. Brand red at a weight that
+     reads as a lit node rather than as a bullet — the field needs some
+     unevenness or the eye files the whole thing as noise. */
+  .gossip-field-accents {
+    @apply fill-red/75;
+  }
+
+  /* Each mask below is cut against its own section's text. `principles` and
+     `quotes` set their type down the right, so the field keeps the left;
+     `issues`, `calls` and `repos` run full-width rows and grids, so those
+     thin from the outer edges inward and leave the middle almost bare. */
+  .gossip-field--principles {
+    @apply bottom-0;
+
+    mask-image: radial-gradient(
+      120% 100% at 4% 78%,
+      black 4%,
+      rgb(0 0 0 / 34%) 40%,
+      transparent 72%
+    );
+  }
+
+  .gossip-field--issues {
+    @apply bottom-0;
+
+    mask-image: radial-gradient(
+      100% 130% at 96% 96%,
+      black 2%,
+      rgb(0 0 0 / 26%) 38%,
+      transparent 68%
+    );
+  }
+
+  .gossip-field--calls {
+    @apply bottom-0;
+
+    mask-image: radial-gradient(
+      110% 90% at 2% 96%,
+      black 4%,
+      rgb(0 0 0 / 30%) 40%,
+      transparent 70%
+    );
+  }
+
+  .gossip-field--repos {
+    @apply top-0;
+
+    mask-image: radial-gradient(
+      110% 90% at 98% 4%,
+      black 4%,
+      rgb(0 0 0 / 30%) 40%,
+      transparent 70%
+    );
+  }
+
+  /* Above `lg` the carousel sets its organisation mark in a column of its own
+     and the quote beside it, which leaves a tall band down the left — the one
+     place on the page where the field has room to be almost fully itself. */
+  .gossip-field--quotes {
+    top: 50%;
+    translate: 0 -50%;
+
+    mask-image: radial-gradient(
+      86% 116% at 8% 50%,
+      black 8%,
+      rgb(0 0 0 / 34%) 42%,
+      transparent 74%
+    );
+  }
+
+  /* Motion.
+
+     Two gestures, and the difference between them is the point: the network
+     drifts, and a few of its nodes pulse. Nothing else moves. The light on the
+     band stays exactly where it is, which is what makes the drift read as a
+     network travelling past a fixed source rather than as a texture being
+     panned around.
+
+     Everything animated here is `translate`, `scale` or `opacity`, so each
+     field is one composited layer and the whole page costs no layout work.
+     Durations are long enough that no single frame is what you notice — the
+     effect is meant to register as the page being alive rather than as
+     something playing. Delays are negative so every field is already
+     mid-cycle on first paint: five fields starting together at t=0 would
+     visibly march in step for the first minute.
+
+     Scoped to screen and no-preference, on the same convention as the
+     principles reveal further down — print gets a still drawing, and a reader
+     who turns reduced motion on mid-session gets one without a reload. */
+  @media screen and (prefers-reduced-motion: no-preference) {
+    .gossip-field-web {
+      animation: gossip-drift 54s ease-in-out infinite alternate;
+    }
+
+    /* Per band: different periods, and half of them running the other way, so
+       no two neighbours share a phase. The numbers are deliberately not
+       multiples of each other. */
+    .gossip-field--principles .gossip-field-web {
+      animation-duration: 61s;
+      animation-delay: -12s;
+    }
+
+    .gossip-field--issues .gossip-field-web {
+      animation-duration: 47s;
+      animation-delay: -31s;
+      animation-direction: alternate-reverse;
+    }
+
+    .gossip-field--calls .gossip-field-web {
+      animation-duration: 73s;
+      animation-delay: -8s;
+    }
+
+    .gossip-field--repos .gossip-field-web {
+      animation-duration: 58s;
+      animation-delay: -24s;
+      animation-direction: alternate-reverse;
+    }
+
+    .gossip-field--quotes .gossip-field-web {
+      animation-duration: 67s;
+      animation-delay: -41s;
+    }
+
+    /* `fill-box` so a circle scales about its own centre rather than the
+       viewBox origin, which is what would happen by default and would fling
+       the accents across the drawing. */
+    .gossip-field-accents circle {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: gossip-accent-pulse 7s ease-in-out infinite;
+    }
+
+    .gossip-field-accents circle:nth-child(2) {
+      animation-delay: -1.75s;
+    }
+
+    .gossip-field-accents circle:nth-child(3) {
+      animation-delay: -3.5s;
+    }
+
+    .gossip-field-accents circle:nth-child(4) {
+      animation-delay: -5.25s;
+    }
+  }
+
+  /* Small amplitudes on purpose. The drawing is a ground, and a ground that
+     travels far enough to be tracked stops being a ground. */
+  @keyframes gossip-drift {
+    from {
+      translate: -1.7% 1.2%;
+      scale: 1;
+    }
+
+    to {
+      translate: 1.9% -1.4%;
+      scale: 1.05;
+    }
+  }
+
+  @keyframes gossip-accent-pulse {
+    0%,
+    100% {
+      opacity: 0.68;
+      scale: 1;
+    }
+
+    50% {
+      opacity: 1;
+      scale: 1.34;
+    }
+  }
+
+  /* ============================================
      Hiero principles — components/WhatIsHieroSection
 
      The page's explanatory beat, so it is set as a specification rather than a
@@ -471,19 +764,39 @@
      down.
      ============================================ */
 
-  /* Flat sand, no wash: a corner tint would pull brand red below 4.5:1 against
-     it on a narrow viewport, and on plain sand the same red holds 4.9:1 — the
-     ratio the site's links already run at everywhere else. The hero carries
-     the colour on this page. The scroll margin clears the fixed header
+  /* Lit sand, not washed sand — the band-backgrounds note below carries the
+     whole argument.
+     The rule this replaces read "flat sand, no wash", and it was right about
+     the thing it measured: a red *tint* over sand drops brand red to 4.50:1 at
+     6% and 4.37:1 at 8%, under the 4.5 floor, against 4.94:1 on bare sand. A
+     light does the opposite of a tint — it raises every ratio in the section
+     rather than lowering them. The scroll margin clears the fixed header
      (`h-22.5` in layout.tsx) for /#what-is-hiero deep links. */
+  /* `overflow-clip`, never `overflow-hidden`: the thesis below is `xl:sticky`,
+     and `hidden` would make this box a scroll container for it — the box never
+     scrolls, so the thesis would silently stop sticking. `clip` trims the
+     gossip field to the section without creating one. */
   .hiero-principles {
-    @apply relative scroll-mt-22.5 bg-sand;
+    @apply relative isolate scroll-mt-22.5 overflow-clip bg-sand;
+
+    --band-bloom: radial-gradient(
+      66% 44% at 2% 64%,
+      rgb(var(--band-light) / 80%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      58% 38% at 98% 30%,
+      rgb(var(--band-cool) / 72%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
   }
 
   /* The thesis is short and the list is long, so from two columns up the layout
      turns into a grid and the thesis sticks. */
   .hiero-principles-inner {
-    @apply flex flex-col gap-[clamp(3rem,6vw,4.5rem)] py-[clamp(4.5rem,9vw,8rem)];
+    @apply flex flex-col gap-[clamp(3rem,6vw,4.5rem)] py-[var(--space-band)];
     @apply xl:grid xl:grid-cols-[minmax(0,23rem)_minmax(0,1fr)] xl:gap-[clamp(4rem,7vw,8rem)];
   }
 
@@ -662,18 +975,31 @@
      ============================================ */
 
   .issue-jump {
-    @apply relative scroll-mt-22.5 overflow-hidden bg-sand text-charcoal;
+    @apply relative isolate scroll-mt-22.5 overflow-hidden bg-sand text-charcoal;
+
+    --band-bloom: radial-gradient(
+      70% 46% at 98% 66%,
+      rgb(var(--band-light) / 76%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      56% 34% at 2% 28%,
+      rgb(var(--band-cool) / 64%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
   }
 
   .issue-jump-inner {
-    @apply py-[clamp(4.5rem,9vw,8rem)];
+    @apply py-[var(--space-band)];
   }
 
   /* The headline occupies the open side of the frame and the useful context
      sits beside its baseline. Until that relationship has room, both remain a
      simple reading column. */
   .issue-jump-header {
-    @apply mb-[clamp(3.5rem,7vw,6.5rem)] grid gap-8;
+    @apply mb-[var(--space-band-header)] grid gap-8;
     @apply lg:grid-cols-[minmax(0,1.25fr)_minmax(18rem,0.75fr)] lg:items-end lg:gap-[clamp(4rem,8vw,9rem)];
   }
 
@@ -801,15 +1127,28 @@
      ============================================ */
 
   .community-calls {
-    @apply scroll-mt-22.5 bg-sand;
+    @apply relative isolate scroll-mt-22.5 overflow-hidden bg-sand;
+
+    --band-bloom: radial-gradient(
+      66% 40% at 2% 70%,
+      rgb(var(--band-light) / 80%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      58% 34% at 98% 30%,
+      rgb(var(--band-cool) / 72%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
   }
 
   .community-calls-inner {
-    @apply py-[clamp(4.5rem,9vw,8rem)];
+    @apply py-[var(--space-band)];
   }
 
   .community-calls-header {
-    @apply mb-[clamp(3.5rem,7vw,6.5rem)] grid gap-8;
+    @apply mb-[var(--space-band-header)] grid gap-8;
     @apply lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)] lg:items-end lg:gap-[clamp(4rem,8vw,9rem)];
   }
 
@@ -963,15 +1302,28 @@
      ============================================ */
 
   .repositories {
-    @apply scroll-mt-22.5 bg-sand;
+    @apply relative isolate scroll-mt-22.5 overflow-hidden bg-sand;
+
+    --band-bloom: radial-gradient(
+      66% 40% at 98% 32%,
+      rgb(var(--band-light) / 78%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      58% 36% at 2% 70%,
+      rgb(var(--band-cool) / 70%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
   }
 
   .repositories-inner {
-    @apply py-[clamp(4.5rem,9vw,8rem)];
+    @apply py-[var(--space-band)];
   }
 
   .repositories-header {
-    @apply mb-[clamp(3.5rem,7vw,6.5rem)] grid gap-8;
+    @apply mb-[var(--space-band-header)] grid gap-8;
     @apply lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)] lg:items-end lg:gap-[clamp(4rem,8vw,9rem)];
   }
 
@@ -1108,15 +1460,28 @@
      ============================================ */
 
   .quotes-carousel {
-    @apply scroll-mt-22.5 bg-sand;
+    @apply relative isolate scroll-mt-22.5 overflow-hidden bg-sand;
+
+    --band-bloom: radial-gradient(
+      54% 56% at 4% 50%,
+      rgb(var(--band-light) / 82%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      50% 50% at 96% 50%,
+      rgb(var(--band-cool) / 68%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
   }
 
   .quotes-carousel-inner {
-    @apply py-[clamp(4.5rem,9vw,8rem)];
+    @apply py-[var(--space-band)];
   }
 
   .quotes-carousel-header {
-    @apply mb-[clamp(3.5rem,7vw,6.5rem)] grid gap-8;
+    @apply mb-[var(--space-band-header)] grid gap-8;
     @apply lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)] lg:items-end lg:gap-[clamp(4rem,8vw,9rem)];
   }
 
@@ -1271,18 +1636,26 @@
     @apply px-12;
   }
 
+  /* 1600 rather than 1820: the section headers cap their copy column at 36rem,
+     so width past this point stops becoming measure and starts becoming gutter
+     *inside* the layout — on a 1920 screen the old ceiling left a 1540px content
+     box with ~200px of nothing between an issue row's description and its
+     action. The 8.75rem gutter is the site's frame and is unchanged. */
   @media (min-width: 1024px) {
-    max-width: 1820px;
+    max-width: 1600px;
     padding-left: 8.75rem;
     padding-right: 8.75rem;
   }
 }
 
+/* Edge-to-edge below `lg`, then identical to `container` above it — the two
+   have to resolve to the same box or a full-bleed block and the text column
+   beside it stop sharing a left edge. */
 @utility container-mobile-full {
   @apply p-0;
 
   @media (min-width: 1024px) {
-    max-width: 1820px;
+    max-width: 1600px;
     padding-left: 8.75rem;
     padding-right: 8.75rem;
   }
@@ -1503,6 +1876,16 @@
 
   /* ============================================
      Anchors & section offsets
+
+     A pre-`scroll-margin` way of clearing the fixed header: pull the box up by
+     the header's height and pad the same amount back on, so a jump link lands
+     below the bar. It costs a real 6.813rem of padding inside the box, which is
+     why nothing that already sets `scroll-mt-*` may also carry it — the home
+     sections used to do both, and paid for the offset twice: 109px of empty
+     ground under every section's top edge, and a negative margin that pulled
+     each one over the divider above it. `scroll-mt-22.5` is the replacement;
+     this class remains only for components/BlogPostList, which has no other
+     offset of its own.
      ============================================ */
   .anchor {
     margin-top: -6.813rem;

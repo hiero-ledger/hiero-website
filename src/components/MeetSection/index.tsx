@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import RichText from "@/components/RichText";
+import GossipField from "@/components/GossipField";
 
 interface MeetCall {
   name: string;
@@ -36,7 +37,9 @@ export default function MeetSection({ data }: MeetSectionProps) {
     <section
       id="meet"
       aria-labelledby="community-calls-heading"
-      className="community-calls anchor">
+      className="community-calls">
+      <GossipField placement="calls" />
+
       <div className="container community-calls-inner">
         <header className="community-calls-header">
           <div>

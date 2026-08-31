@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type { SwiperRef } from "swiper/react";
 import "swiper/css";
 import RichText from "@/components/RichText";
+import GossipField from "@/components/GossipField";
 
 interface QuoteItem {
   quote: string;
@@ -31,7 +32,9 @@ export default function QuotesCarousel({ data }: QuotesCarouselProps) {
     <section
       id="quotes"
       aria-labelledby="quotes-heading"
-      className="quotes-carousel anchor">
+      className="quotes-carousel">
+      <GossipField placement="quotes" />
+
       <div className="container quotes-carousel-inner">
         <header className="quotes-carousel-header">
           <div>

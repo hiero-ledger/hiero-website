@@ -1,3 +1,5 @@
+import GossipField from "@/components/GossipField";
+
 interface DifficultyLink {
   label: string;
   description: string;
@@ -21,7 +23,9 @@ export default function IssueJumpSection({ data }: IssueJumpSectionProps) {
     <section
       id="contribute"
       aria-labelledby="issue-jump-heading"
-      className="issue-jump anchor">
+      className="issue-jump">
+      <GossipField placement="issues" />
+
       <div className="container issue-jump-inner">
         <header className="issue-jump-header">
           <div>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import repoStats from "@/data/repository_stats.json";
+import GossipField from "@/components/GossipField";
 
 interface RepoItem {
   name: string;
@@ -50,7 +51,9 @@ export default function ReposGrid({ data }: ReposGridProps) {
     <section
       id="repos"
       aria-labelledby="repositories-heading"
-      className="repositories anchor">
+      className="repositories">
+      <GossipField placement="repos" />
+
       <div className="container repositories-inner">
         <header className="repositories-header">
           <div>

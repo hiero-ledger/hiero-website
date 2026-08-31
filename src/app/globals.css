@@ -120,6 +120,15 @@
        against, and nothing outside this section should reach for them. */
     --hero-deep: #3a0a1e;
     --hero-shadow: #23060f;
+    --hero-art-x: 0px;
+    --hero-art-y: 0px;
+    --hero-art-rotate-x: 0deg;
+    --hero-art-rotate-y: 0deg;
+    --hero-traces-x: 0px;
+    --hero-traces-y: 0px;
+    --hero-halo-x: 0px;
+    --hero-halo-y: 0px;
+    --hero-scroll-progress: 0;
 
     @apply relative isolate overflow-hidden text-white;
     @apply min-h-[32rem] xl:min-h-[clamp(34rem,calc(100svh-5.625rem),50rem)];
@@ -292,6 +301,12 @@
   .hero-traces {
     @apply pointer-events-none absolute inset-0 -z-20 h-full w-full;
 
+    transform-origin: center;
+    translate: var(--hero-traces-x) var(--hero-traces-y);
+    scale: 1.035;
+    transition: translate 260ms cubic-bezier(0.22, 0.85, 0.28, 1);
+    will-change: translate;
+
     mask-image: radial-gradient(
       116% 94% at 78% 16%,
       black 6%,
@@ -304,6 +319,14 @@
     @apply fill-none stroke-white/14;
 
     stroke-width: 0.6;
+  }
+
+  .hero-traces-signals {
+    @apply fill-none stroke-white/44;
+
+    stroke-width: 1.1;
+    stroke-linecap: round;
+    stroke-dasharray: 1 48;
   }
 
   .hero-traces-events {
@@ -336,15 +359,28 @@
   /* A soft pool of brand light makes the white mark feel lit by the scene,
      rather than laid on top of it. */
   .hero-mark-scene::before {
-    @apply absolute top-1/2 right-[-10%] h-[125%] w-[88%] -translate-y-1/2;
+    @apply absolute top-1/2 right-[-10%] h-[125%] w-[88%];
 
     content: "";
+    translate: var(--hero-halo-x) calc(-50% + var(--hero-halo-y));
+    transition: translate 420ms cubic-bezier(0.22, 0.85, 0.28, 1);
+    will-change: translate;
     background: radial-gradient(
       ellipse,
       rgb(255 158 199 / 50%) 0%,
       rgb(217 45 106 / 24%) 40%,
       transparent 72%
     );
+  }
+
+  .hero-mark-reactive {
+    @apply absolute inset-0 transform-3d;
+
+    transform: translate3d(var(--hero-art-x), var(--hero-art-y), 0)
+      rotateX(var(--hero-art-rotate-x)) rotateY(var(--hero-art-rotate-y));
+    transform-origin: 70% 50%;
+    transition: transform 280ms cubic-bezier(0.22, 0.85, 0.28, 1);
+    will-change: transform;
   }
 
   /* The angled ledger plane gives the mark a setting and depth. Its grid is
@@ -478,6 +514,26 @@
   }
 
   @media (prefers-reduced-motion: no-preference) {
+    .hero-traces-signals {
+      animation: hero-trace-flow 10s linear infinite;
+    }
+
+    .hero-traces-events circle {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: hero-trace-event 5.2s ease-in-out infinite alternate;
+    }
+
+    .hero-traces-events circle:nth-child(3n) {
+      animation-delay: -1.7s;
+      animation-duration: 6.4s;
+    }
+
+    .hero-traces-events circle:nth-child(4n) {
+      animation-delay: -3.1s;
+      animation-duration: 4.6s;
+    }
+
     .hero-mark-emblem {
       animation: hero-mark-float 8s ease-in-out infinite alternate;
     }
@@ -496,6 +552,24 @@
 
     .hero-mark-rail--bottom::after {
       animation-delay: -3.6s;
+    }
+  }
+
+  @keyframes hero-trace-flow {
+    to {
+      stroke-dashoffset: -196;
+    }
+  }
+
+  @keyframes hero-trace-event {
+    from {
+      opacity: 0.45;
+      scale: 0.86;
+    }
+
+    to {
+      opacity: 1;
+      scale: 1.55;
     }
   }
 
@@ -538,6 +612,31 @@
     100% {
       opacity: 0;
       translate: 34vw;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-traces {
+      translate: 0 0;
+      transition: none;
+    }
+
+    .hero-mark-scene::before {
+      translate: 0 -50%;
+      transition: none;
+    }
+
+    .hero-mark-reactive {
+      transform: none;
+      transition: none;
+    }
+
+    .hero-traces-signals,
+    .hero-traces-events circle,
+    .hero-mark-emblem,
+    .hero-mark-grid,
+    .hero-mark-rail::after {
+      animation: none;
     }
   }
 

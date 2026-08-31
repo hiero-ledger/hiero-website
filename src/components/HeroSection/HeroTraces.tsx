@@ -102,6 +102,17 @@ export default function HeroTraces() {
           />
         ))}
       </g>
+      <g className="hero-traces-signals">
+        {links.map(([from, to]) => (
+          <line
+            key={`signal-${from.x}-${from.y}-${to.x}-${to.y}`}
+            x1={from.x}
+            y1={from.y}
+            x2={to.x}
+            y2={to.y}
+          />
+        ))}
+      </g>
       <g className="hero-traces-events">
         {events.map(event => (
           <circle

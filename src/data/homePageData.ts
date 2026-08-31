@@ -118,6 +118,7 @@ const callOverrides: Record<string, { name?: string; description?: string }> = {
 const hiddenCallIds = new Set<string>([]);
 
 export const meetData = {
+  eyebrow: "Community",
   heading: "Join our Hiero Community Calls",
   text: "Join our open meetings to collaborate with the team. [Register here](https://github.com/hiero-ledger#open-community-meetings-and-tsc-schedules) or view schedules on the [LFX Calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week).",
   // Already sorted by sign-up count, highest first.

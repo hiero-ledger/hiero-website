@@ -783,6 +783,168 @@
   .issue-jump-link:focus-visible .issue-jump-action-glyph {
     @apply translate-x-0.5 -translate-y-0.5 border-white bg-white text-red;
   }
+
+  /* ============================================
+     Community calls — components/MeetSection
+
+     Fourteen meetings need a directory, not a pile of independent cards. The
+     header establishes the invitation and scale of the programme; below it, a
+     ruled schedule board keeps cadence, subject and registration in the same
+     place on every entry.
+     ============================================ */
+
+  .community-calls {
+    @apply scroll-mt-22.5 bg-white;
+  }
+
+  .community-calls-inner {
+    @apply py-[clamp(4.5rem,9vw,8rem)];
+  }
+
+  .community-calls-header {
+    @apply mb-[clamp(3.5rem,7vw,6.5rem)] grid gap-8;
+    @apply lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)] lg:items-end lg:gap-[clamp(4rem,8vw,9rem)];
+  }
+
+  .community-calls-eyebrow {
+    @apply m-0 mb-[clamp(1rem,2vw,1.5rem)] flex items-start gap-3.5;
+    @apply font-ibm text-xs leading-normal tracking-[0.16em] text-red uppercase;
+  }
+
+  .community-calls-eyebrow::before {
+    @apply mt-[0.75em] h-px w-[clamp(1.5rem,4vw,3rem)] flex-none bg-current;
+
+    content: "";
+  }
+
+  .community-calls-heading {
+    @apply m-0 max-w-[14ch] text-balance;
+    @apply text-[clamp(2.75rem,5.5vw,5.75rem)] leading-[0.96] font-normal tracking-[-0.055em];
+  }
+
+  .community-calls-intro {
+    @apply flex flex-col gap-8 lg:pb-1;
+  }
+
+  .community-calls-copy {
+    @apply max-w-[36rem] text-[clamp(1.0625rem,1.35vw,1.25rem)];
+    @apply leading-[1.6] tracking-[-0.014em] text-charcoal/72;
+  }
+
+  .community-calls-copy p {
+    @apply m-0;
+  }
+
+  .community-calls-count {
+    @apply m-0 flex items-end gap-4 border-t border-charcoal/16 pt-5;
+  }
+
+  .community-calls-count-value {
+    @apply text-[clamp(3.5rem,6vw,5.5rem)] leading-[0.78] font-medium tracking-[-0.06em] text-red;
+  }
+
+  .community-calls-count-label {
+    @apply pb-0.5 font-ibm text-[0.6875rem] leading-[1.45] tracking-[0.12em] text-charcoal/58 uppercase;
+  }
+
+  .community-calls-board-heading {
+    @apply flex items-center justify-between pb-3;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.14em] text-charcoal/50 uppercase;
+  }
+
+  .community-calls-board-heading span:last-child {
+    @apply hidden sm:block;
+  }
+
+  /* One continuous border grid lets adjacent calls share their edges. This is
+     both quieter and denser than fourteen rounded boxes, while each complete
+     cell remains one large link. */
+  .community-calls-grid {
+    @apply m-0 grid list-none border-t border-l border-charcoal/18 p-0;
+    @apply md:grid-cols-2 xl:grid-cols-3;
+  }
+
+  .community-call-item {
+    @apply min-w-0 border-r border-b border-charcoal/18;
+  }
+
+  .community-call-link {
+    @apply relative flex h-full min-h-[20rem] flex-col overflow-hidden;
+    @apply p-[clamp(1.5rem,3vw,2.5rem)] text-charcoal no-underline;
+    @apply transition-colors duration-300 ease-out hover:bg-sand;
+    @apply focus-visible:bg-sand focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  /* The top edge becomes the sole brand accent on interaction. It grows from
+     the reading edge, echoing the active marker in the principles index. */
+  .community-call-link::before {
+    @apply absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-red;
+    @apply transition-transform duration-300 ease-out motion-reduce:transition-none;
+
+    content: "";
+  }
+
+  .community-call-link:hover::before,
+  .community-call-link:focus-visible::before {
+    @apply scale-x-100;
+  }
+
+  .community-call-meta {
+    @apply flex min-h-4 items-center gap-4;
+  }
+
+  .community-call-cadence {
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.12em] text-red uppercase;
+  }
+
+  .community-call-index {
+    @apply ml-auto font-ibm text-[0.6875rem] leading-none tracking-[0.12em] text-charcoal/38;
+  }
+
+  .community-call-name {
+    @apply m-0 mt-[clamp(2rem,4vw,3rem)];
+    @apply text-[clamp(1.5rem,2.2vw,2rem)] leading-[1.08] font-medium tracking-[-0.04em] text-balance;
+  }
+
+  .community-call-description {
+    @apply m-0 mt-4 text-base leading-[1.6] tracking-[-0.008em] text-pretty text-charcoal/65;
+    @apply transition-colors duration-300 motion-reduce:transition-none;
+  }
+
+  .community-call-link:hover .community-call-description,
+  .community-call-link:focus-visible .community-call-description {
+    @apply text-charcoal/82;
+  }
+
+  .community-call-action {
+    @apply mt-auto flex items-center justify-between gap-4 pt-8;
+    @apply font-ibm text-xs leading-none tracking-[0.1em] text-charcoal uppercase;
+  }
+
+  .community-call-action-glyph {
+    @apply grid h-10 w-10 place-items-center rounded-full border border-charcoal/24;
+    @apply font-serif text-lg leading-none transition-[background-color,border-color,color,translate] duration-300 ease-out;
+    @apply motion-reduce:transition-none;
+  }
+
+  .community-call-link:hover .community-call-action-glyph,
+  .community-call-link:focus-visible .community-call-action-glyph {
+    @apply translate-x-0.5 -translate-y-0.5 border-red bg-red text-white;
+  }
+
+  .community-calls-toggle-row {
+    @apply mt-[clamp(2rem,4vw,3.5rem)] flex justify-center;
+  }
+
+  .community-calls-toggle {
+    @apply inline-flex min-h-12 items-center gap-3 rounded-full border border-charcoal/22 bg-white px-6;
+    @apply text-base font-medium tracking-[-0.02em] text-charcoal;
+    @apply transition-[background-color,border-color,color] duration-200 ease-out;
+    @apply hover:border-red hover:bg-red hover:text-white;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
 }
 
 /* ============================================

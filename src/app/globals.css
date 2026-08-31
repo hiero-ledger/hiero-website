@@ -801,7 +801,7 @@
      ============================================ */
 
   .community-calls {
-    @apply scroll-mt-22.5 bg-white;
+    @apply scroll-mt-22.5 bg-sand;
   }
 
   .community-calls-inner {
@@ -878,8 +878,8 @@
   .community-call-link {
     @apply relative flex h-full min-h-[20rem] flex-col overflow-hidden;
     @apply p-[clamp(1.5rem,3vw,2.5rem)] text-charcoal no-underline;
-    @apply transition-colors duration-300 ease-out hover:bg-sand;
-    @apply focus-visible:bg-sand focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-red;
+    @apply transition-colors duration-300 ease-out hover:bg-white/65;
+    @apply focus-visible:bg-white/65 focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-red;
     @apply motion-reduce:transition-none;
   }
 
@@ -945,7 +945,7 @@
   }
 
   .community-calls-toggle {
-    @apply inline-flex min-h-12 items-center gap-3 rounded-full border border-charcoal/22 bg-white px-6;
+    @apply inline-flex min-h-12 items-center gap-3 rounded-full border border-charcoal/22 bg-transparent px-6;
     @apply text-base font-medium tracking-[-0.02em] text-charcoal;
     @apply transition-[background-color,border-color,color] duration-200 ease-out;
     @apply hover:border-red hover:bg-red hover:text-white;

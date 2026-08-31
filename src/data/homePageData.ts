@@ -133,6 +133,7 @@ export const meetData = {
 };
 
 export const reposData = {
+  eyebrow: "Codebase",
   heading: "Jump to our Hiero Repositories",
   text: "Explore some of our most active and widely used Hiero repositories.\nThese projects form the core of the Hiero ecosystem.",
   // One source of truth with the stats sync: tracked_repositories.json also

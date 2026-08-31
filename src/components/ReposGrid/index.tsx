@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import repoStats from "@/data/repository_stats.json";
 
 interface RepoItem {
@@ -7,6 +9,7 @@ interface RepoItem {
 }
 
 interface ReposData {
+  eyebrow: string;
   heading: string;
   text: string;
   repos: RepoItem[];
@@ -44,37 +47,52 @@ export default function ReposGrid({ data }: ReposGridProps) {
     .slice(0, VISIBLE_COUNT);
 
   return (
-    <div id="repos" className="anchor">
-      <div className="bg-white">
-        <div className="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px]">
-          <div className="mb-10 sm:mb-16">
-            <h2 className="text-2xl mb-2.5 sm:text-4xl sm:mb-5">
+    <section
+      id="repos"
+      aria-labelledby="repositories-heading"
+      className="repositories anchor">
+      <div className="container repositories-inner">
+        <header className="repositories-header">
+          <div>
+            <p className="repositories-eyebrow">{data.eyebrow}</p>
+            <h2 id="repositories-heading" className="repositories-heading">
               {data.heading}
             </h2>
-            <div className="text-lg max-w-full md:max-w-[800px]">
-              {data.text}
-            </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
-            {sortedRepos.map(repo => (
-              <div key={repo.name}>
-                <RepoCard repo={repo} stars={getStars(repo.name)} />
-              </div>
-            ))}
+
+          <div className="repositories-intro">
+            <p className="repositories-copy">{data.text}</p>
+
+            <ul role="list" className="repositories-features">
+              <li>Open source</li>
+              <li>GitHub hosted</li>
+              <li>Community maintained</li>
+            </ul>
           </div>
-          <div className="mt-10 text-center">
-            <a
-              href="https://github.com/orgs/hiero-ledger/repositories"
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label="View all repositories on GitHub (opens in new tab)"
-              className="text-red hover:text-red-dark text-lg font-medium underline">
-              View all repositories →
-            </a>
-          </div>
+        </header>
+
+        <ul role="list" className="repositories-grid">
+          {sortedRepos.map(repo => (
+            <li key={repo.name} className="repository-item">
+              <RepoCard repo={repo} stars={getStars(repo.name)} />
+            </li>
+          ))}
+        </ul>
+
+        <div className="repositories-footer">
+          <p>Explore the complete Hiero codebase on GitHub.</p>
+          <a
+            href="https://github.com/orgs/hiero-ledger/repositories"
+            target="_blank"
+            rel="noreferrer noopener"
+            aria-label="View all repositories on GitHub (opens in new tab)"
+            className="repositories-all-link">
+            <span>View all repositories</span>
+            <span aria-hidden="true">↗</span>
+          </a>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -84,18 +102,31 @@ function RepoCard({ repo, stars }: { repo: RepoItem; stars: number }) {
       href={repo.link}
       target="_blank"
       rel="noreferrer noopener"
-      aria-label={`View ${repo.name} repository on GitHub`}
-      className="relative flex flex-col border-2 border-white-dark rounded-2xl p-8 hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 transition-colors duration-200 bg-white h-full no-underline text-charcoal">
-      <div className="absolute top-4 right-4 z-10">
-        <span className="inline-flex items-center justify-center min-w-[48px] text-sm text-gray-600">
-          ⭐ {stars}
-          <span className="sr-only">{stars} stars</span>
+      aria-label={`View ${repo.name} repository on GitHub (opens in new tab)`}
+      className="repository-link">
+      <div className="repository-meta">
+        <span className="repository-platform">
+          <Image
+            src="/images/Hiero-Icon-Github.svg"
+            alt=""
+            width={16}
+            height={17}
+            className="repository-github-icon"
+          />
+          GitHub
+        </span>
+        <span className="repository-stars" aria-label={`${stars} GitHub stars`}>
+          <span aria-hidden="true">★</span> {stars}
         </span>
       </div>
-      <h3 className="text-xl sm:text-2xl font-medium mb-3 pr-10">
-        {repo.name}
-      </h3>
-      <p className="text-base text-gray-600 flex-grow">{repo.description}</p>
+
+      <h3 className="repository-name">{repo.name}</h3>
+      <p className="repository-description">{repo.description}</p>
+
+      <span className="repository-action" aria-hidden="true">
+        <span>Explore repository</span>
+        <span className="repository-action-glyph">↗</span>
+      </span>
     </a>
   );
 }

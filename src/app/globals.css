@@ -952,6 +952,151 @@
     @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
     @apply motion-reduce:transition-none;
   }
+
+  /* ============================================
+     Repository directory — components/ReposGrid
+
+     The repositories are presented as a developer's project shelf: compact
+     GitHub context, a monospace project name, a plain-language purpose and one
+     consistent exit. No ranking language or ordinal markers compete with the
+     projects themselves.
+     ============================================ */
+
+  .repositories {
+    @apply scroll-mt-22.5 bg-sand;
+  }
+
+  .repositories-inner {
+    @apply py-[clamp(4.5rem,9vw,8rem)];
+  }
+
+  .repositories-header {
+    @apply mb-[clamp(3.5rem,7vw,6.5rem)] grid gap-8;
+    @apply lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)] lg:items-end lg:gap-[clamp(4rem,8vw,9rem)];
+  }
+
+  .repositories-eyebrow {
+    @apply m-0 mb-[clamp(1rem,2vw,1.5rem)] flex items-start gap-3.5;
+    @apply font-ibm text-xs leading-normal tracking-[0.16em] text-red uppercase;
+  }
+
+  .repositories-eyebrow::before {
+    @apply mt-[0.75em] h-px w-[clamp(1.5rem,4vw,3rem)] flex-none bg-current;
+
+    content: "";
+  }
+
+  .repositories-heading {
+    @apply m-0 max-w-[14ch] text-balance;
+    @apply text-[clamp(2.75rem,5.5vw,5.75rem)] leading-[0.96] font-normal tracking-[-0.055em];
+  }
+
+  .repositories-intro {
+    @apply flex flex-col gap-8 lg:pb-1;
+  }
+
+  .repositories-copy {
+    @apply m-0 max-w-[36rem] whitespace-pre-line;
+    @apply text-[clamp(1.0625rem,1.35vw,1.25rem)] leading-[1.6] tracking-[-0.014em] text-charcoal/72;
+  }
+
+  .repositories-features {
+    @apply m-0 flex list-none flex-wrap gap-2 border-t border-charcoal/16 p-0 pt-5;
+  }
+
+  .repositories-features li {
+    @apply rounded-full border border-charcoal/18 px-3 py-1.5;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.1em] text-charcoal/62 uppercase;
+  }
+
+  .repositories-grid {
+    @apply m-0 grid list-none gap-4 p-0;
+    @apply md:grid-cols-2 md:gap-5 xl:grid-cols-3;
+  }
+
+  .repository-item {
+    @apply min-w-0;
+  }
+
+  .repository-link {
+    @apply flex h-full min-h-[19rem] min-w-0 flex-col rounded-[1.25rem];
+    @apply border border-charcoal/18 bg-transparent p-[clamp(1.5rem,3vw,2.25rem)];
+    @apply text-charcoal no-underline;
+    @apply transition-[background-color,border-color,box-shadow,translate] duration-300 ease-out;
+    @apply hover:-translate-y-1 hover:border-red/55 hover:bg-white/60 hover:shadow-[0_18px_45px_rgba(30,30,30,0.08)];
+    @apply focus-visible:bg-white/60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  .repository-meta {
+    @apply flex min-h-8 items-center justify-between gap-4;
+  }
+
+  .repository-platform {
+    @apply inline-flex items-center gap-2 font-ibm text-[0.6875rem] leading-none tracking-[0.11em] text-charcoal/58 uppercase;
+  }
+
+  .repository-github-icon {
+    @apply h-4 w-4 object-contain opacity-65;
+  }
+
+  .repository-stars {
+    @apply inline-flex min-h-8 items-center gap-1.5 whitespace-nowrap rounded-full border border-charcoal/16 px-3;
+    @apply font-ibm text-xs leading-none tracking-[0.04em] text-charcoal/62;
+  }
+
+  .repository-stars span {
+    @apply text-red;
+  }
+
+  .repository-name {
+    @apply m-0 mt-[clamp(2rem,4vw,3rem)] min-w-0 break-words;
+    @apply font-ibm text-[clamp(1.125rem,1.8vw,1.5rem)] leading-[1.25] tracking-[-0.04em];
+    @apply transition-colors duration-300 motion-reduce:transition-none;
+  }
+
+  .repository-description {
+    @apply m-0 mt-4 text-base leading-[1.6] tracking-[-0.008em] text-pretty text-charcoal/65;
+  }
+
+  .repository-action {
+    @apply mt-auto flex items-center justify-between gap-4 pt-8;
+    @apply font-ibm text-xs leading-none tracking-[0.09em] text-charcoal uppercase;
+  }
+
+  .repository-action-glyph {
+    @apply grid h-10 w-10 place-items-center rounded-full border border-charcoal/22;
+    @apply font-serif text-lg leading-none transition-[background-color,border-color,color,translate] duration-300 ease-out;
+    @apply motion-reduce:transition-none;
+  }
+
+  .repository-link:hover .repository-name,
+  .repository-link:focus-visible .repository-name {
+    @apply text-red;
+  }
+
+  .repository-link:hover .repository-action-glyph,
+  .repository-link:focus-visible .repository-action-glyph {
+    @apply translate-x-0.5 -translate-y-0.5 border-red bg-red text-white;
+  }
+
+  .repositories-footer {
+    @apply mt-[clamp(2rem,4vw,3.5rem)] flex flex-col items-start gap-5;
+    @apply sm:flex-row sm:items-center sm:justify-between;
+  }
+
+  .repositories-footer p {
+    @apply m-0 text-sm leading-[1.5] tracking-[-0.005em] text-charcoal/58;
+  }
+
+  .repositories-all-link {
+    @apply inline-flex min-h-12 items-center gap-3 rounded-full border border-charcoal/22 bg-transparent px-6;
+    @apply text-base font-medium tracking-[-0.02em] text-charcoal no-underline;
+    @apply transition-[background-color,border-color,color] duration-200 ease-out;
+    @apply hover:border-red hover:bg-red hover:text-white;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
 }
 
 /* ============================================

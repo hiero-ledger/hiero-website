@@ -28,10 +28,6 @@ vi.mock("swiper/react", async () => {
   };
 });
 
-vi.mock("swiper/modules", () => ({
-  Autoplay: {},
-}));
-
 describe("QuotesCarousel", () => {
   beforeEach(() => {
     swiperActions.slidePrev.mockClear();
@@ -43,16 +39,29 @@ describe("QuotesCarousel", () => {
 
     render(
       <QuotesCarousel
-        data={[
-          {
-            quote: "A great project.",
-            author: "Jane Doe",
-            logo: "/images/logo.svg",
-          },
-        ]}
+        data={{
+          eyebrow: "Community voices",
+          heading: "Voices from the ecosystem",
+          text: "What the community is saying.",
+          quotes: [
+            {
+              quote: "A great project.",
+              author: "Jane Doe",
+              logo: "/images/logo.svg",
+            },
+            {
+              quote: "Built together.",
+              author: "Alex Doe",
+              logo: "/images/logo-two.svg",
+            },
+          ],
+        }}
       />,
     );
 
+    expect(
+      screen.getByRole("heading", { name: "Voices from the ecosystem" }),
+    ).toBeInTheDocument();
     expect(screen.getByText("A great project.")).toBeInTheDocument();
     expect(screen.getByText("Jane Doe")).toBeInTheDocument();
 

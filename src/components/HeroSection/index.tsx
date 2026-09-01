@@ -8,11 +8,7 @@ import {
   type MenuItem,
 } from "@/data/navigation";
 
-/**
- * One number the project can prove, plus what it counts. Values arrive
- * pre-formatted from `src/data/homePageData.ts` so the hero never has to know
- * where the counts come from or how they are punctuated.
- */
+
 type HeroFact = {
   value: string;
   label: string;
@@ -22,11 +18,6 @@ type HeroData = {
   eyebrow: string;
   heading: string;
   lede: string;
-  /**
-   * The first action is the primary one and is rendered solid; the rest are
-   * outlined. Two is the intended maximum — a hero with three equal doors
-   * gives the reader nothing to follow.
-   */
   actions: MenuItem[];
   facts: HeroFact[];
 };
@@ -35,11 +26,6 @@ type HeroSectionProps = {
   data: HeroData;
 };
 
-/**
- * Reuses the menu's link helpers rather than its own external-link test, so a
- * hero button and a nav item treat `external`/`newTab` the same way and carry
- * the same new-tab hint for screen readers.
- */
 function HeroAction({
   action,
   primary,

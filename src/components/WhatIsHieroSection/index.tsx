@@ -25,11 +25,6 @@ interface WhatIsHieroSectionProps {
 
 const HEADING_ID = "what-is-hiero-heading";
 
-/**
- * The property is whatever the copy emphasises — the same half of the phrase
- * the type treatment enlarges — so the index, the anchors and the heading can
- * never disagree about which word this entry is about.
- */
 const EMPHASISED = /\*\*(.+?)\*\*/;
 
 function propertyOf(heading: string) {

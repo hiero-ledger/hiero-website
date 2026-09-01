@@ -6,68 +6,68 @@ import Image from "next/image";
 const clamp = (value: number, minimum: number, maximum: number) =>
   Math.min(maximum, Math.max(minimum, value));
 
+interface Input {
+  x: number;
+  y: number;
+  scroll: number;
+}
+
+const LAYERS: Record<string, (input: Input) => string> = {
+  "--hero-art-x": ({ x }) => `${(x * 18).toFixed(2)}px`,
+  "--hero-art-y": ({ y, scroll }) => `${(y * 12 - scroll * 52).toFixed(2)}px`,
+  "--hero-art-rotate-x": ({ y, scroll }) =>
+    `${(y * -2.75 + scroll * 1.5).toFixed(2)}deg`,
+  "--hero-art-rotate-y": ({ x }) => `${(x * 5).toFixed(2)}deg`,
+  "--hero-traces-x": ({ x }) => `${(x * -13).toFixed(2)}px`,
+  "--hero-traces-y": ({ y, scroll }) =>
+    `${(y * -9 - scroll * 34).toFixed(2)}px`,
+  "--hero-halo-x": ({ x }) => `${(x * 8).toFixed(2)}px`,
+  "--hero-halo-y": ({ y, scroll }) => `${(y * 6 - scroll * 18).toFixed(2)}px`,
+  "--hero-scroll-progress": ({ scroll }) => scroll.toFixed(3),
+};
+
+const MARK = (
+  <Image
+    src="/images/Hiero-Icon.svg"
+    alt=""
+    width={540}
+    height={529}
+    className="hero-mark-image"
+    priority
+  />
+);
+
 /**
  * A brand-led network object for the right side of the hero.
  *
  * The real Hiero mark is set into a translucent ledger plane, with rails and
  * event nodes carrying the existing gossip-field language through the object.
- * Everything is decorative. Pointer and scroll input only update CSS custom
- * properties on the server-rendered hero, so the composition still makes sense
- * before hydration and with motion or JavaScript disabled.
+ * Everything is decorative. Pointer and scroll input only update the custom
+ * properties above, so the composition still makes sense before hydration and
+ * with motion or JavaScript disabled.
  */
 export default function HieroMarkScene() {
   const sceneRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const scene = sceneRef.current;
-    const hero = scene?.closest<HTMLElement>(".hero-section");
+    const hero = sceneRef.current?.closest<HTMLElement>(".hero-section");
 
-    if (!scene || !hero) return;
+    if (!hero) return;
     if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
 
     let frameId = 0;
-    let pointerX = 0;
-    let pointerY = 0;
-    let scrollProgress = 0;
-
-    const draw = () => {
-      frameId = 0;
-
-      hero.style.setProperty("--hero-art-x", `${(pointerX * 18).toFixed(2)}px`);
-      hero.style.setProperty(
-        "--hero-art-y",
-        `${(pointerY * 12 - scrollProgress * 52).toFixed(2)}px`,
-      );
-      hero.style.setProperty(
-        "--hero-art-rotate-x",
-        `${(pointerY * -2.75 + scrollProgress * 1.5).toFixed(2)}deg`,
-      );
-      hero.style.setProperty(
-        "--hero-art-rotate-y",
-        `${(pointerX * 5).toFixed(2)}deg`,
-      );
-      hero.style.setProperty(
-        "--hero-traces-x",
-        `${(pointerX * -13).toFixed(2)}px`,
-      );
-      hero.style.setProperty(
-        "--hero-traces-y",
-        `${(pointerY * -9 - scrollProgress * 34).toFixed(2)}px`,
-      );
-      hero.style.setProperty("--hero-halo-x", `${(pointerX * 8).toFixed(2)}px`);
-      hero.style.setProperty(
-        "--hero-halo-y",
-        `${(pointerY * 6 - scrollProgress * 18).toFixed(2)}px`,
-      );
-      hero.style.setProperty(
-        "--hero-scroll-progress",
-        scrollProgress.toFixed(3),
-      );
-    };
+    const input: Input = { x: 0, y: 0, scroll: 0 };
 
     const scheduleDraw = () => {
       if (frameId) return;
-      frameId = window.requestAnimationFrame(draw);
+
+      frameId = window.requestAnimationFrame(() => {
+        frameId = 0;
+
+        for (const [property, follow] of Object.entries(LAYERS)) {
+          hero.style.setProperty(property, follow(input));
+        }
+      });
     };
 
     const handlePointerMove = (event: PointerEvent) => {
@@ -76,12 +76,12 @@ export default function HieroMarkScene() {
       const bounds = hero.getBoundingClientRect();
       if (bounds.width <= 0 || bounds.height <= 0) return;
 
-      pointerX = clamp(
+      input.x = clamp(
         ((event.clientX - bounds.left) / bounds.width) * 2 - 1,
         -1,
         1,
       );
-      pointerY = clamp(
+      input.y = clamp(
         ((event.clientY - bounds.top) / bounds.height) * 2 - 1,
         -1,
         1,
@@ -90,14 +90,14 @@ export default function HieroMarkScene() {
     };
 
     const handlePointerLeave = () => {
-      pointerX = 0;
-      pointerY = 0;
+      input.x = 0;
+      input.y = 0;
       scheduleDraw();
     };
 
     const handleScroll = () => {
       const bounds = hero.getBoundingClientRect();
-      scrollProgress = clamp(-bounds.top / Math.max(bounds.height, 1), 0, 1);
+      input.scroll = clamp(-bounds.top / Math.max(bounds.height, 1), 0, 1);
       scheduleDraw();
     };
 
@@ -114,17 +114,7 @@ export default function HieroMarkScene() {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
 
-      for (const property of [
-        "--hero-art-x",
-        "--hero-art-y",
-        "--hero-art-rotate-x",
-        "--hero-art-rotate-y",
-        "--hero-traces-x",
-        "--hero-traces-y",
-        "--hero-halo-x",
-        "--hero-halo-y",
-        "--hero-scroll-progress",
-      ]) {
+      for (const property of Object.keys(LAYERS)) {
         hero.style.removeProperty(property);
       }
     };
@@ -135,36 +125,22 @@ export default function HieroMarkScene() {
       <div className="hero-mark-reactive">
         <div className="hero-mark-grid" />
 
-        <span className="hero-mark-rail hero-mark-rail--top" />
-        <span className="hero-mark-rail hero-mark-rail--middle" />
-        <span className="hero-mark-rail hero-mark-rail--bottom" />
-
-        <div className="hero-mark-echo">
-          <Image
-            src="/images/Hiero-Icon.svg"
-            alt=""
-            width={540}
-            height={529}
-            className="hero-mark-image"
-            priority
+        {["top", "middle", "bottom"].map(rail => (
+          <span
+            key={rail}
+            className={`hero-mark-rail hero-mark-rail--${rail}`}
           />
-        </div>
+        ))}
 
-        <div className="hero-mark-emblem">
-          <Image
-            src="/images/Hiero-Icon.svg"
-            alt=""
-            width={540}
-            height={529}
-            className="hero-mark-image"
-            priority
+        <div className="hero-mark-echo">{MARK}</div>
+        <div className="hero-mark-emblem">{MARK}</div>
+
+        {["one", "two", "three", "four"].map(node => (
+          <span
+            key={node}
+            className={`hero-mark-node hero-mark-node--${node}`}
           />
-        </div>
-
-        <span className="hero-mark-node hero-mark-node--one" />
-        <span className="hero-mark-node hero-mark-node--two" />
-        <span className="hero-mark-node hero-mark-node--three" />
-        <span className="hero-mark-node hero-mark-node--four" />
+        ))}
       </div>
     </div>
   );

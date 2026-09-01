@@ -63,31 +63,20 @@
   --text-5xl--letter-spacing: -0.625rem;
 
   /* Vertical rhythm
-     One scale for the whole page rather than the same maxed-out clamp copied
-     into every section. Before this, each band ran a 4.5rem-8rem clamp and
-     every header a 3.5rem-6.5rem one, so a heading sat up to 104px from the
-     content it introduced and two neighbouring bands put 256px of empty ground
-     between them. Flat maximums read as dead space, not as air.
-
-     The three steps are deliberately far apart, so the gap between a band and
-     its neighbour is unmistakably larger than the gap inside a band, and the
-     reader can tell where one section ends without needing the divider to say
-     so. `vw` growth is halved against the old values: a clamp that tracks the
-     viewport that steeply turns a wide desktop into a scroll exercise. */
+     One scale for the whole page rather than a maxed-out clamp copied into
+     every section: flat maximums read as dead space, not as air. The three
+     steps are deliberately far apart, so the gap between two bands is
+     unmistakably larger than the gap inside one, and a reader can tell where a
+     section ends without the divider having to say so. */
   /* Band lights
      Channel triplets, not `--color-*`, so each composes at several alphas
-     without generating a dozen near-identical utilities.
-
-     `--band-light` is the brand red opened up toward white until it carries the
-     hue but none of the darkness — measured at 5.1:1 for red text at the
-     strengths used, against 4.94:1 on bare sand. `--band-cool` is the site's
-     own `gray-light`, used as a counter-light from the opposite corner so a
-     band sweeps warm to cool across its width rather than glowing in one spot.
-     See the band backgrounds below for why lighting is the only safe way to
-     get brand colour into these sections. */
+     without generating a dozen near-identical utilities. `--band-light` is
+     brand red opened toward white until it carries the hue but none of the
+     darkness; `--band-cool` is the site's own `gray-light`, used as a
+     counter-light from the opposite corner. See the band backgrounds below for
+     why lighting is the only safe way to get brand colour into a sand band. */
   --band-light: 255 228 238;
   --band-cool: 239 239 238;
-
 
   --space-band: clamp(3.5rem, 5vw, 5.5rem);
   --space-band-header: clamp(2rem, 3vw, 3rem);
@@ -99,26 +88,24 @@
      Home hero — components/HeroSection
 
      A masthead rather than a billboard: a credential line, the wordmark at
-     display size, the positioning sentence and its two doors set beside it,
-     and a colophon of live project counts closing the bottom edge.
+     display size, the positioning sentence and its two doors beside it, and a
+     colophon of live project counts closing the bottom edge.
 
-     Written `@apply`-first, on the same convention as the header and menu
-     below. What stays as plain declarations is only what Tailwind has no
-     utility for — composite paints, masks, keyframes and `content` — and each
-     of those is a value rather than a layout decision.
+     `@apply`-first, like the header and menu below. What stays a plain
+     declaration is only what Tailwind has no utility for — composite paints,
+     masks, keyframes and `content`.
      ============================================ */
 
   /* Height is the viewport minus the header spacer in layout.tsx (`h-22.5`, so
-     5.625rem), which lands the colophon on the fold instead of guessing at a
+     5.625rem), which lands the colophon on the fold rather than guessing at a
      band. `svh` rather than `vh`: mobile browsers report `vh` against the
      *expanded* viewport, which would push the colophon under the address bar
-     on first paint. The ceiling is higher than the type needs because the
-     lattice needs the volume.
+     on first paint.
 
      Every size below that could push the hero past that fold is measured
-     against `--hero-fold` as well as against `vw`, because width alone gets a
-     landscape phone badly wrong: a 667x375 viewport is *wide* by the numbers a
-     `vw` clamp reads and has 285px of usable height. */
+     against `--hero-fold` as well as `vw`, because width alone gets a landscape
+     phone badly wrong: 667x375 is *wide* to a `vw` clamp and has 285px of
+     usable height. */
   .hero-section {
     /* Two darkenings of `--color-red-dark`, kept local rather than added to the
        theme: they exist so a luminous object has something to be luminous
@@ -188,54 +175,17 @@
     @apply font-ibm text-xs leading-normal tracking-[0.16em] text-white/88 uppercase;
   }
 
-  /* Offset to half the first line rather than centred by the flex row: the
-     credential wraps to two lines on a phone, and a centred rule would then
-     float between them instead of marking where the line starts. */
-  .hero-section-eyebrow::before {
-    @apply mt-[0.75em] h-px w-[clamp(1.5rem,4vw,3rem)] flex-none bg-current;
-
-    content: "";
-  }
-
-  /* `mt-auto` against a measured bottom margin: the lockup takes up the slack
-     the eyebrow and the colophon leave. The two are deliberately unequal — the
-     wordmark sits low, near the colophon it belongs with, and the air collects
-     above it rather than being split evenly around it. From `xl` the type keeps
-     the left of the frame and the lattice takes the right, so the reading order
-     is wordmark, sentence, action, straight down one column. */
   .hero-section-lockup {
     @apply mt-auto mb-[clamp(0rem,3vh,2rem)] flex flex-col;
     @apply gap-[clamp(1.75rem,3.5vw,2.75rem)];
 
-    /* A query container so the wordmark can be capped against the width of the
-       column it actually sits in, rather than against the viewport's — the two
-       stop agreeing the moment the split layout takes 47% of the frame away.
-       `inline-size` only, so the column's height still comes from its content.
-       The `max-width` that narrows it lives in the split block below. */
     container-type: inline-size;
   }
 
-  /* `leading-[0.78]` is measured, not tightened by eye: Space Grotesk puts its
-     baseline at 0.984em, so at this leading the line box ends within 0.04em of
-     the baseline and starts just above the cap. The wordmark's box therefore
-     hugs its own ink and nothing overflows into `overflow-hidden`. The negative
-     left margin pulls the `H` stem's side bearing back into the gutter. */
   .hero-section-title {
     @apply m-0 ml-[-0.045em];
     @apply leading-[0.78] font-medium tracking-[-0.055em];
 
-    /* Three caps on one intent. `26vw` is the intent — display type that tracks
-       the frame — and the other two stop it from being the wrong answer:
-
-       `30svh`, because a `vw` clamp cannot see height. At 667x375 it set the
-       wordmark at 173px inside a viewport 375px tall, and the hero came out at
-       twice the height of the screen it was on.
-
-       `44cqw`, against the lockup. "Hiero" sets 2.2x its own font size at this
-       tracking, so 44cqw keeps the ink inside its column once the split layout
-       cuts that column to 53% — the case that appears at 1024 in landscape and
-       did not exist while the split started at 1280. Inert in the stacked
-       layout, where the column is the full container. */
     font-size: clamp(5.5rem, min(26vw, 30svh, 44cqw), 13.5rem);
   }
 
@@ -257,8 +207,7 @@
     @apply border border-transparent text-base font-medium leading-none no-underline;
     @apply transition-[background-color,border-color,translate] duration-200 ease-out;
     @apply hover:-translate-y-px;
-    /* A white ring rather than the site's red one: red on a red field is not a
-       focus indicator. The offset keeps it clear of the pill's own edge. */
+
     @apply focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-white;
   }
 
@@ -274,9 +223,6 @@
     @apply text-[0.875em] leading-none;
   }
 
-  /* Three facts stop fitting on one line well before the container narrows to a
-     phone, and the third then hangs alone under the other two, so the row only
-     forms from `sm` up. */
   .hero-section-colophon {
     @apply m-0 flex list-none flex-col gap-3.5 p-0;
     @apply border-t border-white/22 pt-[clamp(1.25rem,2.5vw,1.75rem)];
@@ -292,10 +238,6 @@
     @apply text-[0.9375rem] tracking-[0.02em] text-white;
   }
 
-  /* One orchestrated entrance rather than scattered ambient motion: the parts
-     arrive in reading order and then the section is still. CSS-only, so the
-     hero stays a server component and the sequence survives with JS disabled.
-     `animation-delay` has no utility, so the stagger is written out. */
   @media (prefers-reduced-motion: no-preference) {
     .hero-section-eyebrow,
     .hero-section-title,
@@ -328,11 +270,6 @@
     }
   }
 
-  /* The gossip field behind everything. Faint enough to read as texture rather
-     than as a second subject, and masked so it thins out across the lower-left
-     where the wordmark and the sentence sit. `slice` rather than `meet`: the
-     drawing is a crop of a larger network, so it should fill the frame at any
-     ratio instead of letterboxing inside it. */
   .hero-traces {
     @apply pointer-events-none absolute inset-0 -z-20 h-full w-full;
 
@@ -368,30 +305,6 @@
     @apply fill-white/28;
   }
 
-  /* ============================================
-     Hero brand scene — components/HeroSection/HieroMarkScene
-
-     Hedera's homepage gives the right side of its hero to one tall, luminous
-     visual and lets a dark gradient blend that object back into the copy. This
-     follows the same composition with Hiero's own material: the real monogram
-     is embedded in a ledger plane, while rails and event nodes connect it to
-     the gossip field already spread behind the hero.
-     ============================================ */
-
-  /* Stacked, the scene is a band above the wordmark; split (see the block below
-     the nodes) it becomes the full-height panel on the right. The band is the
-     harder of the two: it has a bottom edge, and everything inside it — the
-     ledger plane, the rails, the halo — is drawn to run past its own box.
-
-     Two things follow. The band's height is one named expression so the card
-     inside it can be sized from the same number and cannot outgrow it; and the
-     band bleeds to the viewport's right edge rather than stopping at the
-     container's gutter. Stopping at the gutter is what turned the plane into a
-     torn rectangle on every tablet and phone: a mask is also a clip, and the
-     default `mask-repeat` re-tiled this gradient past the box, so the plane and
-     rails reappeared beyond a hard vertical seam sitting in the gutter. Bleeding
-     off the frame is also what the mark does at desktop size, so the two
-     layouts now read as the same object. */
   .hero-mark-scene {
     --hero-mark-band: min(clamp(10rem, 46vw, 18rem), 26svh);
 
@@ -435,8 +348,6 @@
     will-change: transform;
   }
 
-  /* The angled ledger plane gives the mark a setting and depth. Its grid is
-     deliberately sparse enough to remain texture behind the logo. */
   .hero-mark-grid {
     @apply absolute top-[12%] right-[-7%] h-[76%] w-[78%];
     @apply border border-white/14 shadow-[0_34px_70px_rgb(25_1_10_/_28%)];
@@ -457,10 +368,6 @@
     transform: perspective(60rem) rotateY(-12deg) rotateZ(-5deg);
   }
 
-  /* -7deg in the band, -13deg in the panel (see the split block). The angle is
-     what decides how far a rail's rotated box reaches vertically, and a rail is
-     nearly as wide as the frame: at -13deg the bottom one swept 125px out of a
-     272px band on an iPad and trailed under the wordmark. */
   .hero-mark-rail {
     @apply absolute right-[-12%] h-px w-[88%] origin-right rotate-[-7deg];
 
@@ -497,18 +404,11 @@
   .hero-mark-echo {
     @apply absolute top-1/2 right-[7%] aspect-square;
 
-    /* Measured off the band, not against `vw` alone: `min(13rem,56vw)` put a
-       208px card inside a 192px band on a phone, so the subject of the scene
-       hung out of both its edges. The flat 13rem ceiling went with it — it was a
-       phone number, and on a portrait tablet it held the card at 208px inside a
-       900px-wide band while the wordmark beside it ran to 216px. */
     width: min(56vw, 22rem, calc(var(--hero-mark-band) * 0.92));
 
     translate: 0 -50%;
   }
 
-  /* The echo is a low-contrast second plane, not a second logo. It gives the
-     solid mark a trailing edge like the layered forms in the reference. */
   .hero-mark-echo {
     @apply right-[2%] opacity-12;
 
@@ -565,30 +465,6 @@
     @apply right-[5%] bottom-[12%];
   }
 
-  /* ============================================
-     Split layout — type left, mark right
-
-     The desktop composition, held wherever there is room for it: past 80rem at
-     any shape, and from 48rem once the viewport is at least as wide as it is
-     tall and has some height to work with.
-
-     That second condition is the one doing the work. The split used to start at
-     80rem alone, so a 1024x768 window and an iPad in landscape got the phone
-     stack: a 216px wordmark under a 272px band, 874px of hero in 678px of
-     viewport. Side by side is also the only arrangement that *saves* height,
-     which is exactly what a landscape window is short of — so it is the answer
-     there rather than a luxury. Keying on shape rather than width alone leaves
-     the 12.9" iPad in *portrait* — 1024 wide, 1366 tall — on the stack, which is
-     where it belongs.
-
-     The `height > 30rem` clause hands anything shorter to the compact block
-     below instead, and keeps the two mutually exclusive. Below 48rem wide there
-     is no useful split: the type column comes out around 320px, the lede runs to
-     five lines and the arrangement costs more height than the band it replaced.
-
-     Nothing here needs a height cap of its own: in the panel the mark is
-     absolutely positioned, so it costs the column no vertical space at all.
-     ============================================ */
   @media (width >= 80rem),
     (width >= 48rem) and (aspect-ratio >= 1/1) and (height > 30rem) {
     .hero-section {
@@ -611,11 +487,6 @@
     .hero-mark-echo {
       @apply right-[8%];
 
-      /* `58svh` is the proportion fix. At 66% of the panel the card came out the
-         same ~510px at 1280x800 as at 1920x1080, and on the shorter frame that
-         left it towering over a wordmark of unchanged size, with its glow
-         washing across the actions. Tying the third term to height keeps the
-         card and the type in the same ratio the reference composition has. */
       width: min(33rem, 66%, 58svh);
     }
 
@@ -624,25 +495,6 @@
     }
   }
 
-  /* ============================================
-     Short viewports — phones in landscape, and windows with more chrome than
-     canvas.
-
-     Under 30rem of height there is not room for a band above the masthead. At
-     667x375 the stack ran to 766px against the 285px the viewport actually
-     offers — nearly three screens to get past the hero. So the wordmark comes
-     down to what the height can carry, the vertical rhythm tightens, and the
-     mark moves out of the flow into the panel the split layout uses, where it
-     costs the column no height at all.
-
-     It is a narrower panel than the split one, and the card in it is smaller,
-     because the type column here is the full frame rather than 53% of it: what
-     decides the width is the gap left over past the end of the lede, not a
-     share of the grid.
-
-     Gated under 80rem because anything wider is in the split layout regardless
-     of height, and there this is already handled.
-     ============================================ */
   @media (height <= 30rem) and (width < 80rem) {
     .hero-mark-scene {
       @apply absolute inset-y-0 right-[-2%] left-auto mt-0 h-auto w-[34%] -z-10;
@@ -799,85 +651,16 @@
     }
   }
 
-  /* ============================================
-     Band backgrounds — `--band-bloom` / `--band-counter`
-
-     Five sand sections in a row is a lot of one flat colour, so each one is
-     lit: a wide, soft brand-pink light from one corner and a cool counter-light
-     from the opposite one, so a band sweeps warm to cool across its width.
-
-     Every light is kept clear of its band's top and bottom edges, and that is a
-     hard constraint rather than a preference. The dividers between sections are
-     flat sand and cannot be lit to match, because a divider belongs to neither
-     of the bands it separates — so any light still burning at a band's
-     horizontal edge puts a visible step across the seam. Two earlier versions
-     did exactly that: first a lift along the top edge, then corner lights
-     centred at 82% height. Both stepped. Hence the vertical placements below
-     sit mid-band and fade out well inside the edge, and the `70%` stop is part
-     of that budget. Move one and check the seams.
-
-     Horizontally there is no such limit — the sections clip left and right, and
-     nothing abuts them there.
-
-     Light, never tint. That distinction is the whole rule here, and it is a
-     contrast decision before it is an aesthetic one. Brand red (#b81a56) holds
-     4.94:1 on bare sand; stain the sand with red and it falls through the 4.5
-     floor (4.50:1 at 6% red, 4.37:1 at 8%). Lighten the sand with the same hue
-     opened up toward white and every ratio in the section improves instead —
-     red lands between 5.3:1 and 5.7:1 across the strengths used below, and
-     `charcoal/72` body copy goes from 5.83:1 to about 6.4:1. So nothing in
-     this file may darken a band; the only move available is to lift it.
-
-     Each light is placed at the corner its section's gossip field is densest —
-     the same corner that field's mask is cut from — so the light falls on the
-     fabric rather than across a column of type.
-
-     Measured on the built page across all 37 red text runs on the home page,
-     sampling the composited background under each glyph: the worst case is
-     4.90:1 against a 4.5 floor, with most runs at 4.94:1 or better and the
-     lifted corners reaching 5.2:1. If you strengthen a light, re-measure — a
-     pink light buys less contrast per unit of lift than the cool one does,
-     because it sits nearer brand red in hue.
-     ============================================ */
-
-  /* ============================================
-     Gossip ground — components/GossipField
-
-     The network drawing that sits under the sand sections. Everything here is
-     paint and masking; the geometry is in the component.
-
-     Full bleed: each field covers its whole section and is cropped by it, so
-     the sections read as windows onto one continuous network. What keeps that
-     legible is the mask, not the size — every placement below thins the field
-     across the side its own section fills with type, and the ink underneath is
-     set low enough that removing the whole layer would change the page's
-     texture and not its content.
-     ============================================ */
-
-  /* Full width always; height capped rather than stretched.
-     `slice` scales the drawing to cover its box, so letting the box be the
-     full height of a section made the scale a function of that section's
-     content: the community-calls band is 3484px tall on a phone, which blew
-     one 1200x760 drawing up 4.6x and turned its accent nodes into 52px discs.
-     The cap makes the height the dominant term at every viewport, so every
-     field on the page resolves to the same ~1.3x and the network looks like
-     one network. Which edge the box is pinned to is set per placement below,
-     to the same side that placement's mask is cut from. */
   .gossip-field {
     @apply pointer-events-none absolute inset-x-0 -z-10 h-full w-full;
 
     max-height: 62rem;
   }
 
-  /* The drawing itself, oversized inside the masked box above so the drift
-     below can never pull a hard edge into the aperture. */
   .gossip-field-web {
     @apply absolute -top-[6%] -left-[6%] h-[112%] w-[112%];
   }
 
-  /* Charcoal on sand, not white on red: this is the same material as the
-     hero's field, but a light ground needs the ink an order of magnitude
-     quieter than a dark one to sit at the same visual weight. */
   .gossip-field-links {
     @apply fill-none stroke-charcoal/20;
 
@@ -888,17 +671,10 @@
     @apply fill-charcoal/26;
   }
 
-  /* The one part of the layer meant to be seen. Brand red at a weight that
-     reads as a lit node rather than as a bullet — the field needs some
-     unevenness or the eye files the whole thing as noise. */
   .gossip-field-accents {
     @apply fill-red/75;
   }
 
-  /* Each mask below is cut against its own section's text. `principles` and
-     `quotes` set their type down the right, so the field keeps the left;
-     `issues`, `calls` and `repos` run full-width rows and grids, so those
-     thin from the outer edges inward and leave the middle almost bare. */
   .gossip-field--principles {
     @apply bottom-0;
 
@@ -943,9 +719,6 @@
     );
   }
 
-  /* Above `lg` the carousel sets its organisation mark in a column of its own
-     and the quote beside it, which leaves a tall band down the left — the one
-     place on the page where the field has room to be almost fully itself. */
   .gossip-field--quotes {
     top: 50%;
     translate: 0 -50%;
@@ -958,33 +731,11 @@
     );
   }
 
-  /* Motion.
-
-     Two gestures, and the difference between them is the point: the network
-     drifts, and a few of its nodes pulse. Nothing else moves. The light on the
-     band stays exactly where it is, which is what makes the drift read as a
-     network travelling past a fixed source rather than as a texture being
-     panned around.
-
-     Everything animated here is `translate`, `scale` or `opacity`, so each
-     field is one composited layer and the whole page costs no layout work.
-     Durations are long enough that no single frame is what you notice — the
-     effect is meant to register as the page being alive rather than as
-     something playing. Delays are negative so every field is already
-     mid-cycle on first paint: five fields starting together at t=0 would
-     visibly march in step for the first minute.
-
-     Scoped to screen and no-preference, on the same convention as the
-     principles reveal further down — print gets a still drawing, and a reader
-     who turns reduced motion on mid-session gets one without a reload. */
   @media screen and (prefers-reduced-motion: no-preference) {
     .gossip-field-web {
       animation: gossip-drift 54s ease-in-out infinite alternate;
     }
 
-    /* Per band: different periods, and half of them running the other way, so
-       no two neighbours share a phase. The numbers are deliberately not
-       multiples of each other. */
     .gossip-field--principles .gossip-field-web {
       animation-duration: 61s;
       animation-delay: -12s;
@@ -1012,9 +763,6 @@
       animation-delay: -41s;
     }
 
-    /* `fill-box` so a circle scales about its own centre rather than the
-       viewBox origin, which is what would happen by default and would fling
-       the accents across the drawing. */
     .gossip-field-accents circle {
       transform-box: fill-box;
       transform-origin: center;
@@ -1034,8 +782,6 @@
     }
   }
 
-  /* Small amplitudes on purpose. The drawing is a ground, and a ground that
-     travels far enough to be tracked stops being a ground. */
   @keyframes gossip-drift {
     from {
       translate: -1.7% 1.2%;
@@ -1061,31 +807,146 @@
     }
   }
 
-  /* ============================================
-     Hiero principles — components/WhatIsHieroSection
 
-     The page's explanatory beat, so it is set as a specification rather than a
-     slogan wall: a thesis column that states what Hiero is, and beside it the
-     six properties as ruled entries — each one named and then argued.
+  .issue-jump-inner,
+  .community-calls-inner,
+  .repositories-inner,
+  .quotes-carousel-inner {
+    @apply py-[var(--space-band)];
+  }
 
-     Deliberately absent: sequence markers (fair, fast, secure, decentralized,
-     leaderless and open are six independent claims, not a countdown) and any
-     card or stack treatment, which would give the list no left edge to read
-     down.
-     ============================================ */
+  .issue-jump-header,
+  .community-calls-header,
+  .repositories-header,
+  .quotes-carousel-header {
+    @apply mb-[var(--space-band-header)] grid gap-8;
+    @apply lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)] lg:items-end lg:gap-[clamp(4rem,8vw,9rem)];
+  }
 
-  /* Lit sand, not washed sand — the band-backgrounds note below carries the
-     whole argument.
-     The rule this replaces read "flat sand, no wash", and it was right about
-     the thing it measured: a red *tint* over sand drops brand red to 4.50:1 at
-     6% and 4.37:1 at 8%, under the 4.5 floor, against 4.94:1 on bare sand. A
-     light does the opposite of a tint — it raises every ratio in the section
-     rather than lowering them. The scroll margin clears the fixed header
-     (`h-22.5` in layout.tsx) for /#what-is-hiero deep links. */
-  /* `overflow-clip`, never `overflow-hidden`: the thesis below is `xl:sticky`,
-     and `hidden` would make this box a scroll container for it — the box never
-     scrolls, so the thesis would silently stop sticking. `clip` trims the
-     gossip field to the section without creating one. */
+  /* Contribute carries the page's longest headline, so it takes more of the row. */
+  .issue-jump-header {
+    @apply lg:grid-cols-[minmax(0,1.25fr)_minmax(18rem,0.75fr)];
+  }
+
+  .hiero-principles-eyebrow,
+  .issue-jump-eyebrow,
+  .community-calls-eyebrow,
+  .repositories-eyebrow,
+  .quotes-carousel-eyebrow {
+    @apply m-0 mb-[clamp(1rem,2vw,1.5rem)] flex items-start gap-3.5;
+    @apply font-ibm text-xs leading-normal tracking-[0.16em] text-red uppercase;
+  }
+
+  .hero-section-eyebrow::before,
+  .hiero-principles-eyebrow::before,
+  .issue-jump-eyebrow::before,
+  .community-calls-eyebrow::before,
+  .repositories-eyebrow::before,
+  .quotes-carousel-eyebrow::before {
+    @apply mt-[0.75em] h-px w-[clamp(1.5rem,4vw,3rem)] flex-none bg-current;
+
+    content: "";
+  }
+
+  .community-calls-heading,
+  .repositories-heading,
+  .quotes-carousel-heading {
+    @apply m-0 max-w-[14ch] text-balance;
+    @apply text-[clamp(2.75rem,5.5vw,5.75rem)] leading-[0.96] font-normal tracking-[-0.055em];
+  }
+
+  .issue-jump-heading {
+    @apply m-0 max-w-[13ch] text-balance;
+    @apply text-[clamp(2.75rem,6.25vw,6.5rem)] leading-[0.94] font-normal tracking-[-0.06em];
+  }
+
+  /* A tighter measure, so the quote stage beside it keeps its column. */
+  .quotes-carousel-heading {
+    @apply max-w-[13ch];
+  }
+
+  .issue-jump-intro,
+  .community-calls-intro,
+  .repositories-intro {
+    @apply flex flex-col gap-8 lg:pb-1;
+  }
+
+  .issue-jump-intro {
+    @apply gap-6;
+  }
+
+  .issue-jump-copy,
+  .community-calls-copy,
+  .repositories-copy,
+  .quotes-carousel-copy {
+    @apply max-w-[36rem] text-[clamp(1.0625rem,1.35vw,1.25rem)];
+    @apply leading-[1.6] tracking-[-0.014em] text-charcoal/72;
+  }
+
+  .issue-jump-copy,
+  .repositories-copy,
+  .quotes-carousel-copy {
+    @apply m-0;
+  }
+
+  /* Contribute sets a shorter measure; repository copy carries authored line
+     breaks; quotes pads down to the header baseline. */
+  .issue-jump-copy {
+    @apply max-w-[34rem] leading-[1.55];
+  }
+
+  .repositories-copy {
+    @apply whitespace-pre-line;
+  }
+
+  .quotes-carousel-copy {
+    @apply lg:pb-1;
+  }
+
+  /* The small ruled label that names a list or grid below it. */
+  .issue-jump-list-heading,
+  .community-calls-board-heading {
+    @apply flex items-center justify-between pb-3;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.14em] text-charcoal/50 uppercase;
+  }
+
+  .issue-jump-list-heading {
+    @apply border-b border-charcoal/18 text-charcoal/48;
+  }
+
+  /* The right-hand half is context, not content: it goes when there is no room. */
+  .issue-jump-list-heading span:last-child,
+  .community-calls-board-heading span:last-child {
+    @apply hidden sm:block;
+  }
+
+  /* Constraint pills: the filters applied to every issue search, the facts
+     that hold for every repository. */
+  .issue-jump-filter,
+  .repositories-features li {
+    @apply rounded-full border border-charcoal/18 px-3 py-1.5;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.1em] text-charcoal/68 uppercase;
+  }
+
+  .repositories-features li {
+    @apply text-charcoal/62;
+  }
+
+  /* One outline button per section, filling red on hover — the section's exit. */
+  .community-calls-toggle,
+  .repositories-all-link {
+    @apply inline-flex min-h-12 items-center gap-3 rounded-full border border-charcoal/22 bg-transparent px-6;
+    @apply text-base font-medium tracking-[-0.02em] text-charcoal;
+    @apply transition-[background-color,border-color,color] duration-200 ease-out;
+    @apply hover:border-red hover:bg-red hover:text-white;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  .repositories-all-link {
+    @apply no-underline;
+  }
+
   .hiero-principles {
     @apply relative isolate scroll-mt-22.5 overflow-clip bg-sand;
 
@@ -1116,19 +977,6 @@
     @apply xl:sticky xl:top-32 xl:self-start;
   }
 
-  /* The same rule-and-label device the hero opens with, so a reader crossing
-     from one section to the next meets a vocabulary they have already learnt. */
-  .hiero-principles-eyebrow {
-    @apply m-0 mb-[clamp(1rem,2vw,1.5rem)] flex items-start gap-3.5;
-    @apply font-ibm text-xs leading-normal tracking-[0.16em] text-red uppercase;
-  }
-
-  .hiero-principles-eyebrow::before {
-    @apply mt-[0.75em] h-px w-[clamp(1.5rem,4vw,3rem)] flex-none bg-current;
-
-    content: "";
-  }
-
   .hiero-principles-heading {
     @apply m-0 mb-[clamp(1rem,2vw,1.5rem)];
     @apply text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.05] font-normal tracking-[-0.045em];
@@ -1143,15 +991,6 @@
     @apply m-0;
   }
 
-  /* The sticky column runs out of content long before the list runs out of
-     entries, which used to leave a tall empty field beside the reading column.
-     The index fills it with navigation rather than decoration: six jump links
-     and a marker that follows the reader. Where the property is *is*
-     information in a section this long — unlike an 01/02/03 rail, which would
-     claim a sequence six independent properties do not have.
-
-     Desktop only. On a narrow screen there is no sticky column to fill and the
-     index would simply repeat the list it exists to index. */
   .hiero-principles-index {
     @apply mt-10 hidden xl:block;
   }
@@ -1167,9 +1006,6 @@
     @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
   }
 
-  /* The eyebrows' rule again, now doing a job: it draws itself out beside
-     whichever property the reader has reached, and sits as a short tick against
-     the rest so the column keeps one left edge. */
   .hiero-principles-index-link::before {
     @apply h-px w-6 flex-none origin-left bg-current;
     @apply transition-transform duration-300 ease-out motion-reduce:transition-none;
@@ -1190,30 +1026,17 @@
     @apply m-0 list-none p-0;
   }
 
-  /* A rule above every entry, the first one included, and a closing one under
-     the last: the list opens on a line and reads as a bracketed set rather than
-     trailing off into the sand above the divider. The rule is also what ties
-     the index to the list — it takes the brand colour on the entry the marker
-     is pointing at, which is one pixel of feedback and no more. */
   .hiero-principles-item {
     @apply grid grid-cols-[clamp(2.25rem,3vw,2.75rem)_minmax(0,1fr)];
     @apply gap-[clamp(1.25rem,2.5vw,2rem)] py-[clamp(1.5rem,2.6vw,2.25rem)];
-    /* 45vh rather than a header-sized offset: the aria-current observer band
-       is the middle tenth of the viewport, so a clicked index entry has to
-       land inside it — a smaller margin scrolls the entry above the band and
-       the marker lights up the entry after the one the reader chose. */
     @apply scroll-mt-[45vh] border-t border-charcoal/14 last:border-b;
     @apply transition-colors duration-300 ease-out motion-reduce:transition-none;
   }
 
-  /* Only where the index exists to explain it. Below `xl` there is no marker
-     to tie the rule back to, and a red line with no legend is just a red line. */
   .hiero-principles-item[data-active] {
     @apply xl:border-t-red/45;
   }
 
-  /* Seated on the label's line rather than the property's, which is where the
-     entry starts reading. */
   .hiero-principles-icon {
     @apply mt-1 h-auto w-[clamp(2.25rem,3vw,2.75rem)];
   }
@@ -1222,11 +1045,6 @@
     @apply flex flex-col gap-[clamp(0.625rem,1.2vw,0.875rem)];
   }
 
-  /* The lead-in and the property are the two halves of one markdown phrase and
-     stay one heading, so the accessible name is still "Hiero is fair". Stacking
-     them gives the property the whole line instead of the 45% left over after
-     "Hiero is", and six of them then read down the page as a list of words
-     rather than as six repetitions of the same sentence. */
   .hiero-principles-term {
     @apply m-0 flex flex-col items-start gap-1.5;
     @apply font-ibm text-xs leading-none tracking-[0.16em] text-charcoal/70 uppercase;
@@ -1242,16 +1060,6 @@
     @apply leading-[1.65] tracking-[-0.008em] text-pretty text-charcoal/78;
   }
 
-  /* Armed only once `data-motion` lands from the component, and played per
-     entry as each one is reached — the same rise the hero uses on load, so the
-     page has one entrance gesture rather than one per section.
-
-     Scoped to screen + no-preference: print runs no observers, so unrevealed
-     entries would render as blank pages, and a reader who turns reduced motion
-     on mid-session gets their content back without waiting for a reload. The
-     hidden offset is the `translate` property (that is what `translate-y-5`
-     compiles to), so the keyframe has to resolve `translate`, not `transform` —
-     animating `transform` would leave the offset in place forever. */
   @media screen and (prefers-reduced-motion: no-preference) {
     .hiero-principles[data-motion="ready"] .hiero-principles-thesis,
     .hiero-principles[data-motion="ready"] .hiero-principles-item {
@@ -1274,16 +1082,6 @@
     }
   }
 
-  /* ============================================
-     Open issues — components/IssueJumpSection
-
-     Contribution is the page's first direct invitation, so this section
-     shifts from the sand specification above to a clean working surface. The
-     four searches are an ordered wayfinding index rather than four
-     interchangeable cards: each row names the level, explains it and ends
-     with the same clear exit to GitHub.
-     ============================================ */
-
   .issue-jump {
     @apply relative isolate scroll-mt-22.5 overflow-hidden bg-sand text-charcoal;
 
@@ -1301,62 +1099,8 @@
     background-image: var(--band-bloom), var(--band-counter);
   }
 
-  .issue-jump-inner {
-    @apply py-[var(--space-band)];
-  }
-
-  /* The headline occupies the open side of the frame and the useful context
-     sits beside its baseline. Until that relationship has room, both remain a
-     simple reading column. */
-  .issue-jump-header {
-    @apply mb-[var(--space-band-header)] grid gap-8;
-    @apply lg:grid-cols-[minmax(0,1.25fr)_minmax(18rem,0.75fr)] lg:items-end lg:gap-[clamp(4rem,8vw,9rem)];
-  }
-
-  .issue-jump-eyebrow {
-    @apply m-0 mb-[clamp(1rem,2vw,1.5rem)] flex items-start gap-3.5;
-    @apply font-ibm text-xs leading-normal tracking-[0.16em] text-red uppercase;
-  }
-
-  .issue-jump-eyebrow::before {
-    @apply mt-[0.75em] h-px w-[clamp(1.5rem,4vw,3rem)] flex-none bg-current;
-
-    content: "";
-  }
-
-  .issue-jump-heading {
-    @apply m-0 max-w-[13ch] text-balance;
-    @apply text-[clamp(2.75rem,6.25vw,6.5rem)] leading-[0.94] font-normal tracking-[-0.06em];
-  }
-
-  .issue-jump-intro {
-    @apply flex flex-col gap-6 lg:pb-1;
-  }
-
-  .issue-jump-copy {
-    @apply m-0 max-w-[34rem] text-[clamp(1.0625rem,1.35vw,1.25rem)];
-    @apply leading-[1.55] tracking-[-0.014em] text-charcoal/72;
-  }
-
-  /* These are not decorative tags: they expose the three constraints shared
-     by all four GitHub queries, which saves a contributor from discovering
-     after the jump that the result set is already narrowed. */
   .issue-jump-filters {
     @apply m-0 flex list-none flex-wrap gap-2 p-0;
-  }
-
-  .issue-jump-filter {
-    @apply rounded-full border border-charcoal/18 px-3 py-1.5;
-    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.1em] text-charcoal/68 uppercase;
-  }
-
-  .issue-jump-list-heading {
-    @apply flex items-center justify-between border-b border-charcoal/18 pb-3;
-    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.14em] text-charcoal/48 uppercase;
-  }
-
-  .issue-jump-list-heading span:last-child {
-    @apply hidden sm:block;
   }
 
   .issue-jump-list {
@@ -1367,10 +1111,6 @@
     @apply border-b border-charcoal/18;
   }
 
-  /* The coloured inset is painted by the link itself, so the full hit target
-     responds on hover and keyboard focus. At desktop the row reads as a table;
-     on mobile the label and explanation stack while the number and exit keep
-     their edges. */
   .issue-jump-link {
     @apply grid min-w-0 grid-cols-[2.25rem_minmax(0,1fr)_auto] items-start;
     @apply gap-x-4 gap-y-3 py-6 text-charcoal no-underline;
@@ -1427,14 +1167,6 @@
     @apply translate-x-0.5 -translate-y-0.5 border-white bg-white text-red;
   }
 
-  /* ============================================
-     Community calls — components/MeetSection
-
-     Fourteen meetings need a directory, not a pile of independent cards. The
-     header establishes the invitation and scale of the programme; below it, a
-     ruled schedule board keeps cadence, subject and registration in the same
-     place on every entry.
-     ============================================ */
 
   .community-calls {
     @apply relative isolate scroll-mt-22.5 overflow-hidden bg-sand;
@@ -1453,40 +1185,6 @@
     background-image: var(--band-bloom), var(--band-counter);
   }
 
-  .community-calls-inner {
-    @apply py-[var(--space-band)];
-  }
-
-  .community-calls-header {
-    @apply mb-[var(--space-band-header)] grid gap-8;
-    @apply lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)] lg:items-end lg:gap-[clamp(4rem,8vw,9rem)];
-  }
-
-  .community-calls-eyebrow {
-    @apply m-0 mb-[clamp(1rem,2vw,1.5rem)] flex items-start gap-3.5;
-    @apply font-ibm text-xs leading-normal tracking-[0.16em] text-red uppercase;
-  }
-
-  .community-calls-eyebrow::before {
-    @apply mt-[0.75em] h-px w-[clamp(1.5rem,4vw,3rem)] flex-none bg-current;
-
-    content: "";
-  }
-
-  .community-calls-heading {
-    @apply m-0 max-w-[14ch] text-balance;
-    @apply text-[clamp(2.75rem,5.5vw,5.75rem)] leading-[0.96] font-normal tracking-[-0.055em];
-  }
-
-  .community-calls-intro {
-    @apply flex flex-col gap-8 lg:pb-1;
-  }
-
-  .community-calls-copy {
-    @apply max-w-[36rem] text-[clamp(1.0625rem,1.35vw,1.25rem)];
-    @apply leading-[1.6] tracking-[-0.014em] text-charcoal/72;
-  }
-
   .community-calls-copy p {
     @apply m-0;
   }
@@ -1503,18 +1201,6 @@
     @apply pb-0.5 font-ibm text-[0.6875rem] leading-[1.45] tracking-[0.12em] text-charcoal/58 uppercase;
   }
 
-  .community-calls-board-heading {
-    @apply flex items-center justify-between pb-3;
-    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.14em] text-charcoal/50 uppercase;
-  }
-
-  .community-calls-board-heading span:last-child {
-    @apply hidden sm:block;
-  }
-
-  /* One continuous border grid lets adjacent calls share their edges. This is
-     both quieter and denser than fourteen rounded boxes, while each complete
-     cell remains one large link. */
   .community-calls-grid {
     @apply m-0 grid list-none border-t border-l border-charcoal/18 p-0;
     @apply md:grid-cols-2 xl:grid-cols-3;
@@ -1532,8 +1218,6 @@
     @apply motion-reduce:transition-none;
   }
 
-  /* The top edge becomes the sole brand accent on interaction. It grows from
-     the reading edge, echoing the active marker in the principles index. */
   .community-call-link::before {
     @apply absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-red;
     @apply transition-transform duration-300 ease-out motion-reduce:transition-none;
@@ -1593,23 +1277,6 @@
     @apply mt-[clamp(2rem,4vw,3.5rem)] flex justify-center;
   }
 
-  .community-calls-toggle {
-    @apply inline-flex min-h-12 items-center gap-3 rounded-full border border-charcoal/22 bg-transparent px-6;
-    @apply text-base font-medium tracking-[-0.02em] text-charcoal;
-    @apply transition-[background-color,border-color,color] duration-200 ease-out;
-    @apply hover:border-red hover:bg-red hover:text-white;
-    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
-    @apply motion-reduce:transition-none;
-  }
-
-  /* ============================================
-     Repository directory — components/ReposGrid
-
-     The repositories are presented as a developer's project shelf: compact
-     GitHub context, a monospace project name, a plain-language purpose and one
-     consistent exit. No ranking language or ordinal markers compete with the
-     projects themselves.
-     ============================================ */
 
   .repositories {
     @apply relative isolate scroll-mt-22.5 overflow-hidden bg-sand;
@@ -1628,47 +1295,8 @@
     background-image: var(--band-bloom), var(--band-counter);
   }
 
-  .repositories-inner {
-    @apply py-[var(--space-band)];
-  }
-
-  .repositories-header {
-    @apply mb-[var(--space-band-header)] grid gap-8;
-    @apply lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)] lg:items-end lg:gap-[clamp(4rem,8vw,9rem)];
-  }
-
-  .repositories-eyebrow {
-    @apply m-0 mb-[clamp(1rem,2vw,1.5rem)] flex items-start gap-3.5;
-    @apply font-ibm text-xs leading-normal tracking-[0.16em] text-red uppercase;
-  }
-
-  .repositories-eyebrow::before {
-    @apply mt-[0.75em] h-px w-[clamp(1.5rem,4vw,3rem)] flex-none bg-current;
-
-    content: "";
-  }
-
-  .repositories-heading {
-    @apply m-0 max-w-[14ch] text-balance;
-    @apply text-[clamp(2.75rem,5.5vw,5.75rem)] leading-[0.96] font-normal tracking-[-0.055em];
-  }
-
-  .repositories-intro {
-    @apply flex flex-col gap-8 lg:pb-1;
-  }
-
-  .repositories-copy {
-    @apply m-0 max-w-[36rem] whitespace-pre-line;
-    @apply text-[clamp(1.0625rem,1.35vw,1.25rem)] leading-[1.6] tracking-[-0.014em] text-charcoal/72;
-  }
-
   .repositories-features {
     @apply m-0 flex list-none flex-wrap gap-2 border-t border-charcoal/16 p-0 pt-5;
-  }
-
-  .repositories-features li {
-    @apply rounded-full border border-charcoal/18 px-3 py-1.5;
-    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.1em] text-charcoal/62 uppercase;
   }
 
   .repositories-grid {
@@ -1751,24 +1379,6 @@
     @apply m-0 text-sm leading-[1.5] tracking-[-0.005em] text-charcoal/58;
   }
 
-  .repositories-all-link {
-    @apply inline-flex min-h-12 items-center gap-3 rounded-full border border-charcoal/22 bg-transparent px-6;
-    @apply text-base font-medium tracking-[-0.02em] text-charcoal no-underline;
-    @apply transition-[background-color,border-color,color] duration-200 ease-out;
-    @apply hover:border-red hover:bg-red hover:text-white;
-    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
-    @apply motion-reduce:transition-none;
-  }
-
-  /* ============================================
-     Ecosystem voices — components/QuotesCarousel
-
-     Testimonials remain reader-controlled, with the Hiero red giving every
-     voice one shared stage. The supplied logos are white, so the brand field
-     gives each mark its intended contrast while the quote keeps a wide,
-     left-aligned editorial measure.
-     ============================================ */
-
   .quotes-carousel {
     @apply relative isolate scroll-mt-22.5 overflow-hidden bg-sand;
 
@@ -1784,36 +1394,6 @@
     );
 
     background-image: var(--band-bloom), var(--band-counter);
-  }
-
-  .quotes-carousel-inner {
-    @apply py-[var(--space-band)];
-  }
-
-  .quotes-carousel-header {
-    @apply mb-[var(--space-band-header)] grid gap-8;
-    @apply lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)] lg:items-end lg:gap-[clamp(4rem,8vw,9rem)];
-  }
-
-  .quotes-carousel-eyebrow {
-    @apply m-0 mb-[clamp(1rem,2vw,1.5rem)] flex items-start gap-3.5;
-    @apply font-ibm text-xs leading-normal tracking-[0.16em] text-red uppercase;
-  }
-
-  .quotes-carousel-eyebrow::before {
-    @apply mt-[0.75em] h-px w-[clamp(1.5rem,4vw,3rem)] flex-none bg-current;
-
-    content: "";
-  }
-
-  .quotes-carousel-heading {
-    @apply m-0 max-w-[13ch] text-balance;
-    @apply text-[clamp(2.75rem,5.5vw,5.75rem)] leading-[0.96] font-normal tracking-[-0.055em];
-  }
-
-  .quotes-carousel-copy {
-    @apply m-0 max-w-[36rem] lg:pb-1;
-    @apply text-[clamp(1.0625rem,1.35vw,1.25rem)] leading-[1.6] tracking-[-0.014em] text-charcoal/72;
   }
 
   .quotes-carousel-stage {
@@ -1956,13 +1536,6 @@
     @apply border-red bg-red text-white hover:border-red-dark hover:bg-red-dark;
   }
 }
-
-/* ============================================
-   Authored CSS lives in Tailwind's cascade layers.
-   Unlayered rules outrank every utility regardless of
-   specificity, so anything written outside a layer here
-   silently overrides component-level Tailwind classes.
-   ============================================ */
 
 @layer base {
   /* ============================================

@@ -113,13 +113,19 @@
      band. `svh` rather than `vh`: mobile browsers report `vh` against the
      *expanded* viewport, which would push the colophon under the address bar
      on first paint. The ceiling is higher than the type needs because the
-     lattice needs the volume. */
+     lattice needs the volume.
+
+     Every size below that could push the hero past that fold is measured
+     against `--hero-fold` as well as against `vw`, because width alone gets a
+     landscape phone badly wrong: a 667x375 viewport is *wide* by the numbers a
+     `vw` clamp reads and has 285px of usable height. */
   .hero-section {
     /* Two darkenings of `--color-red-dark`, kept local rather than added to the
        theme: they exist so a luminous object has something to be luminous
        against, and nothing outside this section should reach for them. */
     --hero-deep: #3a0a1e;
     --hero-shadow: #23060f;
+    --hero-fold: calc(100svh - 5.625rem);
     --hero-art-x: 0px;
     --hero-art-y: 0px;
     --hero-art-rotate-x: 0deg;
@@ -131,7 +137,12 @@
     --hero-scroll-progress: 0;
 
     @apply relative isolate overflow-hidden text-white;
-    @apply min-h-[32rem] xl:min-h-[clamp(34rem,calc(100svh-5.625rem),50rem)];
+
+    /* `min()` rather than a flat 32rem floor: 32rem is worth having on a tall
+       phone and nonsense on a landscape one, where it reserved more than the
+       whole viewport for a hero the content only half filled. Below the fold,
+       content is the floor. */
+    min-height: min(var(--hero-fold), 32rem);
 
     /* Front to back: a ground veil, the volume of light the lattice sits
        inside, and the brand ramp run down into its own shadow. Three stacked
@@ -166,7 +177,10 @@
   .hero-section-inner {
     @apply relative flex min-h-[inherit] flex-col;
     @apply gap-[clamp(1.25rem,3vh,2.5rem)];
-    @apply pt-[clamp(3rem,6vw,5rem)] pb-[clamp(1.5rem,3vw,2.5rem)];
+    /* The 3rem floor was 48px of air on a phone that had already spent 90px on
+       the header spacer, on top of a hero that ran past the fold anyway. The
+       maximum is untouched, so nothing changes from `lg` up. */
+    @apply pt-[clamp(2rem,6vw,5rem)] pb-[clamp(1.5rem,3vw,2.5rem)];
   }
 
   .hero-section-eyebrow {
@@ -191,7 +205,14 @@
      is wordmark, sentence, action, straight down one column. */
   .hero-section-lockup {
     @apply mt-auto mb-[clamp(0rem,3vh,2rem)] flex flex-col;
-    @apply gap-[clamp(1.75rem,3.5vw,2.75rem)] xl:max-w-[53%];
+    @apply gap-[clamp(1.75rem,3.5vw,2.75rem)];
+
+    /* A query container so the wordmark can be capped against the width of the
+       column it actually sits in, rather than against the viewport's — the two
+       stop agreeing the moment the split layout takes 47% of the frame away.
+       `inline-size` only, so the column's height still comes from its content.
+       The `max-width` that narrows it lives in the split block below. */
+    container-type: inline-size;
   }
 
   /* `leading-[0.78]` is measured, not tightened by eye: Space Grotesk puts its
@@ -201,7 +222,21 @@
      left margin pulls the `H` stem's side bearing back into the gutter. */
   .hero-section-title {
     @apply m-0 ml-[-0.045em];
-    @apply text-[clamp(5.5rem,26vw,13.5rem)] leading-[0.78] font-medium tracking-[-0.055em];
+    @apply leading-[0.78] font-medium tracking-[-0.055em];
+
+    /* Three caps on one intent. `26vw` is the intent — display type that tracks
+       the frame — and the other two stop it from being the wrong answer:
+
+       `30svh`, because a `vw` clamp cannot see height. At 667x375 it set the
+       wordmark at 173px inside a viewport 375px tall, and the hero came out at
+       twice the height of the screen it was on.
+
+       `44cqw`, against the lockup. "Hiero" sets 2.2x its own font size at this
+       tracking, so 44cqw keeps the ink inside its column once the split layout
+       cuts that column to 53% — the case that appears at 1024 in landscape and
+       did not exist while the split started at 1280. Inert in the stacked
+       layout, where the column is the full container. */
+    font-size: clamp(5.5rem, min(26vw, 30svh, 44cqw), 13.5rem);
   }
 
   .hero-section-pitch {
@@ -343,10 +378,27 @@
      the gossip field already spread behind the hero.
      ============================================ */
 
+  /* Stacked, the scene is a band above the wordmark; split (see the block below
+     the nodes) it becomes the full-height panel on the right. The band is the
+     harder of the two: it has a bottom edge, and everything inside it — the
+     ledger plane, the rails, the halo — is drawn to run past its own box.
+
+     Two things follow. The band's height is one named expression so the card
+     inside it can be sized from the same number and cannot outgrow it; and the
+     band bleeds to the viewport's right edge rather than stopping at the
+     container's gutter. Stopping at the gutter is what turned the plane into a
+     torn rectangle on every tablet and phone: a mask is also a clip, and the
+     default `mask-repeat` re-tiled this gradient past the box, so the plane and
+     rails reappeared beyond a hard vertical seam sitting in the gutter. Bleeding
+     off the frame is also what the mark does at desktop size, so the two
+     layouts now read as the same object. */
   .hero-mark-scene {
-    @apply pointer-events-none relative mt-1 h-[clamp(12rem,38vw,17rem)] w-full;
-    @apply xl:absolute xl:inset-y-0 xl:right-[-3%] xl:left-auto xl:mt-0;
-    @apply xl:h-auto xl:w-[60%] xl:-z-10;
+    --hero-mark-band: min(clamp(10rem, 46vw, 18rem), 26svh);
+
+    @apply pointer-events-none relative mt-1;
+    @apply w-[calc(100%+1.563rem)] md:w-[calc(100%+3rem)] lg:w-[calc(100%+8.75rem)];
+
+    height: var(--hero-mark-band);
 
     mask-image: linear-gradient(
       to right,
@@ -405,8 +457,12 @@
     transform: perspective(60rem) rotateY(-12deg) rotateZ(-5deg);
   }
 
+  /* -7deg in the band, -13deg in the panel (see the split block). The angle is
+     what decides how far a rail's rotated box reaches vertically, and a rail is
+     nearly as wide as the frame: at -13deg the bottom one swept 125px out of a
+     272px band on an iPad and trailed under the wordmark. */
   .hero-mark-rail {
-    @apply absolute right-[-12%] h-px w-[88%] origin-right rotate-[-13deg];
+    @apply absolute right-[-12%] h-px w-[88%] origin-right rotate-[-7deg];
 
     background: linear-gradient(
       to right,
@@ -439,7 +495,14 @@
 
   .hero-mark-emblem,
   .hero-mark-echo {
-    @apply absolute top-1/2 right-[7%] aspect-square w-[min(13rem,56vw)];
+    @apply absolute top-1/2 right-[7%] aspect-square;
+
+    /* Measured off the band, not against `vw` alone: `min(13rem,56vw)` put a
+       208px card inside a 192px band on a phone, so the subject of the scene
+       hung out of both its edges. The flat 13rem ceiling went with it — it was a
+       phone number, and on a portrait tablet it held the card at 208px inside a
+       900px-wide band while the wordmark beside it ran to 216px. */
+    width: min(56vw, 22rem, calc(var(--hero-mark-band) * 0.92));
 
     translate: 0 -50%;
   }
@@ -502,14 +565,110 @@
     @apply right-[5%] bottom-[12%];
   }
 
-  @media (min-width: 80rem) {
+  /* ============================================
+     Split layout — type left, mark right
+
+     The desktop composition, held wherever there is room for it: past 80rem at
+     any shape, and from 48rem once the viewport is at least as wide as it is
+     tall and has some height to work with.
+
+     That second condition is the one doing the work. The split used to start at
+     80rem alone, so a 1024x768 window and an iPad in landscape got the phone
+     stack: a 216px wordmark under a 272px band, 874px of hero in 678px of
+     viewport. Side by side is also the only arrangement that *saves* height,
+     which is exactly what a landscape window is short of — so it is the answer
+     there rather than a luxury. Keying on shape rather than width alone leaves
+     the 12.9" iPad in *portrait* — 1024 wide, 1366 tall — on the stack, which is
+     where it belongs.
+
+     The `height > 30rem` clause hands anything shorter to the compact block
+     below instead, and keeps the two mutually exclusive. Below 48rem wide there
+     is no useful split: the type column comes out around 320px, the lede runs to
+     five lines and the arrangement costs more height than the band it replaced.
+
+     Nothing here needs a height cap of its own: in the panel the mark is
+     absolutely positioned, so it costs the column no vertical space at all.
+     ============================================ */
+  @media (width >= 80rem),
+    (width >= 48rem) and (aspect-ratio >= 1/1) and (height > 30rem) {
+    .hero-section {
+      min-height: min(var(--hero-fold), 50rem);
+    }
+
+    .hero-section-lockup {
+      @apply max-w-[53%];
+    }
+
+    .hero-mark-scene {
+      @apply absolute inset-y-0 right-[-3%] left-auto mt-0 h-auto w-[60%] -z-10;
+    }
+
+    .hero-mark-rail {
+      @apply rotate-[-13deg];
+    }
+
     .hero-mark-emblem,
     .hero-mark-echo {
-      @apply right-[8%] w-[min(33rem,66%)];
+      @apply right-[8%];
+
+      /* `58svh` is the proportion fix. At 66% of the panel the card came out the
+         same ~510px at 1280x800 as at 1920x1080, and on the shorter frame that
+         left it towering over a wordmark of unchanged size, with its glow
+         washing across the actions. Tying the third term to height keeps the
+         card and the type in the same ratio the reference composition has. */
+      width: min(33rem, 66%, 58svh);
     }
 
     .hero-mark-echo {
       @apply right-[3%];
+    }
+  }
+
+  /* ============================================
+     Short viewports — phones in landscape, and windows with more chrome than
+     canvas.
+
+     Under 30rem of height there is not room for a band above the masthead. At
+     667x375 the stack ran to 766px against the 285px the viewport actually
+     offers — nearly three screens to get past the hero. So the wordmark comes
+     down to what the height can carry, the vertical rhythm tightens, and the
+     mark moves out of the flow into the panel the split layout uses, where it
+     costs the column no height at all.
+
+     It is a narrower panel than the split one, and the card in it is smaller,
+     because the type column here is the full frame rather than 53% of it: what
+     decides the width is the gap left over past the end of the lede, not a
+     share of the grid.
+
+     Gated under 80rem because anything wider is in the split layout regardless
+     of height, and there this is already handled.
+     ============================================ */
+  @media (height <= 30rem) and (width < 80rem) {
+    .hero-mark-scene {
+      @apply absolute inset-y-0 right-[-2%] left-auto mt-0 h-auto w-[34%] -z-10;
+    }
+
+    .hero-mark-emblem,
+    .hero-mark-echo {
+      @apply right-[4%];
+
+      width: min(9rem, 74%, 46svh);
+    }
+
+    .hero-section-inner {
+      @apply gap-[clamp(0.75rem,2vh,1.25rem)] pt-8 pb-5;
+    }
+
+    .hero-section-lockup {
+      @apply mb-0 gap-[clamp(1rem,2.5vw,1.75rem)];
+    }
+
+    .hero-section-pitch {
+      @apply gap-[clamp(1rem,2vw,1.5rem)];
+    }
+
+    .hero-section-title {
+      font-size: clamp(3.25rem, min(17vw, 26svh), 7rem);
     }
   }
 

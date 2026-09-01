@@ -8,7 +8,6 @@ import {
   type MenuItem,
 } from "@/data/navigation";
 
-
 type HeroFact = {
   value: string;
   label: string;

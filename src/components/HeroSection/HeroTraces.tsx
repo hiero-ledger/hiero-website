@@ -8,7 +8,6 @@ const { events, links } = buildGossipField({
 });
 
 export default function HeroTraces() {
-
   const traceLines = (prefix: string) =>
     links.map(([from, to]) => (
       <line

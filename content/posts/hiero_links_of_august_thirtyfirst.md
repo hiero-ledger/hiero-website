@@ -16,7 +16,7 @@ This week featured a lot of new and exciting updates within the Hiero Organizati
 Below are links to some of the things that happened this past week. **Check it out!**
 
 ---
-**[Manish D](https://github.com/manishdait)** added support for [opt-in recipt/record node failover](https://github.com/hiero-ledger/hiero-sdk-python/pull/2527) to the Python SDK.
+**[Manish D](https://github.com/manishdait)** added support for [opt-in receipt/record node failover](https://github.com/hiero-ledger/hiero-sdk-python/pull/2527) to the Python SDK.
 
 **[Jessica G](https://github.com/jwagantall)** created a blog post for the [TSC nominations](https://github.com/hiero-ledger/hiero-website/pull/606) in the Hiero Website.
 

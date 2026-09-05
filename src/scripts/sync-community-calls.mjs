@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import prettier from "prettier";
 import fallbackCommunityCalls from "../data/community_calls.json" with { type: "json" };
+import { isRecord, writeJsonIfChanged } from "./lib/sync-helpers.mjs";
 
-const dataDirectory = "src/data";
 const targetFile = "src/data/community_calls.json";
 
 // Same endpoint the LFX calendar UI itself calls. Public, no auth required.
@@ -13,10 +11,6 @@ const apiUrl =
   "https://pcc-bff.platform.linuxfoundation.org/production/api/v2/itx-services" +
   `/public/meetings/${projectSlug}?view=pcc&pageSize=9999`;
 const FETCH_TIMEOUT_MS = 15_000;
-
-function isRecord(value) {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
-}
 
 // The API returns one entry per *occurrence*. Collapse them to one entry per
 // meeting series, keeping the soonest upcoming occurrence.
@@ -113,38 +107,6 @@ function loadFallback(log = true) {
   return [];
 }
 
-async function formatForFile(calls) {
-  let formatted = `${JSON.stringify(calls, null, 2)}\n`;
-
-  try {
-    const prettierConfig = await prettier.resolveConfig(targetFile);
-    formatted = await prettier.format(JSON.stringify(calls), {
-      ...(prettierConfig ?? {}),
-      parser: "json",
-      filepath: targetFile,
-    });
-  } catch (error) {
-    console.warn(
-      `[sync-community-calls] Prettier formatting failed (${error.message}), using fallback formatting.`,
-    );
-  }
-
-  if (!formatted.endsWith("\n")) formatted += "\n";
-  return formatted;
-}
-
-async function writeIfChanged(content) {
-  try {
-    const existingContent = await readFile(targetFile, "utf8");
-    if (existingContent === content) return false;
-  } catch (error) {
-    if (error?.code !== "ENOENT") throw error;
-  }
-
-  await writeFile(targetFile, content);
-  return true;
-}
-
 async function fetchFromLfx() {
   console.log("[sync-community-calls] Fetching community calls from LFX...");
 
@@ -192,9 +154,11 @@ async function run() {
     calls = loadFallback();
   }
 
-  await mkdir(dataDirectory, { recursive: true });
-  const formatted = await formatForFile(calls);
-  const didWrite = await writeIfChanged(formatted);
+  const didWrite = await writeJsonIfChanged(
+    calls,
+    targetFile,
+    "[sync-community-calls]",
+  );
 
   console.log(
     `[sync-community-calls] Done. ${calls.length} meetings${didWrite ? "" : " (no changes)"}`,

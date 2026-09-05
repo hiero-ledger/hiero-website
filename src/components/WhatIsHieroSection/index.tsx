@@ -1,13 +1,19 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import RichText from "@/components/RichText";
+import GossipField from "@/components/GossipField";
 
 interface WhatIsHieroPoint {
+  /** Markdown; the property itself is the emphasised half of the phrase. */
   heading: string;
   text: string;
   icon: string;
 }
 
 interface WhatIsHieroData {
+  eyebrow: string;
   heading: string;
   text: string;
   points: WhatIsHieroPoint[];
@@ -17,54 +23,175 @@ interface WhatIsHieroSectionProps {
   data: WhatIsHieroData;
 }
 
+const HEADING_ID = "what-is-hiero-heading";
+
+const EMPHASISED = /\*\*(.+?)\*\*/;
+
+function propertyOf(heading: string) {
+  return EMPHASISED.exec(heading)?.[1] ?? heading;
+}
+
+function anchorFor(property: string) {
+  return `hiero-is-${property.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+}
+
 export default function WhatIsHieroSection({ data }: WhatIsHieroSectionProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const thesisRef = useRef<HTMLDivElement>(null);
+  const itemsRef = useRef<Array<HTMLLIElement | null>>([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const entries = data.points.map(point => {
+    const property = propertyOf(point.heading);
+
+    return { ...point, property, anchor: anchorFor(property) };
+  });
+
+  // Which entry the reader is on. Not motion — it is the state the index
+  // reports — so it runs whatever the reader's motion preference is, and only
+  // the marker's travel is a transition that `motion-reduce` can drop.
+  useEffect(() => {
+    const items = itemsRef.current.filter(Boolean) as HTMLLIElement[];
+
+    if (!items.length || !("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver(
+      observed => {
+        // The root is a thin band across the middle of the viewport, so the
+        // entry that intersects it is the one the reader is looking at.
+        const reached = observed
+          .filter(entry => entry.isIntersecting)
+          .map(entry => items.indexOf(entry.target as HTMLLIElement))
+          .filter(index => index >= 0);
+
+        if (!reached.length) return;
+
+        setActiveIndex(Math.min(...reached));
+      },
+      { rootMargin: "-45% 0px -45% 0px" },
+    );
+
+    items.forEach(item => observer.observe(item));
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Each entry arrives as it is reached rather than the whole list arriving at
+  // once, so the sixth entry still gets its rise when the reader gets there.
+  // The CSS side of this gate is scoped to `prefers-reduced-motion:
+  // no-preference`, which answers a preference change live; the check here
+  // only saves wiring observers nobody will see.
+  useEffect(() => {
+    const section = sectionRef.current;
+    const reduceMotion =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!section || reduceMotion || !("IntersectionObserver" in window)) {
+      return;
+    }
+
+    const targets = [thesisRef.current, ...itemsRef.current].filter(
+      Boolean,
+    ) as HTMLElement[];
+
+    const alreadyVisible = (element: HTMLElement) =>
+      element.getBoundingClientRect().top < window.innerHeight;
+
+    section.dataset.motion = "ready";
+
+    const observer = new IntersectionObserver(
+      observed => {
+        observed.forEach(entry => {
+          if (!entry.isIntersecting) return;
+
+          (entry.target as HTMLElement).dataset.revealed = "true";
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12 },
+    );
+
+    targets.forEach(element => {
+      if (alreadyVisible(element)) {
+        element.dataset.revealed = "true";
+      } else {
+        observer.observe(element);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div id="what-is-hiero" className="anchor">
-      <div className="bg-white">
-        <div
-          id="what-is-hiero-content"
-          className="container pt-[80px] pb-[40px] sm:pt-[120px] sm:pb-[120px] grid grid-cols-1 lg:grid-cols-[35%_1fr] gap-[60px] lg:gap-32">
-          <div id="what-is-hiero-intro-column" className="relative">
-            <div
-              id="what-is-hiero-intro"
-              className="sticky top-1/2 -translate-y-1/2 md:mt-20">
-              <h2 className="text-3xl mb-2.5 sm:text-4xl sm:mb-0">
-                {data.heading}
-              </h2>
-              <RichText
-                inline
-                markdown={data.text}
-                className="text-base sm:text-lg max-w-[390px]"
-              />
-            </div>
-          </div>
-          <div className="flex flex-col gap-[60px] sm:gap-10">
-            {data.points.map((point, i) => (
-              <div
-                key={i}
-                className="grid grid-cols-[1fr] sm:grid-cols-[55px_1fr] gap-5 sm:gap-10">
-                <Image
-                  src={point.icon}
-                  alt=""
-                  width={56}
-                  height={57}
-                  className="w-[55px] h-auto shrink-0"
-                  loading="lazy"
-                />
-                <div>
-                  <RichText
-                    as="h3"
-                    inline
-                    markdown={point.heading}
-                    className="text-2xl mb-5 sm:mb-2 [&>strong]:text-red"
-                  />
-                  <p className="text-base">{point.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+    <section
+      ref={sectionRef}
+      id="what-is-hiero"
+      aria-labelledby={HEADING_ID}
+      className="hiero-principles">
+      <GossipField placement="principles" />
+
+      <div className="container hiero-principles-inner">
+        <div ref={thesisRef} className="hiero-principles-thesis">
+          <p className="hiero-principles-eyebrow">{data.eyebrow}</p>
+          <h2 id={HEADING_ID} className="hiero-principles-heading">
+            {data.heading}
+          </h2>
+          <RichText
+            as="div"
+            className="hiero-principles-intro"
+            markdown={data.text}
+          />
+
+          <nav className="hiero-principles-index" aria-label={data.heading}>
+            <ul role="list" className="hiero-principles-index-list">
+              {entries.map((entry, index) => (
+                <li key={entry.anchor}>
+                  <a
+                    href={`#${entry.anchor}`}
+                    className="hiero-principles-index-link"
+                    aria-current={
+                      index === activeIndex ? "location" : undefined
+                    }>
+                    {entry.property}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
+
+        <ul role="list" className="hiero-principles-list">
+          {entries.map((entry, index) => (
+            <li
+              key={entry.anchor}
+              id={entry.anchor}
+              ref={item => {
+                itemsRef.current[index] = item;
+              }}
+              data-active={index === activeIndex ? "true" : undefined}
+              className="hiero-principles-item">
+              <Image
+                src={entry.icon}
+                alt=""
+                width={56}
+                height={57}
+                className="hiero-principles-icon"
+                loading="lazy"
+              />
+              <div className="hiero-principles-body">
+                <RichText
+                  as="h3"
+                  inline
+                  markdown={entry.heading}
+                  className="hiero-principles-term"
+                />
+                <p className="hiero-principles-detail">{entry.text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
-    </div>
+    </section>
   );
 }

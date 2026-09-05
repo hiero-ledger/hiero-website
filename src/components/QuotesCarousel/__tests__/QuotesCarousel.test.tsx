@@ -33,19 +33,19 @@ describe("QuotesCarousel", () => {
     expect(screen.getByText("A great project.")).toBeInTheDocument();
     expect(screen.getByText("Jane Doe")).toBeInTheDocument();
     expect(screen.queryByText("Built together.")).not.toBeInTheDocument();
-    expect(screen.getByLabelText("Quote 1 of 2")).toBeInTheDocument();
+    expect(screen.getByRole("status")).toHaveTextContent("Quote 1 of 2");
 
     await user.click(screen.getByRole("button", { name: "Next quote" }));
 
     expect(screen.getByText("Built together.")).toBeInTheDocument();
     expect(screen.getByText("Alex Doe")).toBeInTheDocument();
     expect(screen.queryByText("A great project.")).not.toBeInTheDocument();
-    expect(screen.getByLabelText("Quote 2 of 2")).toBeInTheDocument();
+    expect(screen.getByRole("status")).toHaveTextContent("Quote 2 of 2");
 
     await user.click(screen.getByRole("button", { name: "Previous quote" }));
 
     expect(screen.getByText("A great project.")).toBeInTheDocument();
-    expect(screen.getByLabelText("Quote 1 of 2")).toBeInTheDocument();
+    expect(screen.getByRole("status")).toHaveTextContent("Quote 1 of 2");
   });
 
   it("automatically advances to the next quote", () => {
@@ -59,7 +59,7 @@ describe("QuotesCarousel", () => {
       });
 
       expect(screen.getByText("Built together.")).toBeInTheDocument();
-      expect(screen.getByLabelText("Quote 2 of 2")).toBeInTheDocument();
+      expect(screen.getByRole("status")).toHaveTextContent("Quote 2 of 2");
     } finally {
       vi.useRealTimers();
     }
@@ -102,5 +102,28 @@ describe("QuotesCarousel", () => {
     } finally {
       vi.useRealTimers();
     }
+  });
+
+  it("announces the position in a live region for assistive technology", async () => {
+    const user = userEvent.setup();
+
+    render(<QuotesCarousel data={quotesData} />);
+
+    const status = screen.getByRole("status");
+
+    expect(status).toHaveAttribute("aria-live", "polite");
+    expect(status).toHaveTextContent("Quote 1 of 2");
+
+    await user.click(screen.getByRole("button", { name: "Next quote" }));
+
+    expect(screen.getByRole("status")).toHaveTextContent("Quote 2 of 2");
+  });
+
+  it("renders nothing when there are no quotes", () => {
+    const { container } = render(
+      <QuotesCarousel data={{ ...quotesData, quotes: [] }} />,
+    );
+
+    expect(container).toBeEmptyDOMElement();
   });
 });

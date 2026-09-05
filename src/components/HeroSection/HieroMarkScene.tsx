@@ -26,16 +26,24 @@ const LAYERS: Record<string, (input: Input) => string> = {
   "--hero-scroll-progress": ({ scroll }) => scroll.toFixed(3),
 };
 
-const MARK = (
-  <Image
-    src="/images/Hiero-Icon.svg"
-    alt=""
-    width={540}
-    height={529}
-    className="hero-mark-image"
-    priority
-  />
-);
+/**
+ * The mark itself, drawn twice: once as the echo behind the plane and once as
+ * the emblem on it. Local to the scene on purpose — the other places the icon
+ * appears (`Divider`, the 404 page) size and label it differently, so a shared
+ * component would be a prop bag, not a reuse.
+ */
+function HieroMark() {
+  return (
+    <Image
+      src="/images/Hiero-Icon.svg"
+      alt=""
+      width={540}
+      height={529}
+      className="hero-mark-image"
+      priority
+    />
+  );
+}
 
 /**
  * A brand-led network object for the right side of the hero.
@@ -132,8 +140,12 @@ export default function HieroMarkScene() {
           />
         ))}
 
-        <div className="hero-mark-echo">{MARK}</div>
-        <div className="hero-mark-emblem">{MARK}</div>
+        <div className="hero-mark-echo">
+          <HieroMark />
+        </div>
+        <div className="hero-mark-emblem">
+          <HieroMark />
+        </div>
 
         {["one", "two", "three", "four"].map(node => (
           <span

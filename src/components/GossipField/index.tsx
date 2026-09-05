@@ -5,30 +5,35 @@ import {
   type GossipEvent,
 } from "@/lib/gossip-field";
 
-export type GossipFieldPlacement =
-  "principles" | "issues" | "calls" | "repos" | "quotes";
+/**
+ * One field per placement, built once when the module is loaded rather than on
+ * every render.
+ *
+ * A field is deterministic from its seed, so building it at module scope costs
+ * nothing in fidelity and saves repeating the rejection-sampling layout — the
+ * expensive part — on every render. It also pins each placement to the same
+ * drawing on the server and in the browser, which is what keeps hydration
+ * quiet. The seeds are arbitrary but fixed: changing one redraws that section's
+ * background.
+ */
+const field = (seed: number) =>
+  buildGossipField({
+    seed,
+    eventCount: 46,
+    minSeparation: 92,
+    linkRadius: 205,
+    accents: { count: 4, minSeparation: 300 },
+  });
 
-const SEEDS: Record<GossipFieldPlacement, number> = {
-  principles: 58201774,
-  issues: 20260901,
-  calls: 41720433,
-  repos: 77310219,
-  quotes: 13480967,
+const FIELDS = {
+  principles: field(58201774),
+  issues: field(20260901),
+  calls: field(41720433),
+  repos: field(77310219),
+  quotes: field(13480967),
 };
 
-/** Built once per placement, at module scope, for the reason above. */
-const FIELDS = Object.fromEntries(
-  Object.entries(SEEDS).map(([placement, seed]) => [
-    placement,
-    buildGossipField({
-      seed,
-      eventCount: 46,
-      minSeparation: 92,
-      linkRadius: 205,
-      accents: { count: 4, minSeparation: 300 },
-    }),
-  ]),
-) as Record<GossipFieldPlacement, ReturnType<typeof buildGossipField>>;
+export type GossipFieldPlacement = keyof typeof FIELDS;
 
 function Events({ events }: { events: GossipEvent[] }) {
   return events.map(event => (

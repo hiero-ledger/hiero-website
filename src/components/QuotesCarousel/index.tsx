@@ -54,6 +54,10 @@ export default function QuotesCarousel({ data }: QuotesCarouselProps) {
     setActiveIndex(index => (index + 1) % data.quotes.length);
   };
 
+  // Nothing to carry the section: with no quotes there is no slide to render,
+  // and the same guard covers an index left over from a longer list.
+  if (!activeQuote) return null;
+
   return (
     <section
       id="quotes"
@@ -135,14 +139,20 @@ export default function QuotesCarousel({ data }: QuotesCarouselProps) {
             <div className="quotes-carousel-controls">
               <div className="quotes-carousel-status">
                 <p>Community perspectives</p>
-                <div
-                  className="quotes-carousel-progress"
-                  aria-label={`Quote ${activeIndex + 1} of ${data.quotes.length}`}>
+                {/*
+                  The dots are the sighted read-out of the position. A div with
+                  an `aria-label` is not announced, so the same information goes
+                  out as a live status instead — that is what a keyboard user
+                  hears after Previous/Next.
+                */}
+                <p className="sr-only" role="status" aria-live="polite">
+                  Quote {activeIndex + 1} of {data.quotes.length}
+                </p>
+                <div className="quotes-carousel-progress" aria-hidden="true">
                   {data.quotes.map((quote, index) => (
                     <span
                       key={quote.author}
                       data-active={index === activeIndex ? "true" : undefined}
-                      aria-hidden="true"
                     />
                   ))}
                 </div>

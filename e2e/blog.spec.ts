@@ -65,11 +65,15 @@ test.describe("blog archive", () => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/blog/");
 
-    const tops = await page
-      .locator(".blog-grid-item")
-      .evaluateAll(items =>
-        items.map(item => Math.round(item.getBoundingClientRect().top)),
-      );
+    // Counted first: `evaluateAll` returns [] when nothing matches, and an
+    // empty list trivially satisfies the row assertion below — so without this
+    // the test passed when the archive rendered no cards at all.
+    const cards = page.locator(".blog-grid-item");
+    await expect(cards).toHaveCount(3);
+
+    const tops = await cards.evaluateAll(items =>
+      items.map(item => Math.round(item.getBoundingClientRect().top)),
+    );
     expect(new Set(tops).size, "each card should be on its own row").toBe(
       tops.length,
     );

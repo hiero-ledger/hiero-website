@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { format } from "date-fns";
+import { formatPostDate } from "@/lib/dates";
 import type { PostMeta } from "@/lib/posts";
 
 /**
@@ -50,9 +50,7 @@ export default function BlogLead({ post }: { post: PostMeta }) {
             )}
 
             <span className="blog-lead-byline">
-              <time dateTime={post.date}>
-                {format(new Date(post.date), "d MMMM yyyy")}
-              </time>
+              <time dateTime={post.date}>{formatPostDate(post.date)}</time>
               {byline && (
                 <span className="blog-lead-byline-author">{byline}</span>
               )}

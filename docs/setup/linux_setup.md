@@ -39,7 +39,7 @@ and when the limit is hit the sync quietly falls back to the JSON caches
 committed in `src/data/`. To keep the numbers fresh during repeated local
 builds, export a GitHub token first:
 
-    export GITHUB_TOKEN=<your personal access token>
+    export GITHUB_TOKEN="<your personal access token>"   # replace with your own token
 
 ## Step 5: Preview Draft Content
 

@@ -1,7 +1,6 @@
 "use client";
 
 import Container from "@/components/Container";
-import RichText from "@/components/RichText";
 import { useEffect, useRef, useState } from "react";
 import { useIssues } from "@/hooks/useIssues";
 import { GitHubIssue } from "@/issues/types";
@@ -631,12 +630,18 @@ export default function IssueExplorer() {
                         </span>
                       </div>
 
-                      {/* Title */}
+                      {/* Title, as plain text.
+                          `issue.title` is whatever an issue author typed, and
+                          anyone can open an issue on a tracked repository.
+                          Rendering it as markdown let that author put an `<a>`
+                          inside this card's own anchor — which is invalid, and
+                          closes the outer link early — or an `<img>`, which
+                          would make every visitor fetch from a host they
+                          chose. GitHub shows issue titles as plain text too. */}
                       <div className="mt-4 flex-1">
-                        <RichText
-                          markdown={issue.title ?? ""}
-                          className="line-clamp-3 text-[15px] font-medium leading-5 tracking-[-0.02em] text-charcoal"
-                        />
+                        <p className="line-clamp-3 text-[15px] font-medium leading-5 tracking-[-0.02em] text-charcoal">
+                          {issue.title ?? ""}
+                        </p>
                       </div>
 
                       {/* Bottom row */}

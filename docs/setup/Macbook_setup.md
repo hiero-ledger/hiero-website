@@ -44,7 +44,8 @@ committed in `src/data/`. To keep the numbers fresh during repeated local
 builds, export a GitHub token first:
 
 ```
-export GITHUB_TOKEN=<your personal access token>
+# Replace the placeholder below with your own personal access token.
+export GITHUB_TOKEN="<your personal access token>"
 ```
 
 Step 5: Building for Production

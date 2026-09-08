@@ -18,6 +18,11 @@ const repoSet = new Set(repos);
 const rateLimitHint =
   "Set GITHUB_TOKEN to raise the rate limit for local builds.";
 
+// `pnpm build` and `pnpm dev` both run this first, and fetch has no default
+// timeout. Without this a stalled response hangs the build rather than falling
+// through to the bundled cache — the same guard sync-community-calls uses.
+const FETCH_TIMEOUT_MS = 15_000;
+
 function createZeroStatsMap() {
   return new Map(repos.map(repo => [repo, { stars: 0 }]));
 }
@@ -116,17 +121,27 @@ async function fetchFromGitHub() {
   let successCount = 0;
 
   for (const repo of repos) {
-    const response = await fetch(
-      `https://api.github.com/repos/${organization}/${repo}`,
-      { headers },
-    );
-    // A response counts only if its star field validates. One that does not is
-    // treated like a failed request, so the cached value stands instead of an
-    // unusable one being written to the data file.
+    // Per repository, so one slow or unreachable repository costs its own
+    // entry rather than discarding the counts already collected. Without this
+    // the timeout above would abort the whole run on a single stall.
+    let response = null;
     let stars = null;
-    if (response.ok) {
-      const data = await response.json();
-      stars = isRecord(data) ? toCount(data.stargazers_count) : null;
+
+    try {
+      response = await fetch(
+        `https://api.github.com/repos/${organization}/${repo}`,
+        { headers, signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) },
+      );
+
+      // A response counts only if its star field validates. One that does not
+      // is treated like a failed request, so the cached value stands instead
+      // of an unusable one being written to the data file.
+      if (response.ok) {
+        const data = await response.json();
+        stars = isRecord(data) ? toCount(data.stargazers_count) : null;
+      }
+    } catch (error) {
+      console.warn(`  ⚠ ${repo}: request failed (${error.message})`);
     }
 
     if (stars !== null) {
@@ -134,9 +149,11 @@ async function fetchFromGitHub() {
       successCount += 1;
       console.log(`  ✓ ${repo}: ${stars} stars`);
     } else {
-      const reason = response.ok
-        ? "API returned an unusable star count"
-        : `API responded with ${response.status}`;
+      const reason = !response
+        ? "request failed"
+        : response.ok
+          ? "API returned an unusable star count"
+          : `API responded with ${response.status}`;
       const cachedStars = toCount(cachedStats.get(repo)?.stars);
 
       if (cachedStars !== null) {
@@ -152,6 +169,7 @@ async function fetchFromGitHub() {
 
     // If access is blocked/rate-limited and nothing has succeeded, stop early.
     if (
+      response &&
       (response.status === 401 || response.status === 403) &&
       successCount === 0
     ) {
@@ -197,7 +215,7 @@ async function fetchOrganizationStats(headers) {
   for (let page = 1; ; page += 1) {
     const response = await fetch(
       `https://api.github.com/orgs/${organization}/repos?type=public&per_page=100&page=${page}`,
-      { headers },
+      { headers, signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) },
     );
 
     if (!response.ok) {

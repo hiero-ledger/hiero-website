@@ -103,6 +103,51 @@ describe("extractHeadings", () => {
     ]);
   });
 
+  /* Most weekly round-ups close with a setext heading, and `react-markdown`
+     renders it, so leaving it out desynchronised the slug counters. */
+  it("finds setext headings, both underline styles", () => {
+    expect(
+      extractHeadings("Title here\n===\n\nbody").map(h => [h.text, h.level]),
+    ).toEqual([["Title here", 2]]);
+    expect(
+      extractHeadings("**Want to be featured?**\n--\n\nbody").map(h => [
+        h.text,
+        h.level,
+      ]),
+    ).toEqual([["Want to be featured?", 2]]);
+  });
+
+  it("treats a rule after a blank line as a thematic break, not a heading", () => {
+    expect(extractHeadings("Some copy.\n\n---\n\nMore copy.")).toEqual([]);
+    expect(extractHeadings("---\n\ncopy")).toEqual([]);
+  });
+
+  it("does not read a rule under a list or a quote as a heading", () => {
+    expect(extractHeadings("- an item\n---")).toEqual([]);
+    expect(extractHeadings("> quoted\n---")).toEqual([]);
+    expect(extractHeadings("| a | b |\n---")).toEqual([]);
+  });
+
+  it("ignores underlines inside fenced code", () => {
+    const markdown = ["```", "Title", "===", "```", "## Real"].join("\n");
+    expect(extractHeadings(markdown).map(h => h.text)).toEqual(["Real"]);
+  });
+
+  it("joins a multi-line paragraph into one setext heading", () => {
+    expect(
+      extractHeadings("First line\nsecond line\n--").map(h => h.text),
+    ).toEqual(["First line second line"]);
+  });
+
+  it("keeps setext and atx headings in document order", () => {
+    const markdown = ["## One", "", "Two", "--", "", "### Three"].join("\n");
+    expect(extractHeadings(markdown).map(h => h.text)).toEqual([
+      "One",
+      "Two",
+      "Three",
+    ]);
+  });
+
   it("returns nothing for a post with no headings", () => {
     expect(extractHeadings("Just a paragraph.\n\nAnd another.")).toEqual([]);
   });

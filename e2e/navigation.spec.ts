@@ -7,10 +7,16 @@ import { collectContrastFailures } from "./helpers/contrast";
  * globals.css stop agreeing. Nobody opens a browser at 700px by accident,
  * which is exactly why a regression there survives review.
  */
+/**
+ * `hasOverlay` records which widths are supposed to collapse the nav behind an
+ * opener. Stated here rather than compared against a breakpoint in each test,
+ * so the expectation is data and the tests can fail when a width stops
+ * matching it instead of quietly measuring whatever they were given.
+ */
 const WIDTHS = [
-  { name: "mobile", width: 375, height: 667 },
-  { name: "between", width: 700, height: 800 },
-  { name: "desktop", width: 1280, height: 900 },
+  { name: "mobile", width: 375, height: 667, hasOverlay: true },
+  { name: "between", width: 700, height: 800, hasOverlay: true },
+  { name: "desktop", width: 1280, height: 900, hasOverlay: false },
 ];
 
 async function openMenuIfPresent(page: import("@playwright/test").Page) {
@@ -24,7 +30,7 @@ async function openMenuIfPresent(page: import("@playwright/test").Page) {
   return true;
 }
 
-for (const { name, width, height } of WIDTHS) {
+for (const { name, width, height, hasOverlay } of WIDTHS) {
   test.describe(`${name} (${width}x${height})`, () => {
     test.use({ viewport: { width, height } });
 
@@ -32,7 +38,14 @@ for (const { name, width, height } of WIDTHS) {
       page,
     }) => {
       await page.goto("/");
-      await openMenuIfPresent(page);
+      // Asserted, not discarded: below the breakpoint the overlay is the
+      // surface under test, and if the opener ever vanished or was renamed
+      // this test would otherwise measure the collapsed bar and still pass.
+      const opened = await openMenuIfPresent(page);
+      expect(
+        opened,
+        `the overlay should be the surface under test at ${width}px`,
+      ).toBe(hasOverlay);
 
       // Scoped to the header: the nav overlay and the bar behind it are the
       // pair that has actually gone wrong, and a site-wide sweep would need
@@ -55,8 +68,11 @@ for (const { name, width, height } of WIDTHS) {
       page,
     }) => {
       await page.goto("/");
+      test.skip(!hasOverlay, "no mobile menu at this width");
+
+      // A missing opener is a failure at these widths, not a skip.
       const opened = await openMenuIfPresent(page);
-      test.skip(!opened, "no mobile menu at this width");
+      expect(opened, `the menu should open at ${width}px`).toBe(true);
 
       const clipped = await page.evaluate(() => {
         const items = Array.from(

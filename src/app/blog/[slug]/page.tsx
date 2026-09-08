@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { format } from "date-fns";
 import { notFound } from "next/navigation";
 import ArticleContents from "@/components/ArticleContents";
 import BlogPostCard from "@/components/BlogPostCard";
@@ -9,6 +8,7 @@ import Divider from "@/components/Divider";
 import GossipField from "@/components/GossipField";
 import RichText from "@/components/RichText";
 import ShareButtons from "@/components/ShareButtons/ClientShareButtons";
+import { formatPostDate } from "@/lib/dates";
 import { extractHeadings, type ArticleHeading } from "@/lib/headings";
 import {
   getAllPosts,
@@ -94,9 +94,7 @@ export default async function BlogPostPage({
           {/* Date and reading time sit here, once, rather than repeating
               beside every author the way they used to. */}
           <p className="blog-article-eyebrow">
-            <time dateTime={post.date}>
-              {format(new Date(post.date), "d MMMM yyyy")}
-            </time>
+            <time dateTime={post.date}>{formatPostDate(post.date)}</time>
             <span>{readingTime}</span>
           </p>
 

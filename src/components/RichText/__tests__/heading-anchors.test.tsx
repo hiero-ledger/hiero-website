@@ -47,6 +47,14 @@ describe("heading anchors", () => {
       "punctuation-heavy headings",
       "## HCS-1: File Management\n\n## HCS-20: Auditable Points\n\n## Get involved!",
     ],
+    [
+      "setext headings mixed with atx",
+      "## Intro\n\nbody\n\n**Want to be featured?**\n--\n\nmore",
+    ],
+    [
+      "a setext heading before a repeated atx heading",
+      "Lead in\n===\n\n## Background\n\n## Background",
+    ],
   ])("matches the extracted contents ids for %s", (_name, markdown) => {
     const extracted = extractHeadings(markdown).map(heading => heading.id);
 

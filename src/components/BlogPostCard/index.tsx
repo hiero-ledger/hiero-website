@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { format } from "date-fns";
+import { formatPostDateShort } from "@/lib/dates";
 import type { PostMeta } from "@/lib/posts";
 
 /**
@@ -36,7 +36,7 @@ export default function BlogPostCard({ post }: { post: PostMeta }) {
 
       <span className="blog-card-body">
         <time className="blog-card-date" dateTime={post.date}>
-          {format(new Date(post.date), "dd MMM yyyy")}
+          {formatPostDateShort(post.date)}
         </time>
 
         {/* A heading rather than a span: it keeps the archive navigable by

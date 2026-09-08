@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import type { ArticleHeading } from "@/lib/headings";
 import ArticleContents from "..";
 
@@ -10,6 +10,14 @@ const headings: ArticleHeading[] = [
 ];
 
 describe("ArticleContents", () => {
+  // The global `cleanup` unmounts rendered trees but leaves nodes appended to
+  // the body behind. Doing it here rather than at the end of the test means a
+  // failed assertion cannot leak headings into the next test and turn one
+  // failure into two.
+  afterEach(() => {
+    document.body.replaceChildren();
+  });
+
   it("lists every heading as a link to its anchor", () => {
     render(<ArticleContents headings={headings} />);
 
@@ -73,7 +81,6 @@ describe("ArticleContents", () => {
 
     add.mockRestore();
     remove.mockRestore();
-    document.body.replaceChildren();
   });
 
   it("does nothing when none of its headings are on the page", () => {

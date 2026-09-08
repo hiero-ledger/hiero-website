@@ -54,9 +54,15 @@ export default function MeetSection({ data }: MeetSectionProps) {
           <div className="community-calls-intro">
             <RichText markdown={data.text} className="community-calls-copy" />
 
-            <p
-              className="community-calls-count"
-              aria-label={`${data.calls.length} community calls`}>
+            <p className="community-calls-count">
+              {/* The count in the accessibility tree. It cannot ride on an
+                  `aria-label` here: the implicit `paragraph` role prohibits an
+                  author-provided name, so the label was ignored and — with
+                  both visible spans hidden — the number reached assistive
+                  technology not at all. */}
+              <span className="sr-only">
+                {data.calls.length} community calls open to take part in
+              </span>
               <span className="community-calls-count-value" aria-hidden="true">
                 {String(data.calls.length).padStart(2, "0")}
               </span>

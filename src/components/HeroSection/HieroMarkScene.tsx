@@ -48,8 +48,8 @@ function HieroMark() {
 /**
  * A brand-led network object for the right side of the hero.
  *
- * The real Hiero mark is set into a translucent ledger plane, with rails and
- * event nodes carrying the existing gossip-field language through the object.
+ * The real Hiero mark stands on its own frame, with rails and event nodes
+ * carrying the existing gossip-field language through the object.
  * Everything is decorative. Pointer and scroll input only update the custom
  * properties above, so the composition still makes sense before hydration and
  * with motion or JavaScript disabled.
@@ -131,8 +131,6 @@ export default function HieroMarkScene() {
   return (
     <div ref={sceneRef} className="hero-mark-scene" aria-hidden="true">
       <div className="hero-mark-reactive">
-        <div className="hero-mark-grid" />
-
         {["top", "middle", "bottom"].map(rail => (
           <span
             key={rail}

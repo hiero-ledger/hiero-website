@@ -341,26 +341,6 @@
     will-change: transform;
   }
 
-  .hero-mark-grid {
-    @apply absolute top-[12%] right-[-7%] h-[76%] w-[78%];
-    @apply border border-white/14 shadow-[0_34px_70px_rgb(25_1_10_/_28%)];
-
-    clip-path: polygon(11% 0, 100% 0, 89% 100%, 0 100%);
-    background:
-      repeating-linear-gradient(
-        90deg,
-        transparent 0 4.9rem,
-        rgb(255 255 255 / 7%) 4.9rem calc(4.9rem + 1px)
-      ),
-      repeating-linear-gradient(
-        0deg,
-        transparent 0 4rem,
-        rgb(255 255 255 / 6%) 4rem calc(4rem + 1px)
-      ),
-      linear-gradient(135deg, rgb(255 255 255 / 9%), rgb(255 255 255 / 1%));
-    transform: perspective(60rem) rotateY(-12deg) rotateZ(-5deg);
-  }
-
   .hero-mark-rail {
     @apply absolute right-[-12%] h-px w-[88%] origin-right rotate-[-7deg];
 
@@ -542,10 +522,6 @@
       animation: hero-mark-float 8s ease-in-out infinite alternate;
     }
 
-    .hero-mark-grid {
-      animation: hero-mark-plane 12s ease-in-out infinite alternate;
-    }
-
     .hero-mark-rail::after {
       animation: hero-mark-signal 5.5s ease-in-out infinite;
     }
@@ -589,17 +565,6 @@
     }
   }
 
-  @keyframes hero-mark-plane {
-    from {
-      transform: perspective(60rem) rotateY(-12deg) rotateZ(-5deg) translateX(0);
-    }
-
-    to {
-      transform: perspective(60rem) rotateY(-9deg) rotateZ(-3.5deg)
-        translateX(-0.6rem);
-    }
-  }
-
   @keyframes hero-mark-signal {
     0%,
     10% {
@@ -638,7 +603,6 @@
     .hero-traces-signals,
     .hero-traces-events circle,
     .hero-mark-emblem,
-    .hero-mark-grid,
     .hero-mark-rail::after {
       animation: none;
     }

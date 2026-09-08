@@ -11,6 +11,7 @@ function makePost(overrides: Partial<PostMeta> = {}): PostMeta {
     abstract: "What the post is about",
     featuredImage: "/images/a-post.png",
     duration: "4 min read",
+    readingMinutes: 4,
     authors: [],
     categories: [],
     tags: [],

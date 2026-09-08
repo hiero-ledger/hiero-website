@@ -12,6 +12,7 @@ function makePosts(count: number): PostMeta[] {
     abstract: `Abstract ${i + 1}`,
     featuredImage: `/images/${i + 1}.png`,
     duration: "2 min read",
+    readingMinutes: 2,
     authors: [],
     categories: [],
     tags: [],

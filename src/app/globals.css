@@ -1981,58 +1981,197 @@
     @apply text-pretty text-charcoal/72;
   }
 
-  .blog-article-authors {
-    @apply m-0 mt-[clamp(1.75rem,3vw,2.5rem)] flex list-none flex-wrap gap-x-10 gap-y-5 p-0;
-    @apply border-t border-charcoal/16 pt-[clamp(1.25rem,2vw,1.75rem)];
-  }
-
-  .blog-article-author {
-    @apply flex items-center gap-3.5 no-underline;
-  }
-
-  .blog-article-author--link {
-    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
-  }
-
-  .blog-article-author-avatar {
-    @apply h-12 w-12 flex-none rounded-full border border-charcoal/12 bg-white object-cover;
-  }
-
-  .blog-article-author-text {
-    @apply flex min-w-0 flex-col gap-1.5;
-  }
-
-  .blog-article-author-name {
-    @apply text-base leading-none font-medium tracking-[-0.02em] text-charcoal;
-    @apply transition-colors duration-200 motion-reduce:transition-none;
-  }
-
-  .blog-article-author--link:hover .blog-article-author-name {
-    @apply text-red;
-  }
-
-  .blog-article-author-affiliation {
-    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.09em] text-charcoal/55 uppercase;
-  }
-
-  /* White rather than sand: this is the one page on the site carrying two
+  /* White rather than sand: this is the one page on the site carrying a
      thousand words of body text, and it gets a reading surface. The sand
      bands above and below frame it. */
   .blog-article-body {
     @apply bg-white;
   }
 
+  /* Prose first in the source and first in the grid, so it keeps the
+     container's left edge and shares an axis with the title above it. The rail
+     is a second column only where there is room for one; below `xl` it falls
+     underneath, which is also the order a screen reader takes it in. */
+  .blog-article-layout {
+    @apply flex flex-col gap-[clamp(2.5rem,5vw,4rem)] py-[var(--space-band)];
+    @apply xl:grid xl:grid-cols-[minmax(0,46rem)_minmax(16rem,22rem)] xl:items-start;
+    @apply xl:gap-[clamp(3rem,6vw,6rem)];
+  }
+
   .blog-article-prose {
-    @apply w-full max-w-[46rem] py-[var(--space-band)];
+    @apply w-full max-w-[46rem];
   }
 
-  .blog-article-share {
-    @apply mt-[clamp(2.5rem,5vw,4rem)] flex flex-wrap items-center justify-between gap-5;
-    @apply border-t border-charcoal/14 pt-[clamp(1.5rem,2.5vw,2rem)];
+  /* ---- The rail ---------------------------------------------------------
+     What the reader needs about the post rather than from it: whose it is,
+     what is in it, and how to pass it on. It sticks once there is a column to
+     stick in — `self-start` is what leaves it room to, since a stretched grid
+     item has none. */
+  .blog-rail {
+    @apply w-full min-w-0 xl:sticky xl:top-32 xl:self-start;
   }
 
-  .blog-article-share-label {
-    @apply m-0 font-ibm text-[0.6875rem] leading-none tracking-[0.14em] text-charcoal/58 uppercase;
+  .blog-rail-inner {
+    @apply flex flex-col gap-[clamp(1.75rem,3vw,2.25rem)];
+    @apply border-t border-charcoal/16 pt-[clamp(1.5rem,2.5vw,2rem)];
+    @apply xl:border-t-0 xl:pt-0;
+    /* Backstop for the rail as a whole: whatever it holds stays reachable
+       once it is stuck, rather than running off the bottom of the screen. */
+    @apply xl:max-h-[calc(100svh-9rem)] xl:overflow-y-auto;
+  }
+
+  /* Not optional. This is a flex column with a max height, so its children are
+     shrinkable by default — which silently squashed the plate to two thirds of
+     its height and clipped the artwork against its own rounded corners. The
+     rail scrolls; nothing inside it compresses. */
+  .blog-rail-inner > * {
+    @apply flex-none;
+  }
+
+  .blog-rail-plate {
+    @apply hidden overflow-hidden rounded-[0.875rem] border border-charcoal/12 bg-sand/40 xl:block;
+  }
+
+  .blog-rail-image {
+    @apply block h-auto w-full;
+  }
+
+  .blog-rail-block {
+    @apply flex flex-col gap-3.5;
+  }
+
+  /* The rail's one repeated device: a ruled mono label over each block, which
+     is how the archive and the section headers name a list too. */
+  .blog-rail-label {
+    @apply m-0 border-b border-charcoal/14 pb-2.5;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.14em] text-charcoal/55 uppercase;
+  }
+
+  .blog-rail-authors {
+    @apply m-0 flex list-none flex-col gap-3.5 p-0;
+  }
+
+  .blog-rail-author {
+    @apply flex items-center gap-3 no-underline;
+  }
+
+  .blog-rail-author--link {
+    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+  }
+
+  .blog-rail-avatar {
+    @apply h-10 w-10 flex-none rounded-full border border-charcoal/12 bg-white object-cover;
+  }
+
+  .blog-rail-author-text {
+    @apply flex min-w-0 flex-col gap-1;
+  }
+
+  .blog-rail-author-name {
+    @apply text-[0.9375rem] leading-tight font-medium tracking-[-0.015em] text-charcoal;
+    @apply transition-colors duration-200 motion-reduce:transition-none;
+  }
+
+  .blog-rail-author--link:hover .blog-rail-author-name {
+    @apply text-red;
+  }
+
+  .blog-rail-author-affiliation {
+    @apply font-ibm text-[0.625rem] leading-none tracking-[0.09em] text-charcoal/55 uppercase;
+  }
+
+  /* ---- Contents ---------------------------------------------------------
+     The marker rather than a highlight: it grows from a stub to the full rule
+     on the section being read, the same way the principles index reports
+     position on the home page. */
+  .blog-contents {
+    @apply flex flex-col gap-3.5;
+  }
+
+  .blog-contents-list {
+    @apply m-0 flex list-none flex-col gap-2.5 p-0;
+    @apply xl:max-h-[min(46svh,24rem)] xl:overflow-y-auto xl:pr-1;
+  }
+
+  .blog-contents-list li[data-level="3"] {
+    @apply pl-5;
+  }
+
+  .blog-contents-link {
+    @apply flex items-baseline gap-3 text-sm leading-snug tracking-[-0.01em] no-underline;
+    @apply text-charcoal/65 transition-colors duration-200 ease-out;
+    @apply hover:text-charcoal;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  .blog-contents-link::before {
+    @apply mt-[0.45em] h-px w-4 flex-none origin-left bg-current;
+    @apply transition-transform duration-300 ease-out motion-reduce:transition-none;
+
+    content: "";
+    transform: scaleX(0.45);
+  }
+
+  .blog-contents-link[aria-current] {
+    @apply text-red;
+  }
+
+  .blog-contents-link[aria-current]::before {
+    transform: scaleX(1);
+  }
+
+  /* ---- The post either side ---------------------------------------------
+     Most of this blog is a weekly series, so the neighbouring weeks are a
+     real destination. Two cells that split the row, or one that takes the
+     right-hand half when there is no older post to point at. */
+  .blog-series {
+    @apply bg-white;
+  }
+
+  .blog-series-inner {
+    @apply grid gap-4 border-t border-charcoal/14 py-[clamp(1.5rem,3vw,2.5rem)];
+    @apply sm:grid-cols-2 sm:gap-5;
+  }
+
+  .blog-series-link {
+    @apply flex min-w-0 flex-col gap-2.5 rounded-[1rem] border border-charcoal/16 p-[clamp(1.125rem,2vw,1.5rem)];
+    @apply no-underline transition-[background-color,border-color] duration-200 ease-out;
+    @apply hover:border-red/50 hover:bg-sand/40;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  /* Both halves stated rather than one defaulting: the modifier is what
+     decides which cell a link takes, and a reader of this file should not have
+     to infer the older one from the absence of a rule. */
+  .blog-series-link--older {
+    @apply sm:col-start-1 sm:items-start sm:text-left;
+  }
+
+  .blog-series-link--newer {
+    @apply sm:col-start-2 sm:items-end sm:text-right;
+  }
+
+  .blog-series-direction {
+    @apply inline-flex items-center gap-2.5;
+    @apply font-ibm text-[0.625rem] leading-none tracking-[0.14em] text-charcoal/52 uppercase;
+  }
+
+  /* Arrow after the words on the newer side, so both cells read outward from
+     the middle of the row. */
+  .blog-series-link--newer .blog-series-direction {
+    @apply sm:flex-row-reverse;
+  }
+
+  .blog-series-title {
+    @apply text-[clamp(1rem,1.3vw,1.125rem)] leading-snug font-medium tracking-[-0.02em];
+    @apply text-charcoal transition-colors duration-200 motion-reduce:transition-none;
+  }
+
+  .blog-series-link:hover .blog-series-title,
+  .blog-series-link:focus-visible .blog-series-title {
+    @apply text-red;
   }
 
   .blog-article-more {
@@ -2473,6 +2612,14 @@
     h3:first-child,
     h4:first-child {
       @apply mt-0;
+    }
+
+    /* Headings carry ids for the contents list to point at, so they need to
+       clear the fixed header when one is jumped to. */
+    h1,
+    h2,
+    h3 {
+      @apply scroll-mt-28;
     }
 
     p {

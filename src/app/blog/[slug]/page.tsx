@@ -3,11 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
 import { notFound } from "next/navigation";
+import ArticleContents from "@/components/ArticleContents";
 import BlogPostCard from "@/components/BlogPostCard";
 import Divider from "@/components/Divider";
 import GossipField from "@/components/GossipField";
 import RichText from "@/components/RichText";
 import ShareButtons from "@/components/ShareButtons/ClientShareButtons";
+import { extractHeadings, type ArticleHeading } from "@/lib/headings";
 import {
   getAllPosts,
   getPostBySlug,
@@ -17,7 +19,16 @@ import {
 } from "../../../lib/posts";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hiero.org";
+
+/** One row of the archive grid. */
 const RELATED_COUNT = 3;
+
+/**
+ * Below this, a contents list is furniture rather than help. Most posts here
+ * run a few hundred words under a single heading; the ones that earn a
+ * contents list are the HIP explainers and the long community write-ups.
+ */
+const MIN_HEADINGS_FOR_CONTENTS = 3;
 
 export function generateStaticParams(): { slug: string }[] {
   const posts: PostMeta[] = getAllPosts();
@@ -45,9 +56,28 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   const shareUrl = `${BASE_URL}/blog/${post.slug}`;
+  const readingTime = post.duration ?? `${post.readingMinutes} min read`;
 
-  const relatedPosts: PostMeta[] = getAllPosts()
-    .filter((candidate: PostMeta) => candidate.slug !== slug)
+  const headings: ArticleHeading[] = extractHeadings(post.contentMarkdown);
+  const contents =
+    headings.length >= MIN_HEADINGS_FOR_CONTENTS ? headings : null;
+
+  /* `getAllPosts` is newest first, so the entry before this one is the newer
+     post. Most of this blog is a weekly series, which is what makes the
+     neighbours worth naming: the next week's round-up is a more useful
+     destination than another three cards. */
+  const all: PostMeta[] = getAllPosts();
+  const index = all.findIndex(candidate => candidate.slug === slug);
+  const newer = index > 0 ? all[index - 1] : undefined;
+  const older = index >= 0 ? all[index + 1] : undefined;
+
+  /* Whatever the neighbour links already offer is kept out of the grid below,
+     so the same post is not put in front of the reader twice. */
+  const shown = new Set(
+    [slug, newer?.slug, older?.slug].filter(Boolean) as string[],
+  );
+  const relatedPosts = all
+    .filter(candidate => !shown.has(candidate.slug))
     .slice(0, RELATED_COUNT);
 
   return (
@@ -61,13 +91,13 @@ export default async function BlogPostPage({
             <span>All posts</span>
           </Link>
 
-          {/* The date and reading time sit here, once, rather than repeating
+          {/* Date and reading time sit here, once, rather than repeating
               beside every author the way they used to. */}
           <p className="blog-article-eyebrow">
             <time dateTime={post.date}>
               {format(new Date(post.date), "d MMMM yyyy")}
             </time>
-            {post.duration && <span>{post.duration}</span>}
+            <span>{readingTime}</span>
           </p>
 
           <h1 className="blog-article-title">{post.title}</h1>
@@ -75,36 +105,72 @@ export default async function BlogPostPage({
           {post.abstract && (
             <p className="blog-article-standfirst">{post.abstract}</p>
           )}
-
-          {post.authors.length > 0 && (
-            <ul role="list" className="blog-article-authors">
-              {post.authors.map((author: PostAuthor, i: number) => (
-                <li key={author.link ?? author.name ?? i}>
-                  <Author author={author} />
-                </li>
-              ))}
-            </ul>
-          )}
         </div>
       </div>
 
-      {/* No featured image here, deliberately. Almost every post's image is a
-          red title card with the post's own headline set into it, so running
-          it under the `h1` prints the same sentence twice — once at 4rem and
-          again inside a picture. The index shows it where it is the only thing
-          identifying the post; here the headline already is. */}
+      {/* The reading band. The prose keeps the container's left edge so the
+          title above and the first line of the body share one axis, and the
+          rail takes the space to its right that a single column left empty.
+          Below `xl` the rail moves underneath. */}
       <div className="blog-article-body">
-        <div className="container">
+        <div className="container blog-article-layout">
           <div className="blog-article-prose">
             <RichText markdown={post.contentMarkdown} className="content" />
-
-            <footer className="blog-article-share">
-              <p className="blog-article-share-label">Share this post</p>
-              <ShareButtons shareUrl={shareUrl} shareTitle={post.title} />
-            </footer>
           </div>
+
+          <aside className="blog-rail" aria-label="About this post">
+            <div className="blog-rail-inner">
+              {/* The post's own artwork, at the size it was drawn for rather
+                  than as a banner under the headline it already contains. */}
+              <span className="blog-rail-plate">
+                <Image
+                  src={post.featuredImage}
+                  alt=""
+                  width={720}
+                  height={405}
+                  sizes="22rem"
+                  className="blog-rail-image"
+                />
+              </span>
+
+              {post.authors.length > 0 && (
+                <div className="blog-rail-block">
+                  <p className="blog-rail-label">
+                    {post.authors.length > 1 ? "Authors" : "Author"}
+                  </p>
+                  <ul role="list" className="blog-rail-authors">
+                    {post.authors.map((author: PostAuthor, i: number) => (
+                      <li key={author.link ?? author.name ?? i}>
+                        <Author author={author} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {contents && <ArticleContents headings={contents} />}
+
+              <div className="blog-rail-block">
+                <p className="blog-rail-label">Share</p>
+                <ShareButtons shareUrl={shareUrl} shareTitle={post.title} />
+              </div>
+            </div>
+          </aside>
         </div>
       </div>
+
+      {(newer || older) && (
+        <nav className="blog-series" aria-label="Nearby posts">
+          <div className="container blog-series-inner">
+            {older ? (
+              <Neighbour post={older} direction="older" />
+            ) : (
+              <span aria-hidden="true" />
+            )}
+            {newer && <Neighbour post={newer} direction="newer" />}
+          </div>
+        </nav>
+      )}
 
       {relatedPosts.length > 0 && (
         <>
@@ -118,7 +184,7 @@ export default async function BlogPostPage({
                 <h2
                   id="blog-article-more-heading"
                   className="blog-article-more-heading">
-                  Recent posts
+                  More from the blog
                 </h2>
                 <Link href="/blog/" className="blog-article-more-link">
                   <span>All posts</span>
@@ -126,7 +192,6 @@ export default async function BlogPostPage({
                 </Link>
               </header>
 
-              {/* Three, which is exactly one row of the archive's grid. */}
               <ul role="list" className="blog-grid">
                 {relatedPosts.map((related: PostMeta) => (
                   <li key={related.slug} className="blog-grid-item">
@@ -139,6 +204,32 @@ export default async function BlogPostPage({
         </>
       )}
     </article>
+  );
+}
+
+/** The post either side of this one in date order. */
+function Neighbour({
+  post,
+  direction,
+}: {
+  post: PostMeta;
+  direction: "older" | "newer";
+}) {
+  const older = direction === "older";
+
+  return (
+    <Link
+      href={`/blog/${post.slug}`}
+      aria-label={`${older ? "Older" : "Newer"} post: ${post.title}`}
+      className={`blog-series-link ${
+        older ? "blog-series-link--older" : "blog-series-link--newer"
+      }`}>
+      <span className="blog-series-direction">
+        <span aria-hidden="true">{older ? "←" : "→"}</span>
+        <span>{older ? "Older post" : "Newer post"}</span>
+      </span>
+      <span className="blog-series-title">{post.title}</span>
+    </Link>
   );
 }
 
@@ -155,13 +246,13 @@ function Author({ author }: { author: PostAuthor }) {
           alt=""
           width={80}
           height={80}
-          className="blog-article-author-avatar"
+          className="blog-rail-avatar"
         />
       )}
-      <span className="blog-article-author-text">
-        <span className="blog-article-author-name">{author.name}</span>
+      <span className="blog-rail-author-text">
+        <span className="blog-rail-author-name">{author.name}</span>
         {affiliation && (
-          <span className="blog-article-author-affiliation">{affiliation}</span>
+          <span className="blog-rail-author-affiliation">{affiliation}</span>
         )}
       </span>
     </>
@@ -173,11 +264,11 @@ function Author({ author }: { author: PostAuthor }) {
         href={author.link}
         target="_blank"
         rel="noopener noreferrer"
-        className="blog-article-author blog-article-author--link">
+        className="blog-rail-author blog-rail-author--link">
         {inner}
       </a>
     );
   }
 
-  return <span className="blog-article-author">{inner}</span>;
+  return <span className="blog-rail-author">{inner}</span>;
 }

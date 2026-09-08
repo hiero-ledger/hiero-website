@@ -113,6 +113,8 @@ export default async function BlogPostPage({
           rail takes the space to its right that a single column left empty.
           Below `xl` the rail moves underneath. */}
       <div className="blog-article-body">
+        <GossipField placement="reading" />
+
         <div className="container blog-article-layout">
           <div className="blog-article-prose">
             <RichText markdown={post.contentMarkdown} className="content" />
@@ -157,20 +159,20 @@ export default async function BlogPostPage({
             </div>
           </aside>
         </div>
-      </div>
 
-      {(newer || older) && (
-        <nav className="blog-series" aria-label="Nearby posts">
-          <div className="container blog-series-inner">
-            {older ? (
-              <Neighbour post={older} direction="older" />
-            ) : (
-              <span aria-hidden="true" />
-            )}
-            {newer && <Neighbour post={newer} direction="newer" />}
-          </div>
-        </nav>
-      )}
+        {(newer || older) && (
+          <nav className="blog-series" aria-label="Nearby posts">
+            <div className="container blog-series-inner">
+              {older ? (
+                <Neighbour post={older} direction="older" />
+              ) : (
+                <span aria-hidden="true" />
+              )}
+              {newer && <Neighbour post={newer} direction="newer" />}
+            </div>
+          </nav>
+        )}
+      </div>
 
       {relatedPosts.length > 0 && (
         <>

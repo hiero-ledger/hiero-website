@@ -760,6 +760,25 @@
     );
   }
 
+  /* The reading band's field, held to the outer right — over the rail and the
+     gutter, faded out well before the text column. A web drawn behind body
+     copy is texture the reader has to see past, whatever its opacity, so the
+     mask is doing the real work here and it is deliberately tighter than the
+     others. */
+  /* Only where the rail gives it somewhere to live. Below `xl` the prose takes
+     the full measure, and this mask's right-hand bloom would fall straight
+     behind body text. */
+  .gossip-field--reading {
+    @apply top-0 hidden xl:block;
+
+    mask-image: radial-gradient(
+      44% 58% at 99% 15%,
+      rgb(0 0 0 / 88%) 2%,
+      rgb(0 0 0 / 26%) 32%,
+      transparent 60%
+    );
+  }
+
   @media screen and (prefers-reduced-motion: no-preference) {
     .gossip-field-web {
       animation: gossip-drift 54s ease-in-out infinite alternate;
@@ -806,6 +825,12 @@
     .gossip-field--article .gossip-field-web {
       animation-duration: 59s;
       animation-delay: -5s;
+    }
+
+    .gossip-field--reading .gossip-field-web {
+      animation-duration: 77s;
+      animation-delay: -29s;
+      animation-direction: alternate-reverse;
     }
 
     .gossip-field-accents circle {
@@ -1981,11 +2006,49 @@
     @apply text-pretty text-charcoal/72;
   }
 
-  /* White rather than sand: this is the one page on the site carrying a
-     thousand words of body text, and it gets a reading surface. The sand
-     bands above and below frame it. */
+  /* A lit sand band like every other one, not a white slab.
+     `--reading-light` is the new part: rather than boxing the prose on a card,
+     it lays light across the side of the band the prose occupies, so the text
+     sits *in* light on the site's own ground. It has to be a linear gradient —
+     a radial would light the top of a nine-thousand-pixel post and leave the
+     rest of it in shade, and these posts run from 200 to 1500 words.
+
+     The brand lights are sized in `rem` rather than `%` here for the same
+     reason: a percentage-sized glow scales with the band, so the same rule
+     would be a smudge on a round-up and a wash on a HIP explainer. */
   .blog-article-body {
-    @apply bg-white;
+    @apply relative isolate overflow-clip bg-sand;
+
+    --reading-light: linear-gradient(
+      to right,
+      rgb(255 255 255 / 86%),
+      rgb(255 255 255 / 80%) 40%,
+      rgb(255 255 255 / 0%) 72%
+    );
+    --band-bloom: radial-gradient(
+      34rem 24rem at 97% 7rem,
+      rgb(var(--band-light) / 66%),
+      rgb(var(--band-light) / 0%) 74%
+    );
+    --band-counter: radial-gradient(
+      28rem 20rem at 90% calc(100% - 6rem),
+      rgb(var(--band-cool) / 62%),
+      rgb(var(--band-cool) / 0%) 74%
+    );
+
+    background-image: var(--reading-light), var(--band-bloom),
+      var(--band-counter);
+  }
+
+  /* One column below `xl`, so the light covers the whole measure rather than
+     fading out over the right-hand half of the text. */
+  @media (width < 80rem) {
+    .blog-article-body {
+      --reading-light: linear-gradient(
+        rgb(255 255 255 / 82%),
+        rgb(255 255 255 / 82%)
+      );
+    }
   }
 
   /* Prose first in the source and first in the grid, so it keeps the
@@ -1993,7 +2056,8 @@
      is a second column only where there is room for one; below `xl` it falls
      underneath, which is also the order a screen reader takes it in. */
   .blog-article-layout {
-    @apply flex flex-col gap-[clamp(2.5rem,5vw,4rem)] py-[var(--space-band)];
+    @apply flex flex-col gap-[clamp(2.5rem,5vw,4rem)];
+    @apply pt-[var(--space-band)] pb-[clamp(2.5rem,5vw,4rem)];
     @apply xl:grid xl:grid-cols-[minmax(0,46rem)_minmax(16rem,22rem)] xl:items-start;
     @apply xl:gap-[clamp(3rem,6vw,6rem)];
   }
@@ -2125,19 +2189,21 @@
      Most of this blog is a weekly series, so the neighbouring weeks are a
      real destination. Two cells that split the row, or one that takes the
      right-hand half when there is no older post to point at. */
+  /* No background of its own: it sits inside the reading band now, which is
+     what keeps the two from meeting at a visible edge. */
   .blog-series {
-    @apply bg-white;
+    @apply relative;
   }
 
   .blog-series-inner {
-    @apply grid gap-4 border-t border-charcoal/14 py-[clamp(1.5rem,3vw,2.5rem)];
-    @apply sm:grid-cols-2 sm:gap-5;
+    @apply grid gap-4 border-t border-charcoal/14 pt-[clamp(1.5rem,3vw,2.5rem)];
+    @apply pb-[var(--space-band)] sm:grid-cols-2 sm:gap-5;
   }
 
   .blog-series-link {
     @apply flex min-w-0 flex-col gap-2.5 rounded-[1rem] border border-charcoal/16 p-[clamp(1.125rem,2vw,1.5rem)];
     @apply no-underline transition-[background-color,border-color] duration-200 ease-out;
-    @apply hover:border-red/50 hover:bg-sand/40;
+    @apply hover:border-red/50 hover:bg-white/60;
     @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
     @apply motion-reduce:transition-none;
   }

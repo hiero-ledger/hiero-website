@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 
 import fallbackCommunityCalls from "../data/community_calls.json" with { type: "json" };
-import { isRecord, writeJsonIfChanged } from "./lib/sync-helpers.mjs";
+import {
+  isRecord,
+  toCount,
+  toHttpUrl,
+  toId,
+  toText,
+  writeJsonIfChanged,
+} from "./lib/sync-helpers.mjs";
 
 const targetFile = "src/data/community_calls.json";
 
@@ -29,11 +36,16 @@ function collapseToSeries(meetings, now) {
     if (!isRecord(props)) continue;
     if (props.visibility !== "public" || props.restricted) continue;
 
-    const meetingId = String(props.meeting_id ?? "");
-    const registerLink = props.share_url;
-    if (!meetingId || typeof registerLink !== "string") continue;
+    const meetingId = toId(props.meeting_id);
+    // Rebuilt as a validated http(s) URL rather than accepted as any string:
+    // this value is rendered as an `href`, so a `javascript:` URL here would
+    // become a clickable script on the home page. A meeting whose link does
+    // not validate is dropped rather than written with an unusable one.
+    const registerLink = toHttpUrl(props.share_url);
+    if (!meetingId || !registerLink) continue;
 
-    const start = Date.parse(meeting.start);
+    const start =
+      typeof meeting.start === "string" ? Date.parse(meeting.start) : NaN;
     if (!Number.isFinite(start) || start < now) continue;
 
     const existing = series.get(meetingId);
@@ -42,12 +54,11 @@ function collapseToSeries(meetings, now) {
     series.set(meetingId, {
       start,
       meetingId,
-      name: typeof meeting.title === "string" ? meeting.title.trim() : "",
-      registrantCount:
-        typeof props.registrant_count === "number" ? props.registrant_count : 0,
+      name: toText(meeting.title),
+      registrantCount: toCount(props.registrant_count) ?? 0,
       registerLink,
       cadence: describeRecurrence(props.recurrence),
-      agenda: typeof props.agenda === "string" ? props.agenda.trim() : "",
+      agenda: toText(props.agenda),
     });
   }
 

@@ -3,7 +3,7 @@
 import fallbackRepositoryStats from "../data/repository_stats.json" with { type: "json" };
 import fallbackOrganizationStats from "../data/organization_stats.json" with { type: "json" };
 import trackedRepositories from "../data/tracked_repositories.json" with { type: "json" };
-import { isRecord, writeJsonIfChanged } from "./lib/sync-helpers.mjs";
+import { isRecord, toCount, writeJsonIfChanged } from "./lib/sync-helpers.mjs";
 
 const targetFile = "src/data/repository_stats.json";
 const organizationTargetFile = "src/data/organization_stats.json";
@@ -23,9 +23,7 @@ function createZeroStatsMap() {
 }
 
 function getStars(repoStats) {
-  if (!isRecord(repoStats)) return null;
-  const { stars } = repoStats;
-  return typeof stars === "number" && Number.isFinite(stars) ? stars : null;
+  return isRecord(repoStats) ? toCount(repoStats.stars) : null;
 }
 
 function toStatsMap(rawStats) {
@@ -122,21 +120,33 @@ async function fetchFromGitHub() {
       `https://api.github.com/repos/${organization}/${repo}`,
       { headers },
     );
+    // A response counts only if its star field validates. One that does not is
+    // treated like a failed request, so the cached value stands instead of an
+    // unusable one being written to the data file.
+    let stars = null;
     if (response.ok) {
       const data = await response.json();
-      stats.set(repo, { stars: data.stargazers_count });
+      stars = isRecord(data) ? toCount(data.stargazers_count) : null;
+    }
+
+    if (stars !== null) {
+      stats.set(repo, { stars });
       successCount += 1;
-      console.log(`  ✓ ${repo}: ${data.stargazers_count} stars`);
+      console.log(`  ✓ ${repo}: ${stars} stars`);
     } else {
-      const cachedStars = cachedStats.get(repo)?.stars;
-      if (typeof cachedStars === "number") {
+      const reason = response.ok
+        ? "API returned an unusable star count"
+        : `API responded with ${response.status}`;
+      const cachedStars = toCount(cachedStats.get(repo)?.stars);
+
+      if (cachedStars !== null) {
         stats.set(repo, { stars: cachedStars });
         console.warn(
-          `  ⚠ ${repo}: API ${response.status}, using cached value ${cachedStars}`,
+          `  ⚠ ${repo}: ${reason}, using cached value ${cachedStars}`,
         );
       } else {
         stats.set(repo, { stars: 0 });
-        console.warn(`  ✗ ${repo}: API responded with ${response.status}`);
+        console.warn(`  ✗ ${repo}: ${reason}`);
       }
     }
 
@@ -203,11 +213,11 @@ async function fetchOrganizationStats(headers) {
       throw new Error("GitHub API returned an unexpected payload");
     }
 
-    publicRepositories += pageRepos.length;
-    totalStars += pageRepos.reduce(
-      (sum, repo) => sum + (repo.stargazers_count ?? 0),
-      0,
-    );
+    for (const repo of pageRepos) {
+      if (!isRecord(repo)) continue;
+      publicRepositories += 1;
+      totalStars += toCount(repo.stargazers_count) ?? 0;
+    }
 
     if (pageRepos.length < 100) break;
   }

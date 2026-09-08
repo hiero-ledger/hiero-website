@@ -14,6 +14,71 @@ export function isRecord(value) {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
+/**
+ * Boundary validators for values arriving over the network.
+ *
+ * Both sync scripts fetch JSON from a third party and write it into files that
+ * are committed and imported by the app, so nothing from a response reaches a
+ * file as-is: every field is rebuilt from these as a validated primitive, and
+ * anything that fails validation is dropped rather than written.
+ */
+
+/**
+ * A finite, non-negative integer, or null.
+ *
+ * `sync-repo-stats` accumulated `stargazers_count` with `+=` directly off the
+ * response, so a string in that field would have concatenated instead of
+ * added — turning a star total into "0123". The script already had this check
+ * as `getStars`, but only ever ran it over the bundled cache, never over a
+ * fresh response.
+ */
+export function toCount(value) {
+  return typeof value === "number" && Number.isFinite(value) && value >= 0
+    ? Math.trunc(value)
+    : null;
+}
+
+/**
+ * An `http`/`https` URL, or null.
+ *
+ * `share_url` from the LFX response is rendered as an `href` by
+ * components/MeetSection. It was checked only for being a string, so a
+ * `javascript:` URL in that field would have been written into
+ * `community_calls.json` and become a clickable script on the home page.
+ */
+export function toHttpUrl(value) {
+  if (typeof value !== "string") return null;
+
+  let url;
+  try {
+    url = new URL(value);
+  } catch {
+    return null;
+  }
+
+  return url.protocol === "http:" || url.protocol === "https:"
+    ? url.toString()
+    : null;
+}
+
+/** A trimmed string, or "" — never an object, a number, or null. */
+export function toText(value) {
+  return typeof value === "string" ? value.trim() : "";
+}
+
+/**
+ * An identifier as a trimmed string, or "".
+ *
+ * `String(value)` was used here, which turns an object into the literal
+ * "[object Object]" and would have written that into the data file as a
+ * meeting id.
+ */
+export function toId(value) {
+  return typeof value === "string" || typeof value === "number"
+    ? String(value).trim()
+    : "";
+}
+
 export async function formatJsonForFile(value, filePath, logPrefix) {
   let formatted = `${JSON.stringify(value, null, 2)}\n`;
 

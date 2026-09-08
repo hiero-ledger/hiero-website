@@ -27,10 +27,22 @@ export default function ArticleContents({
   // on every render that hands it a fresh array of the same ids.
   const idsKey = headings.map(heading => heading.id).join("|");
 
+  /**
+   * The active entry is the last heading to have passed the reading line — a
+   * third of the way down the viewport.
+   *
+   * Deliberately not an IntersectionObserver, which is what the principles
+   * index on the home page uses. That works there because it observes the list
+   * items, which are contiguous: one of them is always crossing the band. The
+   * targets here are headings, which are thin and thousands of pixels apart, so
+   * an observer band spends most of a long post empty and the marker sticks
+   * wherever it last saw one. Asking "which heading is above the line" always
+   * has an answer.
+   */
   useEffect(() => {
     const ids = idsKey.split("|").filter(Boolean);
 
-    if (!ids.length || !("IntersectionObserver" in window)) return;
+    if (!ids.length) return;
 
     const targets = ids
       .map(id => document.getElementById(id))
@@ -38,23 +50,37 @@ export default function ArticleContents({
 
     if (!targets.length) return;
 
-    const observer = new IntersectionObserver(
-      observed => {
-        const reached = observed
-          .filter(entry => entry.isIntersecting)
-          .map(entry => targets.indexOf(entry.target as HTMLElement))
-          .filter(index => index >= 0);
+    let frame = 0;
 
-        if (!reached.length) return;
+    const update = () => {
+      frame = 0;
 
-        setActiveId(targets[Math.min(...reached)].id);
-      },
-      { rootMargin: "-20% 0px -70% 0px" },
-    );
+      const line = window.innerHeight * 0.3;
+      let current = targets[0];
 
-    targets.forEach(target => observer.observe(target));
+      for (const target of targets) {
+        if (target.getBoundingClientRect().top > line) break;
+        current = target;
+      }
 
-    return () => observer.disconnect();
+      setActiveId(current.id);
+    };
+
+    // Coalesced onto a frame: the listener fires far more often than the
+    // marker can move, and it reads layout.
+    const onScroll = () => {
+      frame ||= requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, [idsKey]);
 
   return (

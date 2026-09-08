@@ -49,25 +49,15 @@ describe("ArticleContents", () => {
     expect(levels).toEqual(["2", "3", "2"]);
   });
 
-  it("observes the headings it points at", () => {
-    const observe = vi.fn();
-    const disconnect = vi.fn();
+  /* Which heading is active is a question about layout, and jsdom has none:
+     every rect it reports is zero. The tracking itself is covered in
+     e2e/blog.spec.ts, in a browser that can actually scroll. What is worth
+     pinning here is that the listener is attached and cleaned up. */
+  it("listens for scroll while it has headings on the page, and stops on unmount", () => {
+    const add = vi.spyOn(window, "addEventListener");
+    const remove = vi.spyOn(window, "removeEventListener");
 
-    vi.stubGlobal(
-      "IntersectionObserver",
-      class {
-        observe = observe;
-        disconnect = disconnect;
-        unobserve = vi.fn();
-        takeRecords = vi.fn();
-        root = null;
-        rootMargin = "";
-        thresholds = [];
-      },
-    );
-
-    // Only the targets that exist in the document can be observed.
-    for (const heading of headings.slice(0, 2)) {
+    for (const heading of headings) {
       const element = document.createElement("h2");
       element.id = heading.id;
       document.body.append(element);
@@ -75,12 +65,24 @@ describe("ArticleContents", () => {
 
     const { unmount } = render(<ArticleContents headings={headings} />);
 
-    expect(observe).toHaveBeenCalledTimes(2);
+    expect(add.mock.calls.map(([event]) => event)).toContain("scroll");
 
     unmount();
 
-    expect(disconnect).toHaveBeenCalled();
+    expect(remove.mock.calls.map(([event]) => event)).toContain("scroll");
 
-    vi.unstubAllGlobals();
+    add.mockRestore();
+    remove.mockRestore();
+    document.body.replaceChildren();
+  });
+
+  it("does nothing when none of its headings are on the page", () => {
+    const add = vi.spyOn(window, "addEventListener");
+
+    render(<ArticleContents headings={headings} />);
+
+    expect(add.mock.calls.map(([event]) => event)).not.toContain("scroll");
+
+    add.mockRestore();
   });
 });

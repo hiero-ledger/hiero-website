@@ -6,12 +6,15 @@ import GossipField from "@/components/GossipField";
 import type { PostMeta } from "@/lib/posts";
 
 /**
- * Nine, filling three rows of three at the widest breakpoint — the same count
- * and the same grid the repository section on the home page uses, so the two
- * collections read as the same kind of thing. Three per page was the old
- * count, and it put this archive at twenty-four pages.
+ * Three — one complete row of the grid at every breakpoint that shows a row.
+ * The archive band stays a single screen, and the lead post above it keeps the
+ * page's weight rather than competing with three rows of cards.
+ *
+ * The cost is pagination depth: at this count the current archive runs to
+ * twenty-four pages, so the pager is doing real work and the window of five
+ * page numbers plus first/last matters more than it would at nine.
  */
-const POSTS_PER_PAGE = 9;
+const POSTS_PER_PAGE = 3;
 const PAGER_SIZE = 5;
 
 interface BlogPostListProps {

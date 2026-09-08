@@ -1796,9 +1796,12 @@
      does. The difference is the image, which is flush to the card's top edge:
      that is what `overflow-hidden` here is for, and why the padding sits on
      the body below rather than on the card. */
+  /* Straight from one column to three, skipping the two-column step the
+     repository grid uses: both places that render this grid show exactly three
+     cards, and at two columns three cards leave an orphan on a second row. */
   .blog-grid {
     @apply m-0 grid list-none gap-4 p-0;
-    @apply md:grid-cols-2 md:gap-5 xl:grid-cols-3;
+    @apply md:grid-cols-3 md:gap-5;
   }
 
   .blog-grid-item {

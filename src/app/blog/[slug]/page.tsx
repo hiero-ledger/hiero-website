@@ -1,5 +1,15 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
+import { format } from "date-fns";
+import { notFound } from "next/navigation";
+import ArticleContents from "@/components/ArticleContents";
+import BlogPostCard from "@/components/BlogPostCard";
+import Divider from "@/components/Divider";
+import GossipField from "@/components/GossipField";
+import RichText from "@/components/RichText";
+import ShareButtons from "@/components/ShareButtons/ClientShareButtons";
+import { extractHeadings, type ArticleHeading } from "@/lib/headings";
 import {
   getAllPosts,
   getPostBySlug,
@@ -7,13 +17,18 @@ import {
   type PostFull,
   type PostMeta,
 } from "../../../lib/posts";
-import { format } from "date-fns";
-import Link from "next/link";
-import RichText from "@/components/RichText";
-import ShareButtons from "@/components/ShareButtons/ClientShareButtons";
-import { notFound } from "next/navigation";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hiero.org";
+
+/** One row of the archive grid. */
+const RELATED_COUNT = 3;
+
+/**
+ * Below this, a contents list is furniture rather than help. Most posts here
+ * run a few hundred words under a single heading; the ones that earn a
+ * contents list are the HIP explainers and the long community write-ups.
+ */
+const MIN_HEADINGS_FOR_CONTENTS = 3;
 
 export function generateStaticParams(): { slug: string }[] {
   const posts: PostMeta[] = getAllPosts();
@@ -41,138 +56,207 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   const shareUrl = `${BASE_URL}/blog/${post.slug}`;
+  const readingTime = post.duration ?? `${post.readingMinutes} min read`;
 
-  const allPosts: PostMeta[] = getAllPosts();
-  const recentPosts: PostMeta[] = allPosts
-    .filter((candidate: PostMeta) => candidate.slug !== slug)
-    .slice(0, 4);
+  const headings: ArticleHeading[] = extractHeadings(post.contentMarkdown);
+  const contents =
+    headings.length >= MIN_HEADINGS_FOR_CONTENTS ? headings : null;
+
+  /* `getAllPosts` is newest first, so the entry before this one is the newer
+     post. Most of this blog is a weekly series, which is what makes the
+     neighbours worth naming: the next week's round-up is a more useful
+     destination than another three cards. */
+  const all: PostMeta[] = getAllPosts();
+  const index = all.findIndex(candidate => candidate.slug === slug);
+  const newer = index > 0 ? all[index - 1] : undefined;
+  const older = index >= 0 ? all[index + 1] : undefined;
+
+  /* Whatever the neighbour links already offer is kept out of the grid below,
+     so the same post is not put in front of the reader twice. */
+  const shown = new Set(
+    [slug, newer?.slug, older?.slug].filter(Boolean) as string[],
+  );
+  const relatedPosts = all
+    .filter(candidate => !shown.has(candidate.slug))
+    .slice(0, RELATED_COUNT);
 
   return (
-    <div className="mx-auto flex">
-      <article className="w-full break-words">
-        {/* Hero */}
-        <div
-          id="hero"
-          className="bg-gradient-to-br from-red-dark via-red to-red relative">
-          <div className="container pt-14 pb-12 sm:py-[100px] text-white">
-            <h1 className="font-medium text-xl sm:text-2xl leading-none relative mb-6 sm:mb-5">
-              {post.title}
-            </h1>
-            <div className="flex flex-wrap gap-6">
-              {post.authors.map((author: PostAuthor, i: number) => (
-                <AuthorBlock
-                  key={i}
-                  author={author}
-                  date={post.date}
-                  duration={post.duration}
-                />
-              ))}
-            </div>
+    <article className="blog-article-page">
+      <div className="blog-article">
+        <GossipField placement="article" />
+
+        <div className="container blog-article-inner">
+          <Link href="/blog/" className="blog-article-back">
+            <span aria-hidden="true">←</span>
+            <span>All posts</span>
+          </Link>
+
+          {/* Date and reading time sit here, once, rather than repeating
+              beside every author the way they used to. */}
+          <p className="blog-article-eyebrow">
+            <time dateTime={post.date}>
+              {format(new Date(post.date), "d MMMM yyyy")}
+            </time>
+            <span>{readingTime}</span>
+          </p>
+
+          <h1 className="blog-article-title">{post.title}</h1>
+
+          {post.abstract && (
+            <p className="blog-article-standfirst">{post.abstract}</p>
+          )}
+        </div>
+      </div>
+
+      {/* The reading band. The prose keeps the container's left edge so the
+          title above and the first line of the body share one axis, and the
+          rail takes the space to its right that a single column left empty.
+          Below `xl` the rail moves underneath. */}
+      <div className="blog-article-body">
+        <GossipField placement="reading" />
+
+        <div className="container blog-article-layout">
+          <div className="blog-article-prose">
+            <RichText markdown={post.contentMarkdown} className="content" />
           </div>
-        </div>
 
-        {/* Content */}
-        <div className="container py-14 sm:py-[80px] lg:py-[90px]">
-          <main className="w-full min-w-0 max-w-[800px] mx-auto">
-            <RichText
-              markdown={post.contentMarkdown}
-              className="content text-sm text-charcoal font-normal sm:text-base"
-            />
-            <div className="mt-11 mx-auto w-fit">
-              <ShareButtons shareUrl={shareUrl} shareTitle={post.title} />
+          <aside className="blog-rail" aria-label="About this post">
+            <div className="blog-rail-inner">
+              {/* The post's own artwork, at the size it was drawn for rather
+                  than as a banner under the headline it already contains. */}
+              <span className="blog-rail-plate">
+                <Image
+                  src={post.featuredImage}
+                  alt=""
+                  width={720}
+                  height={405}
+                  sizes="22rem"
+                  className="blog-rail-image"
+                />
+              </span>
+
+              {post.authors.length > 0 && (
+                <div className="blog-rail-block">
+                  <p className="blog-rail-label">
+                    {post.authors.length > 1 ? "Authors" : "Author"}
+                  </p>
+                  <ul role="list" className="blog-rail-authors">
+                    {post.authors.map((author: PostAuthor, i: number) => (
+                      <li key={author.link ?? author.name ?? i}>
+                        <Author author={author} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {contents && <ArticleContents headings={contents} />}
+
+              <div className="blog-rail-block">
+                <p className="blog-rail-label">Share</p>
+                <ShareButtons shareUrl={shareUrl} shareTitle={post.title} />
+              </div>
             </div>
-          </main>
+          </aside>
         </div>
 
-        {/* Recent Posts */}
-        {recentPosts.length > 0 && (
-          <div className="w-full bg-gray-light">
-            <div className="container py-[60px] sm:py-[110px] text-black">
-              <h2 className="text-[24px] leading-none font-medium">
-                Recent Hiero Posts
-              </h2>
-              <ul className="mt-6 grid grid-cols-1 xl:grid-cols-4 gap-[38px] list-none p-0">
-                {recentPosts.map((rp: PostMeta) => (
-                  <li key={rp.slug}>
-                    <Link
-                      href={`/blog/${rp.slug}`}
-                      className="no-underline grid grid-cols-1 sm:grid-cols-2 sm:gap-9 xl:gap-0 xl:grid-cols-1">
-                      <Image
-                        src={rp.featuredImage}
-                        alt={rp.title}
-                        width={560}
-                        height={280}
-                        sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
-                        className="w-full md:h-[140px] object-cover"
-                        unoptimized
-                      />
-                      <div>
-                        <h3 className="mt-3 sm:mt-0 xl:mt-3 text-[20px] font-medium text-black line-clamp-1">
-                          {rp.title}
-                        </h3>
-                        <p className="text-charcoal text-sm font-normal mt-1 leading-none">
-                          {rp.duration}
-                          {rp.duration && <span className="mx-1">•</span>}
-                          {format(new Date(rp.date), "MMMM d, yyyy")}
-                        </p>
-                        {rp.abstract && (
-                          <p className="text-charcoal text-sm sm:text-base font-normal line-clamp-4 xl:line-clamp-2 mt-2">
-                            {rp.abstract.length > 400
-                              ? rp.abstract.slice(0, 400) + "…"
-                              : rp.abstract}
-                          </p>
-                        )}
-                      </div>
-                    </Link>
+        {(newer || older) && (
+          <nav className="blog-series" aria-label="Nearby posts">
+            <div className="container blog-series-inner">
+              {older ? (
+                <Neighbour post={older} direction="older" />
+              ) : (
+                <span aria-hidden="true" />
+              )}
+              {newer && <Neighbour post={newer} direction="newer" />}
+            </div>
+          </nav>
+        )}
+      </div>
+
+      {relatedPosts.length > 0 && (
+        <>
+          <Divider />
+
+          <section
+            className="blog-article-more"
+            aria-labelledby="blog-article-more-heading">
+            <div className="container blog-article-more-inner">
+              <header className="blog-article-more-header">
+                <h2
+                  id="blog-article-more-heading"
+                  className="blog-article-more-heading">
+                  More from the blog
+                </h2>
+                <Link href="/blog/" className="blog-article-more-link">
+                  <span>All posts</span>
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </header>
+
+              <ul role="list" className="blog-grid">
+                {relatedPosts.map((related: PostMeta) => (
+                  <li key={related.slug} className="blog-grid-item">
+                    <BlogPostCard post={related} />
                   </li>
                 ))}
               </ul>
             </div>
-          </div>
-        )}
-      </article>
-    </div>
+          </section>
+        </>
+      )}
+    </article>
   );
 }
 
-function AuthorBlock({
-  author,
-  date,
-  duration,
+/** The post either side of this one in date order. */
+function Neighbour({
+  post,
+  direction,
 }: {
-  author: PostAuthor;
-  date: string;
-  duration?: string;
+  post: PostMeta;
+  direction: "older" | "newer";
 }) {
-  const hasAuthorMeta = [author.title, author.organization].some(Boolean);
+  const older = direction === "older";
+
+  return (
+    <Link
+      href={`/blog/${post.slug}`}
+      aria-label={`${older ? "Older" : "Newer"} post: ${post.title}`}
+      className={`blog-series-link ${
+        older ? "blog-series-link--older" : "blog-series-link--newer"
+      }`}>
+      <span className="blog-series-direction">
+        <span aria-hidden="true">{older ? "←" : "→"}</span>
+        <span>{older ? "Older post" : "Newer post"}</span>
+      </span>
+      <span className="blog-series-title">{post.title}</span>
+    </Link>
+  );
+}
+
+function Author({ author }: { author: PostAuthor }) {
+  const affiliation = [author.title, author.organization]
+    .filter(Boolean)
+    .join(", ");
 
   const inner = (
     <>
       {author.image && (
         <Image
           src={author.image}
-          alt={author.name ?? ""}
-          width={72}
-          height={72}
-          className="inline-block h-[72px] w-[72px] rounded-full bg-white"
-          unoptimized
+          alt=""
+          width={80}
+          height={80}
+          className="blog-rail-avatar"
         />
       )}
-      <div className="font-normal">
-        <p className="m-0">
-          {duration}
-          {duration && <span className="mx-1">•</span>}
-          {format(new Date(date), "MMMM d, yyyy")}
-        </p>
-        <p className="m-0">by {author.name}</p>
-        {hasAuthorMeta && (
-          <p className="m-0">
-            {author.title}
-            {author.title && author.organization ? ", " : " "}
-            {author.organization}
-          </p>
+      <span className="blog-rail-author-text">
+        <span className="blog-rail-author-name">{author.name}</span>
+        {affiliation && (
+          <span className="blog-rail-author-affiliation">{affiliation}</span>
         )}
-      </div>
+      </span>
     </>
   );
 
@@ -182,16 +266,11 @@ function AuthorBlock({
         href={author.link}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center text-sand text-sm gap-x-4 no-underline"
-        title={author.name}>
+        className="blog-rail-author blog-rail-author--link">
         {inner}
       </a>
     );
   }
 
-  return (
-    <span className="inline-flex items-center text-sand text-sm gap-x-4">
-      {inner}
-    </span>
-  );
+  return <span className="blog-rail-author">{inner}</span>;
 }

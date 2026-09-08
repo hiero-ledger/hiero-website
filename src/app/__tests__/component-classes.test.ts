@@ -11,7 +11,7 @@ import { describe, expect, it } from "vitest";
  * This closes that gap. It deliberately covers only the prefixes that follow
  * the convention, so it does not object to ordinary Tailwind utilities.
  */
-const PREFIXES = ["menu-", "site-header"];
+const PREFIXES = ["menu-", "site-header", "blog-"];
 const SRC = path.resolve(__dirname, "../..");
 const CSS = path.resolve(__dirname, "../globals.css");
 

@@ -30,10 +30,10 @@ export default function SimpleContentPage({
       </div>
       <div className="container py-14 sm:py-[80px] lg:py-[90px]">
         <main className="w-full min-w-0 max-w-[800px] mx-auto">
-          <RichText
-            markdown={contentMarkdown}
-            className="content text-sm text-charcoal font-normal sm:text-base"
-          />
+          {/* `content` carries the whole prose scale now, so the size and
+              colour utilities that used to override it here are gone: the
+              blog and these pages read the same. */}
+          <RichText markdown={contentMarkdown} className="content" />
           {children}
         </main>
       </div>

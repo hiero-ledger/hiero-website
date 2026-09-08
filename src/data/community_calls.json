@@ -48,14 +48,6 @@
     "agenda": "Let's discuss any questions, issues and plans for our Hiero Python SDK!\nCurrent and future agendas can be found here: https://github.com/hiero-ledger/governance/wiki."
   },
   {
-    "meetingId": "94695703550",
-    "name": "Hiero Solo Community Call",
-    "registrantCount": 20,
-    "registerLink": "https://zoom-lfx.platform.linuxfoundation.org/meeting/94695703550?password=e8819002-3f6e-4905-9916-b049f501e866",
-    "cadence": "Every 2 weeks",
-    "agenda": "Hiero bi-weekly Solo Community Call"
-  },
-  {
     "meetingId": "98394707679",
     "name": "Hiero Community Management",
     "registrantCount": 17,

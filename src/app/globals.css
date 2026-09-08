@@ -7,20 +7,13 @@
   --color-current: currentColor;
   --color-white: #ffffff;
   --color-white-dark: #e5e4d7;
-  --color-white: #ffffff;
-  --color-white-dark: #e5e4d7;
   --color-black: #000000;
-  --color-charcoal: #1e1e1e;
-  --color-red: #b81a56;
   --color-charcoal: #1e1e1e;
   --color-red: #b81a56;
   --color-red-dark: #992350;
   --color-red-light: #d92d6a;
   --color-sand: #e5e4d7;
-  --color-red-light: #d92d6a;
-  --color-sand: #e5e4d7;
   --color-gray: #616161;
-  --color-gray-light: #efefee;
   --color-gray-light: #efefee;
 
   /* Fonts — variables set by next/font in layout.tsx */
@@ -62,12 +55,6 @@
   --text-5xl--line-height: 6.875rem;
   --text-5xl--letter-spacing: -0.625rem;
 
-  /* Vertical rhythm
-     One scale for the whole page rather than a maxed-out clamp copied into
-     every section: flat maximums read as dead space, not as air. The three
-     steps are deliberately far apart, so the gap between two bands is
-     unmistakably larger than the gap inside one, and a reader can tell where a
-     section ends without the divider having to say so. */
   /* Band lights
      Channel triplets, not `--color-*`, so each composes at several alphas
      without generating a dozen near-identical utilities. `--band-light` is
@@ -78,6 +65,12 @@
   --band-light: 255 228 238;
   --band-cool: 239 239 238;
 
+  /* Vertical rhythm
+     One scale for the whole page rather than a maxed-out clamp copied into
+     every section: flat maximums read as dead space, not as air. The three
+     steps are deliberately far apart, so the gap between two bands is
+     unmistakably larger than the gap inside one, and a reader can tell where a
+     section ends without the divider having to say so. */
   --space-band: clamp(3.5rem, 5vw, 5.5rem);
   --space-band-header: clamp(2rem, 3vw, 3rem);
   --space-band-tight: clamp(1.25rem, 2vw, 2rem);
@@ -731,6 +724,61 @@
     );
   }
 
+  /* The blog's three fields. Each is lit from the corner its band's own
+     `--band-bloom` comes from, so the web reads as part of the light rather
+     than a texture laid over it. */
+  .gossip-field--blog {
+    @apply bottom-0;
+
+    mask-image: radial-gradient(
+      104% 122% at 92% 88%,
+      black 4%,
+      rgb(0 0 0 / 30%) 40%,
+      transparent 70%
+    );
+  }
+
+  .gossip-field--archive {
+    @apply bottom-0;
+
+    mask-image: radial-gradient(
+      96% 108% at 6% 6%,
+      black 2%,
+      rgb(0 0 0 / 24%) 36%,
+      transparent 66%
+    );
+  }
+
+  .gossip-field--article {
+    @apply bottom-0;
+
+    mask-image: radial-gradient(
+      112% 128% at 88% 12%,
+      black 4%,
+      rgb(0 0 0 / 28%) 38%,
+      transparent 68%
+    );
+  }
+
+  /* The reading band's field, held to the outer right — over the rail and the
+     gutter, faded out well before the text column. A web drawn behind body
+     copy is texture the reader has to see past, whatever its opacity, so the
+     mask is doing the real work here and it is deliberately tighter than the
+     others. */
+  /* Only where the rail gives it somewhere to live. Below `xl` the prose takes
+     the full measure, and this mask's right-hand bloom would fall straight
+     behind body text. */
+  .gossip-field--reading {
+    @apply top-0 hidden xl:block;
+
+    mask-image: radial-gradient(
+      44% 58% at 99% 15%,
+      rgb(0 0 0 / 88%) 2%,
+      rgb(0 0 0 / 26%) 32%,
+      transparent 60%
+    );
+  }
+
   @media screen and (prefers-reduced-motion: no-preference) {
     .gossip-field-web {
       animation: gossip-drift 54s ease-in-out infinite alternate;
@@ -761,6 +809,28 @@
     .gossip-field--quotes .gossip-field-web {
       animation-duration: 67s;
       animation-delay: -41s;
+    }
+
+    .gossip-field--blog .gossip-field-web {
+      animation-duration: 64s;
+      animation-delay: -19s;
+    }
+
+    .gossip-field--archive .gossip-field-web {
+      animation-duration: 71s;
+      animation-delay: -37s;
+      animation-direction: alternate-reverse;
+    }
+
+    .gossip-field--article .gossip-field-web {
+      animation-duration: 59s;
+      animation-delay: -5s;
+    }
+
+    .gossip-field--reading .gossip-field-web {
+      animation-duration: 77s;
+      animation-delay: -29s;
+      animation-direction: alternate-reverse;
     }
 
     .gossip-field-accents circle {
@@ -832,7 +902,9 @@
   .issue-jump-eyebrow,
   .community-calls-eyebrow,
   .repositories-eyebrow,
-  .quotes-carousel-eyebrow {
+  .quotes-carousel-eyebrow,
+  .blog-index-eyebrow,
+  .blog-article-eyebrow {
     @apply m-0 mb-[clamp(1rem,2vw,1.5rem)] flex items-start gap-3.5;
     @apply font-ibm text-xs leading-normal tracking-[0.16em] text-red uppercase;
   }
@@ -842,7 +914,9 @@
   .issue-jump-eyebrow::before,
   .community-calls-eyebrow::before,
   .repositories-eyebrow::before,
-  .quotes-carousel-eyebrow::before {
+  .quotes-carousel-eyebrow::before,
+  .blog-index-eyebrow::before,
+  .blog-article-eyebrow::before {
     @apply mt-[0.75em] h-px w-[clamp(1.5rem,4vw,3rem)] flex-none bg-current;
 
     content: "";
@@ -1535,6 +1609,675 @@
   .quotes-carousel-control:last-child {
     @apply border-red bg-red text-white hover:border-red-dark hover:bg-red-dark;
   }
+
+  /* ============================================
+     Blog — app/blog, components/Blog*
+
+     The blog inherits the home page's vocabulary: sand bands lit from one
+     corner, a mono eyebrow over a display heading, hairline rules instead of
+     boxes, and one red-filling action per band. What it adds is a structure
+     the home page has no use for — a lead post and a dated archive — because
+     the blog is a record kept over time rather than a pitch.
+
+     The index header and the lead post below it are two elements but one
+     band: both are `bg-sand`, and each keeps its radial light away from the
+     seam between them, so the heading runs into the newest post with no edge
+     in between. Moving either light toward the seam will show it.
+     ============================================ */
+  .blog-index {
+    @apply relative isolate overflow-clip bg-sand;
+
+    --band-bloom: radial-gradient(
+      72% 52% at 94% 26%,
+      rgb(var(--band-light) / 82%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      56% 40% at 2% 30%,
+      rgb(var(--band-cool) / 70%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
+  }
+
+  /* Closes on the header step, not a full band step: the lead below carries
+     the band's bottom padding. */
+  .blog-index-inner {
+    @apply pt-[var(--space-band)] pb-[var(--space-band-header)];
+  }
+
+  .blog-index-header {
+    @apply grid gap-8;
+    @apply lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)] lg:items-end lg:gap-[clamp(4rem,8vw,9rem)];
+  }
+
+  .blog-index-heading {
+    @apply m-0 max-w-[12ch] text-balance;
+    @apply text-[clamp(2.75rem,6vw,6rem)] leading-[0.94] font-normal tracking-[-0.06em];
+  }
+
+  .blog-index-copy {
+    @apply m-0 max-w-[34rem] lg:pb-1;
+    @apply text-[clamp(1.0625rem,1.35vw,1.25rem)] leading-[1.6] tracking-[-0.014em] text-charcoal/72;
+  }
+
+  /* ---- The lead post ---------------------------------------------------- */
+
+  /* No `overflow-clip` here, unlike the other bands: this one holds no gossip
+     field to contain, and clipping it cropped the top of the lead link's focus
+     ring, which starts flush with the band's own top edge. */
+  .blog-lead {
+    @apply relative isolate bg-sand;
+
+    --band-bloom: radial-gradient(
+      60% 62% at 6% 78%,
+      rgb(var(--band-light) / 58%),
+      rgb(var(--band-light) / 0%) 72%
+    );
+
+    background-image: var(--band-bloom);
+  }
+
+  .blog-lead-inner {
+    @apply pb-[var(--space-band)];
+  }
+
+  .blog-lead-link {
+    @apply grid items-center gap-[clamp(1.75rem,3.5vw,3.5rem)] no-underline;
+    @apply lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)];
+    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+  }
+
+  /* A plate, not a card: the photograph keeps its own rounding and shadow and
+     the text sits on the band beside it, so nothing is boxed twice. */
+  .blog-lead-plate {
+    @apply relative block overflow-hidden rounded-[clamp(1.25rem,2.5vw,1.75rem)];
+    @apply border border-charcoal/12 bg-white/40 shadow-[0_24px_60px_rgba(30,30,30,0.12)];
+  }
+
+  .blog-lead-image {
+    @apply block aspect-16/9 h-auto w-full object-cover;
+    @apply transition-transform duration-500 ease-out motion-reduce:transition-none;
+  }
+
+  .blog-lead-link:hover .blog-lead-image,
+  .blog-lead-link:focus-visible .blog-lead-image {
+    @apply scale-[1.03];
+  }
+
+  .blog-lead-body {
+    @apply flex min-w-0 flex-col items-start;
+  }
+
+  .blog-lead-eyebrow {
+    @apply mb-[clamp(0.875rem,1.6vw,1.25rem)] block;
+    @apply font-ibm text-xs leading-none tracking-[0.16em] text-red uppercase;
+  }
+
+  .blog-lead-title {
+    @apply m-0 text-balance;
+    @apply text-[clamp(1.875rem,3.2vw,3rem)] leading-[1.04] font-normal tracking-[-0.04em] text-charcoal;
+    @apply transition-colors duration-300 motion-reduce:transition-none;
+  }
+
+  .blog-lead-link:hover .blog-lead-title,
+  .blog-lead-link:focus-visible .blog-lead-title {
+    @apply text-red;
+  }
+
+  .blog-lead-abstract {
+    @apply mt-5 block line-clamp-3 max-w-[38rem];
+    @apply text-base leading-[1.65] tracking-[-0.008em] text-pretty text-charcoal/72;
+  }
+
+  .blog-lead-byline {
+    @apply mt-6 flex flex-wrap items-center gap-x-3.5 gap-y-1;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.11em] text-charcoal/58 uppercase;
+  }
+
+  /* A hairline in the flex gap rather than a middle dot, so the separator
+     does not read as another character in the tracked-out mono. */
+  .blog-lead-byline-author {
+    @apply relative;
+  }
+
+  .blog-lead-byline-author::before {
+    @apply absolute top-1/2 -left-[0.4375rem] h-2.5 w-px -translate-y-1/2 bg-current opacity-40;
+
+    content: "";
+  }
+
+  .blog-lead-action {
+    @apply mt-[clamp(1.75rem,3vw,2.5rem)] inline-flex items-center gap-4;
+    @apply font-ibm text-xs leading-none tracking-[0.09em] text-charcoal uppercase;
+  }
+
+  .blog-lead-action-glyph {
+    @apply grid h-11 w-11 place-items-center rounded-full border border-charcoal/22;
+    @apply font-serif text-lg leading-none;
+    @apply transition-[background-color,border-color,color,translate] duration-300 ease-out;
+    @apply motion-reduce:transition-none;
+  }
+
+  .blog-lead-link:hover .blog-lead-action-glyph,
+  .blog-lead-link:focus-visible .blog-lead-action-glyph {
+    @apply translate-x-0.5 border-red bg-red text-white;
+  }
+
+  /* ---- The archive ------------------------------------------------------ */
+
+  .blog-archive {
+    @apply relative isolate scroll-mt-22.5 overflow-clip bg-sand text-charcoal;
+
+    --band-bloom: radial-gradient(
+      68% 44% at 4% 10%,
+      rgb(var(--band-light) / 74%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      56% 36% at 96% 76%,
+      rgb(var(--band-cool) / 66%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
+  }
+
+  .blog-archive-inner {
+    @apply py-[var(--space-band)];
+  }
+
+  /* A ruled label, not a second display heading: the page already has one,
+     and what matters in this band is the list under it. */
+  .blog-archive-header {
+    @apply mb-[clamp(1.25rem,2vw,1.75rem)] flex flex-wrap items-end justify-between gap-x-8 gap-y-2;
+    @apply border-b border-charcoal/18 pb-3;
+  }
+
+  .blog-archive-heading,
+  .blog-archive-tally {
+    @apply m-0 font-ibm text-[0.6875rem] leading-none tracking-[0.14em] uppercase;
+  }
+
+  .blog-archive-heading {
+    @apply text-charcoal/62;
+  }
+
+  .blog-archive-tally {
+    @apply flex gap-x-3.5 text-charcoal/45;
+  }
+
+  /* The page count is context, not content: it goes when there is no room,
+     the same way the issue and calls board headings drop their second half. */
+  .blog-archive-tally span:last-child {
+    @apply hidden sm:block;
+  }
+
+  /* ---- One post as a card -----------------------------------------------
+     Built on the repository card's shape from the home page — hairline border
+     on the sand band, a lift on hover, a circular glyph that fills red — so a
+     grid of posts reads as the same kind of object as the grid of repositories
+     does. The difference is the image, which is flush to the card's top edge:
+     that is what `overflow-hidden` here is for, and why the padding sits on
+     the body below rather than on the card. */
+  /* Straight from one column to three, skipping the two-column step the
+     repository grid uses: both places that render this grid show exactly three
+     cards, and at two columns three cards leave an orphan on a second row. */
+  .blog-grid {
+    @apply m-0 grid list-none gap-4 p-0;
+    @apply md:grid-cols-3 md:gap-5;
+  }
+
+  .blog-grid-item {
+    @apply min-w-0;
+  }
+
+  .blog-card {
+    @apply flex h-full min-w-0 flex-col overflow-hidden rounded-[1.25rem];
+    @apply border border-charcoal/18 bg-transparent text-charcoal no-underline;
+    @apply transition-[background-color,border-color,box-shadow,translate] duration-300 ease-out;
+    @apply hover:-translate-y-1 hover:border-red/55 hover:bg-white/60;
+    @apply hover:shadow-[0_18px_45px_rgba(30,30,30,0.08)];
+    @apply focus-visible:bg-white/60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  .blog-card-plate {
+    @apply block border-b border-charcoal/12 bg-white/40;
+  }
+
+  .blog-card-image {
+    @apply block aspect-16/9 h-auto w-full object-cover;
+    @apply transition-transform duration-500 ease-out motion-reduce:transition-none;
+  }
+
+  .blog-card:hover .blog-card-image,
+  .blog-card:focus-visible .blog-card-image {
+    @apply scale-[1.04];
+  }
+
+  /* `flex-1` so every body in a row is the same height and the action rows
+     line up across the grid however long the titles run. */
+  .blog-card-body {
+    @apply flex min-w-0 flex-1 flex-col p-[clamp(1.25rem,2vw,1.625rem)];
+  }
+
+  .blog-card-date {
+    @apply block font-ibm text-[0.6875rem] leading-none tracking-[0.12em] text-charcoal/52 uppercase;
+  }
+
+  .blog-card-title {
+    @apply m-0 mt-3.5 text-[clamp(1.125rem,1.5vw,1.3125rem)] leading-[1.25];
+    @apply font-medium tracking-[-0.03em] text-charcoal;
+    @apply transition-colors duration-300 motion-reduce:transition-none;
+  }
+
+  .blog-card:hover .blog-card-title,
+  .blog-card:focus-visible .blog-card-title {
+    @apply text-red;
+  }
+
+  .blog-card-abstract {
+    @apply mt-2.5 block line-clamp-3 text-sm leading-[1.6];
+    @apply tracking-[-0.004em] text-pretty text-charcoal/64;
+  }
+
+  .blog-card-action {
+    @apply mt-auto flex items-center justify-between gap-4 pt-6;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.09em] text-charcoal uppercase;
+  }
+
+  .blog-card-action-glyph {
+    @apply grid h-9 w-9 flex-none place-items-center rounded-full border border-charcoal/22;
+    @apply font-serif text-base leading-none;
+    @apply transition-[background-color,border-color,color,translate] duration-300 ease-out;
+    @apply motion-reduce:transition-none;
+  }
+
+  .blog-card:hover .blog-card-action-glyph,
+  .blog-card:focus-visible .blog-card-action-glyph {
+    @apply translate-x-0.5 border-red bg-red text-white;
+  }
+
+  /* ---- Pagination ------------------------------------------------------- */
+
+  .blog-pagination {
+    @apply mt-[clamp(2rem,4vw,3rem)] border-t border-charcoal/14 pt-[clamp(1.5rem,2.5vw,2rem)];
+  }
+
+  .blog-pagination-list {
+    @apply m-0 flex list-none flex-wrap items-center justify-center gap-1.5 p-0 sm:gap-2;
+  }
+
+  .blog-pagination-item {
+    @apply flex;
+  }
+
+  .blog-pagination-item:first-child,
+  .blog-pagination-item:last-child {
+    @apply hidden sm:flex;
+  }
+
+  .blog-pagination-link {
+    @apply grid h-9 w-9 cursor-pointer place-items-center rounded-full sm:h-10 sm:w-10;
+    @apply border border-transparent bg-transparent;
+    @apply font-ibm text-[0.8125rem] leading-none text-charcoal/70;
+    @apply transition-[background-color,border-color,color] duration-200 ease-out;
+    @apply hover:border-charcoal/22 hover:text-charcoal;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  .blog-pagination-link--step {
+    @apply font-serif text-lg text-charcoal/60;
+  }
+
+  .blog-pagination-link:disabled {
+    @apply cursor-default;
+  }
+
+  .blog-pagination-link--step:disabled {
+    @apply border-transparent text-charcoal/25 hover:border-transparent;
+  }
+
+  /* Last, so it wins over `:disabled` — the current page is both. */
+  .blog-pagination-link[aria-current="page"] {
+    @apply border-red bg-red text-white;
+  }
+
+  /* ---- One post ---------------------------------------------------------
+     Long unbroken strings in post content (URLs, hashes) must not widen the
+     page. */
+  .blog-article-page {
+    @apply w-full break-words;
+  }
+
+  .blog-article {
+    @apply relative isolate overflow-clip bg-sand;
+
+    --band-bloom: radial-gradient(
+      70% 50% at 90% 16%,
+      rgb(var(--band-light) / 80%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      56% 40% at 4% 82%,
+      rgb(var(--band-cool) / 68%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
+  }
+
+  .blog-article-inner {
+    @apply pt-[clamp(2rem,4vw,3.25rem)] pb-[var(--space-band-header)];
+  }
+
+  .blog-article-back {
+    @apply mb-[clamp(1.75rem,3vw,2.5rem)] inline-flex items-center gap-2.5 no-underline;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.14em] text-charcoal/62 uppercase;
+    @apply transition-colors duration-200 ease-out hover:text-red;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  /* The eyebrow carries the date and, where a post declares one, the reading
+     time. The hairline sits in the flex gap so the tracked-out mono is not
+     asked to absorb a separator character. */
+  .blog-article-eyebrow span {
+    @apply relative;
+  }
+
+  .blog-article-eyebrow span::before {
+    @apply absolute top-1/2 -left-[0.4375rem] h-2.5 w-px -translate-y-1/2 bg-current opacity-45;
+
+    content: "";
+  }
+
+  .blog-article-title {
+    @apply m-0 max-w-[26ch] text-balance;
+    @apply text-[clamp(2.125rem,4.6vw,4.25rem)] leading-[1] font-normal tracking-[-0.05em];
+  }
+
+  .blog-article-standfirst {
+    @apply mt-[clamp(1.25rem,2.2vw,1.75rem)] mb-0 max-w-[44rem];
+    @apply text-[clamp(1.0625rem,1.35vw,1.3125rem)] leading-[1.55] tracking-[-0.014em];
+    @apply text-pretty text-charcoal/72;
+  }
+
+  /* A lit sand band like every other one, not a white slab.
+     `--reading-light` is the new part: rather than boxing the prose on a card,
+     it lays light across the side of the band the prose occupies, so the text
+     sits *in* light on the site's own ground. It has to be a linear gradient —
+     a radial would light the top of a nine-thousand-pixel post and leave the
+     rest of it in shade, and these posts run from 200 to 1500 words.
+
+     The brand lights are sized in `rem` rather than `%` here for the same
+     reason: a percentage-sized glow scales with the band, so the same rule
+     would be a smudge on a round-up and a wash on a HIP explainer. */
+  .blog-article-body {
+    @apply relative isolate overflow-clip bg-sand;
+
+    --reading-light: linear-gradient(
+      to right,
+      rgb(255 255 255 / 86%),
+      rgb(255 255 255 / 80%) 40%,
+      rgb(255 255 255 / 0%) 72%
+    );
+    --band-bloom: radial-gradient(
+      34rem 24rem at 97% 7rem,
+      rgb(var(--band-light) / 66%),
+      rgb(var(--band-light) / 0%) 74%
+    );
+    --band-counter: radial-gradient(
+      28rem 20rem at 90% calc(100% - 6rem),
+      rgb(var(--band-cool) / 62%),
+      rgb(var(--band-cool) / 0%) 74%
+    );
+
+    background-image: var(--reading-light), var(--band-bloom),
+      var(--band-counter);
+  }
+
+  /* One column below `xl`, so the light covers the whole measure rather than
+     fading out over the right-hand half of the text. */
+  @media (width < 80rem) {
+    .blog-article-body {
+      --reading-light: linear-gradient(
+        rgb(255 255 255 / 82%),
+        rgb(255 255 255 / 82%)
+      );
+    }
+  }
+
+  /* Prose first in the source and first in the grid, so it keeps the
+     container's left edge and shares an axis with the title above it. The rail
+     is a second column only where there is room for one; below `xl` it falls
+     underneath, which is also the order a screen reader takes it in. */
+  .blog-article-layout {
+    @apply flex flex-col gap-[clamp(2.5rem,5vw,4rem)];
+    @apply pt-[var(--space-band)] pb-[clamp(2.5rem,5vw,4rem)];
+    @apply xl:grid xl:grid-cols-[minmax(0,46rem)_minmax(16rem,22rem)] xl:items-start;
+    @apply xl:gap-[clamp(3rem,6vw,6rem)];
+  }
+
+  .blog-article-prose {
+    @apply w-full max-w-[46rem];
+  }
+
+  /* ---- The rail ---------------------------------------------------------
+     What the reader needs about the post rather than from it: whose it is,
+     what is in it, and how to pass it on. It sticks once there is a column to
+     stick in — `self-start` is what leaves it room to, since a stretched grid
+     item has none. */
+  .blog-rail {
+    @apply w-full min-w-0 xl:sticky xl:top-32 xl:self-start;
+  }
+
+  .blog-rail-inner {
+    @apply flex flex-col gap-[clamp(1.75rem,3vw,2.25rem)];
+    @apply border-t border-charcoal/16 pt-[clamp(1.5rem,2.5vw,2rem)];
+    @apply xl:border-t-0 xl:pt-0;
+    /* Backstop for the rail as a whole: whatever it holds stays reachable
+       once it is stuck, rather than running off the bottom of the screen. */
+    @apply xl:max-h-[calc(100svh-9rem)] xl:overflow-y-auto;
+  }
+
+  /* Not optional. This is a flex column with a max height, so its children are
+     shrinkable by default — which silently squashed the plate to two thirds of
+     its height and clipped the artwork against its own rounded corners. The
+     rail scrolls; nothing inside it compresses. */
+  .blog-rail-inner > * {
+    @apply flex-none;
+  }
+
+  .blog-rail-plate {
+    @apply hidden overflow-hidden rounded-[0.875rem] border border-charcoal/12 bg-sand/40 xl:block;
+  }
+
+  .blog-rail-image {
+    @apply block h-auto w-full;
+  }
+
+  .blog-rail-block {
+    @apply flex flex-col gap-3.5;
+  }
+
+  /* The rail's one repeated device: a ruled mono label over each block, which
+     is how the archive and the section headers name a list too. */
+  .blog-rail-label {
+    @apply m-0 border-b border-charcoal/14 pb-2.5;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.14em] text-charcoal/55 uppercase;
+  }
+
+  .blog-rail-authors {
+    @apply m-0 flex list-none flex-col gap-3.5 p-0;
+  }
+
+  .blog-rail-author {
+    @apply flex items-center gap-3 no-underline;
+  }
+
+  .blog-rail-author--link {
+    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+  }
+
+  .blog-rail-avatar {
+    @apply h-10 w-10 flex-none rounded-full border border-charcoal/12 bg-white object-cover;
+  }
+
+  .blog-rail-author-text {
+    @apply flex min-w-0 flex-col gap-1;
+  }
+
+  .blog-rail-author-name {
+    @apply text-[0.9375rem] leading-tight font-medium tracking-[-0.015em] text-charcoal;
+    @apply transition-colors duration-200 motion-reduce:transition-none;
+  }
+
+  .blog-rail-author--link:hover .blog-rail-author-name {
+    @apply text-red;
+  }
+
+  .blog-rail-author-affiliation {
+    @apply font-ibm text-[0.625rem] leading-none tracking-[0.09em] text-charcoal/55 uppercase;
+  }
+
+  /* ---- Contents ---------------------------------------------------------
+     The marker rather than a highlight: it grows from a stub to the full rule
+     on the section being read, the same way the principles index reports
+     position on the home page. */
+  .blog-contents {
+    @apply flex flex-col gap-3.5;
+  }
+
+  .blog-contents-list {
+    @apply m-0 flex list-none flex-col gap-2.5 p-0;
+    @apply xl:max-h-[min(46svh,24rem)] xl:overflow-y-auto xl:pr-1;
+  }
+
+  .blog-contents-list li[data-level="3"] {
+    @apply pl-5;
+  }
+
+  .blog-contents-link {
+    @apply flex items-baseline gap-3 text-sm leading-snug tracking-[-0.01em] no-underline;
+    @apply text-charcoal/65 transition-colors duration-200 ease-out;
+    @apply hover:text-charcoal;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  .blog-contents-link::before {
+    @apply mt-[0.45em] h-px w-4 flex-none origin-left bg-current;
+    @apply transition-transform duration-300 ease-out motion-reduce:transition-none;
+
+    content: "";
+    transform: scaleX(0.45);
+  }
+
+  .blog-contents-link[aria-current] {
+    @apply text-red;
+  }
+
+  .blog-contents-link[aria-current]::before {
+    transform: scaleX(1);
+  }
+
+  /* ---- The post either side ---------------------------------------------
+     Most of this blog is a weekly series, so the neighbouring weeks are a
+     real destination. Two cells that split the row, or one that takes the
+     right-hand half when there is no older post to point at. */
+  /* No background of its own: it sits inside the reading band now, which is
+     what keeps the two from meeting at a visible edge. */
+  .blog-series {
+    @apply relative;
+  }
+
+  .blog-series-inner {
+    @apply grid gap-4 border-t border-charcoal/14 pt-[clamp(1.5rem,3vw,2.5rem)];
+    @apply pb-[var(--space-band)] sm:grid-cols-2 sm:gap-5;
+  }
+
+  .blog-series-link {
+    @apply flex min-w-0 flex-col gap-2.5 rounded-[1rem] border border-charcoal/16 p-[clamp(1.125rem,2vw,1.5rem)];
+    @apply no-underline transition-[background-color,border-color] duration-200 ease-out;
+    @apply hover:border-red/50 hover:bg-white/60;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  /* Both halves stated rather than one defaulting: the modifier is what
+     decides which cell a link takes, and a reader of this file should not have
+     to infer the older one from the absence of a rule. */
+  .blog-series-link--older {
+    @apply sm:col-start-1 sm:items-start sm:text-left;
+  }
+
+  .blog-series-link--newer {
+    @apply sm:col-start-2 sm:items-end sm:text-right;
+  }
+
+  .blog-series-direction {
+    @apply inline-flex items-center gap-2.5;
+    @apply font-ibm text-[0.625rem] leading-none tracking-[0.14em] text-charcoal/52 uppercase;
+  }
+
+  /* Arrow after the words on the newer side, so both cells read outward from
+     the middle of the row. */
+  .blog-series-link--newer .blog-series-direction {
+    @apply sm:flex-row-reverse;
+  }
+
+  .blog-series-title {
+    @apply text-[clamp(1rem,1.3vw,1.125rem)] leading-snug font-medium tracking-[-0.02em];
+    @apply text-charcoal transition-colors duration-200 motion-reduce:transition-none;
+  }
+
+  .blog-series-link:hover .blog-series-title,
+  .blog-series-link:focus-visible .blog-series-title {
+    @apply text-red;
+  }
+
+  .blog-article-more {
+    @apply relative isolate overflow-clip bg-sand;
+
+    --band-bloom: radial-gradient(
+      64% 46% at 8% 76%,
+      rgb(var(--band-light) / 70%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      54% 36% at 94% 22%,
+      rgb(var(--band-cool) / 64%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
+  }
+
+  .blog-article-more-inner {
+    @apply py-[var(--space-band)];
+  }
+
+  .blog-article-more-header {
+    @apply mb-[clamp(1.25rem,2vw,1.75rem)] flex flex-wrap items-end justify-between gap-x-8 gap-y-3;
+    @apply border-b border-charcoal/18 pb-3;
+  }
+
+  .blog-article-more-heading,
+  .blog-article-more-link {
+    @apply m-0 font-ibm text-[0.6875rem] leading-none tracking-[0.14em] text-charcoal/62 uppercase;
+  }
+
+  .blog-article-more-link {
+    @apply inline-flex items-center gap-2.5 no-underline;
+    @apply transition-colors duration-200 ease-out hover:text-red;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
 }
 
 @layer base {
@@ -1563,6 +2306,11 @@
 
   main a:not([class]) {
     @apply text-red underline;
+  }
+
+  code,
+  pre {
+    @apply font-ibm;
   }
 }
 
@@ -1865,17 +2613,7 @@
     @apply w-full h-full;
     max-width: 932px;
   }
-  /* ============================================
-     Swiper overrides
-     ============================================ */
-  .swiper {
-    @apply w-full h-full;
-    max-width: 932px;
-  }
 
-  .reposSwiper {
-    @apply max-w-full;
-  }
   .reposSwiper {
     @apply max-w-full;
   }
@@ -1884,14 +2622,7 @@
     @apply text-left text-base;
     font-family: inherit;
   }
-  .reposSwiper .swiper-slide {
-    @apply text-left text-base;
-    font-family: inherit;
-  }
 
-  .swiper-slide {
-    @apply font-serif text-center text-lg;
-  }
   .swiper-slide {
     @apply font-serif text-center text-lg;
   }
@@ -1902,16 +2633,7 @@
     width: 35px;
     height: 35px;
   }
-  .swiper .swiper-button {
-    @apply top-auto text-charcoal bg-white-dark;
-    bottom: 5rem;
-    width: 35px;
-    height: 35px;
-  }
 
-  .swiper .swiper-button::after {
-    @apply text-sm;
-  }
   .swiper .swiper-button::after {
     @apply text-sm;
   }
@@ -1919,363 +2641,164 @@
   .swiper .swiper-button-prev {
     left: calc(50% - 40px);
   }
-  .swiper .swiper-button-prev {
-    left: calc(50% - 40px);
-  }
 
-  .swiper .swiper-button-next {
-    right: calc(50% - 40px);
-  }
   .swiper .swiper-button-next {
     right: calc(50% - 40px);
   }
 
   /* ============================================
-     Blog / Article content prose styles
+     Article prose — the body of a blog post, and of the simple content pages
+
+     One type scale, set here rather than by utilities at the call site, so the
+     two pages that render `RichText` read the same. Sizes step down from the
+     display scale the bands use; the measure is set by the wrapper
+     (`.blog-article-prose`) so this file only has to think about rhythm.
      ============================================ */
   .content {
-    :where(blockquote):not(
-      :where([class~="not-prose"], [class~="not-prose"] *)
-    ) {
-      @apply relative text-charcoal border-red py-2 pr-6;
-      margin-top: 86px;
-      @apply mb-6 first:mt-0;
-      border-left-width: 2px;
-      @apply pl-6;
-    }
-  /* ============================================
-     Blog / Article content prose styles
-     ============================================ */
-  .content {
-    :where(blockquote):not(
-      :where([class~="not-prose"], [class~="not-prose"] *)
-    ) {
-      @apply relative text-charcoal border-red py-2 pr-6;
-      margin-top: 86px;
-      @apply mb-6 first:mt-0;
-      border-left-width: 2px;
-      @apply pl-6;
-    }
+    @apply text-[1.0625rem] leading-[1.7] tracking-[-0.006em] text-charcoal/82;
 
-    @media (min-width: 640px) {
-      :where(blockquote):not(
-        :where([class~="not-prose"], [class~="not-prose"] *)
-      ) {
-        @apply my-6 py-4;
-        margin-left: 92px;
-      }
-    }
-    @media (min-width: 640px) {
-      :where(blockquote):not(
-        :where([class~="not-prose"], [class~="not-prose"] *)
-      ) {
-        @apply my-6 py-4;
-        margin-left: 92px;
-      }
-    }
-
-    :where(blockquote)::before {
-      content: "";
-      @apply block absolute;
-      top: -60px;
-      left: -3px;
-      width: 50px;
-      height: 40px;
-      background-image: url("/images/Hiero-Icon-Quote-Left.svg");
-    }
-    :where(blockquote)::before {
-      content: "";
-      @apply block absolute;
-      top: -60px;
-      left: -3px;
-      width: 50px;
-      height: 40px;
-      background-image: url("/images/Hiero-Icon-Quote-Left.svg");
-    }
-
-    @media (min-width: 640px) {
-      :where(blockquote)::before {
-        top: 0;
-        left: -92px;
-      }
-    }
-    @media (min-width: 640px) {
-      :where(blockquote)::before {
-        top: 0;
-        left: -92px;
-      }
-    }
-
+    /* Headings inside a post are landmarks in a long column, so they take
+       their space from above — a heading belongs to what follows it. */
     h2 {
-      @apply font-medium mt-8 mb-4;
-      font-size: 24px;
-    }
-    h2 {
-      @apply font-medium mt-8 mb-4;
-      font-size: 24px;
+      @apply mt-[2.5em] mb-[0.6em] text-[clamp(1.5rem,2.4vw,1.875rem)];
+      @apply leading-[1.15] font-medium tracking-[-0.035em] text-charcoal;
     }
 
     h3 {
-      @apply font-medium text-lg mt-8 mb-4;
+      @apply mt-[2em] mb-[0.5em] text-[clamp(1.1875rem,1.7vw,1.375rem)];
+      @apply leading-[1.25] font-medium tracking-[-0.025em] text-charcoal;
     }
+
+    h4 {
+      @apply mt-[1.75em] mb-[0.45em];
+      @apply font-ibm text-[0.8125rem] leading-none tracking-[0.12em] text-charcoal/70 uppercase;
+    }
+
+    h2:first-child,
+    h3:first-child,
+    h4:first-child {
+      @apply mt-0;
+    }
+
+    /* Headings carry ids for the contents list to point at, so they need to
+       clear the fixed header when one is jumped to. */
+    h1,
+    h2,
     h3 {
-      @apply font-medium text-lg mt-8 mb-4;
+      @apply scroll-mt-28;
     }
 
-    h4 {
-      @apply font-medium text-base mt-8 mb-4;
+    p {
+      @apply my-[1.1em];
     }
-    h4 {
-      @apply font-medium text-base mt-8 mb-4;
+
+    p:first-child {
+      @apply mt-0;
+    }
+
+    strong {
+      @apply font-medium text-charcoal;
+    }
+
+    ol,
+    ul {
+      @apply my-[1.1em] pl-[1.4em];
+    }
+
+    ol {
+      @apply list-decimal;
+    }
+
+    ul {
+      @apply list-disc;
+    }
+
+    li {
+      @apply my-[0.4em] pl-[0.2em];
+    }
+
+    li::marker {
+      @apply text-red/70;
+    }
+
+    /* An image in a post is a figure, not a run of text: it gets the plate
+       treatment the rest of the blog gives photographs. */
+    p img,
+    figure img {
+      @apply my-[2em] block h-auto w-full rounded-[0.75rem] border border-charcoal/12;
+    }
+
+    hr {
+      @apply my-[2.75em] h-px border-0 bg-charcoal/14;
+    }
+
+    /* A pull quote. The mark hangs in the margin where there is room for it
+       and sits above the text where there is not, which is why the two
+       placements are written as one rule and one override rather than as
+       matching pairs of offsets. */
+    blockquote {
+      @apply relative my-[2.5em] border-l-2 border-red py-1 pr-6 pl-6;
+      @apply text-[1.1875rem] leading-[1.6] tracking-[-0.015em] text-charcoal;
+    }
+
+    blockquote::before {
+      @apply absolute -top-[3.25rem] left-0 block h-10 w-[3.125rem] bg-no-repeat;
+
+      content: "";
+      background-image: url("/images/Hiero-Icon-Quote-Left.svg");
+      background-size: contain;
+    }
+
+    blockquote p {
+      @apply my-[0.6em];
+    }
+
+    blockquote p:first-child {
+      @apply mt-0;
+    }
+
+    blockquote p:last-child {
+      @apply mb-0;
     }
 
     cite {
-      @apply block text-red font-medium not-italic mt-4;
-    }
-    cite {
-      @apply block text-red font-medium not-italic mt-4;
+      @apply mt-[0.9em] block font-ibm text-[0.75rem] tracking-[0.1em] text-red uppercase not-italic;
     }
 
     p:has(cite) {
       @apply mb-0;
     }
-    p:has(cite) {
-      @apply mb-0;
+
+    /* highlight.js paints the syntax (github.css, imported at the top of this
+       file) but gives `pre` no surface of its own, which on the white reading
+       column means an invisible code block. This is that surface. */
+    pre {
+      @apply my-[1.75em] overflow-x-auto rounded-[0.75rem] border border-charcoal/14 bg-sand/45;
     }
 
-    p {
-      @apply mb-4;
-    }
-    p {
-      @apply mb-4;
+    pre code {
+      @apply block bg-transparent p-[1.15em] text-[0.8125rem] leading-[1.65];
     }
 
-    p img {
-      @apply my-7;
-    }
-    p img {
-      @apply my-7;
-    }
-
-    ol {
-      @apply list-decimal my-4 pl-6;
-    }
-    ol {
-      @apply list-decimal my-4 pl-6;
+    /* `pre` keeps its newlines and scrolls, rather than soft-wrapping: these
+       posts carry Python and Java, where an arbitrary break changes what the
+       reader thinks the code says. */
+    pre,
+    pre code {
+      @apply break-normal whitespace-pre;
     }
 
-    ul {
-      @apply list-disc my-4 pl-6;
-    }
-    ul {
-      @apply list-disc my-4 pl-6;
-    }
-
-    table {
-      @apply w-full my-6 border-collapse;
-    }
-    table {
-      @apply w-full my-6 border-collapse;
+    /* Inline code sits inside a sentence, so it takes a pill rather than a
+       block and keeps the surrounding line height. */
+    :not(pre) > code {
+      @apply rounded-[0.3rem] border border-charcoal/12 bg-sand/60 px-[0.35em] py-[0.1em];
+      @apply text-[0.875em] break-words text-charcoal;
     }
 
-    th,
-    td {
-      @apply border border-gray px-4 py-3 text-left;
+    a {
+      @apply underline decoration-red/40 underline-offset-[0.2em];
+      @apply transition-colors duration-200 ease-out motion-reduce:transition-none;
+      @apply hover:decoration-red;
     }
-    th,
-    td {
-      @apply border border-gray px-4 py-3 text-left;
-    }
-
-    th {
-      @apply bg-red text-white font-semibold;
-    }
-    th {
-      @apply bg-red text-white font-semibold;
-    }
-
-    tr:nth-child(even) {
-      @apply bg-gray-light;
-    }
-    tr:nth-child(even) {
-      @apply bg-gray-light;
-    }
-
-    tr:hover {
-      @apply bg-sand;
-    }
-  }
-    tr:hover {
-      @apply bg-sand;
-    }
-  }
-
-  /* ============================================
-     Code blocks
-     ============================================ */
-  .highlight {
-    @apply relative mb-6;
-  }
-  /* ============================================
-     Code blocks
-     ============================================ */
-  .highlight {
-    @apply relative mb-6;
-  }
-
-  .highlight pre {
-    @apply pt-8 pb-3 px-3 rounded-md;
-    background-color: #1e1e1e !important;
-  }
-  .highlight pre {
-    @apply pt-8 pb-3 px-3 rounded-md;
-    background-color: #1e1e1e !important;
-  }
-
-  code {
-    @apply whitespace-pre-wrap text-xs font-ibm;
-    word-break: break-word;
-  }
-  code {
-    @apply whitespace-pre-wrap text-xs font-ibm;
-    word-break: break-word;
-  }
-
-  .copy-button {
-    @apply bg-transparent border-none cursor-pointer p-0 absolute right-2 top-2 opacity-100;
-  }
-  .copy-button {
-    @apply bg-transparent border-none cursor-pointer p-0 absolute right-2 top-2 opacity-100;
-  }
-
-  .highlight:hover .copy-button {
-    @apply opacity-100;
-  }
-  .highlight:hover .copy-button {
-    @apply opacity-100;
-  }
-
-  .copy-button > svg {
-    width: 18px;
-  }
-  .copy-button > svg {
-    width: 18px;
-  }
-
-  .copy-button > svg > path {
-    @apply fill-white;
-  }
-  .copy-button > svg > path {
-    @apply fill-white;
-  }
-
-  /* ============================================
-     Pagination
-     ============================================ */
-  .pagination {
-    @apply flex gap-2 mx-auto mt-16 justify-center;
-  }
-  /* ============================================
-     Pagination
-     ============================================ */
-  .pagination {
-    @apply flex gap-2 mx-auto mt-16 justify-center;
-  }
-
-  .pagination .page-item.disabled {
-    opacity: 0.3;
-  }
-  .pagination .page-item.disabled {
-    opacity: 0.3;
-  }
-
-  .pagination .page-item.disabled .page-link {
-    @apply cursor-default;
-  }
-  .pagination .page-item.disabled .page-link {
-    @apply cursor-default;
-  }
-
-  .pagination .page-item .page-link {
-    @apply bg-sand flex justify-center items-center rounded-full leading-none no-underline text-base font-bold text-charcoal cursor-pointer;
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-  .pagination .page-item .page-link {
-    @apply bg-sand flex justify-center items-center rounded-full leading-none no-underline text-base font-bold text-charcoal cursor-pointer;
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-
-  .pagination .page-item:has([aria-label="Previous"]) .page-link,
-  .pagination .page-item:has([aria-label="First"]) .page-link,
-  .pagination .page-item:has([aria-label="Next"]) .page-link,
-  .pagination .page-item:has([aria-label="Last"]) .page-link {
-    @apply bg-transparent;
-  }
-  .pagination .page-item:has([aria-label="Previous"]) .page-link,
-  .pagination .page-item:has([aria-label="First"]) .page-link,
-  .pagination .page-item:has([aria-label="Next"]) .page-link,
-  .pagination .page-item:has([aria-label="Last"]) .page-link {
-    @apply bg-transparent;
-  }
-
-  .pagination .page-item:has([aria-label="Previous"]) .page-link span,
-  .pagination .page-item:has([aria-label="First"]) .page-link span,
-  .pagination .page-item:has([aria-label="Next"]) .page-link span,
-  .pagination .page-item:has([aria-label="Last"]) .page-link span {
-    @apply hidden;
-  }
-  .pagination .page-item:has([aria-label="Previous"]) .page-link span,
-  .pagination .page-item:has([aria-label="First"]) .page-link span,
-  .pagination .page-item:has([aria-label="Next"]) .page-link span,
-  .pagination .page-item:has([aria-label="Last"]) .page-link span {
-    @apply hidden;
-  }
-
-  .pagination .page-item:has([aria-label="Previous"]) .page-link::before,
-  .pagination .page-item:has([aria-label="Next"]) .page-link::before {
-    content: "";
-    width: 0.5rem;
-    height: 0.75rem;
-    background-image: url("data:image/svg+xml,%3Csvg id='arrow-single' xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 8 12'%3E%3Cpath d='M6.1,12l1.4-1.4L2.9,6,7.5,1.4,6.1,0,0,6l6,6Z'/%3E%3C/svg%3E");
-  }
-  .pagination .page-item:has([aria-label="Previous"]) .page-link::before,
-  .pagination .page-item:has([aria-label="Next"]) .page-link::before {
-    content: "";
-    width: 0.5rem;
-    height: 0.75rem;
-    background-image: url("data:image/svg+xml,%3Csvg id='arrow-single' xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 8 12'%3E%3Cpath d='M6.1,12l1.4-1.4L2.9,6,7.5,1.4,6.1,0,0,6l6,6Z'/%3E%3C/svg%3E");
-  }
-
-  .pagination .page-item:has([aria-label="First"]) .page-link::before,
-  .pagination .page-item:has([aria-label="Last"]) .page-link::before {
-    content: "";
-    width: 14px;
-    height: 0.75rem;
-    background-image: url("data:image/svg+xml,%3Csvg id='arrow-double' xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 14 12'%3E%3Cpath d='M6.1,12l1.4-1.4L2.9,6,7.5,1.4,6.1,0,0,6l6,6Z'/%3E%3Cpath d='M12.1,12l1.4-1.4-4.6-4.6L13.5,1.4,12.1,0l-6,6,6,6Z'/%3E%3C/svg%3E");
-  }
-  .pagination .page-item:has([aria-label="First"]) .page-link::before,
-  .pagination .page-item:has([aria-label="Last"]) .page-link::before {
-    content: "";
-    width: 14px;
-    height: 0.75rem;
-    background-image: url("data:image/svg+xml,%3Csvg id='arrow-double' xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 14 12'%3E%3Cpath d='M6.1,12l1.4-1.4L2.9,6,7.5,1.4,6.1,0,0,6l6,6Z'/%3E%3Cpath d='M12.1,12l1.4-1.4-4.6-4.6L13.5,1.4,12.1,0l-6,6,6,6Z'/%3E%3C/svg%3E");
-  }
-
-  .pagination .page-item:has([aria-label="Next"]) .page-link::before,
-  .pagination .page-item:has([aria-label="Last"]) .page-link::before {
-    transform: rotate(180deg);
-  }
-  .pagination .page-item:has([aria-label="Next"]) .page-link::before,
-  .pagination .page-item:has([aria-label="Last"]) .page-link::before {
-    transform: rotate(180deg);
-  }
-
-  .pagination .page-item.active .page-link {
-    @apply bg-red text-white;
-  }
-  .pagination .page-item.active .page-link {
-    @apply bg-red text-white;
   }
 }

@@ -21,7 +21,10 @@ export interface PostMeta {
   date: string;
   abstract?: string;
   featuredImage: string;
+  /** Reading time as the frontmatter states it, when a post states one. */
   duration?: string;
+  /** Reading time derived from the body, for the posts that do not. */
+  readingMinutes: number;
   authors: PostAuthor[];
   categories: string[];
   tags: string[];
@@ -114,6 +117,28 @@ function cleanContent(content: string): string {
     .trim();
 }
 
+const WORDS_PER_MINUTE = 200;
+
+/**
+ * Reading time from the body.
+ *
+ * Only seven of the posts declare a `duration`, so for the rest it is this or
+ * nothing. Links collapse to their text and fenced code drops out entirely
+ * before the count: the weekly round-ups are mostly links, and counting a
+ * long URL as a word made a two-minute post look like a five-minute one.
+ */
+export function readingMinutes(content: string): number {
+  const prose = content
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/!?\[([^\]]*)\]\([^)]*\)/g, "$1")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/[#>*_`~|]+/g, " ");
+
+  const words = prose.split(/\s+/).filter(Boolean).length;
+
+  return Math.max(1, Math.round(words / WORDS_PER_MINUTE));
+}
+
 function parseDate(raw: unknown): string {
   if (!raw) return new Date(0).toISOString();
   if (raw instanceof Date) return raw.toISOString();
@@ -146,7 +171,11 @@ function deriveSlug(data: Record<string, unknown>, filename: string): string {
   return sanitizeSlug(base);
 }
 
-function buildMeta(data: Record<string, unknown>, filename: string): PostMeta {
+function buildMeta(
+  data: Record<string, unknown>,
+  filename: string,
+  content: string,
+): PostMeta {
   return {
     slug: deriveSlug(data, filename),
     title: String(data.title ?? ""),
@@ -160,6 +189,7 @@ function buildMeta(data: Record<string, unknown>, filename: string): PostMeta {
       ? String(data.featured_image)
       : FALLBACK_IMAGE,
     duration: data.duration ? String(data.duration) : undefined,
+    readingMinutes: readingMinutes(content),
     authors: Array.isArray(data.authors)
       ? data.authors.map((a: Record<string, unknown>) => ({
           name: a.name ? String(a.name) : undefined,
@@ -185,9 +215,9 @@ export function getAllPosts(): PostMeta[] {
   for (const file of files) {
     try {
       const raw = fs.readFileSync(path.join(POSTS_DIR, file), "utf8");
-      const { data } = parseTomlFrontmatter(raw);
+      const { data, content } = parseTomlFrontmatter(raw);
       if (data.draft === true) continue;
-      posts.push(buildMeta(data, file));
+      posts.push(buildMeta(data, file, content));
     } catch {
       /* skip */
     }
@@ -208,7 +238,7 @@ export function getPostBySlug(slug: string): PostFull | null {
       if (data.draft === true) continue;
       if (deriveSlug(data, file) !== slug) continue;
       return {
-        ...buildMeta(data, file),
+        ...buildMeta(data, file, content),
         contentMarkdown: cleanContent(content),
       };
     } catch {

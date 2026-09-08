@@ -25,6 +25,7 @@ import {
   getPostBySlug,
   getSimplePage,
   getSimplePageWithDefaults,
+  readingMinutes,
 } from "../posts";
 
 const postsDir = path.join(process.cwd(), "content", "posts");
@@ -585,6 +586,35 @@ Content`);
 
       const posts = getAllPosts();
       expect(posts).toHaveLength(2); // both .md files
+    });
+  });
+  describe("readingMinutes", () => {
+    it("rounds the body up to at least a minute", () => {
+      expect(readingMinutes("")).toBe(1);
+      expect(readingMinutes("a handful of words")).toBe(1);
+    });
+
+    it("counts about two hundred words to the minute", () => {
+      expect(readingMinutes("word ".repeat(200))).toBe(1);
+      expect(readingMinutes("word ".repeat(600))).toBe(3);
+    });
+
+    /* The weekly round-ups are mostly links, and counting a long URL as a word
+       made a two-minute post read as a five-minute one. */
+    it("counts a link as its text rather than its url", () => {
+      const withUrls = Array.from(
+        { length: 100 },
+        (_, i) =>
+          `[link](https://github.com/hiero-ledger/hiero-website/pull/${i})`,
+      ).join(" ");
+
+      expect(readingMinutes(withUrls)).toBe(1);
+    });
+
+    it("leaves fenced code out of the count", () => {
+      const post = `Short intro.\n\n\`\`\`python\n${"x = 1\n".repeat(400)}\`\`\`\n`;
+
+      expect(readingMinutes(post)).toBe(1);
     });
   });
 });

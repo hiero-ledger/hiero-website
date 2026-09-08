@@ -110,8 +110,11 @@ test.describe("desktop keyboard navigation", () => {
     page,
   }) => {
     await page.goto("/blog/");
-    const bar = page.locator("header > div");
-    const brand = page.locator('header a[aria-label="Go to homepage"]');
+    // The bar by its own class, not by structure. `header > div` matched only
+    // while the blog index happened to be the one page with no section header
+    // of its own — it already resolved to eight elements on the home page.
+    const bar = page.locator(".site-header");
+    const brand = bar.locator('a[aria-label="Go to homepage"]');
 
     await page.mouse.move(640, 500);
     await page.mouse.wheel(0, 600);

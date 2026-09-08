@@ -2,18 +2,22 @@
 
 exports[`Divider > renders the Hiero divider icon 1`] = `
 <div
-  class="container py-[40px] sm:py-0 flex flex-row items-center gap-10"
+  class="bg-sand"
 >
-  <img
-    alt=""
-    class="w-10 h-auto shrink-0"
-    height="67"
-    loading="lazy"
-    src="/images/Hiero-Icon.svg"
-    width="68"
-  />
   <div
-    class="w-full bg-white-dark h-[1px]"
-  />
+    class="container flex flex-row items-center gap-10 py-[var(--space-band-tight)]"
+  >
+    <img
+      alt=""
+      class="h-auto w-10 shrink-0"
+      height="67"
+      loading="lazy"
+      src="/images/Hiero-Icon.svg"
+      width="68"
+    />
+    <div
+      class="h-[1px] w-full bg-charcoal/12"
+    />
+  </div>
 </div>
 `;

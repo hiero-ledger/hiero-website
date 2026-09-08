@@ -41,6 +41,7 @@ The site will be available at `http://localhost:3000`.
 | --- | --- |
 | `pnpm lint` | Lint the codebase |
 | `pnpm test` | Run unit tests |
+| `pnpm test:e2e` | Run browser tests (needs `pnpm build` first) |
 | `pnpm format` | Format source files |
 | `pnpm format:check` | Check formatting without changing files |
 | `pnpm build` | Build the production app |

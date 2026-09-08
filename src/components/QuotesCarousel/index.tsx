@@ -1,12 +1,9 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import type { SwiperRef } from "swiper/react";
-import "swiper/css";
 import RichText from "@/components/RichText";
+import GossipField from "@/components/GossipField";
 
 interface QuoteItem {
   quote: string;
@@ -14,107 +11,188 @@ interface QuoteItem {
   logo: string;
 }
 
-interface QuotesCarouselProps {
-  data: QuoteItem[];
+interface QuotesData {
+  eyebrow: string;
+  heading: string;
+  text: string;
+  quotes: QuoteItem[];
 }
 
+interface QuotesCarouselProps {
+  data: QuotesData;
+}
+
+export const AUTO_ADVANCE_MS = 10_000;
+
 export default function QuotesCarousel({ data }: QuotesCarouselProps) {
-  const swiperRef = useRef<SwiperRef>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState<"next" | "previous">("next");
+  const [autoPlayEnabled, setAutoPlayEnabled] = useState(true);
+  const [interactionPaused, setInteractionPaused] = useState(false);
+  const activeQuote = data.quotes[activeIndex];
+
+  useEffect(() => {
+    if (!autoPlayEnabled || interactionPaused || data.quotes.length <= 1) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setDirection("next");
+      setActiveIndex(index => (index + 1) % data.quotes.length);
+    }, AUTO_ADVANCE_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [activeIndex, autoPlayEnabled, data.quotes.length, interactionPaused]);
+
+  const showPrevious = () => {
+    setDirection("previous");
+    setActiveIndex(index => (index === 0 ? data.quotes.length - 1 : index - 1));
+  };
+
+  const showNext = () => {
+    setDirection("next");
+    setActiveIndex(index => (index + 1) % data.quotes.length);
+  };
+
+  // Nothing to carry the section: with no quotes there is no slide to render,
+  // and the same guard covers an index left over from a longer list.
+  if (!activeQuote) return null;
 
   return (
-    <div id="quotes" className="anchor">
-      <div className="pt-[40px] pb-[40px] sm:pt-[120px] sm:pb-[60px]">
-        <div className="container container-mobile-full">
-          <div className="relative w-full">
-            {/* Left quote icon */}
-            <div className="mx-auto mb-10 lg:mb-0 lg:absolute lg:top-[50%] lg:left-0 lg:-translate-x-[91px] lg:-translate-y-[50%] h-[40px] w-[51px]">
-              <Image
-                src="/images/Hiero-Icon-Quote-Left.svg"
-                alt=""
-                width={51}
-                height={40}
-                loading="lazy"
-              />
-            </div>
-            <div className="relative px-[25px] pt-[80px] lg:pt-[60px] lg:px-[60px] lg:pb-0 text-lg text-white bg-linear-to-br from-red-dark via-red to-red">
-              <Swiper
-                ref={swiperRef}
-                modules={[Autoplay]}
-                loop={true}
-                autoplay={{ delay: 30000 }}
-                className="mySwiper">
-                {data.map((quote, i) => (
-                  <SwiperSlide key={i}>
-                    <div className="mb-5 flex justify-center h-[38px]">
-                      <Image
-                        src={quote.logo}
-                        alt=""
-                        width={160}
-                        height={38}
-                        className="object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-                    <RichText
-                      inline
-                      markdown={quote.quote}
-                      className="mb-5 [&>a]:text-white [&>a:hover]:text-white [&>a]:underline"
-                    />
-                    <RichText
-                      inline
-                      markdown={quote.author}
-                      className="font-bold mb-[155px] [&>a]:text-white [&>a:hover]:text-white [&>a]:underline"
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-              {/* Custom nav buttons — absolute inside the red container, matching Hugo's bottom:5rem centered style */}
-              <button
-                onClick={() => swiperRef.current?.swiper.slidePrev()}
-                aria-label="Previous quote"
-                className="absolute bottom-20 left-[calc(50%-40px)] z-10 w-[35px] h-[35px] bg-white-dark text-charcoal flex items-center justify-center cursor-pointer hover:bg-sand transition-colors">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round">
-                  <path d="M15 18l-6-6 6-6" />
-                </svg>
-              </button>
-              <button
-                onClick={() => swiperRef.current?.swiper.slideNext()}
-                aria-label="Next quote"
-                className="absolute bottom-20 right-[calc(50%-40px)] z-10 w-[35px] h-[35px] bg-white-dark text-charcoal flex items-center justify-center cursor-pointer hover:bg-sand transition-colors">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round">
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
-              </button>
-            </div>
-            {/* Right quote icon */}
-            <div className="mx-auto mt-10 lg:mt-0 lg:absolute lg:top-[50%] lg:left-auto lg:right-0 lg:translate-x-[91px] lg:-translate-y-[50%] h-[40px] w-[51px]">
-              <Image
-                src="/images/Hiero-Icon-Quote-Right.svg"
-                alt=""
-                width={51}
-                height={40}
-                loading="lazy"
-              />
-            </div>
+    <section
+      id="quotes"
+      aria-labelledby="quotes-heading"
+      className="quotes-carousel">
+      <GossipField placement="quotes" />
+
+      <div className="container quotes-carousel-inner">
+        <header className="quotes-carousel-header">
+          <div>
+            <p className="quotes-carousel-eyebrow">{data.eyebrow}</p>
+            <h2 id="quotes-heading" className="quotes-carousel-heading">
+              {data.heading}
+            </h2>
           </div>
+          <p className="quotes-carousel-copy">{data.text}</p>
+        </header>
+
+        <div
+          className="quotes-carousel-stage"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Community testimonials"
+          onMouseEnter={() => setInteractionPaused(true)}
+          onMouseLeave={() => setInteractionPaused(false)}
+          onFocusCapture={() => setInteractionPaused(true)}
+          onBlurCapture={event => {
+            if (
+              !event.currentTarget.contains(event.relatedTarget as Node | null)
+            ) {
+              setInteractionPaused(false);
+            }
+          }}>
+          <div
+            className="quotes-carousel-viewport"
+            aria-live={autoPlayEnabled && !interactionPaused ? "off" : "polite"}
+            aria-atomic="true">
+            <article
+              key={activeQuote.author}
+              className="quotes-carousel-slide"
+              data-direction={direction}
+              aria-roledescription="slide">
+              <div className="quotes-carousel-logo-wrap">
+                <span className="quotes-carousel-logo-label">
+                  Ecosystem voice
+                </span>
+                <Image
+                  src={activeQuote.logo}
+                  alt=""
+                  width={180}
+                  height={52}
+                  className="quotes-carousel-logo"
+                  loading="lazy"
+                />
+              </div>
+
+              <blockquote className="quotes-carousel-testimonial">
+                <Image
+                  src="/images/Hiero-Icon-Quote-Left.svg"
+                  alt=""
+                  width={51}
+                  height={40}
+                  className="quotes-carousel-mark"
+                  loading="lazy"
+                />
+                <RichText
+                  inline
+                  markdown={activeQuote.quote}
+                  className="quotes-carousel-quote"
+                />
+                <footer className="quotes-carousel-author">
+                  <RichText inline markdown={activeQuote.author} />
+                </footer>
+              </blockquote>
+            </article>
+          </div>
+
+          {data.quotes.length > 1 ? (
+            <div className="quotes-carousel-controls">
+              <div className="quotes-carousel-status">
+                <p>Community perspectives</p>
+                {/*
+                  The dots are the sighted read-out of the position. A div with
+                  an `aria-label` is not announced, so the same information goes
+                  out as a live status instead — that is what a keyboard user
+                  hears after Previous/Next.
+                */}
+                <p className="sr-only" role="status" aria-live="polite">
+                  Quote {activeIndex + 1} of {data.quotes.length}
+                </p>
+                <div className="quotes-carousel-progress" aria-hidden="true">
+                  {data.quotes.map((quote, index) => (
+                    <span
+                      key={quote.author}
+                      data-active={index === activeIndex ? "true" : undefined}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="quotes-carousel-buttons">
+                <button
+                  type="button"
+                  onClick={() => setAutoPlayEnabled(enabled => !enabled)}
+                  aria-label={
+                    autoPlayEnabled
+                      ? "Pause automatic quote rotation"
+                      : "Resume automatic quote rotation"
+                  }
+                  aria-pressed={!autoPlayEnabled}
+                  className="quotes-carousel-control quotes-carousel-control--autoplay">
+                  <span aria-hidden="true">{autoPlayEnabled ? "Ⅱ" : "▶"}</span>
+                  <span>{autoPlayEnabled ? "Pause" : "Play"}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={showPrevious}
+                  aria-label="Previous quote"
+                  className="quotes-carousel-control">
+                  <span aria-hidden="true">←</span>
+                  <span>Previous</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={showNext}
+                  aria-label="Next quote"
+                  className="quotes-carousel-control">
+                  <span>Next</span>
+                  <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

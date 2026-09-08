@@ -33,6 +33,14 @@ Open your browser and visit:
 
     http://localhost:3000/
 
+Both `pnpm dev` and `pnpm build` first run `pnpm sync:data`, which fetches
+repository statistics from the GitHub API. Anonymous requests are rate-limited,
+and when the limit is hit the sync quietly falls back to the JSON caches
+committed in `src/data/`. To keep the numbers fresh during repeated local
+builds, export a GitHub token first:
+
+    export GITHUB_TOKEN=<your personal access token>
+
 ## Step 5: Preview Draft Content
 
 To preview draft blog posts, just ensure the `draft` flag in your markdown front matter is respected by your application logic, and run:

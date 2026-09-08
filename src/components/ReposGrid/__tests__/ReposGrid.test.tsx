@@ -14,6 +14,7 @@ describe("ReposGrid", () => {
     render(
       <ReposGrid
         data={{
+          eyebrow: "Codebase",
           heading: "Repositories",
           text: "Explore repos",
           repos: [
@@ -39,7 +40,9 @@ describe("ReposGrid", () => {
     );
 
     const starCount = stats["hiero-sdk-js"]?.stars ?? 0;
-    expect(screen.getByText(`⭐ ${starCount}`)).toBeInTheDocument();
+    expect(
+      screen.getByLabelText(`${starCount} GitHub stars`),
+    ).toBeInTheDocument();
     expect(
       screen.getByRole("link", { name: /View all repositories/i }),
     ).toBeInTheDocument();
@@ -70,6 +73,7 @@ describe("ReposGrid", () => {
     render(
       <ReposGrid
         data={{
+          eyebrow: "Codebase",
           heading: "Repositories",
           text: "All repos",
           repos: mappedRepos,

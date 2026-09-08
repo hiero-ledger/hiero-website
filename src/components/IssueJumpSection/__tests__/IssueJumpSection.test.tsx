@@ -7,8 +7,10 @@ describe("IssueJumpSection", () => {
     render(
       <IssueJumpSection
         data={{
+          eyebrow: "Contribute",
           heading: "Jump In",
           text: "Choose a good first issue.",
+          filters: ["Open", "Unassigned"],
           difficulties: [
             {
               label: "Beginner",
@@ -32,9 +34,21 @@ describe("IssueJumpSection", () => {
       "href",
       "https://github.com/hiero-ledger/hiero-website/issues",
     );
+    expect(screen.getByRole("link", { name: /Beginner/i })).toHaveAttribute(
+      "target",
+      "_blank",
+    );
     expect(screen.getByRole("link", { name: /Offline/i })).toHaveAttribute(
       "href",
       "#",
     );
+    expect(screen.getByRole("link", { name: /Offline/i })).not.toHaveAttribute(
+      "target",
+    );
+    expect(
+      screen.getByRole("list", {
+        name: "Filters applied to every issue search",
+      }),
+    ).toHaveTextContent("OpenUnassigned");
   });
 });

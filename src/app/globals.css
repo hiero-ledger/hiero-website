@@ -7,13 +7,20 @@
   --color-current: currentColor;
   --color-white: #ffffff;
   --color-white-dark: #e5e4d7;
+  --color-white: #ffffff;
+  --color-white-dark: #e5e4d7;
   --color-black: #000000;
+  --color-charcoal: #1e1e1e;
+  --color-red: #b81a56;
   --color-charcoal: #1e1e1e;
   --color-red: #b81a56;
   --color-red-dark: #992350;
   --color-red-light: #d92d6a;
   --color-sand: #e5e4d7;
+  --color-red-light: #d92d6a;
+  --color-sand: #e5e4d7;
   --color-gray: #616161;
+  --color-gray-light: #efefee;
   --color-gray-light: #efefee;
 
   /* Fonts — variables set by next/font in layout.tsx */
@@ -54,14 +61,1481 @@
   --text-5xl: 7.5rem;
   --text-5xl--line-height: 6.875rem;
   --text-5xl--letter-spacing: -0.625rem;
+
+  /* Vertical rhythm
+     One scale for the whole page rather than a maxed-out clamp copied into
+     every section: flat maximums read as dead space, not as air. The three
+     steps are deliberately far apart, so the gap between two bands is
+     unmistakably larger than the gap inside one, and a reader can tell where a
+     section ends without the divider having to say so. */
+  /* Band lights
+     Channel triplets, not `--color-*`, so each composes at several alphas
+     without generating a dozen near-identical utilities. `--band-light` is
+     brand red opened toward white until it carries the hue but none of the
+     darkness; `--band-cool` is the site's own `gray-light`, used as a
+     counter-light from the opposite corner. See the band backgrounds below for
+     why lighting is the only safe way to get brand colour into a sand band. */
+  --band-light: 255 228 238;
+  --band-cool: 239 239 238;
+
+  --space-band: clamp(3.5rem, 5vw, 5.5rem);
+  --space-band-header: clamp(2rem, 3vw, 3rem);
+  --space-band-tight: clamp(1.25rem, 2vw, 2rem);
 }
 
-/* ============================================
-   Authored CSS lives in Tailwind's cascade layers.
-   Unlayered rules outrank every utility regardless of
-   specificity, so anything written outside a layer here
-   silently overrides component-level Tailwind classes.
-   ============================================ */
+@layer components {
+  /* ============================================
+     Home hero — components/HeroSection
+
+     A masthead rather than a billboard: a credential line, the wordmark at
+     display size, the positioning sentence and its two doors beside it, and a
+     colophon of live project counts closing the bottom edge.
+
+     `@apply`-first, like the header and menu below. What stays a plain
+     declaration is only what Tailwind has no utility for — composite paints,
+     masks, keyframes and `content`.
+     ============================================ */
+
+  /* Height is the viewport minus the header spacer in layout.tsx (`h-22.5`, so
+     5.625rem), which lands the colophon on the fold rather than guessing at a
+     band. `svh` rather than `vh`: mobile browsers report `vh` against the
+     *expanded* viewport, which would push the colophon under the address bar
+     on first paint.
+
+     Every size below that could push the hero past that fold is measured
+     against `--hero-fold` as well as `vw`, because width alone gets a landscape
+     phone badly wrong: 667x375 is *wide* to a `vw` clamp and has 285px of
+     usable height. */
+  .hero-section {
+    /* Two darkenings of `--color-red-dark`, kept local rather than added to the
+       theme: they exist so a luminous object has something to be luminous
+       against, and nothing outside this section should reach for them. */
+    --hero-deep: #3a0a1e;
+    --hero-shadow: #23060f;
+    --hero-fold: calc(100svh - 5.625rem);
+    --hero-art-x: 0px;
+    --hero-art-y: 0px;
+    --hero-art-rotate-x: 0deg;
+    --hero-art-rotate-y: 0deg;
+    --hero-traces-x: 0px;
+    --hero-traces-y: 0px;
+    --hero-halo-x: 0px;
+    --hero-halo-y: 0px;
+    --hero-scroll-progress: 0;
+
+    @apply relative isolate overflow-hidden text-white;
+
+    /* `min()` rather than a flat 32rem floor: 32rem is worth having on a tall
+       phone and nonsense on a landscape one, where it reserved more than the
+       whole viewport for a hero the content only half filled. Below the fold,
+       content is the floor. */
+    min-height: min(var(--hero-fold), 32rem);
+
+    /* Front to back: a ground veil, the volume of light the lattice sits
+       inside, and the brand ramp run down into its own shadow. Three stacked
+       gradients are a paint, not a utility — `bg-[…]` here would be one
+       400-character token nobody could read or change. */
+    background:
+      linear-gradient(
+        to bottom,
+        rgb(35 6 15 / 0%) 34%,
+        rgb(35 6 15 / 30%) 100%
+      ),
+      radial-gradient(
+        46rem 38rem at 79% 44%,
+        rgb(217 45 106 / 46%),
+        transparent 62%
+      ),
+      linear-gradient(
+        152deg,
+        var(--hero-deep),
+        var(--color-red-dark) 44%,
+        #6d1338 74%,
+        var(--hero-shadow)
+      );
+  }
+
+  /* `min-h-[inherit]` rather than a second copy of the clamp above: the two
+     boxes have to stay the same height for the colophon to sit on the section's
+     bottom edge, and one declaration cannot drift from the other. The gap is a
+     floor under the three bands, so a short window — a laptop in landscape, a
+     phone with the browser chrome out — closes them evenly instead of letting
+     the auto margin below collapse the wordmark onto the eyebrow. */
+  .hero-section-inner {
+    @apply relative flex min-h-[inherit] flex-col;
+    @apply gap-[clamp(1.25rem,3vh,2.5rem)];
+    /* The 3rem floor was 48px of air on a phone that had already spent 90px on
+       the header spacer, on top of a hero that ran past the fold anyway. The
+       maximum is untouched, so nothing changes from `lg` up. */
+    @apply pt-[clamp(2rem,6vw,5rem)] pb-[clamp(1.5rem,3vw,2.5rem)];
+  }
+
+  .hero-section-eyebrow {
+    @apply m-0 flex items-start gap-3.5;
+    @apply font-ibm text-xs leading-normal tracking-[0.16em] text-white/88 uppercase;
+  }
+
+  .hero-section-lockup {
+    @apply mt-auto mb-[clamp(0rem,3vh,2rem)] flex flex-col;
+    @apply gap-[clamp(1.75rem,3.5vw,2.75rem)];
+
+    container-type: inline-size;
+  }
+
+  .hero-section-title {
+    @apply m-0 ml-[-0.045em];
+    @apply leading-[0.78] font-medium tracking-[-0.055em];
+
+    font-size: clamp(5.5rem, min(26vw, 30svh, 44cqw), 13.5rem);
+  }
+
+  .hero-section-pitch {
+    @apply flex max-w-[34rem] flex-col gap-[clamp(1.5rem,2.5vw,2rem)];
+  }
+
+  .hero-section-lede {
+    @apply m-0 text-[clamp(1.0625rem,1.35vw,1.3125rem)];
+    @apply leading-normal tracking-[-0.015em] text-balance text-white/92;
+  }
+
+  .hero-section-actions {
+    @apply flex flex-wrap gap-3;
+  }
+
+  .hero-section-action {
+    @apply inline-flex h-12 items-center gap-2 rounded-full px-6.5;
+    @apply border border-transparent text-base font-medium leading-none no-underline;
+    @apply transition-[background-color,border-color,translate] duration-200 ease-out;
+    @apply hover:-translate-y-px;
+
+    @apply focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-white;
+  }
+
+  .hero-section-action--primary {
+    @apply bg-white text-charcoal hover:bg-sand;
+  }
+
+  .hero-section-action--ghost {
+    @apply border-white/55 text-white hover:border-white/80 hover:bg-white/12;
+  }
+
+  .hero-section-action-glyph {
+    @apply text-[0.875em] leading-none;
+  }
+
+  .hero-section-colophon {
+    @apply m-0 flex list-none flex-col gap-3.5 p-0;
+    @apply border-t border-white/22 pt-[clamp(1.25rem,2.5vw,1.75rem)];
+    @apply sm:flex-row sm:flex-wrap sm:gap-x-[clamp(1.5rem,4vw,3.5rem)] sm:gap-y-3.5;
+  }
+
+  .hero-section-fact {
+    @apply flex items-baseline gap-2;
+    @apply font-ibm text-xs leading-none tracking-[0.12em] text-white/80 uppercase;
+  }
+
+  .hero-section-fact-value {
+    @apply text-[0.9375rem] tracking-[0.02em] text-white;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-section-eyebrow,
+    .hero-section-title,
+    .hero-section-pitch,
+    .hero-section-colophon {
+      animation: hero-rise 720ms cubic-bezier(0.22, 0.85, 0.28, 1) both;
+    }
+
+    .hero-section-eyebrow {
+      animation-delay: 60ms;
+    }
+
+    .hero-section-title {
+      animation-delay: 150ms;
+    }
+
+    .hero-section-pitch {
+      animation-delay: 280ms;
+    }
+
+    .hero-section-colophon {
+      animation-delay: 400ms;
+    }
+  }
+
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(0.875rem);
+    }
+  }
+
+  .hero-traces {
+    @apply pointer-events-none absolute inset-0 -z-20 h-full w-full;
+
+    transform-origin: center;
+    translate: var(--hero-traces-x) var(--hero-traces-y);
+    scale: 1.035;
+    transition: translate 260ms cubic-bezier(0.22, 0.85, 0.28, 1);
+    will-change: translate;
+
+    mask-image: radial-gradient(
+      116% 94% at 78% 16%,
+      black 6%,
+      rgb(0 0 0 / 34%) 44%,
+      transparent 78%
+    );
+  }
+
+  .hero-traces-links {
+    @apply fill-none stroke-white/14;
+
+    stroke-width: 0.6;
+  }
+
+  .hero-traces-signals {
+    @apply fill-none stroke-white/44;
+
+    stroke-width: 1.1;
+    stroke-linecap: round;
+    stroke-dasharray: 1 48;
+  }
+
+  .hero-traces-events {
+    @apply fill-white/28;
+  }
+
+  .hero-mark-scene {
+    --hero-mark-band: min(clamp(10rem, 46vw, 18rem), 26svh);
+
+    @apply pointer-events-none relative mt-1;
+    @apply w-[calc(100%+1.563rem)] md:w-[calc(100%+3rem)] lg:w-[calc(100%+8.75rem)];
+
+    height: var(--hero-mark-band);
+
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 19%,
+      black 100%
+    );
+  }
+
+  /* A soft pool of brand light makes the white mark feel lit by the scene,
+     rather than laid on top of it. */
+  .hero-mark-scene::before {
+    @apply absolute top-1/2 right-[-10%] h-[125%] w-[88%];
+
+    content: "";
+    translate: var(--hero-halo-x) calc(-50% + var(--hero-halo-y));
+    transition: translate 420ms cubic-bezier(0.22, 0.85, 0.28, 1);
+    will-change: translate;
+    background: radial-gradient(
+      ellipse,
+      rgb(255 158 199 / 50%) 0%,
+      rgb(217 45 106 / 24%) 40%,
+      transparent 72%
+    );
+  }
+
+  .hero-mark-reactive {
+    @apply absolute inset-0 transform-3d;
+
+    transform: translate3d(var(--hero-art-x), var(--hero-art-y), 0)
+      rotateX(var(--hero-art-rotate-x)) rotateY(var(--hero-art-rotate-y));
+    transform-origin: 70% 50%;
+    transition: transform 280ms cubic-bezier(0.22, 0.85, 0.28, 1);
+    will-change: transform;
+  }
+
+  .hero-mark-grid {
+    @apply absolute top-[12%] right-[-7%] h-[76%] w-[78%];
+    @apply border border-white/14 shadow-[0_34px_70px_rgb(25_1_10_/_28%)];
+
+    clip-path: polygon(11% 0, 100% 0, 89% 100%, 0 100%);
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0 4.9rem,
+        rgb(255 255 255 / 7%) 4.9rem calc(4.9rem + 1px)
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 4rem,
+        rgb(255 255 255 / 6%) 4rem calc(4rem + 1px)
+      ),
+      linear-gradient(135deg, rgb(255 255 255 / 9%), rgb(255 255 255 / 1%));
+    transform: perspective(60rem) rotateY(-12deg) rotateZ(-5deg);
+  }
+
+  .hero-mark-rail {
+    @apply absolute right-[-12%] h-px w-[88%] origin-right rotate-[-7deg];
+
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgb(255 255 255 / 25%) 20%,
+      rgb(255 207 228 / 76%) 64%,
+      transparent
+    );
+    box-shadow: 0 0 18px rgb(255 156 198 / 35%);
+  }
+
+  .hero-mark-rail::after {
+    @apply absolute top-[-2px] left-[18%] h-[5px] w-[5px] rounded-full bg-white;
+    @apply shadow-[0_0_12px_rgb(255_174_208_/_95%)];
+
+    content: "";
+  }
+
+  .hero-mark-rail--top {
+    @apply top-[23%];
+  }
+
+  .hero-mark-rail--middle {
+    @apply top-[52%] right-[-4%] w-[94%];
+  }
+
+  .hero-mark-rail--bottom {
+    @apply top-[79%] right-[-18%] w-[82%];
+  }
+
+  .hero-mark-emblem,
+  .hero-mark-echo {
+    @apply absolute top-1/2 right-[7%] aspect-square;
+
+    width: min(56vw, 22rem, calc(var(--hero-mark-band) * 0.92));
+
+    translate: 0 -50%;
+  }
+
+  .hero-mark-echo {
+    @apply right-[2%] opacity-12;
+
+    filter: blur(0.4px);
+    scale: 1.13;
+    translate: 0 -43%;
+  }
+
+  .hero-mark-emblem {
+    @apply grid place-items-center rounded-[clamp(1.5rem,3vw,3rem)];
+    @apply border border-white/22;
+    @apply shadow-[0_34px_85px_rgb(29_2_12_/_45%),inset_0_1px_0_rgb(255_255_255_/_20%)];
+
+    background:
+      radial-gradient(
+        circle at 30% 18%,
+        rgb(255 255 255 / 17%),
+        transparent 38%
+      ),
+      linear-gradient(145deg, rgb(104 12 48 / 72%), rgb(50 4 20 / 44%));
+    backdrop-filter: blur(6px);
+  }
+
+  .hero-mark-emblem::before {
+    @apply absolute inset-[5%] rounded-[inherit] border border-white/8;
+
+    content: "";
+  }
+
+  .hero-mark-image {
+    @apply h-[72%] w-[72%] object-contain;
+
+    filter: brightness(0) invert(1) drop-shadow(0 0 24px rgb(255 181 213 / 34%));
+  }
+
+  .hero-mark-node {
+    @apply absolute h-2.5 w-2.5 rounded-full bg-white;
+    @apply shadow-[0_0_12px_rgb(255_174_208_/_95%),0_0_34px_rgb(217_45_106_/_75%)];
+  }
+
+  .hero-mark-node--one {
+    @apply top-[19%] right-[43%];
+  }
+
+  .hero-mark-node--two {
+    @apply top-[39%] right-[12%] h-1.5 w-1.5;
+  }
+
+  .hero-mark-node--three {
+    @apply right-[49%] bottom-[20%] h-1.5 w-1.5;
+  }
+
+  .hero-mark-node--four {
+    @apply right-[5%] bottom-[12%];
+  }
+
+  @media (width >= 80rem),
+    (width >= 48rem) and (aspect-ratio >= 1/1) and (height > 30rem) {
+    .hero-section {
+      min-height: min(var(--hero-fold), 50rem);
+    }
+
+    .hero-section-lockup {
+      @apply max-w-[53%];
+    }
+
+    .hero-mark-scene {
+      @apply absolute inset-y-0 right-[-3%] left-auto mt-0 h-auto w-[60%] -z-10;
+    }
+
+    .hero-mark-rail {
+      @apply rotate-[-13deg];
+    }
+
+    .hero-mark-emblem,
+    .hero-mark-echo {
+      @apply right-[8%];
+
+      width: min(33rem, 66%, 58svh);
+    }
+
+    .hero-mark-echo {
+      @apply right-[3%];
+    }
+  }
+
+  @media (height <= 30rem) and (width < 80rem) {
+    .hero-mark-scene {
+      @apply absolute inset-y-0 right-[-2%] left-auto mt-0 h-auto w-[34%] -z-10;
+    }
+
+    .hero-mark-emblem,
+    .hero-mark-echo {
+      @apply right-[4%];
+
+      width: min(9rem, 74%, 46svh);
+    }
+
+    .hero-section-inner {
+      @apply gap-[clamp(0.75rem,2vh,1.25rem)] pt-8 pb-5;
+    }
+
+    .hero-section-lockup {
+      @apply mb-0 gap-[clamp(1rem,2.5vw,1.75rem)];
+    }
+
+    .hero-section-pitch {
+      @apply gap-[clamp(1rem,2vw,1.5rem)];
+    }
+
+    .hero-section-title {
+      font-size: clamp(3.25rem, min(17vw, 26svh), 7rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-traces-signals {
+      animation: hero-trace-flow 10s linear infinite;
+    }
+
+    .hero-traces-events circle {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: hero-trace-event 5.2s ease-in-out infinite alternate;
+    }
+
+    .hero-traces-events circle:nth-child(3n) {
+      animation-delay: -1.7s;
+      animation-duration: 6.4s;
+    }
+
+    .hero-traces-events circle:nth-child(4n) {
+      animation-delay: -3.1s;
+      animation-duration: 4.6s;
+    }
+
+    .hero-mark-emblem {
+      animation: hero-mark-float 8s ease-in-out infinite alternate;
+    }
+
+    .hero-mark-grid {
+      animation: hero-mark-plane 12s ease-in-out infinite alternate;
+    }
+
+    .hero-mark-rail::after {
+      animation: hero-mark-signal 5.5s ease-in-out infinite;
+    }
+
+    .hero-mark-rail--middle::after {
+      animation-delay: -1.8s;
+    }
+
+    .hero-mark-rail--bottom::after {
+      animation-delay: -3.6s;
+    }
+  }
+
+  @keyframes hero-trace-flow {
+    to {
+      stroke-dashoffset: -196;
+    }
+  }
+
+  @keyframes hero-trace-event {
+    from {
+      opacity: 0.45;
+      scale: 0.86;
+    }
+
+    to {
+      opacity: 1;
+      scale: 1.55;
+    }
+  }
+
+  @keyframes hero-mark-float {
+    from {
+      translate: 0 -50%;
+      rotate: -1deg;
+    }
+
+    to {
+      translate: -0.4rem calc(-50% - 0.6rem);
+      rotate: 1.25deg;
+    }
+  }
+
+  @keyframes hero-mark-plane {
+    from {
+      transform: perspective(60rem) rotateY(-12deg) rotateZ(-5deg) translateX(0);
+    }
+
+    to {
+      transform: perspective(60rem) rotateY(-9deg) rotateZ(-3.5deg)
+        translateX(-0.6rem);
+    }
+  }
+
+  @keyframes hero-mark-signal {
+    0%,
+    10% {
+      opacity: 0;
+      translate: 0;
+    }
+
+    20%,
+    72% {
+      opacity: 1;
+    }
+
+    90%,
+    100% {
+      opacity: 0;
+      translate: 34vw;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-traces {
+      translate: 0 0;
+      transition: none;
+    }
+
+    .hero-mark-scene::before {
+      translate: 0 -50%;
+      transition: none;
+    }
+
+    .hero-mark-reactive {
+      transform: none;
+      transition: none;
+    }
+
+    .hero-traces-signals,
+    .hero-traces-events circle,
+    .hero-mark-emblem,
+    .hero-mark-grid,
+    .hero-mark-rail::after {
+      animation: none;
+    }
+  }
+
+  .gossip-field {
+    @apply pointer-events-none absolute inset-x-0 -z-10 h-full w-full;
+
+    max-height: 62rem;
+  }
+
+  .gossip-field-web {
+    @apply absolute -top-[6%] -left-[6%] h-[112%] w-[112%];
+  }
+
+  .gossip-field-links {
+    @apply fill-none stroke-charcoal/20;
+
+    stroke-width: 0.7;
+  }
+
+  .gossip-field-events {
+    @apply fill-charcoal/26;
+  }
+
+  .gossip-field-accents {
+    @apply fill-red/75;
+  }
+
+  .gossip-field--principles {
+    @apply bottom-0;
+
+    mask-image: radial-gradient(
+      120% 100% at 4% 78%,
+      black 4%,
+      rgb(0 0 0 / 34%) 40%,
+      transparent 72%
+    );
+  }
+
+  .gossip-field--issues {
+    @apply bottom-0;
+
+    mask-image: radial-gradient(
+      100% 130% at 96% 96%,
+      black 2%,
+      rgb(0 0 0 / 26%) 38%,
+      transparent 68%
+    );
+  }
+
+  .gossip-field--calls {
+    @apply bottom-0;
+
+    mask-image: radial-gradient(
+      110% 90% at 2% 96%,
+      black 4%,
+      rgb(0 0 0 / 30%) 40%,
+      transparent 70%
+    );
+  }
+
+  .gossip-field--repos {
+    @apply top-0;
+
+    mask-image: radial-gradient(
+      110% 90% at 98% 4%,
+      black 4%,
+      rgb(0 0 0 / 30%) 40%,
+      transparent 70%
+    );
+  }
+
+  .gossip-field--quotes {
+    top: 50%;
+    translate: 0 -50%;
+
+    mask-image: radial-gradient(
+      86% 116% at 8% 50%,
+      black 8%,
+      rgb(0 0 0 / 34%) 42%,
+      transparent 74%
+    );
+  }
+
+  @media screen and (prefers-reduced-motion: no-preference) {
+    .gossip-field-web {
+      animation: gossip-drift 54s ease-in-out infinite alternate;
+    }
+
+    .gossip-field--principles .gossip-field-web {
+      animation-duration: 61s;
+      animation-delay: -12s;
+    }
+
+    .gossip-field--issues .gossip-field-web {
+      animation-duration: 47s;
+      animation-delay: -31s;
+      animation-direction: alternate-reverse;
+    }
+
+    .gossip-field--calls .gossip-field-web {
+      animation-duration: 73s;
+      animation-delay: -8s;
+    }
+
+    .gossip-field--repos .gossip-field-web {
+      animation-duration: 58s;
+      animation-delay: -24s;
+      animation-direction: alternate-reverse;
+    }
+
+    .gossip-field--quotes .gossip-field-web {
+      animation-duration: 67s;
+      animation-delay: -41s;
+    }
+
+    .gossip-field-accents circle {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: gossip-accent-pulse 7s ease-in-out infinite;
+    }
+
+    .gossip-field-accents circle:nth-child(2) {
+      animation-delay: -1.75s;
+    }
+
+    .gossip-field-accents circle:nth-child(3) {
+      animation-delay: -3.5s;
+    }
+
+    .gossip-field-accents circle:nth-child(4) {
+      animation-delay: -5.25s;
+    }
+  }
+
+  @keyframes gossip-drift {
+    from {
+      translate: -1.7% 1.2%;
+      scale: 1;
+    }
+
+    to {
+      translate: 1.9% -1.4%;
+      scale: 1.05;
+    }
+  }
+
+  @keyframes gossip-accent-pulse {
+    0%,
+    100% {
+      opacity: 0.68;
+      scale: 1;
+    }
+
+    50% {
+      opacity: 1;
+      scale: 1.34;
+    }
+  }
+
+
+  .issue-jump-inner,
+  .community-calls-inner,
+  .repositories-inner,
+  .quotes-carousel-inner {
+    @apply py-[var(--space-band)];
+  }
+
+  .issue-jump-header,
+  .community-calls-header,
+  .repositories-header,
+  .quotes-carousel-header {
+    @apply mb-[var(--space-band-header)] grid gap-8;
+    @apply lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)] lg:items-end lg:gap-[clamp(4rem,8vw,9rem)];
+  }
+
+  /* Contribute carries the page's longest headline, so it takes more of the row. */
+  .issue-jump-header {
+    @apply lg:grid-cols-[minmax(0,1.25fr)_minmax(18rem,0.75fr)];
+  }
+
+  .hiero-principles-eyebrow,
+  .issue-jump-eyebrow,
+  .community-calls-eyebrow,
+  .repositories-eyebrow,
+  .quotes-carousel-eyebrow {
+    @apply m-0 mb-[clamp(1rem,2vw,1.5rem)] flex items-start gap-3.5;
+    @apply font-ibm text-xs leading-normal tracking-[0.16em] text-red uppercase;
+  }
+
+  .hero-section-eyebrow::before,
+  .hiero-principles-eyebrow::before,
+  .issue-jump-eyebrow::before,
+  .community-calls-eyebrow::before,
+  .repositories-eyebrow::before,
+  .quotes-carousel-eyebrow::before {
+    @apply mt-[0.75em] h-px w-[clamp(1.5rem,4vw,3rem)] flex-none bg-current;
+
+    content: "";
+  }
+
+  .community-calls-heading,
+  .repositories-heading,
+  .quotes-carousel-heading {
+    @apply m-0 max-w-[14ch] text-balance;
+    @apply text-[clamp(2.75rem,5.5vw,5.75rem)] leading-[0.96] font-normal tracking-[-0.055em];
+  }
+
+  .issue-jump-heading {
+    @apply m-0 max-w-[13ch] text-balance;
+    @apply text-[clamp(2.75rem,6.25vw,6.5rem)] leading-[0.94] font-normal tracking-[-0.06em];
+  }
+
+  /* A tighter measure, so the quote stage beside it keeps its column. */
+  .quotes-carousel-heading {
+    @apply max-w-[13ch];
+  }
+
+  .issue-jump-intro,
+  .community-calls-intro,
+  .repositories-intro {
+    @apply flex flex-col gap-8 lg:pb-1;
+  }
+
+  .issue-jump-intro {
+    @apply gap-6;
+  }
+
+  .issue-jump-copy,
+  .community-calls-copy,
+  .repositories-copy,
+  .quotes-carousel-copy {
+    @apply max-w-[36rem] text-[clamp(1.0625rem,1.35vw,1.25rem)];
+    @apply leading-[1.6] tracking-[-0.014em] text-charcoal/72;
+  }
+
+  .issue-jump-copy,
+  .repositories-copy,
+  .quotes-carousel-copy {
+    @apply m-0;
+  }
+
+  /* Contribute sets a shorter measure; repository copy carries authored line
+     breaks; quotes pads down to the header baseline. */
+  .issue-jump-copy {
+    @apply max-w-[34rem] leading-[1.55];
+  }
+
+  .repositories-copy {
+    @apply whitespace-pre-line;
+  }
+
+  .quotes-carousel-copy {
+    @apply lg:pb-1;
+  }
+
+  /* The small ruled label that names a list or grid below it. */
+  .issue-jump-list-heading,
+  .community-calls-board-heading {
+    @apply flex items-center justify-between pb-3;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.14em] text-charcoal/50 uppercase;
+  }
+
+  .issue-jump-list-heading {
+    @apply border-b border-charcoal/18 text-charcoal/48;
+  }
+
+  /* The right-hand half is context, not content: it goes when there is no room. */
+  .issue-jump-list-heading span:last-child,
+  .community-calls-board-heading span:last-child {
+    @apply hidden sm:block;
+  }
+
+  /* Constraint pills: the filters applied to every issue search, the facts
+     that hold for every repository. */
+  .issue-jump-filter,
+  .repositories-features li {
+    @apply rounded-full border border-charcoal/18 px-3 py-1.5;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.1em] text-charcoal/68 uppercase;
+  }
+
+  .repositories-features li {
+    @apply text-charcoal/62;
+  }
+
+  /* One outline button per section, filling red on hover — the section's exit. */
+  .community-calls-toggle,
+  .repositories-all-link {
+    @apply inline-flex min-h-12 items-center gap-3 rounded-full border border-charcoal/22 bg-transparent px-6;
+    @apply text-base font-medium tracking-[-0.02em] text-charcoal;
+    @apply transition-[background-color,border-color,color] duration-200 ease-out;
+    @apply hover:border-red hover:bg-red hover:text-white;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  .repositories-all-link {
+    @apply no-underline;
+  }
+
+  .hiero-principles {
+    @apply relative isolate scroll-mt-22.5 overflow-clip bg-sand;
+
+    --band-bloom: radial-gradient(
+      66% 44% at 2% 64%,
+      rgb(var(--band-light) / 80%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      58% 38% at 98% 30%,
+      rgb(var(--band-cool) / 72%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
+  }
+
+  /* The thesis is short and the list is long, so from two columns up the layout
+     turns into a grid and the thesis sticks. */
+  .hiero-principles-inner {
+    @apply flex flex-col gap-[clamp(3rem,6vw,4.5rem)] py-[var(--space-band)];
+    @apply xl:grid xl:grid-cols-[minmax(0,23rem)_minmax(0,1fr)] xl:gap-[clamp(4rem,7vw,8rem)];
+  }
+
+  /* `self-start` is not optional here: a stretched grid item has no room left
+     to stick in. */
+  .hiero-principles-thesis {
+    @apply xl:sticky xl:top-32 xl:self-start;
+  }
+
+  .hiero-principles-heading {
+    @apply m-0 mb-[clamp(1rem,2vw,1.5rem)];
+    @apply text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.05] font-normal tracking-[-0.045em];
+  }
+
+  .hiero-principles-intro {
+    @apply max-w-[34rem] text-[clamp(1.0625rem,1.25vw,1.1875rem)];
+    @apply leading-[1.6] tracking-[-0.012em] text-charcoal/78;
+  }
+
+  .hiero-principles-intro p {
+    @apply m-0;
+  }
+
+  .hiero-principles-index {
+    @apply mt-10 hidden xl:block;
+  }
+
+  .hiero-principles-index-list {
+    @apply m-0 flex list-none flex-col gap-3 p-0;
+  }
+
+  .hiero-principles-index-link {
+    @apply inline-flex items-center gap-3 text-lg tracking-[-0.02em] no-underline;
+    @apply text-charcoal/70 transition-colors duration-200 ease-out;
+    @apply hover:text-charcoal;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+  }
+
+  .hiero-principles-index-link::before {
+    @apply h-px w-6 flex-none origin-left bg-current;
+    @apply transition-transform duration-300 ease-out motion-reduce:transition-none;
+
+    content: "";
+    transform: scaleX(0.26);
+  }
+
+  .hiero-principles-index-link[aria-current] {
+    @apply text-red;
+  }
+
+  .hiero-principles-index-link[aria-current]::before {
+    transform: scaleX(1);
+  }
+
+  .hiero-principles-list {
+    @apply m-0 list-none p-0;
+  }
+
+  .hiero-principles-item {
+    @apply grid grid-cols-[clamp(2.25rem,3vw,2.75rem)_minmax(0,1fr)];
+    @apply gap-[clamp(1.25rem,2.5vw,2rem)] py-[clamp(1.5rem,2.6vw,2.25rem)];
+    @apply scroll-mt-[45vh] border-t border-charcoal/14 last:border-b;
+    @apply transition-colors duration-300 ease-out motion-reduce:transition-none;
+  }
+
+  .hiero-principles-item[data-active] {
+    @apply xl:border-t-red/45;
+  }
+
+  .hiero-principles-icon {
+    @apply mt-1 h-auto w-[clamp(2.25rem,3vw,2.75rem)];
+  }
+
+  .hiero-principles-body {
+    @apply flex flex-col gap-[clamp(0.625rem,1.2vw,0.875rem)];
+  }
+
+  .hiero-principles-term {
+    @apply m-0 flex flex-col items-start gap-1.5;
+    @apply font-ibm text-xs leading-none tracking-[0.16em] text-charcoal/70 uppercase;
+  }
+
+  .hiero-principles-term strong {
+    @apply font-serif text-[clamp(1.75rem,3vw,2.75rem)] leading-[1] font-medium;
+    @apply tracking-[-0.04em] text-red normal-case;
+  }
+
+  .hiero-principles-detail {
+    @apply m-0 max-w-[46rem] text-base;
+    @apply leading-[1.65] tracking-[-0.008em] text-pretty text-charcoal/78;
+  }
+
+  @media screen and (prefers-reduced-motion: no-preference) {
+    .hiero-principles[data-motion="ready"] .hiero-principles-thesis,
+    .hiero-principles[data-motion="ready"] .hiero-principles-item {
+      @apply translate-y-5 opacity-0;
+    }
+
+    .hiero-principles[data-motion="ready"]
+      .hiero-principles-thesis[data-revealed],
+    .hiero-principles[data-motion="ready"]
+      .hiero-principles-item[data-revealed] {
+      animation: hiero-principles-rise 640ms cubic-bezier(0.22, 0.85, 0.28, 1)
+        both;
+    }
+  }
+
+  @keyframes hiero-principles-rise {
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  .issue-jump {
+    @apply relative isolate scroll-mt-22.5 overflow-hidden bg-sand text-charcoal;
+
+    --band-bloom: radial-gradient(
+      70% 46% at 98% 66%,
+      rgb(var(--band-light) / 76%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      56% 34% at 2% 28%,
+      rgb(var(--band-cool) / 64%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
+  }
+
+  .issue-jump-filters {
+    @apply m-0 flex list-none flex-wrap gap-2 p-0;
+  }
+
+  .issue-jump-list {
+    @apply m-0 list-none p-0;
+  }
+
+  .issue-jump-item {
+    @apply border-b border-charcoal/18;
+  }
+
+  .issue-jump-link {
+    @apply grid min-w-0 grid-cols-[2.25rem_minmax(0,1fr)_auto] items-start;
+    @apply gap-x-4 gap-y-3 py-6 text-charcoal no-underline;
+    @apply transition-[background-color,padding] duration-300 ease-out;
+    @apply hover:bg-red hover:px-4 hover:text-white;
+    @apply focus-visible:bg-red focus-visible:px-4 focus-visible:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red-dark;
+    @apply motion-reduce:transition-none;
+    @apply md:grid-cols-[3rem_minmax(10rem,0.75fr)_minmax(15rem,1.25fr)_auto] md:items-center md:gap-6 md:py-7;
+  }
+
+  .issue-jump-number {
+    @apply pt-1 font-ibm text-xs leading-none tracking-[0.12em] text-charcoal/45;
+    @apply transition-colors duration-300;
+    @apply md:pt-0;
+  }
+
+  .issue-jump-link:hover .issue-jump-number,
+  .issue-jump-link:focus-visible .issue-jump-number {
+    @apply text-white/75;
+  }
+
+  .issue-jump-label {
+    @apply m-0 text-[clamp(1.5rem,2.5vw,2.25rem)] leading-[1.05] font-medium tracking-[-0.04em];
+  }
+
+  .issue-jump-description {
+    @apply col-start-2 m-0 max-w-[36rem] text-base leading-[1.55] tracking-[-0.008em] text-charcoal/65;
+    @apply transition-colors duration-300;
+    @apply md:col-start-3;
+  }
+
+  .issue-jump-link:hover .issue-jump-description,
+  .issue-jump-link:focus-visible .issue-jump-description {
+    @apply text-white/86;
+  }
+
+  .issue-jump-action {
+    @apply col-start-3 row-span-2 row-start-1 flex items-center gap-3 self-center;
+    @apply md:col-start-4 md:row-span-1;
+  }
+
+  .issue-jump-action-label {
+    @apply hidden whitespace-nowrap font-ibm text-xs leading-none tracking-[0.1em] uppercase;
+    @apply lg:inline;
+  }
+
+  .issue-jump-action-glyph {
+    @apply grid h-10 w-10 place-items-center rounded-full border border-charcoal/25;
+    @apply text-lg leading-none transition-[background-color,border-color,color,translate] duration-300 ease-out;
+  }
+
+  .issue-jump-link:hover .issue-jump-action-glyph,
+  .issue-jump-link:focus-visible .issue-jump-action-glyph {
+    @apply translate-x-0.5 -translate-y-0.5 border-white bg-white text-red;
+  }
+
+
+  .community-calls {
+    @apply relative isolate scroll-mt-22.5 overflow-hidden bg-sand;
+
+    --band-bloom: radial-gradient(
+      66% 40% at 2% 70%,
+      rgb(var(--band-light) / 80%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      58% 34% at 98% 30%,
+      rgb(var(--band-cool) / 72%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
+  }
+
+  .community-calls-copy p {
+    @apply m-0;
+  }
+
+  .community-calls-count {
+    @apply m-0 flex items-end gap-4 border-t border-charcoal/16 pt-5;
+  }
+
+  .community-calls-count-value {
+    @apply text-[clamp(3.5rem,6vw,5.5rem)] leading-[0.78] font-medium tracking-[-0.06em] text-red;
+  }
+
+  .community-calls-count-label {
+    @apply pb-0.5 font-ibm text-[0.6875rem] leading-[1.45] tracking-[0.12em] text-charcoal/58 uppercase;
+  }
+
+  .community-calls-grid {
+    @apply m-0 grid list-none border-t border-l border-charcoal/18 p-0;
+    @apply md:grid-cols-2 xl:grid-cols-3;
+  }
+
+  .community-call-item {
+    @apply min-w-0 border-r border-b border-charcoal/18;
+  }
+
+  .community-call-link {
+    @apply relative flex h-full min-h-[20rem] flex-col overflow-hidden;
+    @apply p-[clamp(1.5rem,3vw,2.5rem)] text-charcoal no-underline;
+    @apply transition-colors duration-300 ease-out hover:bg-white/65;
+    @apply focus-visible:bg-white/65 focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  .community-call-link::before {
+    @apply absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-red;
+    @apply transition-transform duration-300 ease-out motion-reduce:transition-none;
+
+    content: "";
+  }
+
+  .community-call-link:hover::before,
+  .community-call-link:focus-visible::before {
+    @apply scale-x-100;
+  }
+
+  .community-call-meta {
+    @apply flex min-h-4 items-center gap-4;
+  }
+
+  .community-call-cadence {
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.12em] text-red uppercase;
+  }
+
+  .community-call-index {
+    @apply ml-auto font-ibm text-[0.6875rem] leading-none tracking-[0.12em] text-charcoal/38;
+  }
+
+  .community-call-name {
+    @apply m-0 mt-[clamp(2rem,4vw,3rem)];
+    @apply text-[clamp(1.5rem,2.2vw,2rem)] leading-[1.08] font-medium tracking-[-0.04em] text-balance;
+  }
+
+  .community-call-description {
+    @apply m-0 mt-4 text-base leading-[1.6] tracking-[-0.008em] text-pretty text-charcoal/65;
+    @apply transition-colors duration-300 motion-reduce:transition-none;
+  }
+
+  .community-call-link:hover .community-call-description,
+  .community-call-link:focus-visible .community-call-description {
+    @apply text-charcoal/82;
+  }
+
+  .community-call-action {
+    @apply mt-auto flex items-center justify-between gap-4 pt-8;
+    @apply font-ibm text-xs leading-none tracking-[0.1em] text-charcoal uppercase;
+  }
+
+  .community-call-action-glyph {
+    @apply grid h-10 w-10 place-items-center rounded-full border border-charcoal/24;
+    @apply font-serif text-lg leading-none transition-[background-color,border-color,color,translate] duration-300 ease-out;
+    @apply motion-reduce:transition-none;
+  }
+
+  .community-call-link:hover .community-call-action-glyph,
+  .community-call-link:focus-visible .community-call-action-glyph {
+    @apply translate-x-0.5 -translate-y-0.5 border-red bg-red text-white;
+  }
+
+  .community-calls-toggle-row {
+    @apply mt-[clamp(2rem,4vw,3.5rem)] flex justify-center;
+  }
+
+
+  .repositories {
+    @apply relative isolate scroll-mt-22.5 overflow-hidden bg-sand;
+
+    --band-bloom: radial-gradient(
+      66% 40% at 98% 32%,
+      rgb(var(--band-light) / 78%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      58% 36% at 2% 70%,
+      rgb(var(--band-cool) / 70%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
+  }
+
+  .repositories-features {
+    @apply m-0 flex list-none flex-wrap gap-2 border-t border-charcoal/16 p-0 pt-5;
+  }
+
+  .repositories-grid {
+    @apply m-0 grid list-none gap-4 p-0;
+    @apply md:grid-cols-2 md:gap-5 xl:grid-cols-3;
+  }
+
+  .repository-item {
+    @apply min-w-0;
+  }
+
+  .repository-link {
+    @apply flex h-full min-h-[19rem] min-w-0 flex-col rounded-[1.25rem];
+    @apply border border-charcoal/18 bg-transparent p-[clamp(1.5rem,3vw,2.25rem)];
+    @apply text-charcoal no-underline;
+    @apply transition-[background-color,border-color,box-shadow,translate] duration-300 ease-out;
+    @apply hover:-translate-y-1 hover:border-red/55 hover:bg-white/60 hover:shadow-[0_18px_45px_rgba(30,30,30,0.08)];
+    @apply focus-visible:bg-white/60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  .repository-meta {
+    @apply flex min-h-8 items-center justify-between gap-4;
+  }
+
+  .repository-platform {
+    @apply inline-flex items-center gap-2 font-ibm text-[0.6875rem] leading-none tracking-[0.11em] text-charcoal/58 uppercase;
+  }
+
+  .repository-github-icon {
+    @apply h-4 w-4 object-contain opacity-65;
+  }
+
+  .repository-stars {
+    @apply inline-flex min-h-8 items-center gap-1.5 whitespace-nowrap rounded-full border border-charcoal/16 px-3;
+    @apply font-ibm text-xs leading-none tracking-[0.04em] text-charcoal/62;
+  }
+
+  .repository-stars span {
+    @apply text-red;
+  }
+
+  .repository-name {
+    @apply m-0 mt-[clamp(2rem,4vw,3rem)] min-w-0 break-words;
+    @apply font-ibm text-[clamp(1.125rem,1.8vw,1.5rem)] leading-[1.25] tracking-[-0.04em];
+    @apply transition-colors duration-300 motion-reduce:transition-none;
+  }
+
+  .repository-description {
+    @apply m-0 mt-4 text-base leading-[1.6] tracking-[-0.008em] text-pretty text-charcoal/65;
+  }
+
+  .repository-action {
+    @apply mt-auto flex items-center justify-between gap-4 pt-8;
+    @apply font-ibm text-xs leading-none tracking-[0.09em] text-charcoal uppercase;
+  }
+
+  .repository-action-glyph {
+    @apply grid h-10 w-10 place-items-center rounded-full border border-charcoal/22;
+    @apply font-serif text-lg leading-none transition-[background-color,border-color,color,translate] duration-300 ease-out;
+    @apply motion-reduce:transition-none;
+  }
+
+  .repository-link:hover .repository-name,
+  .repository-link:focus-visible .repository-name {
+    @apply text-red;
+  }
+
+  .repository-link:hover .repository-action-glyph,
+  .repository-link:focus-visible .repository-action-glyph {
+    @apply translate-x-0.5 -translate-y-0.5 border-red bg-red text-white;
+  }
+
+  .repositories-footer {
+    @apply mt-[clamp(2rem,4vw,3.5rem)] flex flex-col items-start gap-5;
+    @apply sm:flex-row sm:items-center sm:justify-between;
+  }
+
+  .repositories-footer p {
+    @apply m-0 text-sm leading-[1.5] tracking-[-0.005em] text-charcoal/58;
+  }
+
+  .quotes-carousel {
+    @apply relative isolate scroll-mt-22.5 overflow-hidden bg-sand;
+
+    --band-bloom: radial-gradient(
+      54% 56% at 4% 50%,
+      rgb(var(--band-light) / 82%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      50% 50% at 96% 50%,
+      rgb(var(--band-cool) / 68%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
+  }
+
+  .quotes-carousel-stage {
+    @apply relative;
+  }
+
+  .quotes-carousel-viewport {
+    @apply relative;
+  }
+
+  .quotes-carousel-slide {
+    @apply relative isolate grid overflow-hidden rounded-[clamp(1.5rem,3vw,2.25rem)] bg-red text-white;
+    @apply shadow-[0_28px_70px_rgba(30,30,30,0.16)];
+    @apply lg:grid-cols-[minmax(13rem,0.32fr)_minmax(0,0.68fr)];
+
+    background-image: radial-gradient(
+      38rem 30rem at 92% 8%,
+      rgb(255 255 255 / 13%),
+      transparent 70%
+    );
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .quotes-carousel-slide[data-direction="next"] {
+      animation: quote-enter-next 520ms cubic-bezier(0.22, 0.85, 0.28, 1) both;
+    }
+
+    .quotes-carousel-slide[data-direction="previous"] {
+      animation: quote-enter-previous 520ms cubic-bezier(0.22, 0.85, 0.28, 1)
+        both;
+    }
+  }
+
+  @keyframes quote-enter-next {
+    from {
+      opacity: 0;
+      translate: 1.75rem 0;
+    }
+  }
+
+  @keyframes quote-enter-previous {
+    from {
+      opacity: 0;
+      translate: -1.75rem 0;
+    }
+  }
+
+  /* A partial ring gives the coloured field depth without adding another
+     image or competing with the organisation logo. */
+  .quotes-carousel-slide::after {
+    @apply pointer-events-none absolute -top-35 -right-30 -z-10 h-80 w-80 rounded-full border border-white/12;
+
+    content: "";
+  }
+
+  .quotes-carousel-logo-wrap {
+    @apply flex min-h-44 flex-col justify-between gap-10 border-b border-white/18 bg-black/10;
+    @apply p-[clamp(1.75rem,4vw,3.5rem)];
+    @apply lg:min-h-[34rem] lg:border-r lg:border-b-0;
+  }
+
+  .quotes-carousel-logo-label {
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.14em] text-white/78 uppercase;
+  }
+
+  .quotes-carousel-logo {
+    @apply h-auto max-h-15 w-auto max-w-[12rem] object-contain object-left;
+  }
+
+  .quotes-carousel-testimonial {
+    @apply relative z-10 m-0 max-w-[62rem] p-[clamp(1.75rem,5vw,4.75rem)];
+  }
+
+  .quotes-carousel-mark {
+    @apply h-auto w-[clamp(2.5rem,4vw,3.25rem)] brightness-0 invert opacity-75;
+  }
+
+  .quotes-carousel-quote {
+    @apply mt-[clamp(1.5rem,3vw,2.25rem)];
+    @apply text-[clamp(1.0625rem,1.55vw,1.5rem)] leading-[1.55] tracking-[-0.022em] text-pretty text-white;
+  }
+
+  .quotes-carousel-author {
+    @apply mt-[clamp(1.75rem,3vw,2.5rem)] max-w-[48rem];
+    @apply text-[0.9375rem] leading-[1.55] font-medium tracking-[-0.008em] text-white/88;
+  }
+
+  .quotes-carousel-quote a,
+  .quotes-carousel-author a {
+    @apply underline decoration-white/55 underline-offset-4 transition-colors;
+
+    color: var(--color-white) !important;
+  }
+
+  .quotes-carousel-quote a:hover,
+  .quotes-carousel-author a:hover {
+    color: rgb(255 255 255 / 78%) !important;
+  }
+
+  .quotes-carousel-controls {
+    @apply mt-6 flex flex-col gap-5;
+    @apply sm:flex-row sm:items-center sm:justify-between;
+  }
+
+  .quotes-carousel-status {
+    @apply flex flex-col gap-3;
+  }
+
+  .quotes-carousel-status > p {
+    @apply m-0 font-ibm text-[0.6875rem] leading-none tracking-[0.12em] text-charcoal/52 uppercase;
+  }
+
+  .quotes-carousel-progress {
+    @apply flex items-center gap-1.5;
+  }
+
+  .quotes-carousel-progress span {
+    @apply h-1 w-4 rounded-full bg-charcoal/16;
+    @apply transition-[background-color,width] duration-300 ease-out motion-reduce:transition-none;
+  }
+
+  .quotes-carousel-progress span[data-active] {
+    @apply w-9 bg-red;
+  }
+
+  .quotes-carousel-buttons {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .quotes-carousel-control {
+    @apply inline-flex min-h-11 items-center gap-2.5 rounded-full border border-charcoal/22 bg-transparent px-5;
+    @apply text-sm font-medium leading-none tracking-[-0.01em] text-charcoal;
+    @apply transition-[background-color,border-color,color] duration-200 ease-out;
+    @apply hover:border-red hover:bg-red hover:text-white;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  .quotes-carousel-control:last-child {
+    @apply border-red bg-red text-white hover:border-red-dark hover:bg-red-dark;
+  }
+}
 
 @layer base {
   /* ============================================
@@ -69,6 +1543,15 @@
      ============================================ */
   html {
     scroll-behavior: smooth;
+  }
+
+  /* An in-page jump is a multi-thousand-pixel animation for anyone using the
+     section index or the hero's contribute action, so the smooth behaviour has
+     to yield to a stated motion preference. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {
@@ -103,18 +1586,26 @@
     @apply px-12;
   }
 
+  /* 1600 rather than 1820: the section headers cap their copy column at 36rem,
+     so width past this point stops becoming measure and starts becoming gutter
+     *inside* the layout — on a 1920 screen the old ceiling left a 1540px content
+     box with ~200px of nothing between an issue row's description and its
+     action. The 8.75rem gutter is the site's frame and is unchanged. */
   @media (min-width: 1024px) {
-    max-width: 1820px;
+    max-width: 1600px;
     padding-left: 8.75rem;
     padding-right: 8.75rem;
   }
 }
 
+/* Edge-to-edge below `lg`, then identical to `container` above it — the two
+   have to resolve to the same box or a full-bleed block and the text column
+   beside it stop sharing a left edge. */
 @utility container-mobile-full {
   @apply p-0;
 
   @media (min-width: 1024px) {
-    max-width: 1820px;
+    max-width: 1600px;
     padding-left: 8.75rem;
     padding-right: 8.75rem;
   }
@@ -335,6 +1826,16 @@
 
   /* ============================================
      Anchors & section offsets
+
+     A pre-`scroll-margin` way of clearing the fixed header: pull the box up by
+     the header's height and pad the same amount back on, so a jump link lands
+     below the bar. It costs a real 6.813rem of padding inside the box, which is
+     why nothing that already sets `scroll-mt-*` may also carry it — the home
+     sections used to do both, and paid for the offset twice: 109px of empty
+     ground under every section's top edge, and a negative margin that pulled
+     each one over the divider above it. `scroll-mt-22.5` is the replacement;
+     this class remains only for components/BlogPostList, which has no other
+     offset of its own.
      ============================================ */
   .anchor {
     margin-top: -6.813rem;
@@ -364,7 +1865,17 @@
     @apply w-full h-full;
     max-width: 932px;
   }
+  /* ============================================
+     Swiper overrides
+     ============================================ */
+  .swiper {
+    @apply w-full h-full;
+    max-width: 932px;
+  }
 
+  .reposSwiper {
+    @apply max-w-full;
+  }
   .reposSwiper {
     @apply max-w-full;
   }
@@ -373,7 +1884,14 @@
     @apply text-left text-base;
     font-family: inherit;
   }
+  .reposSwiper .swiper-slide {
+    @apply text-left text-base;
+    font-family: inherit;
+  }
 
+  .swiper-slide {
+    @apply font-serif text-center text-lg;
+  }
   .swiper-slide {
     @apply font-serif text-center text-lg;
   }
@@ -384,7 +1902,16 @@
     width: 35px;
     height: 35px;
   }
+  .swiper .swiper-button {
+    @apply top-auto text-charcoal bg-white-dark;
+    bottom: 5rem;
+    width: 35px;
+    height: 35px;
+  }
 
+  .swiper .swiper-button::after {
+    @apply text-sm;
+  }
   .swiper .swiper-button::after {
     @apply text-sm;
   }
@@ -392,11 +1919,30 @@
   .swiper .swiper-button-prev {
     left: calc(50% - 40px);
   }
+  .swiper .swiper-button-prev {
+    left: calc(50% - 40px);
+  }
 
   .swiper .swiper-button-next {
     right: calc(50% - 40px);
   }
+  .swiper .swiper-button-next {
+    right: calc(50% - 40px);
+  }
 
+  /* ============================================
+     Blog / Article content prose styles
+     ============================================ */
+  .content {
+    :where(blockquote):not(
+      :where([class~="not-prose"], [class~="not-prose"] *)
+    ) {
+      @apply relative text-charcoal border-red py-2 pr-6;
+      margin-top: 86px;
+      @apply mb-6 first:mt-0;
+      border-left-width: 2px;
+      @apply pl-6;
+    }
   /* ============================================
      Blog / Article content prose styles
      ============================================ */
@@ -419,7 +1965,24 @@
         margin-left: 92px;
       }
     }
+    @media (min-width: 640px) {
+      :where(blockquote):not(
+        :where([class~="not-prose"], [class~="not-prose"] *)
+      ) {
+        @apply my-6 py-4;
+        margin-left: 92px;
+      }
+    }
 
+    :where(blockquote)::before {
+      content: "";
+      @apply block absolute;
+      top: -60px;
+      left: -3px;
+      width: 50px;
+      height: 40px;
+      background-image: url("/images/Hiero-Icon-Quote-Left.svg");
+    }
     :where(blockquote)::before {
       content: "";
       @apply block absolute;
@@ -436,7 +1999,17 @@
         left: -92px;
       }
     }
+    @media (min-width: 640px) {
+      :where(blockquote)::before {
+        top: 0;
+        left: -92px;
+      }
+    }
 
+    h2 {
+      @apply font-medium mt-8 mb-4;
+      font-size: 24px;
+    }
     h2 {
       @apply font-medium mt-8 mb-4;
       font-size: 24px;
@@ -445,7 +2018,13 @@
     h3 {
       @apply font-medium text-lg mt-8 mb-4;
     }
+    h3 {
+      @apply font-medium text-lg mt-8 mb-4;
+    }
 
+    h4 {
+      @apply font-medium text-base mt-8 mb-4;
+    }
     h4 {
       @apply font-medium text-base mt-8 mb-4;
     }
@@ -453,7 +2032,13 @@
     cite {
       @apply block text-red font-medium not-italic mt-4;
     }
+    cite {
+      @apply block text-red font-medium not-italic mt-4;
+    }
 
+    p:has(cite) {
+      @apply mb-0;
+    }
     p:has(cite) {
       @apply mb-0;
     }
@@ -461,7 +2046,13 @@
     p {
       @apply mb-4;
     }
+    p {
+      @apply mb-4;
+    }
 
+    p img {
+      @apply my-7;
+    }
     p img {
       @apply my-7;
     }
@@ -469,11 +2060,20 @@
     ol {
       @apply list-decimal my-4 pl-6;
     }
+    ol {
+      @apply list-decimal my-4 pl-6;
+    }
 
     ul {
       @apply list-disc my-4 pl-6;
     }
+    ul {
+      @apply list-disc my-4 pl-6;
+    }
 
+    table {
+      @apply w-full my-6 border-collapse;
+    }
     table {
       @apply w-full my-6 border-collapse;
     }
@@ -482,7 +2082,14 @@
     td {
       @apply border border-gray px-4 py-3 text-left;
     }
+    th,
+    td {
+      @apply border border-gray px-4 py-3 text-left;
+    }
 
+    th {
+      @apply bg-red text-white font-semibold;
+    }
     th {
       @apply bg-red text-white font-semibold;
     }
@@ -490,7 +2097,14 @@
     tr:nth-child(even) {
       @apply bg-gray-light;
     }
+    tr:nth-child(even) {
+      @apply bg-gray-light;
+    }
 
+    tr:hover {
+      @apply bg-sand;
+    }
+  }
     tr:hover {
       @apply bg-sand;
     }
@@ -502,7 +2116,17 @@
   .highlight {
     @apply relative mb-6;
   }
+  /* ============================================
+     Code blocks
+     ============================================ */
+  .highlight {
+    @apply relative mb-6;
+  }
 
+  .highlight pre {
+    @apply pt-8 pb-3 px-3 rounded-md;
+    background-color: #1e1e1e !important;
+  }
   .highlight pre {
     @apply pt-8 pb-3 px-3 rounded-md;
     background-color: #1e1e1e !important;
@@ -512,7 +2136,14 @@
     @apply whitespace-pre-wrap text-xs font-ibm;
     word-break: break-word;
   }
+  code {
+    @apply whitespace-pre-wrap text-xs font-ibm;
+    word-break: break-word;
+  }
 
+  .copy-button {
+    @apply bg-transparent border-none cursor-pointer p-0 absolute right-2 top-2 opacity-100;
+  }
   .copy-button {
     @apply bg-transparent border-none cursor-pointer p-0 absolute right-2 top-2 opacity-100;
   }
@@ -520,11 +2151,20 @@
   .highlight:hover .copy-button {
     @apply opacity-100;
   }
+  .highlight:hover .copy-button {
+    @apply opacity-100;
+  }
 
   .copy-button > svg {
     width: 18px;
   }
+  .copy-button > svg {
+    width: 18px;
+  }
 
+  .copy-button > svg > path {
+    @apply fill-white;
+  }
   .copy-button > svg > path {
     @apply fill-white;
   }
@@ -535,11 +2175,23 @@
   .pagination {
     @apply flex gap-2 mx-auto mt-16 justify-center;
   }
+  /* ============================================
+     Pagination
+     ============================================ */
+  .pagination {
+    @apply flex gap-2 mx-auto mt-16 justify-center;
+  }
 
   .pagination .page-item.disabled {
     opacity: 0.3;
   }
+  .pagination .page-item.disabled {
+    opacity: 0.3;
+  }
 
+  .pagination .page-item.disabled .page-link {
+    @apply cursor-default;
+  }
   .pagination .page-item.disabled .page-link {
     @apply cursor-default;
   }
@@ -549,7 +2201,18 @@
     width: 2.5rem;
     height: 2.5rem;
   }
+  .pagination .page-item .page-link {
+    @apply bg-sand flex justify-center items-center rounded-full leading-none no-underline text-base font-bold text-charcoal cursor-pointer;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 
+  .pagination .page-item:has([aria-label="Previous"]) .page-link,
+  .pagination .page-item:has([aria-label="First"]) .page-link,
+  .pagination .page-item:has([aria-label="Next"]) .page-link,
+  .pagination .page-item:has([aria-label="Last"]) .page-link {
+    @apply bg-transparent;
+  }
   .pagination .page-item:has([aria-label="Previous"]) .page-link,
   .pagination .page-item:has([aria-label="First"]) .page-link,
   .pagination .page-item:has([aria-label="Next"]) .page-link,
@@ -563,7 +2226,20 @@
   .pagination .page-item:has([aria-label="Last"]) .page-link span {
     @apply hidden;
   }
+  .pagination .page-item:has([aria-label="Previous"]) .page-link span,
+  .pagination .page-item:has([aria-label="First"]) .page-link span,
+  .pagination .page-item:has([aria-label="Next"]) .page-link span,
+  .pagination .page-item:has([aria-label="Last"]) .page-link span {
+    @apply hidden;
+  }
 
+  .pagination .page-item:has([aria-label="Previous"]) .page-link::before,
+  .pagination .page-item:has([aria-label="Next"]) .page-link::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.75rem;
+    background-image: url("data:image/svg+xml,%3Csvg id='arrow-single' xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 8 12'%3E%3Cpath d='M6.1,12l1.4-1.4L2.9,6,7.5,1.4,6.1,0,0,6l6,6Z'/%3E%3C/svg%3E");
+  }
   .pagination .page-item:has([aria-label="Previous"]) .page-link::before,
   .pagination .page-item:has([aria-label="Next"]) .page-link::before {
     content: "";
@@ -579,12 +2255,26 @@
     height: 0.75rem;
     background-image: url("data:image/svg+xml,%3Csvg id='arrow-double' xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 14 12'%3E%3Cpath d='M6.1,12l1.4-1.4L2.9,6,7.5,1.4,6.1,0,0,6l6,6Z'/%3E%3Cpath d='M12.1,12l1.4-1.4-4.6-4.6L13.5,1.4,12.1,0l-6,6,6,6Z'/%3E%3C/svg%3E");
   }
+  .pagination .page-item:has([aria-label="First"]) .page-link::before,
+  .pagination .page-item:has([aria-label="Last"]) .page-link::before {
+    content: "";
+    width: 14px;
+    height: 0.75rem;
+    background-image: url("data:image/svg+xml,%3Csvg id='arrow-double' xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 14 12'%3E%3Cpath d='M6.1,12l1.4-1.4L2.9,6,7.5,1.4,6.1,0,0,6l6,6Z'/%3E%3Cpath d='M12.1,12l1.4-1.4-4.6-4.6L13.5,1.4,12.1,0l-6,6,6,6Z'/%3E%3C/svg%3E");
+  }
 
   .pagination .page-item:has([aria-label="Next"]) .page-link::before,
   .pagination .page-item:has([aria-label="Last"]) .page-link::before {
     transform: rotate(180deg);
   }
+  .pagination .page-item:has([aria-label="Next"]) .page-link::before,
+  .pagination .page-item:has([aria-label="Last"]) .page-link::before {
+    transform: rotate(180deg);
+  }
 
+  .pagination .page-item.active .page-link {
+    @apply bg-red text-white;
+  }
   .pagination .page-item.active .page-link {
     @apply bg-red text-white;
   }

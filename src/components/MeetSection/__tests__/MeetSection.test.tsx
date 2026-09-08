@@ -8,6 +8,7 @@ describe("MeetSection", () => {
     render(
       <MeetSection
         data={{
+          eyebrow: "Community",
           heading: "Meet the community",
           text: "Join the **weekly** calls.",
           calls: [
@@ -41,7 +42,16 @@ describe("MeetSection", () => {
       registerLink: `https://example.com/${i + 1}`,
     }));
 
-    render(<MeetSection data={{ heading: "Meet", text: "Join us.", calls }} />);
+    render(
+      <MeetSection
+        data={{
+          eyebrow: "Community",
+          heading: "Meet",
+          text: "Join us.",
+          calls,
+        }}
+      />,
+    );
 
     expect(
       screen.getByRole("heading", { name: `Call ${VISIBLE_COUNT}` }),
@@ -72,6 +82,7 @@ describe("MeetSection", () => {
     render(
       <MeetSection
         data={{
+          eyebrow: "Community",
           heading: "Meet",
           text: "Join us.",
           calls: [
@@ -91,6 +102,7 @@ describe("MeetSection", () => {
     render(
       <MeetSection
         data={{
+          eyebrow: "Community",
           heading: "Meet",
           text: "Join us.",
           calls: [

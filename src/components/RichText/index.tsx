@@ -61,23 +61,28 @@ export default function RichText({
         </Link>
       );
     },
+    /* Hairlines and a mono header row rather than a filled bar: a table in a
+       post is data to read, and the rest of the site draws data with rules.
+       The wrapper scrolls so a wide table never widens the reading column. */
     table({ children }: { children?: ReactNode }) {
       return (
-        <div className="overflow-x-auto my-6">
-          <table className="w-full border-collapse text-left">{children}</table>
+        <div className="my-[2em] max-w-full overflow-x-auto">
+          <table className="w-full border-collapse text-left text-[0.9375rem]">
+            {children}
+          </table>
         </div>
       );
     },
     th({ children }: { children?: ReactNode }) {
       return (
-        <th className="border-b-2 border-white-dark px-4 py-2.5 font-medium align-top">
+        <th className="border-b border-charcoal/28 px-4 py-3 align-top font-ibm text-[0.6875rem] leading-none tracking-[0.12em] text-charcoal/62 uppercase">
           {children}
         </th>
       );
     },
     td({ children }: { children?: ReactNode }) {
       return (
-        <td className="border-b border-white-dark px-4 py-2.5 align-top">
+        <td className="border-b border-charcoal/14 px-4 py-3 align-top">
           {children}
         </td>
       );

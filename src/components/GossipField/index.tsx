@@ -31,6 +31,9 @@ const FIELDS = {
   calls: field(41720433),
   repos: field(77310219),
   quotes: field(13480967),
+  blog: field(30514682),
+  archive: field(64209137),
+  article: field(19850426),
 };
 
 export type GossipFieldPlacement = keyof typeof FIELDS;

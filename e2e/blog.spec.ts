@@ -26,19 +26,27 @@ const LONG_POST = "/blog/hiero-consensus-specifications";
 test.describe("blog archive", () => {
   test.use({ viewport: { width: 1280, height: 900 } });
 
-  test("shows one row of three cards, each with its image", async ({
+  test("shows nine cards in three full rows, each with its image", async ({
     page,
   }) => {
     await page.goto("/blog/");
 
     const cards = page.locator(".blog-grid-item");
-    await expect(cards).toHaveCount(3);
+    await expect(cards).toHaveCount(9);
 
-    // One row: three cards that share a top edge.
-    const tops = await cards.evaluateAll(items =>
-      items.map(item => Math.round(item.getBoundingClientRect().top)),
+    // Three rows of three, so no row is left with an orphan: nine distinct
+    // left edges would mean one column, three would mean the grid held.
+    const boxes = await cards.evaluateAll(items =>
+      items.map(item => {
+        const box = item.getBoundingClientRect();
+        return { top: Math.round(box.top), left: Math.round(box.left) };
+      }),
     );
-    expect(new Set(tops).size, "the three cards should share a row").toBe(1);
+    expect(new Set(boxes.map(b => b.top)).size, "should be three rows").toBe(3);
+    expect(
+      new Set(boxes.map(b => b.left)).size,
+      "should be three columns",
+    ).toBe(3);
 
     // The images are the point of the grid, so they have to actually decode.
     // They load lazily, so they have to be in view and then given a moment —
@@ -69,7 +77,7 @@ test.describe("blog archive", () => {
     // empty list trivially satisfies the row assertion below — so without this
     // the test passed when the archive rendered no cards at all.
     const cards = page.locator(".blog-grid-item");
-    await expect(cards).toHaveCount(3);
+    await expect(cards).toHaveCount(9);
 
     const tops = await cards.evaluateAll(items =>
       items.map(item => Math.round(item.getBoundingClientRect().top)),

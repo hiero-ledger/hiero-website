@@ -21,7 +21,7 @@ const data = {
     { name: "Browse the code", href: "https://github.com/hiero-ledger/" },
   ],
   facts: [
-    { value: "42", label: "Total repositories" },
+    { value: "42", label: "Public repositories" },
     { value: "3,021", label: "GitHub stars" },
     { value: "14", label: "Community calls" },
   ],

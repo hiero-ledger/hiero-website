@@ -19,8 +19,8 @@ function makePosts(count: number): PostMeta[] {
   }));
 }
 
-/** Four posts over pages of three: three on the first, the last on its own. */
-const posts = makePosts(4);
+/** Ten posts over pages of nine: nine on the first, the last on its own. */
+const posts = makePosts(10);
 const first = posts[0];
 const last = posts[posts.length - 1];
 
@@ -31,7 +31,7 @@ describe("BlogPostList", () => {
     Element.prototype.scrollIntoView = vi.fn();
   });
 
-  it("shows one page of three and paginates to the rest", async () => {
+  it("shows one page of nine and paginates to the rest", async () => {
     const user = userEvent.setup();
 
     render(<BlogPostList posts={posts} listTitle="Recent Articles" />);
@@ -40,7 +40,7 @@ describe("BlogPostList", () => {
       screen.getByRole("heading", { name: "Recent Articles" }),
     ).toBeInTheDocument();
     // One card per post, each titled by its own heading.
-    expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(3);
+    expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(9);
     expect(screen.getByText(first.title)).toBeInTheDocument();
     expect(screen.queryByText(last.title)).not.toBeInTheDocument();
 
@@ -66,7 +66,7 @@ describe("BlogPostList", () => {
     render(<BlogPostList posts={makePosts(13)} listTitle="Recent Articles" />);
 
     expect(screen.getByText("13 posts")).toBeInTheDocument();
-    expect(screen.getByText("Page 1 of 5")).toBeInTheDocument();
+    expect(screen.getByText("Page 1 of 2")).toBeInTheDocument();
   });
 
   it("marks the current page and disables the steps that lead nowhere", async () => {
@@ -93,26 +93,27 @@ describe("BlogPostList", () => {
     expect(screen.getByLabelText("Previous")).toBeEnabled();
   });
 
-  /* At three per page the pager window matters: a long archive has far more
-     pages than the five numbers it can show at once. */
+  /* The archive is longer than the five page numbers the pager can show, so
+     the window has to travel with the reader. */
   it("keeps the page window around the current page in a long archive", async () => {
     const user = userEvent.setup();
 
-    render(<BlogPostList posts={makePosts(60)} listTitle="Recent Articles" />);
+    // 90 posts over pages of nine: ten pages, five numbers visible.
+    render(<BlogPostList posts={makePosts(90)} listTitle="Recent Articles" />);
 
-    expect(screen.getByText("Page 1 of 20")).toBeInTheDocument();
+    expect(screen.getByText("Page 1 of 10")).toBeInTheDocument();
     expect(screen.getByLabelText("Page 5")).toBeInTheDocument();
     expect(screen.queryByLabelText("Page 6")).not.toBeInTheDocument();
 
     await user.click(screen.getByLabelText("Last"));
 
-    expect(screen.getByText("Page 20 of 20")).toBeInTheDocument();
-    expect(screen.getByLabelText("Page 16")).toBeInTheDocument();
-    expect(screen.queryByLabelText("Page 15")).not.toBeInTheDocument();
+    expect(screen.getByText("Page 10 of 10")).toBeInTheDocument();
+    expect(screen.getByLabelText("Page 6")).toBeInTheDocument();
+    expect(screen.queryByLabelText("Page 5")).not.toBeInTheDocument();
   });
 
   it("leaves out the pager when everything fits on one page", () => {
-    render(<BlogPostList posts={makePosts(3)} listTitle="Recent Articles" />);
+    render(<BlogPostList posts={makePosts(9)} listTitle="Recent Articles" />);
 
     expect(
       screen.queryByRole("navigation", { name: "Archive pages" }),

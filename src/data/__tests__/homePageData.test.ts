@@ -63,7 +63,7 @@ describe("homePageData", () => {
   });
 
   it("counts the organization's public repositories", () => {
-    expect(factFor("Total repositories").value).toBe(
+    expect(factFor("Public repositories").value).toBe(
       String(organizationStats.publicRepositories),
     );
   });

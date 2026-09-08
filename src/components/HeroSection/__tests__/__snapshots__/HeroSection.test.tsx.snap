@@ -77,7 +77,7 @@ exports[`HeroSection > matches the rendered structure 1`] = `
           42
         </span>
          
-        Total repositories
+        Public repositories
       </li>
       <li
         class="hero-section-fact"

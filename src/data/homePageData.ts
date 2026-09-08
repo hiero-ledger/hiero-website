@@ -267,8 +267,12 @@ export const heroData = {
   ],
   facts: [
     {
+      // "Public", not "Total". The value is the organisation's public
+      // repository count, which is all a public site can see, and calling it
+      // the total invited the comparison against the repository list a member
+      // sees when signed in — which includes private ones and reads higher.
       value: String(organizationStats.publicRepositories),
-      label: "Total repositories",
+      label: "Public repositories",
     },
     {
       // Explicit locale so the separator is the same in Node at build time and

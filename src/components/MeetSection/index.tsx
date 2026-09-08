@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import RichText from "@/components/RichText";
+import GossipField from "@/components/GossipField";
 
 interface MeetCall {
   name: string;
@@ -14,6 +15,7 @@ interface MeetCall {
 }
 
 interface MeetData {
+  eyebrow: string;
   heading: string;
   text: string;
   calls: MeetCall[];
@@ -32,72 +34,100 @@ export default function MeetSection({ data }: MeetSectionProps) {
     expanded || !hasMore ? data.calls : data.calls.slice(0, VISIBLE_COUNT);
 
   return (
-    <div id="meet" className="anchor">
-      <div className="bg-white">
-        <div className="container pt-[40px] pb-[40px] sm:pt-[60px] sm:pb-[120px]">
-          <div className="mb-10 sm:mb-16">
-            <h2 className="text-2xl mb-2.5 sm:text-4xl sm:mb-5">
+    <section
+      id="meet"
+      aria-labelledby="community-calls-heading"
+      className="community-calls">
+      <GossipField placement="calls" />
+
+      <div className="container community-calls-inner">
+        <header className="community-calls-header">
+          <div>
+            <p className="community-calls-eyebrow">{data.eyebrow}</p>
+            <h2
+              id="community-calls-heading"
+              className="community-calls-heading">
               {data.heading}
             </h2>
-            <RichText
-              markdown={data.text}
-              className="text-lg max-w-full md:max-w-[800px] space-y-4"
-            />
           </div>
-          <div
-            id="meet-calls"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {visibleCalls.map((call, i) => (
+
+          <div className="community-calls-intro">
+            <RichText markdown={data.text} className="community-calls-copy" />
+
+            <p
+              className="community-calls-count"
+              aria-label={`${data.calls.length} community calls`}>
+              <span className="community-calls-count-value" aria-hidden="true">
+                {String(data.calls.length).padStart(2, "0")}
+              </span>
+              <span className="community-calls-count-label" aria-hidden="true">
+                open spaces
+                <br />
+                to take part
+              </span>
+            </p>
+          </div>
+        </header>
+
+        <div className="community-calls-board-heading" aria-hidden="true">
+          <span>Recurring community spaces</span>
+          <span>
+            {expanded || !hasMore
+              ? `Showing all ${data.calls.length}`
+              : `Showing ${VISIBLE_COUNT} of ${data.calls.length}`}
+          </span>
+        </div>
+
+        <ul id="meet-calls" role="list" className="community-calls-grid">
+          {visibleCalls.map((call, index) => (
+            <li key={call.registerLink} className="community-call-item">
               <a
-                key={i}
                 href={call.registerLink}
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label={`Register for ${call.name} (opens in new tab)`}
-                className="grid grid-rows-subgrid row-span-3 gap-0 border-2 border-white-dark rounded-2xl p-8 hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 transition-colors duration-200 bg-white no-underline text-charcoal">
-                <h3 className="text-xl sm:text-2xl font-medium">{call.name}</h3>
-                <p className="flex items-center gap-1.5 text-sm text-gray-500 pt-1">
-                  {call.cadence && (
-                    <>
-                      <svg
-                        aria-hidden="true"
-                        focusable="false"
-                        viewBox="0 0 16 16"
-                        className="h-4 w-4 shrink-0"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round">
-                        <rect x="2" y="3" width="12" height="11" rx="2" />
-                        <path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3" />
-                      </svg>
+                className="community-call-link">
+                <div className="community-call-meta">
+                  {call.cadence ? (
+                    <span className="community-call-cadence">
                       {call.cadence}
-                    </>
-                  )}
-                </p>
-                <p className="text-base text-gray-600 pt-3">
-                  {call.description}
-                </p>
+                    </span>
+                  ) : null}
+                  <span className="community-call-index" aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+
+                <h3 className="community-call-name">{call.name}</h3>
+                <p className="community-call-description">{call.description}</p>
+
+                <span className="community-call-action" aria-hidden="true">
+                  <span>Register</span>
+                  <span className="community-call-action-glyph">↗</span>
+                </span>
               </a>
-            ))}
-          </div>
-          {hasMore && (
-            <div className="mt-10 text-center">
-              <button
-                type="button"
-                onClick={() => setExpanded(!expanded)}
-                aria-expanded={expanded}
-                aria-controls="meet-calls"
-                className="text-red hover:text-red-dark text-lg font-medium underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2 rounded">
+            </li>
+          ))}
+        </ul>
+
+        {hasMore && (
+          <div className="community-calls-toggle-row">
+            <button
+              type="button"
+              onClick={() => setExpanded(!expanded)}
+              aria-expanded={expanded}
+              aria-controls="meet-calls"
+              className="community-calls-toggle">
+              <span>
                 {expanded
-                  ? "Show fewer community calls ↑"
-                  : `View all ${data.calls.length} community calls ↓`}
-              </button>
-            </div>
-          )}
-        </div>
+                  ? "Show fewer community calls"
+                  : `View all ${data.calls.length} community calls`}
+              </span>
+              <span aria-hidden="true">{expanded ? "↑" : "↓"}</span>
+            </button>
+          </div>
+        )}
       </div>
-    </div>
+    </section>
   );
 }

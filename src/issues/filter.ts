@@ -1,14 +1,18 @@
+import trackedRepositories from "@/data/tracked_repositories.json";
+
 type SDK = "python" | "javascript" | "go" | "rust" | "java" | "cpp" | "swift";
 type Difficulty = "good first issue" | "beginner" | "intermediate" | "advanced";
 
+const org = trackedRepositories.organization;
+
 export const sdkMap: Record<SDK, string> = {
-  python: "repo:hiero-ledger/hiero-sdk-python",
-  javascript: "repo:hiero-ledger/hiero-sdk-js",
-  go: "repo:hiero-ledger/hiero-sdk-go",
-  rust: "repo:hiero-ledger/hiero-sdk-rust",
-  java: "repo:hiero-ledger/hiero-sdk-java",
-  cpp: "repo:hiero-ledger/hiero-sdk-cpp",
-  swift: "repo:hiero-ledger/hiero-sdk-swift",
+  python: `repo:${org}/hiero-sdk-python`,
+  javascript: `repo:${org}/hiero-sdk-js`,
+  go: `repo:${org}/hiero-sdk-go`,
+  rust: `repo:${org}/hiero-sdk-rust`,
+  java: `repo:${org}/hiero-sdk-java`,
+  cpp: `repo:${org}/hiero-sdk-cpp`,
+  swift: `repo:${org}/hiero-sdk-swift`,
 };
 
 export const difficultyMap: Record<Difficulty, RegExp[]> = {

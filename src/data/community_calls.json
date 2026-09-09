@@ -2,7 +2,7 @@
   {
     "meetingId": "95775743341",
     "name": "Hiero TSC Meeting",
-    "registrantCount": 65,
+    "registrantCount": 66,
     "registerLink": "https://zoom-lfx.platform.linuxfoundation.org/meeting/95775743341?password=c07443bf-b0e6-4a68-93f1-5c7ce9bb49ab",
     "cadence": "Weekly",
     "agenda": ""
@@ -48,14 +48,6 @@
     "agenda": "Let's discuss any questions, issues and plans for our Hiero Python SDK!\nCurrent and future agendas can be found here: https://github.com/hiero-ledger/governance/wiki."
   },
   {
-    "meetingId": "94695703550",
-    "name": "Hiero Solo Community Call",
-    "registrantCount": 20,
-    "registerLink": "https://zoom-lfx.platform.linuxfoundation.org/meeting/94695703550?password=e8819002-3f6e-4905-9916-b049f501e866",
-    "cadence": "Every 2 weeks",
-    "agenda": "Hiero bi-weekly Solo Community Call"
-  },
-  {
     "meetingId": "98394707679",
     "name": "Hiero Community Management",
     "registrantCount": 17,
@@ -66,7 +58,7 @@
   {
     "meetingId": "92576669768",
     "name": "Hiero Solo Action Community Call",
-    "registrantCount": 15,
+    "registrantCount": 16,
     "registerLink": "https://zoom-lfx.platform.linuxfoundation.org/meeting/92576669768?password=8dab94bb-7315-4d37-a944-b1fa0e924741",
     "cadence": "Every 2 weeks",
     "agenda": "Community Call to discuss solo-action"

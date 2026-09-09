@@ -16,6 +16,17 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: ["./vitest-setup.ts"],
     testTimeout: 10000,
-    exclude: ["**/node_modules/**", "**/.next/**", "**/e2e/**"],
+    // Tests that spy on shared globals (window.addEventListener, say) otherwise
+    // leave them patched for everything that runs after them in the same file.
+    restoreMocks: true,
+    // e2e/ is Playwright's; it imports @playwright/test, which Vitest cannot
+    // run. `.next` is excluded too because `output: "standalone"` copies the
+    // specs into the traced bundle, where they would be picked up again.
+    exclude: [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/e2e/**",
+      "**/.next/**",
+    ],
   },
 });

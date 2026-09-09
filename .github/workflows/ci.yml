@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - main
+      - websiteRedesign
   pull_request:
     branches:
       - main
+      # Long-lived redesign branch. 
+      - websiteRedesign
   workflow_dispatch:
 
 concurrency:
@@ -69,5 +72,15 @@ jobs:
 
       - name: Build Next.js application
         run: pnpm build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+
+      # Runs after the build so the browser tests exercise the production CSS,
+      # and so `pnpm start` finds .next already in place.
+      - name: Install Playwright browser
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run browser tests
+        run: pnpm test:e2e
         env:
           NEXT_TELEMETRY_DISABLED: 1

@@ -1,0 +1,85 @@
+{
+  "organization": "hiero-ledger",
+  "repositories": [
+    {
+      "name": "hiero-consensus-node",
+      "description": "Crypto, token, consensus, file, and smart contract services for a Hiero based network."
+    },
+    {
+      "name": "hiero-local-node",
+      "description": "Run your own local Hiero based network for development purposes."
+    },
+    {
+      "name": "hiero-mirror-node",
+      "description": "Archives data from consensus nodes and serves it via an API."
+    },
+    {
+      "name": "hiero-improvement-proposals",
+      "description": "Hiero Improvement Proposal repository for community-driven enhancements."
+    },
+    {
+      "name": "hiero-sdk-js",
+      "description": "JavaScript/TypeScript SDK for interacting with a Hiero network."
+    },
+    {
+      "name": "hiero-sdk-java",
+      "description": "Java SDK for Hiero distributed ledger technology."
+    },
+    {
+      "name": "hiero-json-rpc-relay",
+      "description": "Implementation of Ethereum JSON-RPC APIs for Hedera."
+    },
+    {
+      "name": "hiero-sdk-go",
+      "description": "Go SDK for Hiero distributed ledger technology."
+    },
+    {
+      "name": "hiero-sdk-rust",
+      "description": "The Hiero Rust SDK for building on Hiero networks."
+    },
+    {
+      "name": "hiero-mirror-node-explorer",
+      "description": "Hedera Mirror Node Explorer for the Hedera Hashgraph DLT."
+    },
+    {
+      "name": "hiero-cli",
+      "description": "Hiero command line tools for developers."
+    },
+    {
+      "name": "solo",
+      "description": "An opinionated CLI tool to deploy and manage standalone test networks."
+    },
+    {
+      "name": "hiero-block-node",
+      "description": "New Block Node services for Hiero networks."
+    },
+    {
+      "name": "hiero-sdk-tck",
+      "description": "Technology Compatibility Kit used to verify compliant implementations of a Hiero SDK."
+    },
+    {
+      "name": "hiero-sdk-cpp",
+      "description": "A C++ SDK for Hiero: A C++ toolkit for creating and interacting with on-ledger assets."
+    },
+    {
+      "name": "governance",
+      "description": "Configuration repository for managing all Hiero GitHub repositories."
+    },
+    {
+      "name": "hiero-sdk-python",
+      "description": "A Python SDK for Hiero: A Python toolkit for interacting with on-ledger assets."
+    },
+    {
+      "name": "hiero-sdk-swift",
+      "description": "A Swift SDK for Hiero: A Swift toolkit for creating and interacting with on-ledger assets."
+    },
+    {
+      "name": "sdk-collaboration-hub",
+      "description": "Collaboration hub for SDK-related discussions and coordination."
+    },
+    {
+      "name": "tsc",
+      "description": "Technical Steering Committee activity, discussions and decisions repository."
+    }
+  ]
+}

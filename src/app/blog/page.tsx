@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import BlogLead from "@/components/BlogLead";
 import BlogPostList from "@/components/BlogPostList";
+import Divider from "@/components/Divider";
+import GossipField from "@/components/GossipField";
 import {
   getAllPosts,
   getBlogIndexMeta,
@@ -16,21 +19,37 @@ export default function BlogPage() {
   const posts: PostMeta[] = getAllPosts();
   const blogMeta: BlogIndexMeta = getBlogIndexMeta();
 
+  /* `getAllPosts` sorts newest first, so the lead is the head of the list and
+     the archive is everything behind it. */
+  const [lead, ...archive] = posts;
+
   return (
     <>
-      <div
-        id="hero"
-        className="bg-gradient-to-br from-red-dark via-red to-red relative">
-        <div className="container py-14 sm:py-[100px] xl:py-36 text-white text-center">
-          <h1 className="text-[42px] sm:text-5xl leading-none relative mb-2.5">
-            {blogMeta.title}
-          </h1>
-          <p className="text-[24px] tracking-[-0.081rem] sm:text-xl relative">
-            {blogMeta.subtitle}
-          </p>
+      <section className="blog-index" aria-labelledby="blog-index-heading">
+        <GossipField placement="blog" />
+
+        <div className="container blog-index-inner">
+          <header className="blog-index-header">
+            <div>
+              <p className="blog-index-eyebrow">Project news</p>
+              <h1 id="blog-index-heading" className="blog-index-heading">
+                {blogMeta.title}
+              </h1>
+            </div>
+
+            <p className="blog-index-copy">{blogMeta.subtitle}</p>
+          </header>
         </div>
-      </div>
-      <BlogPostList posts={posts} listTitle={blogMeta.listTitle} />
+      </section>
+
+      {lead && <BlogLead post={lead} />}
+
+      {archive.length > 0 && (
+        <>
+          <Divider />
+          <BlogPostList posts={archive} listTitle={blogMeta.listTitle} />
+        </>
+      )}
     </>
   );
 }

@@ -28,7 +28,7 @@ exports[`SimpleContentPage > renders markdown content and child content 1`] = `
       class="w-full min-w-0 max-w-[800px] mx-auto"
     >
       <div
-        class="content text-sm text-charcoal font-normal sm:text-base"
+        class="content"
       >
         <p>
           Welcome to 

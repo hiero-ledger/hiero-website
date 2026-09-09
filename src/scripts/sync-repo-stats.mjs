@@ -1,48 +1,34 @@
 #!/usr/bin/env node
 
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import prettier from "prettier";
 import fallbackRepositoryStats from "../data/repository_stats.json" with { type: "json" };
+import fallbackOrganizationStats from "../data/organization_stats.json" with { type: "json" };
+import trackedRepositories from "../data/tracked_repositories.json" with { type: "json" };
+import { isRecord, toCount, writeJsonIfChanged } from "./lib/sync-helpers.mjs";
 
-const dataDirectory = "src/data";
 const targetFile = "src/data/repository_stats.json";
+const organizationTargetFile = "src/data/organization_stats.json";
 
-const repos = [
-  "hiero-consensus-node",
-  "hiero-local-node",
-  "hiero-mirror-node",
-  "hiero-improvement-proposals",
-  "hiero-sdk-js",
-  "hiero-sdk-java",
-  "hiero-json-rpc-relay",
-  "hiero-sdk-go",
-  "hiero-sdk-rust",
-  "hiero-mirror-node-explorer",
-  "hiero-cli",
-  "solo",
-  "hiero-block-node",
-  "hiero-sdk-tck",
-  "hiero-sdk-cpp",
-  "governance",
-  "hiero-sdk-python",
-  "hiero-sdk-swift",
-  "sdk-collaboration-hub",
-  "tsc",
-];
+// One source of truth with the repository grid: src/data/tracked_repositories.json
+// is also what `reposData` in src/data/homePageData.ts renders, so the grid and
+// these stats can never track different repo sets.
+const organization = trackedRepositories.organization;
+const repos = trackedRepositories.repositories.map(repo => repo.name);
 const repoSet = new Set(repos);
+
+const rateLimitHint =
+  "Set GITHUB_TOKEN to raise the rate limit for local builds.";
+
+// `pnpm build` and `pnpm dev` both run this first, and fetch has no default
+// timeout. Without this a stalled response hangs the build rather than falling
+// through to the bundled cache — the same guard sync-community-calls uses.
+const FETCH_TIMEOUT_MS = 15_000;
 
 function createZeroStatsMap() {
   return new Map(repos.map(repo => [repo, { stars: 0 }]));
 }
 
-function isRecord(value) {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
-}
-
 function getStars(repoStats) {
-  if (!isRecord(repoStats)) return null;
-  const { stars } = repoStats;
-  return typeof stars === "number" && Number.isFinite(stars) ? stars : null;
+  return isRecord(repoStats) ? toCount(repoStats.stars) : null;
 }
 
 function toStatsMap(rawStats) {
@@ -88,48 +74,30 @@ function loadFallback(log = true) {
   return toStatsObject(createZeroStatsMap());
 }
 
-async function formatStatsForFile(stats) {
-  let formatted = `${JSON.stringify(stats, null, 2)}\n`;
-
-  try {
-    const prettierConfig = await prettier.resolveConfig(targetFile);
-    formatted = await prettier.format(JSON.stringify(stats), {
-      ...(prettierConfig ?? {}),
-      parser: "json",
-      filepath: targetFile,
-    });
-  } catch (error) {
-    console.warn(
-      `[sync-repo-stats] Prettier formatting failed (${error.message}), using fallback formatting.`,
-    );
-  }
-
-  if (!formatted.endsWith("\n")) {
-    formatted += "\n";
-  }
-
-  return formatted;
+function isValidOrganizationStats(value) {
+  return (
+    isRecord(value) &&
+    Number.isFinite(value.publicRepositories) &&
+    Number.isFinite(value.totalStars)
+  );
 }
 
-async function writeIfChanged(content) {
-  try {
-    const existingContent = await readFile(targetFile, "utf8");
-    if (existingContent === content) {
-      return false;
-    }
-  } catch (error) {
-    if (error?.code !== "ENOENT") {
-      throw error;
-    }
+function loadOrganizationFallback() {
+  if (isValidOrganizationStats(fallbackOrganizationStats)) {
+    console.warn("[sync-repo-stats] Using bundled organization stats cache.");
+    return {
+      publicRepositories: fallbackOrganizationStats.publicRepositories,
+      totalStars: fallbackOrganizationStats.totalStars,
+    };
   }
 
-  await writeFile(targetFile, content);
-  return true;
+  console.warn(
+    "[sync-repo-stats] No cached organization data available, writing zeroes.",
+  );
+  return { publicRepositories: 0, totalStars: 0 };
 }
 
-async function fetchFromGitHub() {
-  const stats = new Map();
-  const cachedStats = toStatsMap(loadFallback(false));
+function buildHeaders() {
   const headers = {
     "User-Agent": "hiero-website-build",
     Accept: "application/vnd.github+json",
@@ -138,6 +106,13 @@ async function fetchFromGitHub() {
   if (process.env.GITHUB_TOKEN) {
     headers["Authorization"] = `Bearer ${process.env.GITHUB_TOKEN}`;
   }
+  return headers;
+}
+
+async function fetchFromGitHub() {
+  const stats = new Map();
+  const cachedStats = toStatsMap(loadFallback(false));
+  const headers = buildHeaders();
 
   console.log(
     "[sync-repo-stats] Fetching repository statistics from GitHub...",
@@ -146,30 +121,55 @@ async function fetchFromGitHub() {
   let successCount = 0;
 
   for (const repo of repos) {
-    const response = await fetch(
-      `https://api.github.com/repos/hiero-ledger/${repo}`,
-      { headers },
-    );
-    if (response.ok) {
-      const data = await response.json();
-      stats.set(repo, { stars: data.stargazers_count });
+    // Per repository, so one slow or unreachable repository costs its own
+    // entry rather than discarding the counts already collected. Without this
+    // the timeout above would abort the whole run on a single stall.
+    let response = null;
+    let stars = null;
+
+    try {
+      response = await fetch(
+        `https://api.github.com/repos/${organization}/${repo}`,
+        { headers, signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) },
+      );
+
+      // A response counts only if its star field validates. One that does not
+      // is treated like a failed request, so the cached value stands instead
+      // of an unusable one being written to the data file.
+      if (response.ok) {
+        const data = await response.json();
+        stars = isRecord(data) ? toCount(data.stargazers_count) : null;
+      }
+    } catch (error) {
+      console.warn(`  ⚠ ${repo}: request failed (${error.message})`);
+    }
+
+    if (stars !== null) {
+      stats.set(repo, { stars });
       successCount += 1;
-      console.log(`  ✓ ${repo}: ${data.stargazers_count} stars`);
+      console.log(`  ✓ ${repo}: ${stars} stars`);
     } else {
-      const cachedStars = cachedStats.get(repo)?.stars;
-      if (typeof cachedStars === "number") {
+      const reason = !response
+        ? "request failed"
+        : response.ok
+          ? "API returned an unusable star count"
+          : `API responded with ${response.status}`;
+      const cachedStars = toCount(cachedStats.get(repo)?.stars);
+
+      if (cachedStars !== null) {
         stats.set(repo, { stars: cachedStars });
         console.warn(
-          `  ⚠ ${repo}: API ${response.status}, using cached value ${cachedStars}`,
+          `  ⚠ ${repo}: ${reason}, using cached value ${cachedStars}`,
         );
       } else {
         stats.set(repo, { stars: 0 });
-        console.warn(`  ✗ ${repo}: API responded with ${response.status}`);
+        console.warn(`  ✗ ${repo}: ${reason}`);
       }
     }
 
     // If access is blocked/rate-limited and nothing has succeeded, stop early.
     if (
+      response &&
       (response.status === 401 || response.status === 403) &&
       successCount === 0
     ) {
@@ -177,7 +177,7 @@ async function fetchFromGitHub() {
       if (resetAt) {
         const resetTime = new Date(Number(resetAt) * 1000).toISOString();
         console.warn(
-          `[sync-repo-stats] GitHub access currently limited; rate limit resets at ${resetTime}.`,
+          `[sync-repo-stats] GitHub access currently limited; rate limit resets at ${resetTime}. ${rateLimitHint}`,
         );
       }
       break;
@@ -199,6 +199,54 @@ async function fetchFromGitHub() {
   return toStatsObject(stats);
 }
 
+/**
+ * The hero's headline facts cover the whole organization, not just the curated
+ * grid list, so the two numbers can never describe different repo sets: both
+ * come from one listing of every public repository.
+ */
+async function fetchOrganizationStats(headers) {
+  console.log(
+    "[sync-repo-stats] Fetching organization statistics from GitHub...",
+  );
+
+  let publicRepositories = 0;
+  let totalStars = 0;
+
+  for (let page = 1; ; page += 1) {
+    const response = await fetch(
+      `https://api.github.com/orgs/${organization}/repos?type=public&per_page=100&page=${page}`,
+      { headers, signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) },
+    );
+
+    if (!response.ok) {
+      const suffix =
+        response.status === 401 || response.status === 403
+          ? ` ${rateLimitHint}`
+          : "";
+      throw new Error(`GitHub API responded with ${response.status}.${suffix}`);
+    }
+
+    const pageRepos = await response.json();
+    if (!Array.isArray(pageRepos)) {
+      throw new Error("GitHub API returned an unexpected payload");
+    }
+
+    for (const repo of pageRepos) {
+      if (!isRecord(repo)) continue;
+      publicRepositories += 1;
+      totalStars += toCount(repo.stargazers_count) ?? 0;
+    }
+
+    if (pageRepos.length < 100) break;
+  }
+
+  console.log(
+    `  ✓ ${organization}: ${publicRepositories} public repositories, ${totalStars.toLocaleString()} stars`,
+  );
+
+  return { publicRepositories, totalStars };
+}
+
 async function run() {
   let stats;
   try {
@@ -210,13 +258,30 @@ async function run() {
     stats = loadFallback();
   }
 
-  await mkdir(dataDirectory, { recursive: true });
-  const formattedStats = await formatStatsForFile(stats);
-  const didWrite = await writeIfChanged(formattedStats);
+  let organizationStats;
+  try {
+    organizationStats = await fetchOrganizationStats(buildHeaders());
+  } catch (error) {
+    console.warn(
+      `[sync-repo-stats] Organization fetch failed (${error.message}), falling back to cached data.`,
+    );
+    organizationStats = loadOrganizationFallback();
+  }
+
+  const didWrite = await writeJsonIfChanged(
+    stats,
+    targetFile,
+    "[sync-repo-stats]",
+  );
+  const didWriteOrganization = await writeJsonIfChanged(
+    organizationStats,
+    organizationTargetFile,
+    "[sync-repo-stats]",
+  );
 
   const totalStars = Object.values(stats).reduce((sum, r) => sum + r.stars, 0);
   console.log(
-    `[sync-repo-stats] Done. Total stars: ${totalStars.toLocaleString()}${didWrite ? "" : " (no changes)"}`,
+    `[sync-repo-stats] Done. Tracked stars: ${totalStars.toLocaleString()}, organization: ${organizationStats.publicRepositories} repos / ${organizationStats.totalStars.toLocaleString()} stars${didWrite || didWriteOrganization ? "" : " (no changes)"}`,
   );
 }
 

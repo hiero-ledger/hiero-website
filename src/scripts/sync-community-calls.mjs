@@ -1,10 +1,15 @@
 #!/usr/bin/env node
 
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import prettier from "prettier";
 import fallbackCommunityCalls from "../data/community_calls.json" with { type: "json" };
+import {
+  isRecord,
+  toCount,
+  toHttpUrl,
+  toId,
+  toText,
+  writeJsonIfChanged,
+} from "./lib/sync-helpers.mjs";
 
-const dataDirectory = "src/data";
 const targetFile = "src/data/community_calls.json";
 
 // Same endpoint the LFX calendar UI itself calls. Public, no auth required.
@@ -13,10 +18,6 @@ const apiUrl =
   "https://pcc-bff.platform.linuxfoundation.org/production/api/v2/itx-services" +
   `/public/meetings/${projectSlug}?view=pcc&pageSize=9999`;
 const FETCH_TIMEOUT_MS = 15_000;
-
-function isRecord(value) {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
-}
 
 // The API returns one entry per *occurrence*. Collapse them to one entry per
 // meeting series, keeping the soonest upcoming occurrence.
@@ -35,11 +36,16 @@ function collapseToSeries(meetings, now) {
     if (!isRecord(props)) continue;
     if (props.visibility !== "public" || props.restricted) continue;
 
-    const meetingId = String(props.meeting_id ?? "");
-    const registerLink = props.share_url;
-    if (!meetingId || typeof registerLink !== "string") continue;
+    const meetingId = toId(props.meeting_id);
+    // Rebuilt as a validated http(s) URL rather than accepted as any string:
+    // this value is rendered as an `href`, so a `javascript:` URL here would
+    // become a clickable script on the home page. A meeting whose link does
+    // not validate is dropped rather than written with an unusable one.
+    const registerLink = toHttpUrl(props.share_url);
+    if (!meetingId || !registerLink) continue;
 
-    const start = Date.parse(meeting.start);
+    const start =
+      typeof meeting.start === "string" ? Date.parse(meeting.start) : NaN;
     if (!Number.isFinite(start) || start < now) continue;
 
     const existing = series.get(meetingId);
@@ -48,12 +54,11 @@ function collapseToSeries(meetings, now) {
     series.set(meetingId, {
       start,
       meetingId,
-      name: typeof meeting.title === "string" ? meeting.title.trim() : "",
-      registrantCount:
-        typeof props.registrant_count === "number" ? props.registrant_count : 0,
+      name: toText(meeting.title),
+      registrantCount: toCount(props.registrant_count) ?? 0,
       registerLink,
       cadence: describeRecurrence(props.recurrence),
-      agenda: typeof props.agenda === "string" ? props.agenda.trim() : "",
+      agenda: toText(props.agenda),
     });
   }
 
@@ -113,38 +118,6 @@ function loadFallback(log = true) {
   return [];
 }
 
-async function formatForFile(calls) {
-  let formatted = `${JSON.stringify(calls, null, 2)}\n`;
-
-  try {
-    const prettierConfig = await prettier.resolveConfig(targetFile);
-    formatted = await prettier.format(JSON.stringify(calls), {
-      ...(prettierConfig ?? {}),
-      parser: "json",
-      filepath: targetFile,
-    });
-  } catch (error) {
-    console.warn(
-      `[sync-community-calls] Prettier formatting failed (${error.message}), using fallback formatting.`,
-    );
-  }
-
-  if (!formatted.endsWith("\n")) formatted += "\n";
-  return formatted;
-}
-
-async function writeIfChanged(content) {
-  try {
-    const existingContent = await readFile(targetFile, "utf8");
-    if (existingContent === content) return false;
-  } catch (error) {
-    if (error?.code !== "ENOENT") throw error;
-  }
-
-  await writeFile(targetFile, content);
-  return true;
-}
-
 async function fetchFromLfx() {
   console.log("[sync-community-calls] Fetching community calls from LFX...");
 
@@ -192,9 +165,11 @@ async function run() {
     calls = loadFallback();
   }
 
-  await mkdir(dataDirectory, { recursive: true });
-  const formatted = await formatForFile(calls);
-  const didWrite = await writeIfChanged(formatted);
+  const didWrite = await writeJsonIfChanged(
+    calls,
+    targetFile,
+    "[sync-community-calls]",
+  );
 
   console.log(
     `[sync-community-calls] Done. ${calls.length} meetings${didWrite ? "" : " (no changes)"}`,

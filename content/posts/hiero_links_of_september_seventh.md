@@ -22,7 +22,7 @@ Below are links to some of the things that happened this past week. **Check it o
 
 **[Alfredo G](https://github.com/AlfredoG87)** fixed the default omitted port and priority in backfill sources [ConfigMap](https://github.com/hiero-ledger/hiero-block-node/pull/3594), adding defaults of 0 and a CI render test to validate the generated JSON in Hiero Block Node. 
 
-**[Xin L](https://github.com/xin-hedera)** updated the [release checklist](https://github.com/hiero-ledger/hiero-mirror-node/pull/14261) and bumped up solo to v0.88.1 in Hiero Block Node.
+**[Xin L](https://github.com/xin-hedera)** updated the [release checklist](https://github.com/hiero-ledger/hiero-mirror-node/pull/14261) and bumped up solo to v0.88.1 in Hiero Mirror Node.
 
 **Want to be featured on the Hiero-Website?**
 --

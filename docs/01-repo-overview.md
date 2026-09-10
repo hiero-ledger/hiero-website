@@ -59,6 +59,29 @@ Blog posts are loaded from markdown files directly inside `content/posts`.
 
 The post list and post pages are driven by helpers in `src/lib/posts.ts`.
 
+### Pages Backed By A Live API
+
+`/issues` is the one route whose content comes from outside the repository.
+
+- `src/issues/repositories.ts` derives the scope — the `hiero-sdk-*` entries
+  of `src/data/tracked_repositories.json` — and splits it into search queries
+  that fit GitHub's 256-character limit.
+- `src/lib/github/issues.ts` runs those searches on the server and trims each
+  result down to what the board renders.
+- `src/app/issues/page.tsx` is a server component with
+  `export const revalidate`, so the page is prerendered, served from the CDN,
+  and rebuilt on a timer rather than per visitor.
+- `src/components/IssueExplorer` receives that array as a prop and does all
+  searching, filtering, sorting and paging in the browser, without going back
+  to the network.
+
+Follow the same shape for any future page fed by an API: fetch on the server
+behind `revalidate`, ship the reduced data with the HTML, and filter locally.
+Fetching per visitor from a client component is what this page used to do, and
+it cost a spinner on every visit and seven API requests per page view. See the
+comments at the top of `src/lib/github/issues.ts` for the full account, and the
+`GITHUB_TOKEN` note in the README for the rate limits involved.
+
 ## Current Content Model
 
 The content directory is not fully generic.

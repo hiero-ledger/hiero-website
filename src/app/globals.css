@@ -743,6 +743,31 @@
     );
   }
 
+  /* The Issue Explorer's two sand bands. Same rule as the blog's three: each
+     is masked toward the corner its band's own `--band-bloom` comes from, so
+     the web reads as part of the light rather than a texture laid over it. */
+  .gossip-field--board {
+    @apply top-0;
+
+    mask-image: radial-gradient(
+      98% 104% at 6% 4%,
+      black 2%,
+      rgb(0 0 0 / 26%) 36%,
+      transparent 68%
+    );
+  }
+
+  .gossip-field--handoff {
+    @apply bottom-0;
+
+    mask-image: radial-gradient(
+      100% 116% at 94% 90%,
+      black 4%,
+      rgb(0 0 0 / 28%) 38%,
+      transparent 70%
+    );
+  }
+
   @media screen and (prefers-reduced-motion: no-preference) {
     .gossip-field-web {
       animation: gossip-drift 54s ease-in-out infinite alternate;
@@ -797,6 +822,17 @@
       animation-direction: alternate-reverse;
     }
 
+    .gossip-field--board .gossip-field-web {
+      animation-duration: 69s;
+      animation-delay: -14s;
+    }
+
+    .gossip-field--handoff .gossip-field-web {
+      animation-duration: 63s;
+      animation-delay: -46s;
+      animation-direction: alternate-reverse;
+    }
+
     .gossip-field-accents circle {
       transform-box: fill-box;
       transform-origin: center;
@@ -841,7 +877,6 @@
     }
   }
 
-
   .issue-jump-inner,
   .community-calls-inner,
   .repositories-inner,
@@ -852,7 +887,8 @@
   .issue-jump-header,
   .community-calls-header,
   .repositories-header,
-  .quotes-carousel-header {
+  .quotes-carousel-header,
+  .issues-index-header {
     @apply mb-[var(--space-band-header)] grid gap-8;
     @apply lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)] lg:items-end lg:gap-[clamp(4rem,8vw,9rem)];
   }
@@ -868,7 +904,8 @@
   .repositories-eyebrow,
   .quotes-carousel-eyebrow,
   .blog-index-eyebrow,
-  .blog-article-eyebrow {
+  .blog-article-eyebrow,
+  .issues-index-eyebrow {
     @apply m-0 mb-[clamp(1rem,2vw,1.5rem)] flex items-start gap-3.5;
     @apply font-ibm text-xs leading-normal tracking-[0.16em] text-red uppercase;
   }
@@ -880,7 +917,8 @@
   .repositories-eyebrow::before,
   .quotes-carousel-eyebrow::before,
   .blog-index-eyebrow::before,
-  .blog-article-eyebrow::before {
+  .blog-article-eyebrow::before,
+  .issues-index-eyebrow::before {
     @apply mt-[0.75em] h-px w-[clamp(1.5rem,4vw,3rem)] flex-none bg-current;
 
     content: "";
@@ -961,7 +999,8 @@
   /* Constraint pills: the filters applied to every issue search, the facts
      that hold for every repository. */
   .issue-jump-filter,
-  .repositories-features li {
+  .repositories-features li,
+  .issues-index-constraints li {
     @apply rounded-full border border-charcoal/18 px-3 py-1.5;
     @apply font-ibm text-[0.6875rem] leading-none tracking-[0.1em] text-charcoal/68 uppercase;
   }
@@ -972,7 +1011,9 @@
 
   /* One outline button per section, filling red on hover — the section's exit. */
   .community-calls-toggle,
-  .repositories-all-link {
+  .repositories-all-link,
+  .issues-outro-link,
+  .issues-empty-action {
     @apply inline-flex min-h-12 items-center gap-3 rounded-full border border-charcoal/22 bg-transparent px-6;
     @apply text-base font-medium tracking-[-0.02em] text-charcoal;
     @apply transition-[background-color,border-color,color] duration-200 ease-out;
@@ -1205,7 +1246,6 @@
     @apply translate-x-0.5 -translate-y-0.5 border-white bg-white text-red;
   }
 
-
   .community-calls {
     @apply relative isolate scroll-mt-22.5 overflow-hidden bg-sand;
 
@@ -1314,7 +1354,6 @@
   .community-calls-toggle-row {
     @apply mt-[clamp(2rem,4vw,3.5rem)] flex justify-center;
   }
-
 
   .repositories {
     @apply relative isolate scroll-mt-22.5 overflow-hidden bg-sand;
@@ -1616,12 +1655,14 @@
     @apply lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)] lg:items-end lg:gap-[clamp(4rem,8vw,9rem)];
   }
 
-  .blog-index-heading {
+  .blog-index-heading,
+  .issues-index-heading {
     @apply m-0 max-w-[12ch] text-balance;
     @apply text-[clamp(2.75rem,6vw,6rem)] leading-[0.94] font-normal tracking-[-0.06em];
   }
 
-  .blog-index-copy {
+  .blog-index-copy,
+  .issues-index-copy {
     @apply m-0 max-w-[34rem] lg:pb-1;
     @apply text-[clamp(1.0625rem,1.35vw,1.25rem)] leading-[1.6] tracking-[-0.014em] text-charcoal/72;
   }
@@ -1866,15 +1907,18 @@
 
   /* ---- Pagination ------------------------------------------------------- */
 
-  .blog-pagination {
+  .blog-pagination,
+  .issues-pagination {
     @apply mt-[clamp(2rem,4vw,3rem)] border-t border-charcoal/14 pt-[clamp(1.5rem,2.5vw,2rem)];
   }
 
-  .blog-pagination-list {
+  .blog-pagination-list,
+  .issues-pagination-list {
     @apply m-0 flex list-none flex-wrap items-center justify-center gap-1.5 p-0 sm:gap-2;
   }
 
-  .blog-pagination-item {
+  .blog-pagination-item,
+  .issues-pagination-item {
     @apply flex;
   }
 
@@ -1883,7 +1927,8 @@
     @apply hidden sm:flex;
   }
 
-  .blog-pagination-link {
+  .blog-pagination-link,
+  .issues-pagination-link {
     @apply grid h-9 w-9 cursor-pointer place-items-center rounded-full sm:h-10 sm:w-10;
     @apply border border-transparent bg-transparent;
     @apply font-ibm text-[0.8125rem] leading-none text-charcoal/70;
@@ -1893,20 +1938,24 @@
     @apply motion-reduce:transition-none;
   }
 
-  .blog-pagination-link--step {
+  .blog-pagination-link--step,
+  .issues-pagination-link--step {
     @apply font-serif text-lg text-charcoal/60;
   }
 
-  .blog-pagination-link:disabled {
+  .blog-pagination-link:disabled,
+  .issues-pagination-link:disabled {
     @apply cursor-default;
   }
 
-  .blog-pagination-link--step:disabled {
+  .blog-pagination-link--step:disabled,
+  .issues-pagination-link--step:disabled {
     @apply border-transparent text-charcoal/25 hover:border-transparent;
   }
 
   /* Last, so it wins over `:disabled` — the current page is both. */
-  .blog-pagination-link[aria-current="page"] {
+  .blog-pagination-link[aria-current="page"],
+  .issues-pagination-link[aria-current="page"] {
     @apply border-red bg-red text-white;
   }
 
@@ -2000,8 +2049,8 @@
       rgb(var(--band-cool) / 0%) 74%
     );
 
-    background-image: var(--reading-light), var(--band-bloom),
-      var(--band-counter);
+    background-image:
+      var(--reading-light), var(--band-bloom), var(--band-counter);
   }
 
   /* One column below `xl`, so the light covers the whole measure rather than
@@ -2242,6 +2291,427 @@
     @apply motion-reduce:transition-none;
   }
 
+  /* ============================================
+     Issue Explorer — app/issues + components/IssueExplorer
+
+     Same vocabulary as the blog index: a sand band lit from one corner, a mono
+     eyebrow over a display heading, hairline rules instead of boxes. What it
+     adds is a working surface — a search field, a level filter, a sort — which
+     the rest of the site has no use for, so the form controls are defined here
+     and nowhere else.
+
+     One rule holds the whole thing together: a control is a hairline and a
+     label, never a filled box. Filling arrives on the one thing that is
+     currently true — the active level, the current page, a hovered card.
+     ============================================ */
+
+  /* The home hero's ground, and its lattice — same three-gradient paint, same
+     two darkenings of `red-dark`, and `HeroTraces` over the top with a seed of
+     its own. The two dark bands on the site are the front door and this one,
+     and they should look like the same building.
+
+     `--hero-traces-*` are the parallax offsets the home page's script writes
+     as the pointer moves. Nothing drives them here, and an unset custom
+     property makes the whole `translate` declaration invalid — so they are
+     given a resting value rather than left to fail. */
+  .issues-index {
+    --hero-deep: #3a0a1e;
+    --hero-shadow: #23060f;
+    --hero-traces-x: 0px;
+    --hero-traces-y: 0px;
+
+    @apply relative isolate overflow-clip text-white;
+
+    /* The home hero's three layers, re-aimed for a band a third its height.
+       The colours and their order are unchanged; the geometry is not, and it
+       could not be. A 152deg ramp crossing a 1440x800 box spends most of its
+       length in the bright middle of the scale; the same declaration across a
+       1440x380 one reaches the closing shadow while it is still behind the
+       text, and the paint copied verbatim came out visibly darker than the
+       page it was copied from. So the ramp is flatter, the bloom is wider and
+       sits higher, and the closing veil starts later. */
+    background:
+      linear-gradient(
+        to bottom,
+        rgb(35 6 15 / 0%) 58%,
+        rgb(35 6 15 / 22%) 100%
+      ),
+      radial-gradient(
+        58rem 30rem at 76% 34%,
+        rgb(217 45 106 / 52%),
+        transparent 68%
+      ),
+      linear-gradient(
+        118deg,
+        var(--hero-deep),
+        var(--color-red-dark) 38%,
+        #6d1338 72%,
+        var(--hero-shadow)
+      );
+  }
+
+  .issues-index-inner {
+    @apply pt-[var(--space-band)] pb-[var(--space-band-header)];
+  }
+
+  .issues-index-intro {
+    @apply flex flex-col gap-6 lg:pb-1;
+  }
+
+  .issues-index-constraints {
+    @apply m-0 flex list-none flex-wrap gap-2 p-0;
+  }
+
+  /* ---- On the dark ground ----------------------------------------------
+     Each rule below overrides one this band shares with a sand one, and every
+     value is the home hero's rather than a new guess: `white/88` on the
+     eyebrow, `white/92` on the lede, `white/22` on the closing hairline. The
+     contrast helper in `e2e/helpers/contrast.ts` cannot check any of it — it
+     skips elements over a gradient, because there is no single background
+     colour to measure against — so borrowing proven values is the check. */
+  .issues-index-eyebrow {
+    @apply text-white/88;
+  }
+
+  .issues-index-copy {
+    @apply text-white/92;
+  }
+
+  .issues-index-constraints li {
+    @apply border-white/32 text-white/82;
+  }
+
+  /* Where the band closes: one quiet mono line on a hairline, and
+     deliberately not a row of display-scale counts — that is
+     `hero-section-colophon`, the home page hero's closing device, and two
+     different pages should not open the same way. */
+  .issues-index-provenance {
+    @apply mt-[clamp(2.5rem,5vw,4rem)] mb-0 flex flex-wrap gap-x-5 gap-y-1.5;
+    @apply border-t border-white/22 pt-[clamp(1.25rem,2vw,1.75rem)];
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.11em] text-white/70 uppercase;
+  }
+
+  /* A left rule rather than a panel, so the notice is findable without
+     turning the top of the page into a warning — and drawn in `red-light`
+     rather than `red`, because the brand red is most of this band's own
+     ground and a rule in it would not be a rule at all. */
+  .issues-index-notice {
+    @apply mt-8 mb-0 max-w-[44rem] border-l-2 border-red-light py-1 pl-4;
+    @apply text-[0.9375rem] leading-[1.55] tracking-[-0.008em] text-white/88;
+  }
+
+  /* ---- The board -------------------------------------------------------- */
+
+  .issues-board {
+    @apply relative isolate scroll-mt-22.5 overflow-clip bg-sand text-charcoal;
+
+    --band-bloom: radial-gradient(
+      68% 44% at 4% 8%,
+      rgb(var(--band-light) / 74%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      56% 36% at 96% 74%,
+      rgb(var(--band-cool) / 66%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
+  }
+
+  .issues-board-inner {
+    @apply py-[var(--space-band)];
+  }
+
+  /* Search takes the row on its own below `md`, because a text field sharing a
+     line with two selects gets too narrow to show what was typed. */
+  .issues-toolbar {
+    @apply flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8;
+  }
+
+  .issues-search {
+    @apply relative flex min-w-0 flex-1 items-center md:max-w-[26rem];
+  }
+
+  .issues-search-glyph {
+    @apply pointer-events-none absolute left-0 text-lg leading-none text-charcoal/40;
+  }
+
+  /* A ruled field, not a boxed one — the same hairline every other edge on the
+     page is drawn with. `appearance-none` clears Safari's search decorations,
+     which otherwise put a second, differently-styled clear button in the
+     field. */
+  .issues-search-input {
+    @apply w-full appearance-none border-0 border-b border-charcoal/25 bg-transparent;
+    @apply py-2.5 pr-3 pl-7 text-base tracking-[-0.014em] text-charcoal;
+    @apply transition-colors duration-200 ease-out;
+    @apply placeholder:text-charcoal/45;
+    @apply hover:border-charcoal/45;
+    @apply focus:border-red focus:outline-none;
+    @apply motion-reduce:transition-none;
+  }
+
+  .issues-search-input::-webkit-search-cancel-button {
+    @apply appearance-none;
+  }
+
+  .issues-toolbar-fields {
+    @apply flex flex-wrap items-end gap-x-6 gap-y-4;
+  }
+
+  /* The two fields share the row on a phone rather than sitting at their
+     natural width with the rest of the line empty; from `sm` up the toolbar
+     has room and they go back to being sized by their content. */
+  .issues-field {
+    @apply flex min-w-[9rem] flex-1 flex-col gap-1.5 sm:flex-none;
+  }
+
+  .issues-field-label {
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.13em] text-charcoal/52 uppercase;
+  }
+
+  .issues-select-shell {
+    @apply relative flex items-center;
+  }
+
+  /* A native `select`, restyled rather than replaced: the platform's own
+     dropdown is reachable by keyboard, searchable by typing, and correct on a
+     phone, and no scripted listbox on this page would be worth losing that.
+     Right padding leaves room for the glyph below. */
+  .issues-select {
+    @apply w-full min-w-[10rem] cursor-pointer appearance-none;
+    @apply border-0 border-b border-charcoal/25 bg-transparent;
+    @apply py-2.5 pr-7 pl-0 text-base tracking-[-0.014em] text-charcoal;
+    @apply transition-colors duration-200 ease-out;
+    @apply hover:border-charcoal/45;
+    @apply focus:border-red focus:outline-none;
+    @apply motion-reduce:transition-none;
+  }
+
+  .issues-select-glyph {
+    @apply pointer-events-none absolute right-1 text-xs leading-none text-charcoal/50;
+  }
+
+  /* ---- The level filter -------------------------------------------------
+     Pills rather than a fourth select: this is the filter the page exists for,
+     it has five fixed options, and each one can carry the count it would
+     leave — which a `select` cannot show until it is open. */
+  .issues-levels {
+    @apply mt-[clamp(1.5rem,3vw,2.25rem)] flex flex-wrap gap-2;
+  }
+
+  .issues-level {
+    @apply inline-flex cursor-pointer items-center gap-2.5 rounded-full;
+    @apply border border-charcoal/20 bg-transparent px-4 py-2;
+    @apply font-serif text-sm font-medium tracking-[-0.01em] text-charcoal;
+    @apply transition-[background-color,border-color,color] duration-200 ease-out;
+    @apply hover:border-charcoal/45;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  .issues-level[aria-pressed="true"] {
+    @apply border-red bg-red text-white hover:border-red;
+  }
+
+  .issues-level-count {
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.06em] text-charcoal/50 tabular-nums;
+  }
+
+  .issues-level[aria-pressed="true"] .issues-level-count {
+    @apply text-white/72;
+  }
+
+  /* ---- Result count ------------------------------------------------------ */
+
+  .issues-tally {
+    @apply mt-[clamp(1.75rem,3vw,2.5rem)] mb-[clamp(1.25rem,2vw,1.75rem)];
+    @apply flex flex-wrap items-end justify-between gap-x-8 gap-y-2;
+    @apply border-b border-charcoal/18 pb-3;
+  }
+
+  .issues-tally-count,
+  .issues-reset {
+    @apply m-0 font-ibm text-[0.6875rem] leading-none tracking-[0.14em] uppercase;
+  }
+
+  .issues-tally-count {
+    @apply text-charcoal/62;
+  }
+
+  .issues-tally-count span {
+    @apply hidden text-charcoal/45 sm:inline;
+  }
+
+  .issues-reset {
+    @apply cursor-pointer border-0 bg-transparent p-0 text-red;
+    @apply underline decoration-red/40 underline-offset-4;
+    @apply transition-colors duration-200 ease-out hover:decoration-red;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  /* ---- One issue as a card ----------------------------------------------
+     The blog card's object, without the image: hairline on the sand band, a
+     lift on hover, a circular glyph that fills red. Three columns rather than
+     the blog's fixed three, because an issue title is longer than a post title
+     and two columns is the honest maximum on a laptop. */
+  .issues-grid {
+    @apply m-0 grid list-none gap-4 p-0;
+    @apply sm:grid-cols-2 sm:gap-5 xl:grid-cols-3;
+  }
+
+  .issues-grid-item {
+    @apply flex min-w-0;
+  }
+
+  .issues-card {
+    @apply flex min-h-[13rem] w-full min-w-0 flex-col rounded-[1.25rem];
+    @apply border border-charcoal/18 bg-transparent text-charcoal no-underline;
+    @apply p-[clamp(1.125rem,1.8vw,1.5rem)];
+    @apply transition-[background-color,border-color,box-shadow,translate] duration-300 ease-out;
+    @apply hover:-translate-y-1 hover:border-red/55 hover:bg-white/60;
+    @apply hover:shadow-[0_18px_45px_rgba(30,30,30,0.08)];
+    @apply focus-visible:bg-white/60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  .issues-card-head {
+    @apply flex flex-wrap items-center justify-between gap-x-3 gap-y-2;
+  }
+
+  /* The repository name is the card's first fact and it is a machine name, so
+     it is set in mono and allowed to shrink rather than wrap. */
+  .issues-card-repo {
+    @apply min-w-0 truncate font-ibm text-[0.6875rem] leading-none;
+    @apply tracking-[0.1em] text-charcoal/58 uppercase;
+  }
+
+  /* Level colours are the one place this page departs from the brand palette,
+     and deliberately: green/blue/amber/red is the convention every issue
+     tracker uses, and a contributor reads it before they read the words. Each
+     pair is checked to clear 4.5:1 on its own tint. */
+  .issues-card-level {
+    @apply flex-none rounded-full border px-2.5 py-1;
+    @apply font-ibm text-[0.625rem] leading-none tracking-[0.08em] uppercase;
+  }
+
+  .issues-card-level[data-level="good-first-issue"] {
+    @apply border-[#9BDCBB] bg-[#EFFBF4] text-[#136B43];
+  }
+
+  .issues-card-level[data-level="beginner"] {
+    @apply border-[#AECDFA] bg-[#F1F6FE] text-[#1F5BAE];
+  }
+
+  .issues-card-level[data-level="intermediate"] {
+    @apply border-[#E9C877] bg-[#FDF7E8] text-[#8A5A00];
+  }
+
+  .issues-card-level[data-level="advanced"] {
+    @apply border-[#EDAAAA] bg-[#FDF2F2] text-[#A82121];
+  }
+
+  .issues-card-title {
+    @apply mt-4 block line-clamp-3 text-[clamp(1rem,1.25vw,1.125rem)];
+    @apply leading-[1.35] font-medium tracking-[-0.025em] text-pretty text-charcoal;
+    @apply transition-colors duration-300 motion-reduce:transition-none;
+  }
+
+  .issues-card:hover .issues-card-title,
+  .issues-card:focus-visible .issues-card-title {
+    @apply text-red;
+  }
+
+  /* `overflow-hidden` with a fixed height rather than wrapping: chips are the
+     card's least important row, and letting them run to three lines pushes the
+     footers in a row of cards out of alignment. */
+  .issues-card-labels {
+    @apply mt-3.5 flex h-[1.375rem] flex-wrap gap-1.5 overflow-hidden;
+  }
+
+  .issues-card-label {
+    @apply max-w-[11rem] flex-none truncate rounded-md bg-charcoal/6 px-2 py-1;
+    @apply font-ibm text-[0.625rem] leading-none tracking-[0.04em] text-charcoal/62;
+  }
+
+  .issues-card-label--more {
+    @apply bg-transparent px-0 text-charcoal/45;
+  }
+
+  /* `mt-auto` so the footers line up across a row however long the titles run. */
+  .issues-card-foot {
+    @apply mt-auto flex items-center justify-between gap-4 pt-5;
+  }
+
+  .issues-card-meta {
+    @apply flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.06em] text-charcoal/52;
+  }
+
+  .issues-card-glyph {
+    @apply grid h-9 w-9 flex-none place-items-center rounded-full border border-charcoal/22;
+    @apply font-serif text-base leading-none;
+    @apply transition-[background-color,border-color,color,translate] duration-300 ease-out;
+    @apply motion-reduce:transition-none;
+  }
+
+  .issues-card:hover .issues-card-glyph,
+  .issues-card:focus-visible .issues-card-glyph {
+    @apply translate-x-0.5 -translate-y-0.5 border-red bg-red text-white;
+  }
+
+  /* ---- Nothing matched --------------------------------------------------- */
+
+  .issues-empty {
+    @apply flex flex-col items-start gap-3 rounded-[1.25rem];
+    @apply border border-dashed border-charcoal/22 p-[clamp(1.75rem,4vw,3rem)];
+  }
+
+  .issues-empty-title {
+    @apply m-0 text-[clamp(1.25rem,2vw,1.625rem)] leading-[1.2];
+    @apply font-medium tracking-[-0.03em] text-charcoal;
+  }
+
+  .issues-empty-copy {
+    @apply m-0 max-w-[34rem] text-base leading-[1.6] tracking-[-0.008em] text-charcoal/68;
+  }
+
+  .issues-empty-action {
+    @apply mt-3 cursor-pointer;
+  }
+
+  /* ---- The way out ------------------------------------------------------- */
+
+  .issues-outro {
+    @apply relative isolate overflow-clip bg-sand;
+
+    --band-bloom: radial-gradient(
+      64% 52% at 92% 84%,
+      rgb(var(--band-light) / 70%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      54% 38% at 4% 20%,
+      rgb(var(--band-cool) / 64%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
+  }
+
+  .issues-outro-inner {
+    @apply flex flex-col items-start gap-6 border-t border-charcoal/14;
+    @apply py-[var(--space-band)] lg:flex-row lg:items-center lg:justify-between;
+  }
+
+  .issues-outro-copy {
+    @apply m-0 max-w-[44rem] text-base leading-[1.6] tracking-[-0.008em] text-charcoal/68;
+  }
+
+  .issues-outro-link {
+    @apply flex-none no-underline;
+  }
 }
 
 @layer base {

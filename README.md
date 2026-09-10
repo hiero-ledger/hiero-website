@@ -35,6 +35,24 @@ pnpm dev
 
 The site will be available at `http://localhost:3000`.
 
+### GitHub token (optional locally, recommended in CI)
+
+Three parts of the build read the GitHub API: the repository star counts, the
+organisation stats, and the Issue Explorer at `/issues`, which searches the
+`hiero-sdk-*` repositories. Unauthenticated, the search API allows ten requests
+a minute per address and answers a burst with a secondary rate limit, so a
+build from a shared address can come out with a partial issue board — the page
+says so when that happens.
+
+Export a token with no scopes (it only reads public data) to raise the limit:
+
+```bash
+export GITHUB_TOKEN="<your personal access token>"
+```
+
+Set the same variable in the deployment environment. Nothing fails without it;
+the pages fall back to cached data or say that they are incomplete.
+
 ### Build and Checks
 
 | Command | Description |

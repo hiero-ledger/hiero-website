@@ -35,6 +35,8 @@ const FIELDS = {
   archive: field(64209137),
   article: field(19850426),
   reading: field(52907341),
+  board: field(88104526),
+  handoff: field(64137208),
 };
 
 export type GossipFieldPlacement = keyof typeof FIELDS;

@@ -37,6 +37,9 @@ const FIELDS = {
   reading: field(52907341),
   board: field(88104526),
   handoff: field(64137208),
+  charter: field(46820913),
+  committee: field(71309584),
+  governance: field(25476130),
 };
 
 export type GossipFieldPlacement = keyof typeof FIELDS;

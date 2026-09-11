@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   affiliations,
   footerNavGroups,
+  headerOnlyMenuItems,
   isExternalLink,
   menuItems,
   opensInNewTab,
@@ -36,8 +37,10 @@ describe("Footer", () => {
     expect(within(homeLink).getByAltText("Hiero")).toBeInTheDocument();
   });
 
-  // The footer is expected to surface every header menu item, so adding a
-  // header link without adding it to `footerNavGroups` should fail here.
+  // The footer is expected to surface every header menu item except the ones
+  // `navigation` marks header-only, so adding a header link without adding it
+  // to `footerNavGroups` should fail here — and so should quietly dropping one
+  // from the footer without saying why in `headerOnlyMenuItems`.
   it("renders every navigation link with the shared menu data", () => {
     render(<Footer />);
 
@@ -45,6 +48,11 @@ describe("Footer", () => {
 
     for (const item of menuItems) {
       const name = accessibleName(item.name, opensInNewTab(item));
+
+      if (headerOnlyMenuItems.some(headerOnly => headerOnly === item.name)) {
+        expect(within(footerNav).queryByRole("link", { name })).toBeNull();
+        continue;
+      }
 
       expect(within(footerNav).getByRole("link", { name })).toHaveAttribute(
         "href",

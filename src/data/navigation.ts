@@ -43,9 +43,23 @@ const menuItemDefinitions = [
   },
 ] as const satisfies readonly MenuItem[];
 
-type MenuItemName = (typeof menuItemDefinitions)[number]["name"];
+export type MenuItemName = (typeof menuItemDefinitions)[number]["name"];
 
 export const menuItems: MenuItem[] = [...menuItemDefinitions];
+
+/**
+ * Menu items the footer deliberately does not repeat.
+ *
+ * `Connect` is an anchor into a band of the home page rather than a
+ * destination of its own, and the footer's own Community group already lists
+ * the ways in — so at the foot of the page it only offered to send the reader
+ * back up the one they were leaving. The header keeps it, where a jump to a
+ * section of the page you are on is the point.
+ *
+ * Held here rather than in the footer so the test that checks the footer
+ * carries every menu item has something to check the exceptions against.
+ */
+export const headerOnlyMenuItems: readonly MenuItemName[] = ["Connect"];
 
 export interface SocialLink {
   name: string;
@@ -138,7 +152,7 @@ export const footerNavGroups: FooterNavGroup[] = [
   {
     title: "Community",
     items: [
-      ...fromMenu("Contribute", "Connect", "Calendar"),
+      ...fromMenu("Contribute", "Calendar"),
       {
         name: "Discussions",
         href: "https://github.com/orgs/hiero-ledger/discussions",

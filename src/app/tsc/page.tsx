@@ -1,16 +1,15 @@
-"use client";
+import type { Metadata } from "next";
 
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import GossipField from "@/components/GossipField";
+import TscCommittee, { type TscMember } from "@/components/TscCommittee";
+import TscHeroNetwork from "@/components/TscHeroNetwork";
 import tscMembers from "@/data/technical_steering_committee.json";
 
-interface Member {
-  firstName: string;
-  lastName: string;
-  gitHubAccount?: string;
-  photo?: string;
-  bio?: string;
-}
+export const metadata: Metadata = {
+  title: "Technical Steering Committee",
+  description:
+    "The Technical Steering Committee is responsible for technical governance within the Hiero project. Meet the current members and read the charter they work from.",
+};
 
 const TECHNICAL_CHARTER_URL =
   "https://github.com/hiero-ledger/governance/blob/main/hiero-technical-charter.md";
@@ -32,450 +31,9 @@ const governanceResources = [
   },
 ];
 
-/**
- * Animated network background for the TSC hero.
- *
- * The animation creates a subtle, slowly moving network of nodes and
- * connections while keeping the page content easy to read.
- */
-function AnimatedNetwork() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-
-    if (!canvas) {
-      return;
-    }
-
-    const context = canvas.getContext("2d");
-
-    if (!context) {
-      return;
-    }
-
-    let animationFrame = 0;
-    let width = 0;
-    let height = 0;
-
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    type NetworkNode = {
-      x: number;
-      y: number;
-      radius: number;
-      speedX: number;
-      speedY: number;
-      phase: number;
-      person: boolean;
-    };
-
-    const nodes: NetworkNode[] = [
-      {
-        x: 0.04,
-        y: 0.25,
-        radius: 5,
-        speedX: 0.0005,
-        speedY: 0.0004,
-        phase: 0.5,
-        person: false,
-      },
-      {
-        x: 0.11,
-        y: 0.67,
-        radius: 26,
-        speedX: -0.0004,
-        speedY: 0.0005,
-        phase: 1.2,
-        person: true,
-      },
-      {
-        x: 0.2,
-        y: 0.35,
-        radius: 5,
-        speedX: 0.0006,
-        speedY: -0.0004,
-        phase: 2.4,
-        person: false,
-      },
-      {
-        x: 0.29,
-        y: 0.2,
-        radius: 19,
-        speedX: -0.0005,
-        speedY: 0.0004,
-        phase: 3.2,
-        person: true,
-      },
-      {
-        x: 0.34,
-        y: 0.77,
-        radius: 6,
-        speedX: 0.0004,
-        speedY: -0.0005,
-        phase: 4.1,
-        person: false,
-      },
-      {
-        x: 0.43,
-        y: 0.34,
-        radius: 28,
-        speedX: 0.0005,
-        speedY: 0.0005,
-        phase: 1.8,
-        person: true,
-      },
-      {
-        x: 0.51,
-        y: 0.7,
-        radius: 5,
-        speedX: -0.0005,
-        speedY: -0.0004,
-        phase: 2.7,
-        person: false,
-      },
-      {
-        x: 0.59,
-        y: 0.18,
-        radius: 5,
-        speedX: 0.0004,
-        speedY: 0.0005,
-        phase: 4.6,
-        person: false,
-      },
-      {
-        x: 0.65,
-        y: 0.48,
-        radius: 21,
-        speedX: -0.0006,
-        speedY: 0.0003,
-        phase: 3.5,
-        person: true,
-      },
-      {
-        x: 0.74,
-        y: 0.76,
-        radius: 5,
-        speedX: 0.0005,
-        speedY: -0.0004,
-        phase: 1.1,
-        person: false,
-      },
-      {
-        x: 0.79,
-        y: 0.27,
-        radius: 27,
-        speedX: -0.0004,
-        speedY: 0.0005,
-        phase: 5.1,
-        person: true,
-      },
-      {
-        x: 0.89,
-        y: 0.58,
-        radius: 6,
-        speedX: 0.0006,
-        speedY: -0.0003,
-        phase: 2.2,
-        person: false,
-      },
-      {
-        x: 0.96,
-        y: 0.31,
-        radius: 5,
-        speedX: -0.0005,
-        speedY: 0.0004,
-        phase: 3.8,
-        person: false,
-      },
-      {
-        x: 0.94,
-        y: 0.82,
-        radius: 17,
-        speedX: 0.0004,
-        speedY: -0.0005,
-        phase: 0.8,
-        person: true,
-      },
-      {
-        x: 0.18,
-        y: 0.88,
-        radius: 4,
-        speedX: -0.0005,
-        speedY: 0.0003,
-        phase: 4.4,
-        person: false,
-      },
-      {
-        x: 0.56,
-        y: 0.91,
-        radius: 4,
-        speedX: 0.0005,
-        speedY: -0.0004,
-        phase: 2.9,
-        person: false,
-      },
-    ];
-
-    const resize = () => {
-      const rect = canvas.getBoundingClientRect();
-
-      width = rect.width;
-      height = rect.height;
-
-      const devicePixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-
-      canvas.width = width * devicePixelRatio;
-      canvas.height = height * devicePixelRatio;
-
-      context.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
-    };
-
-    const drawPerson = (x: number, y: number, radius: number) => {
-      const headRadius = radius * 0.27;
-      const bodyWidth = radius * 0.9;
-      const bodyHeight = radius * 0.62;
-
-      context.save();
-
-      context.fillStyle = "rgba(255,255,255,0.38)";
-
-      // Head
-      context.beginPath();
-      context.arc(x, y - radius * 0.28, headRadius, 0, Math.PI * 2);
-      context.fill();
-
-      // Body
-      context.beginPath();
-      context.ellipse(
-        x,
-        y + radius * 0.25,
-        bodyWidth / 2,
-        bodyHeight / 2,
-        0,
-        Math.PI,
-        0,
-      );
-      context.fill();
-
-      context.restore();
-    };
-
-    const drawNode = (
-      node: NetworkNode,
-      x: number,
-      y: number,
-      pulse: number,
-    ) => {
-      if (node.person) {
-        context.save();
-
-        // Outer network rings
-        context.strokeStyle = "rgba(255,255,255,0.10)";
-        context.lineWidth = 1;
-
-        context.beginPath();
-        context.arc(x, y, node.radius * 1.45 + pulse, 0, Math.PI * 2);
-        context.stroke();
-
-        context.beginPath();
-        context.arc(x, y, node.radius * 1.18 + pulse * 0.5, 0, Math.PI * 2);
-        context.stroke();
-
-        drawPerson(x, y, node.radius);
-
-        context.restore();
-      } else {
-        context.save();
-
-        context.fillStyle = "rgba(255,255,255,0.40)";
-
-        context.beginPath();
-        context.arc(x, y, node.radius, 0, Math.PI * 2);
-        context.fill();
-
-        context.restore();
-      }
-    };
-
-    const draw = (time: number) => {
-      context.clearRect(0, 0, width, height);
-
-      /*
-       * Subtle grid.
-       */
-      context.save();
-
-      context.strokeStyle = "rgba(255,255,255,0.045)";
-      context.lineWidth = 1;
-
-      const gridSize = 54;
-
-      for (let x = 0; x <= width; x += gridSize) {
-        context.beginPath();
-        context.moveTo(x, 0);
-        context.lineTo(x, height);
-        context.stroke();
-      }
-
-      for (let y = 0; y <= height; y += gridSize) {
-        context.beginPath();
-        context.moveTo(0, y);
-        context.lineTo(width, y);
-        context.stroke();
-      }
-
-      context.restore();
-
-      const positions = nodes.map(node => {
-        const movementTime = prefersReducedMotion ? 0 : time;
-
-        const x =
-          node.x * width +
-          Math.sin(movementTime * node.speedX + node.phase) * 45;
-
-        const y =
-          node.y * height +
-          Math.cos(movementTime * node.speedY + node.phase) * 32;
-
-        return { x, y };
-      });
-
-      /*
-       * Connect nearby nodes.
-       */
-      for (let i = 0; i < nodes.length; i += 1) {
-        for (let j = i + 1; j < nodes.length; j += 1) {
-          const first = positions[i];
-          const second = positions[j];
-
-          const dx = second.x - first.x;
-          const dy = second.y - first.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          const maxDistance = Math.min(width * 0.22, 260);
-
-          if (distance > maxDistance) {
-            continue;
-          }
-
-          const opacity = (1 - distance / maxDistance) * 0.2;
-
-          context.save();
-
-          context.strokeStyle = `rgba(255,255,255,${opacity})`;
-          context.lineWidth = 1;
-
-          context.beginPath();
-          context.moveTo(first.x, first.y);
-          context.lineTo(second.x, second.y);
-          context.stroke();
-
-          context.restore();
-        }
-      }
-
-      /*
-       * Draw nodes on top of connections.
-       */
-      nodes.forEach((node, index) => {
-        const position = positions[index];
-
-        const pulse = prefersReducedMotion
-          ? 0
-          : Math.sin(time * 0.0015 + node.phase) * 2;
-
-        drawNode(node, position.x, position.y, pulse);
-      });
-
-      if (!prefersReducedMotion) {
-        animationFrame = requestAnimationFrame(draw);
-      }
-    };
-
-    resize();
-
-    window.addEventListener("resize", resize);
-
-    if (prefersReducedMotion) {
-      draw(0);
-    } else {
-      animationFrame = requestAnimationFrame(draw);
-    }
-
-    return () => {
-      window.removeEventListener("resize", resize);
-      cancelAnimationFrame(animationFrame);
-    };
-  }, []);
-
+export default function TscPage() {
   return (
-    <canvas
-      ref={canvasRef}
-      className="pointer-events-none absolute inset-0 h-full w-full"
-      aria-hidden="true"
-    />
-  );
-}
-
-export default function TSCSection() {
-  const [selectedMember, setSelectedMember] = useState<Member | null>(null);
-  const modalRef = useRef<HTMLDivElement | null>(null);
-  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
-  const lastFocusedTriggerIdRef = useRef<string | null>(null);
-
-  const sorted = [...(tscMembers as Member[])].sort((a, b) =>
-    `${a.lastName} ${a.firstName}`.localeCompare(
-      `${b.lastName} ${b.firstName}`,
-    ),
-  );
-
-  useEffect(() => {
-    if (!selectedMember) {
-      return;
-    }
-
-    const focusCloseButton = window.setTimeout(() => {
-      closeButtonRef.current?.focus();
-    }, 0);
-
-    const handleKeyboardInteraction = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setSelectedMember(null);
-        return;
-      }
-
-      if (event.key !== "Tab") {
-        return;
-      }
-
-      const focusableElements = getFocusableElements(modalRef.current);
-
-      trapFocusInModal(event, focusableElements);
-    };
-
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handleKeyboardInteraction);
-
-    return () => {
-      window.clearTimeout(focusCloseButton);
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleKeyboardInteraction);
-
-      if (lastFocusedTriggerIdRef.current) {
-        const triggerButton = document.getElementById(
-          lastFocusedTriggerIdRef.current,
-        );
-
-        triggerButton?.focus();
-      }
-    };
-  }, [selectedMember]);
-
-  return (
-    <main className="bg-white text-charcoal">
+    <>
       {/* TSC Hero */}
       <section className="relative overflow-hidden bg-[#24000F] text-white">
         {/* Background gradient */}
@@ -510,7 +68,7 @@ export default function TSCSection() {
         />
 
         {/* Animated network */}
-        <AnimatedNetwork />
+        <TscHeroNetwork />
 
         <div className="container relative z-10">
           <div className="mx-auto flex min-h-[580px] items-center justify-center py-20 sm:py-24 lg:py-28">
@@ -555,349 +113,95 @@ export default function TSCSection() {
         </div>
       </section>
 
-      <section
-        aria-labelledby="tsc-about-heading"
-        className="border-b border-white-dark bg-white">
-        <div className="container py-10 sm:py-15">
-          <div className="max-w-225">
-            <h2 id="tsc-about-heading" className="mb-5 text-2xl sm:text-4xl">
-              About the TSC
-            </h2>
+      <section aria-labelledby="tsc-about-heading" className="tsc-about">
+        <GossipField placement="charter" />
 
-            <div className="space-y-4 text-lg text-gray">
-              <p>
-                The Hiero Technical Steering Committee (TSC) is a committee of
-                members who serve the project&apos;s technical governance.
-              </p>
+        <div className="container tsc-about-inner">
+          <header className="tsc-about-header">
+            <div>
+              <p className="tsc-about-eyebrow">Governance</p>
+              <h2 id="tsc-about-heading" className="tsc-about-heading">
+                About the TSC
+              </h2>
+            </div>
 
-              <p>
-                The duties, goals, and rights of the TSC are defined in the{" "}
+            <div className="tsc-about-intro">
+              <p className="tsc-about-copy">
+                The duties, goals, and rights of the committee are defined in
+                the{" "}
                 <a
                   href={TECHNICAL_CHARTER_URL}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="text-red underline hover:text-red-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2"
-                  aria-label="Read the technical charter (opens in new tab)">
+                  className="tsc-about-link"
+                  aria-label="Read the technical charter (opens in a new tab)">
                   technical charter
                 </a>{" "}
-                of the Hiero project.
+                of the Hiero project. This page lists the committee as it stands
+                today, alongside the governance resources the project works
+                from.
               </p>
 
-              <p>
-                This page provides an overview of the current committee members
-                and links to the core governance resources used by the project.
+              <ul role="list" className="tsc-about-facts">
+                <li>Vendor neutral</li>
+                <li>Open meetings</li>
+                <li>Public charter</li>
+              </ul>
+            </div>
+          </header>
+        </div>
+      </section>
+
+      <TscCommittee members={tscMembers as TscMember[]} />
+
+      <section
+        aria-labelledby="tsc-resources-heading"
+        className="tsc-resources">
+        <GossipField placement="governance" />
+
+        <div className="container tsc-resources-inner">
+          <header className="tsc-resources-header">
+            <div>
+              <p className="tsc-resources-eyebrow">Resources</p>
+              <h2 id="tsc-resources-heading" className="tsc-resources-heading">
+                Where the work is kept
+              </h2>
+            </div>
+
+            <div className="tsc-resources-intro">
+              <p className="tsc-resources-copy">
+                Review the charter and follow governance activity through the
+                project&apos;s primary source materials.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
+          </header>
 
-      <section aria-labelledby="tsc-members-heading" className="bg-gray-light">
-        <div className="container py-10 sm:py-15 lg:py-20">
-          <div className="mb-10 sm:mb-12">
-            <h2 id="tsc-members-heading" className="mb-5 text-2xl sm:text-4xl">
-              Committee Members
-            </h2>
-
-            <p className="max-w-205 text-lg">
-              The committee is composed of contributors from across the Hiero
-              ecosystem. Member bios reflect their current roles and ongoing
-              work in open-source governance and technical delivery.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 xl:grid-cols-3">
-            {sorted.map((member, index) => {
-              const fullName = `${member.firstName} ${member.lastName}`.trim();
-
-              const hasBio = Boolean(member.bio?.trim());
-
-              const bioPreview = hasBio
-                ? getBioPreview(member.bio ?? "")
-                : "Biography not available.";
-
-              const githubHandle = getGitHubHandle(member.gitHubAccount);
-
-              return (
-                <article
-                  key={`${fullName}-${index}`}
-                  className="flex h-full flex-col rounded-2xl border-2 border-white-dark bg-white p-6 sm:p-7">
-                  {member.photo ? (
-                    <Image
-                      src={`/images/tsc/${member.photo}`}
-                      alt={`${fullName} profile photo for the Hiero Technical Steering Committee`}
-                      width={320}
-                      height={320}
-                      className="aspect-square w-full rounded-xl object-cover"
-                      sizes="(min-width: 1280px) 25vw, (min-width: 768px) 40vw, 100vw"
-                    />
-                  ) : (
-                    <div
-                      className="aspect-square w-full rounded-xl border border-white-dark bg-gray-light"
-                      aria-hidden="true"
-                    />
-                  )}
-
-                  <div className="mt-5 flex flex-1 flex-col">
-                    <h3 className="mb-2 text-xl sm:text-2xl">{fullName}</h3>
-
-                    {member.gitHubAccount ? (
-                      <a
-                        href={member.gitHubAccount}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        className="inline-flex items-center gap-2 text-base text-red underline hover:text-red-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2"
-                        aria-label={`Visit ${fullName} on GitHub (opens in new tab)`}>
-                        <Image
-                          src="/images/Hiero-Icon-Github.svg"
-                          alt="GitHub"
-                          width={16}
-                          height={16}
-                        />
-                        {githubHandle ?? "GitHub profile"}
-                      </a>
-                    ) : null}
-
-                    <p className="mt-4 grow text-base text-gray">
-                      {bioPreview}
-                    </p>
-
-                    {hasBio ? (
-                      <button
-                        id={`tsc-read-profile-${index}`}
-                        type="button"
-                        onClick={() => {
-                          lastFocusedTriggerIdRef.current = `tsc-read-profile-${index}`;
-
-                          setSelectedMember(member);
-                        }}
-                        className="mt-4 inline-flex items-center justify-center rounded-full border-2 border-white-dark px-4 py-1.5 text-sm font-medium text-charcoal transition-colors hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2"
-                        aria-label={`Read full profile for ${fullName}`}>
-                        Read full profile
-                      </button>
-                    ) : null}
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section aria-labelledby="tsc-resources-heading" className="bg-white">
-        <div className="container py-10 sm:py-15 lg:py-20">
-          <div className="mb-10 max-w-225 sm:mb-12">
-            <h2
-              id="tsc-resources-heading"
-              className="mb-5 text-2xl sm:text-4xl">
-              Governance Resources
-            </h2>
-
-            <p className="text-lg">
-              Review the charter and follow governance activity through the
-              project&apos;s primary source materials.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2">
+          <ul role="list" className="tsc-resources-grid">
             {governanceResources.map(resource => (
-              <a
-                key={resource.title}
-                href={resource.href}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="flex h-full flex-col rounded-2xl border-2 border-white-dark bg-white p-6 text-charcoal no-underline transition-colors hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2"
-                aria-label={`${resource.title} (opens in new tab)`}>
-                <h3 className="mb-3 text-xl font-medium">{resource.title}</h3>
+              <li key={resource.title} className="tsc-resource">
+                <a
+                  href={resource.href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="tsc-resource-link"
+                  aria-label={`${resource.title} (opens in a new tab)`}>
+                  <span className="tsc-resource-platform">GitHub</span>
 
-                <p className="grow text-base text-gray">
-                  {resource.description}
-                </p>
-              </a>
+                  <h3 className="tsc-resource-name">{resource.title}</h3>
+                  <p className="tsc-resource-description">
+                    {resource.description}
+                  </p>
+
+                  <span className="tsc-resource-action" aria-hidden="true">
+                    <span>Open resource</span>
+                    <span className="tsc-resource-action-glyph">↗</span>
+                  </span>
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
-
-      {selectedMember ? (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 p-4 sm:p-8"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="tsc-member-modal-title"
-          onClick={() => {
-            setSelectedMember(null);
-          }}>
-          <div
-            ref={modalRef}
-            className="relative max-h-[90vh] w-full max-w-220 overflow-y-auto rounded-2xl border-2 border-white-dark bg-white p-6 sm:p-8"
-            onClick={event => {
-              event.stopPropagation();
-            }}>
-            <button
-              ref={closeButtonRef}
-              type="button"
-              onClick={() => {
-                setSelectedMember(null);
-              }}
-              className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-red bg-white text-red shadow-xs transition-colors hover:bg-red hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2"
-              aria-label="Close profile dialog">
-              <span className="text-xl leading-none" aria-hidden="true">
-                ×
-              </span>
-            </button>
-
-            <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-[220px_1fr] md:items-start">
-              {selectedMember.photo ? (
-                <Image
-                  src={`/images/tsc/${selectedMember.photo}`}
-                  alt={`${selectedMember.firstName} ${selectedMember.lastName} profile photo`}
-                  width={220}
-                  height={220}
-                  className="aspect-square w-full rounded-xl object-cover"
-                />
-              ) : (
-                <div
-                  className="aspect-square w-full rounded-xl border border-white-dark bg-gray-light"
-                  aria-hidden="true"
-                />
-              )}
-
-              <div>
-                <h3
-                  id="tsc-member-modal-title"
-                  className="mb-3 text-2xl sm:text-3xl">
-                  {selectedMember.firstName} {selectedMember.lastName}
-                </h3>
-
-                {selectedMember.gitHubAccount ? (
-                  <a
-                    href={selectedMember.gitHubAccount}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="inline-flex items-center gap-2 text-base text-red underline hover:text-red-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2"
-                    aria-label={`Visit ${selectedMember.firstName} ${selectedMember.lastName} on GitHub (opens in new tab)`}>
-                    <Image
-                      src="/images/Hiero-Icon-Github.svg"
-                      alt="GitHub"
-                      width={16}
-                      height={16}
-                    />
-
-                    {getGitHubHandle(selectedMember.gitHubAccount) ??
-                      "GitHub profile"}
-                  </a>
-                ) : null}
-
-                <div className="mt-5 space-y-4 text-base text-gray sm:text-lg sm:leading-relaxed">
-                  {getBioParagraphs(
-                    selectedMember.bio ?? "Biography not available.",
-                  ).map((paragraph, index) => (
-                    <p key={`${selectedMember.lastName}-${index}`}>
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : null}
-    </main>
+    </>
   );
-}
-
-function getBioPreview(bio: string, maxLength = 170): string {
-  const trimmedBio = bio.trim();
-
-  if (trimmedBio.length <= maxLength) {
-    return trimmedBio;
-  }
-
-  return `${trimmedBio.slice(0, maxLength)}...`;
-}
-
-function getBioParagraphs(bio: string): string[] {
-  const trimmedBio = bio.trim();
-
-  if (!trimmedBio) {
-    return [];
-  }
-
-  const explicitParagraphs = trimmedBio
-    .split(/\n\s*\n/)
-    .map(paragraph => paragraph.trim())
-    .filter(Boolean);
-
-  if (explicitParagraphs.length > 1) {
-    return explicitParagraphs;
-  }
-
-  const sentences = trimmedBio.split(/(?<=[.!?])\s+/).filter(Boolean);
-
-  if (sentences.length <= 2) {
-    return [trimmedBio];
-  }
-
-  const paragraphs: string[] = [];
-
-  for (let index = 0; index < sentences.length; index += 2) {
-    paragraphs.push(sentences.slice(index, index + 2).join(" "));
-  }
-
-  return paragraphs;
-}
-
-function getFocusableElements(container: HTMLDivElement | null): HTMLElement[] {
-  if (!container) {
-    return [];
-  }
-
-  return Array.from(
-    container.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
-    ),
-  ).filter(
-    element =>
-      !element.hasAttribute("disabled") &&
-      element.getAttribute("aria-hidden") !== "true",
-  );
-}
-
-function trapFocusInModal(
-  event: KeyboardEvent,
-  focusableElements: HTMLElement[],
-): void {
-  if (focusableElements.length === 0) {
-    event.preventDefault();
-    return;
-  }
-
-  const firstElement = focusableElements[0];
-  const lastElement = focusableElements[focusableElements.length - 1];
-
-  if (!event.shiftKey && document.activeElement === lastElement) {
-    event.preventDefault();
-    firstElement.focus();
-  }
-
-  if (event.shiftKey && document.activeElement === firstElement) {
-    event.preventDefault();
-    lastElement.focus();
-  }
-}
-
-function getGitHubHandle(gitHubAccount?: string): string | null {
-  if (!gitHubAccount) {
-    return null;
-  }
-
-  try {
-    const url = new URL(gitHubAccount);
-    const handle = url.pathname.split("/").filter(Boolean)[0];
-
-    return handle ? `@${handle}` : null;
-  } catch {
-    return null;
-  }
 }

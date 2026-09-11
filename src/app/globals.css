@@ -768,6 +768,46 @@
     );
   }
 
+  /* The TSC page's three sand bands. Same rule again: each is masked toward
+     the corner its band's own `--band-bloom` comes from, and the three walk
+     down the page — top right, bottom left, bottom right — so no two adjacent
+     bands are lit from the same side. */
+  .gossip-field--charter {
+    @apply top-0;
+
+    mask-image: radial-gradient(
+      100% 112% at 94% 6%,
+      black 2%,
+      rgb(0 0 0 / 26%) 36%,
+      transparent 68%
+    );
+  }
+
+  /* Held further back than the others: this band is a grid of photographs,
+     and a web drawn at the usual strength behind them reads as dirt on the
+     picture rather than as light. */
+  .gossip-field--committee {
+    @apply bottom-0;
+
+    mask-image: radial-gradient(
+      84% 96% at 4% 94%,
+      rgb(0 0 0 / 70%) 2%,
+      rgb(0 0 0 / 20%) 34%,
+      transparent 62%
+    );
+  }
+
+  .gossip-field--governance {
+    @apply bottom-0;
+
+    mask-image: radial-gradient(
+      102% 118% at 94% 88%,
+      black 4%,
+      rgb(0 0 0 / 28%) 38%,
+      transparent 70%
+    );
+  }
+
   @media screen and (prefers-reduced-motion: no-preference) {
     .gossip-field-web {
       animation: gossip-drift 54s ease-in-out infinite alternate;
@@ -833,6 +873,22 @@
       animation-direction: alternate-reverse;
     }
 
+    .gossip-field--charter .gossip-field-web {
+      animation-duration: 66s;
+      animation-delay: -22s;
+    }
+
+    .gossip-field--committee .gossip-field-web {
+      animation-duration: 74s;
+      animation-delay: -39s;
+      animation-direction: alternate-reverse;
+    }
+
+    .gossip-field--governance .gossip-field-web {
+      animation-duration: 57s;
+      animation-delay: -11s;
+    }
+
     .gossip-field-accents circle {
       transform-box: fill-box;
       transform-origin: center;
@@ -880,7 +936,10 @@
   .issue-jump-inner,
   .community-calls-inner,
   .repositories-inner,
-  .quotes-carousel-inner {
+  .quotes-carousel-inner,
+  .tsc-about-inner,
+  .tsc-committee-inner,
+  .tsc-resources-inner {
     @apply py-[var(--space-band)];
   }
 
@@ -888,7 +947,10 @@
   .community-calls-header,
   .repositories-header,
   .quotes-carousel-header,
-  .issues-index-header {
+  .issues-index-header,
+  .tsc-about-header,
+  .tsc-committee-header,
+  .tsc-resources-header {
     @apply mb-[var(--space-band-header)] grid gap-8;
     @apply lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)] lg:items-end lg:gap-[clamp(4rem,8vw,9rem)];
   }
@@ -905,7 +967,10 @@
   .quotes-carousel-eyebrow,
   .blog-index-eyebrow,
   .blog-article-eyebrow,
-  .issues-index-eyebrow {
+  .issues-index-eyebrow,
+  .tsc-about-eyebrow,
+  .tsc-committee-eyebrow,
+  .tsc-resources-eyebrow {
     @apply m-0 mb-[clamp(1rem,2vw,1.5rem)] flex items-start gap-3.5;
     @apply font-ibm text-xs leading-normal tracking-[0.16em] text-red uppercase;
   }
@@ -918,7 +983,10 @@
   .quotes-carousel-eyebrow::before,
   .blog-index-eyebrow::before,
   .blog-article-eyebrow::before,
-  .issues-index-eyebrow::before {
+  .issues-index-eyebrow::before,
+  .tsc-about-eyebrow::before,
+  .tsc-committee-eyebrow::before,
+  .tsc-resources-eyebrow::before {
     @apply mt-[0.75em] h-px w-[clamp(1.5rem,4vw,3rem)] flex-none bg-current;
 
     content: "";
@@ -926,7 +994,10 @@
 
   .community-calls-heading,
   .repositories-heading,
-  .quotes-carousel-heading {
+  .quotes-carousel-heading,
+  .tsc-about-heading,
+  .tsc-committee-heading,
+  .tsc-resources-heading {
     @apply m-0 max-w-[14ch] text-balance;
     @apply text-[clamp(2.75rem,5.5vw,5.75rem)] leading-[0.96] font-normal tracking-[-0.055em];
   }
@@ -943,7 +1014,10 @@
 
   .issue-jump-intro,
   .community-calls-intro,
-  .repositories-intro {
+  .repositories-intro,
+  .tsc-about-intro,
+  .tsc-committee-intro,
+  .tsc-resources-intro {
     @apply flex flex-col gap-8 lg:pb-1;
   }
 
@@ -954,14 +1028,20 @@
   .issue-jump-copy,
   .community-calls-copy,
   .repositories-copy,
-  .quotes-carousel-copy {
+  .quotes-carousel-copy,
+  .tsc-about-copy,
+  .tsc-committee-copy,
+  .tsc-resources-copy {
     @apply max-w-[36rem] text-[clamp(1.0625rem,1.35vw,1.25rem)];
     @apply leading-[1.6] tracking-[-0.014em] text-charcoal/72;
   }
 
   .issue-jump-copy,
   .repositories-copy,
-  .quotes-carousel-copy {
+  .quotes-carousel-copy,
+  .tsc-about-copy,
+  .tsc-committee-copy,
+  .tsc-resources-copy {
     @apply m-0;
   }
 
@@ -981,7 +1061,8 @@
 
   /* The small ruled label that names a list or grid below it. */
   .issue-jump-list-heading,
-  .community-calls-board-heading {
+  .community-calls-board-heading,
+  .tsc-committee-board-heading {
     @apply flex items-center justify-between pb-3;
     @apply font-ibm text-[0.6875rem] leading-none tracking-[0.14em] text-charcoal/50 uppercase;
   }
@@ -992,7 +1073,8 @@
 
   /* The right-hand half is context, not content: it goes when there is no room. */
   .issue-jump-list-heading span:last-child,
-  .community-calls-board-heading span:last-child {
+  .community-calls-board-heading span:last-child,
+  .tsc-committee-board-heading span:last-child {
     @apply hidden sm:block;
   }
 
@@ -1000,12 +1082,14 @@
      that hold for every repository. */
   .issue-jump-filter,
   .repositories-features li,
-  .issues-index-constraints li {
+  .issues-index-constraints li,
+  .tsc-about-facts li {
     @apply rounded-full border border-charcoal/18 px-3 py-1.5;
     @apply font-ibm text-[0.6875rem] leading-none tracking-[0.1em] text-charcoal/68 uppercase;
   }
 
-  .repositories-features li {
+  .repositories-features li,
+  .tsc-about-facts li {
     @apply text-charcoal/62;
   }
 
@@ -2711,6 +2795,336 @@
 
   .issues-outro-link {
     @apply flex-none no-underline;
+  }
+
+  /* ============================================
+     Technical Steering Committee — app/tsc, components/TscCommittee
+
+     Below the masthead the page speaks the site's ordinary language: sand
+     bands lit from one corner, a mono eyebrow over a display heading,
+     hairline rules instead of boxes, one filled action per object. The
+     committee is a grid of the same card the blog index and the repository
+     list use, carrying a photograph where those carry a cover image or a
+     machine name — so a reader arriving from either recognises the object
+     before they read a word of it.
+
+     The masthead above these bands keeps its own paint in the component. It
+     is the page's one dark band, nothing else on the site reuses it, and it
+     is deliberately left as it was.
+
+     What this page has that no other does is a profile dialog, so everything
+     under `.tsc-profile` is defined here and nowhere else.
+     ============================================ */
+  .tsc-about {
+    @apply relative isolate overflow-clip bg-sand;
+
+    --band-bloom: radial-gradient(
+      70% 50% at 94% 24%,
+      rgb(var(--band-light) / 80%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      56% 38% at 2% 74%,
+      rgb(var(--band-cool) / 68%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
+  }
+
+  /* The band is a header and nothing else, so the margin the shared rule puts
+     under a header — the gap to the grid or list it introduces — would here
+     only add to the band's own closing padding. */
+  .tsc-about-header {
+    @apply mb-0;
+  }
+
+  /* The one inline link in the page's body copy. Drawn like the Issue
+     Explorer's reset: brand red, a rule that fills in on hover, and no change
+     of weight, so a sentence does not thicken where the link falls. */
+  .tsc-about-link {
+    @apply font-medium text-red underline decoration-red/40 underline-offset-4;
+    @apply transition-colors duration-200 ease-out hover:decoration-red;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  .tsc-about-facts {
+    @apply m-0 flex list-none flex-wrap gap-2 border-t border-charcoal/16 p-0 pt-5;
+  }
+
+  /* ---- The committee ----------------------------------------------------- */
+
+  .tsc-committee {
+    @apply relative isolate overflow-clip bg-sand;
+
+    --band-bloom: radial-gradient(
+      64% 46% at 4% 84%,
+      rgb(var(--band-light) / 76%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      56% 36% at 96% 16%,
+      rgb(var(--band-cool) / 66%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
+  }
+
+  .tsc-committee-count {
+    @apply m-0 flex items-end gap-4 border-t border-charcoal/16 pt-5;
+  }
+
+  .tsc-committee-count-value {
+    @apply text-[clamp(3.5rem,6vw,5.5rem)] leading-[0.78] font-medium tracking-[-0.06em] text-red;
+  }
+
+  .tsc-committee-count-label {
+    @apply pb-0.5 font-ibm text-[0.6875rem] leading-[1.45] tracking-[0.12em] text-charcoal/58 uppercase;
+  }
+
+  .tsc-committee-board-heading {
+    @apply mb-[clamp(1.25rem,2vw,1.75rem)] border-b border-charcoal/18 text-charcoal/48;
+  }
+
+  /* Two columns from `sm`, three from `xl` — the repository grid's steps. A
+     card here is a portrait and three lines of prose, so it needs the same
+     room a repository card does and not the blog grid's straight jump to
+     three. */
+  .tsc-committee-grid {
+    @apply m-0 grid list-none gap-4 p-0;
+    @apply sm:grid-cols-2 sm:gap-5 xl:grid-cols-3;
+  }
+
+  .tsc-member {
+    @apply min-w-0;
+  }
+
+  /* Not a link, unlike every other card on the site: a member card holds two
+     separate destinations — a GitHub profile and the dialog — so the card
+     itself cannot be one of them. It still lifts, on hover and on
+     `focus-within`, because the lift is what says there is something here to
+     use, and a keyboard has to be told that too. */
+  .tsc-member-card {
+    @apply flex h-full min-w-0 flex-col overflow-hidden rounded-[1.25rem];
+    @apply border border-charcoal/18 bg-transparent text-charcoal;
+    @apply transition-[background-color,border-color,box-shadow,translate] duration-300 ease-out;
+    @apply hover:-translate-y-1 hover:border-red/55 hover:bg-white/60;
+    @apply hover:shadow-[0_18px_45px_rgba(30,30,30,0.08)];
+    @apply focus-within:-translate-y-1 focus-within:border-red/55 focus-within:bg-white/60;
+    @apply motion-reduce:transition-none;
+  }
+
+  .tsc-member-plate {
+    @apply block border-b border-charcoal/12 bg-white/40;
+  }
+
+  .tsc-member-photo {
+    @apply block aspect-square h-auto w-full object-cover;
+  }
+
+  /* A member with no photograph keeps the card's proportions rather than
+     letting its text ride up to the top edge and break the row's alignment. */
+  .tsc-member-photo--empty {
+    @apply bg-charcoal/6;
+  }
+
+  .tsc-member-body {
+    @apply flex min-w-0 flex-1 flex-col p-[clamp(1.25rem,2vw,1.625rem)];
+  }
+
+  .tsc-member-name {
+    @apply m-0 text-[clamp(1.25rem,1.8vw,1.625rem)] leading-[1.15];
+    @apply font-medium tracking-[-0.035em] text-balance text-charcoal;
+  }
+
+  /* `self-start` so the hit area stops at the handle rather than running the
+     width of the card, which would put a link under the empty half of the
+     line. */
+  .tsc-member-handle {
+    @apply mt-3 inline-flex items-center gap-2 self-start no-underline;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.08em] text-charcoal/58;
+    @apply transition-colors duration-200 ease-out hover:text-red;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  .tsc-member-handle-icon {
+    @apply h-4 w-4 object-contain opacity-65;
+  }
+
+  .tsc-member-bio {
+    @apply mt-4 mb-0 text-sm leading-[1.6] tracking-[-0.004em] text-pretty text-charcoal/64;
+  }
+
+  /* `mt-auto` so the action rows line up across a row of cards however long
+     the names and the bios run. */
+  .tsc-member-action {
+    @apply mt-auto flex w-full cursor-pointer items-center justify-between gap-4;
+    @apply border-0 bg-transparent p-0 pt-6;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.09em] text-charcoal uppercase;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+  }
+
+  .tsc-member-action-glyph {
+    @apply grid h-9 w-9 flex-none place-items-center rounded-full border border-charcoal/22;
+    @apply font-serif text-base leading-none;
+    @apply transition-[background-color,border-color,color,translate] duration-300 ease-out;
+    @apply motion-reduce:transition-none;
+  }
+
+  .tsc-member-action:hover .tsc-member-action-glyph,
+  .tsc-member-action:focus-visible .tsc-member-action-glyph {
+    @apply translate-x-0.5 border-red bg-red text-white;
+  }
+
+  /* ---- Governance resources ---------------------------------------------- */
+
+  .tsc-resources {
+    @apply relative isolate overflow-clip bg-sand;
+
+    --band-bloom: radial-gradient(
+      66% 52% at 92% 86%,
+      rgb(var(--band-light) / 74%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      54% 38% at 4% 16%,
+      rgb(var(--band-cool) / 64%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
+  }
+
+  /* Two cards, so two columns and no third step: at three these would be a
+     third of a row wide with a third of a row of nothing beside them. */
+  .tsc-resources-grid {
+    @apply m-0 grid list-none gap-4 p-0;
+    @apply md:grid-cols-2 md:gap-5;
+  }
+
+  .tsc-resource {
+    @apply min-w-0;
+  }
+
+  .tsc-resource-link {
+    @apply flex h-full min-h-[17rem] min-w-0 flex-col rounded-[1.25rem];
+    @apply border border-charcoal/18 bg-transparent p-[clamp(1.5rem,3vw,2.25rem)];
+    @apply text-charcoal no-underline;
+    @apply transition-[background-color,border-color,box-shadow,translate] duration-300 ease-out;
+    @apply hover:-translate-y-1 hover:border-red/55 hover:bg-white/60;
+    @apply hover:shadow-[0_18px_45px_rgba(30,30,30,0.08)];
+    @apply focus-visible:bg-white/60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  .tsc-resource-platform {
+    @apply inline-flex min-h-8 items-center;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.11em] text-charcoal/58 uppercase;
+  }
+
+  .tsc-resource-name {
+    @apply m-0 mt-[clamp(2rem,4vw,3rem)] min-w-0 break-words;
+    @apply text-[clamp(1.25rem,1.8vw,1.625rem)] leading-[1.15] font-medium tracking-[-0.035em];
+    @apply transition-colors duration-300 motion-reduce:transition-none;
+  }
+
+  .tsc-resource-description {
+    @apply m-0 mt-4 text-base leading-[1.6] tracking-[-0.008em] text-pretty text-charcoal/65;
+  }
+
+  .tsc-resource-action {
+    @apply mt-auto flex items-center justify-between gap-4 pt-8;
+    @apply font-ibm text-xs leading-none tracking-[0.09em] text-charcoal uppercase;
+  }
+
+  .tsc-resource-action-glyph {
+    @apply grid h-10 w-10 place-items-center rounded-full border border-charcoal/22;
+    @apply font-serif text-lg leading-none;
+    @apply transition-[background-color,border-color,color,translate] duration-300 ease-out;
+    @apply motion-reduce:transition-none;
+  }
+
+  .tsc-resource-link:hover .tsc-resource-name,
+  .tsc-resource-link:focus-visible .tsc-resource-name {
+    @apply text-red;
+  }
+
+  .tsc-resource-link:hover .tsc-resource-action-glyph,
+  .tsc-resource-link:focus-visible .tsc-resource-action-glyph {
+    @apply translate-x-0.5 -translate-y-0.5 border-red bg-red text-white;
+  }
+
+  /* ---- One member's profile ----------------------------------------------
+     The only dialog on the site. It is drawn as the page's cards are — a
+     hairline and a `1.25rem` corner — but on solid white rather than the
+     bands' transparency, because a sand panel on a sand band is not a panel
+     at all. */
+  .tsc-profile-backdrop {
+    @apply fixed inset-0 z-50 flex items-center justify-center;
+    @apply bg-charcoal/55 p-4 backdrop-blur-sm sm:p-8;
+  }
+
+  .tsc-profile {
+    @apply relative max-h-[90vh] w-full max-w-[56rem] overflow-y-auto;
+    @apply rounded-[1.25rem] border border-charcoal/18 bg-white;
+    @apply p-[clamp(1.5rem,3vw,2.5rem)] shadow-[0_24px_60px_rgba(30,30,30,0.22)];
+  }
+
+  /* Opaque rather than transparent: below `md` it sits over the corner of the
+     photograph, and a hairline ring on a face is not a button. */
+  .tsc-profile-close {
+    @apply absolute top-[clamp(1rem,2vw,1.5rem)] right-[clamp(1rem,2vw,1.5rem)] z-10;
+    @apply grid h-10 w-10 cursor-pointer place-items-center rounded-full;
+    @apply border border-charcoal/22 bg-white p-0;
+    @apply font-serif text-xl leading-none text-charcoal;
+    @apply transition-[background-color,border-color,color] duration-200 ease-out;
+    @apply hover:border-red hover:bg-red hover:text-white;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  .tsc-profile-body {
+    @apply grid gap-[clamp(1.5rem,3vw,2.5rem)];
+    @apply md:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] md:items-start;
+  }
+
+  .tsc-profile-plate {
+    @apply block overflow-hidden rounded-[1rem] border border-charcoal/12 bg-sand/40;
+  }
+
+  .tsc-profile-photo {
+    @apply block aspect-square h-auto w-full object-cover;
+  }
+
+  .tsc-profile-photo--empty {
+    @apply bg-charcoal/6;
+  }
+
+  /* The close button's own corner, so a long first line of the name does not
+     run under it. */
+  .tsc-profile-text {
+    @apply min-w-0 md:pr-14;
+  }
+
+  .tsc-profile-eyebrow {
+    @apply m-0 mb-3 block;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.16em] text-red uppercase;
+  }
+
+  .tsc-profile-name {
+    @apply m-0 text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.05];
+    @apply font-medium tracking-[-0.04em] text-balance text-charcoal;
+  }
+
+  .tsc-profile-bio {
+    @apply mt-6 flex flex-col gap-4;
+  }
+
+  .tsc-profile-bio p {
+    @apply m-0 text-base leading-[1.65] tracking-[-0.008em] text-pretty text-charcoal/72;
   }
 }
 

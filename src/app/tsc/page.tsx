@@ -32,6 +32,394 @@ const governanceResources = [
   },
 ];
 
+/**
+ * Animated network background for the TSC hero.
+ *
+ * The animation creates a subtle, slowly moving network of nodes and
+ * connections while keeping the page content easy to read.
+ */
+function AnimatedNetwork() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+
+    if (!canvas) {
+      return;
+    }
+
+    const context = canvas.getContext("2d");
+
+    if (!context) {
+      return;
+    }
+
+    let animationFrame = 0;
+    let width = 0;
+    let height = 0;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    type NetworkNode = {
+      x: number;
+      y: number;
+      radius: number;
+      speedX: number;
+      speedY: number;
+      phase: number;
+      person: boolean;
+    };
+
+    const nodes: NetworkNode[] = [
+      {
+        x: 0.04,
+        y: 0.25,
+        radius: 5,
+        speedX: 0.0005,
+        speedY: 0.0004,
+        phase: 0.5,
+        person: false,
+      },
+      {
+        x: 0.11,
+        y: 0.67,
+        radius: 26,
+        speedX: -0.0004,
+        speedY: 0.0005,
+        phase: 1.2,
+        person: true,
+      },
+      {
+        x: 0.2,
+        y: 0.35,
+        radius: 5,
+        speedX: 0.0006,
+        speedY: -0.0004,
+        phase: 2.4,
+        person: false,
+      },
+      {
+        x: 0.29,
+        y: 0.2,
+        radius: 19,
+        speedX: -0.0005,
+        speedY: 0.0004,
+        phase: 3.2,
+        person: true,
+      },
+      {
+        x: 0.34,
+        y: 0.77,
+        radius: 6,
+        speedX: 0.0004,
+        speedY: -0.0005,
+        phase: 4.1,
+        person: false,
+      },
+      {
+        x: 0.43,
+        y: 0.34,
+        radius: 28,
+        speedX: 0.0005,
+        speedY: 0.0005,
+        phase: 1.8,
+        person: true,
+      },
+      {
+        x: 0.51,
+        y: 0.7,
+        radius: 5,
+        speedX: -0.0005,
+        speedY: -0.0004,
+        phase: 2.7,
+        person: false,
+      },
+      {
+        x: 0.59,
+        y: 0.18,
+        radius: 5,
+        speedX: 0.0004,
+        speedY: 0.0005,
+        phase: 4.6,
+        person: false,
+      },
+      {
+        x: 0.65,
+        y: 0.48,
+        radius: 21,
+        speedX: -0.0006,
+        speedY: 0.0003,
+        phase: 3.5,
+        person: true,
+      },
+      {
+        x: 0.74,
+        y: 0.76,
+        radius: 5,
+        speedX: 0.0005,
+        speedY: -0.0004,
+        phase: 1.1,
+        person: false,
+      },
+      {
+        x: 0.79,
+        y: 0.27,
+        radius: 27,
+        speedX: -0.0004,
+        speedY: 0.0005,
+        phase: 5.1,
+        person: true,
+      },
+      {
+        x: 0.89,
+        y: 0.58,
+        radius: 6,
+        speedX: 0.0006,
+        speedY: -0.0003,
+        phase: 2.2,
+        person: false,
+      },
+      {
+        x: 0.96,
+        y: 0.31,
+        radius: 5,
+        speedX: -0.0005,
+        speedY: 0.0004,
+        phase: 3.8,
+        person: false,
+      },
+      {
+        x: 0.94,
+        y: 0.82,
+        radius: 17,
+        speedX: 0.0004,
+        speedY: -0.0005,
+        phase: 0.8,
+        person: true,
+      },
+      {
+        x: 0.18,
+        y: 0.88,
+        radius: 4,
+        speedX: -0.0005,
+        speedY: 0.0003,
+        phase: 4.4,
+        person: false,
+      },
+      {
+        x: 0.56,
+        y: 0.91,
+        radius: 4,
+        speedX: 0.0005,
+        speedY: -0.0004,
+        phase: 2.9,
+        person: false,
+      },
+    ];
+
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+
+      width = rect.width;
+      height = rect.height;
+
+      const devicePixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+
+      canvas.width = width * devicePixelRatio;
+      canvas.height = height * devicePixelRatio;
+
+      context.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    };
+
+    const drawPerson = (x: number, y: number, radius: number) => {
+      const headRadius = radius * 0.27;
+      const bodyWidth = radius * 0.9;
+      const bodyHeight = radius * 0.62;
+
+      context.save();
+
+      context.fillStyle = "rgba(255,255,255,0.38)";
+
+      // Head
+      context.beginPath();
+      context.arc(x, y - radius * 0.28, headRadius, 0, Math.PI * 2);
+      context.fill();
+
+      // Body
+      context.beginPath();
+      context.ellipse(
+        x,
+        y + radius * 0.25,
+        bodyWidth / 2,
+        bodyHeight / 2,
+        0,
+        Math.PI,
+        0,
+      );
+      context.fill();
+
+      context.restore();
+    };
+
+    const drawNode = (
+      node: NetworkNode,
+      x: number,
+      y: number,
+      pulse: number,
+    ) => {
+      if (node.person) {
+        context.save();
+
+        // Outer network rings
+        context.strokeStyle = "rgba(255,255,255,0.10)";
+        context.lineWidth = 1;
+
+        context.beginPath();
+        context.arc(x, y, node.radius * 1.45 + pulse, 0, Math.PI * 2);
+        context.stroke();
+
+        context.beginPath();
+        context.arc(x, y, node.radius * 1.18 + pulse * 0.5, 0, Math.PI * 2);
+        context.stroke();
+
+        drawPerson(x, y, node.radius);
+
+        context.restore();
+      } else {
+        context.save();
+
+        context.fillStyle = "rgba(255,255,255,0.40)";
+
+        context.beginPath();
+        context.arc(x, y, node.radius, 0, Math.PI * 2);
+        context.fill();
+
+        context.restore();
+      }
+    };
+
+    const draw = (time: number) => {
+      context.clearRect(0, 0, width, height);
+
+      /*
+       * Subtle grid.
+       */
+      context.save();
+
+      context.strokeStyle = "rgba(255,255,255,0.045)";
+      context.lineWidth = 1;
+
+      const gridSize = 54;
+
+      for (let x = 0; x <= width; x += gridSize) {
+        context.beginPath();
+        context.moveTo(x, 0);
+        context.lineTo(x, height);
+        context.stroke();
+      }
+
+      for (let y = 0; y <= height; y += gridSize) {
+        context.beginPath();
+        context.moveTo(0, y);
+        context.lineTo(width, y);
+        context.stroke();
+      }
+
+      context.restore();
+
+      const positions = nodes.map(node => {
+        const movementTime = prefersReducedMotion ? 0 : time;
+
+        const x =
+          node.x * width +
+          Math.sin(movementTime * node.speedX + node.phase) * 45;
+
+        const y =
+          node.y * height +
+          Math.cos(movementTime * node.speedY + node.phase) * 32;
+
+        return { x, y };
+      });
+
+      /*
+       * Connect nearby nodes.
+       */
+      for (let i = 0; i < nodes.length; i += 1) {
+        for (let j = i + 1; j < nodes.length; j += 1) {
+          const first = positions[i];
+          const second = positions[j];
+
+          const dx = second.x - first.x;
+          const dy = second.y - first.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          const maxDistance = Math.min(width * 0.22, 260);
+
+          if (distance > maxDistance) {
+            continue;
+          }
+
+          const opacity = (1 - distance / maxDistance) * 0.2;
+
+          context.save();
+
+          context.strokeStyle = `rgba(255,255,255,${opacity})`;
+          context.lineWidth = 1;
+
+          context.beginPath();
+          context.moveTo(first.x, first.y);
+          context.lineTo(second.x, second.y);
+          context.stroke();
+
+          context.restore();
+        }
+      }
+
+      /*
+       * Draw nodes on top of connections.
+       */
+      nodes.forEach((node, index) => {
+        const position = positions[index];
+
+        const pulse = prefersReducedMotion
+          ? 0
+          : Math.sin(time * 0.0015 + node.phase) * 2;
+
+        drawNode(node, position.x, position.y, pulse);
+      });
+
+      if (!prefersReducedMotion) {
+        animationFrame = requestAnimationFrame(draw);
+      }
+    };
+
+    resize();
+
+    window.addEventListener("resize", resize);
+
+    if (prefersReducedMotion) {
+      draw(0);
+    } else {
+      animationFrame = requestAnimationFrame(draw);
+    }
+
+    return () => {
+      window.removeEventListener("resize", resize);
+      cancelAnimationFrame(animationFrame);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="pointer-events-none absolute inset-0 h-full w-full"
+      aria-hidden="true"
+    />
+  );
+}
+
 export default function TSCSection() {
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
@@ -64,6 +452,7 @@ export default function TSCSection() {
       }
 
       const focusableElements = getFocusableElements(modalRef.current);
+
       trapFocusInModal(event, focusableElements);
     };
 
@@ -79,6 +468,7 @@ export default function TSCSection() {
         const triggerButton = document.getElementById(
           lastFocusedTriggerIdRef.current,
         );
+
         triggerButton?.focus();
       }
     };
@@ -86,33 +476,80 @@ export default function TSCSection() {
 
   return (
     <main className="bg-white text-charcoal">
-      <section className="bg-linear-to-br from-red-dark via-red to-red text-white">
-        <div className="container py-14 sm:py-22.5 lg:py-27.5">
-          <div className="max-w-170 mx-auto text-center">
-            <h1 className="text-[42px] sm:text-5xl leading-none relative mb-2.5">
-              The TSC of Hiero
-            </h1>
-            <p className="text-[24px] tracking-[-0.081rem] sm:text-xl relative max-w-150 mx-auto">
-              The Hiero Technical Steering Committee (TSC) is the committee
-              responsible for technical governance within the Hiero project.
-            </p>
-            <div className="mt-7 flex flex-wrap justify-center gap-3">
-              <a
-                href={TECHNICAL_CHARTER_URL}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="inline-flex items-center justify-center rounded-full border-2 border-white bg-white px-5 py-2 text-sm font-medium text-red transition-colors hover:bg-gray-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-red"
-                aria-label="View Technical Charter (opens in new tab)">
-                View Technical Charter
-              </a>
-              <a
-                href={MEETING_CALENDAR_URL}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="inline-flex items-center justify-center rounded-full border-2 border-white px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-red"
-                aria-label="Open Meeting Calendar (opens in new tab)">
-                Open Meeting Calendar
-              </a>
+      {/* TSC Hero */}
+      <section className="relative overflow-hidden bg-[#24000F] text-white">
+        {/* Background gradient */}
+        <div
+          className="absolute inset-0"
+          aria-hidden="true"
+          style={{
+            background: `
+              radial-gradient(
+                circle at 70% 20%,
+                rgba(217, 45, 106, 0.52),
+                transparent 34%
+              ),
+              radial-gradient(
+                circle at 18% 75%,
+                rgba(184, 26, 86, 0.60),
+                transparent 42%
+              ),
+              radial-gradient(
+                circle at 90% 70%,
+                rgba(217, 45, 106, 0.45),
+                transparent 38%
+              ),
+              linear-gradient(
+                110deg,
+                #21000d 0%,
+                #5d0b2c 42%,
+                #b81a56 100%
+              )
+            `,
+          }}
+        />
+
+        {/* Animated network */}
+        <AnimatedNetwork />
+
+        <div className="container relative z-10">
+          <div className="mx-auto flex min-h-[580px] items-center justify-center py-20 sm:py-24 lg:py-28">
+            <div className="mx-auto max-w-[680px] text-center">
+              <div className="mb-7 flex items-center justify-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-white/75">
+                <span className="h-2 w-2 rounded-full bg-red-light" />
+                Hiero Technical Governance
+              </div>
+
+              <h1 className="relative mb-6 text-[42px] font-medium leading-[0.95] tracking-[-0.04em] text-white sm:text-6xl lg:text-7xl">
+                The TSC of Hiero
+              </h1>
+
+              <div className="mx-auto mb-7 h-px w-24 bg-white" />
+
+              <p className="relative mx-auto max-w-[620px] text-lg leading-7 tracking-[-0.02em] text-white/80 sm:text-xl sm:leading-8">
+                The Hiero Technical Steering Committee (TSC) is the committee
+                responsible for technical governance within the Hiero project.
+              </p>
+
+              <div className="relative mt-8 flex flex-wrap justify-center gap-3">
+                <a
+                  href={TECHNICAL_CHARTER_URL}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="inline-flex items-center justify-center rounded-full border-2 border-white bg-white px-5 py-2.5 text-sm font-medium text-red transition-colors hover:bg-gray-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-red"
+                  aria-label="View Technical Charter (opens in new tab)">
+                  View Technical Charter
+                </a>
+
+                <a
+                  href={MEETING_CALENDAR_URL}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="inline-flex items-center justify-center rounded-full border-2 border-white px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-red"
+                  aria-label="Open Meeting Calendar (opens in new tab)">
+                  Open Meeting Calendar
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -123,14 +560,16 @@ export default function TSCSection() {
         className="border-b border-white-dark bg-white">
         <div className="container py-10 sm:py-15">
           <div className="max-w-225">
-            <h2 id="tsc-about-heading" className="text-2xl sm:text-4xl mb-5">
+            <h2 id="tsc-about-heading" className="mb-5 text-2xl sm:text-4xl">
               About the TSC
             </h2>
+
             <div className="space-y-4 text-lg text-gray">
               <p>
                 The Hiero Technical Steering Committee (TSC) is a committee of
                 members who serve the project&apos;s technical governance.
               </p>
+
               <p>
                 The duties, goals, and rights of the TSC are defined in the{" "}
                 <a
@@ -143,6 +582,7 @@ export default function TSCSection() {
                 </a>{" "}
                 of the Hiero project.
               </p>
+
               <p>
                 This page provides an overview of the current committee members
                 and links to the core governance resources used by the project.
@@ -155,29 +595,33 @@ export default function TSCSection() {
       <section aria-labelledby="tsc-members-heading" className="bg-gray-light">
         <div className="container py-10 sm:py-15 lg:py-20">
           <div className="mb-10 sm:mb-12">
-            <h2 id="tsc-members-heading" className="text-2xl sm:text-4xl mb-5">
+            <h2 id="tsc-members-heading" className="mb-5 text-2xl sm:text-4xl">
               Committee Members
             </h2>
-            <p className="text-lg max-w-205">
+
+            <p className="max-w-205 text-lg">
               The committee is composed of contributors from across the Hiero
               ecosystem. Member bios reflect their current roles and ongoing
               work in open-source governance and technical delivery.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 xl:grid-cols-3">
             {sorted.map((member, index) => {
               const fullName = `${member.firstName} ${member.lastName}`.trim();
+
               const hasBio = Boolean(member.bio?.trim());
+
               const bioPreview = hasBio
                 ? getBioPreview(member.bio ?? "")
                 : "Biography not available.";
+
               const githubHandle = getGitHubHandle(member.gitHubAccount);
 
               return (
                 <article
                   key={`${fullName}-${index}`}
-                  className="flex flex-col h-full rounded-2xl border-2 border-white-dark bg-white p-6 sm:p-7">
+                  className="flex h-full flex-col rounded-2xl border-2 border-white-dark bg-white p-6 sm:p-7">
                   {member.photo ? (
                     <Image
                       src={`/images/tsc/${member.photo}`}
@@ -189,13 +633,13 @@ export default function TSCSection() {
                     />
                   ) : (
                     <div
-                      className="aspect-square w-full rounded-xl bg-gray-light border border-white-dark"
+                      className="aspect-square w-full rounded-xl border border-white-dark bg-gray-light"
                       aria-hidden="true"
                     />
                   )}
 
-                  <div className="flex flex-1 flex-col mt-5">
-                    <h3 className="text-xl sm:text-2xl mb-2">{fullName}</h3>
+                  <div className="mt-5 flex flex-1 flex-col">
+                    <h3 className="mb-2 text-xl sm:text-2xl">{fullName}</h3>
 
                     {member.gitHubAccount ? (
                       <a
@@ -214,7 +658,7 @@ export default function TSCSection() {
                       </a>
                     ) : null}
 
-                    <p className="grow mt-4 text-base text-gray">
+                    <p className="mt-4 grow text-base text-gray">
                       {bioPreview}
                     </p>
 
@@ -224,6 +668,7 @@ export default function TSCSection() {
                         type="button"
                         onClick={() => {
                           lastFocusedTriggerIdRef.current = `tsc-read-profile-${index}`;
+
                           setSelectedMember(member);
                         }}
                         className="mt-4 inline-flex items-center justify-center rounded-full border-2 border-white-dark px-4 py-1.5 text-sm font-medium text-charcoal transition-colors hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2"
@@ -241,29 +686,31 @@ export default function TSCSection() {
 
       <section aria-labelledby="tsc-resources-heading" className="bg-white">
         <div className="container py-10 sm:py-15 lg:py-20">
-          <div className="mb-10 sm:mb-12 max-w-225">
+          <div className="mb-10 max-w-225 sm:mb-12">
             <h2
               id="tsc-resources-heading"
-              className="text-2xl sm:text-4xl mb-5">
+              className="mb-5 text-2xl sm:text-4xl">
               Governance Resources
             </h2>
+
             <p className="text-lg">
               Review the charter and follow governance activity through the
               project&apos;s primary source materials.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2">
             {governanceResources.map(resource => (
               <a
                 key={resource.title}
                 href={resource.href}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="flex h-full flex-col rounded-2xl border-2 border-white-dark bg-white p-6 no-underline text-charcoal transition-colors hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2"
+                className="flex h-full flex-col rounded-2xl border-2 border-white-dark bg-white p-6 text-charcoal no-underline transition-colors hover:border-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-light focus-visible:ring-offset-2"
                 aria-label={`${resource.title} (opens in new tab)`}>
-                <h3 className="text-xl font-medium mb-3">{resource.title}</h3>
-                <p className="text-base text-gray grow">
+                <h3 className="mb-3 text-xl font-medium">{resource.title}</h3>
+
+                <p className="grow text-base text-gray">
                   {resource.description}
                 </p>
               </a>
@@ -311,7 +758,7 @@ export default function TSCSection() {
                 />
               ) : (
                 <div
-                  className="aspect-square w-full rounded-xl bg-gray-light border border-white-dark"
+                  className="aspect-square w-full rounded-xl border border-white-dark bg-gray-light"
                   aria-hidden="true"
                 />
               )}
@@ -319,7 +766,7 @@ export default function TSCSection() {
               <div>
                 <h3
                   id="tsc-member-modal-title"
-                  className="text-2xl sm:text-3xl mb-3">
+                  className="mb-3 text-2xl sm:text-3xl">
                   {selectedMember.firstName} {selectedMember.lastName}
                 </h3>
 
@@ -336,6 +783,7 @@ export default function TSCSection() {
                       width={16}
                       height={16}
                     />
+
                     {getGitHubHandle(selectedMember.gitHubAccount) ??
                       "GitHub profile"}
                   </a>

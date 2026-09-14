@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PlausibleAnalytics from "@/components/PlausibleAnalytics";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -49,23 +49,7 @@ export default function RootLayout({
         <footer>
           <Footer />
         </footer>
-        {/* Plausible Analytics */}
-        <Script
-          async
-          src="https://plausible.io/js/pa-xBzR_3Q2z32_06OfPSZ4G.js"
-          strategy="afterInteractive"
-        />
-        <Script
-          id="plausible-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.plausible = window.plausible || function() { (plausible.q = plausible.q || []).push(arguments) };
-              plausible.init = plausible.init || function(i) { plausible.o = i || {} };
-              plausible.init();
-            `,
-          }}
-        />
+        <PlausibleAnalytics />
       </body>
     </html>
   );

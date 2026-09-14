@@ -49,11 +49,22 @@ export default function RootLayout({
         <footer>
           <Footer />
         </footer>
+        {/* Plausible Analytics */}
         <Script
-          defer
-          data-domain="hiero.org"
-          src="https://plausible.io/js/script.js"
+          async
+          src="https://plausible.io/js/pa-xBzR_3Q2z32_06OfPSZ4G.js"
           strategy="afterInteractive"
+        />
+        <Script
+          id="plausible-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.plausible = window.plausible || function() { (plausible.q = plausible.q || []).push(arguments) };
+              plausible.init = plausible.init || function(i) { plausible.o = i || {} };
+              plausible.init();
+            `,
+          }}
         />
       </body>
     </html>

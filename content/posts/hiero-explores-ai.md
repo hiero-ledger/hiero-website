@@ -11,13 +11,13 @@ image = "/images/profile-hiero.png"
 
 # 🤖 Hiero Maintainers Explore AI: Two Upcoming Meetup Events
 
-Artificial intelligence is quickly changing the way developers build, review, maintain, and contribute to open source software. At the same time, we need to be aware on how to use these technologies and tooling responsibly and to our project's advantage. 
+Artificial intelligence is quickly changing the way developers build, review, maintain, and contribute to open-source software. At the same time, we need to be aware of how to use these technologies and tooling responsibly and to our project's advantage. 
 
 This September and October, members of the Hiero and Linux Foundation Decentralized Trust communities will come together for two online events to discuss these very important topics. 
 
 Whether you are a maintainer, contributor, developer, or simply interested in how AI can be used responsibly in your projects, we invite you to join the conversation.
 
-## 🐇 September 22: How To Improve The Quality Of Your Project With AI Powered Tools
+## 🐇 September 22: How To Improve The Quality Of Your Project With AI-Powered Tools
 
 **📅 September 22, 2026**  
 **🕙 9:00 AM Pacific Time**  
@@ -27,9 +27,9 @@ AI-powered development tools can provide more than code generation. When used ef
 
 Join **Angelina Ceppaluni, Hiero contributor and maintainer**, for a practical session exploring how **CodeRabbit** can support developers throughout the software development and review process.
 
-This session is useful for developers, contributors, reviewers, maintainers, and project leaders interested in understanding how AI-powered tools can complement the work that is being delivered in open source projects. 
+This session is useful for developers, contributors, reviewers, maintainers, and project leaders interested in understanding how AI-powered tools can complement the work that is being delivered in open-source projects. 
 
-👉 [Register on Meetup: How To Improve The Quality Of Your Project With AI Powered Tools](https://www.meetup.com/lfdt-seattle-chapter/events/316185044/)
+👉 [Register on Meetup: How To Improve The Quality Of Your Project With AI-Powered Tools](https://www.meetup.com/lfdt-seattle-chapter/events/316185044/)
 
 ## 🧠 October 6: AI × Decentralized Trust — Kickoff of the LFDT AI Working Group
 
@@ -37,7 +37,7 @@ This session is useful for developers, contributors, reviewers, maintainers, and
 **🕘 9:00 AM Pacific Time**  
 **🌐 Online**
 
-AI is not only changing how open source projects are developed. **Agentic AI is also becoming an important use case for decentralized technologies.**
+AI is not only changing how open-source projects are developed. **Agentic AI is also becoming an important use case for decentralized technologies.**
 
 The community will come together for the **kickoff of the LFDT AI Working Group**, a new forum intended to establish a shared conversation around AI across Linux Foundation Decentralized Trust projects.
 

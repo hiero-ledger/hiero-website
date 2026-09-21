@@ -9,3 +9,9 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      # init and analyze must stay on the same release: a newer init writes a
+      # config file an older analyze refuses to load.
+      codeql-action:
+        patterns:
+          - "github/codeql-action*"

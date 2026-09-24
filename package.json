@@ -47,7 +47,7 @@
     "@vitest/coverage-v8": "4.1.11",
     "eslint": "^9.39.4",
     "eslint-config-next": "16.3.5",
-    "fast-check": "4.10.1",
+    "fast-check": "4.10.2",
     "jsdom": "^30.0.1",
     "prettier": "^3.9.6",
     "tailwindcss": "^4.3.3",

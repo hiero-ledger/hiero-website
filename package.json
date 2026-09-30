@@ -32,7 +32,7 @@
     "toml": "^5.0.0"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^5.15.13",
+    "@netlify/plugin-nextjs": "^5.16.0",
     "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@testing-library/dom": "^10.4.2",
@@ -49,7 +49,7 @@
     "eslint-config-next": "16.3.5",
     "fast-check": "4.10.2",
     "jsdom": "^30.0.1",
-    "prettier": "^3.9.6",
+    "prettier": "^3.9.8",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
     "vite": "^8.2.2",

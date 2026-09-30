@@ -52,8 +52,8 @@ importers:
         version: 5.0.0
     devDependencies:
       '@netlify/plugin-nextjs':
-        specifier: ^5.15.13
-        version: 5.15.13
+        specifier: ^5.16.0
+        version: 5.16.0
       '@playwright/test':
         specifier: ^1.62.1
         version: 1.63.0
@@ -520,8 +520,8 @@ packages:
       '@emnapi/core': ^1.7.1 || ^2.0.0-alpha.4
       '@emnapi/runtime': ^1.7.1 || ^2.0.0-alpha.4
 
-  '@netlify/plugin-nextjs@5.15.13':
-    resolution: {integrity: sha512-gBmWtgG13ZW4ytNMCvacfwZemtdtV/Ekc+6RBYvI5fndjmDvKxgFHylsw7oli+PHMGAtNqaJrN8QccGnDReu6A==}
+  '@netlify/plugin-nextjs@5.16.0':
+    resolution: {integrity: sha512-ys9G34vifslRRy1VwbOMVNFSKU/vuWdNGcYqvAsCAB8VlDFnZDUBM1WUDjDjXOnNXb8kLXA3hX5LgISEONAhAA==}
     engines: {node: '>=18.0.0'}
 
   '@next/env@16.3.5':
@@ -3492,7 +3492,7 @@ snapshots:
       '@tybys/wasm-util': 0.10.3
     optional: true
 
-  '@netlify/plugin-nextjs@5.15.13': {}
+  '@netlify/plugin-nextjs@5.16.0': {}
 
   '@next/env@16.3.5': {}
 

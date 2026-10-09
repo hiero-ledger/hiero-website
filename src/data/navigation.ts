@@ -38,6 +38,10 @@ const menuItemDefinitions = [
   { name: "TSC", href: "/tsc/" },
   { name: "Issue Explorer", href: "/issues/" },
   {
+    name: "Hiero Analytics",
+    href: "https://hiero-hackers.github.io/analytics",
+  },
+  {
     name: "Calendar",
     href: "https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week",
   },
@@ -174,6 +178,7 @@ export const footerNavGroups: FooterNavGroup[] = [
         name: "LF Decentralized Trust",
         href: "https://www.lfdecentralizedtrust.org/projects/hiero",
       },
+      ...fromMenu("Hiero Analytics"),
     ],
   },
 ];

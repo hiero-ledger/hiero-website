@@ -101,4 +101,19 @@ describe("Menu", () => {
       }
     });
   });
+
+  it("Hiero Analytics link points to the Analytics dashboard", async () => {
+    mockNavigation.pathname = "/";
+    setWindowWidth(1024);
+
+    render(<Menu />);
+
+    await waitFor(() => {
+      expect(
+        screen.getByRole("link", {
+          name: "Hiero Analytics (opens in a new tab)",
+        }),
+      ).toHaveAttribute("href", "https://hiero-hackers.github.io/analytics");
+    });
+  });
 });

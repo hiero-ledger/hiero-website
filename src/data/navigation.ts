@@ -39,7 +39,7 @@ const menuItemDefinitions = [
   { name: "Issue Explorer", href: "/issues/" },
   {
     name: "Hiero Analytics",
-    href: "https://hiero-hackers.github.io/analytics",
+    href: "https://analytics.hiero.org/",
   },
   {
     name: "Calendar",

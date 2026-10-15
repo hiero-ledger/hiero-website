@@ -35,9 +35,9 @@ For more information on HIPs and the HIP workflow processes, visit the [HIP Pres
 
 ## What We Built
 
-Our work at [Hiero Analytics](https://hiero-hackers.github.io/analytics/#hips) is the first automated attempt to track HIP implementations across Hiero Ledger.
+Our work at [Hiero Analytics](https://analytics.hiero.org/#hips) is the first automated attempt to track HIP implementations across Hiero Ledger.
 
-The community analytics dashboard has a [HIPs tab](https://hiero-hackers.github.io/analytics/#hips). It sweeps **every merged and open pull request across the Hiero organization** and finds references to HIP numbers in commits, pull request titles, and descriptions. It then validates each one against the list of known HIPs.
+The community analytics dashboard has a [HIPs tab](https://analytics.hiero.org/#hips). It sweeps **every merged and open pull request across the Hiero organization** and finds references to HIP numbers in commits, pull request titles, and descriptions. It then validates each one against the list of known HIPs.
 
 The analytics dashboard also works to exclude false positives. For example, a pull request that mentions a HIP only as a blocker rather than something actively being worked on.
 

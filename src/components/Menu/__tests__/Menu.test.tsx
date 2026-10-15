@@ -113,7 +113,7 @@ describe("Menu", () => {
         screen.getByRole("link", {
           name: "Hiero Analytics (opens in a new tab)",
         }),
-      ).toHaveAttribute("href", "https://hiero-hackers.github.io/analytics");
+      ).toHaveAttribute("href", "https://analytics.hiero.org/");
     });
   });
 });

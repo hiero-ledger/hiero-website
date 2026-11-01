@@ -61,9 +61,20 @@ jobs:
           output: ./lychee/out.md
           fail: true
           token: ${{ secrets.GITHUB_TOKEN }}
+          # Pinned because the action's default (v0.24.2 as of action v2.9.0)
+          # ships a glibc build that needs GLIBC_2.39, i.e. Ubuntu 24.04. The
+          # hl-web-lin-md runner image is older, so that binary cannot even
+          # start: every weekly run from the v2.9.0 bump onwards died in
+          # milliseconds without checking a single link. v0.23.0 needs only
+          # GLIBC_2.18. Drop this pin once the runner ships glibc >= 2.39.
+          lycheeVersion: v0.23.0
 
+      # Lychee exits with 2 when it found broken links. Any other failure
+      # (1: runtime error, 3: config error, or the action's own "no links
+      # found" check) means the checker did not do its job, so it is
+      # surfaced as a red run below rather than reported as broken links.
       - name: Report Broken Links (Idempotent Issue Management)
-        if: steps.lychee.outcome == 'failure'
+        if: steps.lychee.outputs.exit_code == '2'
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
@@ -169,3 +180,11 @@ jobs:
               console.error('Failed to manage broken link issue:', error);
               core.setFailed(`Failed to create or update issue: ${error.message}`);
             }
+
+      - name: Fail if Lychee could not check the links
+        if: steps.lychee.outcome == 'failure' && steps.lychee.outputs.exit_code != '2'
+        env:
+          EXIT_CODE: ${{ steps.lychee.outputs.exit_code }}
+        run: |
+          echo "::error::Lychee failed without producing a link report (exit code: ${EXIT_CODE:-none}). See the 'Check Markdown links (Lychee)' step for the cause."
+          exit 1

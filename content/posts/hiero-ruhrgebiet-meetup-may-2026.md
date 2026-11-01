@@ -7,6 +7,10 @@ abstract = "Catch up on the recent online meetup where we showcased a live demo 
 [[authors]]
 name = "Hiero Team"
 image = "/images/profile-hiero.png"
+
+[event]
+date = 2026-05-11
+location = "Online"
 +++
 
 ## 🌐 Enabling Anyone to Build and Operate Decentralized Networks with Hiero

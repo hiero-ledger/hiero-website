@@ -588,6 +588,86 @@ Content`);
       expect(posts).toHaveLength(2); // both .md files
     });
   });
+  describe("event frontmatter", () => {
+    function postWith(frontmatter: string) {
+      fsMocks.existsSync.mockReturnValue(true);
+      fsMocks.readdirSync.mockReturnValue(["post.md"]);
+      fsMocks.readFileSync.mockReturnValue(`+++
+title = "Meetup recap"
+date = 2026-07-10
+${frontmatter}
++++
+Content`);
+
+      return getAllPosts()[0];
+    }
+
+    it("reads the event's own date, location and photos in order", () => {
+      const post = postWith(`[event]
+date = 2026-07-07
+location = " Berlin, Germany "
+
+[[event.photos]]
+src = "/images/talk.jpg"
+alt = " A speaker on stage "
+
+[[event.photos]]
+src = "/images/lunch.jpg"`);
+
+      expect(post.date).toBe("2026-07-10T00:00:00.000Z");
+      expect(post.event).toEqual({
+        date: "2026-07-07T00:00:00.000Z",
+        location: "Berlin, Germany",
+        photos: [
+          { src: "/images/talk.jpg", alt: "A speaker on stage" },
+          { src: "/images/lunch.jpg", alt: "" },
+        ],
+      });
+    });
+
+    it("leaves event undefined on a post without an [event] table", () => {
+      expect(postWith("").event).toBeUndefined();
+    });
+
+    it("drops an event with no usable date but keeps the post on the blog", () => {
+      const post = postWith(`[event]
+location = "Berlin, Germany"`);
+
+      expect(post.title).toBe("Meetup recap");
+      expect(post.event).toBeUndefined();
+    });
+
+    it("treats a blank location as no location", () => {
+      const post = postWith(`[event]
+date = 2026-07-07
+location = "  "`);
+
+      expect(post.event?.location).toBeUndefined();
+      expect(post.event?.photos).toEqual([]);
+    });
+
+    it("keeps only photos whose src is a path on this site", () => {
+      const post = postWith(`[event]
+date = 2026-07-07
+
+[[event.photos]]
+src = "https://example.com/hotlinked.jpg"
+
+[[event.photos]]
+src = "//example.com/protocol-relative.jpg"
+
+[[event.photos]]
+alt = "No source at all"
+
+[[event.photos]]
+src = "/images/kept.jpg"`);
+
+      expect(post.event?.photos).toEqual([
+        { src: "/images/kept.jpg", alt: "" },
+      ]);
+    });
+  });
+
   describe("readingMinutes", () => {
     it("rounds the body up to at least a minute", () => {
       expect(readingMinutes("")).toBe(1);

@@ -935,6 +935,7 @@
 
   .issue-jump-inner,
   .community-calls-inner,
+  .events-inner,
   .repositories-inner,
   .quotes-carousel-inner,
   .tsc-about-inner,
@@ -945,6 +946,7 @@
 
   .issue-jump-header,
   .community-calls-header,
+  .events-header,
   .repositories-header,
   .quotes-carousel-header,
   .issues-index-header,
@@ -963,6 +965,7 @@
   .hiero-principles-eyebrow,
   .issue-jump-eyebrow,
   .community-calls-eyebrow,
+  .events-eyebrow,
   .repositories-eyebrow,
   .quotes-carousel-eyebrow,
   .blog-index-eyebrow,
@@ -979,6 +982,7 @@
   .hiero-principles-eyebrow::before,
   .issue-jump-eyebrow::before,
   .community-calls-eyebrow::before,
+  .events-eyebrow::before,
   .repositories-eyebrow::before,
   .quotes-carousel-eyebrow::before,
   .blog-index-eyebrow::before,
@@ -993,6 +997,7 @@
   }
 
   .community-calls-heading,
+  .events-heading,
   .repositories-heading,
   .quotes-carousel-heading,
   .tsc-about-heading,
@@ -1014,6 +1019,7 @@
 
   .issue-jump-intro,
   .community-calls-intro,
+  .events-intro,
   .repositories-intro,
   .tsc-about-intro,
   .tsc-committee-intro,
@@ -1027,6 +1033,7 @@
 
   .issue-jump-copy,
   .community-calls-copy,
+  .events-copy,
   .repositories-copy,
   .quotes-carousel-copy,
   .tsc-about-copy,
@@ -1062,6 +1069,7 @@
   /* The small ruled label that names a list or grid below it. */
   .issue-jump-list-heading,
   .community-calls-board-heading,
+  .events-board-heading,
   .tsc-committee-board-heading {
     @apply flex items-center justify-between pb-3;
     @apply font-ibm text-[0.6875rem] leading-none tracking-[0.14em] text-charcoal/50 uppercase;
@@ -1074,6 +1082,7 @@
   /* The right-hand half is context, not content: it goes when there is no room. */
   .issue-jump-list-heading span:last-child,
   .community-calls-board-heading span:last-child,
+  .events-board-heading span:last-child,
   .tsc-committee-board-heading span:last-child {
     @apply hidden sm:block;
   }
@@ -1095,6 +1104,7 @@
 
   /* One outline button per section, filling red on hover — the section's exit. */
   .community-calls-toggle,
+  .events-photos-button,
   .repositories-all-link,
   .issues-outro-link,
   .issues-empty-action {
@@ -1437,6 +1447,297 @@
 
   .community-calls-toggle-row {
     @apply mt-[clamp(2rem,4vw,3.5rem)] flex justify-center;
+  }
+
+  /* ============================================
+     Home events — components/EventsSection
+
+     The one band on the home page built from photographs: the newest event as
+     a mosaic beside its story, the next few as cards. Cards keep the blog
+     card's shape — hairline, `1.25rem` corner, a glyph that fills red — so an
+     event reads as the same kind of object as the post it links to.
+     ============================================ */
+  .events {
+    @apply relative isolate scroll-mt-22.5 overflow-hidden bg-sand;
+
+    --band-bloom: radial-gradient(
+      64% 42% at 98% 72%,
+      rgb(var(--band-light) / 80%),
+      rgb(var(--band-light) / 0%) 70%
+    );
+    --band-counter: radial-gradient(
+      56% 36% at 2% 24%,
+      rgb(var(--band-cool) / 70%),
+      rgb(var(--band-cool) / 0%) 70%
+    );
+
+    background-image: var(--band-bloom), var(--band-counter);
+  }
+
+  .events-copy p {
+    @apply m-0;
+  }
+
+  /* ---- The featured event ----------------------------------------------- */
+
+  /* The photos take the wider side: they are what the band is for. */
+  .events-feature {
+    @apply grid gap-[clamp(1.75rem,3vw,2.5rem)];
+    @apply lg:grid-cols-[minmax(0,1.5fr)_minmax(18rem,1fr)] lg:items-end lg:gap-[clamp(2.5rem,5vw,5rem)];
+  }
+
+  /* One large photo and two stacked beside it. Fewer photos fill the same
+     frame rather than leaving a hole: one takes it all, and a second takes
+     the whole right-hand column. */
+  .events-mosaic {
+    @apply grid aspect-[4/3] grid-cols-3 grid-rows-2 gap-2;
+    @apply sm:aspect-[3/2] sm:gap-3;
+  }
+
+  .events-tile {
+    @apply relative block min-h-0 min-w-0 overflow-hidden rounded-[1rem];
+    @apply border-0 bg-white/40 p-0;
+  }
+
+  .events-tile:first-child {
+    @apply col-span-2 row-span-2;
+  }
+
+  .events-mosaic[data-count="1"] .events-tile {
+    @apply col-span-3;
+  }
+
+  .events-mosaic[data-count="2"] .events-tile:last-child {
+    @apply row-span-2;
+  }
+
+  button.events-tile {
+    @apply cursor-pointer;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-red;
+  }
+
+  .events-tile-image {
+    @apply block h-full w-full object-cover;
+    @apply transition-transform duration-500 ease-out motion-reduce:transition-none;
+  }
+
+  button.events-tile:hover .events-tile-image,
+  button.events-tile:focus-visible .events-tile-image {
+    @apply scale-[1.04];
+  }
+
+  .events-tile-more {
+    @apply absolute inset-0 grid place-items-center bg-charcoal/55 text-white;
+    @apply text-[clamp(1.5rem,3vw,2.5rem)] leading-none font-medium tracking-[-0.04em];
+    @apply transition-colors duration-300 motion-reduce:transition-none;
+  }
+
+  button.events-tile:hover .events-tile-more {
+    @apply bg-red/80;
+  }
+
+  .events-feature-body {
+    @apply flex min-w-0 flex-col items-start;
+  }
+
+  .events-feature-title {
+    @apply m-0 mt-4 text-[clamp(1.75rem,3vw,2.75rem)] leading-[1.04];
+    @apply font-medium tracking-[-0.045em] text-balance;
+  }
+
+  .events-feature-abstract {
+    @apply m-0 mt-4 max-w-[34rem] text-base leading-[1.6] tracking-[-0.008em] text-pretty text-charcoal/68;
+  }
+
+  .events-feature-actions {
+    @apply mt-8 flex flex-wrap items-center gap-3;
+  }
+
+  /* Filled, beside the outline photos button: the post is the way on, the
+     photos a look around. */
+  .events-feature-link {
+    @apply inline-flex min-h-12 items-center gap-3 rounded-full bg-charcoal px-6;
+    @apply text-base font-medium tracking-[-0.02em] text-white no-underline;
+    @apply transition-colors duration-200 ease-out hover:bg-red;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red;
+    @apply motion-reduce:transition-none;
+  }
+
+  .events-photos-button {
+    @apply cursor-pointer;
+  }
+
+  /* ---- Date, place, and whether it is still to come ---------------------- */
+
+  .events-meta {
+    @apply flex flex-wrap items-center gap-x-3.5 gap-y-2;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.12em] text-charcoal/58 uppercase;
+  }
+
+  /* The blog byline's hairline separator, for the same reason: a middle dot
+     reads as another character in the tracked-out mono. */
+  .events-meta-location {
+    @apply relative;
+  }
+
+  .events-meta-location::before {
+    @apply absolute top-1/2 -left-[0.4375rem] h-2.5 w-px -translate-y-1/2 bg-current opacity-40;
+
+    content: "";
+  }
+
+  .events-meta-tag {
+    @apply rounded-full bg-red px-2.5 py-1.5 text-white;
+  }
+
+  /* ---- More events ------------------------------------------------------ */
+
+  .events-board-heading {
+    @apply mt-[var(--space-band-header)];
+  }
+
+  /* Three columns from `md` with no two-column step, as the blog grid does:
+     at two, three cards leave an orphan. */
+  .events-grid {
+    @apply m-0 grid list-none gap-4 p-0;
+    @apply md:grid-cols-3 md:gap-5;
+  }
+
+  /* Two ways in — the photos and the post — so the card itself is not a link
+     and lifts when either half is hovered or focused. */
+  .events-card {
+    @apply flex min-w-0 flex-col overflow-hidden rounded-[1.25rem];
+    @apply border border-charcoal/18 bg-transparent;
+    @apply transition-[background-color,border-color,box-shadow,translate] duration-300 ease-out;
+    @apply hover:-translate-y-1 hover:border-red/55 hover:bg-white/60;
+    @apply hover:shadow-[0_18px_45px_rgba(30,30,30,0.08)];
+    @apply focus-within:border-red/55 focus-within:bg-white/60;
+    @apply motion-reduce:transition-none;
+  }
+
+  .events-card-plate {
+    @apply relative block aspect-16/9 w-full overflow-hidden;
+    @apply border-0 border-b border-solid border-charcoal/12 bg-white/40 p-0;
+  }
+
+  button.events-card-plate {
+    @apply cursor-pointer;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-red;
+  }
+
+  .events-card-image {
+    @apply block h-full w-full object-cover;
+    @apply transition-transform duration-500 ease-out motion-reduce:transition-none;
+  }
+
+  button.events-card-plate:hover .events-card-image,
+  button.events-card-plate:focus-visible .events-card-image {
+    @apply scale-[1.04];
+  }
+
+  .events-card-count {
+    @apply absolute bottom-3 left-3 rounded-full bg-charcoal/72 px-3 py-1.5 backdrop-blur-sm;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.1em] text-white uppercase;
+  }
+
+  .events-card-body {
+    @apply flex min-w-0 flex-1 flex-col p-[clamp(1.25rem,2vw,1.625rem)];
+    @apply text-charcoal no-underline;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-red;
+  }
+
+  .events-card-title {
+    @apply m-0 mt-3.5 text-[clamp(1.125rem,1.5vw,1.3125rem)] leading-[1.25];
+    @apply font-medium tracking-[-0.03em] text-charcoal;
+    @apply transition-colors duration-300 motion-reduce:transition-none;
+  }
+
+  .events-card-body:hover .events-card-title,
+  .events-card-body:focus-visible .events-card-title {
+    @apply text-red;
+  }
+
+  .events-card-action {
+    @apply mt-auto flex items-center justify-between gap-4 pt-6;
+    @apply font-ibm text-[0.6875rem] leading-none tracking-[0.09em] text-charcoal uppercase;
+  }
+
+  .events-card-action-glyph {
+    @apply grid h-9 w-9 flex-none place-items-center rounded-full border border-charcoal/22;
+    @apply font-serif text-base leading-none;
+    @apply transition-[background-color,border-color,color,translate] duration-300 ease-out;
+    @apply motion-reduce:transition-none;
+  }
+
+  .events-card-body:hover .events-card-action-glyph,
+  .events-card-body:focus-visible .events-card-action-glyph {
+    @apply translate-x-0.5 border-red bg-red text-white;
+  }
+
+  .events-footer {
+    @apply mt-[clamp(2rem,4vw,3.5rem)] border-t border-charcoal/16 pt-5;
+    @apply text-sm leading-[1.5] tracking-[-0.005em] text-charcoal/58;
+  }
+
+  .events-footer p {
+    @apply m-0;
+  }
+
+  /* ---- The photo viewer -------------------------------------------------
+     Dark rather than the TSC profile's white panel: a photograph is judged
+     against what surrounds it, and on near-black it is the brightest thing
+     on screen. The stage has a fixed height so the controls stay put while
+     landscape and portrait photos take turns in it. */
+  .events-viewer-backdrop {
+    @apply fixed inset-0 z-50 flex items-center justify-center;
+    @apply bg-charcoal/92 p-3 backdrop-blur-sm sm:p-8;
+  }
+
+  .events-viewer {
+    @apply flex max-h-full w-full max-w-[72rem] flex-col gap-4 text-white;
+  }
+
+  .events-viewer-header {
+    @apply flex items-start justify-between gap-6;
+  }
+
+  .events-viewer-position {
+    @apply m-0 mb-2 font-ibm text-[0.6875rem] leading-none tracking-[0.16em] text-white/62 uppercase;
+  }
+
+  .events-viewer-title {
+    @apply m-0 text-[clamp(1.125rem,2vw,1.5rem)] leading-[1.2] font-medium tracking-[-0.03em] text-balance;
+  }
+
+  .events-viewer-close,
+  .events-viewer-control {
+    @apply cursor-pointer rounded-full border border-white/32 bg-transparent text-white;
+    @apply transition-[background-color,border-color,color] duration-200 ease-out;
+    @apply hover:border-white hover:bg-white hover:text-charcoal;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-white;
+    @apply motion-reduce:transition-none;
+  }
+
+  .events-viewer-close {
+    @apply grid h-11 w-11 flex-none place-items-center p-0;
+    @apply font-serif text-xl leading-none;
+  }
+
+  .events-viewer-stage {
+    @apply m-0 flex h-[min(68vh,52rem)] min-h-0 items-center justify-center;
+  }
+
+  .events-viewer-photo {
+    @apply block h-auto max-h-full w-auto max-w-full rounded-[0.75rem] object-contain;
+  }
+
+  .events-viewer-controls {
+    @apply flex items-center justify-between gap-4;
+  }
+
+  .events-viewer-control {
+    @apply inline-flex min-h-11 items-center gap-3 px-5;
+    @apply text-base font-medium tracking-[-0.02em];
   }
 
   .repositories {

@@ -7,6 +7,10 @@ abstract = "Hedera DevDay united builders, maintainers, and innovators for an ex
 [[authors]]
 name = "Hiero Team"
 image = "/images/profile-hiero.png"
+
+[event]
+date = 2026-02-17
+location = "Denver, USA"
 +++
 
 ## 🚀 An Exciting Day for Roadmap, Innovation & Technical Conversations

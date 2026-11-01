@@ -7,6 +7,54 @@ abstract = "The first in person Hiero Community Day in Berlin concludes with gre
 [[authors]]
 name = "Jessica Gonzalez, Technical Community Architect in collaboration with Hiero maintainers"
 image = "/images/profile-hiero.png"
+
+[event]
+date = 2026-07-07
+location = "Berlin, Germany"
+
+[[event.photos]]
+src = "/images/hcd-1.jpg"
+alt = "A speaker presents to a seated audience in the session room at TreeHouse Berlin"
+
+[[event.photos]]
+src = "/images/hcd-6.jpg"
+alt = "Attendees squeeze into a group selfie at the evening dinner"
+
+[[event.photos]]
+src = "/images/hcd-10.jpg"
+alt = "Attendees queue for lunch under an awning in the courtyard"
+
+[[event.photos]]
+src = "/images/hcd-3.jpg"
+alt = "An attendee points to the Hiero Community Day poster at the TreeHouse entrance"
+
+[[event.photos]]
+src = "/images/hcd-11.jpg"
+alt = "Attendees seated for a session in the TreeHouse hall"
+
+[[event.photos]]
+src = "/images/hcd-8.jpg"
+alt = "An attendee waves from behind a laptop at a courtyard table"
+
+[[event.photos]]
+src = "/images/hcd-4.jpg"
+alt = "Stacks of black Hiero T-shirts on a table"
+
+[[event.photos]]
+src = "/images/hcd-5.jpg"
+alt = "LF Decentralized Trust T-shirts and stickers laid out on a wooden table"
+
+[[event.photos]]
+src = "/images/hcd-9.jpg"
+alt = "Three attendees take a selfie on the terrace"
+
+[[event.photos]]
+src = "/images/hcd-2.jpg"
+alt = "Instant photos of attendees spread across a wooden table"
+
+[[event.photos]]
+src = "/images/hcd-7.jpg"
+alt = "An attendee smiles from behind the DJ booth at the evening event"
 +++
 
 # 🚀 Hiero Community Day 2026 Launched in Berlin 🚀

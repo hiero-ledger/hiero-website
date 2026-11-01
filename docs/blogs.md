@@ -192,6 +192,46 @@ organization = "Hiero"
 link = "https://github.com/second-author"
 ```
 
+## Events And Photos
+
+A post about an event (a community day, meetup, workshop or talk) can add an
+`[event]` table. Posts that have one appear in the **Events** section of the
+home page, with their photos in a gallery.
+
+Put the table after the `[[authors]]` blocks, at the end of the front matter:
+
+```toml
+[event]
+date = 2026-07-07
+location = "Berlin, Germany"
+
+[[event.photos]]
+src = "/images/my-event/talk.jpg"
+alt = "A speaker presents to a seated audience"
+
+[[event.photos]]
+src = "/images/my-event/lunch.jpg"
+alt = "Attendees queue for lunch in the courtyard"
+```
+
+| Field | Status | Notes |
+| --- | --- | --- |
+| `date` | Required | The day the event happens, not the day the post goes out. Without a valid date the post stays on the blog but is left off the home page. |
+| `location` | Recommended | City and country, or `"Online"`. |
+| `[[event.photos]]` | Optional | One block per photo, in the order the gallery shows them. The first is the cover. Without photos, the post's `featured_image` is used. |
+| `src` | Required per photo | A site path under `/images/`. Links to other sites are ignored. |
+| `alt` | Strongly recommended | What the photo shows, for screen reader users. |
+
+Things to know:
+
+- **Only one post per event.** If you published a save-the-date and later a
+  recap, move the `[event]` table to the recap so the event is not listed twice.
+- **Events still to come** are labelled _Upcoming_ and listed first.
+- **Resize photos before committing.** Images are served as they are, so a
+  phone photo straight from the camera can be 5 MB. Aim for about 1600px on the
+  long edge and under 400 KB. Re-saving also strips camera metadata such as
+  GPS coordinates.
+
 ## Current Date Format Notes
 
 These both work with the current parser:
@@ -217,6 +257,8 @@ Before your PR is ready:
 - The hero image path is valid
 - Inline image paths are valid
 - The post renders correctly at `/blog/<slug>`
+- For an event post: the `[event]` date is set, and every photo has a valid
+  `src` and an `alt`
 - `draft = false` if the post is intended to publish after merge
 
 ## Helpful References

@@ -7,6 +7,30 @@ abstract = "An overview of the success of the Open-Source event in Kampala, Afri
 
 [[authors]]
 name = "Angelina Ceppaluni and Jessy Ssebuliba"
+
+[event]
+date = 2026-04-20
+location = "Kampala, Uganda"
+
+[[event.photos]]
+src = "/images/one.jpg"
+alt = "Students in a workshop room follow a presentation on a wall screen"
+
+[[event.photos]]
+src = "/images/seven.jpg"
+alt = "A presenter speaks to students in front of a screen showing the Hiero website"
+
+[[event.photos]]
+src = "/images/two.jpg"
+alt = "A presenter stands at a projected screen in a computer lab"
+
+[[event.photos]]
+src = "/images/four.jpg"
+alt = "Students at rows of computers during a lab session"
+
+[[event.photos]]
+src = "/images/six.jpg"
+alt = "A presenter walks seated students through a demo on a wall screen"
 +++
 
 ![Students at Bugema University workshop](/images/one.jpg)

@@ -132,6 +132,16 @@ export const meetData = {
     })),
 };
 
+// The events themselves are blog posts with an `[event]` table in their
+// frontmatter; see docs/blogs.md. This is only the band's own copy.
+export const eventsData = {
+  eyebrow: "Events",
+  heading: "Where the community meets",
+  text: "Community days, meetups and university workshops, with photos and recaps from the [Hiero blog](/blog/).",
+  footer:
+    "Hosted a Hiero meetup, talk or workshop? [Write it up for the blog](https://github.com/hiero-ledger/hiero-website/blob/main/docs/blogs.md#events-and-photos) and it will show up here.",
+};
+
 export const reposData = {
   eyebrow: "Codebase",
   heading: "Jump to our Hiero Repositories",

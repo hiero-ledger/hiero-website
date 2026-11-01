@@ -15,6 +15,23 @@ export interface PostAuthor {
   image?: string;
 }
 
+export interface EventPhoto {
+  src: string;
+  /** Empty when the post gives none; the gallery supplies a fallback. */
+  alt: string;
+}
+
+/**
+ * The event a post announces or recaps, from an `[event]` table in its
+ * frontmatter. Its own date rather than the post's: a recap goes out days
+ * after the event, a save-the-date weeks before it.
+ */
+export interface PostEvent {
+  date: string;
+  location?: string;
+  photos: EventPhoto[];
+}
+
 export interface PostMeta {
   slug: string;
   title: string;
@@ -28,6 +45,8 @@ export interface PostMeta {
   authors: PostAuthor[];
   categories: string[];
   tags: string[];
+  /** Only on posts about an event; these feed the home page's events band. */
+  event?: PostEvent;
 }
 
 export interface PostFull extends PostMeta {
@@ -145,6 +164,42 @@ function parseDate(raw: unknown): string {
   return new Date(String(raw)).toISOString();
 }
 
+/**
+ * Photos are site paths only. They are rendered unoptimised, so an absolute
+ * URL would hotlink someone else's server from the home page; `//` is ruled
+ * out with them because it is one.
+ */
+function parsePhoto(raw: unknown): EventPhoto[] {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return [];
+  const { src, alt } = raw as Record<string, unknown>;
+  if (typeof src !== "string" || !/^\/(?!\/)/.test(src)) return [];
+  return [{ src, alt: typeof alt === "string" ? alt.trim() : "" }];
+}
+
+/**
+ * A malformed `[event]` drops the event, not the post: a typo in the date
+ * should cost the home page a card, not take the article off the blog.
+ */
+function parseEvent(raw: unknown): PostEvent | undefined {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return undefined;
+  const event = raw as Record<string, unknown>;
+
+  const time =
+    event.date instanceof Date
+      ? event.date.getTime()
+      : Date.parse(String(event.date ?? ""));
+  if (!Number.isFinite(time)) return undefined;
+
+  const location =
+    typeof event.location === "string" ? event.location.trim() : "";
+
+  return {
+    date: new Date(time).toISOString(),
+    location: location || undefined,
+    photos: Array.isArray(event.photos) ? event.photos.flatMap(parsePhoto) : [],
+  };
+}
+
 function sanitizeSlug(raw: string): string {
   // Normalize whitespace and case.
   let slug = raw.trim().toLowerCase();
@@ -203,6 +258,7 @@ function buildMeta(
       ? data.categories.map(String)
       : [],
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+    event: parseEvent(data.event),
   };
 }
 

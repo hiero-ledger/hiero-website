@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 import GossipField from "@/components/GossipField";
+import { getFocusableElements, trapFocusInModal } from "@/lib/focus-trap";
 
 export interface TscMember {
   firstName: string;
@@ -336,45 +337,6 @@ function getBioParagraphs(bio: string): string[] {
   }
 
   return paragraphs;
-}
-
-function getFocusableElements(container: HTMLDivElement | null): HTMLElement[] {
-  if (!container) {
-    return [];
-  }
-
-  return Array.from(
-    container.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
-    ),
-  ).filter(
-    element =>
-      !element.hasAttribute("disabled") &&
-      element.getAttribute("aria-hidden") !== "true",
-  );
-}
-
-function trapFocusInModal(
-  event: KeyboardEvent,
-  focusableElements: HTMLElement[],
-): void {
-  if (focusableElements.length === 0) {
-    event.preventDefault();
-    return;
-  }
-
-  const firstElement = focusableElements[0];
-  const lastElement = focusableElements[focusableElements.length - 1];
-
-  if (!event.shiftKey && document.activeElement === lastElement) {
-    event.preventDefault();
-    firstElement.focus();
-  }
-
-  if (event.shiftKey && document.activeElement === firstElement) {
-    event.preventDefault();
-    lastElement.focus();
-  }
 }
 
 function getGitHubHandle(gitHubAccount?: string): string | null {

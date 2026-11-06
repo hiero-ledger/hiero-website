@@ -22,7 +22,7 @@
     "@plausible-analytics/tracker": "^0.4.7",
     "date-fns": "^4.4.0",
     "js-yaml": "^5.5.0",
-    "next": "16.4.2",
+    "next": "16.4.4",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "react-markdown": "^10.1.0",
@@ -32,7 +32,7 @@
     "toml": "^5.0.1"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^5.16.4",
+    "@netlify/plugin-nextjs": "^5.16.5",
     "@playwright/test": "^1.64.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@testing-library/dom": "^10.4.2",

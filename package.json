@@ -32,7 +32,7 @@
     "toml": "^5.0.1"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^5.16.5",
+    "@netlify/plugin-nextjs": "^5.16.6",
     "@playwright/test": "^1.65.0",
     "@tailwindcss/postcss": "^4.3.3",
     "@testing-library/dom": "^10.4.2",

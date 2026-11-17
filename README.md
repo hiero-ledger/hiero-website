@@ -125,6 +125,10 @@ New to the project? Start with a [Good First Issue](https://github.com/hiero-led
 - **Community Calls**: Browse meeting schedules and recordings on the [LFX Calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/hiero?view=week).
 - **Discussions**: Use [GitHub Discussions](https://github.com/hiero-ledger/hiero-website/discussions) for questions and ideas.
 
+## Code of Conduct
+
+Hiero uses the Linux Foundation Decentralised Trust [Code of Conduct](https://www.lfdecentralizedtrust.org/code-of-conduct).
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
